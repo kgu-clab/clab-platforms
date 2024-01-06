@@ -5,6 +5,7 @@
 !.yarn/versions
 
 .pnp.*
+.eslintcache
 
 node_modules
 
