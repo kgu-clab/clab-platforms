@@ -1,17 +1,26 @@
 {
   "name": "clab.page",
+  "private": true,
   "packageManager": "yarn@4.0.2",
   "workspaces": [
     "apps/*",
     "packages/*"
   ],
   "scripts": {
-    "prepare": "husky install",
+    "postinstall": "husky install",
+    "lint-staged": "lint-staged",
     "land": "yarn workspace land"
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx}": [
+      "eslint --fix --cache",
+      "prettier --write"
+    ]
   },
   "devDependencies": {
     "eslint": "^8.56.0",
     "husky": "^8.0.3",
+    "lint-staged": "^15.2.0",
     "prettier": "^3.1.1",
     "typescript": "^5.3.3"
   }
