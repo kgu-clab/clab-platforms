@@ -5,20 +5,21 @@
 
 ## Apps
 
-> [!IMPORTANT]\
-> 현재 기존 저장소(Private)에서 새로운 저장소(Public)으로의 전환 작업이 진행중이에요.  
-> 오픈소스로 공개하고자 내부적으로 테스트 및 마이그레이션 중이에요. 조금만 기다려주세요.
-
+- [auth](/apps/auth/README.md): 동아리 계정을 이용한 로그인 시스템이에요.
 - [land](/apps/land/README.md): 동아리에 대해 알아볼 수 있는 랜딩 페이지이에요.
-- auth: 동아리 계정을 이용한 로그인 시스템이에요.
-- member: 동아리원들이 사용하는 활동 관리 플랫폼이에요.
+- [member](/apps/member/README>md): 동아리원들이 사용하는 활동 관리 플랫폼이에요.
 
 ## Packages
+
+- [design-system](/packages/design-system/README.md): 동아리의 고유 디자인 시스템이에요.
+- [utils](/packages/utils/README.md): 공통적으로 사용하는 유틸리티 라이브러리에요.
+- [hooks](/packages/hooks/README.md): 공통적으로 사용하는 React Hooks 라이브러리에요.
+- [icon](/packages/icon/README.md): 공통적으로 사용하는 아이콘 라이브러리에요.
 
 ## Contributing
 
 동아리원이 아니더라도 누구나 기여할 수 있습니다. 해당 프로젝트에 기여하고 싶다면 아래 문서를 참고해주세요.  
-[CONTRIBUTING.md]()
+[CONTRIBUTING.md](CONTRIBUTING.md)
 
 ## License
 
