@@ -17,5 +17,19 @@
   "trailingComma": "none",
   "useTabs": false,
   "vueIndentScriptAndStyle": false,
-  "disableLanguages": []
+  "disableLanguages": [],
+  "importOrder": [
+    "^react(.*)",
+    "^@tanstack/(.*)$",
+    "^recoil(.*)",
+    "<THIRD_PARTY_MODULES>",
+    "^@icons/(.*)$",
+    "^[./]"
+  ],
+  "importOrderSeparation": true,
+  "importOrderSortSpecifiers": true,
+  "plugins": [
+    "prettier-plugin-tailwindcss",
+    "@trivago/prettier-plugin-sort-imports"
+  ]
 }
