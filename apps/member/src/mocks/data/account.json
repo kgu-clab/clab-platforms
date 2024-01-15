@@ -1,0 +1,27 @@
+[
+  {
+    "id": 201912023,
+    "name": "김정은",
+    "image": "https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8Y2F0fGVufDB8fDB8fHww",
+    "interests": "Front-end",
+    "createAt": "2022-3-20",
+    "role": [
+      { "id": 1, "position": "부회장" },
+      { "id": 2, "position": "코어팀" },
+      { "id": 3, "position": "운영진" }
+    ],
+    "alerts": [
+      { "id": 1, "content": "새로운 동아리 일정이 등록됐어요." },
+      { "id": 2, "content": "스터디 과제가 올라왔어요." },
+      { "id": 3, "content": "도서 반납일이 2일 남았어요." }
+    ],
+    "activity": [
+      { "id": 1, "title": "Core Team" },
+      { "id": 2, "title": "유니티 스터디" }
+    ],
+    "books": [
+      { "id": 1, "title": "리액트를 다루는 방법", "date": "2023-10-29" },
+      { "id": 2, "title": "러닝 타입스크립트", "date": "2023-11-05" }
+    ]
+  }
+]
