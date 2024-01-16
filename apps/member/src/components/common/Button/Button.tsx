@@ -18,8 +18,8 @@ const Button = ({
     orange:
       'hover:bg-orange-200 text-orange-600 border-orange-600 bg-orange-100',
     green: 'hover:bg-green-200 text-green-600 border-green-600 bg-green-100',
-    red: 'hover:bg-red-200 text-red-600 border-red-600 bg-red-100 bg-red-100',
-    blue: 'hover:bg-blue-200 text-blue-600 border-blue-600 bg-blue-100'
+    red: 'hover:bg-red-200 text-red-600 border-red-600 bg-red-100',
+    blue: 'hover:bg-blue-200 text-blue-600 border-blue-600 bg-blue-100',
   }[color];
 
   return (
@@ -27,9 +27,10 @@ const Button = ({
       className={classNames(
         'font-semibold text-sm py-2 rounded-lg border',
         colored,
-        className
+        className,
       )}
-      {...rest}>
+      {...rest}
+    >
       {children}
     </button>
   );
