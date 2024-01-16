@@ -1,13 +1,13 @@
 # clab.page
 
-경기대학교 동아리 C-Lab의 공식사이트 프론트엔드 시스템이에요.  
-지속적으로 늘어나는 동아리 공식 프론트엔드 프로젝트를 유연하고 생산성 있게 관리하기 위해 만들어졌어요.
+경기대학교 컴퓨터공학부 동아리 C-Lab의 공식 프론트엔드 시스템이에요.  
+지속적으로 늘어나는 동아리 공식 프론트엔드 프로젝트를 유연하고 생산성 있게 관리하기 위해 [모노레포(Monorepo)](https://en.wikipedia.org/wiki/Monorepo) 환경이 만들어졌어요.
 
 ## Apps
 
-- [auth](/apps/auth/README.md): 동아리 계정을 이용한 로그인 시스템이에요.
+- [auth](/apps/auth/README.md): 동아리 계정을 이용한 로그인(OAuth) 시스템이에요.
 - [land](/apps/land/README.md): 동아리에 대해 알아볼 수 있는 랜딩 페이지이에요.
-- [member](/apps/member/README>md): 동아리원들이 사용하는 활동 관리 플랫폼이에요.
+- [member](/apps/member/README.md): 동아리원들이 사용하는 활동 플랫폼이에요.
 
 ## Packages
 
@@ -24,6 +24,6 @@
 ## License
 
 C-Lab의 모든 공개 프로젝트는 [GNU General Public License v3.0](https://www.gnu.org/licenses/gpl-3.0.html)의 라이선스를 따라요.  
-자세한 사항은 `LICENSE` 파일을 참고하세요.
+자세한 사항은 `LICENSE`를 참고하세요.
 
-**© 2024 C-Lab**
+**© Kyonggi University C-Lab**
