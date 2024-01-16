@@ -8,7 +8,7 @@ const tips = [
   '오늘은 맛집 게시글을 작성하는건 어때요?',
   '오늘은 어떤 책을 읽으셨나요?',
   '오늘은 어떤 활동을 하셨나요?',
-  '후배들을 위한 조언을 남겨보세요!'
+  '후배들을 위한 조언을 남겨보세요!',
 ];
 
 interface ProfilePanelProps {
@@ -22,8 +22,10 @@ const ProfilePanel = ({ name, image, createAt }: ProfilePanelProps) => {
     <Panel>
       <div className="flex gap-4">
         <div className="p-1">
-          <div className="w-12 h-12 rounded-full ring ring-orange-500 ring-offset-1">
+          <div className="rounded-full ring ring-orange-500 ring-offset-1">
             <Image
+              width="w-10"
+              height="h-10"
               src={image}
               alt="프로필사진"
               className="object-cover rounded-full"
