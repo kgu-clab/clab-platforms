@@ -1,4 +1,5 @@
 import Panel from '@components/common/Panel/Panel';
+import ProgressBar from '@components/common/ProgressBar/ProgressBar';
 import { FcBookmark } from 'react-icons/fc';
 
 interface BookPanelProps {
@@ -28,12 +29,12 @@ const BookPanel = ({ data }: BookPanelProps) => {
       <Panel.Body className="space-y-4 text-sm">
         {data.map(({ id, title }) => (
           <ul key={id}>
-            <li className="font-bold">
-              <div className="flex items-baseline justify-between">
+            <li className="font-semibold">
+              <div className="flex items-baseline justify-between mb-2">
                 <span>{title}</span>
                 <span className="text-xs">D-10</span>
               </div>
-              <progress className="w-full" value="20" max="100"></progress>
+              <ProgressBar value={30} />
             </li>
           </ul>
         ))}
