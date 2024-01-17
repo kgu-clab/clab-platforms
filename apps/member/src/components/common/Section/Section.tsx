@@ -1,11 +1,11 @@
 import classNames from 'classnames';
 
-interface CardProps {
+interface SectionProps {
   children: React.ReactNode;
   className?: string;
 }
 
-const Card = ({ className, children }: CardProps) => {
+const Section = ({ className, children }: SectionProps) => {
   return (
     <div
       className={classNames(
@@ -18,12 +18,12 @@ const Card = ({ className, children }: CardProps) => {
   );
 };
 
-interface CardHeaderProps {
+interface SectionHeaderProps {
   title: string;
   children?: React.ReactNode;
 }
 
-Card.Header = ({ title, children }: CardHeaderProps) => {
+Section.Header = ({ title, children }: SectionHeaderProps) => {
   return (
     <div className="flex justify-between items-center">
       <p className="text-xl font-bold text-black">{title}</p>
@@ -32,13 +32,13 @@ Card.Header = ({ title, children }: CardHeaderProps) => {
   );
 };
 
-interface CardBodyProps {
+interface SectionBodyProps {
   className?: string;
   children: React.ReactNode;
 }
 
-Card.Body = ({ className, children }: CardBodyProps) => {
+Section.Body = ({ className, children }: SectionBodyProps) => {
   return <div className={classNames('mt-4', className)}>{children}</div>;
 };
 
-export default Card;
+export default Section;

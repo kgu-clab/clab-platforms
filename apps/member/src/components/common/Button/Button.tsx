@@ -1,10 +1,11 @@
+import { ButtonColorType } from '@type/button';
 import classNames from 'classnames';
 import { ComponentPropsWithRef } from 'react';
 
 interface ButtonProps extends ComponentPropsWithRef<'button'> {
   className?: string;
   children: React.ReactNode;
-  color?: 'white' | 'orange' | 'green' | 'red' | 'blue';
+  color?: ButtonColorType;
 }
 
 const Button = ({

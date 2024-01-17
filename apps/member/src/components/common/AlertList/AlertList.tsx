@@ -2,7 +2,7 @@ import { useState } from 'react';
 import DropdownButton from '../DropdownButton/DropdownButton';
 import Alert from '../Alert/Alert';
 import classNames from 'classnames';
-import Card from '../Card/Card';
+import Section from '../Section/Section';
 
 interface AlertListProps {
   data: {
@@ -22,7 +22,7 @@ const AlertList = ({ data }: AlertListProps) => {
     const { to, title, date } = data[0]; // Header
 
     return (
-      <Card>
+      <Section>
         <div className="flex w-full items-center gap-2 divide-x">
           <Alert to={to} title={title} date={date} />
           <DropdownButton
@@ -44,18 +44,18 @@ const AlertList = ({ data }: AlertListProps) => {
             ))}
           </div>
         </div>
-      </Card>
+      </Section>
     );
   } else {
     // this is the only alert
     const { to, title, date } = data[0];
 
     return (
-      <Card>
+      <Section>
         <div className="flex w-full items-center gap-2">
           <Alert to={to} title={title} date={date} />
         </div>
-      </Card>
+      </Section>
     );
   }
 };

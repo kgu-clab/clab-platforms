@@ -1,0 +1,29 @@
+[
+  {
+    "id": 3,
+    "image": "",
+    "title": "C-Lab Office를 소개합니다!",
+    "description": "C-Lab에서 똑똑하게 활동하는 방법을 소개합니다.",
+    "contents": "",
+    "category": "공지사항",
+    "date": "2023-05-01"
+  },
+  {
+    "id": 2,
+    "image": "",
+    "title": "'Core Team'이 만들어진 이유",
+    "description": "clab.page를 만들게 된 이유와 Core Team의 목표를 소개합니다.",
+    "contents": "",
+    "category": "공지사항",
+    "date": "2023-04-01"
+  },
+  {
+    "id": 1,
+    "image": "",
+    "title": "Hello, C-Lab!",
+    "description": "경기대학교 컴퓨터공학부 개발보안동아리 씨랩입니다.",
+    "contents": "",
+    "category": "공지사항",
+    "date": "2023-03-01"
+  }
+]

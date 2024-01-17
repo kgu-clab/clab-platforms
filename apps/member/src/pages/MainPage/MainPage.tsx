@@ -1,27 +1,41 @@
 import Content from '@components/common/Content/Content';
 import AlertList from '@components/common/AlertList/AlertList';
 import ImageBanner from '@components/common/ImageBanner/ImageBanner';
-import NewsCardList from '@components/main/NewsCardList/NewsCardList';
-import CommunityCard from '@components/main/CommunityCard/CommunityCard';
+import NewsCardSection from '@components/main/NewsCardSection/NewsCardSection';
+import CommunitySection from '@components/main/CommunitySection/CommunitySection';
 import BirthdayList from '@components/main/BirthdayList/BirthdayList';
+import { PATH } from '@constants/path';
 
 import bannerList from '@mocks/data/mainBannerList.json';
 import alertList from '@mocks/data/mainAlertList.json';
 import noticeList from '@mocks/data/noticeList.json';
+import newsList from '@mocks/data/newsList.json';
 import communityList from '@mocks/data/communityList.json';
 import birthdayList from '@mocks/data/birthdayList.json';
+import blogList from '@mocks/data/blogList.json';
+import itNewsList from '@mocks/data/itNewsList.json';
+import hireList from '@mocks/data/hireList.json';
 
 const MainPage = () => {
   return (
     <Content>
       <AlertList data={alertList} />
       <ImageBanner data={bannerList} />
-      <NewsCardList />
-      <CommunityCard.Wrapper>
-        <CommunityCard title="공지사항" data={noticeList} />
-        <CommunityCard title="커뮤니티" data={communityList} />
-      </CommunityCard.Wrapper>
+      <NewsCardSection
+        to={PATH.NEWS}
+        title="최근 동아리 소식은?"
+        data={newsList}
+      />
+      <CommunitySection.Wrapper>
+        <CommunitySection title="공지사항" data={noticeList} />
+        <CommunitySection title="커뮤니티" data={communityList} />
+      </CommunitySection.Wrapper>
       <BirthdayList data={birthdayList} />
+      <NewsCardSection to={PATH.BLOG} title="기술 블로그" data={blogList} />
+      <CommunitySection.Wrapper>
+        <CommunitySection title="IT 소식" data={itNewsList} />
+        <CommunitySection title="취업 소식" data={hireList} />
+      </CommunitySection.Wrapper>
     </Content>
   );
 };
