@@ -4,6 +4,7 @@ import ImageBanner from '@components/common/ImageBanner/ImageBanner';
 import NewsCardSection from '@components/main/NewsCardSection/NewsCardSection';
 import CommunitySection from '@components/main/CommunitySection/CommunitySection';
 import BirthdayList from '@components/main/BirthdayList/BirthdayList';
+import { PATH } from '@constants/path';
 
 import bannerList from '@mocks/data/mainBannerList.json';
 import alertList from '@mocks/data/mainAlertList.json';
@@ -12,7 +13,8 @@ import newsList from '@mocks/data/newsList.json';
 import communityList from '@mocks/data/communityList.json';
 import birthdayList from '@mocks/data/birthdayList.json';
 import blogList from '@mocks/data/blogList.json';
-import { PATH } from '@constants/path';
+import itNewsList from '@mocks/data/itNewsList.json';
+import hireList from '@mocks/data/hireList.json';
 
 const MainPage = () => {
   return (
@@ -30,6 +32,10 @@ const MainPage = () => {
       </CommunitySection.Wrapper>
       <BirthdayList data={birthdayList} />
       <NewsCardSection to={PATH.BLOG} title="기술 블로그" data={blogList} />
+      <CommunitySection.Wrapper>
+        <CommunitySection title="IT 소식" data={itNewsList} />
+        <CommunitySection title="취업 소식" data={hireList} />
+      </CommunitySection.Wrapper>
     </Content>
   );
 };
