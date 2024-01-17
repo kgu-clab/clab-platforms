@@ -1,13 +1,13 @@
-import Card from '@components/common/Card/Card';
+import Section from '@components/common/Section/Section';
 import Image from '@components/common/Image/Image';
 
 import newsList from '@mocks/data/newsList.json';
 
-const NewsCardList = () => {
+const NewsSectionList = () => {
   return (
-    <Card>
-      <Card.Header title="최근 동아리 소식은?" />
-      <Card.Body className="flex gap-2 overflow-scroll scrollbar-hide">
+    <Section>
+      <Section.Header title="최근 동아리 소식은?" />
+      <Section.Body className="flex gap-2 overflow-scroll scrollbar-hide">
         {newsList.slice(0, 4).map(({ id, title, image }) => (
           <div
             key={id}
@@ -23,9 +23,9 @@ const NewsCardList = () => {
             <p className="break-keep text-center hover:underline">{title}</p>
           </div>
         ))}
-      </Card.Body>
-    </Card>
+      </Section.Body>
+    </Section>
   );
 };
 
-export default NewsCardList;
+export default NewsSectionList;

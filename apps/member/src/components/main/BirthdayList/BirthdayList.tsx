@@ -1,4 +1,4 @@
-import Card from '@components/common/Card/Card';
+import Section from '@components/common/Section/Section';
 import Image from '@components/common/Image/Image';
 
 interface BirthdayListProps {
@@ -12,9 +12,9 @@ interface BirthdayListProps {
 
 const BirthdayList = ({ data }: BirthdayListProps) => {
   return (
-    <Card>
-      <Card.Header title="생일자를 소개합니다" />
-      <Card.Body className="flex overflow-scroll scrollbar-hide">
+    <Section>
+      <Section.Header title="생일자를 소개합니다" />
+      <Section.Body className="flex overflow-scroll scrollbar-hide">
         {data.map(({ id, name, image, birth }) => (
           <div
             key={id}
@@ -38,8 +38,8 @@ const BirthdayList = ({ data }: BirthdayListProps) => {
             </div>
           </div>
         ))}
-      </Card.Body>
-    </Card>
+      </Section.Body>
+    </Section>
   );
 };
 
