@@ -1,0 +1,12 @@
+[
+  {
+    "image": "https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8Y2F0fGVufDB8fDB8fHww",
+    "name": "김정은",
+    "id": 201912023,
+    "interests": "Front-end",
+    "phone": "010-1234-5678",
+    "email": "clab@gmail.com",
+    "githubUrl": "https://github.com/KGU-C-Lab",
+    "address": "경기도 수원시 영통구 광교산로 154-42"
+  }
+]
