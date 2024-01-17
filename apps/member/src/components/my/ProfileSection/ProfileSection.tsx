@@ -12,11 +12,15 @@ interface ProfileSectionProps {
     email: string;
     githubUrl: string;
     address: string;
-  }[];
+  };
+}
+
+interface InfoProps {
+  label: string;
+  children: React.ReactNode;
 }
 
 const ProfileSection = ({ data }: ProfileSectionProps) => {
-  const profileData = data[0];
   return (
     <Section>
       <Section.Header title="나의 정보">
@@ -28,7 +32,7 @@ const ProfileSection = ({ data }: ProfileSectionProps) => {
       <Section.Body className="flex flex-col">
         <div className="flex flex-col text-center items-center">
           <Image
-            src={profileData.image}
+            src={data.image}
             alt="프로필 이미지"
             className="rounded-full m-auto"
             width={32}
@@ -36,28 +40,21 @@ const ProfileSection = ({ data }: ProfileSectionProps) => {
           />
 
           <div className="mt-2">
-            <p className="text-xl font-bold">{profileData.name}</p>
-            <p className="text-sm font-semibold text-gray-500">
-              {profileData.id}
-            </p>
+            <p className="text-xl font-bold">{data.name}</p>
+            <p className="text-sm font-semibold text-gray-500">{data.id}</p>
           </div>
         </div>
         <div className="mt-4 space-y-4">
-          <Info label="분야">{profileData.interests}</Info>
-          <Info label="연락처">{profileData.phone}</Info>
-          <Info label="이메일">{profileData.email}</Info>
-          <Info label="Github">{profileData.githubUrl}</Info>
-          <Info label="주소">{profileData.address}</Info>
+          <Info label="분야">{data.interests}</Info>
+          <Info label="연락처">{data.phone}</Info>
+          <Info label="이메일">{data.email}</Info>
+          <Info label="Github">{data.githubUrl}</Info>
+          <Info label="주소">{data.address}</Info>
         </div>
       </Section.Body>
     </Section>
   );
 };
-
-interface InfoProps {
-  label: string;
-  children: React.ReactNode;
-}
 
 const Info = ({ label, children }: InfoProps) => {
   return (
