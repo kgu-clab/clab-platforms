@@ -7,7 +7,7 @@ interface CommunitySectionProps {
   title: string;
   data: {
     id: number;
-    type: string;
+    type?: string;
     title: string;
     createAt: string;
   }[];
@@ -22,8 +22,8 @@ const CommunitySection = ({ title, data }: CommunitySectionProps) => {
       <Section.Body>
         {data.slice(0, 6).map(({ id, type, title, createAt }) => (
           <ListButton key={id} to="">
-            <p className="break-keep">{type}</p>
-            <p className="w-full truncate px-4">{title}</p>
+            {type && <p className="break-keep pr-4">{type}</p>}
+            <p className="w-full truncate pr-4">{title}</p>
             <p className="text-clab-main-light">{toYYMMDD(createAt)}</p>
           </ListButton>
         ))}
