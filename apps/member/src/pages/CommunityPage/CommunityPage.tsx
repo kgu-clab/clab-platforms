@@ -6,42 +6,43 @@ import gassipList from '@mocks/data/gassipList.json';
 import itNewsList from '@mocks/data/itNewsList.json';
 import hireList from '@mocks/data/hireList.json';
 import graduatedList from '@mocks/data/graduatedList.json';
-import CommunityHeader from '@components/community/CommunityHeader';
+import Header from '@components/common/Header/Header';
+import { PATH } from '@constants/path';
 
 const CommunityPage = () => {
   return (
     <Content>
-      <CommunityHeader />
+      <Header name="커뮤니티" button="글쓰기" to={PATH.COMMUNITY_WRITE} />
       <div className="grid grid-cols-2 gap-4">
         <CommunitySection
           title="공지사항"
           data={noticeList}
-          to="/community/notice"
+          to={PATH.COMMUNITY_NOTICE}
         />
         <CommunitySection
           title="자유"
           data={gassipList}
-          to="/community/gassip"
+          to={PATH.COMMUNITY_GASSIP}
         />
         <CommunitySection
           title="QnA"
           data={communityList}
-          to="/community/qna"
+          to={PATH.COMMUNITY_QNA}
         />
         <CommunitySection
           title="졸업생 게시판"
           data={graduatedList}
-          to="/community/graduated"
+          to={PATH.COMMUNITY_GRADUATED}
         />
         <CommunitySection
           title="IT 뉴스"
           data={itNewsList}
-          to="/community/news"
+          to={PATH.COMMUNITY_NEWS}
         />
         <CommunitySection
           title="채용 정보"
           data={hireList}
-          to="/community/hire"
+          to={PATH.COMMUNITY_HIRE}
         />
       </div>
     </Content>

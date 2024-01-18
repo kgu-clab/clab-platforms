@@ -5,9 +5,9 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import AppLayout from './AppLayout';
 import ErrorPage from '@pages/ErrorPage/ErrorPage';
 import CommunityPage from '@pages/CommunityPage/CommunityPage';
-import CommunityDetailPage from '@pages/CommunityPage/CommunityDetailPage';
-import CommunityPostPage from '@pages/CommunityPage/CommunityPostPage';
-import CommunityWritePage from '@pages/CommunityPage/CommunityWritePage';
+import CommunityDetailPage from '@pages/CommunityDetailPage/CommunityDetailPage';
+import CommunityPostPage from '@pages/CommunityPostPage/CommunityPostPage';
+import CommunityWritePage from '@pages/CommunityWritePage/CommunityWritePage';
 
 const AppRouter = () => {
   const router = createBrowserRouter([

@@ -1,6 +1,7 @@
 import Content from '@components/common/Content/Content';
-import CommunityHeader from '@components/community/CommunityHeader';
-import DetailList from '@components/community/DetailList';
+import Header from '@components/common/Header/Header';
+import { PATH } from '@constants/path';
+import DetailList from '@components/community/DetailList/DetailList';
 import { useParams } from 'react-router-dom';
 import notice from '@mocks/data/noticeList.json';
 import gassip from '@mocks/data/gassipList.json';
@@ -43,7 +44,7 @@ const CommunityDetailPage = () => {
 
   return (
     <Content>
-      <CommunityHeader />
+      <Header name="커뮤니티" button="글쓰기" to={PATH.COMMUNITY_WRITE} />
       <DetailList data={data} sort={sort} />
     </Content>
   );
