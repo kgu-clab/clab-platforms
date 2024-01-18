@@ -5,6 +5,7 @@ import { toYYMMDD } from '@utils/date';
 
 interface CommunitySectionProps {
   title: string;
+  to?: string;
   data: {
     id: number;
     type?: string;
@@ -13,11 +14,11 @@ interface CommunitySectionProps {
   }[];
 }
 
-const CommunitySection = ({ title, data }: CommunitySectionProps) => {
+const CommunitySection = ({ title, to, data }: CommunitySectionProps) => {
   return (
     <Section>
       <Section.Header title={title}>
-        <MoreButton to="" />
+        <MoreButton to={to ? to : ''} />
       </Section.Header>
       <Section.Body>
         {data.slice(0, 6).map(({ id, type, title, createAt }) => (

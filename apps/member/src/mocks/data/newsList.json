@@ -6,7 +6,7 @@
     "description": "",
     "contents": "023년도 제 10회 SW 개발보안 경진대회에서 본선에서 25개 팀 중 12개의 팀이 수상하였고",
     "category": "공모전",
-    "date": "2000-03-23"
+    "createAt": "2000-03-23"
   },
   {
     "id": 2,
@@ -15,7 +15,7 @@
     "description": "",
     "contents": "2023 INHA SW ENT-Zero에 참가하여 장려상을 수상하였습니다. ",
     "category": "공모전",
-    "date": "2000-03-23"
+    "createAt": "2000-03-23"
   },
   {
     "id": 3,
@@ -23,7 +23,7 @@
     "title": "SW중심대학 공동해커톤 최우수상 수상",
     "contents": "정보통신기획평가원이 주최한 2023 SW중심대학 공동해커톤 대회(2023.06.28 ~ 6.30)에서 ",
     "category": "공모전",
-    "date": "2000-03-23"
+    "createAt": "2000-03-23"
   },
   {
     "id": 4,
@@ -32,7 +32,7 @@
     "description": "",
     "contents": "총 40명의 부원들과 함께 대부도로 2023년 C-Lab MT를 무사히 다녀왔습니다. ",
     "category": "대외활동",
-    "date": "2000-03-23"
+    "createAt": "2000-03-23"
   },
   {
     "id": 5,
@@ -41,7 +41,7 @@
     "description": "",
     "contents": "contents",
     "category": "대외활동",
-    "date": "2000-03-23"
+    "createAt": "2000-03-23"
   },
   {
     "id": 6,
@@ -50,6 +50,6 @@
     "description": "",
     "contents": "contents",
     "category": "대외활동",
-    "date": "2000-03-23"
+    "createAt": "2000-03-23"
   }
 ]
