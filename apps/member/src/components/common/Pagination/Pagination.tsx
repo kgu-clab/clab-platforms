@@ -1,6 +1,9 @@
+import classNames from 'classnames';
 import { useEffect, useState } from 'react';
+import { MdOutlineSkipNext } from 'react-icons/md';
 
 interface PaginationProps {
+  className?: string;
   totalItems: number;
   pageLimit: number;
   postLimit: number;
@@ -10,12 +13,12 @@ interface PaginationProps {
 }
 
 const Pagination = ({
+  className,
   totalItems,
   pageLimit,
   postLimit,
   setPage,
   page,
-  sort,
 }: PaginationProps) => {
   const totalPages = Math.ceil(totalItems / postLimit);
   const [startPage, setStartPage] = useState(1);
@@ -27,47 +30,35 @@ const Pagination = ({
     pageNumber.push(i);
   }
 
-  useEffect(() => {
-    setStartPage(page - (page % 5) + 1);
-    setEndPage(Math.min(totalPages, page - (page % 5) + 5));
-  }, [page, totalPages, pageLimit]);
-
-  useEffect(() => {
-    setPage(1);
-  }, [sort]);
-
   const handleButtonClick = (index: number) => {
     setPage(index);
     setClickedButton(index);
   };
 
-  return (
-    <div className="flex">
-      <button
-        className="rounded-full px-2 hover:bg-gray-200"
-        onClick={() => handleButtonClick(1)}
-      >
-        {'<<'}
-      </button>
+  useEffect(() => {
+    setStartPage(page - (page % 5) + 1);
+    setEndPage(Math.min(totalPages, page - (page % 5) + 5));
+  }, [page, totalPages, pageLimit]);
 
+  return (
+    <div className={classNames('flex items-center', className)}>
+      <button onClick={() => handleButtonClick(1)}>
+        <MdOutlineSkipNext className="rotate-180" />
+      </button>
       {pageNumber.map((index) => (
         <div key={index}>
           <button
-            className={`rounded-full px-2 hover:bg-gray-300 ${
-              clickedButton === index ? 'bg-gray-200' : null
-            }`}
+            className={classNames('rounded-full px-2', {
+              underline: clickedButton === index,
+            })}
             onClick={() => handleButtonClick(index)}
           >
             {index}
           </button>
         </div>
       ))}
-
-      <button
-        className="rounded-full px-2 hover:bg-gray-200"
-        onClick={() => handleButtonClick(totalPages)}
-      >
-        {'>>'}
+      <button onClick={() => handleButtonClick(totalPages)}>
+        <MdOutlineSkipNext />
       </button>
     </div>
   );
