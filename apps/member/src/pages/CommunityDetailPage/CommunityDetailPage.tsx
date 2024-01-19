@@ -29,7 +29,7 @@ const getSubTitle = (type = 'error'): ContentProps => {
       name: '공지사항',
       data: noticeBoardList,
     },
-    gassip: {
+    free: {
       name: '자유',
       data: freeBoardList,
     },

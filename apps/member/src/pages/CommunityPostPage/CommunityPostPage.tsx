@@ -7,16 +7,17 @@ import Section from '@components/common/Section/Section';
 import Button from '@components/common/Button/Button';
 import Post from '@components/common/Post/Post';
 import { getPokemonImage } from '@mocks/mocks';
+import { ERROR_MESSAGE } from '@constants/message';
 
 const getSubTitle = (type = 'error'): string => {
   return {
     notice: '공지사항',
-    gassip: '자유',
+    free: '자유',
     qna: 'QnA',
     graduated: '졸업생',
     news: 'IT 뉴스',
     hire: '채용 정보',
-    error: `${type} 게시판을 찾을 수 없습니다`,
+    error: ERROR_MESSAGE.default,
   }[type] as string;
 };
 
@@ -24,7 +25,7 @@ const CommunityPostPage = () => {
   const { type } = useParams<{ type: string }>();
   const { title, writer, contents, createAt } = post;
 
-  const subTitle = getSubTitle(type);
+  const subTitle = getSubTitle(type) || ERROR_MESSAGE.default;
 
   return (
     <Content>

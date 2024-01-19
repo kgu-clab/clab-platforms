@@ -8,7 +8,7 @@ export const PATH = {
   COMMUNITY_DETAIL: '/community/:type',
   COMMUNITY_POST: '/community/:type/:id',
   COMMUNITY_NOTICE: '/community/notice',
-  COMMUNITY_GASSIP: '/community/gassip',
+  COMMUNITY_FREE: '/community/free',
   COMMUNITY_QNA: '/community/qna',
   COMMUNITY_GRADUATED: '/community/graduated',
   COMMUNITY_NEWS: '/community/news',

@@ -34,7 +34,7 @@ const CommunityPage = () => {
         <CommunitySection
           title="자유"
           data={freeBoardList}
-          to={PATH.COMMUNITY_GASSIP}
+          to={PATH.COMMUNITY_FREE}
           number={borderNumber}
         />
         <CommunitySection
