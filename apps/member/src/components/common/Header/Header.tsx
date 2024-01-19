@@ -1,24 +1,35 @@
-import { Link } from 'react-router-dom';
+import { Fragment } from 'react';
+import { GrNext } from 'react-icons/gr';
 
 interface HeaderProps {
-  name: string;
-  button?: string;
-  to?: string;
+  title: string | string[];
+  children?: React.ReactNode;
 }
 
-const CommunityHeader = ({ name, button, to }: HeaderProps) => {
+const Header = ({ title, children }: HeaderProps) => {
+  const RenderTitle = () => {
+    if (Array.isArray(title)) {
+      return (
+        <div className="flex text-xl font-bold items-center">
+          {title.map((name, index) => (
+            <Fragment key={name}>
+              <span className="hover:bg-gray-100 rounded-lg px-2">{name}</span>
+              {index !== title.length - 1 && <GrNext />}
+            </Fragment>
+          ))}
+        </div>
+      );
+    }
+
+    return <h1 className="text-xl font-bold">{title}</h1>;
+  };
+
   return (
-    <div className="flex justify-between rounded-lg border bg-white p-4">
-      <div className="text-xl font-bold py-1">{name}</div>
-      {button && typeof to === 'string' && (
-        <Link
-          to={to}
-          className="flex border items-center text-sm rounded px-2 bg-gray-100 transition hover:bg-gray-200"
-        >
-          {button}
-        </Link>
-      )}
+    <div className="flex justify-between items-center rounded-lg border bg-white p-4">
+      <RenderTitle />
+      <div className="flex gap-4">{children}</div>
     </div>
   );
 };
-export default CommunityHeader;
+
+export default Header;
