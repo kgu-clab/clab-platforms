@@ -4,12 +4,14 @@ import Button from '@components/common/Button/Button';
 import { PATH } from '@constants/path';
 import { useNavigate } from 'react-router-dom';
 import CommunitySection from '@components/main/CommunitySection/CommunitySection';
-import noticeList from '@mocks/data/noticeList.json';
-import communityList from '@mocks/data/communityList.json';
-import gassipList from '@mocks/data/gassipList.json';
-import itNewsList from '@mocks/data/itNewsList.json';
-import hireList from '@mocks/data/hireList.json';
-import graduatedList from '@mocks/data/graduatedList.json';
+import {
+  freeBoardList,
+  graduatedBoardList,
+  hireBoardList,
+  itNewsBoardList,
+  noticeBoardList,
+  qnaBoardList,
+} from '@mocks/mocks';
 
 const CommunityPage = () => {
   const navigate = useNavigate();
@@ -25,37 +27,37 @@ const CommunityPage = () => {
       <CommunitySection.Wrapper>
         <CommunitySection
           title="공지사항"
-          data={noticeList}
+          data={noticeBoardList}
           to={PATH.COMMUNITY_NOTICE}
           number={borderNumber}
         />
         <CommunitySection
           title="자유"
-          data={gassipList}
+          data={freeBoardList}
           to={PATH.COMMUNITY_GASSIP}
           number={borderNumber}
         />
         <CommunitySection
           title="QnA"
-          data={communityList}
+          data={qnaBoardList}
           to={PATH.COMMUNITY_QNA}
           number={borderNumber}
         />
         <CommunitySection
           title="졸업생"
-          data={graduatedList}
+          data={graduatedBoardList}
           to={PATH.COMMUNITY_GRADUATED}
           number={borderNumber}
         />
         <CommunitySection
           title="IT 뉴스"
-          data={itNewsList}
+          data={itNewsBoardList}
           to={PATH.COMMUNITY_NEWS}
           number={borderNumber}
         />
         <CommunitySection
           title="채용 정보"
-          data={hireList}
+          data={hireBoardList}
           to={PATH.COMMUNITY_HIRE}
           number={borderNumber}
         />

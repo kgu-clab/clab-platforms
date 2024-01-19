@@ -1,5 +1,6 @@
 import Section from '@components/common/Section/Section';
 import Image from '@components/common/Image/Image';
+import { getPokemonImage } from '@mocks/mocks';
 
 interface BirthdayListProps {
   data: {
@@ -15,13 +16,13 @@ const BirthdayList = ({ data }: BirthdayListProps) => {
     <Section>
       <Section.Header title="생일자를 소개합니다" />
       <Section.Body className="flex overflow-scroll scrollbar-hide">
-        {data.map(({ id, name, image, birth }) => (
+        {data.map(({ id, name, birth }) => (
           <div
             key={id}
             className="flex flex-col items-center gap-4 rounded-lg px-4 pt-2"
           >
             <Image
-              src={image}
+              src={getPokemonImage()}
               alt={name}
               width="w-24"
               height="h-24"

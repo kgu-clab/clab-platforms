@@ -6,7 +6,7 @@ import post from '@mocks/data/post.json';
 import Section from '@components/common/Section/Section';
 import Button from '@components/common/Button/Button';
 import Post from '@components/common/Post/Post';
-import { getPokemon } from '@mocks/mocks';
+import { getPokemonImage } from '@mocks/mocks';
 
 const getSubTitle = (type = 'error'): string => {
   return {
@@ -33,7 +33,7 @@ const CommunityPostPage = () => {
         <Post>
           <Post.Head
             title={title}
-            src={getPokemon()}
+            src={getPokemonImage()}
             writer={writer}
             createAt={createAt}
           />

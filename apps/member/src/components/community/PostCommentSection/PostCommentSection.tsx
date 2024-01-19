@@ -2,7 +2,7 @@ import { useState } from 'react';
 import Comment from '@components/common/Comment/Comment';
 import CommentInput from '@components/common/CommentInput/CommentInput';
 import Section from '@components/common/Section/Section';
-import { getPokemon } from '@mocks/mocks';
+import { getPokemonImage } from '@mocks/mocks';
 
 const PostCommentSection = () => {
   const [input, setInput] = useState<string>('');
@@ -74,7 +74,7 @@ const PostCommentSection = () => {
             <div key={index} className="space-y-2">
               {/* ROOT */}
               <Comment
-                image={getPokemon()}
+                image={getPokemonImage()}
                 writer="김관식 (201912023)"
                 onClickReport={onClickReport}
                 onClickReply={() => onClickReComment(index)}
@@ -86,7 +86,7 @@ const PostCommentSection = () => {
                 {reCommentList[index] &&
                   reCommentList[index].map((comment, index) => (
                     <Comment
-                      image={getPokemon()}
+                      image={getPokemonImage()}
                       isReply
                       writer="김관식 (201912023)"
                       onClickReport={onClickReport}

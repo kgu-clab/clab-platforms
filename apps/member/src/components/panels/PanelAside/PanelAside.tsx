@@ -1,11 +1,11 @@
 import AttendanceFairyPanel from '@components/panels/AttendanceFairyPanel/AttendanceFairyPanel';
 import ProfilePanel from '@components/panels/ProfilePanel/ProfilePanel';
-import account from '@mocks/data/account.json';
 import AlarmPanel from '../AlarmPanel/AlarmPanel';
 import ActivityPanel from '../ActivityPanel/ActivityPanel';
 import BookPanel from '../BookPanel/BookPanel';
 import AccountPanel from '../AccountPanel/AccountPanel';
 import SetupPanel from '../SetupPanel/SetupPanel';
+import { account } from '@mocks/mocks';
 
 const PanelAside = () => {
   return (
@@ -21,7 +21,7 @@ const PanelAside = () => {
             <AccountPanel />
             <SetupPanel />
           </div>
-        )
+        ),
       )}
     </aside>
   );

@@ -8,13 +8,14 @@ import Pagination from '@components/common/Pagination/Pagination';
 import { useState } from 'react';
 import { PATH_FINDER } from '@constants/path';
 import { toYYMMDD } from '@utils/date';
-
-import notice from '@mocks/data/noticeList.json';
-import gassip from '@mocks/data/gassipList.json';
-import qna from '@mocks/data/communityList.json';
-import graduated from '@mocks/data/graduatedList.json';
-import news from '@mocks/data/newsList.json';
-import hire from '@mocks/data/hireList.json';
+import {
+  freeBoardList,
+  graduatedBoardList,
+  hireBoardList,
+  newsList,
+  noticeBoardList,
+  qnaBoardList,
+} from '@mocks/mocks';
 
 interface ContentProps {
   name: string;
@@ -26,27 +27,27 @@ const getSubTitle = (type = 'error'): ContentProps => {
   return {
     notice: {
       name: '공지사항',
-      data: notice,
+      data: noticeBoardList,
     },
     gassip: {
       name: '자유',
-      data: gassip,
+      data: freeBoardList,
     },
     qna: {
       name: 'QnA',
-      data: qna,
+      data: qnaBoardList,
     },
     graduated: {
       name: '졸업생 게시판',
-      data: graduated,
+      data: graduatedBoardList,
     },
     news: {
       name: 'IT 소식',
-      data: news,
+      data: newsList,
     },
     hire: {
       name: '채용 정보',
-      data: hire,
+      data: hireBoardList,
     },
     error: {
       name: `${type} 게시판을 찾을 수 없습니다`,
@@ -85,11 +86,13 @@ const CommunityDetailPage = () => {
           {data
             .slice(offset, offset + limit)
             .map(({ id, title, writer, createAt }) => (
-              <Table.Row key={id} className="text-center">
+              <Table.Row
+                key={id}
+                className="text-center"
+                onClick={() => onClickTitle(id)}
+              >
                 <td className="py-2">{id}</td>
-                <td className="text-left py-2" onClick={() => onClickTitle(id)}>
-                  {title}
-                </td>
+                <td className="text-left py-2">{title}</td>
                 <td className="py-2">{writer}</td>
                 <td className="py-2">{toYYMMDD(createAt)}</td>
               </Table.Row>

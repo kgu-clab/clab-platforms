@@ -5,7 +5,7 @@ import { toYYMMDD } from '@utils/date';
 
 interface CommunitySectionProps {
   title: string;
-  to?: string;
+  to: string;
   number?: number;
   data: {
     id: number;
@@ -17,7 +17,7 @@ interface CommunitySectionProps {
 
 const CommunitySection = ({
   title,
-  to = '',
+  to,
   number = 6,
   data,
 }: CommunitySectionProps) => {
