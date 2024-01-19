@@ -9,6 +9,7 @@ interface TableProps {
 
 interface RowProps {
   className?: string;
+  onClick?: () => void;
 }
 
 const Table = ({ head, className, children }: TableProps) => {
@@ -31,13 +32,14 @@ const Table = ({ head, className, children }: TableProps) => {
   );
 };
 
-Table.Row = ({ className, children }: PropsWithChildren<RowProps>) => {
+Table.Row = ({ className, onClick, children }: PropsWithChildren<RowProps>) => {
   return (
     <tr
       className={classNames(
         'items-center text-center cursor-pointer hover:bg-gray-100',
         className,
       )}
+      onClick={onClick}
     >
       {children}
     </tr>
