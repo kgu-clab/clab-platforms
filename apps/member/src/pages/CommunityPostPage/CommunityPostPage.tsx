@@ -2,29 +2,49 @@ import Content from '@components/common/Content/Content';
 import PostCommentSection from '@components/community/PostCommentSection/PostCommentSection';
 import { useParams } from 'react-router-dom';
 import Header from '@components/common/Header/Header';
-import { PATH } from '@constants/path';
-import postData from '@mocks/data/postData.json';
+import post from '@mocks/data/post.json';
 import Section from '@components/common/Section/Section';
-import PostTitleSection from '@components/community/PostTitleSection/PostTitleSection';
-import PostProfileSection from '@components/community/PostProfileSection/PostProfileSection';
-import PostTextSection from '@components/community/PostTextSection/PostTextSection';
+import Button from '@components/common/Button/Button';
+import Post from '@components/common/Post/Post';
+import { getPokemon } from '@mocks/mocks';
+
+const getSubTitle = (type = 'error'): string => {
+  return {
+    notice: '공지사항',
+    gassip: '자유',
+    qna: 'QnA',
+    graduated: '졸업생',
+    news: 'IT 뉴스',
+    hire: '채용 정보',
+    error: `${type} 게시판을 찾을 수 없습니다`,
+  }[type] as string;
+};
 
 const CommunityPostPage = () => {
-  const { sort } = useParams();
-  const data = postData;
+  const { type } = useParams<{ type: string }>();
+  const { title, writer, contents, createAt } = post;
+
+  const subTitle = getSubTitle(type);
 
   return (
     <Content>
-      <Header name="커뮤니티" button="글쓰기" to={PATH.COMMUNITY_WRITE} />
+      <Header title={['커뮤니티', subTitle]} />
       <Section>
-        <PostTitleSection title={data.title} />
-        <PostProfileSection
-          sort={sort}
-          image="https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8Y2F0fGVufDB8fDB8fHww"
-          writer={data.writer}
-          createAt={data.createAt}
-        />
-        <PostTextSection contents={data.contents} />
+        <Post>
+          <Post.Head
+            title={title}
+            src={getPokemon()}
+            writer={writer}
+            createAt={createAt}
+          />
+          <Post.Body>{contents}</Post.Body>
+          <Post.Footer>
+            <Button size="sm" color="red">
+              신고
+            </Button>
+            <Button size="sm">수정</Button>
+          </Post.Footer>
+        </Post>
       </Section>
       <PostCommentSection />
     </Content>
