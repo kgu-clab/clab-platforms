@@ -15,50 +15,55 @@ interface ProfileSectionProps {
   };
 }
 
-interface InfoProps {
+interface ProfileInfoProps {
   label: string;
   children: React.ReactNode;
 }
 
 const ProfileSection = ({ data }: ProfileSectionProps) => {
+  const { image, name, id, interests, phone, email, githubUrl, address } = data;
+
   return (
     <Section>
       <Section.Header title="나의 정보">
         <div className="flex gap-2">
-          <Button color="orange" children="수정" className="px-1" />
-          <Button color="red" children="로그아웃" className="px-1" />
+          <Button color="orange" size="sm">
+            수정
+          </Button>
+          <Button color="red" size="sm">
+            로그아웃
+          </Button>
         </div>
       </Section.Header>
       <Section.Body className="flex flex-col">
         <div className="flex flex-col text-center items-center">
           <Image
-            src={data.image}
+            width="w-32"
+            height="h-32"
+            src={image}
             alt="프로필 이미지"
-            className="rounded-full m-auto"
-            width={32}
-            height={32}
+            className="rounded-full m-auto object-cover"
           />
-
           <div className="mt-2">
-            <p className="text-xl font-bold">{data.name}</p>
-            <p className="text-sm font-semibold text-gray-500">{data.id}</p>
+            <p className="text-xl font-bold">{name}</p>
+            <p className="text-sm font-semibold text-gray-500">{id}</p>
           </div>
         </div>
         <div className="mt-4 space-y-4">
-          <Info label="분야">{data.interests}</Info>
-          <Info label="연락처">{data.phone}</Info>
-          <Info label="이메일">{data.email}</Info>
-          <Info label="Github">{data.githubUrl}</Info>
-          <Info label="주소">{data.address}</Info>
+          <ProfileInfo label="분야">{interests}</ProfileInfo>
+          <ProfileInfo label="연락처">{phone}</ProfileInfo>
+          <ProfileInfo label="이메일">{email}</ProfileInfo>
+          <ProfileInfo label="주소">{address}</ProfileInfo>
+          <ProfileInfo label="Github">{githubUrl}</ProfileInfo>
         </div>
       </Section.Body>
     </Section>
   );
 };
 
-const Info = ({ label, children }: InfoProps) => {
+const ProfileInfo = ({ label, children }: ProfileInfoProps) => {
   return (
-    <div className="flex text-lg">
+    <div className="flex">
       <p className="w-24 font-semibold">{label}</p>
       <p className="grow">{children}</p>
     </div>

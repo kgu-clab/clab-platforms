@@ -15,11 +15,11 @@ const HistorySection = ({ title, data }: HistorySectionProps) => {
   return (
     <Section>
       <Section.Header title={title} />
-      <Section.Body>
+      <Section.Body className="text-sm">
         {data.map(({ id, content, createdAt }) => (
-          <ListButton key={id} to="" className="justify-between">
-            <p className="truncate">{content}</p>
-            <p>{toYYMMDD(createdAt)}</p>
+          <ListButton key={id} to="">
+            <p className="w-full truncate pr-4">{content}</p>
+            <p className="text-clab-main-light">{toYYMMDD(createdAt)}</p>
           </ListButton>
         ))}
       </Section.Body>
