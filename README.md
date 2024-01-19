@@ -1,7 +1,7 @@
 # clab.page
 
 경기대학교 컴퓨터공학부 동아리 C-Lab의 공식 프론트엔드 시스템이에요.  
-지속적으로 늘어나는 동아리 공식 프론트엔드 프로젝트를 유연하고 생산성 있게 관리하기 위해 [모노레포(Monorepo)](https://en.wikipedia.org/wiki/Monorepo) 환경이 만들어졌어요.
+지속적으로 늘어나는 동아리의 프론트엔드 프로젝트를 유연하고 생산성 있게 관리하기 위해 [모노레포(Monorepo)](https://en.wikipedia.org/wiki/Monorepo) 환경이 만들어졌어요.
 
 ## Apps
 

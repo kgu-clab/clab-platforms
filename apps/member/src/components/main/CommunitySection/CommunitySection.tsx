@@ -5,6 +5,8 @@ import { toYYMMDD } from '@utils/date';
 
 interface CommunitySectionProps {
   title: string;
+  to: string;
+  number?: number;
   data: {
     id: number;
     type?: string;
@@ -13,14 +15,19 @@ interface CommunitySectionProps {
   }[];
 }
 
-const CommunitySection = ({ title, data }: CommunitySectionProps) => {
+const CommunitySection = ({
+  title,
+  to,
+  number = 6,
+  data,
+}: CommunitySectionProps) => {
   return (
     <Section>
       <Section.Header title={title}>
-        <MoreButton to="" />
+        <MoreButton to={to} />
       </Section.Header>
       <Section.Body>
-        {data.slice(0, 6).map(({ id, type, title, createAt }) => (
+        {data.slice(0, number).map(({ id, type, title, createAt }) => (
           <ListButton key={id} to="">
             {type && <p className="break-keep pr-4">{type}</p>}
             <p className="w-full truncate pr-4">{title}</p>

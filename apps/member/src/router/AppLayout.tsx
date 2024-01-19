@@ -5,11 +5,11 @@ import PanelAside from '@components/panels/PanelAside/PanelAside';
 import classNames from 'classnames';
 import { Outlet } from 'react-router-dom';
 
-const AppView = () => {
+const View = () => {
   const mockBanner = {
     banner: true,
     message: '500,000원을 후원했습니다.',
-    name: '이석현 (201912023)'
+    name: '이석현 (201912023)',
   };
 
   const { banner, message, name } = mockBanner;
@@ -17,8 +17,9 @@ const AppView = () => {
   return (
     <div
       className={classNames('m-nav min-h-screen bg-gray-50 pb-10', {
-        'pt-10': banner === false
-      })}>
+        'pt-10': banner === false,
+      })}
+    >
       {banner && (
         <div className="py-4 text-center text-xl font-semibold">
           <h1>&quot;{message}&quot;</h1>
@@ -39,7 +40,7 @@ const AppLayout = () => {
   return (
     <ScrollToTop>
       <Nav />
-      <AppView />
+      <View />
       <Footer />
     </ScrollToTop>
   );

@@ -2,26 +2,31 @@
   {
     "id": 1,
     "title": "[Search CIC] Search Engine 인턴십 모집 (체험형)",
-    "createAt": "2019-12-23"
+    "createAt": "2019-12-23",
+    "contents": "상세설명"
   },
   {
     "id": 2,
     "title": "[공동체] 카카오페이증권 DevOps 엔지니어",
-    "createAt": "2019-12-23"
+    "createAt": "2019-12-23",
+    "contents": "상세설명"
   },
   {
     "id": 3,
     "title": "[공동체] 카카오게임즈 DB엔지니어(DBA)",
-    "createAt": "2019-12-23"
+    "createAt": "2019-12-23",
+    "contents": "상세설명"
   },
   {
     "id": 4,
     "title": "Software Engineer, Backend - 당근페이 FDS/AML (Java / Kotlin)",
-    "createAt": "2019-12-23"
+    "createAt": "2019-12-23",
+    "contents": "상세설명"
   },
   {
     "id": 5,
     "title": "[Tech] RDMS개발팀 서버 개발자 (기간제)",
-    "createAt": "2019-12-23"
+    "createAt": "2019-12-23",
+    "contents": "상세설명"
   }
 ]
