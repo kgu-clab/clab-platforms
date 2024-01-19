@@ -34,7 +34,7 @@ const MainPage = () => {
       <NewsCardSection to={PATH.BLOG} title="기술 블로그" data={blogList} />
       <CommunitySection.Wrapper>
         <CommunitySection title="IT 소식" data={itNewsList} />
-        <CommunitySection title="취업 소식" data={hireList} />
+        <CommunitySection title="채용 정보" data={hireList} />
       </CommunitySection.Wrapper>
     </Content>
   );
