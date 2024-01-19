@@ -5,14 +5,14 @@ export const PATH = {
   CALENDER: '/calendar',
   ACTIVITY: '/activity',
   COMMUNITY: '/community',
-  COMMUNITY_DETAIL: '/community/:sort',
+  COMMUNITY_DETAIL: '/community/:type',
+  COMMUNITY_POST: '/community/:type/:id',
   COMMUNITY_NOTICE: '/community/notice',
   COMMUNITY_GASSIP: '/community/gassip',
   COMMUNITY_QNA: '/community/qna',
   COMMUNITY_GRADUATED: '/community/graduated',
   COMMUNITY_NEWS: '/community/news',
   COMMUNITY_HIRE: '/community/hire',
-  COMMUNITY_POST: '/communityPost/:sort/:id',
   COMMUNITY_WRITE: '/community/write',
   NEWS: '/news',
   BLOG: '/blog',
@@ -24,4 +24,5 @@ export const PATH = {
 export const PATH_FINDER = {
   NEWS_POST: (id: number) => `${PATH.NEWS}/${id}`,
   BLOG_POST: (id: number) => `${PATH.BLOG}/${id}`,
+  COMMUNITY_POST: (sort: string, id: number) => `/community/${sort}/${id}`,
 };
