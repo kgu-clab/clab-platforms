@@ -9,6 +9,7 @@ import CommunityDetailPage from '@pages/CommunityDetailPage/CommunityDetailPage'
 import CommunityPostPage from '@pages/CommunityPostPage/CommunityPostPage';
 import CommunityWritePage from '@pages/CommunityWritePage/CommunityWritePage';
 import MyPage from '@pages/MyPage/MyPage';
+import CalendarPage from '@pages/CalendarPage/CalendarPage';
 
 const AppRouter = () => {
   const router = createBrowserRouter([
@@ -23,6 +24,7 @@ const AppRouter = () => {
         { path: PATH.COMMUNITY_DETAIL, element: <CommunityDetailPage /> },
         { path: PATH.COMMUNITY_WRITE, element: <CommunityWritePage /> },
         { path: PATH.MY, element: <MyPage /> },
+        { path: PATH.CALENDER, element: <CalendarPage /> },
       ],
     },
   ]);
