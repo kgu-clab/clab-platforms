@@ -1,6 +1,6 @@
 import Button from '@components/common/Button/Button';
-import Input from '@components/common/Input/Input';
 import { ChangeEvent, useState } from 'react';
+import FormInput from '../FormInput/FormInput';
 
 interface InputProps {
   name: string;
@@ -28,7 +28,9 @@ const RequestForm = () => {
   };
 
   const addComma = (cost: string) => {
-    const returnString = cost?.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+    const returnString = cost
+      .replace(/,/g, '')
+      .replace(/\B(?=(\d{3})+(?!\d))/g, ',');
     return returnString;
   };
 
@@ -51,105 +53,56 @@ const RequestForm = () => {
       <h1 className="text-center text-2xl font-bold pb-4">신청서</h1>
       <div className="mt-4 grid gap-2 md:grid-cols-2">
         <div className="space-y-4">
-          <div className="space-y-1">
-            <label className="label">
-              <p className="label-text">
-                요청자
-                <span className="text-sm text-red-500">*</span>
-              </p>
-            </label>
-            <div className="flex">
-              <Input
-                type="text"
-                placeholder="요청하는 분의 성함을 적어주세요"
-                className="grow"
-                name="name"
-                value={name}
-                onChange={onChangeInputs}
-              />
-            </div>
-          </div>
+          <FormInput
+            title="요청자"
+            essential={true}
+            name="name"
+            placeholder="요청하시는 분의 성함을 적어주세요"
+            value={name}
+            onChange={onChangeInputs}
+          />
 
-          <div className="space-y-1">
-            <label className="label">
-              <p className="label-text">
-                신청 일시
-                <span className="text-sm text-red-500">*</span>
-              </p>
-            </label>
-            <div className="flex">
-              <Input
-                type="date"
-                className="grow"
-                name="date"
-                value={date}
-                onChange={onChangeInputs}
-              />
-            </div>
-          </div>
-
-          <div className="space-y-1">
-            <label className="label">
-              <p className="label-text">
-                목적
-                <span className="text-sm text-red-500">*</span>
-              </p>
-            </label>
-            <div className="flex">
-              <Input
-                type="text"
-                placeholder="구매 목적을 적어주세요"
-                className="grow"
-                name="purpose"
-                value={purpose}
-                onChange={onChangeInputs}
-              />
-            </div>
-          </div>
+          <FormInput
+            title="신청일시"
+            essential={true}
+            type="date"
+            name="date"
+            value={date}
+            onChange={onChangeInputs}
+          />
+          <FormInput
+            title="목적"
+            essential={true}
+            name="purpose"
+            placeholder="구매 목적을 적어주세요"
+            value={purpose}
+            onChange={onChangeInputs}
+          />
         </div>
 
         <div className="space-y-4">
-          <div className="space-y-1">
-            <label className="label">
-              <p className="label-text">
-                금액
-                <span className="text-sm text-red-500">*</span>
-              </p>
-            </label>
-            <div className="flex">
-              <Input
-                type="text"
-                placeholder="구매 금액을 적어주세요"
-                className="grow"
-                name="cost"
-                value={addComma(cost) || cost}
-                onChange={(e) => onChangeCost(e)}
-              />
-            </div>
-          </div>
+          <FormInput
+            title="금액"
+            essential={true}
+            name="cost"
+            placeholder="구매 금액을 적어주세요"
+            value={addComma(cost) || cost}
+            onChange={(e) => onChangeCost(e)}
+          />
 
-          <div className="space-y-1 pb-8">
-            <label className="label">
-              <p className="label-text">
-                링크
-                <span className="text-sm text-red-500">*</span>
-              </p>
-            </label>
-            <div className="flex">
-              <Input
-                type="text"
-                placeholder="구매처 링크를 넣어주세요"
-                className="grow"
-                name="url"
-                value={url}
-                onChange={onChangeInputs}
-              />
-            </div>
+          <FormInput
+            title="링크"
+            essential={true}
+            name="url"
+            placeholder="구매처 링크를 넣어주세요"
+            value={url}
+            onChange={onChangeInputs}
+          />
+          <div className="pt-8">
+            <Button className="w-full" onClick={onClickRequest}>
+              요청하기
+            </Button>
           </div>
-
-          <Button className="w-full" onClick={onClickRequest}>
-            요청하기
-          </Button>
         </div>
       </div>
     </div>

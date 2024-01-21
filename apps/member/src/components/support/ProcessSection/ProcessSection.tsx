@@ -1,32 +1,30 @@
-import step3 from '@assets/support/check.svg';
-import step2 from '@assets/support/checking.svg';
-import step1 from '@assets/support/document.svg';
-import next from '@assets/support/next.svg';
 import Linker from '@components/common/Linker/Linker';
 import { PATH } from '@constants/path';
+import classNames from 'classnames';
+import Icons from '@components/common/Icons/Icons';
 
 const stepContents = [
   {
     id: 1,
-    image: step1,
+    image: 'document',
     description: '회비 사용과 관련된 정보를 기입하여 제출해주세요.',
   },
   {
     id: 2,
-    image: next,
+    image: 'next',
   },
   {
     id: 3,
-    image: step2,
+    image: 'checking',
     description: '운영진이 신청서를 검토해요.',
   },
   {
     id: 4,
-    image: next,
+    image: 'next',
   },
   {
     id: 5,
-    image: step3,
+    image: 'check',
     description: '승인 또는 거절의 결과를 안내해요.',
   },
 ];
@@ -36,18 +34,22 @@ const ProcessSection = () => {
     <div className="space-y-12 text-center">
       <div>
         <h1 className="text-2xl font-bold pb-4">회비 사용 신청 절차</h1>
-        <div className="flex place-items-center content-center">
+        <div className="flex justify-center items-center">
           {stepContents.map(({ id, image, description }) => (
-            <div key={id} className="flex flex-col w-40 items-center gap-4">
-              <div className={id % 2 === 0 ? '' : 'rounded-full bg-gray-200'}>
-                <img
-                  src={image}
-                  alt="절차"
-                  className={
-                    id % 2 === 0
-                      ? 'h-full max-h-[50px] w-full max-w-[50px]'
-                      : 'h-full max-h-[120px] w-full max-w-[120px] p-6'
-                  }
+            <div
+              key={id}
+              className="flex flex-col items-center w-16 md:w-40 gap-4"
+            >
+              <div
+                className={classNames({
+                  'rounded-full bg-gray-200': image != 'next',
+                })}
+              >
+                <Icons
+                  name={image}
+                  width={image != 'next' ? 24 : 16}
+                  height={image != 'next' ? 24 : 16}
+                  className="p-4"
                 />
               </div>
               <p className="text-center text-sm">{description}</p>

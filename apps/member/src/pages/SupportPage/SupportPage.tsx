@@ -8,7 +8,7 @@ const SupportPage = () => {
   return (
     <Content>
       <Header title="동아리 지원 신청" />
-      <Section className="space-y-10 p-12">
+      <Section className="space-y-10 p-8">
         <ProcessSection />
         <RequestForm />
       </Section>
