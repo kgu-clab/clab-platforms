@@ -4,8 +4,8 @@ import { useState } from 'react';
 interface ImageProps {
   src: string;
   alt: string;
-  width: number | string;
-  height: number | string;
+  width?: string;
+  height?: string;
   className?: string;
   onClick?: () => void;
 }
@@ -15,14 +15,14 @@ const Image = ({ src, alt, width, height, className, onClick }: ImageProps) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
 
+  const _width = width ? width : 'w-full';
+  const _height = height ? height : 'h-full';
+
   const handleError = () => {
     setImgSrc('/not_found.webp');
     setError(true);
     setLoading(false);
   };
-
-  const _width = typeof width === 'number' ? `w-${width}` : width;
-  const _height = typeof height === 'number' ? `h-${height}` : height;
 
   return (
     <div className={classNames(_width, _height)}>
@@ -37,6 +37,7 @@ const Image = ({ src, alt, width, height, className, onClick }: ImageProps) => {
         onClick={onClick}
         onLoad={() => setLoading(false)}
         onError={handleError}
+        loading="lazy"
       />
     </div>
   );
