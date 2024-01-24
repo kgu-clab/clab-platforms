@@ -17,6 +17,7 @@ export const PATH = {
   NEWS: '/news',
   BLOG: '/blog',
   LIBRARY: '/library',
+  LIBRARY_DETAIL: '/library/:id',
   SUPPORT: '/support',
   SITEMAP: '/sitemap',
 };
@@ -25,4 +26,5 @@ export const PATH_FINDER = {
   NEWS_POST: (id: number) => `${PATH.NEWS}/${id}`,
   BLOG_POST: (id: number) => `${PATH.BLOG}/${id}`,
   COMMUNITY_POST: (sort: string, id: number) => `/community/${sort}/${id}`,
+  LIBRARY_DETAIL: (id: number) => `/library/${id}`,
 };

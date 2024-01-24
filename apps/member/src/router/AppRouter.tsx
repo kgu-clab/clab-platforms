@@ -11,6 +11,8 @@ import CommunityWritePage from '@pages/CommunityWritePage/CommunityWritePage';
 import MyPage from '@pages/MyPage/MyPage';
 import CalendarPage from '@pages/CalendarPage/CalendarPage';
 import SupportPage from '@pages/SupportPage/SupportPage';
+import LibraryPage from '@pages/LibraryPage/LibraryPage';
+import LibraryDetailPage from '@pages/LibraryDetailPage/LibraryDetailPage';
 
 const AppRouter = () => {
   const router = createBrowserRouter([
@@ -27,6 +29,8 @@ const AppRouter = () => {
         { path: PATH.MY, element: <MyPage /> },
         { path: PATH.CALENDER, element: <CalendarPage /> },
         { path: PATH.SUPPORT, element: <SupportPage /> },
+        { path: PATH.LIBRARY, element: <LibraryPage /> },
+        { path: PATH.LIBRARY_DETAIL, element: <LibraryDetailPage /> },
       ],
     },
   ]);
