@@ -14,6 +14,12 @@ export const PATH = {
   COMMUNITY_NEWS: '/community/news',
   COMMUNITY_HIRE: '/community/hire',
   COMMUNITY_WRITE: '/community/write',
+  GROUP: '/group',
+  GROUP_DETAIL: `/group/:id`,
+  CREATE_GROUP: '/group/createGroup',
+  GROUP_NOTICE: '/group/:id/notice',
+  GROUP_STUDENT: '/group/:id/student',
+  ASSIGNMENT_UPLOAD: '/group/:id/assignment/:assignmentId',
   NEWS: '/news',
   BLOG: '/blog',
   LIBRARY: '/library',
@@ -25,4 +31,9 @@ export const PATH_FINDER = {
   NEWS_POST: (id: number) => `${PATH.NEWS}/${id}`,
   BLOG_POST: (id: number) => `${PATH.BLOG}/${id}`,
   COMMUNITY_POST: (sort: string, id: number) => `/community/${sort}/${id}`,
+  GROUP_DETAIL: (id: number) => `${PATH.GROUP}/${id}`,
+  GROUP_STUDENT: (id: number) => `${PATH.GROUP}/${id}/student`,
+  GROUP_NOTICE: (id: number) => `${PATH.GROUP}/${id}/notice`,
+  GROUP_ASSIGNMENT: (id: number, assignmentId: number) =>
+    `${PATH.GROUP}/${id}/assignment/${assignmentId}`,
 };
