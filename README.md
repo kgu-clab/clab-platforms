@@ -6,15 +6,15 @@
 ## Apps
 
 - [auth](/apps/auth/README.md): 동아리 계정을 이용한 로그인(OAuth) 시스템이에요.
-- [land](/apps/land/README.md): 동아리에 대해 알아볼 수 있는 랜딩 페이지이에요.
-- [member](/apps/member/README.md): 동아리원들이 사용하는 활동 플랫폼이에요.
+- [land](/apps/land/README.md): 외부인이 동아리에 대해 알아볼 수 있는 랜딩 페이지이에요.
+- [member](/apps/member/README.md): 동아리원들을 위한 그룹웨어 시스템이에요.
 
 ## Packages
 
-- [design-system](/packages/design-system/README.md): 동아리의 고유 디자인 시스템이에요.
+- [design-system](/packages/design-system/README.md): 동아리에서 사용하는 디자인 시스템이에요.
 - [utils](/packages/utils/README.md): 공통적으로 사용하는 유틸리티 라이브러리에요.
 - [hooks](/packages/hooks/README.md): 공통적으로 사용하는 React Hooks 라이브러리에요.
-- [icon](/packages/icon/README.md): 공통적으로 사용하는 아이콘 라이브러리에요.
+- [icon](/packages/icon/README.md): 공통적으로 사용하는 아이콘팩 라이브러리에요.
 
 ## Contributing
 
