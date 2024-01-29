@@ -1,4 +1,4 @@
-import Button from '@components/common/Button/Button';
+import { Button } from '@clab/design-system';
 import Image from '@components/common/Image/Image';
 import Section from '@components/common/Section/Section';
 

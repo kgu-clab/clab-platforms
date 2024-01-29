@@ -1,4 +1,4 @@
-import Button from '@components/common/Button/Button';
+import { Button } from '@clab/design-system';
 import Content from '@components/common/Content/Content';
 import Header from '@components/common/Header/Header';
 import Input from '@components/common/Input/Input';

@@ -1,4 +1,4 @@
-import Button from '@components/common/Button/Button';
+import { Button } from '@clab/design-system';
 import { ChangeEvent, useState } from 'react';
 import FormInput from '../FormInput/FormInput';
 

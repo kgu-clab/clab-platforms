@@ -1,7 +1,7 @@
-import Button from '@components/common/Button/Button';
 import Section from '@components/common/Section/Section';
 import SkeletonImage from '@components/common/Skeleton/SkeletonImage';
 import { Link } from 'react-router-dom';
+import { Button } from '@clab/design-system';
 
 interface BookDetailSectionProps {
   data: {

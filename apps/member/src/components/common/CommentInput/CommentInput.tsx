@@ -1,6 +1,6 @@
 import { ChangeEventHandler } from 'react';
 import Textarea from '../Textarea/Textarea';
-import Button from '../Button/Button';
+import { Button } from '@clab/design-system';
 
 interface CommentInputProps {
   value: string;

@@ -2,7 +2,7 @@ import Section from '@components/common/Section/Section';
 import dayjs from 'dayjs';
 import { useState } from 'react';
 import ShowDate from '../ShowDate/ShowDate';
-import Button from '@components/common/Button/Button';
+import { Button } from '@clab/design-system';
 
 const now = dayjs();
 

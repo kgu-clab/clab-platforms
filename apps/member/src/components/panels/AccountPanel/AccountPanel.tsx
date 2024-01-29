@@ -1,8 +1,7 @@
-import Button from '@components/common/Button/Button';
 import Panel from '@components/common/Panel/Panel';
-import { ButtonColorType } from '@type/button';
 import { useState } from 'react';
 import { FcBusiness } from 'react-icons/fc';
+import { Button, type ButtonColorType } from '@clab/design-system';
 
 interface AccountButtonProps {
   label: string;
