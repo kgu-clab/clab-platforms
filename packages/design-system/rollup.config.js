@@ -37,7 +37,7 @@ const config = [
     external: ['react', 'react-dom'],
   },
   {
-    input: 'dist/types/index.d.ts',
+    input: 'src/index.ts',
     output: [{ file: 'dist/index.d.ts', format: 'es' }],
     plugins: [dts.default()],
   },
