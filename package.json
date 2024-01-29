@@ -11,7 +11,8 @@
     "lint-staged": "lint-staged",
     "auth": "yarn workspace auth",
     "land": "yarn workspace land",
-    "member": "yarn workspace member"
+    "member": "yarn workspace member",
+    "design-system": "yarn workspace @clab/design-system"
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": [
