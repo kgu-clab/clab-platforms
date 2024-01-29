@@ -7,12 +7,16 @@
     "packages/*"
   ],
   "scripts": {
+    "setup": "yarn install && yarn build:design-system",
     "postinstall": "husky install",
     "lint-staged": "lint-staged",
-    "auth": "yarn workspace auth",
-    "land": "yarn workspace land",
-    "member": "yarn workspace member",
-    "design-system": "yarn workspace @clab/design-system"
+    "dev:auth": "yarn workspace auth dev",
+    "dev:land": "yarn workspace land dev",
+    "dev:member": "yarn workspace member dev",
+    "build:auth": "yarn workspace auth build",
+    "build:land": "yarn workspace land build",
+    "build:member": "yarn workspace member build",
+    "build:design-system": "yarn workspace @clab/design-system build"
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": [
