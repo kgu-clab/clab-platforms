@@ -1,10 +1,10 @@
 import type { Config } from 'tailwindcss';
+import path from 'path';
 
 const config: Config = {
   content: [
-    './pages/**/*.{js,ts,jsx,tsx,mdx}',
-    './components/**/*.{js,ts,jsx,tsx,mdx}',
-    './app/**/*.{js,ts,jsx,tsx,mdx}',
+    './app/**/*.{ts,jsx,tsx}',
+    path.join(path.dirname(require.resolve('@clab/design-system')), '**/*.js'),
   ],
   theme: {
     extend: {
