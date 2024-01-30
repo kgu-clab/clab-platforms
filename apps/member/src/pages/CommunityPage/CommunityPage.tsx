@@ -1,6 +1,6 @@
 import Content from '@components/common/Content/Content';
 import Header from '@components/common/Header/Header';
-import Button from '@components/common/Button/Button';
+import { Button } from '@clab/design-system';
 import { PATH } from '@constants/path';
 import { useNavigate } from 'react-router-dom';
 import CommunitySection from '@components/main/CommunitySection/CommunitySection';

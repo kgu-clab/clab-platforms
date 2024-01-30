@@ -1,11 +1,11 @@
-import type { ButtonColorType, ButtonSizeType } from '@type/button';
-import classNames from 'classnames';
-import { ComponentPropsWithRef } from 'react';
+import React, { ComponentPropsWithRef, ReactNode } from 'react';
+import { twMerge } from 'tailwind-merge';
 import { buttonStyleColored, buttonStyleSized } from './Button.style';
+import type { ButtonColorType, ButtonSizeType } from './Button.types';
 
 interface ButtonProps extends ComponentPropsWithRef<'button'> {
   className?: string;
-  children: React.ReactNode;
+  children: ReactNode;
   color?: ButtonColorType;
   size?: ButtonSizeType;
 }
@@ -19,7 +19,7 @@ const Button = ({
 }: ButtonProps) => {
   return (
     <button
-      className={classNames(
+      className={twMerge(
         'font-semibold text-sm rounded-lg border',
         buttonStyleColored(color),
         buttonStyleSized(size),

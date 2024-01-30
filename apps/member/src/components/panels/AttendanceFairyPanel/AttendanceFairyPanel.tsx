@@ -1,7 +1,7 @@
+import { useState } from 'react';
 import Panel from '@components/common/Panel/Panel';
 import fairy from '@assets/webp/fairy.webp';
-import Button from '@components/common/Button/Button';
-import { useState } from 'react';
+import { Button } from '@clab/design-system';
 
 const AttendanceFairyPanel = () => {
   const [open, setOpen] = useState(true);

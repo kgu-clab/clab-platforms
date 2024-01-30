@@ -1,0 +1,98 @@
+[
+  {
+    "id": 1,
+    "title": "리액트를 다루는 기술",
+    "image": "https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9791160508796.jpg",
+    "author": "김민준",
+    "publisher": "길벗",
+    "category": "개발",
+    "date": "2019-08-31",
+    "detail": "https://product.kyobobook.co.kr/detail/S000001792882",
+    "state": "대여 중",
+    "memberID": ""
+  },
+  {
+    "id": 2,
+    "title": "핵심만 콕 쿠버네티스",
+    "image": "https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9791165920180.jpg",
+    "author": "유홍근(커피고래)",
+    "publisher": "비제이퍼블릭",
+    "category": "인프라",
+    "date": "2020-09-18",
+    "detail": "https://product.kyobobook.co.kr/detail/S000001842159",
+    "state": "대여 가능",
+    "memberID": ""
+  },
+  {
+    "id": 3,
+    "title": "김정은은 군필 여대생인가?",
+    "image": "https://placekitten.com/700/700",
+    "author": "김관식",
+    "publisher": "경기대",
+    "category": "",
+    "date": "2023-11-25",
+    "detail": "",
+    "state": "대여 가능",
+    "memberID": ""
+  },
+  {
+    "id": 4,
+    "title": "이것이 자바다",
+    "image": "https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9791169210027.jpg",
+    "author": "신용권, 임경균",
+    "publisher": "한빛미디어",
+    "category": "개발",
+    "date": "",
+    "detail": "https://product.kyobobook.co.kr/detail/S000061695652",
+    "state": "대여 가능",
+    "memberID": ""
+  },
+  {
+    "id": 5,
+    "title": "면접을 위한 CS 전공지식 노트",
+    "image": "https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9791165219529.jpg",
+    "author": "주홍철",
+    "publisher": "길벗",
+    "category": "개발",
+    "date": "",
+    "detail": "https://product.kyobobook.co.kr/detail/S000001834833",
+    "state": "대여 중",
+    "memberID": ""
+  },
+  {
+    "id": 6,
+    "title": "리액트를 다루는 기술",
+    "image": "https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9791160508796.jpg",
+    "author": "김민준",
+    "publisher": "길벗",
+    "category": "개발",
+    "date": "2019-08-31",
+    "detail": "https://product.kyobobook.co.kr/detail/S000001792882",
+    "state": "대여 중",
+    "memberID": ""
+  },
+  {
+    "id": 7,
+    "title": "이것이 자바다",
+    "image": "https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9791169210027.jpg",
+    "author": "신용권, 임경균",
+    "publisher": "한빛미디어",
+    "category": "개발",
+    "date": "",
+    "detail": "https://product.kyobobook.co.kr/detail/S000061695652",
+    "state": "대여 가능",
+    "memberID": ""
+  },
+  {
+    "id": 8,
+    "title": "핵심만 콕 쿠버네티스",
+    "image": "https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9791165920180.jpg",
+    "author": "유홍근(커피고래)",
+    "publisher": "비제이퍼블릭",
+    "category": "인프라",
+    "date": "2020-09-18",
+    "detail": "https://product.kyobobook.co.kr/detail/S000001842159",
+    "state": "대여 가능",
+    "memberID": ""
+  }
+]

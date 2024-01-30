@@ -1,4 +1,4 @@
-import { ButtonColorType, ButtonSizeType } from '@type/button';
+import type { ButtonColorType, ButtonSizeType } from './Button.types';
 
 export const buttonStyleColored = (color: ButtonColorType): string => {
   return {
