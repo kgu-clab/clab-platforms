@@ -1,12 +1,14 @@
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
+import QueryClientProvider from '@components/common/QueryClientProvider/QueryClientProvider';
+import RecoilProvider from '@components/common/RecoilProvider/RecoilProvider';
 import './globals.css';
 
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
   title: 'C-Lab Auth',
-  description: 'C-Lab 로그인 시스템',
+  description: 'C-Lab Login System',
 };
 
 export default function RootLayout({
@@ -16,7 +18,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko">
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className}>
+        <QueryClientProvider>
+          <RecoilProvider>{children}</RecoilProvider>
+        </QueryClientProvider>
+      </body>
     </html>
   );
 }
