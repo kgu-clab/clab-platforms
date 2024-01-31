@@ -13,8 +13,10 @@ const Header = ({ title, children }: HeaderProps) => {
         <div className="flex text-xl font-bold items-center">
           {title.map((name, index) => (
             <Fragment key={name}>
-              <span className="hover:bg-gray-100 rounded-lg px-2">{name}</span>
-              {index !== title.length - 1 && <GrNext />}
+              <span className="hover:bg-gray-100 rounded-lg cursor-pointer">
+                {name}
+              </span>
+              {index !== title.length - 1 && <GrNext className="mx-2" />}
             </Fragment>
           ))}
         </div>
