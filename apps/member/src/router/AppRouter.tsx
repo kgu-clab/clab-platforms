@@ -14,7 +14,7 @@ import SupportPage from '@pages/SupportPage/SupportPage';
 import LibraryPage from '@pages/LibraryPage/LibraryPage';
 import LibraryDetailPage from '@pages/LibraryDetailPage/LibraryDetailPage';
 import GroupPage from '@pages/GroupPage/GroupPage';
-import GroupCreatePage from '@pages/GroupCreatePage/GroupCreatePage';
+import GroupApplyPage from '@pages/GroupApplyPage/GroupApplyPage';
 import GroupDetailPage from '@pages/GroupDetailPage/GroupDetailPage';
 import GroupNoticeDetailPage from '@pages/GroupNoticeDetailPage/GroupNoticeDetailPage';
 import GroupStudentPage from '@pages/GroupStudentPage/GroupStudentPage';
@@ -32,17 +32,17 @@ const AppRouter = () => {
         { path: PATH.COMMUNITY_POST, element: <CommunityPostPage /> },
         { path: PATH.COMMUNITY_DETAIL, element: <CommunityDetailPage /> },
         { path: PATH.COMMUNITY_WRITE, element: <CommunityWritePage /> },
+        { path: PATH.ACTIVITY, element: <GroupPage /> },
+        { path: PATH.ACTIVITY_APPLY, element: <GroupApplyPage /> },
+        { path: PATH.ACTIVITY_DETAIL, element: <GroupDetailPage /> },
+        { path: PATH.ACTIVITY_NOTICE, element: <GroupNoticeDetailPage /> },
+        { path: PATH.ACTIVITY_STUDENT, element: <GroupStudentPage /> },
+        { path: PATH.ACTIVITY_ASSIGNMENT, element: <GroupAssignmentPage /> },
+        { path: PATH.LIBRARY, element: <LibraryPage /> },
+        { path: PATH.LIBRARY_DETAIL, element: <LibraryDetailPage /> },
         { path: PATH.MY, element: <MyPage /> },
         { path: PATH.CALENDER, element: <CalendarPage /> },
         { path: PATH.SUPPORT, element: <SupportPage /> },
-        { path: PATH.LIBRARY, element: <LibraryPage /> },
-        { path: PATH.LIBRARY_DETAIL, element: <LibraryDetailPage /> },
-        { path: PATH.GROUP, element: <GroupPage /> },
-        { path: PATH.CREATE_GROUP, element: <GroupCreatePage /> },
-        { path: PATH.GROUP_DETAIL, element: <GroupDetailPage /> },
-        { path: PATH.GROUP_NOTICE, element: <GroupNoticeDetailPage /> },
-        { path: PATH.GROUP_STUDENT, element: <GroupStudentPage /> },
-        { path: PATH.ASSIGNMENT_UPLOAD, element: <GroupAssignmentPage /> },
       ],
     },
   ]);

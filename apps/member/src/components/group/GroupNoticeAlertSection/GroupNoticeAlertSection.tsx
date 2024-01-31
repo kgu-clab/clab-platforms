@@ -21,12 +21,14 @@ const GroupNoticeAlertSection = ({
   const navigate = useNavigate();
   const { id } = useParams();
 
+  if (!id) return null;
+
   return (
     <div className={classNames('w-full', className)}>
       <div
         className="flex items-center justify-between gap-2 font-semibold"
         onClick={() =>
-          navigate(PATH_FINDER.GROUP_NOTICE(Number(id)), {
+          navigate(PATH_FINDER.ACTIVITY_NOTICE(id), {
             state: { noticeId },
           })
         }

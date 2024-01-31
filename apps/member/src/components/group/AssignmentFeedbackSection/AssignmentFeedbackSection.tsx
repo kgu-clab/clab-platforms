@@ -1,6 +1,6 @@
-import Button from '@components/common/Button/Button';
 import { FormEvent, useState } from 'react';
 import { FaPenSquare } from 'react-icons/fa';
+import { Button } from '@clab/design-system';
 
 const AssignmentFeedbackSection = () => {
   const [isFormVisible, setFormVisible] = useState(false);
@@ -26,7 +26,6 @@ const AssignmentFeedbackSection = () => {
           onClick={() => setFormVisible(!isFormVisible)}
         />
       </div>
-
       {isFormVisible && (
         <div className="bg-white p-4">
           <form onSubmit={handleSubmit}>

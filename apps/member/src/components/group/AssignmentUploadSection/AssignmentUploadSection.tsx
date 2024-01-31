@@ -1,8 +1,8 @@
-import Button from '@components/common/Button/Button';
+import { useEffect, useState } from 'react';
+import { Button } from '@clab/design-system';
 import Header from '@components/common/Header/Header';
 import Section from '@components/common/Section/Section';
 import dayjs from 'dayjs';
-import { useEffect, useState } from 'react';
 
 interface assignmentData {
   id: number;
@@ -46,7 +46,7 @@ const AssignmentUploadSection = ({
         setAssignment(assignmentData);
       }
     }
-  }, [week, id, weeklyActivities]);
+  }, [week, id, weeklyActivities, activityId]);
 
   useEffect(() => {
     // 제출되지 않았을 경우 남은 기간 계산
@@ -90,15 +90,12 @@ const AssignmentUploadSection = ({
   return (
     <div className="space-y-4">
       <Header title={['활동', name, assignment ? assignment.title : '']} />
-
       <Section>
         <Section.Header title="과제 설명" />
         <p className="pt-3">{assignment?.content}</p>
       </Section>
-
       <Section>
         <Section.Header title="제출 상황" />
-
         <table className="table mb-4 m-2 w-full table-fixed bg-white">
           <tbody>
             <tr className="border-b">

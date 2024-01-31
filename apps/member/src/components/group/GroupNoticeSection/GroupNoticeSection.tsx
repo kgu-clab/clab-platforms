@@ -30,7 +30,6 @@ const GroupNoticeSection = ({ data }: GroupNoticeSectionProps) => {
   return (
     <div className="flex flex-col rounded-lg border bg-white p-4">
       <div className="flex items-center gap-2">
-        {/* 가장 최근의 공지사항 */}
         <GroupNoticeAlertSection
           className="border-r pr-2"
           noticeId={latestNotice.id}
@@ -42,7 +41,6 @@ const GroupNoticeSection = ({ data }: GroupNoticeSectionProps) => {
           <DropdownButton isOpen={open} onClick={() => setOpen(!open)} />
         )}
       </div>
-
       <div
         className={classNames(
           'overflow-hidden transition duration-500 ease-in-out',
@@ -50,7 +48,6 @@ const GroupNoticeSection = ({ data }: GroupNoticeSectionProps) => {
         )}
       >
         <hr className="my-4" />
-        {/* 나머지 공지사항 */}
         <div className="flex flex-col gap-4">
           {otherNotices.map((notice) => (
             <GroupNoticeAlertSection

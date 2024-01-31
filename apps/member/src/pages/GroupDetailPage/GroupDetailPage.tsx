@@ -1,14 +1,14 @@
-import Button from '@components/common/Button/Button';
+import { Button } from '@clab/design-system';
 import Content from '@components/common/Content/Content';
 import Header from '@components/common/Header/Header';
-import SkeletonImage from '@components/common/Skeleton/SkeletonImage';
-import DetailInfo from '@components/group/DetailInfoSection/DetailInfoSection';
+import GroupDetailSection from '@components/group/GroupDetailSection/GroupDetailSection';
 import { PATH_FINDER } from '@constants/path';
 import { useNavigate, useParams } from 'react-router-dom';
 import groupList from '@mocks/data/groupList.json';
 import ErrorPage from '@pages/ErrorPage/ErrorPage';
 import WeeklyActivitySection from '@components/group/WeeklyActivitySection/WeeklyActivitySection';
 import GroupNoticeSection from '@components/group/GroupNoticeSection/GroupNoticeSection';
+import Image from '@components/common/Image/Image';
 
 interface AssignmentsData {
   id: number;
@@ -61,27 +61,29 @@ const GroupDetailPage = () => {
   return (
     <Content>
       <Header title={['활동', data.name]}>
-        <Button onClick={() => navigate(PATH_FINDER.GROUP_STUDENT(Number(id)))}>
+        <Button
+          size="sm"
+          onClick={() => navigate(PATH_FINDER.ACTIVITY_STUDENT(Number(id)))}
+        >
           인원목록
         </Button>
-        <Button color="red">관리</Button>
+        <Button size="sm" color="red">
+          관리
+        </Button>
       </Header>
-
-      <SkeletonImage
+      <Image
         src={data.image}
-        h={300}
-        alt="그룹 이미지"
-        className="w-full object-cover rounded-lg border"
+        alt={data.name}
+        width="w-full"
+        height="h-[300px]"
+        className="object-cover rounded-lg border"
       />
-
-      <DetailInfo
+      <GroupDetailSection
         name={data.name}
         category={data.category}
         description={data.description}
       />
-
       <GroupNoticeSection data={data.notices} />
-
       <WeeklyActivitySection
         id={Number(id)}
         weeklyActivities={data.weeklyActivities}

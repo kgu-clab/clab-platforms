@@ -1,9 +1,21 @@
+type PathFinderId = string | number;
+
+export const createPath = (...nodes: Array<PathFinderId>): string => {
+  return nodes
+    .map((node) => {
+      if (typeof node === 'string' || typeof node === 'number') {
+        return node.toString();
+      }
+      throw new Error('Invalid node type');
+    })
+    .join('/');
+};
+
 export const PATH = {
   ROOT: '',
   MAIN: '/',
   MY: '/my',
   CALENDER: '/calendar',
-  ACTIVITY: '/activity',
   COMMUNITY: '/community',
   COMMUNITY_DETAIL: '/community/:type',
   COMMUNITY_POST: '/community/:type/:id',
@@ -14,12 +26,12 @@ export const PATH = {
   COMMUNITY_NEWS: '/community/news',
   COMMUNITY_HIRE: '/community/hire',
   COMMUNITY_WRITE: '/community/write',
-  GROUP: '/group',
-  GROUP_DETAIL: `/group/:id`,
-  CREATE_GROUP: '/group/createGroup',
-  GROUP_NOTICE: '/group/:id/notice',
-  GROUP_STUDENT: '/group/:id/student',
-  ASSIGNMENT_UPLOAD: '/group/:id/assignment/:assignmentId',
+  ACTIVITY: '/activity',
+  ACTIVITY_DETAIL: `/activity/:id`,
+  ACTIVITY_APPLY: '/activity/apply',
+  ACTIVITY_NOTICE: '/activity/:id/notice',
+  ACTIVITY_STUDENT: '/activity/:id/student',
+  ACTIVITY_ASSIGNMENT: '/activity/:id/:assignmentId',
   NEWS: '/news',
   BLOG: '/blog',
   LIBRARY: '/library',
@@ -29,14 +41,16 @@ export const PATH = {
 };
 
 export const PATH_FINDER = {
-  NEWS_POST: (id: number) => `${PATH.NEWS}/${id}`,
-  BLOG_POST: (id: number) => `${PATH.BLOG}/${id}`,
-  COMMUNITY_POST: (sort: string, id: number) =>
-    `${PATH.COMMUNITY}/${sort}/${id}`,
-  LIBRARY_DETAIL: (id: number) => `${PATH.LIBRARY}/${id}`,
-  GROUP_DETAIL: (id: number) => `${PATH.GROUP}/${id}`,
-  GROUP_STUDENT: (id: number) => `${PATH.GROUP}/${id}/student`,
-  GROUP_NOTICE: (id: number) => `${PATH.GROUP}/${id}/notice`,
-  GROUP_ASSIGNMENT: (id: number, assignmentId: number) =>
-    `${PATH.GROUP}/${id}/assignment/${assignmentId}`,
+  NEWS_POST: (id: PathFinderId) => createPath(PATH.NEWS, id),
+  BLOG_POST: (id: PathFinderId) => createPath(PATH.BLOG, id),
+  COMMUNITY_POST: (sort: string, id: PathFinderId) =>
+    createPath(PATH.COMMUNITY, sort, id),
+  LIBRARY_DETAIL: (id: PathFinderId) => createPath(PATH.LIBRARY, id),
+  ACTIVITY_DETAIL: (id: PathFinderId) => createPath(PATH.ACTIVITY, id),
+  ACTIVITY_STUDENT: (id: PathFinderId) =>
+    createPath(PATH.ACTIVITY, id, 'student'),
+  ACTIVITY_NOTICE: (id: PathFinderId) =>
+    createPath(PATH.ACTIVITY, id, 'notice'),
+  ACTIVITY_ASSIGNMENT: (id: PathFinderId, assignmentId: PathFinderId) =>
+    createPath(PATH.ACTIVITY, id, assignmentId),
 };

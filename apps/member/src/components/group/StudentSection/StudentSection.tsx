@@ -1,8 +1,8 @@
-import Button from '@components/common/Button/Button';
+import { useState } from 'react';
+import { Button } from '@clab/design-system';
 import Section from '@components/common/Section/Section';
 import Table from '@components/common/Table/Table';
 import ErrorPage from '@pages/ErrorPage/ErrorPage';
-import { useState } from 'react';
 
 interface MemberData {
   id: number;

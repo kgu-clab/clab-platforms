@@ -1,6 +1,5 @@
-import Button from '@components/common/Button/Button';
 import Section from '@components/common/Section/Section';
-import FormInput from '@components/support/FormInput/FormInput';
+import { Button, Input } from '@clab/design-system';
 import classNames from 'classnames';
 import { ChangeEvent, useState } from 'react';
 
@@ -13,7 +12,7 @@ interface CreateFormProps {
   description: string;
 }
 
-const CreateForm = () => {
+const ApplyForm = () => {
   const [inputs, setInputs] = useState<CreateFormProps>({
     manager: '',
     managerId: '',
@@ -51,62 +50,53 @@ const CreateForm = () => {
   return (
     <Section>
       <div className="space-y-4">
-        {/* 팀장 인적사항*/}
         <div className="grid grid-cols-2 gap-4">
-          <FormInput
-            title="이름"
-            essential={true}
+          <Input
+            label="이름"
+            id="manager"
             name="manager"
             placeholder="이름"
             value={manager}
             onChange={onChangeInputs}
           />
-
-          <FormInput
-            title="학번"
-            essential={true}
+          <Input
+            label="학번"
+            id="managerId"
             name="managerId"
             placeholder="학번"
             value={managerId}
             onChange={onChangeInputs}
           />
         </div>
-
         <div className="grid grid-cols-2 gap-4 pb-4">
-          <FormInput
-            title="학과"
-            essential={true}
+          <Input
+            label="학과"
+            id="department"
             name="department"
             placeholder="학과"
             value={department}
             onChange={onChangeInputs}
           />
-
-          <FormInput
-            title="학년"
-            essential={true}
+          <Input
+            label="학년"
+            id="grade"
             name="grade"
             placeholder="학년"
             value={grade}
             onChange={onChangeInputs}
           />
         </div>
-
-        {/* 그룹 정보 */}
         <div className="form-control">
-          {/* 그룹 이름 */}
-          <FormInput
-            title="그룹 이름"
-            essential={true}
+          <Input
+            label="그룹 이름"
+            id="groupName"
             name="groupName"
             placeholder="그룹 이름"
             value={groupName}
             onChange={onChangeInputs}
           />
         </div>
-
         <div className="form-control">
-          {/* 신청 이유 */}
           <label className="flex justify-between label">
             <p className="label-text">
               신청 이유
@@ -120,7 +110,8 @@ const CreateForm = () => {
               {inputs.description.length}/1000
             </p>
           </label>
-          <FormInput
+          <Input
+            id="description"
             name="description"
             placeholder="신청 이유"
             value={description}
@@ -129,8 +120,6 @@ const CreateForm = () => {
             onChange={onChangeInputs}
           />
         </div>
-
-        {/* 그룹 생성 신청 버튼 */}
         <div className="form-control">
           <Button className="w-full" onClick={onClickCreate}>
             신청하기
@@ -141,4 +130,4 @@ const CreateForm = () => {
   );
 };
 
-export default CreateForm;
+export default ApplyForm;

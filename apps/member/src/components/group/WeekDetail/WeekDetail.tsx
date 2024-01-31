@@ -58,7 +58,7 @@ const WeekDetail = ({ id, week, content, assignments }: WeekDetailProps) => {
                   key={id}
                   className="flex cursor-pointer items-center"
                   onClick={() =>
-                    navigate(PATH_FINDER.GROUP_ASSIGNMENT(groupId, id), {
+                    navigate(PATH_FINDER.ACTIVITY_ASSIGNMENT(groupId, id), {
                       state: { groupId, week, id },
                     })
                   }

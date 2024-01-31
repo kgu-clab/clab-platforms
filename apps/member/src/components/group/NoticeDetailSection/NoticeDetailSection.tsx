@@ -13,7 +13,6 @@ interface NoticeDetailSectionProps {
 const NoticeDetailSection = ({ manager, data }: NoticeDetailSectionProps) => {
   return (
     <Section>
-      {/* 공지내용 상단 */}
       <div className="rounded-t-md border-2 bg-zinc-100 p-3 text-center">
         <h1 className="font-bold text-lg">{data.title}</h1>
       </div>
@@ -21,7 +20,6 @@ const NoticeDetailSection = ({ manager, data }: NoticeDetailSectionProps) => {
         <p>작성자 : {manager}</p>
         <p>작성일 : {data.date}</p>
       </div>
-      {/* 공지내용 하단 */}
       <div className="h-auto p-5">{data.content}</div>
     </Section>
   );
