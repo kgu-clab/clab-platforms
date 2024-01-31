@@ -8,9 +8,18 @@ interface ImageProps {
   height?: string;
   className?: string;
   onClick?: () => void;
+  overflow?: boolean;
 }
 
-const Image = ({ src, alt, width, height, className, onClick }: ImageProps) => {
+const Image = ({
+  src,
+  alt,
+  width,
+  height,
+  className,
+  onClick,
+  overflow,
+}: ImageProps) => {
   const [imgSrc, setImgSrc] = useState(src);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
@@ -25,7 +34,11 @@ const Image = ({ src, alt, width, height, className, onClick }: ImageProps) => {
   };
 
   return (
-    <div className={classNames(_width, _height)}>
+    <div
+      className={classNames(_width, _height, {
+        'overflow-hidden': overflow,
+      })}
+    >
       <img
         className={classNames('w-full h-full', className, {
           'animate-pulse bg-gray-200': loading,

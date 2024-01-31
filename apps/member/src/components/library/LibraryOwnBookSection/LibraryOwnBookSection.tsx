@@ -14,10 +14,7 @@ const LibraryNewBookSection = () => {
     <Section>
       <Section.Header title="소장도서" />
       <Section.Body>
-        <LibraryBookList
-          data={bookCollection.slice(offset, offset + limit)}
-          category="소장도서"
-        />
+        <LibraryBookList data={bookCollection.slice(offset, offset + limit)} />
         <div className="flex justify-center mt-4">
           <Pagination
             totalItems={bookCollection.length}
