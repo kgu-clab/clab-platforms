@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom';
 import Header from '@components/common/Header/Header';
 import post from '@mocks/data/post.json';
 import Section from '@components/common/Section/Section';
-import Button from '@components/common/Button/Button';
+import { Button } from '@clab/design-system';
 import Post from '@components/common/Post/Post';
 import { getPokemonImage } from '@mocks/mocks';
 import { ERROR_MESSAGE } from '@constants/message';

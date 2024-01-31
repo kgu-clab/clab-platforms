@@ -16,9 +16,10 @@ const Linker = ({ to, className, children }: LinkerProps) => {
     <a
       onClick={() => navigate(to)}
       className={classNames(
-        "text-bold cursor-pointer text-sm underline after:content-['_↗']",
-        className
-      )}>
+        "text-bold cursor-pointer underline after:content-['_↗']",
+        className,
+      )}
+    >
       {children}
     </a>
   );

@@ -11,6 +11,8 @@ import CommunityWritePage from '@pages/CommunityWritePage/CommunityWritePage';
 import MyPage from '@pages/MyPage/MyPage';
 import CalendarPage from '@pages/CalendarPage/CalendarPage';
 import SupportPage from '@pages/SupportPage/SupportPage';
+import LibraryPage from '@pages/LibraryPage/LibraryPage';
+import LibraryDetailPage from '@pages/LibraryDetailPage/LibraryDetailPage';
 import GroupPage from '@pages/GroupPage/GroupPage';
 import GroupCreatePage from '@pages/GroupCreatePage/GroupCreatePage';
 import GroupDetailPage from '@pages/GroupDetailPage/GroupDetailPage';
@@ -33,6 +35,8 @@ const AppRouter = () => {
         { path: PATH.MY, element: <MyPage /> },
         { path: PATH.CALENDER, element: <CalendarPage /> },
         { path: PATH.SUPPORT, element: <SupportPage /> },
+        { path: PATH.LIBRARY, element: <LibraryPage /> },
+        { path: PATH.LIBRARY_DETAIL, element: <LibraryDetailPage /> },
         { path: PATH.GROUP, element: <GroupPage /> },
         { path: PATH.CREATE_GROUP, element: <GroupCreatePage /> },
         { path: PATH.GROUP_DETAIL, element: <GroupDetailPage /> },
