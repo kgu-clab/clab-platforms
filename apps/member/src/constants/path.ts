@@ -25,6 +25,7 @@ export const PATH = {
 export const PATH_FINDER = {
   NEWS_POST: (id: number) => `${PATH.NEWS}/${id}`,
   BLOG_POST: (id: number) => `${PATH.BLOG}/${id}`,
-  COMMUNITY_POST: (sort: string, id: number) => `/community/${sort}/${id}`,
-  LIBRARY_DETAIL: (id: number) => `/library/${id}`,
+  COMMUNITY_POST: (sort: string, id: number) =>
+    `${PATH.COMMUNITY}/${sort}/${id}`,
+  LIBRARY_DETAIL: (id: number) => `${PATH.LIBRARY}/${id}`,
 };
