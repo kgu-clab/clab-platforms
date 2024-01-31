@@ -13,6 +13,12 @@ import CalendarPage from '@pages/CalendarPage/CalendarPage';
 import SupportPage from '@pages/SupportPage/SupportPage';
 import LibraryPage from '@pages/LibraryPage/LibraryPage';
 import LibraryDetailPage from '@pages/LibraryDetailPage/LibraryDetailPage';
+import GroupPage from '@pages/GroupPage/GroupPage';
+import GroupCreatePage from '@pages/GroupCreatePage/GroupCreatePage';
+import GroupDetailPage from '@pages/GroupDetailPage/GroupDetailPage';
+import GroupNoticeDetailPage from '@pages/GroupNoticeDetailPage/GroupNoticeDetailPage';
+import GroupStudentPage from '@pages/GroupStudentPage/GroupStudentPage';
+import GroupAssignmentPage from '@pages/GroupAssignmentPage/GroupAssignmentPage';
 
 const AppRouter = () => {
   const router = createBrowserRouter([
@@ -31,6 +37,12 @@ const AppRouter = () => {
         { path: PATH.SUPPORT, element: <SupportPage /> },
         { path: PATH.LIBRARY, element: <LibraryPage /> },
         { path: PATH.LIBRARY_DETAIL, element: <LibraryDetailPage /> },
+        { path: PATH.GROUP, element: <GroupPage /> },
+        { path: PATH.CREATE_GROUP, element: <GroupCreatePage /> },
+        { path: PATH.GROUP_DETAIL, element: <GroupDetailPage /> },
+        { path: PATH.GROUP_NOTICE, element: <GroupNoticeDetailPage /> },
+        { path: PATH.GROUP_STUDENT, element: <GroupStudentPage /> },
+        { path: PATH.ASSIGNMENT_UPLOAD, element: <GroupAssignmentPage /> },
       ],
     },
   ]);

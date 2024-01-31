@@ -1,0 +1,776 @@
+[
+  {
+    "id": 1,
+    "category": "스터디",
+    "description": "1학년 대상으로 필수로 진행되는 자료구조 스터디입니다. 자료구조를 공부하고 싶은 분들은 모두 참여 가능합니다.",
+    "image": "https://images.unsplash.com/photo-1532522750741-628fde798c73?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NDJ8fEMlMjBsYW5ndWFnZXxlbnwwfHwwfHx8MA%3D%3D",
+    "name": "자료구조",
+    "manager": "이윤종 (201912023)",
+    "members": [
+      {
+        "id": 1,
+        "memberId": "202112345",
+        "memberName": "고양이",
+        "department": "컴퓨터공학전공",
+        "role": "팀장"
+      },
+      {
+        "id": 2,
+        "memberId": "202212345",
+        "memberName": "강아지",
+        "department": "인공지능전공",
+        "role": "부원"
+      },
+      {
+        "id": 3,
+        "memberId": "202312345",
+        "memberName": "코끼리",
+        "department": "SW안전보안전공",
+        "role": "부원"
+      }
+    ],
+    "proposers": [
+      {
+        "id": 1,
+        "memberId": "202111234",
+        "memberName": "낙타",
+        "department": "컴퓨터공학전공",
+        "role": "부원"
+      },
+      {
+        "id": 2,
+        "memberId": "202211234",
+        "memberName": "사슴벌레",
+        "department": "인공지능전공",
+        "role": "부원"
+      }
+    ],
+    "notices": [
+      {
+        "id": 1,
+        "title": "인삿말",
+        "content": "안녕하세요.. 앞으로 1학기동안 열심히 공부해봅시다",
+        "date": "2023-07-07"
+      },
+      {
+        "id": 2,
+        "title": "과제 공지",
+        "content": "과제 공지 내용을 입력해주세요",
+        "date": "2023-07-08"
+      },
+      {
+        "id": 3,
+        "title": "휴강 안내",
+        "content": "휴강 하겠습니다. 다들 연휴 잘보내세요",
+        "date": "2023-09-20"
+      }
+    ],
+    "weeklyActivities": [
+      {
+        "week": 1,
+        "content": "오리엔테이션",
+        "assignments": [
+          {
+            "id": 1,
+            "title": "자기소개",
+            "content": "스터디원에 대해 빨리 알아가기 위해 자기소개을 받으려고 합니다.",
+            "deadline": "2024-01-30 00:00"
+          }
+        ]
+      },
+      {
+        "week": 2,
+        "content": "과제 안내",
+        "assignments": [
+          {
+            "id": 1,
+            "title": "큐, 스택",
+            "content": "큐, 스택 구현 코드 작성해오세요",
+            "deadline": "2024-02-06 00:00"
+          }
+        ]
+      },
+      {
+        "week": 3,
+        "content": "과제 안내",
+        "assignments": [
+          {
+            "id": 1,
+            "title": "링크드 리스트",
+            "content": "링크드 리스트 구현 코드 작성해오세요",
+            "deadline": "2024-02-13 00:00"
+          }
+        ]
+      },
+      {
+        "week": 4,
+        "content": "과제 안내",
+        "assignments": [
+          {
+            "id": 1,
+            "title": "트리 자료구조",
+            "content": "트리 자료구조 구현 코드 작성해오세요",
+            "deadline": "2024-02-20 00:00"
+          }
+        ]
+      },
+      {
+        "week": 5,
+        "content": "해시 테이블",
+        "assignments": [
+          {
+            "id": 1,
+            "title": "해시 테이블",
+            "content": "해시 테이블 구현 코드 작성해오세요",
+            "deadline": "2024-02-27 00:00"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "category": "스터디",
+    "description": "웹 개발에 관심 있는 학생들을 위한 워크숍입니다. HTML, CSS, JavaScript 기초부터 심화까지 다룰 예정입니다.",
+    "image": "https://images.unsplash.com/photo-1542831371-29b0f74f9713?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8aHRtbHxlbnwwfHwwfHx8MA%3D%3D",
+    "name": "웹 개발",
+    "manager": "김하늘 (201913045)",
+    "members": [
+      {
+        "id": 1,
+        "memberId": "202112789",
+        "memberName": "토끼",
+        "department": "컴퓨터공학전공",
+        "role": "팀장"
+      },
+      {
+        "id": 2,
+        "memberId": "202212678",
+        "memberName": "거북이",
+        "department": "웹개발전공",
+        "role": "부원"
+      },
+      {
+        "id": 3,
+        "memberId": "202312589",
+        "memberName": "사자",
+        "department": "IT비즈니스전공",
+        "role": "부원"
+      }
+    ],
+    "proposers": [
+      {
+        "id": 1,
+        "memberId": "202111567",
+        "memberName": "기린",
+        "department": "컴퓨터공학전공",
+        "role": "부원"
+      },
+      {
+        "id": 2,
+        "memberId": "202211456",
+        "memberName": "코뿔소",
+        "department": "웹개발전공",
+        "role": "부원"
+      }
+    ],
+    "notices": [
+      {
+        "id": 1,
+        "title": "워크숍 일정 안내",
+        "content": "워크숍 일정 및 개요 안내드립니다.",
+        "date": "2024-01-15"
+      },
+      {
+        "id": 2,
+        "title": "자료 준비 요청",
+        "content": "다음 주 워크숍 전까지 필요한 자료를 준비해주세요.",
+        "date": "2024-01-20"
+      },
+      {
+        "id": 3,
+        "title": "팀 프로젝트 발표",
+        "content": "워크숍 마지막 날에는 팀별 프로젝트 발표가 있을 예정입니다.",
+        "date": "2024-02-10"
+      }
+    ],
+    "weeklyActivities": [
+      {
+        "week": 1,
+        "content": "HTML 기초",
+        "assignments": [
+          {
+            "id": 1,
+            "title": "HTML 페이지 만들기",
+            "content": "자신을 소개하는 HTML 페이지를 만들어 오세요.",
+            "deadline": "2024-01-22 00:00"
+          }
+        ]
+      },
+      {
+        "week": 2,
+        "content": "CSS 스타일링",
+        "assignments": [
+          {
+            "id": 1,
+            "title": "스타일링 적용하기",
+            "content": "만든 HTML 페이지에 CSS를 적용하여 디자인하세요.",
+            "deadline": "2024-01-29 00:00"
+          }
+        ]
+      },
+      {
+        "week": 3,
+        "content": "자바스크립트 기초",
+        "assignments": [
+          {
+            "id": 1,
+            "title": "인터랙티브 요소 추가",
+            "content": "자바스크립트를 사용하여 페이지에 동적 요소를 추가하세요.",
+            "deadline": "2024-02-05 00:00"
+          }
+        ]
+      },
+      {
+        "week": 4,
+        "content": "반응형 웹 디자인",
+        "assignments": [
+          {
+            "id": 1,
+            "title": "반응형 페이지 만들기",
+            "content": "다양한 디바이스에서 잘 보이는 반응형 웹 페이지를 만드세요.",
+            "deadline": "2024-02-12 00:00"
+          }
+        ]
+      },
+      {
+        "week": 5,
+        "content": "프로젝트 기획 및 개발",
+        "assignments": [
+          {
+            "id": 1,
+            "title": "팀 프로젝트",
+            "content": "팀을 이루어 간단한 웹 애플리케이션을 개발하세요.",
+            "deadline": "2024-02-19 00:00"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "category": "스터디",
+    "description": "모바일 앱 개발에 관심 있는 학생들을 위한 그룹입니다. 안드로이드 및 iOS 플랫폼을 위한 앱 개발을 배우고, 실제 프로젝트를 진행합니다.",
+    "image": "https://images.unsplash.com/photo-1580860749755-f49eb5509d55?w=700&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8YW5kcm9pZHxlbnwwfHwwfHx8MA%3D%3D",
+    "name": "모바일 앱 개발",
+    "manager": "최수연 (201915678)",
+    "members": [
+      {
+        "id": 1,
+        "memberId": "202116789",
+        "memberName": "펭귄",
+        "department": "소프트웨어공학과",
+        "role": "팀장"
+      },
+      {
+        "id": 2,
+        "memberId": "202216890",
+        "memberName": "돌고래",
+        "department": "컴퓨터과학과",
+        "role": "부원"
+      },
+      {
+        "id": 3,
+        "memberId": "202316901",
+        "memberName": "기린",
+        "department": "정보기술학과",
+        "role": "부원"
+      }
+    ],
+    "proposers": [
+      {
+        "id": 1,
+        "memberId": "202116012",
+        "memberName": "호랑이",
+        "department": "소프트웨어공학과",
+        "role": "부원"
+      },
+      {
+        "id": 2,
+        "memberId": "202216123",
+        "memberName": "제브라",
+        "department": "컴퓨터과학과",
+        "role": "부원"
+      }
+    ],
+    "notices": [
+      {
+        "id": 1,
+        "title": "오리엔테이션 및 소개",
+        "content": "첫 모임에서는 모바일 앱 개발에 대한 오리엔테이션과 멤버 소개를 진행합니다.",
+        "date": "2024-03-05"
+      },
+      {
+        "id": 2,
+        "title": "프로젝트 아이디어 제출",
+        "content": "개인 또는 팀별로 프로젝트 아이디어를 제출해 주세요.",
+        "date": "2024-03-10"
+      },
+      {
+        "id": 3,
+        "title": "코드 리뷰 세션",
+        "content": "정기적으로 코드 리뷰 세션을 가질 예정입니다. 모두 참여 바랍니다.",
+        "date": "2024-03-15"
+      }
+    ],
+    "weeklyActivities": [
+      {
+        "week": 1,
+        "content": "안드로이드 기초",
+        "assignments": [
+          {
+            "id": 1,
+            "title": "간단한 안드로이드 앱 만들기",
+            "content": "자기소개를 할 수 있는 간단한 안드로이드 앱을 만들어 오세요.",
+            "deadline": "2024-03-12 00:00"
+          }
+        ]
+      },
+      {
+        "week": 2,
+        "content": "iOS 기초",
+        "assignments": [
+          {
+            "id": 1,
+            "title": "기본적인 iOS 앱 만들기",
+            "content": "일기장 형식의 기본적인 iOS 앱을 제작해 보세요.",
+            "deadline": "2024-03-19 00:00"
+          }
+        ]
+      },
+      {
+        "week": 3,
+        "content": "API 연동",
+        "assignments": [
+          {
+            "id": 1,
+            "title": "날씨 정보 앱",
+            "content": "공개 API를 활용하여 날씨 정보를 보여주는 앱을 만드세요.",
+            "deadline": "2024-03-26 00:00"
+          }
+        ]
+      },
+      {
+        "week": 4,
+        "content": "UI/UX 디자인",
+        "assignments": [
+          {
+            "id": 1,
+            "title": "앱 디자인 개선",
+            "content": "사용자 경험을 고려하여 기존에 만든 앱의 디자인을 개선하세요.",
+            "deadline": "2024-04-02 00:00"
+          }
+        ]
+      },
+      {
+        "week": 5,
+        "content": "프로젝트 개발",
+        "assignments": [
+          {
+            "id": 1,
+            "title": "최종 프로젝트",
+            "content": "지금까지 배운 내용을 바탕으로 독창적인 모바일 앱을 개발하세요.",
+            "deadline": "2024-04-09 00:00"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 5,
+    "category": "스터디",
+    "description": "클라우드 컴퓨팅과 빅데이터에 관심 있는 학생들을 위한 연구 그룹입니다. AWS, Azure 등의 클라우드 서비스를 사용하며 빅데이터 분석 기술을 실습합니다.",
+    "image": "https://plus.unsplash.com/premium_photo-1681487942927-e1a2786e6036?w=700&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8Y2xvdWQlMjBjb21wdXRpbmd8ZW58MHx8MHx8fDA%3D",
+    "name": "클라우드 컴퓨팅 & 빅데이터",
+    "manager": "홍길동 (201816789)",
+    "members": [
+      {
+        "id": 1,
+        "memberId": "202217890",
+        "memberName": "여우",
+        "department": "데이터과학과",
+        "role": "팀장"
+      },
+      {
+        "id": 2,
+        "memberId": "202317901",
+        "memberName": "토끼",
+        "department": "컴퓨터공학과",
+        "role": "부원"
+      },
+      {
+        "id": 3,
+        "memberId": "202418012",
+        "memberName": "사슴",
+        "department": "정보시스템학과",
+        "role": "부원"
+      }
+    ],
+    "proposers": [
+      {
+        "id": 1,
+        "memberId": "202217123",
+        "memberName": "곰",
+        "department": "데이터과학과",
+        "role": "부원"
+      },
+      {
+        "id": 2,
+        "memberId": "202317234",
+        "memberName": "늑대",
+        "department": "컴퓨터공학과",
+        "role": "부원"
+      }
+    ],
+    "notices": [
+      {
+        "id": 1,
+        "title": "그룹 미팅 일정",
+        "content": "첫 그룹 미팅에서는 클라우드 기초 개념을 다룰 예정입니다.",
+        "date": "2024-03-10"
+      },
+      {
+        "id": 2,
+        "title": "클라우드 서비스 계정 생성",
+        "content": "AWS 또는 Azure 계정을 생성해오세요.",
+        "date": "2024-03-12"
+      },
+      {
+        "id": 3,
+        "title": "데이터 세트 공유",
+        "content": "빅데이터 분석을 위한 데이터 세트를 공유합니다.",
+        "date": "2024-03-15"
+      }
+    ],
+    "weeklyActivities": [
+      {
+        "week": 1,
+        "content": "클라우드 서비스 기초",
+        "assignments": [
+          {
+            "id": 1,
+            "title": "클라우드 서비스 탐색",
+            "content": "AWS 또는 Azure에서 제공하는 서비스 중 하나를 선택하여 탐색하고 요약하세요.",
+            "deadline": "2024-03-17 00:00"
+          }
+        ]
+      },
+      {
+        "week": 2,
+        "content": "클라우드 기반 서버 구축",
+        "assignments": [
+          {
+            "id": 1,
+            "title": "간단한 웹 서버 설정",
+            "content": "선택한 클라우드 서비스를 이용하여 기본 웹 서버를 구축하고, 그 과정을 문서화하세요.",
+            "deadline": "2024-03-24 00:00"
+          }
+        ]
+      },
+      {
+        "week": 3,
+        "content": "데이터 스토리지와 관리",
+        "assignments": [
+          {
+            "id": 1,
+            "title": "클라우드 기반 데이터베이스 구성",
+            "content": "클라우드 플랫폼을 사용하여 간단한 데이터베이스를 생성하고 관리하는 방법을 배우세요.",
+            "deadline": "2024-03-31 00:00"
+          }
+        ]
+      },
+      {
+        "week": 4,
+        "content": "빅데이터 분석",
+        "assignments": [
+          {
+            "id": 1,
+            "title": "데이터 분석 프로젝트",
+            "content": "제공된 데이터 세트를 사용하여 기본적인 빅데이터 분석을 수행하세요.",
+            "deadline": "2024-04-07 00:00"
+          }
+        ]
+      },
+      {
+        "week": 5,
+        "content": "프로젝트 발표",
+        "assignments": [
+          {
+            "id": 1,
+            "title": "최종 프로젝트 발표",
+            "content": "지금까지의 학습을 바탕으로 한 최종 프로젝트를 준비하고 발표하세요.",
+            "deadline": "2024-04-14 00:00"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 6,
+    "category": "스터디",
+    "description": "인공지능 및 머신러닝에 관심 있는 학생들을 위한 스터디 그룹입니다. 기초 이론부터 실제 적용까지 다룹니다.",
+    "image": "https://images.unsplash.com/photo-1697577418970-95d99b5a55cf?w=700&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fEFJfGVufDB8fDB8fHww",
+    "name": "AI & 머신러닝 스터디",
+    "manager": "이승현 (201917890)",
+    "members": [
+      {
+        "id": 1,
+        "memberId": "202318901",
+        "memberName": "사자",
+        "department": "인공지능학과",
+        "role": "팀장"
+      },
+      {
+        "id": 2,
+        "memberId": "202419012",
+        "memberName": "호랑이",
+        "department": "데이터과학과",
+        "role": "부원"
+      },
+      {
+        "id": 3,
+        "memberId": "202419123",
+        "memberName": "치타",
+        "department": "컴퓨터공학과",
+        "role": "부원"
+      }
+    ],
+    "proposers": [
+      {
+        "id": 1,
+        "memberId": "202318234",
+        "memberName": "표범",
+        "department": "인공지능학과",
+        "role": "부원"
+      },
+      {
+        "id": 2,
+        "memberId": "202418345",
+        "memberName": "늑대",
+        "department": "데이터과학과",
+        "role": "부원"
+      }
+    ],
+    "notices": [
+      {
+        "id": 1,
+        "title": "스터디 시작 안내",
+        "content": "첫 모임에서는 머신러닝 기초 개념을 다룰 예정입니다.",
+        "date": "2024-04-01"
+      },
+      {
+        "id": 2,
+        "title": "프로젝트 아이디어 논의",
+        "content": "다음 모임에서는 프로젝트 아이디어에 대해 논의하겠습니다.",
+        "date": "2024-04-08"
+      },
+      {
+        "id": 3,
+        "title": "데이터 세트 공유",
+        "content": "머신러닝 프로젝트를 위한 데이터 세트를 공유합니다.",
+        "date": "2024-04-15"
+      }
+    ],
+    "weeklyActivities": [
+      {
+        "week": 1,
+        "content": "머신러닝 이론",
+        "assignments": [
+          {
+            "id": 1,
+            "title": "기본 알고리즘 연구",
+            "content": "머신러닝의 기본 알고리즘 중 하나를 선택하여 연구하고 발표하세요.",
+            "deadline": "2024-04-07 00:00"
+          }
+        ]
+      },
+      {
+        "week": 2,
+        "content": "파이썬을 활용한 데이터 분석",
+        "assignments": [
+          {
+            "id": 1,
+            "title": "데이터 분석 실습",
+            "content": "파이썬을 사용하여 간단한 데이터 분석을 수행하고 결과를 공유하세요.",
+            "deadline": "2024-04-14 00:00"
+          }
+        ]
+      },
+      {
+        "week": 3,
+        "content": "머신러닝 모델 구축",
+        "assignments": [
+          {
+            "id": 1,
+            "title": "기본 모델 구축",
+            "content": "선택한 알고리즘을 사용하여 기본 머신러닝 모델을 구축하고 평가하세요.",
+            "deadline": "2024-04-21 00:00"
+          }
+        ]
+      },
+      {
+        "week": 4,
+        "content": "딥러닝 기초",
+        "assignments": [
+          {
+            "id": 1,
+            "title": "딥러닝 알고리즘 이해",
+            "content": "딥러닝의 기본 개념을 이해하고 간단한 신경망을 구현해 보세요.",
+            "deadline": "2024-04-28 00:00"
+          }
+        ]
+      },
+      {
+        "week": 5,
+        "content": "프로젝트 발표 준비",
+        "assignments": [
+          {
+            "id": 1,
+            "title": "최종 프로젝트 준비",
+            "content": "지금까지 학습한 내용을 바탕으로 최종 프로젝트를 준비하고 발표 자료를 만드세요.",
+            "deadline": "2024-05-05 00:00"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 7,
+    "category": "스터디",
+    "description": "블록체인 기술과 암호화폐에 관심 있는 학생들을 위한 연구 그룹입니다. 블록체인의 기본 개념부터 실제 응용까지 탐구합니다.",
+    "image": "https://images.unsplash.com/photo-1639322537228-f710d846310a?w=700&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8YmxvY2tjaGFpbnxlbnwwfHwwfHx8MA%3D%3D",
+    "name": "블록체인 기술 연구",
+    "manager": "박지은 (201818901)",
+    "members": [
+      {
+        "id": 1,
+        "memberId": "202419234",
+        "memberName": "늑대",
+        "department": "컴퓨터공학과",
+        "role": "팀장"
+      },
+      {
+        "id": 2,
+        "memberId": "202519345",
+        "memberName": "여우",
+        "department": "정보보안학과",
+        "role": "부원"
+      },
+      {
+        "id": 3,
+        "memberId": "202519456",
+        "memberName": "곰",
+        "department": "소프트웨어공학과",
+        "role": "부원"
+      }
+    ],
+    "proposers": [
+      {
+        "id": 1,
+        "memberId": "202419567",
+        "memberName": "호랑이",
+        "department": "컴퓨터공학과",
+        "role": "부원"
+      },
+      {
+        "id": 2,
+        "memberId": "202519678",
+        "memberName": "표범",
+        "department": "정보보안학과",
+        "role": "부원"
+      }
+    ],
+    "notices": [
+      {
+        "id": 1,
+        "title": "블록체인 소개 및 개요",
+        "content": "블록체인 기술의 기본 개념과 역사에 대해 배웁니다.",
+        "date": "2024-04-20"
+      },
+      {
+        "id": 2,
+        "title": "암호화폐 워크숍",
+        "content": "암호화폐의 작동 원리와 시장 분석에 대해 배우는 워크숍을 진행합니다.",
+        "date": "2024-04-27"
+      },
+      {
+        "id": 3,
+        "title": "블록체인 프로젝트 제안",
+        "content": "블록체인 관련 프로젝트 아이디어를 제안하고 토론합니다.",
+        "date": "2024-05-04"
+      }
+    ],
+    "weeklyActivities": [
+      {
+        "week": 1,
+        "content": "블록체인의 기초",
+        "assignments": [
+          {
+            "id": 1,
+            "title": "블록체인 기술 조사",
+            "content": "블록체인 기술에 대한 기본적인 조사를 하고 발표하세요.",
+            "deadline": "2024-04-26 00:00"
+          }
+        ]
+      },
+      {
+        "week": 2,
+        "content": "암호화 기법",
+        "assignments": [
+          {
+            "id": 1,
+            "title": "암호화 알고리즘 분석",
+            "content": "블록체인에서 사용되는 암호화 알고리즘을 분석하고 발표하세요.",
+            "deadline": "2024-05-03 00:00"
+          }
+        ]
+      },
+      {
+        "week": 3,
+        "content": "스마트 컨트랙트 개발",
+        "assignments": [
+          {
+            "id": 1,
+            "title": "간단한 스마트 컨트랙트 만들기",
+            "content": "이더리움 플랫폼을 사용하여 간단한 스마트 컨트랙트를 개발하세요.",
+            "deadline": "2024-05-10 00:00"
+          }
+        ]
+      },
+      {
+        "week": 4,
+        "content": "블록체인 네트워크 구축",
+        "assignments": [
+          {
+            "id": 1,
+            "title": "블록체인 네트워크 시뮬레이션",
+            "content": "블록체인 네트워크를 구축하고 기능을 시험해 보세요.",
+            "deadline": "2024-05-17 00:00"
+          }
+        ]
+      },
+      {
+        "week": 5,
+        "content": "프로젝트 발표 준비",
+        "assignments": [
+          {
+            "id": 1,
+            "title": "최종 프로젝트 준비",
+            "content": "지금까지 학습한 내용을 바탕으로 최종 프로젝트를 준비하고 발표 자료를 만드세요.",
+            "deadline": "2024-05-24 00:00"
+          }
+        ]
+      }
+    ]
+  }
+]
