@@ -1,5 +1,7 @@
-import SkeletonImage from '@components/common/Skeleton/SkeletonImage';
+import Image from '@components/common/Image/Image';
 import { PATH_FINDER } from '@constants/path';
+import { BOOK_STATE } from '@constants/state';
+import classNames from 'classnames';
 import { useNavigate } from 'react-router-dom';
 
 interface LibraryBookListProps {
@@ -11,10 +13,9 @@ interface LibraryBookListProps {
     publisher: string;
     state: string;
   }[];
-  category: string;
 }
 
-const LibraryBookList = ({ data, category }: LibraryBookListProps) => {
+const LibraryBookList = ({ data }: LibraryBookListProps) => {
   const navigate = useNavigate();
 
   const onClickBook = (id: number) => {
@@ -28,31 +29,38 @@ const LibraryBookList = ({ data, category }: LibraryBookListProps) => {
       {data.map(({ id, image, title, author, publisher, state }) => (
         <div
           key={id}
-          className="space-y-1 border rounded-lg cursor-pointer"
+          className="group space-y-1 border rounded-lg cursor-pointer"
           onClick={() => onClickBook(id)}
         >
-          <SkeletonImage
-            className="h-[200px] w-full object-cover border-b"
+          <Image
             src={image}
-            alt="도서 이미지"
-            h={200}
-            w={200}
+            alt={title}
+            width="w-full"
+            height="h-[200px]"
+            className="object-cover border-b rounded-t-lg group-hover:scale-125 transition-transform ease-in-out"
+            overflow
           />
-
           <div className="text-sm p-2">
-            <p className="hover:underline font-bold">{title}</p>
+            <p className="font-semibold group-hover:underline">{title}</p>
             <p className="text-gray-500">
               {author} | {publisher}
             </p>
-            {category === '소장도서' && (
-              <p
-                className={
-                  state === '대여 가능' ? 'text-green-600' : 'text-pink-600'
-                }
+            <div className="flex items-center gap-1 mt-2">
+              <div
+                className={classNames(
+                  'w-1.5 h-1.5 rounded-full',
+                  state === BOOK_STATE.OK ? 'bg-green-600' : 'bg-pink-600',
+                )}
+              ></div>
+              <span
+                className={classNames(
+                  'text-xs',
+                  state === BOOK_STATE.OK ? 'text-green-600' : 'text-pink-600',
+                )}
               >
                 {state}
-              </p>
-            )}
+              </span>
+            </div>
           </div>
         </div>
       ))}
