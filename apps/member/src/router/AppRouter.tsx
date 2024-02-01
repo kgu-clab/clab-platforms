@@ -19,6 +19,9 @@ import GroupDetailPage from '@pages/GroupDetailPage/GroupDetailPage';
 import GroupNoticeDetailPage from '@pages/GroupNoticeDetailPage/GroupNoticeDetailPage';
 import GroupStudentPage from '@pages/GroupStudentPage/GroupStudentPage';
 import GroupAssignmentPage from '@pages/GroupAssignmentPage/GroupAssignmentPage';
+import LoginPage from '@pages/LoginPage/LoginPage';
+import AuthPage from '@pages/AuthPage/AuthPage';
+import ProtectAuth from '@components/router/ProtectAuth';
 
 const AppRouter = () => {
   const router = createBrowserRouter([
@@ -43,6 +46,20 @@ const AppRouter = () => {
         { path: PATH.MY, element: <MyPage /> },
         { path: PATH.CALENDER, element: <CalendarPage /> },
         { path: PATH.SUPPORT, element: <SupportPage /> },
+      ],
+    },
+    {
+      path: PATH.MAIN,
+      element: <ProtectAuth />,
+      children: [
+        {
+          path: PATH.LOGIN,
+          element: <LoginPage />,
+        },
+        {
+          path: PATH.AUTH,
+          element: <AuthPage />,
+        },
       ],
     },
   ]);
