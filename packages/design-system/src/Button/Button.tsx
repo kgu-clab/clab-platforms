@@ -20,7 +20,7 @@ const Button = ({
   return (
     <button
       className={twMerge(
-        'font-semibold text-sm rounded-lg border',
+        'font-semibold text-sm rounded-lg border transition-colors',
         buttonStyleColored(color),
         buttonStyleSized(size),
         className,
