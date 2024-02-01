@@ -1,6 +1,8 @@
 import { Button } from '@clab/design-system';
 import Image from '@components/common/Image/Image';
 import Section from '@components/common/Section/Section';
+import { useSetIsLoggedInStore } from '@store/auth';
+import { ACCESS_TOKEN_KEY, REFRESH_TOKEN_KEY } from '@constants/api';
 
 interface ProfileSectionProps {
   data: {
@@ -21,6 +23,14 @@ interface ProfileInfoProps {
 }
 
 const ProfileSection = ({ data }: ProfileSectionProps) => {
+  const setIsLoggedIn = useSetIsLoggedInStore();
+
+  const onClickLogout = () => {
+    sessionStorage.removeItem(ACCESS_TOKEN_KEY);
+    sessionStorage.removeItem(REFRESH_TOKEN_KEY);
+    setIsLoggedIn(false);
+  };
+
   const { image, name, id, interests, phone, email, githubUrl, address } = data;
 
   return (
@@ -30,7 +40,7 @@ const ProfileSection = ({ data }: ProfileSectionProps) => {
           <Button color="orange" size="sm">
             수정
           </Button>
-          <Button color="red" size="sm">
+          <Button color="red" size="sm" onClick={onClickLogout}>
             로그아웃
           </Button>
         </div>
@@ -41,7 +51,7 @@ const ProfileSection = ({ data }: ProfileSectionProps) => {
             width="w-32"
             height="h-32"
             src={image}
-            alt="프로필 이미지"
+            alt={name}
             className="rounded-full m-auto object-cover"
           />
           <div className="mt-2">
@@ -50,18 +60,18 @@ const ProfileSection = ({ data }: ProfileSectionProps) => {
           </div>
         </div>
         <div className="mt-4 space-y-4">
-          <ProfileInfo label="분야">{interests}</ProfileInfo>
-          <ProfileInfo label="연락처">{phone}</ProfileInfo>
-          <ProfileInfo label="이메일">{email}</ProfileInfo>
-          <ProfileInfo label="주소">{address}</ProfileInfo>
-          <ProfileInfo label="Github">{githubUrl}</ProfileInfo>
+          <ProfileInfoRow label="분야">{interests}</ProfileInfoRow>
+          <ProfileInfoRow label="연락처">{phone}</ProfileInfoRow>
+          <ProfileInfoRow label="이메일">{email}</ProfileInfoRow>
+          <ProfileInfoRow label="주소">{address}</ProfileInfoRow>
+          <ProfileInfoRow label="Github">{githubUrl}</ProfileInfoRow>
         </div>
       </Section.Body>
     </Section>
   );
 };
 
-const ProfileInfo = ({ label, children }: ProfileInfoProps) => {
+const ProfileInfoRow = ({ label, children }: ProfileInfoProps) => {
   return (
     <div className="flex">
       <p className="w-24 font-semibold">{label}</p>
