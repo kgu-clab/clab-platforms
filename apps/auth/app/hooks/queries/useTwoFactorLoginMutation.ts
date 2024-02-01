@@ -1,14 +1,12 @@
 import { useMutation } from '@tanstack/react-query';
 import { AUTH_ATOM_DEFAULT, useSetAuthStore } from '@store/auth';
 import { postTwoFactorLogin } from '@api/auth';
-import { useSearchParams } from 'next/navigation';
 import { ERROR_MESSAGE, REDIRECT, SUCCESS_MESSAGE } from '@constants/api';
+import { useCode } from '@hooks/useCode';
 
 export const useTwoFactorLoginMutation = () => {
   const setAuth = useSetAuthStore();
-  const searchParams = useSearchParams();
-
-  const code = searchParams.get('code');
+  const { code } = useCode();
 
   const twoFactorLoginMutation = useMutation({
     mutationFn: postTwoFactorLogin,

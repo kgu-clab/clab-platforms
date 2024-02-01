@@ -38,6 +38,8 @@ export const PATH = {
   LIBRARY_DETAIL: '/library/:id',
   SUPPORT: '/support',
   SITEMAP: '/sitemap',
+  LOGIN: '/login',
+  AUTH: '/auth',
 };
 
 export const PATH_FINDER = {
