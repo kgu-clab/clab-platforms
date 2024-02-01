@@ -7,7 +7,7 @@
 
 - [auth](/apps/auth/README.md): 동아리 계정을 이용한 로그인(OAuth) 시스템이에요.
 - [land](/apps/land/README.md): 외부인이 동아리에 대해 알아볼 수 있는 랜딩 페이지이에요.
-- [member](/apps/member/README.md): 동아리원들을 위한 그룹웨어 시스템이에요.
+- [playground](/apps/member/README.md): 동아리원들을 위한 그룹웨어 시스템이에요.
 
 ## Packages
 
