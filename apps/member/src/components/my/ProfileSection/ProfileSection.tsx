@@ -17,10 +17,19 @@ interface ProfileSectionProps {
   };
 }
 
-interface ProfileInfoProps {
+interface ProfileInfoRowProps {
   label: string;
   children: React.ReactNode;
 }
+
+const ProfileInfoRow = ({ label, children }: ProfileInfoRowProps) => {
+  return (
+    <div className="flex">
+      <p className="w-24 font-semibold">{label}</p>
+      <p className="grow">{children}</p>
+    </div>
+  );
+};
 
 const ProfileSection = ({ data }: ProfileSectionProps) => {
   const setIsLoggedIn = useSetIsLoggedInStore();
@@ -68,15 +77,6 @@ const ProfileSection = ({ data }: ProfileSectionProps) => {
         </div>
       </Section.Body>
     </Section>
-  );
-};
-
-const ProfileInfoRow = ({ label, children }: ProfileInfoProps) => {
-  return (
-    <div className="flex">
-      <p className="w-24 font-semibold">{label}</p>
-      <p className="grow">{children}</p>
-    </div>
   );
 };
 
