@@ -3,7 +3,12 @@ export const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 export const ACCESS_TOKEN_KEY = 'ACCESS_TOKEN';
 export const REFRESH_TOKEN_KEY = 'REFRESH_TOKEN';
 
-export const ENDPOINT = {};
+export const END_POINT = {
+  LOGIN_REISSUE: '/login/reissue',
+  MY_BOARDS: '/boards/my-boards',
+  MY_NOTIFICATION: '/notifications',
+  MY_COMMENTS: '/comments/my-comments',
+};
 
 export const HTTP_STATUS_CODE = {
   SUCCESS: 200,
