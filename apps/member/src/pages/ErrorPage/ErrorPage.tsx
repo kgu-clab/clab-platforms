@@ -26,12 +26,11 @@ const ErrorPage = () => {
           <div className="section flex min-h-screen flex-col items-center justify-center gap-4">
             <BiMessageAltError className="w-20 h-20" />
             <div className="text-center">
-              <h1 className="text-5xl text-clab-main">{`${errorStatus || '오류'} ${
-                errorMessage || 'ERROR'
-              }`}</h1>
-              <h2 className="mt-2 text-xl">
+              <h1 className="text-5xl text-clab-main">{`${errorStatus || '오류'}`}</h1>
+              <h2>{errorMessage || 'ERROR'}</h2>
+              <p className="mt-2 text-xl">
                 불편을 드려 죄송합니다. 오류가 발생했어요. 😭
-              </h2>
+              </p>
             </div>
             <div className="break-keep text-center text-gray-500">
               <p>
