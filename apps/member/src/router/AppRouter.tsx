@@ -22,6 +22,8 @@ import GroupAssignmentPage from '@pages/GroupAssignmentPage/GroupAssignmentPage'
 import LoginPage from '@pages/LoginPage/LoginPage';
 import AuthPage from '@pages/AuthPage/AuthPage';
 import ProtectAuth from '@components/router/ProtectAuth';
+import { Suspense } from 'react';
+import MyPageSkeleton from '@pages/MyPage/MyPageSkeleton';
 
 const AppRouter = () => {
   const router = createBrowserRouter([
@@ -43,7 +45,14 @@ const AppRouter = () => {
         { path: PATH.ACTIVITY_ASSIGNMENT, element: <GroupAssignmentPage /> },
         { path: PATH.LIBRARY, element: <LibraryPage /> },
         { path: PATH.LIBRARY_DETAIL, element: <LibraryDetailPage /> },
-        { path: PATH.MY, element: <MyPage /> },
+        {
+          path: PATH.MY,
+          element: (
+            <Suspense fallback={<MyPageSkeleton />}>
+              <MyPage />
+            </Suspense>
+          ),
+        },
         { path: PATH.CALENDER, element: <CalendarPage /> },
         { path: PATH.SUPPORT, element: <SupportPage /> },
       ],
