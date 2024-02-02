@@ -1,9 +1,9 @@
-export interface TokenType {
-  accessToken: string;
-  refreshToken: string;
+export interface BaseResponse<T = unknown> {
+  success: boolean;
+  data: T;
 }
 
-export interface PaginationType<T = unknown> {
+interface Pagination<T = unknown> {
   currentPage: number;
   hasPrevious: boolean;
   hasNext: boolean;
@@ -12,3 +12,11 @@ export interface PaginationType<T = unknown> {
   take: number;
   items: Array<T>;
 }
+
+export interface TokenType {
+  accessToken: string;
+  refreshToken: string;
+}
+
+export interface PaginationType<T = unknown>
+  extends BaseResponse<Pagination<T>> {}

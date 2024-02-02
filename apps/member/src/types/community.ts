@@ -1,6 +1,6 @@
-export interface CommunityPost {
+export interface CommunityPostItem {
   id: number;
-  type?: string;
+  type: string;
   title: string;
   writer: string;
   createAt: string;
