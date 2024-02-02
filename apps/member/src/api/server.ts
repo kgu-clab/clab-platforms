@@ -1,9 +1,10 @@
 import ServerChain from '@gwansikk/server-chain';
 import { tokenHandler } from './interceptors';
+import { API_BASE_URL } from '@constants/api';
 
 export const server = ServerChain({
   key: 'server',
-  baseURL: 'https://api.clab.page',
+  baseURL: API_BASE_URL,
   headers: {
     'Content-Type': 'application/json',
   },
