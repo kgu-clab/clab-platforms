@@ -5,8 +5,9 @@ import Section from '@components/common/Section/Section';
 import { useSetIsLoggedInStore } from '@store/auth';
 import { Input } from '@clab/design-system';
 import { removeTokens } from '@utils/api';
+// import { useUserInfoMutation } from '@hooks/queries';
 
-export interface ProfileProps {
+interface ProfileProps {
   image: string;
   name: string;
   id: number;
@@ -17,18 +18,27 @@ export interface ProfileProps {
   address: string;
 }
 
-export interface ProfileSectionProps {
+interface ProfileSectionProps {
   data: ProfileProps;
 }
 
 const ProfileSection = ({ data }: ProfileSectionProps) => {
   const setIsLoggedIn = useSetIsLoggedInStore();
+  // const { userInfoMutate } = useUserInfoMutation();
 
   const [isEdit, setIsEdit] = useState<boolean>(false);
   const [inputs, setInputs] = useState<ProfileProps>(data);
 
   const onClickEdit = () => {
-    setIsEdit((prev) => !prev);
+    setIsEdit((prev) => {
+      if (prev) {
+        // 편집 모드일 경우, 수정된 정보를 서버에 전송
+        // 프로필 수정 API 호출
+        // userInfoMutate({})
+      }
+
+      return !prev;
+    });
   };
 
   const onClickLogout = () => {
