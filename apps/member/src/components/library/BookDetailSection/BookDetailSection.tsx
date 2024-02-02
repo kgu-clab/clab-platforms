@@ -66,9 +66,7 @@ const BookDetailSection = ({ data }: BookDetailSectionProps) => {
             </div>
             <div className="w-full">
               {state === BOOK_STATE.OK ? (
-                <Button className="w-full mt-4 bg-clab-main text-white hover:bg-clab-main-dark">
-                  대여하기
-                </Button>
+                <Button className="w-full">대여하기</Button>
               ) : (
                 <p className="text-xl font-bold pt-12 underline decoration-green-700">
                   이미 대여된 도서예요! 조금만 기다려주세요 ⏳
