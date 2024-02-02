@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useToken } from '@hooks/common/useToken';
 import AppRouter from '@router/AppRouter';
 import { useSetIsLoggedInStore } from '@store/auth';
+import { server } from '@api/server';
 
 const App = () => {
   const setIsLoggedIn = useSetIsLoggedInStore();
@@ -11,6 +12,7 @@ const App = () => {
   useEffect(() => {
     if (accessToken && refreshToken) {
       setIsLoggedIn(true);
+      server.setHeaders({ Authorization: `Bearer ${accessToken}` });
     } else {
       setIsLoggedIn(false);
     }
