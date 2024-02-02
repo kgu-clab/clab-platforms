@@ -15,9 +15,7 @@ const Nav = () => {
         <div className="flex items-center gap-10 lg:gap-20">
           <Link className="flex items-center gap-2 text-xl" to={PATH.MAIN}>
             <img src="/favicon.ico" alt="c-lab" className="size-8" />
-            <h1 className="font-bold">
-              PLAY<span className="font-medium">GROUND</span>
-            </h1>
+            <h1 className="font-bold">PLAY</h1>
           </Link>
           <div className="hidden gap-10 text-sm font-semibold sm:flex">
             <Link to={PATH.MAIN}>홈</Link>
