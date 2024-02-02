@@ -1,12 +1,12 @@
 type PathFinderId = string | number;
 
-export const createPath = (...nodes: Array<PathFinderId>): string => {
-  return nodes
-    .map((node) => {
-      if (typeof node === 'string' || typeof node === 'number') {
-        return node.toString();
+export const createPath = (...paths: Array<PathFinderId>): string => {
+  return paths
+    .map((path) => {
+      if (typeof path === 'string' || typeof path === 'number') {
+        return path.toString();
       }
-      throw new Error('Invalid node type');
+      throw new Error('Invalid path type');
     })
     .join('/');
 };
