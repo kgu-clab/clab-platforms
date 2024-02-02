@@ -554,6 +554,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@gwansikk/server-chain@npm:^0.4.3":
+  version: 0.4.3
+  resolution: "@gwansikk/server-chain@npm:0.4.3"
+  checksum: bc752f5c78a7598611d519d987816d7cdbf257874624d0247055d80248024f1c6a5e29d03ad498470233d8dec2c92a379f35f6f0a548d2e56eb37b5dc0f53ab6
+  languageName: node
+  linkType: hard
+
 "@humanwhocodes/config-array@npm:^0.11.13":
   version: 0.11.13
   resolution: "@humanwhocodes/config-array@npm:0.11.13"
@@ -4239,7 +4246,7 @@ __metadata:
   resolution: "member@workspace:apps/member"
   dependencies:
     "@clab/design-system": "workspace:^"
-    "@gwansikk/server-chain": "npm:^0.3.0"
+    "@gwansikk/server-chain": "npm:^0.4.3"
     "@tanstack/react-query": "npm:^5.18.1"
     "@types/react": "npm:^18.2.43"
     "@types/react-dom": "npm:^18.2.17"
