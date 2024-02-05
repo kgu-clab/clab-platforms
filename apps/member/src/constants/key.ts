@@ -7,4 +7,5 @@ export const QUERY_KEY = {
   MY_NOTIFICATIONS: 'MyNotifications',
   MY_COMMENTS: 'MyComments',
   MY_INFO: 'MyInfo',
+  MY_BOOKS: 'MyBooks',
 };

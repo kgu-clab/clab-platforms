@@ -9,6 +9,7 @@ export const END_POINT = {
   MY_NOTIFICATION: '/notifications',
   MY_COMMENTS: '/comments/my-comments',
   MY_INFO_EDIT: (id: string) => `/members/${id}`,
+  MY_BOOKS: `/book-loan-records`,
 };
 
 export const HTTP_STATUS_CODE = {
