@@ -3,12 +3,10 @@ import { FcAbout } from 'react-icons/fc';
 import Panel from '@components/common/Panel/Panel';
 import SelectButton from '@components/common/SelectButton/SelectButton';
 import { useState } from 'react';
+import { NotificationItem } from '@type/notification';
 
 interface AlarmPanelProps {
-  data: {
-    id: number;
-    content: string;
-  }[];
+  data: Array<NotificationItem>;
 }
 
 const AlarmPanel = ({ data }: AlarmPanelProps) => {

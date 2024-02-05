@@ -2,17 +2,19 @@ import Content from '@components/common/Content/Content';
 import HistorySection from '@components/my/HistorySection/HistorySection';
 import ProfileSection from '@components/my/ProfileSection/ProfileSection';
 import profile from '@mocks/data/profile.json';
-import myAlertList from '@mocks/data/myAlertList.json';
-import myCommentList from '@mocks/data/myCommentList.json';
-import myPostList from '@mocks/data/myPostList.json';
+import { useMyNotifications, useMyBoards, useMyComments } from '@hooks/queries';
 
 const MyPage = () => {
+  const { data: myBoardsData } = useMyBoards();
+  const { data: myNotificationsData } = useMyNotifications();
+  const { data: myCommentsData } = useMyComments();
+
   return (
     <Content>
       <ProfileSection data={profile} />
-      <HistorySection title="지난 알림" data={myAlertList} />
-      <HistorySection title="나의 게시글" data={myPostList} />
-      <HistorySection title="나의 댓글" data={myCommentList} />
+      <HistorySection title="지난 알림" data={myNotificationsData.items} />
+      <HistorySection title="나의 게시글" data={myBoardsData.items} />
+      <HistorySection title="나의 댓글" data={myCommentsData.items} />
     </Content>
   );
 };

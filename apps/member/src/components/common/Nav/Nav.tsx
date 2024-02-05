@@ -8,17 +8,14 @@ const Nav = () => {
   const onClickReady = () => {
     alert('준비중');
   };
+
   return (
     <nav className="fixed left-0 top-0 z-50 w-full border-b bg-white">
       <div className="section flex h-[61px] items-center justify-between py-1.5">
         <div className="flex items-center gap-10 lg:gap-20">
-          <Link
-            className="flex items-center gap-2 text-xl font-bold"
-            to={PATH.MAIN}>
+          <Link className="flex items-center gap-2 text-xl" to={PATH.MAIN}>
             <img src="/favicon.ico" alt="c-lab" className="size-8" />
-            <h1>
-              씨랩<span className="font-medium">오피스</span>
-            </h1>
+            <h1 className="font-bold">PLAY</h1>
           </Link>
           <div className="hidden gap-10 text-sm font-semibold sm:flex">
             <Link to={PATH.MAIN}>홈</Link>

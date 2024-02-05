@@ -19,6 +19,11 @@ import GroupDetailPage from '@pages/GroupDetailPage/GroupDetailPage';
 import GroupNoticeDetailPage from '@pages/GroupNoticeDetailPage/GroupNoticeDetailPage';
 import GroupStudentPage from '@pages/GroupStudentPage/GroupStudentPage';
 import GroupAssignmentPage from '@pages/GroupAssignmentPage/GroupAssignmentPage';
+import LoginPage from '@pages/LoginPage/LoginPage';
+import AuthPage from '@pages/AuthPage/AuthPage';
+import ProtectAuth from '@components/router/ProtectAuth';
+import { Suspense } from 'react';
+import MyPageSkeleton from '@pages/MyPage/MyPageSkeleton';
 
 const AppRouter = () => {
   const router = createBrowserRouter([
@@ -40,9 +45,30 @@ const AppRouter = () => {
         { path: PATH.ACTIVITY_ASSIGNMENT, element: <GroupAssignmentPage /> },
         { path: PATH.LIBRARY, element: <LibraryPage /> },
         { path: PATH.LIBRARY_DETAIL, element: <LibraryDetailPage /> },
-        { path: PATH.MY, element: <MyPage /> },
+        {
+          path: PATH.MY,
+          element: (
+            <Suspense fallback={<MyPageSkeleton />}>
+              <MyPage />
+            </Suspense>
+          ),
+        },
         { path: PATH.CALENDER, element: <CalendarPage /> },
         { path: PATH.SUPPORT, element: <SupportPage /> },
+      ],
+    },
+    {
+      path: PATH.MAIN,
+      element: <ProtectAuth />,
+      children: [
+        {
+          path: PATH.LOGIN,
+          element: <LoginPage />,
+        },
+        {
+          path: PATH.AUTH,
+          element: <AuthPage />,
+        },
       ],
     },
   ]);

@@ -1,9 +1,10 @@
+import { Outlet } from 'react-router-dom';
 import Footer from '@components/common/Footer/Footer';
 import Nav from '@components/common/Nav/Nav';
 import ScrollToTop from '@components/common/ScrollToTop/ScrollToTop';
 import PanelAside from '@components/panels/PanelAside/PanelAside';
 import classNames from 'classnames';
-import { Outlet } from 'react-router-dom';
+import ProtectAuth from '@components/router/ProtectAuth';
 
 const View = () => {
   const mockBanner = {
@@ -15,7 +16,7 @@ const View = () => {
   const { banner, message, name } = mockBanner;
 
   return (
-    <div
+    <main
       className={classNames('m-nav min-h-screen bg-gray-50 pb-10', {
         'pt-10': banner === false,
       })}
@@ -32,17 +33,19 @@ const View = () => {
         <PanelAside />
         <Outlet />
       </div>
-    </div>
+    </main>
   );
 };
 
 const AppLayout = () => {
   return (
-    <ScrollToTop>
-      <Nav />
-      <View />
-      <Footer />
-    </ScrollToTop>
+    <ProtectAuth protect>
+      <ScrollToTop>
+        <Nav />
+        <View />
+        <Footer />
+      </ScrollToTop>
+    </ProtectAuth>
   );
 };
 
