@@ -1,14 +1,10 @@
 import Section from '@components/common/Section/Section';
 import Image from '@components/common/Image/Image';
 import { getPokemonImage } from '@mocks/mocks';
+import { MemberType } from '@type/member';
 
 interface BirthdayListProps {
-  data: {
-    id: number;
-    name: string;
-    image: string;
-    birth: string;
-  }[];
+  data: Array<MemberType>;
 }
 
 const BirthdayList = ({ data }: BirthdayListProps) => {

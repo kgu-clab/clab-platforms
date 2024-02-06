@@ -9,7 +9,15 @@ export const END_POINT = {
   MY_NOTIFICATION: '/notifications',
   MY_COMMENTS: '/comments/my-comments',
   MY_INFO_EDIT: (id: string) => `/members/${id}`,
-  MY_BOOKS: `/book-loan-records`,
+  BOOK_LIST: `/books`,
+  MY_COMMUNITY: `/boards`,
+  MY_NEWS: `/news`,
+  MY_BLOG: `/blogs`,
+  MY_HIRE: `/job-postings`,
+  MY_BIRTHDAY: `/members/birthday`,
+  MY_ACTIVITY: `/schedule/activity`,
+  MAIN_SCHEDULE: `/schedule`,
+  MAIN_ACTIVITY_PHOTO: `/activity-photos`,
 };
 
 export const HTTP_STATUS_CODE = {

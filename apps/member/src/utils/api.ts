@@ -8,6 +8,25 @@ export const createPagination = (
   return `${endpoint}?page=${page}&size=${size}`;
 };
 
+export const createBirthdayPagination = (
+  endpoint: string,
+  month: number,
+  page: number,
+  size: number,
+) => {
+  return `${endpoint}?month=${month}&page=${page}&size=${size}`;
+};
+
+export const createSchedulePagination = (
+  endpoint: string,
+  startDateTime: string,
+  endDateTime: string,
+  page: number,
+  size: number,
+) => {
+  return `${endpoint}?startDateTime=${startDateTime}&endDateTime=${endDateTime}&page=${page}&size=${size}`;
+};
+
 export const getAccessToken = () => {
   return sessionStorage.getItem(ACCESS_TOKEN_KEY);
 };

@@ -26,11 +26,14 @@ const AlarmPanel = ({ data }: AlarmPanelProps) => {
         onClick={handleClick}
       />
       <Panel.Body isOpen={open} className="flex flex-col text-sm">
-        {data.map(({ id, content }) => (
-          <SelectButton key={id} to="">
-            {content}
-          </SelectButton>
-        ))}
+        {data.map(
+          ({ id, content }) =>
+            id <= 5 && (
+              <SelectButton className="truncate" key={id} to="">
+                {content}
+              </SelectButton>
+            ),
+        )}
       </Panel.Body>
     </Panel>
   );

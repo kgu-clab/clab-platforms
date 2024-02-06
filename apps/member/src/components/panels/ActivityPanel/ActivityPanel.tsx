@@ -1,12 +1,10 @@
 import Panel from '@components/common/Panel/Panel';
+import { ScheduleItem } from '@type/schedule';
 import { useState } from 'react';
 import { FcTimeline } from 'react-icons/fc';
 
 interface ActivityPanelProps {
-  data: {
-    id: number;
-    title: string;
-  }[];
+  data: Array<ScheduleItem>;
 }
 
 const ActivityPanel = ({ data }: ActivityPanelProps) => {
@@ -28,9 +26,9 @@ const ActivityPanel = ({ data }: ActivityPanelProps) => {
       <Panel.Body isOpen={open}>
         <div className="space-y-4 text-sm">
           <ul className="list-inside list-disc rounded-md bg-gray-100 p-2 text-gray-500">
-            {data.map(({ id, title }) => (
+            {data.map(({ id, activityName }) => (
               <li key={id} className="font-semibold">
-                {title}
+                {activityName}
               </li>
             ))}
           </ul>

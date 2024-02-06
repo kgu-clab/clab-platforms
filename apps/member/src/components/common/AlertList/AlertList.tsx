@@ -3,14 +3,10 @@ import DropdownButton from '../DropdownButton/DropdownButton';
 import Alert from '../Alert/Alert';
 import classNames from 'classnames';
 import Section from '../Section/Section';
+import { ScheduleItem } from '@type/schedule';
 
 interface AlertListProps {
-  data: {
-    id: number;
-    to: string;
-    title: string;
-    date: string;
-  }[];
+  data: Array<ScheduleItem>;
 }
 
 const AlertList = ({ data }: AlertListProps) => {
@@ -19,12 +15,12 @@ const AlertList = ({ data }: AlertListProps) => {
   if (data.length <= 0) return;
 
   if (data.length > 1) {
-    const { to, title, date } = data[0]; // Header
+    const { to, title, startDate } = data[0]; // Header
 
     return (
       <Section>
         <div className="flex w-full items-center gap-2 divide-x">
-          <Alert to={to} title={title} date={date} />
+          <Alert to={to ? to : ''} title={title} date={startDate} />
           <DropdownButton
             className="pl-2"
             isOpen={open}
@@ -39,8 +35,13 @@ const AlertList = ({ data }: AlertListProps) => {
         >
           <hr className="my-4" />
           <div className="flex flex-col gap-4">
-            {data.slice(1).map(({ id, to, title, date }) => (
-              <Alert key={id} to={to} title={title} date={date} />
+            {data.slice(1).map(({ id, to, title, startDate }) => (
+              <Alert
+                key={id}
+                to={to ? to : ''}
+                title={title}
+                date={startDate}
+              />
             ))}
           </div>
         </div>
@@ -48,12 +49,12 @@ const AlertList = ({ data }: AlertListProps) => {
     );
   } else {
     // this is the only alert
-    const { to, title, date } = data[0];
+    const { to, title, startDate } = data[0];
 
     return (
       <Section>
         <div className="flex w-full items-center gap-2">
-          <Alert to={to} title={title} date={date} />
+          <Alert to={to ? to : ''} title={title} date={startDate} />
         </div>
       </Section>
     );
