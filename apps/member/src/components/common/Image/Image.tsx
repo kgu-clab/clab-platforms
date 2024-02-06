@@ -2,7 +2,7 @@ import classNames from 'classnames';
 import { useState } from 'react';
 
 interface ImageProps {
-  src: string;
+  src?: string;
   alt: string;
   width?: string;
   height?: string;

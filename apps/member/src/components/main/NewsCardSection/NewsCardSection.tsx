@@ -2,16 +2,13 @@ import MoreButton from '@components/common/MoreButton/MoreButton';
 import NewsCard from '@components/common/NewsCard/NewsCard';
 import Section from '@components/common/Section/Section';
 import { PATH } from '@constants/path';
+import { BlogPostItem } from '@type/blog';
+import { CommunityPostItem } from '@type/community';
 
 interface NewsCardSectionProps {
   to: string;
   title: string;
-  data: {
-    id: number;
-    title: string;
-    image: string;
-    description?: string;
-  }[];
+  data: Array<BlogPostItem | CommunityPostItem>;
 }
 
 const NewsCardSection = ({ to, title, data }: NewsCardSectionProps) => {
@@ -23,8 +20,8 @@ const NewsCardSection = ({ to, title, data }: NewsCardSectionProps) => {
         <MoreButton to={to} />
       </Section.Header>
       <Section.Body className="flex gap-2 overflow-scroll scrollbar-hide">
-        {data.slice(0, 4).map(({ id, ...props }) => (
-          <NewsCard key={id} to={post_path} {...props} />
+        {data.map((news, index) => (
+          <NewsCard key={index} to={post_path} {...news} />
         ))}
       </Section.Body>
     </Section>

@@ -1,22 +1,19 @@
+import { ActivityPhotoItem } from '@type/activity';
 import Image from '../Image/Image';
 
 interface ImageBannerProps {
-  data: {
-    image: string;
-    title: string;
-    date: string;
-  };
+  data: Array<ActivityPhotoItem>;
 }
 
 const ImageBanner = ({ data }: ImageBannerProps) => {
-  const { image, title, date } = data;
+  const { imageUrl, title, date } = data[0];
 
   return (
     <div className="relative flex h-60 items-center gap-2 overflow-hidden rounded-lg border">
       <Image
         width="w-full"
         height="h-full"
-        src={image}
+        src={imageUrl}
         alt={title}
         className="object-cover"
       />

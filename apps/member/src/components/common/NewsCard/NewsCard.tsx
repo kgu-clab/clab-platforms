@@ -4,19 +4,19 @@ import { Link } from 'react-router-dom';
 
 interface NewsCardProps {
   to: string;
-  image: string;
+  imageUrl?: string;
   title: string;
   description?: string;
 }
 
-const NewsCard = ({ to, image, title, description }: NewsCardProps) => {
+const NewsCard = ({ to, imageUrl, title, description }: NewsCardProps) => {
   return (
     <Link
       to={to}
       className="cursor-pointer space-y-2 rounded-lg p-2 transition hover:bg-gray-100 items-center flex flex-col"
     >
       <Image
-        src={image}
+        src={imageUrl}
         alt={title}
         width="w-48"
         height="h-48"
