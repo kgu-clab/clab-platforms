@@ -16,8 +16,15 @@ const ActionButton = ({ children }: { children: React.ReactNode }) => (
 
 const checkProgress = (createdAt: string) => {
   const now = dayjs();
-  const loanDate = dayjs(createdAt);
-  const value = (now.diff(loanDate, 'd') * 100) / 14;
+  const end = dayjs(createdAt).add(14, 'd');
+  const value = (end.diff(now, 'd') * 100) % 14;
+  console.log(value);
+  return value;
+};
+const checkDueDate = (createdAt: string) => {
+  const today = dayjs();
+  const end = dayjs(createdAt).add(14, 'd');
+  const value = end.diff(today, 'd');
   return value;
 };
 
@@ -36,8 +43,10 @@ const BookPanel = ({ data }: BookPanelProps) => {
           <ul key={id}>
             <li className="font-semibold">
               <div className="flex items-baseline justify-between mb-2">
-                <span>{title}</span>
-                <span className="text-xs">D-10</span>
+                <span className="truncate mr-2">{title}</span>
+                <span className="text-xs w-fit">
+                  D-{checkDueDate(createdAt)}
+                </span>
               </div>
               <ProgressBar value={checkProgress(createdAt)} />
             </li>
