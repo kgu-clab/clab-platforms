@@ -2,8 +2,8 @@ import { PaginationType } from '@type/api';
 import { server } from './server';
 import { createPagination, createSchedulePagination } from '@utils/api';
 import { END_POINT } from '@constants/api';
-import { ActivityPhotoItem } from '@type/activity';
-import { ScheduleItem } from '@type/schedule';
+import type { ActivityPhotoItem } from '@type/activity';
+import type { ScheduleItem } from '@type/schedule';
 
 // 나의 활동 일정 조회
 export const getMyActivities = async (
