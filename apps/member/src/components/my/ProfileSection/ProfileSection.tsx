@@ -5,38 +5,25 @@ import Section from '@components/common/Section/Section';
 import { useSetIsLoggedInStore } from '@store/auth';
 import { Input } from '@clab/design-system';
 import { removeTokens } from '@utils/api';
-// import { useUserInfoMutation } from '@hooks/queries';
-
-interface ProfileProps {
-  image: string;
-  name: string;
-  id: number;
-  interests: string;
-  phone: string;
-  email: string;
-  githubUrl: string;
-  address: string;
-}
+import { useUserInfoMutation } from '@hooks/queries';
+import { ProfileData } from '@type/profile';
 
 interface ProfileSectionProps {
-  data: ProfileProps;
+  data: ProfileData;
 }
 
 const ProfileSection = ({ data }: ProfileSectionProps) => {
   const setIsLoggedIn = useSetIsLoggedInStore();
-  // const { userInfoMutate } = useUserInfoMutation();
+  const { userInfoMutate } = useUserInfoMutation();
 
   const [isEdit, setIsEdit] = useState<boolean>(false);
-  const [inputs, setInputs] = useState<ProfileProps>(data);
+  const [inputs, setInputs] = useState<ProfileData>(data);
 
   const onClickEdit = () => {
     setIsEdit((prev) => {
       if (prev) {
-        // 편집 모드일 경우, 수정된 정보를 서버에 전송
-        // 프로필 수정 API 호출
-        // userInfoMutate({})
+        userInfoMutate({ id: String(data.id), body: inputs });
       }
-
       return !prev;
     });
   };
@@ -55,7 +42,7 @@ const ProfileSection = ({ data }: ProfileSectionProps) => {
     setInputs((prev) => ({ ...prev, [name]: value }));
   };
 
-  const { image, name, id, interests, phone, email, address, githubUrl } =
+  const { imageUrl, name, id, interests, contact, email, address, githubUrl } =
     inputs;
 
   return (
@@ -79,7 +66,7 @@ const ProfileSection = ({ data }: ProfileSectionProps) => {
           <Image
             width="w-32"
             height="h-32"
-            src={image}
+            src={imageUrl}
             alt={name}
             className="rounded-full m-auto object-cover"
           />
@@ -101,9 +88,9 @@ const ProfileSection = ({ data }: ProfileSectionProps) => {
           <Input
             id="연락처"
             label="연락처"
-            name="phone"
-            value={phone}
-            placeholder={data.phone}
+            name="contact"
+            value={contact}
+            placeholder={data.contact}
             disabled={!isEdit}
             onChange={onChange}
           />

@@ -3,6 +3,7 @@ export const ATOM_KEY = {
 };
 
 export const QUERY_KEY = {
+  MY_PROFILE: 'MyProfile',
   MY_BOARDS: 'MyBoards',
   MY_NOTIFICATIONS: 'MyNotifications',
   MY_COMMENTS: 'MyComments',

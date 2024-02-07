@@ -5,6 +5,7 @@ export const REFRESH_TOKEN_KEY = 'REFRESH_TOKEN';
 
 export const END_POINT = {
   LOGIN_REISSUE: '/login/reissue',
+  MY_PROFILE: '/members/my-profile',
   MY_BOARDS: '/boards/my-boards',
   MY_NOTIFICATION: '/notifications',
   MY_COMMENTS: '/comments/my-comments',
