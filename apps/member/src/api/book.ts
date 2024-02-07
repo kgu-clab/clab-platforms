@@ -2,7 +2,7 @@ import { PaginationType } from '@type/api';
 import { server } from './server';
 import { createPagination } from '@utils/api';
 import { END_POINT } from '@constants/api';
-import { BookItem } from '@type/book';
+import type { BookItem } from '@type/book';
 
 // 나의 대출내역 조회
 export const getMyBooks = async (page: number, size: number, id: string) => {

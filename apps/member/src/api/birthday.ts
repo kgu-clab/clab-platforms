@@ -2,7 +2,7 @@ import { PaginationType } from '@type/api';
 import { server } from './server';
 import { createBirthdayPagination } from '@utils/api';
 import { END_POINT } from '@constants/api';
-import { MemberType } from '@type/member';
+import type { MemberType } from '@type/member';
 
 // 이달의 생일자 조회
 export const getBirthday = async (

@@ -2,7 +2,7 @@ import { PaginationType } from '@type/api';
 import { server } from './server';
 import { END_POINT } from '@constants/api';
 import { createSchedulePagination } from '@utils/api';
-import { ScheduleItem } from '@type/schedule';
+import type { ScheduleItem } from '@type/schedule';
 
 // 일정 조회
 export const getSchedule = async (

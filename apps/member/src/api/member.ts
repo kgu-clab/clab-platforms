@@ -1,7 +1,7 @@
 import { server } from './server';
 import { END_POINT } from '@constants/api';
 import type { BaseResponse } from '@type/api';
-import { ProfileData } from '@type/profile';
+import type { ProfileData } from '@type/profile';
 
 interface PatchUserInfoArgs {
   id: string;

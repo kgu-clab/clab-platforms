@@ -2,7 +2,7 @@ import { PaginationType } from '@type/api';
 import { server } from './server';
 import { createPagination } from '@utils/api';
 import { END_POINT } from '@constants/api';
-import { HireItem } from '@type/hire';
+import type { HireItem } from '@type/hire';
 
 // 채용 공고 조회
 export const getMyHire = async (page: number, size: number) => {

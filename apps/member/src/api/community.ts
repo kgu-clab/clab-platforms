@@ -2,7 +2,7 @@ import { PaginationType } from '@type/api';
 import { server } from './server';
 import { createPagination } from '@utils/api';
 import { END_POINT } from '@constants/api';
-import { CommunityPostItem } from '@type/community';
+import type { CommunityPostItem } from '@type/community';
 
 // 커뮤니티 게시글 조회
 export const getMyCommunity = async (
