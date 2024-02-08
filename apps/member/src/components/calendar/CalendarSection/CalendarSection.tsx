@@ -1,6 +1,6 @@
 import Section from '@components/common/Section/Section';
 import dayjs from 'dayjs';
-import { useState } from 'react';
+import { startTransition, useState } from 'react';
 import Calendar from '../Calendar/Calendar';
 
 const now = dayjs();
@@ -11,24 +11,30 @@ const CalendarSection = () => {
   const [month, setMonth] = useState(now.get('month') + 1);
 
   const onClickPrev = () => {
-    const prevMonth = month - 1 <= 0 ? 12 : month - 1;
-    const prevYear = month - 1 <= 0 ? year - 1 : year;
+    startTransition(() => {
+      const prevMonth = month - 1 <= 0 ? 12 : month - 1;
+      const prevYear = month - 1 <= 0 ? year - 1 : year;
 
-    setYear(prevYear);
-    setMonth(prevMonth);
+      setYear(prevYear);
+      setMonth(prevMonth);
+    });
   };
 
   const onClickNext = () => {
-    const nextMonth = month + 1 > 12 ? 1 : month + 1;
-    const nextYear = month + 1 > 12 ? year + 1 : year;
+    startTransition(() => {
+      const nextMonth = month + 1 > 12 ? 1 : month + 1;
+      const nextYear = month + 1 > 12 ? year + 1 : year;
 
-    setYear(nextYear);
-    setMonth(nextMonth);
+      setYear(nextYear);
+      setMonth(nextMonth);
+    });
   };
 
   const onClickToday = () => {
-    setYear(now.get('year'));
-    setMonth(now.get('month') + 1);
+    startTransition(() => {
+      setYear(now.get('year'));
+      setMonth(now.get('month') + 1);
+    });
   };
 
   return (
