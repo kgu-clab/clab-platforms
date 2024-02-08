@@ -22,7 +22,7 @@ const PanelAside = () => {
         <ProfilePanel
           name={myProfile.name}
           image={myProfile.imageUrl}
-          createAt={myProfile.createAt}
+          createdAt={myProfile.createdAt}
         />
         <AttendanceFairyPanel />
         <AlarmPanel data={myNotificationsData.items} />
