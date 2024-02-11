@@ -1,8 +1,8 @@
 import Panel from '@components/common/Panel/Panel';
 import ProgressBar from '@components/common/ProgressBar/ProgressBar';
 import { BookItem } from '@type/book';
-import dayjs from 'dayjs';
 import { FcBookmark } from 'react-icons/fc';
+import dayjs from 'dayjs';
 
 interface BookPanelProps {
   data: Array<BookItem>;
@@ -17,15 +17,13 @@ const ActionButton = ({ children }: { children: React.ReactNode }) => (
 const checkProgress = (createdAt: string) => {
   const now = dayjs();
   const end = dayjs(createdAt).add(14, 'd');
-  const value = (end.diff(now, 'd') * 100) % 14;
-  console.log(value);
-  return value;
+  return (end.diff(now, 'd') * 100) % 14;
 };
+
 const checkDueDate = (createdAt: string) => {
   const today = dayjs();
   const end = dayjs(createdAt).add(14, 'd');
-  const value = end.diff(today, 'd');
-  return value;
+  return end.diff(today, 'd');
 };
 
 const BookPanel = ({ data }: BookPanelProps) => {
@@ -44,7 +42,7 @@ const BookPanel = ({ data }: BookPanelProps) => {
             <li className="font-semibold">
               <div className="flex items-baseline justify-between mb-2">
                 <span className="truncate mr-2">{title}</span>
-                <span className="text-xs w-fit">
+                <span className="text-xs w-fit text-nowrap">
                   D-{checkDueDate(createdAt)}
                 </span>
               </div>
