@@ -11,6 +11,8 @@ export const createPath = (...paths: Array<PathFinderId>): string => {
     .join('/');
 };
 
+export const NOT_FOUND_IMG = '/not_found.webp';
+
 export const PATH = {
   ROOT: '',
   MAIN: '/',
