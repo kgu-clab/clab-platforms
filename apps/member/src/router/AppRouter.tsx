@@ -1,9 +1,10 @@
+import { Suspense } from 'react';
 import { PATH } from '@constants/path';
-import MainPage from '@pages/MainPage/MainPage';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 import AppLayout from './AppLayout';
 import ErrorPage from '@pages/ErrorPage/ErrorPage';
+import MainPage from '@pages/MainPage/MainPage';
 import CommunityPage from '@pages/CommunityPage/CommunityPage';
 import CommunityDetailPage from '@pages/CommunityDetailPage/CommunityDetailPage';
 import CommunityPostPage from '@pages/CommunityPostPage/CommunityPostPage';
@@ -22,29 +23,123 @@ import GroupAssignmentPage from '@pages/GroupAssignmentPage/GroupAssignmentPage'
 import LoginPage from '@pages/LoginPage/LoginPage';
 import AuthPage from '@pages/AuthPage/AuthPage';
 import ProtectAuth from '@components/router/ProtectAuth';
-import { Suspense } from 'react';
 import MyPageSkeleton from '@pages/MyPage/MyPageSkeleton';
 
 const AppRouter = () => {
   const router = createBrowserRouter([
     {
       path: PATH.MAIN,
-      element: <AppLayout />,
+      element: (
+        <Suspense>
+          <AppLayout />
+        </Suspense>
+      ),
       errorElement: <ErrorPage />,
       children: [
-        { path: PATH.MAIN, element: <MainPage /> },
-        { path: PATH.COMMUNITY, element: <CommunityPage /> },
-        { path: PATH.COMMUNITY_POST, element: <CommunityPostPage /> },
-        { path: PATH.COMMUNITY_DETAIL, element: <CommunityDetailPage /> },
-        { path: PATH.COMMUNITY_WRITE, element: <CommunityWritePage /> },
-        { path: PATH.ACTIVITY, element: <GroupPage /> },
-        { path: PATH.ACTIVITY_APPLY, element: <GroupApplyPage /> },
-        { path: PATH.ACTIVITY_DETAIL, element: <GroupDetailPage /> },
-        { path: PATH.ACTIVITY_NOTICE, element: <GroupNoticeDetailPage /> },
-        { path: PATH.ACTIVITY_STUDENT, element: <GroupStudentPage /> },
-        { path: PATH.ACTIVITY_ASSIGNMENT, element: <GroupAssignmentPage /> },
-        { path: PATH.LIBRARY, element: <LibraryPage /> },
-        { path: PATH.LIBRARY_DETAIL, element: <LibraryDetailPage /> },
+        {
+          path: PATH.MAIN,
+          element: (
+            <Suspense>
+              <MainPage />
+            </Suspense>
+          ),
+        },
+        {
+          path: PATH.COMMUNITY,
+          element: (
+            <Suspense>
+              <CommunityPage />
+            </Suspense>
+          ),
+        },
+        {
+          path: PATH.COMMUNITY_POST,
+          element: (
+            <Suspense>
+              <CommunityPostPage />
+            </Suspense>
+          ),
+        },
+        {
+          path: PATH.COMMUNITY_DETAIL,
+          element: (
+            <Suspense>
+              <CommunityDetailPage />
+            </Suspense>
+          ),
+        },
+        {
+          path: PATH.COMMUNITY_WRITE,
+          element: (
+            <Suspense>
+              <CommunityWritePage />
+            </Suspense>
+          ),
+        },
+        {
+          path: PATH.ACTIVITY,
+          element: (
+            <Suspense>
+              <GroupPage />
+            </Suspense>
+          ),
+        },
+        {
+          path: PATH.ACTIVITY_APPLY,
+          element: (
+            <Suspense>
+              <GroupApplyPage />
+            </Suspense>
+          ),
+        },
+        {
+          path: PATH.ACTIVITY_DETAIL,
+          element: (
+            <Suspense>
+              <GroupDetailPage />
+            </Suspense>
+          ),
+        },
+        {
+          path: PATH.ACTIVITY_NOTICE,
+          element: (
+            <Suspense>
+              <GroupNoticeDetailPage />
+            </Suspense>
+          ),
+        },
+        {
+          path: PATH.ACTIVITY_STUDENT,
+          element: (
+            <Suspense>
+              <GroupStudentPage />
+            </Suspense>
+          ),
+        },
+        {
+          path: PATH.ACTIVITY_ASSIGNMENT,
+          element: (
+            <Suspense>
+              <GroupAssignmentPage />
+            </Suspense>
+          ),
+        },
+        {
+          path: PATH.LIBRARY,
+          element: (
+            <Suspense>
+              <LibraryPage />
+            </Suspense>
+          ),
+        },
+        {
+          path: PATH.LIBRARY_DETAIL,
+          element: (
+            <Suspense>
+              <LibraryDetailPage />
+            </Suspense>
+          ),
+        },
         {
           path: PATH.MY,
           element: (
@@ -53,8 +148,22 @@ const AppRouter = () => {
             </Suspense>
           ),
         },
-        { path: PATH.CALENDER, element: <CalendarPage /> },
-        { path: PATH.SUPPORT, element: <SupportPage /> },
+        {
+          path: PATH.CALENDER,
+          element: (
+            <Suspense>
+              <CalendarPage />
+            </Suspense>
+          ),
+        },
+        {
+          path: PATH.SUPPORT,
+          element: (
+            <Suspense>
+              <SupportPage />
+            </Suspense>
+          ),
+        },
       ],
     },
     {

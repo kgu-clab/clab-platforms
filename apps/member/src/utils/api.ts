@@ -1,5 +1,17 @@
 import { ACCESS_TOKEN_KEY, REFRESH_TOKEN_KEY } from '@constants/api';
 
+export const createPath = (...path: Array<string | number>): string => {
+  return path
+    .map((path) => {
+      if (typeof path === 'string' || typeof path === 'number') {
+        return path.toString();
+      }
+      throw new Error('Invalid path type');
+    })
+    .join('/')
+    .replace(/([^:])\/\/+/g, '$1/');
+};
+
 export const createPagination = (
   endpoint: string,
   page: number,
@@ -45,7 +57,7 @@ export const removeTokens = () => {
   sessionStorage.removeItem(REFRESH_TOKEN_KEY);
 };
 
-export const authorization = (token: string) => {
+export const authorization = (token: string | null) => {
   return {
     Authorization: `Bearer ${token}`,
   };
