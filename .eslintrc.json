@@ -16,7 +16,8 @@
   "rules": {
     "react/react-in-jsx-scope": "off", // React 17 이상에서는 필요 없음
     "@typescript-eslint/explicit-module-boundary-types": "off", // 모든 함수의 반환 타입 명시를 강제하지 않음
-    "react/prop-types": "off" // TypeScript를 사용할 경우 propTypes는 필요 없음
+    "react/prop-types": "off", // TypeScript를 사용할 경우 propTypes는 필요 없음
+    "no-console": "error"
   },
   "env": { "browser": true, "es2020": true }
 }
