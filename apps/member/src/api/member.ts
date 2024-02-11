@@ -1,9 +1,8 @@
 import { server } from './server';
 import { API_BASE_URL, END_POINT } from '@constants/api';
-import { createPath } from '@constants/path';
 import type { BaseResponse } from '@type/api';
 import type { ProfileData } from '@type/profile';
-import { getAccessToken } from '@utils/api';
+import { createPath, getAccessToken } from '@utils/api';
 
 interface PatchUserInfoArgs {
   id: string;
