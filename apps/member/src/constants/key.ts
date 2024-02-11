@@ -7,7 +7,6 @@ export const QUERY_KEY = {
   MY_BOARDS: 'MyBoards',
   MY_NOTIFICATIONS: 'MyNotifications',
   MY_COMMENTS: 'MyComments',
-  MY_INFO: 'MyInfo',
   MY_COMMUNITY: 'MyCommunity',
   MY_NEWS: 'MyNews',
   MY_BLOG: 'MyBlog',

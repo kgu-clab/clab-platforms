@@ -8,7 +8,7 @@ export const useUserInfoMutation = () => {
   const userInfoMutation = useMutation({
     mutationFn: patchUserInfo,
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: [QUERY_KEY.MY_INFO] });
+      queryClient.invalidateQueries({ queryKey: [QUERY_KEY.MY_PROFILE] });
     },
   });
 
