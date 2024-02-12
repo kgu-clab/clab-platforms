@@ -48,6 +48,22 @@ export const createCommunityPagination = (
   return `${endpoint}?category=${category}&page=${page}&size=${size}`;
 };
 
+export const createCommentsPagination = (
+  endpoint: string,
+  boardId: number,
+  page: number,
+  size: number,
+) => {
+  return `${endpoint}?boardId=${boardId}&page=${page}&size=${size}`;
+};
+
+export const createRecommentsWrtiePagination = (
+  endpoint: string,
+  parentId: number,
+) => {
+  return `${endpoint}?parentId=${parentId}`;
+};
+
 export const getAccessToken = () => {
   return sessionStorage.getItem(ACCESS_TOKEN_KEY);
 };

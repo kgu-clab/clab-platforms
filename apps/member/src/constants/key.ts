@@ -18,4 +18,5 @@ export const QUERY_KEY = {
   BOOK_LIST: 'BookList',
   COMMUNITY: 'Community',
   ACCUSES: 'Accuses',
+  COMMENTS: 'Comments',
 };

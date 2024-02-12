@@ -22,6 +22,7 @@ export const END_POINT = {
   MAIN_ACTIVITY_PHOTO: `/activity-photos`,
   COMMUNITY_LIST: `/boards/list`,
   COMMUNITY_POST: (boardId: string) => `/boards/${boardId}`,
+  COMMENTS: (boardId: number) => `/comments/${boardId}`,
 };
 
 export const HTTP_STATUS_CODE = {

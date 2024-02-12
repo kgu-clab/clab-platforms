@@ -9,7 +9,6 @@ import { ERROR_MESSAGE } from '@constants/message';
 import { useCommunityPost } from '@hooks/queries/useCommunityPost';
 import { useAccuses } from '@hooks/queries/useAccuses';
 import { getPokemonImage } from '@mocks/mocks';
-// import { useCommunityPostMutation } from '@hooks/queries/useCommunityPostMutation';
 
 const getSubTitle = (type = 'error'): string => {
   return {
@@ -69,7 +68,7 @@ const CommunityPostPage = () => {
           </Post.Footer>
         </Post>
       </Section>
-      <PostCommentSection />
+      {id && <PostCommentSection id={Number(id)} />}
     </Content>
   );
 };

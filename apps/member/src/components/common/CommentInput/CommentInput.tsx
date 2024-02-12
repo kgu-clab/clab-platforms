@@ -1,14 +1,42 @@
-import { ChangeEventHandler } from 'react';
+import { useState } from 'react';
 import Textarea from '../Textarea/Textarea';
-import { Button } from '@clab/design-system';
+import { Button, Input } from '@clab/design-system';
+import { useCommentWrite } from '@hooks/queries/useCommentWrite';
 
 interface CommentInputProps {
+  id: number;
   value: string;
-  onChange: ChangeEventHandler<HTMLTextAreaElement>;
-  onClick: () => void;
+  onChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
+  parentId?: number;
 }
 
-const CommentInput = ({ value, onChange, onClick }: CommentInputProps) => {
+const CommentInput = ({ id, value, onChange, parentId }: CommentInputProps) => {
+  const { commentWriteInfo } = useCommentWrite();
+
+  const [anonymous, setAnonymous] = useState(false);
+
+  const handleAnonymousToggle = () => {
+    setAnonymous(!anonymous);
+  };
+
+  const handleSubmit = () => {
+    if (parentId) {
+      commentWriteInfo({
+        parentId: parentId,
+        boardId: id,
+        body: { content: value, wantAnonymous: anonymous },
+      });
+    } else {
+      commentWriteInfo({
+        boardId: id,
+        body: { content: value, wantAnonymous: anonymous },
+      });
+    }
+    onChange({
+      target: { value: '' },
+    } as React.ChangeEvent<HTMLTextAreaElement>);
+  };
+
   return (
     <div className="flex gap-2">
       <Textarea
@@ -17,9 +45,21 @@ const CommentInput = ({ value, onChange, onClick }: CommentInputProps) => {
         value={value}
         onChange={onChange}
       />
-      <Button className="whitespace-nowrap" onClick={onClick}>
-        등록
-      </Button>
+      <div className="flex flex-col justify-between">
+        <div className="flex">
+          <Input
+            id={String(id)}
+            name="wantAnonymous"
+            type="checkbox"
+            checked={anonymous}
+            onChange={handleAnonymousToggle}
+          />
+          <span className="pl-1 text-xs">익명</span>
+        </div>
+        <Button className="whitespace-nowrap" onClick={handleSubmit}>
+          등록
+        </Button>
+      </div>
     </div>
   );
 };
