@@ -19,6 +19,7 @@ export const END_POINT = {
   MY_ACTIVITY: `/schedule/activity`,
   MAIN_SCHEDULE: `/schedule`,
   MAIN_ACTIVITY_PHOTO: `/activity-photos`,
+  COMMUNITY_LIST: `/boards/list`,
 };
 
 export const HTTP_STATUS_CODE = {

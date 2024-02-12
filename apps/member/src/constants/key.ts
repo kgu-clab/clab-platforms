@@ -16,4 +16,5 @@ export const QUERY_KEY = {
   MAIN_SCHEDULE: 'MainSchedule',
   MAIN_ACTIVITY_PHOTO: 'MainActivityPhoto',
   BOOK_LIST: 'BookList',
+  COMMUNITY: 'Community',
 };

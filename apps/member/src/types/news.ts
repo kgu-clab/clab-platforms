@@ -5,5 +5,5 @@ export interface NewsItem {
   articleUrl: string;
   source: string;
   date: string;
-  createAt?: string;
+  createdAt?: string;
 }

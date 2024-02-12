@@ -39,6 +39,15 @@ export const createSchedulePagination = (
   return `${endpoint}?startDateTime=${startDateTime}&endDateTime=${endDateTime}&page=${page}&size=${size}`;
 };
 
+export const createCommunityPagination = (
+  endpoint: string,
+  category: string,
+  page: number,
+  size: number,
+) => {
+  return `${endpoint}?category=${category}&page=${page}&size=${size}`;
+};
+
 export const getAccessToken = () => {
   return sessionStorage.getItem(ACCESS_TOKEN_KEY);
 };

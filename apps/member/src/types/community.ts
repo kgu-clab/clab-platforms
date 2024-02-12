@@ -1,7 +1,7 @@
 export interface CommunityPostItem {
   id: number;
-  category: string;
+  category?: string;
   title: string;
   writer: string;
-  createAt: string;
+  createdAt: string;
 }

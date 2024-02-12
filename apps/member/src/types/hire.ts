@@ -6,5 +6,5 @@ export interface HireItem {
   recruitmentPeriod: string;
   jobPostingUrl: string;
   category?: string;
-  createAt?: string;
+  createdAt?: string;
 }

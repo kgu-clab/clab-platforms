@@ -1,6 +1,6 @@
 import { PaginationType } from '@type/api';
 import { server } from './server';
-import { createPagination } from '@utils/api';
+import { createCommunityPagination, createPagination } from '@utils/api';
 import { END_POINT } from '@constants/api';
 import type { CommunityPostItem } from '@type/community';
 
@@ -17,4 +17,21 @@ export const getMyCommunity = async (
   const categoryPost = data.items.filter((post) => post.category === category);
 
   return categoryPost;
+};
+
+export const getCommunityList = async (
+  category: string,
+  page: number,
+  size: number,
+) => {
+  const { data } = await server.get<PaginationType<CommunityPostItem>>({
+    url: createCommunityPagination(
+      END_POINT.COMMUNITY_LIST,
+      category,
+      page,
+      size,
+    ),
+  });
+
+  return data;
 };
