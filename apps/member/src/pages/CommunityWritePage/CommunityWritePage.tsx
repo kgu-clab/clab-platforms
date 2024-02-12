@@ -5,6 +5,7 @@ import Input from '@components/common/Input/Input';
 import Section from '@components/common/Section/Section';
 import Select from '@components/common/Select/Select';
 import Textarea from '@components/common/Textarea/Textarea';
+import { useCommunityWrite } from '@hooks/queries/useCommunityWrite';
 import { useCallback, useState } from 'react';
 
 const selectOptions = [
@@ -15,10 +16,12 @@ const selectOptions = [
 ];
 
 const CommunityWritePage = () => {
+  const { communityWriteMutate } = useCommunityWrite();
   const [content, setContent] = useState({
-    type: 0,
+    category: 0,
     title: '',
     content: '',
+    wantAnnonymous: false,
   });
 
   const handleContent = useCallback(
@@ -27,12 +30,19 @@ const CommunityWritePage = () => {
         HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
       >,
     ) => {
+      const value =
+        e.target.type === 'checkbox' ? !content.wantAnnonymous : e.target.value;
       setContent((prev) => {
-        return { ...prev, [e.target.name]: e.target.value };
+        return { ...prev, [e.target.name]: value };
       });
     },
     [],
   );
+
+  const onClickSubmit = () => {
+    const categoryName = selectOptions[content.category - 1].name;
+    communityWriteMutate({ ...content, category: categoryName });
+  };
 
   return (
     <Content>
@@ -40,9 +50,9 @@ const CommunityWritePage = () => {
       <Section className="space-y-2">
         <div className="flex gap-2">
           <Select
-            name="type"
+            name="category"
             data={selectOptions}
-            value={content.type}
+            value={content.category}
             onChange={handleContent}
           />
           <Input
@@ -61,7 +71,16 @@ const CommunityWritePage = () => {
           value={content.content}
           onChange={handleContent}
         />
-        <Button>등록</Button>
+        <div>
+          <Input
+            name="wantAnnonymous"
+            type="checkbox"
+            value={String(content.wantAnnonymous)}
+            onChange={handleContent}
+          />
+          <span className="pl-2">익명</span>
+        </div>
+        <Button onClick={onClickSubmit}>등록</Button>
       </Section>
     </Content>
   );

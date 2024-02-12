@@ -5,3 +5,10 @@ export interface CommunityPostItem {
   writer: string;
   createdAt: string;
 }
+
+export interface CommunityWriteItem {
+  category: string;
+  title: string;
+  content: string;
+  wantAnnonymous: boolean;
+}
