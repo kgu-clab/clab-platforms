@@ -8,6 +8,7 @@ import Post from '@components/common/Post/Post';
 import { ERROR_MESSAGE } from '@constants/message';
 import { useCommunityPost } from '@hooks/queries/useCommunityPost';
 import { useAccuses } from '@hooks/queries/useAccuses';
+import { getPokemonImage } from '@mocks/mocks';
 // import { useCommunityPostMutation } from '@hooks/queries/useCommunityPostMutation';
 
 const getSubTitle = (type = 'error'): string => {
@@ -51,7 +52,11 @@ const CommunityPostPage = () => {
         <Post>
           <Post.Head
             title={postData.title}
-            src={postData.memberImageUrl}
+            src={
+              postData.memberImageUrl
+                ? postData.memberImageUrl
+                : getPokemonImage()
+            }
             writer={postData.writer}
             createAt={postData.createdAt}
           />
