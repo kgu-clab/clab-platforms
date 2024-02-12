@@ -12,3 +12,14 @@ export interface CommunityWriteItem {
   content: string;
   wantAnnonymous: boolean;
 }
+
+export interface CommunityPostDetailItem {
+  id: number;
+  writer: string;
+  memberImageUrl: string;
+  title: string;
+  content: string;
+  likes: number;
+  hasLikeByMe: boolean;
+  createdAt: string;
+}

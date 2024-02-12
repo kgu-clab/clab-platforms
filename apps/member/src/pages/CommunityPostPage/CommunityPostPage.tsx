@@ -2,12 +2,13 @@ import Content from '@components/common/Content/Content';
 import PostCommentSection from '@components/community/PostCommentSection/PostCommentSection';
 import { useParams } from 'react-router-dom';
 import Header from '@components/common/Header/Header';
-import post from '@mocks/data/post.json';
 import Section from '@components/common/Section/Section';
 import { Button } from '@clab/design-system';
 import Post from '@components/common/Post/Post';
-import { getPokemonImage } from '@mocks/mocks';
 import { ERROR_MESSAGE } from '@constants/message';
+import { useCommunityPost } from '@hooks/queries/useCommunityPost';
+import { useAccuses } from '@hooks/queries/useAccuses';
+// import { useCommunityPostMutation } from '@hooks/queries/useCommunityPostMutation';
 
 const getSubTitle = (type = 'error'): string => {
   return {
@@ -22,10 +23,26 @@ const getSubTitle = (type = 'error'): string => {
 };
 
 const CommunityPostPage = () => {
-  const { type } = useParams<{ type: string }>();
-  const { title, writer, contents, createAt } = post;
+  const { type, id } = useParams<{ type: string; id: string }>();
+  const { data: postData } = useCommunityPost(id);
+  const { accusesData } = useAccuses();
+  // const { postMutate } = useCommunityPostMutation();
 
   const subTitle = getSubTitle(type) || ERROR_MESSAGE.default;
+
+  const info = {
+    targetType: 'BOARD',
+    targetId: Number(id),
+    reason: '부적절한 게시글입니다.',
+  };
+  const onClickAccuses = () => {
+    if (window.confirm('신고하시겠습니까?')) {
+      accusesData(info);
+      alert('신고가 완료되었습니다.');
+    } else {
+      alert('취소되었습니다.');
+    }
+  };
 
   return (
     <Content>
@@ -33,14 +50,14 @@ const CommunityPostPage = () => {
       <Section>
         <Post>
           <Post.Head
-            title={title}
-            src={getPokemonImage()}
-            writer={writer}
-            createAt={createAt}
+            title={postData.title}
+            src={postData.memberImageUrl}
+            writer={postData.writer}
+            createAt={postData.createdAt}
           />
-          <Post.Body>{contents}</Post.Body>
+          <Post.Body>{postData.content}</Post.Body>
           <Post.Footer>
-            <Button size="sm" color="red">
+            <Button onClick={onClickAccuses} size="sm" color="red">
               신고
             </Button>
             <Button size="sm">수정</Button>
