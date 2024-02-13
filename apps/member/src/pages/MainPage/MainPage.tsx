@@ -34,32 +34,36 @@ const MainPage = () => {
         title="최근 동아리 소식은?"
         data={newsData}
       />
-      <CommunitySection.Wrapper>
-        <CommunitySection
+      <CommunitySection>
+        <CommunitySection.List
           title="공지사항"
           to={PATH.COMMUNITY_NOTICE}
           data={noticeData}
         />
-        <CommunitySection title="QnA" to={PATH.COMMUNITY_QNA} data={QnAData} />
-      </CommunitySection.Wrapper>
+        <CommunitySection.List
+          title="QnA"
+          to={PATH.COMMUNITY_QNA}
+          data={QnAData}
+        />
+      </CommunitySection>
       <BirthdayList data={birthdayData.items} />
       <NewsCardSection
         to={PATH.BLOG}
         title="기술 블로그"
         data={blogData.items}
       />
-      <CommunitySection.Wrapper>
-        <CommunitySection
+      <CommunitySection>
+        <CommunitySection.List
           title="IT 소식"
           to={PATH.COMMUNITY_NEWS}
           data={ITNewsData.items}
         />
-        <CommunitySection
+        <CommunitySection.List
           title="채용 정보"
           to={PATH.COMMUNITY_HIRE}
           data={hireData.items}
         />
-      </CommunitySection.Wrapper>
+      </CommunitySection>
     </Content>
   );
 };
