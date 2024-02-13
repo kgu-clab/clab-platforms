@@ -27,7 +27,7 @@ const CommunitySection = ({ title, to, data }: CommunitySectionProps) => {
             )}
             <p className="w-full truncate pr-4">{data.title}</p>
             <p className="text-clab-main-light">
-              {data.createAt ? toYYMMDD(data.createAt) : ''}
+              {data.createdAt ? toYYMMDD(data.createdAt) : ''}
             </p>
           </ListButton>
         ))}

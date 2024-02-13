@@ -1,9 +1,9 @@
-export interface NewsItem {
-  title: string;
-  category: string;
-  content: string;
+import { PostItem } from './post';
+
+export interface NewsItem extends PostItem {
+  content?: string;
   articleUrl: string;
-  source: string;
+  source?: string;
   date: string;
-  createAt?: string;
+  memberImageUrl?: string;
 }
