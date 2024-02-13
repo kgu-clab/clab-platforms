@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import Textarea from '../Textarea/Textarea';
 import { Button, Input } from '@clab/design-system';
-import { useCommentWrite } from '@hooks/queries/useCommentWrite';
+import { useCommentWriteMutation } from '@hooks/queries/useCommentWriteMutation';
 
 interface CommentInputProps {
   id: number;
@@ -11,7 +11,7 @@ interface CommentInputProps {
 }
 
 const CommentInput = ({ id, value, onChange, parentId }: CommentInputProps) => {
-  const { commentWriteInfo } = useCommentWrite();
+  const { commentWriteInfo } = useCommentWriteMutation();
 
   const [anonymous, setAnonymous] = useState(false);
 

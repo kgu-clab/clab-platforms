@@ -5,7 +5,7 @@ import Input from '@components/common/Input/Input';
 import Section from '@components/common/Section/Section';
 import Select from '@components/common/Select/Select';
 import Textarea from '@components/common/Textarea/Textarea';
-import { useCommunityWrite } from '@hooks/queries/useCommunityWrite';
+import { useCommunityWriteMutation } from '@hooks/queries/useCommunityWriteMutation';
 import { useCallback, useState } from 'react';
 
 const selectOptions = [
@@ -16,7 +16,7 @@ const selectOptions = [
 ];
 
 const CommunityWritePage = () => {
-  const { communityWriteMutate } = useCommunityWrite();
+  const { communityWriteMutate } = useCommunityWriteMutation();
   const [content, setContent] = useState({
     category: 0,
     title: '',

@@ -2,7 +2,7 @@ import { postCommunityWrite } from '@api/community';
 import { QUERY_KEY } from '@constants/key';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
-export const useCommunityWrite = () => {
+export const useCommunityWriteMutation = () => {
   const queryClient = useQueryClient();
 
   const communityWriteMutation = useMutation({

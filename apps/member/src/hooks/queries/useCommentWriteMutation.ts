@@ -2,7 +2,7 @@ import { postCommentWrite } from '@api/comment';
 import { QUERY_KEY } from '@constants/key';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
-export const useCommentWrite = () => {
+export const useCommentWriteMutation = () => {
   const queryClient = useQueryClient();
 
   const commentWrite = useMutation({
