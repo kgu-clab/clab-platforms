@@ -1,5 +1,6 @@
 export const ATOM_KEY = {
   IS_LOGGED_IN: 'isLoggedInState',
+  MODAL: 'modalState',
 };
 
 export const QUERY_KEY = {

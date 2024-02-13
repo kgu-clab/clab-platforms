@@ -25,44 +25,44 @@ const CommunityPage = () => {
           글쓰기
         </Button>
       </Header>
-      <CommunitySection.Wrapper>
-        <CommunitySection
+      <CommunitySection>
+        <CommunitySection.List
           title="공지사항"
           data={noticeData.items}
           to={PATH.COMMUNITY_NOTICE}
           number={borderNumber}
         />
-        <CommunitySection
+        <CommunitySection.List
           title="자유"
           data={freeData.items}
           to={PATH.COMMUNITY_FREE}
           number={borderNumber}
         />
-        <CommunitySection
+        <CommunitySection.List
           title="QnA"
           data={QnAData.items}
           to={PATH.COMMUNITY_QNA}
           number={borderNumber}
         />
-        <CommunitySection
+        <CommunitySection.List
           title="졸업생"
           data={graduatedData.items}
           to={PATH.COMMUNITY_GRADUATED}
           number={borderNumber}
         />
-        <CommunitySection
+        <CommunitySection.List
           title="IT 뉴스"
           data={ITNewsData.items}
           to={PATH.COMMUNITY_NEWS}
           number={borderNumber}
         />
-        <CommunitySection
+        <CommunitySection.List
           title="채용 정보"
           data={hireData.items}
           to={PATH.COMMUNITY_HIRE}
           number={borderNumber}
         />
-      </CommunitySection.Wrapper>
+      </CommunitySection>
     </Content>
   );
 };
