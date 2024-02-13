@@ -1,25 +1,38 @@
+import { useCallback, useLayoutEffect } from 'react';
 import useModal from '@hooks/common/useModal';
 import { useGetModalStore } from '@store/modal';
-import Modal from '../Modal/Modal';
-import { useEffect } from 'react';
+import Modal from './Modal';
+
+const preventScroll = (e: WheelEvent | TouchEvent) => {
+  e.preventDefault();
+};
 
 const ModalContainer = () => {
   const { isOpen, title, content, accept, cancel } = useGetModalStore();
   const { closeModal } = useModal();
 
-  useEffect(() => {
-    const handleKeyDown = (event: KeyboardEvent) => {
+  const handleKeyDown = useCallback(
+    (event: KeyboardEvent) => {
       if (event.key === 'Escape') {
         closeModal();
       }
-    };
+    },
+    [closeModal],
+  );
 
+  useLayoutEffect(() => {
     if (isOpen) {
+      document.addEventListener('wheel', preventScroll, { passive: false });
+      document.addEventListener('touchmove', preventScroll, { passive: false });
       document.addEventListener('keydown', handleKeyDown);
     }
 
-    return () => document.removeEventListener('keydown', handleKeyDown);
-  }, [isOpen, closeModal]);
+    return () => {
+      document.removeEventListener('wheel', preventScroll);
+      document.removeEventListener('touchmove', preventScroll);
+      document.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [isOpen, handleKeyDown]);
 
   return (
     <div id="modal-container">
