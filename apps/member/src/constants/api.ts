@@ -5,6 +5,7 @@ export const REFRESH_TOKEN_KEY = 'REFRESH_TOKEN';
 
 export const END_POINT = {
   LOGIN_REISSUE: '/login/reissue',
+  ACCUSES: '/accuses',
   MY_PROFILE: '/members/my-profile',
   MY_BOARDS: '/boards/my-boards',
   MY_NOTIFICATION: '/notifications',
@@ -19,6 +20,11 @@ export const END_POINT = {
   MY_ACTIVITY: `/schedule/activity`,
   MAIN_SCHEDULE: `/schedule`,
   MAIN_ACTIVITY_PHOTO: `/activity-photos`,
+  COMMUNITY_LIST: `/boards/list`,
+  COMMUNITY_POST: (boardId: string) => `/boards/${boardId}`,
+  COMMENTS: (boardId: number) => `/comments/${boardId}`,
+  HIRE: (jobPostingId: number) => `/job-postings/${jobPostingId}`,
+  NEWS: (newsId: number) => `/news/${newsId}`,
 };
 
 export const HTTP_STATUS_CODE = {

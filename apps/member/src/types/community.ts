@@ -1,7 +1,21 @@
-export interface CommunityPostItem {
-  id: number;
+import { PostItem } from './post';
+
+export interface CommunityPostItem extends PostItem {}
+
+export interface CommunityWriteItem {
   category: string;
   title: string;
+  content: string;
+  wantAnnonymous: boolean;
+}
+
+export interface CommunityPostDetailItem {
+  id: number;
   writer: string;
-  createAt: string;
+  memberImageUrl: string;
+  title: string;
+  content: string;
+  likes: number;
+  hasLikeByMe: boolean;
+  createdAt: string;
 }
