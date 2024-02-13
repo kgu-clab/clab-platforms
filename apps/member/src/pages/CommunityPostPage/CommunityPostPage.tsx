@@ -31,7 +31,6 @@ const CommunityPostPage = () => {
   const { data: newData } = useNewsPost(Number(id));
   const { data: hireData } = useHirePost(Number(id));
   const { accusesData } = useAccuses();
-  // const { postMutate } = useCommunityPostMutation();
 
   const subTitle = getSubTitle(type) || ERROR_MESSAGE.default;
 
