@@ -1,8 +1,8 @@
 import { API_BASE_URL, END_POINT } from '@constants/api';
-import type { AccusesItem } from '@type/accuses';
+import type { AccusesType } from '@type/accuses';
 import { createPath, getAccessToken } from '@utils/api';
 
-export const postAccuses = async (body: AccusesItem) => {
+export const postAccuses = async (body: AccusesType) => {
   const accessToken = getAccessToken();
 
   const { data } = await fetch(createPath(API_BASE_URL, END_POINT.ACCUSES), {

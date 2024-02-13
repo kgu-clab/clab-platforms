@@ -1,4 +1,4 @@
-export interface AccusesItem {
+export interface AccusesType {
   targetType: string;
   targetId: number;
   reason: string;
