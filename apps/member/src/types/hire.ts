@@ -1,14 +1,11 @@
-export interface HireItem {
-  id?: number;
-  title: string;
+import { PostItem } from './post';
+
+export interface HireItem extends PostItem {
   careerLevel?: string;
   employmentType?: string;
   companyName?: string;
   recruitmentPeriod: string;
   jobPostingUrl: string;
-  category?: string;
-  createdAt?: string;
-  writer?: string;
   memberImageUrl?: string;
   content: string;
 }

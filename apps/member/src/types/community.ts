@@ -1,10 +1,6 @@
-export interface CommunityPostItem {
-  id: number;
-  category?: string;
-  title: string;
-  writer: string;
-  createdAt: string;
-}
+import { PostItem } from './post';
+
+export interface CommunityPostItem extends PostItem {}
 
 export interface CommunityWriteItem {
   category: string;
