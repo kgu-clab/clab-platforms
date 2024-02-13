@@ -1,4 +1,4 @@
-import { useModalStore } from '@store/modal';
+import { useSetModalStore } from '@store/modal';
 
 interface OpenModalProps {
   title?: string;
@@ -14,7 +14,7 @@ interface OpenModalProps {
 }
 
 const useModal = () => {
-  const [, setModal] = useModalStore();
+  const setModal = useSetModalStore();
 
   const openModal = ({
     title = 'C-Lab PLAY',

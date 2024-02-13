@@ -3,7 +3,6 @@ import useModal from '@hooks/common/useModal';
 import classNames from 'classnames';
 
 interface ModalProps {
-  onClick?: () => void;
   children: ReactNode;
 }
 
@@ -18,7 +17,7 @@ interface ModalButtonProps {
   onClick?: () => void;
 }
 
-const Modal = ({ children, onClick }: ModalProps) => {
+const Modal = ({ children }: ModalProps) => {
   const { closeModal } = useModal();
 
   return (
@@ -29,13 +28,13 @@ const Modal = ({ children, onClick }: ModalProps) => {
       role="dialog"
     >
       <div className="flex items-center justify-center min-h-screen px-5">
-        <div className="fixed inset-0 transition-opacity">
+        <div className="fixed inset-0">
           <div
-            className="absolute inset-0 bg-gray-500 opacity-75"
-            onClick={onClick || closeModal}
+            className="absolute inset-0 bg-gray-600/50"
+            onClick={closeModal}
           ></div>
         </div>
-        <div className="inline-block w-full bg-white rounded-lg text-center sm:text-left overflow-hidden shadow-lg transform transition-all sm:max-w-lg">
+        <div className="inline-block w-full bg-white rounded-lg text-center sm:text-left overflow-hidden shadow-lg transform sm:max-w-lg">
           {children}
         </div>
       </div>
