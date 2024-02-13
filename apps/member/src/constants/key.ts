@@ -19,4 +19,6 @@ export const QUERY_KEY = {
   COMMUNITY: 'Community',
   ACCUSES: 'Accuses',
   COMMENTS: 'Comments',
+  HIRE: 'Hire',
+  NEWS: 'News',
 };

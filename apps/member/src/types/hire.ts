@@ -9,4 +9,6 @@ export interface HireItem {
   category?: string;
   createdAt?: string;
   writer?: string;
+  memberImageUrl?: string;
+  content: string;
 }

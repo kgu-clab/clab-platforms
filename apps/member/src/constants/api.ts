@@ -23,6 +23,8 @@ export const END_POINT = {
   COMMUNITY_LIST: `/boards/list`,
   COMMUNITY_POST: (boardId: string) => `/boards/${boardId}`,
   COMMENTS: (boardId: number) => `/comments/${boardId}`,
+  HIRE: (jobPostingId: number) => `/job-postings/${jobPostingId}`,
+  NEWS: (newsId: number) => `/news/${newsId}`,
 };
 
 export const HTTP_STATUS_CODE = {

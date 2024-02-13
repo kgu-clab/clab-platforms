@@ -9,6 +9,9 @@ import { ERROR_MESSAGE } from '@constants/message';
 import { useCommunityPost } from '@hooks/queries/useCommunityPost';
 import { useAccuses } from '@hooks/queries/useAccuses';
 import { getPokemonImage } from '@mocks/mocks';
+import { useHirePost } from '@hooks/queries/useHirePost';
+import { useNewsPost } from '@hooks/queries/useNewsPost';
+import HireContentSection from '@components/community/HireContentSection/HireContentSection';
 
 const getSubTitle = (type = 'error'): string => {
   return {
@@ -25,6 +28,8 @@ const getSubTitle = (type = 'error'): string => {
 const CommunityPostPage = () => {
   const { type, id } = useParams<{ type: string; id: string }>();
   const { data: postData } = useCommunityPost(id);
+  const { data: newData } = useNewsPost(Number(id));
+  const { data: hireData } = useHirePost(Number(id));
   const { accusesData } = useAccuses();
   // const { postMutate } = useCommunityPostMutation();
 
@@ -44,31 +49,58 @@ const CommunityPostPage = () => {
     }
   };
 
+  let communityData;
+  switch (type) {
+    case 'notice':
+    case 'free':
+    case 'qna':
+    case 'graduated':
+      communityData = postData;
+      break;
+    case 'news':
+      communityData = newData;
+      break;
+    case 'hire':
+      communityData = hireData;
+      break;
+    default:
+      communityData = null;
+      break;
+  }
+
   return (
     <Content>
       <Header title={['커뮤니티', subTitle]} />
       <Section>
-        <Post>
-          <Post.Head
-            title={postData.title}
-            src={
-              postData.memberImageUrl
-                ? postData.memberImageUrl
-                : getPokemonImage()
-            }
-            writer={postData.writer}
-            createAt={postData.createdAt}
-          />
-          <Post.Body>{postData.content}</Post.Body>
-          <Post.Footer>
-            <Button onClick={onClickAccuses} size="sm" color="red">
-              신고
-            </Button>
-            <Button size="sm">수정</Button>
-          </Post.Footer>
-        </Post>
+        {communityData && (
+          <Post>
+            <Post.Head
+              title={communityData.title}
+              src={
+                communityData.memberImageUrl
+                  ? communityData.memberImageUrl
+                  : getPokemonImage()
+              }
+              writer={communityData.writer ? communityData.writer : ''}
+              createAt={communityData.createdAt ? communityData.createdAt : ''}
+            />
+            {type === 'hire' ? (
+              <HireContentSection id={Number(id)} />
+            ) : (
+              <Post.Body>{communityData.content}</Post.Body>
+            )}
+            <Post.Footer>
+              <Button onClick={onClickAccuses} size="sm" color="red">
+                신고
+              </Button>
+              <Button size="sm">수정</Button>
+            </Post.Footer>
+          </Post>
+        )}
       </Section>
-      {id && <PostCommentSection id={Number(id)} />}
+      {id && type != 'news' && type != 'hire' && (
+        <PostCommentSection id={Number(id)} />
+      )}
     </Content>
   );
 };

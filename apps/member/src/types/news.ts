@@ -8,4 +8,5 @@ export interface NewsItem {
   date: string;
   createdAt?: string;
   writer?: string;
+  memberImageUrl?: string;
 }
