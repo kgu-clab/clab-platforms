@@ -1,11 +1,6 @@
 import { BaseResponse, PaginationType } from '@type/api';
 import { server } from './server';
-import {
-  createCommunityPagination,
-  createPagination,
-  createPath,
-  getAccessToken,
-} from '@utils/api';
+import { createCommonPagination, createPath, getAccessToken } from '@utils/api';
 import { API_BASE_URL, END_POINT } from '@constants/api';
 import type {
   CommunityPostDetailItem,
@@ -24,8 +19,9 @@ export const getMyCommunity = async (
   size: number,
   category: string,
 ) => {
+  const params = { page, size };
   const { data } = await server.get<PaginationType<CommunityPostItem>>({
-    url: createPagination(END_POINT.MY_COMMUNITY, page, size),
+    url: createCommonPagination(END_POINT.MY_COMMUNITY, params),
   });
 
   const categoryPost = data.items.filter((post) => post.category === category);
@@ -38,26 +34,13 @@ export const getCommunityList = async (
   page: number,
   size: number,
 ) => {
+  const params = { category, page, size };
   const { data } = await server.get<PaginationType<CommunityPostItem>>({
-    url: createCommunityPagination(
-      END_POINT.COMMUNITY_LIST,
-      category,
-      page,
-      size,
-    ),
+    url: createCommonPagination(END_POINT.COMMUNITY_LIST, params),
   });
 
   return data;
 };
-
-// export const postCommunityWrite = async (body: CommunityWriteItem) => {
-//   const { data } = await server.post<string, BaseResponse<number>>({
-//     url: END_POINT.MY_COMMUNITY,
-//     body: JSON.stringify(body),
-//   });
-
-//   return data;
-// };
 
 export const postCommunityWrite = async (body: CommunityWriteItem) => {
   const accessToken = getAccessToken();

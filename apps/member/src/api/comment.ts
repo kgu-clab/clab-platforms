@@ -1,11 +1,6 @@
 import { PaginationType } from '@type/api';
 import { server } from './server';
-import {
-  createCommentsPagination,
-  createPagination,
-  createPath,
-  getAccessToken,
-} from '@utils/api';
+import { createCommonPagination, createPath, getAccessToken } from '@utils/api';
 import { API_BASE_URL, END_POINT } from '@constants/api';
 import type {
   CommentItem,
@@ -21,8 +16,9 @@ interface commentWriteArgs {
 
 // 나의 댓글 조회
 export const getMyComments = async (page: number, size: number) => {
+  const params = { page, size };
   const { data } = await server.get<PaginationType<CommentItem>>({
-    url: createPagination(END_POINT.MY_COMMENTS, page, size),
+    url: createCommonPagination(END_POINT.MY_COMMENTS, params),
   });
 
   return data;
@@ -33,8 +29,9 @@ export const getCommentList = async (
   page: number,
   size: number,
 ) => {
+  const params = { id, page, size };
   const { data } = await server.get<PaginationType<CommentListItem>>({
-    url: createCommentsPagination(END_POINT.COMMENTS(id), id, page, size),
+    url: createCommonPagination(END_POINT.COMMENTS(id), params),
   });
   return data;
 };
@@ -66,26 +63,3 @@ export const postCommentWrite = async ({
 
   return data;
 };
-
-// export const postCommentWrite = async ({
-//   parentId,
-//   boardId,
-//   body,
-// }: commentWriteArgs) => {
-//   const jsonRequestBody = JSON.stringify(body);
-//   let url;
-//   if (parentId) {
-//     url = createRecommentsWrtiePagination(
-//       END_POINT.COMMENTS(boardId),
-//       parentId,
-//       boardId,
-//     );
-//   } else {
-//     url = createCommentsWrtiePagination(END_POINT.COMMENTS(boardId), boardId);
-//   }
-//   const { data } = await server.post<string, BaseResponse<number>>({
-//     url: url,
-//     body: jsonRequestBody,
-//   });
-//   return data;
-// };
