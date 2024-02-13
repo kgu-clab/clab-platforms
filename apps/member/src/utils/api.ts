@@ -12,31 +12,19 @@ export const createPath = (...path: Array<string | number>): string => {
     .replace(/([^:])\/\/+/g, '$1/');
 };
 
-export const createPagination = (
+export const createCommonPagination = (
   endpoint: string,
-  page: number,
-  size: number,
+  params: Record<string, string | number | boolean>,
 ) => {
-  return `${endpoint}?page=${page}&size=${size}`;
-};
-
-export const createBirthdayPagination = (
-  endpoint: string,
-  month: number,
-  page: number,
-  size: number,
-) => {
-  return `${endpoint}?month=${month}&page=${page}&size=${size}`;
-};
-
-export const createSchedulePagination = (
-  endpoint: string,
-  startDateTime: string,
-  endDateTime: string,
-  page: number,
-  size: number,
-) => {
-  return `${endpoint}?startDateTime=${startDateTime}&endDateTime=${endDateTime}&page=${page}&size=${size}`;
+  let url = `${endpoint}?`;
+  Object.keys(params).forEach((key, index) => {
+    const value = params[key];
+    if (index !== 0) {
+      url += '&';
+    }
+    url += `${key}=${encodeURIComponent(value)}`;
+  });
+  return url;
 };
 
 export const getAccessToken = () => {

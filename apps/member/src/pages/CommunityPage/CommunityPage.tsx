@@ -4,18 +4,19 @@ import { Button } from '@clab/design-system';
 import { PATH } from '@constants/path';
 import { useNavigate } from 'react-router-dom';
 import CommunitySection from '@components/main/CommunitySection/CommunitySection';
-import {
-  freeBoardList,
-  graduatedBoardList,
-  hireBoardList,
-  itNewsBoardList,
-  noticeBoardList,
-  qnaBoardList,
-} from '@mocks/mocks';
+import { useCommunityList } from '@hooks/queries/useCommunityList';
+import { useHire } from '@hooks/queries/useHire';
+import { useNews } from '@hooks/queries/useNews';
 
 const CommunityPage = () => {
   const navigate = useNavigate();
   const borderNumber = 8;
+  const { data: noticeData } = useCommunityList('공지사항', 0, 6);
+  const { data: freeData } = useCommunityList('자유', 0, 6);
+  const { data: QnAData } = useCommunityList('QnA', 0, 6);
+  const { data: graduatedData } = useCommunityList('졸업생', 0, 6);
+  const { data: ITNewsData } = useNews(0, 6);
+  const { data: hireData } = useHire(0, 6);
 
   return (
     <Content>
@@ -27,37 +28,37 @@ const CommunityPage = () => {
       <CommunitySection>
         <CommunitySection.List
           title="공지사항"
-          data={noticeBoardList}
+          data={noticeData.items}
           to={PATH.COMMUNITY_NOTICE}
           number={borderNumber}
         />
         <CommunitySection.List
           title="자유"
-          data={freeBoardList}
+          data={freeData.items}
           to={PATH.COMMUNITY_FREE}
           number={borderNumber}
         />
         <CommunitySection.List
           title="QnA"
-          data={qnaBoardList}
+          data={QnAData.items}
           to={PATH.COMMUNITY_QNA}
           number={borderNumber}
         />
         <CommunitySection.List
           title="졸업생"
-          data={graduatedBoardList}
+          data={graduatedData.items}
           to={PATH.COMMUNITY_GRADUATED}
           number={borderNumber}
         />
         <CommunitySection.List
           title="IT 뉴스"
-          data={itNewsBoardList}
+          data={ITNewsData.items}
           to={PATH.COMMUNITY_NEWS}
           number={borderNumber}
         />
         <CommunitySection.List
           title="채용 정보"
-          data={hireBoardList}
+          data={hireData.items}
           to={PATH.COMMUNITY_HIRE}
           number={borderNumber}
         />

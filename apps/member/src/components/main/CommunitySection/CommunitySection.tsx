@@ -36,7 +36,7 @@ CommunitySection.List = ({ title, to, data }: CommunitySectionListProps) => {
           <ListButton key={index} to="">
             <p className="w-full truncate pr-4">{data.title}</p>
             <p className="text-clab-main-light">
-              {data.createAt && toYYMMDD(data.createAt)}
+              {data.createdAt ? toYYMMDD(data.createdAt) : ''}
             </p>
           </ListButton>
         ))}
