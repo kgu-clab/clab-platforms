@@ -13,8 +13,11 @@ import {
   isCommunityCategoryType,
   isHireItem,
 } from '@utils/community';
-import type { CommunityCategoryType } from '@type/community';
 import { usePosts } from '@hooks/queries/usePosts';
+import { useState } from 'react';
+import Textarea from '@components/common/Textarea/Textarea';
+import useBoardModifyMutation from '@hooks/queries/useBoardModifyMutation';
+import type { CommunityCategoryType } from '@type/community';
 
 const CommunityPostPage = () => {
   const { type, id } = useParams<{ type: CommunityCategoryType; id: string }>();
@@ -25,8 +28,11 @@ const CommunityPostPage = () => {
 
   const { data } = usePosts(type, id);
   const { accusesMutate } = useAccusesMutation();
-
+  const { boardModifyMutate } = useBoardModifyMutation();
   const { openModal } = useModal();
+
+  const [isEditMode, setIsEditMode] = useState(false);
+  const [contents, setContents] = useState<string>(data.content || '');
 
   const subTitle = categoryToTitle(type);
 
@@ -48,6 +54,23 @@ const CommunityPostPage = () => {
     });
   };
 
+  const onClickModify = () => {
+    if (isEditMode) {
+      // 수정 상태에서 저장 버튼을 누르면 수정된 내용을 저장한다.
+      boardModifyMutate({
+        id: id,
+        body: {
+          category: subTitle,
+          title: data.title,
+          content: contents,
+          wantAnonymous: false, // 수정할 경우 익명은 해제
+        },
+      });
+    }
+
+    setIsEditMode((prev) => !prev);
+  };
+
   return (
     <Content>
       <Header title={['커뮤니티', subTitle]} />
@@ -62,6 +85,12 @@ const CommunityPostPage = () => {
             />
             {isHireItem(data) ? (
               <HireContentSection {...data} />
+            ) : isEditMode ? (
+              <Textarea
+                value={contents}
+                placeholder={data.content}
+                onChange={(e) => setContents(e.target.value)}
+              />
             ) : (
               <Post.Body>{data.content}</Post.Body>
             )}
@@ -69,7 +98,13 @@ const CommunityPostPage = () => {
               <Button onClick={onClickAccuses} size="sm" color="red">
                 신고
               </Button>
-              <Button size="sm">수정</Button>
+              <Button
+                size="sm"
+                color={isEditMode ? 'blue' : 'white'}
+                onClick={onClickModify}
+              >
+                {isEditMode ? '저장' : '수정'}
+              </Button>
             </Post.Footer>
           </Post>
         )}
