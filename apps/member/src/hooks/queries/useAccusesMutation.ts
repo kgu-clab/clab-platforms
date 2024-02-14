@@ -2,15 +2,17 @@ import { postAccuses } from '@api/accuse';
 import { QUERY_KEY } from '@constants/key';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
-export const useAccuses = () => {
+export const useAccusesMutation = () => {
   const queryClient = useQueryClient();
 
   const AccusesPost = useMutation({
     mutationFn: postAccuses,
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: [QUERY_KEY.ACCUSES] });
+    onSuccess: (boardId) => {
+      queryClient.invalidateQueries({
+        queryKey: [QUERY_KEY.COMMUNITY, boardId],
+      });
     },
   });
 
-  return { accusesData: AccusesPost.mutate };
+  return { accusesMutate: AccusesPost.mutate };
 };
