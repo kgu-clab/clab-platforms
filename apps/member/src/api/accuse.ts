@@ -1,22 +1,13 @@
-import { API_BASE_URL, END_POINT } from '@constants/api';
+import { END_POINT } from '@constants/api';
+import { server } from './server';
+import { BaseResponse } from '@type/api';
 import type { AccusesType } from '@type/accuses';
-import { createPath, getAccessToken } from '@utils/api';
 
+// 신고하기
 export const postAccuses = async (body: AccusesType) => {
-  const accessToken = getAccessToken();
-
-  const { data } = await fetch(createPath(API_BASE_URL, END_POINT.ACCUSES), {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${accessToken}`,
-    },
-    body: JSON.stringify(body),
-  }).then((response) => {
-    if (!response.ok) {
-      throw new Error('Network response was not ok');
-    }
-    return response.json();
+  const { data } = await server.post<AccusesType, BaseResponse<number>>({
+    url: END_POINT.ACCUSES,
+    body,
   });
 
   return data;

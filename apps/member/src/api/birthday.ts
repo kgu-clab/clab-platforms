@@ -14,5 +14,6 @@ export const getBirthday = async (
   const { data } = await server.get<PaginationType<MemberType>>({
     url: createCommonPagination(END_POINT.MY_BIRTHDAY, params),
   });
+
   return data;
 };

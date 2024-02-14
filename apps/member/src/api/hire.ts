@@ -14,9 +14,11 @@ export const getMyHire = async (page: number, size: number) => {
   return data;
 };
 
+// 채용 공고 상세 조회
 export const getHirePost = async (id: number) => {
   const { data } = await server.get<BaseResponse<HireItem>>({
     url: END_POINT.HIRE(id),
   });
+
   return data;
 };

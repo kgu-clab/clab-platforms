@@ -10,6 +10,6 @@ export const getMyBooks = async (page: number, size: number, id: string) => {
   const { data } = await server.get<PaginationType<BookItem>>({
     url: createCommonPagination(END_POINT.BOOK_LIST, params),
   });
-  const myLoanBooks = data.items.filter((book) => book.borrowerId === id);
-  return myLoanBooks;
+
+  return data.items.filter((book) => book.borrowerId === id);
 };
