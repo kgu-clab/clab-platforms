@@ -5,7 +5,7 @@ import Share from '../Share/Share';
 
 interface PostHeaderProps {
   title: string;
-  src: string;
+  src?: string;
   writer: string;
   createAt: string;
 }
