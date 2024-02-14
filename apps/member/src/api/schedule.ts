@@ -15,15 +15,19 @@ export const getSchedule = async (
   const { data } = await server.get<PaginationType<ScheduleItem>>({
     url: createCommonPagination(END_POINT.MAIN_SCHEDULE, params),
   });
+
   return data;
 };
 
 // 일정 추가
-export const postSchedule = async (requestBody: ScheduleRegisterItem) => {
-  const jsonRequestBody = JSON.stringify(requestBody);
-  const { data } = await server.post<string, BaseResponse<number>>({
+export const postSchedule = async (body: ScheduleRegisterItem) => {
+  const { data } = await server.post<
+    ScheduleRegisterItem,
+    BaseResponse<number>
+  >({
     url: END_POINT.MAIN_SCHEDULE,
-    body: jsonRequestBody,
+    body,
   });
+
   return data;
 };

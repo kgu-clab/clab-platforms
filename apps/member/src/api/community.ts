@@ -1,7 +1,7 @@
 import { BaseResponse, PaginationType } from '@type/api';
 import { server } from './server';
-import { createCommonPagination, createPath, getAccessToken } from '@utils/api';
-import { API_BASE_URL, END_POINT } from '@constants/api';
+import { createCommonPagination } from '@utils/api';
+import { END_POINT } from '@constants/api';
 import type {
   CommunityPostDetailItem,
   CommunityPostItem,
@@ -24,11 +24,10 @@ export const getMyCommunity = async (
     url: createCommonPagination(END_POINT.MY_COMMUNITY, params),
   });
 
-  const categoryPost = data.items.filter((post) => post.category === category);
-
-  return categoryPost;
+  return data.items.filter((post) => post.category === category);
 };
 
+// 커뮤니티 게시글 카테고리별 조회
 export const getCommunityList = async (
   category: string,
   page: number,
@@ -42,29 +41,17 @@ export const getCommunityList = async (
   return data;
 };
 
+// 커뮤니티 게시글 작성
 export const postCommunityWrite = async (body: CommunityWriteItem) => {
-  const accessToken = getAccessToken();
-
-  const { data } = await fetch(
-    createPath(API_BASE_URL, END_POINT.MY_COMMUNITY),
-    {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${accessToken}`,
-      },
-      body: JSON.stringify(body),
-    },
-  ).then((response) => {
-    if (!response.ok) {
-      throw new Error('Network response was not ok');
-    }
-    return response.json();
+  const { data } = await server.post<CommunityWriteItem, BaseResponse>({
+    url: END_POINT.MY_COMMUNITY,
+    body,
   });
 
   return data;
 };
 
+// 커뮤니티 게시글 상세 조회
 export const getCommunityPost = async (id: string) => {
   const { data } = await server.get<BaseResponse<CommunityPostDetailItem>>({
     url: END_POINT.COMMUNITY_POST(id),
@@ -73,24 +60,11 @@ export const getCommunityPost = async (id: string) => {
   return data;
 };
 
+// 커뮤니티 게시글 수정
 export const patchCommunityPost = async ({ id, body }: PatchPostArgs) => {
-  const accessToken = getAccessToken();
-
-  const { data } = await fetch(
-    createPath(API_BASE_URL, END_POINT.COMMUNITY_POST(id)),
-    {
-      method: 'PATCH',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${accessToken}`,
-      },
-      body: JSON.stringify(body),
-    },
-  ).then((response) => {
-    if (!response.ok) {
-      throw new Error('Network response was not ok');
-    }
-    return response.json();
+  const { data } = await server.patch<CommunityWriteItem, BaseResponse>({
+    url: END_POINT.COMMUNITY_POST(id),
+    body,
   });
 
   return data;
