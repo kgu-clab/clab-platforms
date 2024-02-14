@@ -20,6 +20,16 @@ const ModalContainer = () => {
     [closeModal],
   );
 
+  const onClickAccept = () => {
+    accept?.onClick();
+    closeModal();
+  };
+
+  const onClickCancel = () => {
+    cancel?.onClick();
+    closeModal();
+  };
+
   useLayoutEffect(() => {
     if (isOpen) {
       document.addEventListener('wheel', preventScroll, { passive: false });
@@ -41,12 +51,12 @@ const ModalContainer = () => {
           <Modal.Body title={title}>{content}</Modal.Body>
           <Modal.Footer>
             {accept && (
-              <Modal.Button color="sky" onClick={accept.onClick}>
+              <Modal.Button color="orange" onClick={onClickAccept}>
                 {accept.text}
               </Modal.Button>
             )}
             {cancel && (
-              <Modal.Button color="gray" onClick={cancel.onClick}>
+              <Modal.Button color="gray" onClick={onClickCancel}>
                 {cancel.text}
               </Modal.Button>
             )}
