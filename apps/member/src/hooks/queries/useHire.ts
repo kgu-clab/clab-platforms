@@ -4,7 +4,7 @@ import { useSuspenseQuery } from '@tanstack/react-query';
 
 export const useHire = (page = 0, size = 6) => {
   return useSuspenseQuery({
-    queryKey: [QUERY_KEY.MY_HIRE, page, size],
+    queryKey: [QUERY_KEY.HIRE, page, size],
     queryFn: () => getMyHire(page, size),
   });
 };

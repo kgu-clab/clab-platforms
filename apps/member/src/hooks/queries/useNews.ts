@@ -4,7 +4,7 @@ import { useSuspenseQuery } from '@tanstack/react-query';
 
 export const useNews = (page = 0, size = 4) => {
   return useSuspenseQuery({
-    queryKey: [QUERY_KEY.MY_NEWS, page, size],
+    queryKey: [QUERY_KEY.NEWS, page, size],
     queryFn: () => getNews(page, size),
   });
 };
