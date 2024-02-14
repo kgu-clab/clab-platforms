@@ -1,7 +1,7 @@
 import { BaseResponse, PaginationType } from '@type/api';
 import { server } from './server';
 import { createCommonPagination, createPath } from '@utils/api';
-import { API_BASE_URL, END_POINT } from '@constants/api';
+import { END_POINT } from '@constants/api';
 import type {
   CommentItem,
   CommentListItem,
@@ -10,7 +10,7 @@ import type {
 
 interface commentWriteArgs {
   parentId?: number;
-  boardId: number;
+  boardId: string;
   body: CommentWriteItem;
 }
 
@@ -26,7 +26,7 @@ export const getMyComments = async (page: number, size: number) => {
 
 // 댓글 목록 조회
 export const getCommentList = async (
-  id: number,
+  id: string,
   page: number,
   size: number,
 ) => {
@@ -44,7 +44,7 @@ export const postCommentWrite = async ({
   boardId,
   body,
 }: commentWriteArgs) => {
-  let url = createPath(API_BASE_URL, END_POINT.COMMENTS(boardId));
+  let url = createPath(END_POINT.COMMENTS(boardId));
   if (parentId) {
     url += `?parentId=${parentId}`;
   }

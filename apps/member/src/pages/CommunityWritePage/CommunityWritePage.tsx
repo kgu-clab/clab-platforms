@@ -1,3 +1,4 @@
+import { ChangeEvent, useState } from 'react';
 import { Button } from '@clab/design-system';
 import Content from '@components/common/Content/Content';
 import Header from '@components/common/Header/Header';
@@ -5,43 +6,38 @@ import Input from '@components/common/Input/Input';
 import Section from '@components/common/Section/Section';
 import Select from '@components/common/Select/Select';
 import Textarea from '@components/common/Textarea/Textarea';
-import { useCommunityWriteMutation } from '@hooks/queries/useCommunityWriteMutation';
-import { useCallback, useState } from 'react';
+import { useBoardWriteMutation } from '@hooks/queries/useBoardWriteMutation';
 
+// name이 category와 매치되어야 합니다.
 const selectOptions = [
-  { id: 1, name: '공지사항' },
-  { id: 2, name: '자유' },
-  { id: 3, name: 'QnA' },
-  { id: 4, name: '졸업생 게시판' },
+  { id: 1, name: '자유' },
+  { id: 2, name: 'QnA' },
+  { id: 3, name: '졸업생' },
 ];
 
 const CommunityWritePage = () => {
-  const { communityWriteMutate } = useCommunityWriteMutation();
+  const { boardWriteMutate } = useBoardWriteMutation();
+
   const [content, setContent] = useState({
     category: 0,
     title: '',
     content: '',
-    wantAnnonymous: false,
+    wantAnonymous: false,
   });
 
-  const handleContent = useCallback(
-    (
-      e: React.ChangeEvent<
-        HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
-      >,
-    ) => {
-      const value =
-        e.target.type === 'checkbox' ? !content.wantAnnonymous : e.target.value;
-      setContent((prev) => {
-        return { ...prev, [e.target.name]: value };
-      });
-    },
-    [],
-  );
+  const handleContent = (
+    e: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>,
+  ) => {
+    const value =
+      e.target.type === 'checkbox' ? !content.wantAnonymous : e.target.value;
+    setContent((prev) => {
+      return { ...prev, [e.target.name]: value };
+    });
+  };
 
   const onClickSubmit = () => {
-    const categoryName = selectOptions[content.category - 1].name;
-    communityWriteMutate({ ...content, category: categoryName });
+    const categoryName = selectOptions[content.category - 1]?.name;
+    boardWriteMutate({ ...content, category: categoryName });
   };
 
   return (
@@ -73,9 +69,9 @@ const CommunityWritePage = () => {
         />
         <div>
           <Input
-            name="wantAnnonymous"
+            name="wantAnonymous"
             type="checkbox"
-            value={String(content.wantAnnonymous)}
+            value={String(content.wantAnonymous)}
             onChange={handleContent}
           />
           <span className="pl-2">익명</span>

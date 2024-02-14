@@ -13,7 +13,7 @@ interface ImageProps {
 }
 
 const Image = ({
-  src = NOT_FOUND_IMG,
+  src,
   alt,
   width,
   height,
@@ -23,6 +23,8 @@ const Image = ({
 }: ImageProps) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
+
+  if (!src) src = NOT_FOUND_IMG;
 
   const _width = width ? width : 'w-full';
   const _height = height ? height : 'h-full';

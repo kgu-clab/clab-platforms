@@ -4,31 +4,39 @@ import Section from '@components/common/Section/Section';
 import { getPokemonImage } from '@mocks/mocks';
 import { useCommentList } from '@hooks/queries/useCommentList';
 import CommentInput from '@components/common/CommentInput/CommentInput';
-import { useAccuses } from '@hooks/queries/useAccuses';
+import { useAccusesMutation } from '@hooks/queries/useAccusesMutation';
+import useModal from '@hooks/common/useModal';
 
 interface PostCommentSectionProps {
-  id: number;
+  id: string;
 }
 
 const PostCommentSection = ({ id }: PostCommentSectionProps) => {
   const [input, setInput] = useState<string>('');
   const [reInput, setReInput] = useState<string[]>([]);
   const [checkReComment, setCheckReComment] = useState<boolean[]>([false]);
-  const { data: commentData } = useCommentList(id, 0, 20);
-  const { accusesData } = useAccuses();
 
-  const onClickReport = (commentId: number) => {
-    const info = {
-      targetType: 'COMMENT',
-      targetId: commentId,
-      reason: '부적절한 댓글입니다.',
-    };
-    if (window.confirm('신고하시겠습니까?')) {
-      accusesData(info);
-      alert('신고가 완료되었습니다.');
-    } else {
-      alert('취소되었습니다.');
-    }
+  const { openModal } = useModal();
+
+  const { data } = useCommentList(id);
+  const { accusesMutate } = useAccusesMutation();
+
+  const onClickReport = async (commentId: number) => {
+    openModal({
+      title: '🚨 신고하기',
+      content:
+        '댓글에 신고 횟수가 많아지면 운영진이 해당 댓글을 검토합니다.\n정말 해당 댓글을 신고하시겠습니까?',
+      accept: {
+        text: '신고하기',
+        onClick: () => {
+          accusesMutate({
+            targetType: 'COMMENT',
+            targetId: commentId,
+            reason: '부적절한 댓글입니다.',
+          });
+        },
+      },
+    });
   };
 
   const onClickReComment = (commentIndex: number) => {
@@ -38,11 +46,12 @@ const PostCommentSection = ({ id }: PostCommentSectionProps) => {
       return updatedCheckReComment;
     });
   };
-  const inputChange = (e: string) => {
+
+  const handleInput = (e: string) => {
     setInput(e);
   };
 
-  const reInputChange = (commentIndex: number, value: string) => {
+  const handleReInput = (commentIndex: number, value: string) => {
     setReInput((prevReInput) => {
       const updatedReInput = [...prevReInput];
       updatedReInput[commentIndex] = value;
@@ -53,16 +62,14 @@ const PostCommentSection = ({ id }: PostCommentSectionProps) => {
   return (
     <Section>
       <div className="space-y-4">
-        <h3 className="text-lg font-bold">
-          댓글 {commentData?.items?.length ?? 0}
-        </h3>
+        <h3 className="text-lg font-bold">댓글 {data?.items?.length ?? 0}</h3>
         <CommentInput
           id={id}
           value={input}
-          onChange={(e) => inputChange(e.target.value)}
+          onChange={(e) => handleInput(e.target.value)}
         />
         <div className="space-y-4">
-          {commentData?.items?.map(
+          {data?.items?.map(
             ({ id: commentId, writer, writerImageUrl, content, children }) => (
               <div key={commentId} className="space-y-2">
                 {/* ROOT */}
@@ -98,7 +105,7 @@ const PostCommentSection = ({ id }: PostCommentSectionProps) => {
                       id={id}
                       parentId={commentId}
                       value={reInput[commentId] || ''}
-                      onChange={(e) => reInputChange(commentId, e.target.value)}
+                      onChange={(e) => handleReInput(commentId, e.target.value)}
                     />
                   )}
                 </div>

@@ -4,7 +4,7 @@ import { useSuspenseQuery } from '@tanstack/react-query';
 
 export const useBlog = (page = 0, size = 6) => {
   return useSuspenseQuery({
-    queryKey: [QUERY_KEY.MY_BLOG, page, size],
+    queryKey: [QUERY_KEY.BLOG, page, size],
     queryFn: () => getMyBlog(page, size),
   });
 };
