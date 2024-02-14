@@ -7,7 +7,7 @@ const today = dayjs();
 
 export const useBirthday = (month = today.get('M') + 1, page = 0, size = 6) => {
   return useSuspenseQuery({
-    queryKey: [QUERY_KEY.MY_BIRTHDAY, month, page, size],
+    queryKey: [QUERY_KEY.BIRTHDAY, month, page, size],
     queryFn: () => getBirthday(month, page, size),
   });
 };

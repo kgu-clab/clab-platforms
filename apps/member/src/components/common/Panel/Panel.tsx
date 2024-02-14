@@ -60,13 +60,12 @@ Panel.Header = ({
 };
 
 Panel.Body = ({ isOpen = true, children, className }: PanelBodyProps) => {
-  const openClass = isOpen ? 'opacity-100' : 'max-h-0 opacity-0';
+  const openStyle = isOpen ? 'opacity-100 m-4' : 'max-h-0 opacity-0';
   return (
     <div
       className={classNames(
         'overflow-hidden transition duration-500 ease-in-out',
-        { 'm-4': open },
-        openClass,
+        openStyle,
         className,
       )}
     >

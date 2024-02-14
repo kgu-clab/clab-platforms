@@ -7,5 +7,5 @@ export interface ProfileData {
   address: string;
   githubUrl: string;
   imageUrl: string;
-  createAt: string;
+  createdAt: string;
 }

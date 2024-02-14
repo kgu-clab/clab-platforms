@@ -1,6 +1,6 @@
 import { PaginationType } from '@type/api';
 import { server } from './server';
-import { createPagination, createSchedulePagination } from '@utils/api';
+import { createCommonPagination } from '@utils/api';
 import { END_POINT } from '@constants/api';
 import type { ActivityPhotoItem } from '@type/activity';
 import type { ScheduleItem } from '@type/schedule';
@@ -12,14 +12,14 @@ export const getMyActivities = async (
   page: number,
   size: number,
 ) => {
+  const params = {
+    startDateTime,
+    endDateTime,
+    page,
+    size,
+  };
   const { data } = await server.get<PaginationType<ScheduleItem>>({
-    url: createSchedulePagination(
-      END_POINT.MY_ACTIVITY,
-      startDateTime,
-      endDateTime,
-      page,
-      size,
-    ),
+    url: createCommonPagination(END_POINT.MY_ACTIVITY, params),
   });
 
   return data;
@@ -27,8 +27,9 @@ export const getMyActivities = async (
 
 //활동 사진 조회
 export const getActivityPhoto = async (page: number, size: number) => {
+  const params = { page, size };
   const { data } = await server.get<PaginationType<ActivityPhotoItem>>({
-    url: createPagination(END_POINT.MAIN_ACTIVITY_PHOTO, page, size),
+    url: createCommonPagination(END_POINT.MAIN_ACTIVITY_PHOTO, params),
   });
 
   return data;

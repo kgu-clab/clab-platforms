@@ -1,15 +1,6 @@
-type PathFinderId = string | number;
+import { createPath } from '@utils/api';
 
-export const createPath = (...paths: Array<PathFinderId>): string => {
-  return paths
-    .map((path) => {
-      if (typeof path === 'string' || typeof path === 'number') {
-        return path.toString();
-      }
-      throw new Error('Invalid path type');
-    })
-    .join('/');
-};
+export const NOT_FOUND_IMG = '/not_found.webp';
 
 export const PATH = {
   ROOT: '',
@@ -43,16 +34,14 @@ export const PATH = {
 };
 
 export const PATH_FINDER = {
-  NEWS_POST: (id: PathFinderId) => createPath(PATH.NEWS, id),
-  BLOG_POST: (id: PathFinderId) => createPath(PATH.BLOG, id),
-  COMMUNITY_POST: (sort: string, id: PathFinderId) =>
+  NEWS_POST: (id: string) => createPath(PATH.NEWS, id),
+  BLOG_POST: (id: string) => createPath(PATH.BLOG, id),
+  COMMUNITY_POST: (sort: string, id: string) =>
     createPath(PATH.COMMUNITY, sort, id),
-  LIBRARY_DETAIL: (id: PathFinderId) => createPath(PATH.LIBRARY, id),
-  ACTIVITY_DETAIL: (id: PathFinderId) => createPath(PATH.ACTIVITY, id),
-  ACTIVITY_STUDENT: (id: PathFinderId) =>
-    createPath(PATH.ACTIVITY, id, 'student'),
-  ACTIVITY_NOTICE: (id: PathFinderId) =>
-    createPath(PATH.ACTIVITY, id, 'notice'),
-  ACTIVITY_ASSIGNMENT: (id: PathFinderId, assignmentId: PathFinderId) =>
+  LIBRARY_DETAIL: (id: string) => createPath(PATH.LIBRARY, id),
+  ACTIVITY_DETAIL: (id: string) => createPath(PATH.ACTIVITY, id),
+  ACTIVITY_STUDENT: (id: string) => createPath(PATH.ACTIVITY, id, 'student'),
+  ACTIVITY_NOTICE: (id: string) => createPath(PATH.ACTIVITY, id, 'notice'),
+  ACTIVITY_ASSIGNMENT: (id: string, assignmentId: string) =>
     createPath(PATH.ACTIVITY, id, assignmentId),
 };

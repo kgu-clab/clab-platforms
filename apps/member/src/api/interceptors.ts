@@ -1,9 +1,10 @@
 import { server } from './server';
-import { API_BASE_URL, END_POINT } from '@constants/api';
+import { API_BASE_URL, END_POINT, HTTP_STATUS_CODE } from '@constants/api';
 import type { Interceptor } from '@gwansikk/server-chain';
 import type { BaseResponse, TokenType } from '@type/api';
 import {
   authorization,
+  createPath,
   getAccessToken,
   getRefreshToken,
   removeTokens,
@@ -23,7 +24,7 @@ const retryRequest = async (
   return fetch(response.url, {
     method: method,
     headers: {
-      Authorization: `Bearer ${accessToken}`,
+      ...authorization(accessToken),
       'Content-Type': 'application/json',
     },
   });
@@ -32,7 +33,9 @@ const retryRequest = async (
 export const tokenHandler: Interceptor<Response> = async (response, method) => {
   const { status } = response;
 
-  if (status === 401) {
+  if (
+    [HTTP_STATUS_CODE.UNAUTHORIZED, HTTP_STATUS_CODE.FORBIDDEN].includes(status)
+  ) {
     const preRefreshToken = getRefreshToken();
     if (!preRefreshToken) return response;
 
@@ -44,19 +47,21 @@ export const tokenHandler: Interceptor<Response> = async (response, method) => {
       reissueLock = true;
     }
 
-    const tokenResponse = await fetch(
-      `${API_BASE_URL}${END_POINT.LOGIN_REISSUE}`,
+    const { success, data } = await fetch(
+      createPath(API_BASE_URL, END_POINT.LOGIN_REISSUE),
       {
         method: 'POST',
         headers: {
-          Authorization: `Bearer ${preRefreshToken}`,
+          ...authorization(preRefreshToken),
           'Content-Type': 'application/json',
         },
       },
-    );
-
-    const { success, data } =
-      (await tokenResponse.json()) as BaseResponse<TokenType>;
+    ).then(async (response) => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return (await response.json()) as BaseResponse<TokenType>;
+    });
 
     if (success === true) {
       const { accessToken, refreshToken } = data;

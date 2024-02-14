@@ -1,30 +1,30 @@
 import { ACCESS_TOKEN_KEY, REFRESH_TOKEN_KEY } from '@constants/api';
 
-export const createPagination = (
-  endpoint: string,
-  page: number,
-  size: number,
-) => {
-  return `${endpoint}?page=${page}&size=${size}`;
+export const createPath = (...path: Array<string | number>): string => {
+  return path
+    .map((path) => {
+      if (typeof path === 'string' || typeof path === 'number') {
+        return path.toString();
+      }
+      throw new Error('Invalid path type');
+    })
+    .join('/')
+    .replace(/([^:])\/\/+/g, '$1/');
 };
 
-export const createBirthdayPagination = (
+export const createCommonPagination = (
   endpoint: string,
-  month: number,
-  page: number,
-  size: number,
+  params: Record<string, string | number | boolean>,
 ) => {
-  return `${endpoint}?month=${month}&page=${page}&size=${size}`;
-};
-
-export const createSchedulePagination = (
-  endpoint: string,
-  startDateTime: string,
-  endDateTime: string,
-  page: number,
-  size: number,
-) => {
-  return `${endpoint}?startDateTime=${startDateTime}&endDateTime=${endDateTime}&page=${page}&size=${size}`;
+  let url = `${endpoint}?`;
+  Object.keys(params).forEach((key, index) => {
+    const value = params[key];
+    if (index !== 0) {
+      url += '&';
+    }
+    url += `${key}=${encodeURIComponent(value)}`;
+  });
+  return url;
 };
 
 export const getAccessToken = () => {
@@ -45,7 +45,7 @@ export const removeTokens = () => {
   sessionStorage.removeItem(REFRESH_TOKEN_KEY);
 };
 
-export const authorization = (token: string) => {
+export const authorization = (token: string | null) => {
   return {
     Authorization: `Bearer ${token}`,
   };

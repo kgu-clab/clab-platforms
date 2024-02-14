@@ -16,10 +16,10 @@ const tips = [
 interface ProfilePanelProps {
   name: string;
   image: string;
-  createAt: string;
+  createdAt: string;
 }
 
-const ProfilePanel = ({ name, image, createAt }: ProfilePanelProps) => {
+const ProfilePanel = ({ name, image, createdAt }: ProfilePanelProps) => {
   return (
     <Panel>
       <Panel.Body>
@@ -38,7 +38,7 @@ const ProfilePanel = ({ name, image, createAt }: ProfilePanelProps) => {
           <div className="flex flex-col justify-between">
             <p className="text-lg font-bold">반가워요! {name}님</p>
             <p className="text-sm font-semibold">
-              C-Lab과 함께한 지 {calculateDDay(createAt)}일 ❤️
+              C-Lab과 함께한 지 {calculateDDay(createdAt)}일 ❤️
             </p>
           </div>
         </div>

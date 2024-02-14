@@ -1,5 +1,6 @@
+import { SyntheticEvent, useState } from 'react';
 import classNames from 'classnames';
-import { useState } from 'react';
+import { NOT_FOUND_IMG } from '@constants/path';
 
 interface ImageProps {
   src?: string;
@@ -20,15 +21,16 @@ const Image = ({
   onClick,
   overflow,
 }: ImageProps) => {
-  const [imgSrc, setImgSrc] = useState(src);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
+
+  if (!src) src = NOT_FOUND_IMG;
 
   const _width = width ? width : 'w-full';
   const _height = height ? height : 'h-full';
 
-  const handleError = () => {
-    setImgSrc('/not_found.webp');
+  const handleError = (e: SyntheticEvent<HTMLImageElement>) => {
+    e.currentTarget.src = NOT_FOUND_IMG;
     setError(true);
     setLoading(false);
   };
@@ -45,7 +47,7 @@ const Image = ({
           'bg-gray-50': error,
           'cursor-pointer': onClick,
         })}
-        src={imgSrc}
+        src={src}
         alt={alt}
         onClick={onClick}
         onLoad={() => setLoading(false)}

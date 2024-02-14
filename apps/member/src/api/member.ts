@@ -12,14 +12,16 @@ export const getMyProfile = async () => {
   const { data } = await server.get<BaseResponse<ProfileData>>({
     url: END_POINT.MY_PROFILE,
   });
+
   return data;
 };
 
 // 내 정보 수정
 export const patchUserInfo = async ({ id, body }: PatchUserInfoArgs) => {
-  const { data } = await server.patch<ProfileData, BaseResponse<ProfileData>>({
+  const { data } = await server.patch<ProfileData, BaseResponse<string>>({
     url: END_POINT.MY_INFO_EDIT(id),
-    body: body,
+    body,
   });
+
   return data;
 };

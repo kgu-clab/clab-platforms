@@ -6,6 +6,10 @@ interface ImageBannerProps {
 }
 
 const ImageBanner = ({ data }: ImageBannerProps) => {
+  if (data.length === 0) {
+    return null;
+  }
+
   const { imageUrl, title, date } = data[0];
 
   return (
