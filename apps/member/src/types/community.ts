@@ -6,7 +6,7 @@ export interface CommunityWriteItem {
   category: string;
   title: string;
   content: string;
-  wantAnnonymous: boolean;
+  wantAnonymous: boolean;
 }
 
 export interface CommunityPostDetailItem {

@@ -1,3 +1,4 @@
+import { useCallback, useState } from 'react';
 import { Button } from '@clab/design-system';
 import Content from '@components/common/Content/Content';
 import Header from '@components/common/Header/Header';
@@ -6,7 +7,6 @@ import Section from '@components/common/Section/Section';
 import Select from '@components/common/Select/Select';
 import Textarea from '@components/common/Textarea/Textarea';
 import { useCommunityWriteMutation } from '@hooks/queries/useCommunityWriteMutation';
-import { useCallback, useState } from 'react';
 
 const selectOptions = [
   { id: 1, name: '공지사항' },
@@ -21,7 +21,7 @@ const CommunityWritePage = () => {
     category: 0,
     title: '',
     content: '',
-    wantAnnonymous: false,
+    wantAnonymous: false,
   });
 
   const handleContent = useCallback(
@@ -31,7 +31,7 @@ const CommunityWritePage = () => {
       >,
     ) => {
       const value =
-        e.target.type === 'checkbox' ? !content.wantAnnonymous : e.target.value;
+        e.target.type === 'checkbox' ? !content.wantAnonymous : e.target.value;
       setContent((prev) => {
         return { ...prev, [e.target.name]: value };
       });
@@ -75,7 +75,7 @@ const CommunityWritePage = () => {
           <Input
             name="wantAnnonymous"
             type="checkbox"
-            value={String(content.wantAnnonymous)}
+            value={String(content.wantAnonymous)}
             onChange={handleContent}
           />
           <span className="pl-2">익명</span>
