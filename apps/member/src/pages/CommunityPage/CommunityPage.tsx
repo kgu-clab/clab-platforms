@@ -4,17 +4,17 @@ import { Button } from '@clab/design-system';
 import { PATH } from '@constants/path';
 import { useNavigate } from 'react-router-dom';
 import CommunitySection from '@components/main/CommunitySection/CommunitySection';
-import { useCommunityList } from '@hooks/queries/useCommunityList';
+import { useBoards } from '@hooks/queries/useBoards';
 import { useHire } from '@hooks/queries/useHire';
 import { useNews } from '@hooks/queries/useNews';
 
 const CommunityPage = () => {
   const navigate = useNavigate();
 
-  const { data: noticeData } = useCommunityList('공지사항');
-  const { data: freeData } = useCommunityList('자유');
-  const { data: QnAData } = useCommunityList('QnA');
-  const { data: graduatedData } = useCommunityList('졸업생');
+  const { data: noticeData } = useBoards('notice');
+  const { data: freeData } = useBoards('free');
+  const { data: QnAData } = useBoards('qna');
+  const { data: graduatedData } = useBoards('graduated');
   const { data: newsData } = useNews();
   const { data: hireData } = useHire();
 
