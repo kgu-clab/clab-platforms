@@ -42,9 +42,15 @@ const BirthdayList = ({ data }: BirthdayListProps) => {
     <Section>
       <Section.Header title="생일자를 소개합니다" />
       <Section.Body className="flex overflow-scroll scrollbar-hide">
-        {data.map(({ id, ...props }) => (
-          <BirthdayCard key={id} id={id} {...props} />
-        ))}
+        {data.length === 0 ? (
+          <p className="text-gray-500 w-full text-center">
+            이번 달엔 생일자가 없어요!
+          </p>
+        ) : (
+          data.map(({ id, ...props }) => (
+            <BirthdayCard key={id} id={id} {...props} />
+          ))
+        )}
       </Section.Body>
     </Section>
   );
