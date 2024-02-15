@@ -24,6 +24,8 @@ export const END_POINT = {
   MY_ACTIVITY: `/schedule/activity`,
   MAIN_SCHEDULE: `/schedule`,
   MAIN_ACTIVITY_PHOTO: `/activity-photos`,
+  MEMBERSHIP_FEE: `/membership-fees`,
+  UPLOADEDFILE_MEMBERSHIP_FEE: `/files/membership-fee`,
   COMMENTS: (boardId: string) => `/comments/${boardId}`,
   HIRE: (jobPostingId: string) => `/job-postings/${jobPostingId}`,
   NEWS: (newsId: string) => `/news/${newsId}`,

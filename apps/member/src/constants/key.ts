@@ -22,4 +22,6 @@ export const QUERY_KEY = {
   SCHEDULE: 'Schedule',
   MAIN_ACTIVITY_PHOTO: 'MainActivityPhoto',
   COMMENTS: 'Comments',
+  MEMBERSHIP_FEE: 'MembershipFee',
+  UPLOADEDFILE: 'UploadedFile',
 };
