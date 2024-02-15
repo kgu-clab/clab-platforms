@@ -19,7 +19,7 @@ export const QUERY_KEY = {
   BLOG: 'Blog',
   HIRE: 'Hire',
   BIRTHDAY: 'Birthday',
-  MAIN_SCHEDULE: 'MainSchedule',
+  SCHEDULE: 'Schedule',
   MAIN_ACTIVITY_PHOTO: 'MainActivityPhoto',
   COMMENTS: 'Comments',
 };
