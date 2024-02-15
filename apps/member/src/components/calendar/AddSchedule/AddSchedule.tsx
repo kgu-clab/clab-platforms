@@ -55,7 +55,7 @@ const AddSchedule = () => {
         placeholder="설명을 입력해주세요."
         value={detail}
         onChange={onChangeInputs}
-      />{' '}
+      />
       <Input
         label="시작일"
         type="date"
@@ -63,7 +63,7 @@ const AddSchedule = () => {
         name="startDateTime"
         value={startDateTime}
         onChange={onChangeInputs}
-      />{' '}
+      />
       <Input
         label="마감일"
         type="date"

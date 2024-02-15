@@ -11,13 +11,12 @@ import { useBlog } from '@hooks/queries/useBlog';
 import { useHire } from '@hooks/queries/useHire';
 import { useBirthday } from '@hooks/queries/useBirthday';
 import { useActivityPicture } from '@hooks/queries/useActivityPicture';
-import { useMainSchedule } from '@hooks/queries/useSchedule';
+import { useSchedule } from '@hooks/queries/useSchedule';
 import { useBoards } from '@hooks/queries/useBoards';
 
 const MainPage = () => {
-  const { data: mainAlertData } = useMainSchedule();
+  const { data: mainAlertData } = useSchedule({});
   const { data: mainBannerData } = useActivityPicture();
-
   const { data: noticeData } = useBoards('notice');
   const { data: QnAData } = useBoards('qna');
   const { data: birthdayData } = useBirthday();
