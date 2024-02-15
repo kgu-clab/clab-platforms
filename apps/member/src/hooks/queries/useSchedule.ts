@@ -1,19 +1,28 @@
 import { getSchedule } from '@api/schedule';
 import { QUERY_KEY } from '@constants/key';
+import { DATE_FORMAT } from '@constants/state';
 import { useSuspenseQuery } from '@tanstack/react-query';
 import dayjs from 'dayjs';
 
-const today = dayjs().format('YYYY-MM-DDTHH:mm:ss.SSS');
-const endDay = dayjs().add(6, 'month').format('YYYY-MM-DDTHH:mm:ss.SSS');
+interface UseMainScheduleArgs {
+  start?: string;
+  end?: string;
+  page?: number;
+  size?: number;
+}
 
-export const useMainSchedule = (
-  startDateTime = String(today),
-  endDateTime = String(endDay),
+// 오늘 날짜와 3개월 후 날짜를 기본값으로 설정
+const defaultStartDate = dayjs().format(DATE_FORMAT.WITH_TIME);
+const defaultEndDate = dayjs().add(3, 'month').format(DATE_FORMAT.WITH_TIME);
+
+export const useSchedule = ({
+  start = defaultStartDate,
+  end = defaultEndDate,
   page = 0,
-  size = 5,
-) => {
+  size = 10,
+}: UseMainScheduleArgs) => {
   return useSuspenseQuery({
-    queryKey: [QUERY_KEY.MAIN_SCHEDULE, startDateTime, endDateTime, page, size],
-    queryFn: () => getSchedule(startDateTime, endDateTime, page, size),
+    queryKey: [QUERY_KEY.SCHEDULE, start, end, page, size],
+    queryFn: () => getSchedule(start, end, page, size),
   });
 };
