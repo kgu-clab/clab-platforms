@@ -1,7 +1,7 @@
-import { PaginationType } from '@type/api';
+import { BaseResponse, PaginationType } from '@type/api';
 import { server } from './server';
-import { createCommonPagination, createPath, getAccessToken } from '@utils/api';
-import { API_BASE_URL, END_POINT } from '@constants/api';
+import { createCommonPagination, createPath } from '@utils/api';
+import { END_POINT } from '@constants/api';
 import type {
   CommentItem,
   CommentListItem,
@@ -10,7 +10,7 @@ import type {
 
 interface commentWriteArgs {
   parentId?: number;
-  boardId: number;
+  boardId: string;
   body: CommentWriteItem;
 }
 
@@ -24,8 +24,9 @@ export const getMyComments = async (page: number, size: number) => {
   return data;
 };
 
+// 댓글 목록 조회
 export const getCommentList = async (
-  id: number,
+  id: string,
   page: number,
   size: number,
 ) => {
@@ -33,32 +34,24 @@ export const getCommentList = async (
   const { data } = await server.get<PaginationType<CommentListItem>>({
     url: createCommonPagination(END_POINT.COMMENTS(id), params),
   });
+
   return data;
 };
 
+// 댓글 작성
 export const postCommentWrite = async ({
   parentId,
   boardId,
   body,
 }: commentWriteArgs) => {
-  const accessToken = getAccessToken();
-  let url = createPath(API_BASE_URL, END_POINT.COMMENTS(boardId));
+  let url = createPath(END_POINT.COMMENTS(boardId));
   if (parentId) {
     url += `?parentId=${parentId}`;
   }
 
-  const { data } = await fetch(url, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${accessToken}`,
-    },
-    body: JSON.stringify(body),
-  }).then((response) => {
-    if (!response.ok) {
-      throw new Error('Network response was not ok');
-    }
-    return response.json();
+  const { data } = await server.post<CommentWriteItem, BaseResponse>({
+    url,
+    body,
   });
 
   return data;

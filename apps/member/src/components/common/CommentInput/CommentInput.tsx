@@ -4,7 +4,7 @@ import { Button, Input } from '@clab/design-system';
 import { useCommentWriteMutation } from '@hooks/queries/useCommentWriteMutation';
 
 interface CommentInputProps {
-  id: number;
+  id: string;
   value: string;
   onChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
   parentId?: number;
@@ -16,7 +16,7 @@ const CommentInput = ({ id, value, onChange, parentId }: CommentInputProps) => {
   const [anonymous, setAnonymous] = useState(false);
 
   const handleAnonymousToggle = () => {
-    setAnonymous(!anonymous);
+    setAnonymous((prev) => !prev);
   };
 
   const handleSubmit = () => {

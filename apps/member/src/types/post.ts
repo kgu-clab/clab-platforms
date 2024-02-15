@@ -1,7 +1,7 @@
 export interface PostItem {
-  id?: number;
+  id: number;
   category?: string;
   title: string;
-  writer?: string;
-  createdAt?: string;
+  writer: string;
+  createdAt: string;
 }

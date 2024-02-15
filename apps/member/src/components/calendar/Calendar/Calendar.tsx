@@ -1,67 +1,74 @@
 import dayjs from 'dayjs';
 import classNames from 'classnames';
 import CalendarSchedule from '../CalendarSchedule/CalendarSchedule';
-import { checkDate, monthDate } from './Calendar.utils';
-
-const now = dayjs();
+import { now, transformEvents } from '@utils/date';
+import { useSchedule } from '@hooks/queries/useSchedule';
+import { DATE_FORMAT } from '@constants/state';
 
 interface CalendarProps {
-  year: number;
-  month: number;
+  date: dayjs.Dayjs;
 }
 
-const Calendar = ({ year, month }: CalendarProps) => {
+const Calendar = ({ date }: CalendarProps) => {
   const dateElements = [];
-  const firstDay = dayjs(`${year}-${month}-01`).day();
-  let index = 0;
+  const year = date.year();
+  const month = date.month() + 1;
+  const prevDaysInMonth = date.subtract(1, 'month').daysInMonth();
+  const toDaysInMonth = date.daysInMonth();
 
-  const checkedDate = checkDate(year, month);
+  const { data } = useSchedule({
+    start: date.startOf('month').format(DATE_FORMAT.WITH_TIME),
+    end: date.endOf('month').format(DATE_FORMAT.WITH_TIME),
+  });
+
+  const events = transformEvents(data.items);
 
   //전 달 날짜
-  for (let i = firstDay - 1; i >= 0; i--) {
-    const prevMonthDate =
-      monthDate(checkedDate.checkedYear, checkedDate.checkedMonth) - i;
+  for (let i = date.day() - 1; i >= 0; i--) {
+    const day = date.subtract(1, 'month');
     dateElements.push(
       <div
-        key={index}
+        key={`${day.get('year')}-${day.get('month')}-${i}`}
         className="h-20 border p-1 text-end text-sm text-gray-400"
       >
-        <span>{prevMonthDate}</span>
+        <p>{prevDaysInMonth - i}</p>
       </div>,
     );
-    index++;
   }
 
   //이번 달 날짜
-  for (let i = 1; i <= monthDate(year, month); i++) {
-    const element = dayjs(`${year}-${month}-${i}`);
+  for (let i = 1; i <= toDaysInMonth; i++) {
+    const day = dayjs(`${year}-${month}-${i}`);
+    const element = day.format('YYYY-MM-DD');
+    const event = events[element];
     dateElements.push(
-      <div key={index} className="h-20 border p-1 text-end text-sm space-y-1">
-        <span
+      <div key={element} className="h-20 border p-1 text-end text-sm space-y-1">
+        <p
           className={classNames({
             'rounded-full bg-red-500 text-white':
-              element.format('YY-MM-DD') === now.format('YY-MM-DD'),
+              element === now().format('YY-MM-DD'),
           })}
         >
           {i}
-        </span>
-        <CalendarSchedule date={element} />
+        </p>
+        <CalendarSchedule {...event} />
       </div>,
     );
-    index++;
   }
 
+  const nextDaysInMonth = 7 - (dateElements.length % 7);
+
   //다음 달 날짜
-  for (let i = 1; index % 7 !== 0; i++) {
+  for (let i = 1; i <= nextDaysInMonth; i++) {
+    const day = date.add(1, 'month');
     dateElements.push(
       <div
-        key={index}
+        key={`${day.get('year')}-${day.get('month')}-${i}`}
         className="h-20 border p-1 text-end text-sm text-gray-400"
       >
-        <span>{i}</span>
+        <p>{i}</p>
       </div>,
     );
-    index++;
   }
 
   return dateElements;

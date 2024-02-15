@@ -12,7 +12,7 @@ interface ModalHeaderProps {
 }
 
 interface ModalButtonProps {
-  color: 'gray' | 'red' | 'sky';
+  color: 'gray' | 'red' | 'sky' | 'orange';
   children: ReactNode;
   onClick?: () => void;
 }
@@ -48,7 +48,7 @@ Modal.Body = ({ title, children }: ModalHeaderProps) => {
       <header>
         <h3 className="text-xl leading-6 font-semibold">{title}</h3>
       </header>
-      <main className="mt-2 break-keep min-h-20 text-gray-500 text-sm">
+      <main className="mt-2 break-keep min-h-20 text-gray-500 text-sm whitespace-pre-wrap">
         {children}
       </main>
     </div>
@@ -68,6 +68,8 @@ Modal.Button = ({ color, children, onClick }: ModalButtonProps) => {
     red: 'border-red-300 bg-red-100 text-red-500 hover:bg-red-200',
     sky: 'border-sky-300 bg-sky-100 text-sky-500 hover:bg-sky-200',
     gray: 'border-gray-300 bg-gray-100 text-gray-500 hover:bg-gray-200',
+    orange:
+      'border-orange-300 bg-orange-100 text-orange-500 hover:bg-orange-200',
   } as const;
 
   return (

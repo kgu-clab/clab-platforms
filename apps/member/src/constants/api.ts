@@ -5,14 +5,18 @@ export const REFRESH_TOKEN_KEY = 'REFRESH_TOKEN';
 
 export const END_POINT = {
   LOGIN_REISSUE: '/login/reissue',
-  ACCUSES: '/accuses',
+  // -- 마이페이지
   MY_PROFILE: '/members/my-profile',
   MY_BOARDS: '/boards/my-boards',
   MY_NOTIFICATION: '/notifications',
   MY_COMMENTS: '/comments/my-comments',
   MY_INFO_EDIT: (id: string) => `/members/${id}`,
+  // -- 커뮤니티
+  BOARDS: `/boards`,
+  BOARDS_LIST: `/boards/list`,
+  BOARDERS_ITEM: (boardId: string) => `/boards/${boardId}`,
+  ACCUSES: '/accuses',
   BOOK_LIST: `/books`,
-  MY_COMMUNITY: `/boards`,
   MY_NEWS: `/news`,
   MY_BLOG: `/blogs`,
   MY_HIRE: `/job-postings`,
@@ -20,13 +24,11 @@ export const END_POINT = {
   MY_ACTIVITY: `/schedule/activity`,
   MAIN_SCHEDULE: `/schedule`,
   MAIN_ACTIVITY_PHOTO: `/activity-photos`,
-  COMMUNITY_LIST: `/boards/list`,
-  COMMUNITY_POST: (boardId: string) => `/boards/${boardId}`,
-  COMMENTS: (boardId: number) => `/comments/${boardId}`,
-  HIRE: (jobPostingId: number) => `/job-postings/${jobPostingId}`,
-  NEWS: (newsId: number) => `/news/${newsId}`,
   MEMBERSHIP_FEE: `/membership-fees`,
   UPLOADEDFILE_MEMBERSHIP_FEE: `/files/membership-fee`,
+  COMMENTS: (boardId: string) => `/comments/${boardId}`,
+  HIRE: (jobPostingId: string) => `/job-postings/${jobPostingId}`,
+  NEWS: (newsId: string) => `/news/${newsId}`,
 };
 
 export const HTTP_STATUS_CODE = {
@@ -35,6 +37,7 @@ export const HTTP_STATUS_CODE = {
   NO_CONTENT: 204,
   BAD_REQUEST: 400,
   UNAUTHORIZED: 401,
+  FORBIDDEN: 403,
   NOT_FOUND: 404,
   CONTENT_TOO_LARGE: 413,
   INTERNAL_SERVER_ERROR: 500,

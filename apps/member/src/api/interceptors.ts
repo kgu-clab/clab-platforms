@@ -1,5 +1,5 @@
 import { server } from './server';
-import { API_BASE_URL, END_POINT } from '@constants/api';
+import { API_BASE_URL, END_POINT, HTTP_STATUS_CODE } from '@constants/api';
 import type { Interceptor } from '@gwansikk/server-chain';
 import type { BaseResponse, TokenType } from '@type/api';
 import {
@@ -33,7 +33,9 @@ const retryRequest = async (
 export const tokenHandler: Interceptor<Response> = async (response, method) => {
   const { status } = response;
 
-  if (status === 401 || status === 403) {
+  if (
+    [HTTP_STATUS_CODE.UNAUTHORIZED, HTTP_STATUS_CODE.FORBIDDEN].includes(status)
+  ) {
     const preRefreshToken = getRefreshToken();
     if (!preRefreshToken) return response;
 

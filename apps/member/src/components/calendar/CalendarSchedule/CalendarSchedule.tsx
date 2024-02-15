@@ -1,50 +1,37 @@
-import dayjs from 'dayjs';
-import { useMainSchedule } from '@hooks/queries/useSchedule';
+import useModal from '@hooks/common/useModal';
+import { formattedDate } from '@utils/date';
+import type { ScheduleItem } from '@type/schedule';
 
-interface CalendarScheduleProps {
-  date: dayjs.Dayjs;
-}
-
-const CalendarSchedule = ({ date }: CalendarScheduleProps) => {
-  const checkedDate = dayjs(date).startOf('day');
-  const { data: mySchedule } = useMainSchedule(
-    String(checkedDate.startOf('day').format('YYYY-MM-DDTHH:mm:ss.SSS')),
-    undefined,
-    0,
-    20,
-  );
+const CalendarSchedule = ({
+  title,
+  detail,
+  startDate,
+  endDate,
+}: ScheduleItem) => {
+  const { openModal } = useModal();
 
   const onClickSchedule = (detail: string, start: string, end: string) => {
-    alert(`${detail}\n${start} ~ ${end}`);
+    let date = `${formattedDate(start)} ~ ${formattedDate(end)}`;
+
+    if (start === end) {
+      // 시작일과 종료일이 같은 경우, 종료일은 표시하지 않는다.
+      date = `${formattedDate(start)}`;
+    }
+
+    openModal({
+      title: '📆 일정',
+      content: `내용: ${detail}\n일시: ${date}`,
+    });
   };
 
-  if (!mySchedule) {
-    return null;
-  }
-
-  return mySchedule.items
-    ? mySchedule.items.map(({ title, detail, startDate, endDate }, index) => {
-        const start = dayjs(startDate).startOf('day');
-        const end = dayjs(endDate).endOf('day');
-
-        if (
-          checkedDate.isSame(start) ||
-          checkedDate.isSame(end) ||
-          (checkedDate.isAfter(start) && checkedDate.isBefore(end))
-        ) {
-          return (
-            <p
-              key={index}
-              className="cursor-pointer text-xs border-l-2 border-red-500 hover:bg-gray-50"
-              onClick={() => onClickSchedule(detail, startDate, endDate)}
-            >
-              {title}
-            </p>
-          );
-        }
-        return null;
-      })
-    : null;
+  return (
+    <p
+      className="cursor-pointer text-xs border-l-2 border-red-500 hover:bg-gray-50"
+      onClick={() => onClickSchedule(detail, startDate, endDate)}
+    >
+      {title}
+    </p>
+  );
 };
 
 export default CalendarSchedule;
