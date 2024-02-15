@@ -1,5 +1,6 @@
 export const BOOK_STATE = {
-  OK: '대여 가능',
+  BORROWED: '대출중',
+  AVAILABLE: '대여가능',
 };
 
 export const DATE_FORMAT = {
