@@ -15,6 +15,8 @@ export const QUERY_KEY = {
   BORDER_FREE: 'BorderFREE',
   BORDER_QNA: 'BorderQNA',
   BORDER_GRADUATED: 'BorderGraduated',
+  BOOK: 'Book',
+  BOOK_DETAIL: 'BookDetail',
   NEWS: 'News',
   BLOG: 'Blog',
   HIRE: 'Hire',

@@ -14,9 +14,10 @@ export const END_POINT = {
   // -- 커뮤니티
   BOARDS: `/boards`,
   BOARDS_LIST: `/boards/list`,
-  BOARDERS_ITEM: (boardId: string) => `/boards/${boardId}`,
+  BOARDERS_ITEM: (id: string) => `/boards/${id}`,
   ACCUSES: '/accuses',
-  BOOK_LIST: `/books`,
+  BOOK: `/books`,
+  BOOK_DETAIL: (id: string) => `/books/${id}`,
   MY_NEWS: `/news`,
   MY_BLOG: `/blogs`,
   MY_HIRE: `/job-postings`,
@@ -24,7 +25,7 @@ export const END_POINT = {
   MY_ACTIVITY: `/schedule/activity`,
   MAIN_SCHEDULE: `/schedule`,
   MAIN_ACTIVITY_PHOTO: `/activity-photos`,
-  COMMENTS: (boardId: string) => `/comments/${boardId}`,
+  COMMENTS: (id: string) => `/comments/${id}`,
   HIRE: (jobPostingId: string) => `/job-postings/${jobPostingId}`,
   NEWS: (newsId: string) => `/news/${newsId}`,
 };

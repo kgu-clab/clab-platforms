@@ -1,12 +1,12 @@
 export interface BookItem {
   id: number;
-  borrowerId: string;
-  borrowerName: string;
+  borrowerId: string | null;
+  borrowerName: string | null;
   category: string;
   title: string;
   author: string;
   publisher: string;
   imageUrl: string;
   createdAt: string;
-  updateTime: string;
+  updateTime: string | null;
 }
