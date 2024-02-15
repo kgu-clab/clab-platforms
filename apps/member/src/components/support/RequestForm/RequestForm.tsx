@@ -1,46 +1,57 @@
 import { Button } from '@clab/design-system';
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, useRef, useState } from 'react';
 
 import { Input } from '@clab/design-system';
 import Section from '@components/common/Section/Section';
-
-interface InputProps {
-  name: string;
-  cost: string;
-  purpose: string;
-  url: string;
-}
+import { useMembershipFeeMutation } from '@hooks/queries/useMembershipFeeMutation';
+import { MembershipFeeType } from '@type/membershipFee';
 
 const RequestForm = () => {
-  const [input, setInput] = useState<InputProps>({
-    name: '',
-    cost: '',
-    url: '',
-    purpose: '',
+  const { membershipFeeMutate } = useMembershipFeeMutation();
+  const imageUploader = useRef<HTMLInputElement>(null);
+  const [input, setInput] = useState<MembershipFeeType>({
+    category: '',
+    amount: 0,
+    content: '',
   });
 
-  const { name, cost, purpose, url } = input;
+  const { category, amount, content } = input;
 
   const onChangeInputs = (e: ChangeEvent<HTMLInputElement>) => {
     setInput((prev) => ({
       ...prev,
-      [e.target.name]: e.target.value,
+      [e.target.name]:
+        e.target.name === 'amount'
+          ? parseFloat(e.target.value.replace(/,/g, ''))
+          : e.target.value,
     }));
   };
 
-  const addComma = (cost: string) => {
-    const returnString = cost
-      .replace(/,/g, '')
-      .replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  const addComma = (amount: number) => {
+    if (!amount) return '';
+    const returnString = String(amount).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
     return returnString;
   };
 
-  const onClickRequest = () => {
-    if (!name || !cost || !purpose || !cost || !url) {
+  const onClickRequest = async () => {
+    if (!category || !amount || !content) {
       alert('필수 입력 사항을 확인해주세요');
     } else {
-      alert('검토 후 안내드리겠습니다.');
+      console.log(imageUploader.current?.files);
+      if (imageUploader.current?.files?.length) {
+        console.log('checked');
+        const files = imageUploader.current?.files[0];
+        const formData = new FormData();
+        formData.append('multipartFile', files, encodeURIComponent(files.name));
+        membershipFeeMutate({ body: input, multipartFile: formData });
+        console.log('posted');
+      }
     }
+    setInput({
+      category: '',
+      amount: 0,
+      content: '',
+    });
   };
 
   return (
@@ -48,37 +59,37 @@ const RequestForm = () => {
       <Section.Header title="신청서" />
       <Section.Body className="mt-4 grid gap-2 md:grid-cols-2">
         <Input
-          id="name"
-          name="name"
-          label="품명"
-          placeholder="품명을 작성해주세요"
-          value={name}
+          id="category"
+          name="category"
+          label="분류"
+          placeholder="신청 분류를 작성해주세요"
+          value={category}
           onChange={onChangeInputs}
         />
         <Input
-          id="cost"
-          name="cost"
+          id="amount"
+          name="amount"
           label="금액"
           inputMode="numeric"
           placeholder="구매 금액을 작성해주세요"
-          value={addComma(cost) || cost}
+          value={addComma(amount)}
           onChange={onChangeInputs}
         />
         <Input
-          id="url"
-          name="url"
-          label="URL"
-          placeholder="구매한 사이트의 URL을 작성해주세요"
-          value={url}
-          onChange={onChangeInputs}
-        />
-        <Input
-          id="purpose"
-          name="purpose"
+          id="content"
+          name="content"
           label="사유"
           placeholder="요청 사유를 작성해주세요"
-          value={purpose}
+          value={content}
           onChange={onChangeInputs}
+        />
+        <Input
+          id="membershipFormUploader"
+          name="membershipFormUploader"
+          type="file"
+          label="증빙 자료"
+          ref={imageUploader}
+          className="border-none"
         />
       </Section.Body>
       <Button className="w-full mt-6" onClick={onClickRequest}>

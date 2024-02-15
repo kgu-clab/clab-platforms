@@ -25,6 +25,8 @@ export const END_POINT = {
   COMMENTS: (boardId: number) => `/comments/${boardId}`,
   HIRE: (jobPostingId: number) => `/job-postings/${jobPostingId}`,
   NEWS: (newsId: number) => `/news/${newsId}`,
+  MEMBERSHIP_FEE: `/membership-fees`,
+  UPLOADEDFILE_MEMBERSHIP_FEE: `/files/membership-fee`,
 };
 
 export const HTTP_STATUS_CODE = {

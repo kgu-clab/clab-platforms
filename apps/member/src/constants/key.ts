@@ -23,4 +23,6 @@ export const QUERY_KEY = {
   COMMENTS: 'Comments',
   HIRE: 'Hire',
   NEWS: 'News',
+  MEMBERSHIP_FEE: 'MembershipFee',
+  UPLOADEDFILE: 'UploadedFile',
 };
