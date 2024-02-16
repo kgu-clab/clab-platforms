@@ -5,12 +5,15 @@ import { PATH } from '@constants/path';
 import { useNavigate } from 'react-router-dom';
 import Section from '@components/common/Section/Section';
 import GroupCard from '@components/group/GroupCard/GroupCard';
-import groupList from '@mocks/data/groupList.json';
-
-const groupCount = groupList?.length || 0;
+import { useActivityGroupMemberByStatus } from '@hooks/queries/useActivityGroupMemberByStatus';
 
 const GroupPage = () => {
   const navigate = useNavigate();
+  const { data: groupData } = useActivityGroupMemberByStatus(
+    'PROGRESSING',
+    0,
+    20,
+  );
 
   return (
     <Content>
@@ -23,10 +26,18 @@ const GroupPage = () => {
         </Button>
       </Header>
       <Section>
-        <Section.Header title={`현재 진행중인 그룹 ${groupCount}`} />
+        <Section.Header
+          title={`현재 진행중인 그룹 ${groupData.items.length}`}
+        />
         <Section.Body className="space-y-4">
-          {groupList.map(({ id, ...props }) => (
-            <GroupCard key={id} id={id} {...props} />
+          {groupData.items.map(({ id, imageUrl, name, category }) => (
+            <GroupCard
+              key={id}
+              id={id}
+              imageUrl={imageUrl}
+              name={name}
+              category={category}
+            />
           ))}
         </Section.Body>
       </Section>

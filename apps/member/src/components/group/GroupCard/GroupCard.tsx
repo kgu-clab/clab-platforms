@@ -4,6 +4,9 @@ import { useNavigate } from 'react-router-dom';
 import { LiaCertificateSolid } from 'react-icons/lia';
 import { MdOutlineDateRange } from 'react-icons/md';
 import Image from '@components/common/Image/Image';
+import { useActivityGroupMemberDetail } from '@hooks/queries/useActivityGroupMemberDetail';
+import { useActivityGroupBoardsByCategory } from '@hooks/queries/useActivityGroupBoardsByCategory';
+import dayjs from 'dayjs';
 
 interface InfoCardProps {
   title: string;
@@ -13,13 +16,9 @@ interface InfoCardProps {
 
 interface GroupCardProps {
   id: number;
-  image: string;
+  imageUrl?: string;
   name: string;
-  manager: string;
-  members: object[];
-  description: string;
   category: string;
-  weeklyActivities: object[];
 }
 
 const InfoCard = ({ title, value, color }: InfoCardProps) => {
@@ -32,35 +31,38 @@ const InfoCard = ({ title, value, color }: InfoCardProps) => {
   return (
     <div
       className={classNames(
-        'items-center flex flex-col px-4 py-2 rounded',
+        'items-center flex flex-col px-4 py-2 rounded text-center',
         colorClass,
       )}
     >
       <b>{value || 0}</b>
-      <p className="font-semibold text-xs">{title}</p>
+      <p className="font-semibold text-xsr">{title}</p>
     </div>
   );
 };
 
-const GroupCard = ({
-  id,
-  image,
-  name,
-  manager,
-  members,
-  description,
-  category,
-  weeklyActivities,
-}: GroupCardProps) => {
+const GroupCard = ({ id, imageUrl, name, category }: GroupCardProps) => {
   const navigate = useNavigate();
-
+  const { data: groupDetailData } = useActivityGroupMemberDetail(id, category);
+  const { data: groupBoardData } = useActivityGroupBoardsByCategory(
+    id,
+    'WEEKLY_ACTIVITY',
+    0,
+    20,
+  );
+  const setDate = (createdAt: string) => {
+    const year = dayjs(createdAt).get('year');
+    const semester = dayjs(createdAt).get('month') <= 5 ? 1 : 2;
+    const activitSemester = `${year}년도 ${semester}학기`;
+    return activitSemester;
+  };
   return (
     <div
       className="flex cursor-pointer border rounded-lg"
-      onClick={() => navigate(PATH_FINDER.ACTIVITY_DETAIL(id))}
+      onClick={() => navigate(PATH_FINDER.ACTIVITY_DETAIL(String(id)))}
     >
       <Image
-        src={image}
+        src={imageUrl}
         width="w-1/3"
         height="h-[227px]"
         alt={name}
@@ -69,7 +71,7 @@ const GroupCard = ({
       <div className="p-4 flex flex-col gap-2 w-2/3 divide-y">
         <div className="grow">
           <p className="font-bold text-lg">{name}</p>
-          <p className="text-gray-600 text-sm">{description}</p>
+          <p className="text-gray-600 text-sm">{groupDetailData.content}</p>
         </div>
         <div className="grid md:grid-cols-2 md:divide-x pt-4 text-sm">
           <div className="pr-4 hidden md:block">
@@ -78,26 +80,36 @@ const GroupCard = ({
               <InfoCard
                 title="주차"
                 color="yellow"
-                value={weeklyActivities?.length || 0}
+                value={groupBoardData.items?.length || 0}
               />
               <InfoCard
                 title="인원"
                 color="blue"
-                value={members?.length || 1}
+                value={groupDetailData.groupMembers?.length || 1}
               />
-              <InfoCard title="대상" color="purple" value="2학년" />
+              <InfoCard
+                title="대상"
+                color="purple"
+                value={groupDetailData.subject}
+              />
             </div>
           </div>
           <div className="md:pl-4 text-sm">
             <b>팀장</b>
-            <p>{manager}</p>
+            <p>
+              {
+                groupDetailData.groupMembers?.find(
+                  (member) => member.role === 'LEADER',
+                )?.memberName
+              }
+            </p>
             <b>정보</b>
             <div className="text-sm flex items-center text-gray-500">
               <LiaCertificateSolid className="mr-1" />
               <span>{category}</span>
               <span className="px-1">•</span>
               <MdOutlineDateRange className="mr-1" />
-              <span>24년도 1학기</span>
+              <span>{setDate(groupDetailData.createdAt)}</span>
             </div>
           </div>
         </div>

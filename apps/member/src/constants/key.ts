@@ -24,4 +24,5 @@ export const QUERY_KEY = {
   COMMENTS: 'Comments',
   MEMBERSHIP_FEE: 'MembershipFee',
   UPLOADEDFILE: 'UploadedFile',
+  ACTIVITY: 'Activity',
 };

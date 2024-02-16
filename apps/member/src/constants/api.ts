@@ -29,6 +29,12 @@ export const END_POINT = {
   COMMENTS: (boardId: string) => `/comments/${boardId}`,
   HIRE: (jobPostingId: string) => `/job-postings/${jobPostingId}`,
   NEWS: (newsId: string) => `/news/${newsId}`,
+  ACTIVITY_GROUP_MEMBER_STATUS: `/activity-group/member/status`,
+  ACTIVITY_GROUP_MEMBER_STUDY: (activityGroupId: number) =>
+    `/activity-group/member/study/${activityGroupId}`,
+  ACTIVITY_GROUP_MEMBER_PROJECT: (activityGroupId: number) =>
+    `/activity-group/member/project/${activityGroupId}`,
+  ACTIVITY_GROUP_BOARD_BY_CATRGORY: `/activity-group/boards/by-category`,
 };
 
 export const HTTP_STATUS_CODE = {
