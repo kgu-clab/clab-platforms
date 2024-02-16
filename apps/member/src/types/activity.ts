@@ -15,7 +15,7 @@ export interface ActivityPhotoItem {
   isPublic: boolean;
 }
 
-export interface ActivityGroupMemberItem {
+export interface ActivityGroupMemberType {
   memberId: string;
   memberName: string;
   role: string;
@@ -32,7 +32,22 @@ export interface ActivityGroupItem {
   subject: string;
   status?: string;
   imageUrl?: string;
-  groupMembers?: Array<ActivityGroupMemberItem>;
+  groupMembers?: Array<ActivityGroupMemberType>;
   curriculum?: string;
   createdAt: string;
+}
+export interface ActivityApplierType {
+  id: string;
+  name: string;
+  department: string;
+  grade: number;
+}
+
+export interface ActivityRequestType {
+  activityGroupId: number;
+  applierName: string;
+  applierId: string;
+  applierDepartment: string;
+  applierYear: string;
+  applyReason: string;
 }

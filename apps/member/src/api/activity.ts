@@ -2,7 +2,12 @@ import { BaseResponse, PaginationType } from '@type/api';
 import { server } from './server';
 import { createCommonPagination } from '@utils/api';
 import { END_POINT } from '@constants/api';
-import type { ActivityGroupItem, ActivityPhotoItem } from '@type/activity';
+import type {
+  ActivityApplierType,
+  ActivityGroupItem,
+  ActivityPhotoItem,
+  ActivityRequestType,
+} from '@type/activity';
 import type { ScheduleItem } from '@type/schedule';
 
 // 나의 활동 일정 조회
@@ -81,4 +86,38 @@ export const getActivityBoardsById = async (
   });
 
   return data;
+};
+
+// 신청자 정보
+export const getActivityApplierInfo = async () => {
+  const { data } = await server.get<BaseResponse<ActivityApplierType>>({
+    url: END_POINT.ACTIVITY_GROUP_MEMBER_APPLIER,
+  });
+
+  return data;
+};
+
+// 활동 신청
+export const postActivityGroupMemberApply = async (
+  body: ActivityRequestType,
+) => {
+  const params = {
+    activityGroupId: body.activityGroupId,
+  };
+  const { data: formData } = await server.post<
+    ActivityRequestType,
+    BaseResponse<number>
+  >({
+    url: END_POINT.ACTIVITY_GROUP_MEMBER_APPLY_FORM,
+    body,
+  });
+  if (formData) {
+    await server.post<number, BaseResponse<number>>({
+      url: createCommonPagination(
+        END_POINT.ACTIVITY_GROUP_MEMBER_APPLY,
+        params,
+      ),
+    });
+  }
+  return formData;
 };

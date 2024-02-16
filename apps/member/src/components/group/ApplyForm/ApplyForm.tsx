@@ -2,29 +2,36 @@ import Section from '@components/common/Section/Section';
 import { Button, Input } from '@clab/design-system';
 import classNames from 'classnames';
 import { ChangeEvent, useState } from 'react';
-
-interface CreateFormProps {
-  manager: string;
-  managerId: string;
-  department: string;
-  grade: string;
-  groupName: string;
-  description: string;
-}
+import { useActivityGroupMemberApplierInfo } from '@hooks/queries/useActivityGroupMemberApplierInfo';
+import Select from '@components/common/Select/Select';
+import { useActivityGroupMemberByStatus } from '@hooks/queries/useActivityGroupMemberByStatus';
+import type { ActivityRequestType } from '@type/activity';
+import { useActivityGroupMemberApplyMutation } from '@hooks/queries/useActivityGroupMemberApplyMutation';
 
 const ApplyForm = () => {
-  const [inputs, setInputs] = useState<CreateFormProps>({
-    manager: '',
-    managerId: '',
-    department: '',
-    grade: '',
-    groupName: '',
-    description: '',
+  const { data: applierData } = useActivityGroupMemberApplierInfo();
+  const { data: groupData } = useActivityGroupMemberByStatus(
+    'PROGRESSING',
+    0,
+    20,
+  );
+  const { activityGroupMemberMutate } = useActivityGroupMemberApplyMutation();
+  const [inputs, setInputs] = useState<ActivityRequestType>({
+    applierName: applierData.name,
+    applierId: applierData.id,
+    applierDepartment: applierData.department,
+    applierYear: String(applierData.grade),
+    activityGroupId: 0,
+    applyReason: '',
   });
-
-  const { groupName, manager, managerId, department, grade, description } =
-    inputs;
-  const onChangeInputs = (e: ChangeEvent<HTMLInputElement>) => {
+  const selectOption = groupData.items.map((item) => ({
+    id: item.id,
+    name: item.name,
+  }));
+  const { activityGroupId, applyReason } = inputs;
+  const onChangeInputs = (
+    e: ChangeEvent<HTMLInputElement | HTMLSelectElement>,
+  ) => {
     setInputs((prev) => ({
       ...prev,
       [e.target.name]: e.target.value,
@@ -32,18 +39,11 @@ const ApplyForm = () => {
   };
 
   const onClickCreate = () => {
-    if (
-      !groupName ||
-      !manager ||
-      !managerId ||
-      !description ||
-      !department ||
-      !grade
-    ) {
+    if (activityGroupId === 0 || !applyReason) {
       // 필수 입력 사항이 비어있을 경우
       alert('필수 입력 사항을 모두 입력해주세요.');
     } else {
-      alert('산청되었습니다.');
+      activityGroupMemberMutate(inputs);
     }
   };
 
@@ -55,17 +55,17 @@ const ApplyForm = () => {
             label="이름"
             id="manager"
             name="manager"
-            placeholder="이름"
-            value={manager}
+            placeholder={applierData.name}
             onChange={onChangeInputs}
+            disabled
           />
           <Input
             label="학번"
             id="managerId"
             name="managerId"
-            placeholder="학번"
-            value={managerId}
+            placeholder={applierData.id}
             onChange={onChangeInputs}
+            disabled
           />
         </div>
         <div className="grid grid-cols-2 gap-4 pb-4">
@@ -73,27 +73,30 @@ const ApplyForm = () => {
             label="학과"
             id="department"
             name="department"
-            placeholder="학과"
-            value={department}
+            placeholder={applierData.department}
             onChange={onChangeInputs}
+            disabled
           />
           <Input
             label="학년"
             id="grade"
             name="grade"
-            placeholder="학년"
-            value={grade}
+            placeholder={String(applierData.grade)}
             onChange={onChangeInputs}
+            disabled
           />
         </div>
         <div className="form-control">
-          <Input
-            label="그룹 이름"
-            id="groupName"
-            name="groupName"
-            placeholder="그룹 이름"
-            value={groupName}
+          <p className="label-text">
+            그룹 이름
+            <span className="text-sm text-red-500">*</span>
+          </p>
+          <Select
+            name="activityGroupId"
+            data={selectOption}
+            value={inputs.activityGroupId}
             onChange={onChangeInputs}
+            className="w-full"
           />
         </div>
         <div className="form-control">
@@ -104,17 +107,17 @@ const ApplyForm = () => {
             </p>
             <p
               className={classNames('text-sm font-medium', {
-                'text-red-500': inputs.description.length >= 1000,
+                'text-red-500': inputs.applyReason.length >= 1000,
               })}
             >
-              {inputs.description.length}/1000
+              {inputs.applyReason.length}/1000
             </p>
           </label>
           <Input
-            id="description"
-            name="description"
+            id="applyReason"
+            name="applyReason"
             placeholder="신청 이유"
-            value={description}
+            value={inputs.applyReason}
             maxLength={1000}
             className="h-80 w-full resize-none scrollbar-hide"
             onChange={onChangeInputs}

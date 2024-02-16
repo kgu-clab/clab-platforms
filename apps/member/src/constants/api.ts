@@ -35,6 +35,9 @@ export const END_POINT = {
   ACTIVITY_GROUP_MEMBER_PROJECT: (activityGroupId: number) =>
     `/activity-group/member/project/${activityGroupId}`,
   ACTIVITY_GROUP_BOARD_BY_CATRGORY: `/activity-group/boards/by-category`,
+  ACTIVITY_GROUP_MEMBER_APPLIER: `/activity-group/member/apply-form/applier-information`,
+  ACTIVITY_GROUP_MEMBER_APPLY_FORM: `/activity-group/member/apply-form`,
+  ACTIVITY_GROUP_MEMBER_APPLY: `/activity-group/member/apply`,
 };
 
 export const HTTP_STATUS_CODE = {
