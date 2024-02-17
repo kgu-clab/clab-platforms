@@ -1,4 +1,5 @@
 import Section from '@components/common/Section/Section';
+import { setDateSemester } from '@utils/date';
 import { LiaCertificateSolid } from 'react-icons/lia';
 import { MdOutlineDateRange } from 'react-icons/md';
 
@@ -6,12 +7,14 @@ interface DetailInfoSectionProps {
   name: string;
   description: string;
   category: string;
+  createdAt: string;
 }
 
 const DetailInfoSection = ({
   name,
   description,
   category,
+  createdAt,
 }: DetailInfoSectionProps) => {
   return (
     <Section>
@@ -22,7 +25,7 @@ const DetailInfoSection = ({
         <span>{category}</span>
         <span className="px-2">•</span>
         <MdOutlineDateRange className="mr-1" />
-        <span>24년도 1학기</span>
+        <span>{setDateSemester(createdAt)}</span>
       </div>
     </Section>
   );

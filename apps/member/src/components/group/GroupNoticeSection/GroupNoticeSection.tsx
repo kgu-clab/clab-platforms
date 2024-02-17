@@ -3,21 +3,17 @@ import { useState } from 'react';
 import GroupNoticeAlertSection from '../GroupNoticeAlertSection/GroupNoticeAlertSection';
 import DropdownButton from '@components/common/DropdownButton/DropdownButton';
 import dayjs from 'dayjs';
+import type { ActivityBoardType } from '@type/activity';
 
 interface GroupNoticeSectionProps {
-  data: {
-    id: number;
-    title: string;
-    date: string;
-    content: string;
-  }[];
+  data: Array<ActivityBoardType>;
 }
 
 const GroupNoticeSection = ({ data }: GroupNoticeSectionProps) => {
   const [open, setOpen] = useState(false);
 
   const sortedNotices = data.sort(
-    (a, b) => dayjs(b.date).valueOf() - dayjs(a.date).valueOf(),
+    (a, b) => dayjs(b.createdAt).valueOf() - dayjs(a.createdAt).valueOf(),
   );
 
   const latestNotice = sortedNotices[0];
@@ -34,7 +30,7 @@ const GroupNoticeSection = ({ data }: GroupNoticeSectionProps) => {
           className="border-r pr-2"
           noticeId={latestNotice.id}
           title={latestNotice.title}
-          date={latestNotice.date}
+          date={latestNotice.createdAt || ''}
           latest={true}
         />
         {otherNotices.length > 0 && (
@@ -54,7 +50,7 @@ const GroupNoticeSection = ({ data }: GroupNoticeSectionProps) => {
               key={notice.id}
               noticeId={notice.id}
               title={notice.title}
-              date={notice.date}
+              date={notice.createdAt || ''}
               latest={false}
             />
           ))}

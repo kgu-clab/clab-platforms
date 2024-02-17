@@ -1,23 +1,12 @@
+import type { ActivityBoardType } from '@type/activity';
 import WeekDetail from '../WeekDetail/WeekDetail';
 
-interface AssignmentsData {
-  id: number;
-  title: string;
-  content: string;
-  deadline: string;
-}
-
 interface WeeklyActivitySectionProps {
-  id: number;
-  weeklyActivities: {
-    week: number;
-    content: string;
-    assignments: AssignmentsData[];
-  }[];
+  groupId: string;
+  weeklyActivities: Array<ActivityBoardType>;
 }
-
 const WeeklyActivitySection = ({
-  id,
+  groupId,
   weeklyActivities,
 }: WeeklyActivitySectionProps) => {
   return (
@@ -26,13 +15,14 @@ const WeeklyActivitySection = ({
         <h1 className="text-lg font-semibold">주차별 활동</h1>
       </div>
       <div className="divide-y">
-        {weeklyActivities.map(({ week, content, assignments }) => (
+        {weeklyActivities.reverse().map(({ id, title, content }, index) => (
           <WeekDetail
-            key={week}
-            id={id}
-            week={week}
+            key={id}
+            parentId={id}
+            week={index + 1}
+            groupId={groupId}
+            title={title}
             content={content}
-            assignments={assignments}
           />
         ))}
       </div>

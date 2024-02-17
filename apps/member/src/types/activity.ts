@@ -44,10 +44,35 @@ export interface ActivityApplierType {
 }
 
 export interface ActivityRequestType {
-  activityGroupId: number;
+  activityGroupId?: number;
   applierName: string;
   applierId: string;
   applierDepartment: string;
   applierYear: string;
   applyReason: string;
+  createdAt?: string;
+}
+
+export interface assignmentFileType {
+  id: number;
+  fileUrl: string;
+  submitDate: string;
+}
+
+export enum BoardType {
+  SUBMIT = 'SUBMIT',
+  NOTICE = 'NOTICE',
+  WEEKLY_ACTIVITY = 'WEEKLY_ACTIVITY',
+  FEEDBACK = 'FEEDBACK',
+  ASSIGNMENT = 'ASSIGNMENT',
+}
+
+export interface ActivityBoardType {
+  id: number;
+  category: BoardType;
+  title: string;
+  content: string;
+  assignmentFiles?: Array<assignmentFileType>;
+  dueDateTime?: string;
+  createdAt?: string;
 }

@@ -4,11 +4,18 @@ import { createCommonPagination } from '@utils/api';
 import { END_POINT } from '@constants/api';
 import type {
   ActivityApplierType,
+  ActivityBoardType,
   ActivityGroupItem,
+  ActivityGroupMemberType,
   ActivityPhotoItem,
   ActivityRequestType,
 } from '@type/activity';
 import type { ScheduleItem } from '@type/schedule';
+
+interface patchActivityGroupMemberApplyArgs {
+  memberId: string;
+  status: string;
+}
 
 // 나의 활동 일정 조회
 export const getMyActivities = async (
@@ -78,7 +85,7 @@ export const getActivityBoardsById = async (
   size: number,
 ) => {
   const params = { activityGroupId, category, page, size };
-  const { data } = await server.get<PaginationType<ActivityGroupItem>>({
+  const { data } = await server.get<PaginationType<ActivityBoardType>>({
     url: createCommonPagination(
       END_POINT.ACTIVITY_GROUP_BOARD_BY_CATRGORY,
       params,
@@ -101,9 +108,6 @@ export const getActivityApplierInfo = async () => {
 export const postActivityGroupMemberApply = async (
   body: ActivityRequestType,
 ) => {
-  const params = {
-    activityGroupId: body.activityGroupId,
-  };
   const { data: formData } = await server.post<
     ActivityRequestType,
     BaseResponse<number>
@@ -111,13 +115,80 @@ export const postActivityGroupMemberApply = async (
     url: END_POINT.ACTIVITY_GROUP_MEMBER_APPLY_FORM,
     body,
   });
-  if (formData) {
-    await server.post<number, BaseResponse<number>>({
-      url: createCommonPagination(
-        END_POINT.ACTIVITY_GROUP_MEMBER_APPLY,
-        params,
-      ),
-    });
-  }
+  formData &&
+    body.activityGroupId &&
+    (await server.post<number, BaseResponse<number>>({
+      url: createCommonPagination(END_POINT.ACTIVITY_GROUP_MEMBER_APPLY, {
+        activityGroupId: body.activityGroupId,
+      }),
+    }));
   return formData;
+};
+
+// 부모 게시판 id로 자식 게시판 조회
+export const getActivityBoardLayer = async (
+  parentId: number,
+  page: number,
+  size: number,
+) => {
+  const params = {
+    parentId,
+    page,
+    size,
+  };
+  const { data } = await server.get<PaginationType<ActivityBoardType>>({
+    url: createCommonPagination(
+      END_POINT.ACTIVITY_GROUP_BOARD_BY_PARENT,
+      params,
+    ),
+  });
+
+  return data;
+};
+
+// 활동 멤버 조회
+export const getActivityGroupMember = async (
+  activityGroupId: number,
+  page: number,
+  size: number,
+) => {
+  const params = { activityGroupId, page, size };
+  const { data } = await server.get<PaginationType<ActivityGroupMemberType>>({
+    url: createCommonPagination(END_POINT.ACTIVITY_GROUP_MEMBER, params),
+  });
+
+  return data;
+};
+
+// 신청 멤버 조회
+export const getActivityGroupApplyMember = async (
+  activityGroupId: number,
+  page: number,
+  size: number,
+) => {
+  const params = { activityGroupId, page, size };
+  const { data } = await server.get<PaginationType<ActivityRequestType>>({
+    url: createCommonPagination(
+      END_POINT.ACTIVITY_GROUP_ADMIN_APPLY_FORMS,
+      params,
+    ),
+  });
+
+  return data;
+};
+
+// 활동 신청 수락
+export const patchActivityGroupMemberApply = async ({
+  memberId,
+  status,
+}: patchActivityGroupMemberApplyArgs) => {
+  const params = { memberId, status };
+  const { data } = await server.patch<
+    ActivityRequestType,
+    BaseResponse<string>
+  >({
+    url: createCommonPagination(END_POINT.ACTIVITY_GROUP_ADMIN_ACCEPT, params),
+  });
+
+  return data;
 };

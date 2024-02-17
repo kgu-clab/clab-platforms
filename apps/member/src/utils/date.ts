@@ -70,3 +70,16 @@ export const transformEvents = (
     {} as Record<string, ScheduleItem>,
   );
 };
+
+/**
+ * 주어진 날짜의 년도와 학기를 반환합니다.
+ *
+ * @param {string} createdAt - 주어진 날짜.
+ * @return {string} 주어진 날짜를 YY년도 1/2학기로 반환.
+ */
+export const setDateSemester = (createdAt: string) => {
+  const year = dayjs(createdAt).format('YY');
+  const semester = dayjs(createdAt).get('month') <= 5 ? 1 : 2;
+  const activitSemester = `${year}년도 ${semester}학기`;
+  return activitSemester;
+};

@@ -6,7 +6,7 @@ import { MdOutlineDateRange } from 'react-icons/md';
 import Image from '@components/common/Image/Image';
 import { useActivityGroupMemberDetail } from '@hooks/queries/useActivityGroupMemberDetail';
 import { useActivityGroupBoardsByCategory } from '@hooks/queries/useActivityGroupBoardsByCategory';
-import dayjs from 'dayjs';
+import { setDateSemester } from '@utils/date';
 
 interface InfoCardProps {
   title: string;
@@ -50,16 +50,15 @@ const GroupCard = ({ id, imageUrl, name, category }: GroupCardProps) => {
     0,
     20,
   );
-  const setDate = (createdAt: string) => {
-    const year = dayjs(createdAt).get('year');
-    const semester = dayjs(createdAt).get('month') <= 5 ? 1 : 2;
-    const activitSemester = `${year}년도 ${semester}학기`;
-    return activitSemester;
-  };
+
   return (
     <div
       className="flex cursor-pointer border rounded-lg"
-      onClick={() => navigate(PATH_FINDER.ACTIVITY_DETAIL(String(id)))}
+      onClick={() =>
+        navigate(PATH_FINDER.ACTIVITY_DETAIL(String(id)), {
+          state: { category: category, id: id },
+        })
+      }
     >
       <Image
         src={imageUrl}
@@ -109,7 +108,7 @@ const GroupCard = ({ id, imageUrl, name, category }: GroupCardProps) => {
               <span>{category}</span>
               <span className="px-1">•</span>
               <MdOutlineDateRange className="mr-1" />
-              <span>{setDate(groupDetailData.createdAt)}</span>
+              <span>{setDateSemester(groupDetailData.createdAt)}</span>
             </div>
           </div>
         </div>
