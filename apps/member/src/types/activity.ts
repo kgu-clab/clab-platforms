@@ -20,7 +20,7 @@ export interface ActivityGroupMemberType {
   memberName: string;
   role: string;
 }
-export enum ActivityCategory {
+enum ActivityCategory {
   STUDY = 'STUDY',
   PROJECT = 'PROJECT',
 }
@@ -53,20 +53,18 @@ export interface ActivityRequestType {
   createdAt?: string;
 }
 
-export interface assignmentFileType {
-  id: number;
-  fileUrl: string;
-  submitDate: string;
-}
-
-export enum BoardType {
+enum BoardType {
   SUBMIT = 'SUBMIT',
   NOTICE = 'NOTICE',
   WEEKLY_ACTIVITY = 'WEEKLY_ACTIVITY',
   FEEDBACK = 'FEEDBACK',
   ASSIGNMENT = 'ASSIGNMENT',
 }
-
+interface assignmentFileType {
+  fileUrl: string;
+  originalFileName: string;
+  storageDateTimeOfFile: string;
+}
 export interface ActivityBoardType {
   id: number;
   category: BoardType;

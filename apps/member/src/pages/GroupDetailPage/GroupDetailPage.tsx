@@ -67,8 +67,12 @@ const GroupDetailPage = () => {
         description={groupDetailData.content}
         createdAt={groupDetailData.createdAt}
       />
-      <GroupNoticeSection data={groupNoticeData.items} />
+      <GroupNoticeSection
+        groupName={groupDetailData.name}
+        data={groupNoticeData.items}
+      />
       <WeeklyActivitySection
+        name={groupDetailData.name}
         groupId={id}
         weeklyActivities={groupWeeklyActivityData.items}
       />

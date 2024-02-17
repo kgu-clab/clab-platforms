@@ -6,10 +6,11 @@ import dayjs from 'dayjs';
 import type { ActivityBoardType } from '@type/activity';
 
 interface GroupNoticeSectionProps {
+  groupName: string;
   data: Array<ActivityBoardType>;
 }
 
-const GroupNoticeSection = ({ data }: GroupNoticeSectionProps) => {
+const GroupNoticeSection = ({ groupName, data }: GroupNoticeSectionProps) => {
   const [open, setOpen] = useState(false);
 
   const sortedNotices = data.sort(
@@ -27,11 +28,10 @@ const GroupNoticeSection = ({ data }: GroupNoticeSectionProps) => {
     <div className="flex flex-col rounded-lg border bg-white p-4">
       <div className="flex items-center gap-2">
         <GroupNoticeAlertSection
+          groupName={groupName}
           className="border-r pr-2"
-          noticeId={latestNotice.id}
-          title={latestNotice.title}
-          date={latestNotice.createdAt || ''}
           latest={true}
+          data={latestNotice}
         />
         {otherNotices.length > 0 && (
           <DropdownButton isOpen={open} onClick={() => setOpen(!open)} />
@@ -47,10 +47,9 @@ const GroupNoticeSection = ({ data }: GroupNoticeSectionProps) => {
         <div className="flex flex-col gap-4">
           {otherNotices.map((notice) => (
             <GroupNoticeAlertSection
+              groupName={groupName}
+              data={notice}
               key={notice.id}
-              noticeId={notice.id}
-              title={notice.title}
-              date={notice.createdAt || ''}
               latest={false}
             />
           ))}

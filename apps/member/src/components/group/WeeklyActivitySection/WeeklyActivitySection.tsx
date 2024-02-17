@@ -2,10 +2,12 @@ import type { ActivityBoardType } from '@type/activity';
 import WeekDetail from '../WeekDetail/WeekDetail';
 
 interface WeeklyActivitySectionProps {
+  name: string;
   groupId: string;
   weeklyActivities: Array<ActivityBoardType>;
 }
 const WeeklyActivitySection = ({
+  name,
   groupId,
   weeklyActivities,
 }: WeeklyActivitySectionProps) => {
@@ -17,7 +19,8 @@ const WeeklyActivitySection = ({
       <div className="divide-y">
         {weeklyActivities.reverse().map(({ id, title, content }, index) => (
           <WeekDetail
-            key={id}
+            key={index}
+            groupName={name}
             parentId={id}
             week={index + 1}
             groupId={groupId}

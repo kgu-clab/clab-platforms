@@ -16,7 +16,10 @@ interface patchActivityGroupMemberApplyArgs {
   memberId: string;
   status: string;
 }
-
+interface PatchActivityBoardArgs {
+  activityGroupBoardId: number;
+  body: ActivityBoardType;
+}
 // 나의 활동 일정 조회
 export const getMyActivities = async (
   startDateTime: string,
@@ -188,6 +191,47 @@ export const patchActivityGroupMemberApply = async ({
     BaseResponse<string>
   >({
     url: createCommonPagination(END_POINT.ACTIVITY_GROUP_ADMIN_ACCEPT, params),
+  });
+
+  return data;
+};
+
+// 게시판 단일 조회
+export const getActivityBoard = async (activityGroupBoardId: number) => {
+  const params = {
+    activityGroupBoardId,
+  };
+  const { data } = await server.get<BaseResponse<ActivityBoardType>>({
+    url: createCommonPagination(END_POINT.ACTIVITY_GROUP_BOARDS, params),
+  });
+
+  return data;
+};
+
+// 과제 제출 조회
+export const getActivityBoardsMyAssignment = async (parentId: number) => {
+  const params = {
+    parentId,
+  };
+  const { data } = await server.get<BaseResponse<ActivityBoardType>>({
+    url: createCommonPagination(
+      END_POINT.ACTIVITY_GROUP_BOARDS_MY_ASSIGNMENT,
+      params,
+    ),
+  });
+
+  return data;
+};
+
+// 게시글 수정
+export const patchActivityBoard = async ({
+  activityGroupBoardId,
+  body,
+}: PatchActivityBoardArgs) => {
+  const params = { activityGroupBoardId };
+  const { data } = await server.patch<ActivityBoardType, BaseResponse<number>>({
+    url: createCommonPagination(END_POINT.ACTIVITY_GROUP_BOARDS, params),
+    body,
   });
 
   return data;

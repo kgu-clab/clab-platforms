@@ -1,4 +1,5 @@
 import { PATH_FINDER } from '@constants/path';
+import type { ActivityBoardType } from '@type/activity';
 import { formattedDate } from '@utils/date';
 import classNames from 'classnames';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -6,17 +7,15 @@ import { useNavigate, useParams } from 'react-router-dom';
 interface GroupNoticeAlertSectionProps {
   className?: string;
   latest: boolean;
-  noticeId: number;
-  title: string;
-  date: string;
+  groupName: string;
+  data: ActivityBoardType;
 }
 
 const GroupNoticeAlertSection = ({
   className,
   latest,
-  noticeId,
-  title,
-  date,
+  data,
+  groupName,
 }: GroupNoticeAlertSectionProps) => {
   const navigate = useNavigate();
   const { id } = useParams();
@@ -29,7 +28,7 @@ const GroupNoticeAlertSection = ({
         className="flex items-center justify-between gap-2 font-semibold"
         onClick={() =>
           navigate(PATH_FINDER.ACTIVITY_NOTICE(id), {
-            state: { noticeId },
+            state: { groupName: groupName, boardId: data.id },
           })
         }
       >
@@ -44,9 +43,9 @@ const GroupNoticeAlertSection = ({
           공지사항
         </div>
 
-        <p className="w-full truncate">{title}</p>
+        <p className="w-full truncate">{data.title}</p>
         <p className="whitespace-nowrap text-sm text-gray-500">
-          {formattedDate(date)}
+          {formattedDate(data.createdAt || '')}
         </p>
       </div>
     </div>

@@ -4,31 +4,34 @@ import classNames from 'classnames';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { PATH_FINDER } from '@constants/path';
+import { useActivityGroupBoardsByParent } from '@hooks/queries/useActivityGroupBoardByParent';
 
-interface assignmentsData {
-  id: number;
+interface WeekDetailProps {
+  parentId: number;
+  week: number;
+  groupId: string;
   title: string;
   content: string;
-  deadline: string;
-}
-interface WeekDetailProps {
-  id: number;
-  week: number;
-  content: string;
-  assignments: assignmentsData[];
+  groupName: string;
 }
 
-const WeekDetail = ({ id, week, content, assignments }: WeekDetailProps) => {
+const WeekDetail = ({
+  parentId,
+  week,
+  groupId,
+  title,
+  content,
+  groupName,
+}: WeekDetailProps) => {
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
-  const groupId = Number(id);
-
+  const { data: assignmentData } = useActivityGroupBoardsByParent(parentId);
   return (
-    <div key={week} className="p-4">
+    <div key={groupId} className="p-4">
       <div className="flex items-center justify-between cursor-pointer">
         <div>
           <span className="font-semibold mr-2">{week}.</span>
-          <span>{content}</span>
+          <span>{title}</span>
         </div>
         <DropdownButton
           isOpen={open}
@@ -45,22 +48,26 @@ const WeekDetail = ({ id, week, content, assignments }: WeekDetailProps) => {
         <hr className="my-4" />
 
         <div className="space-y-4">
-          <p className="text-sm">
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Odio id
-            fuga natus eum laudantium aut, nesciunt dicta! Beatae soluta rerum
-            possimus ut tempora est inventore id esse nulla. Mollitia, autem?
-          </p>
+          <p className="text-sm">{content}</p>
 
-          {assignments.map(
-            ({ id, title }) =>
-              id && (
+          {assignmentData.items.map(
+            ({ id, title, category }, index) =>
+              id !== parentId &&
+              category === 'ASSIGNMENT' && (
                 <div
-                  key={id}
+                  key={index}
                   className="flex cursor-pointer items-center"
                   onClick={() =>
-                    navigate(PATH_FINDER.ACTIVITY_ASSIGNMENT(groupId, id), {
-                      state: { groupId, week, id },
-                    })
+                    navigate(
+                      PATH_FINDER.ACTIVITY_ASSIGNMENT(groupId, String(id)),
+                      {
+                        state: {
+                          groupId: groupId,
+                          id: id,
+                          groupName: groupName,
+                        },
+                      },
+                    )
                   }
                 >
                   <div
@@ -69,9 +76,7 @@ const WeekDetail = ({ id, week, content, assignments }: WeekDetailProps) => {
                   >
                     <FaRegFileAlt size="16" />
                   </div>
-                  <p key={id} className="">
-                    {title}
-                  </p>
+                  <p key={id}>{title}</p>
                 </div>
               ),
           )}
