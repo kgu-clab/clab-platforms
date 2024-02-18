@@ -1,5 +1,5 @@
 import Section from '@components/common/Section/Section';
-import { setDateSemester } from '@utils/date';
+import { getDateSemester } from '@utils/date';
 import { LiaCertificateSolid } from 'react-icons/lia';
 import { MdOutlineDateRange } from 'react-icons/md';
 
@@ -25,7 +25,7 @@ const DetailInfoSection = ({
         <span>{category}</span>
         <span className="px-2">•</span>
         <MdOutlineDateRange className="mr-1" />
-        <span>{setDateSemester(createdAt)}</span>
+        <span>{getDateSemester(createdAt)}</span>
       </div>
     </Section>
   );

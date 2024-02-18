@@ -77,9 +77,8 @@ export const transformEvents = (
  * @param {string} createdAt - 주어진 날짜.
  * @return {string} 주어진 날짜를 YY년도 1/2학기로 반환.
  */
-export const setDateSemester = (createdAt: string) => {
+export const getDateSemester = (createdAt: string): string => {
   const year = dayjs(createdAt).format('YY');
   const semester = dayjs(createdAt).get('month') <= 5 ? 1 : 2;
-  const activitSemester = `${year}년도 ${semester}학기`;
-  return activitSemester;
+  return `${year}년도 ${semester}학기`;
 };

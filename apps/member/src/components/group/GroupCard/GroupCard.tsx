@@ -6,7 +6,7 @@ import { MdOutlineDateRange } from 'react-icons/md';
 import Image from '@components/common/Image/Image';
 import { useActivityGroupMemberDetail } from '@hooks/queries/useActivityGroupMemberDetail';
 import { useActivityGroupBoardsByCategory } from '@hooks/queries/useActivityGroupBoardsByCategory';
-import { setDateSemester } from '@utils/date';
+import { getDateSemester } from '@utils/date';
 
 interface InfoCardProps {
   title: string;
@@ -108,7 +108,7 @@ const GroupCard = ({ id, imageUrl, name, category }: GroupCardProps) => {
               <span>{category}</span>
               <span className="px-1">•</span>
               <MdOutlineDateRange className="mr-1" />
-              <span>{setDateSemester(groupDetailData.createdAt)}</span>
+              <span>{getDateSemester(groupDetailData.createdAt)}</span>
             </div>
           </div>
         </div>
