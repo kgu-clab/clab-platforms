@@ -28,7 +28,7 @@ export const END_POINT = {
   COMMENTS: (id: string) => `/comments/${id}`,
   HIRE: (jobPostingId: string) => `/job-postings/${jobPostingId}`,
   NEWS: (newsId: string) => `/news/${newsId}`,
-};
+} as const;
 
 export const HTTP_STATUS_CODE = {
   SUCCESS: 200,
@@ -40,4 +40,4 @@ export const HTTP_STATUS_CODE = {
   NOT_FOUND: 404,
   CONTENT_TOO_LARGE: 413,
   INTERNAL_SERVER_ERROR: 500,
-};
+} as const;

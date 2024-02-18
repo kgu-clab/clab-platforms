@@ -2,7 +2,7 @@ export const ATOM_KEY = {
   IS_LOGGED_IN: 'isLoggedInState',
   MODAL: 'modalState',
   TOAST: 'toastState',
-};
+} as const;
 
 export const QUERY_KEY = {
   MY_PROFILE: 'MyProfile',
@@ -24,4 +24,4 @@ export const QUERY_KEY = {
   SCHEDULE: 'Schedule',
   MAIN_ACTIVITY_PHOTO: 'MainActivityPhoto',
   COMMENTS: 'Comments',
-};
+} as const;
