@@ -6,7 +6,7 @@ interface postUploadedFileMembershipFeeArgs {
   storagePeriod: number;
   multipartFile: string;
 }
-interface postUploadedFileAssignemntArgs {
+interface postUploadedFileAssignmentArgs {
   body: {
     activityGroupId: number;
     activityGroupBoard: number;
@@ -50,7 +50,7 @@ export const postUploadedFileAssignment = async ({
   body,
   multipartFile,
   change,
-}: postUploadedFileAssignemntArgs) => {
+}: postUploadedFileAssignmentArgs) => {
   const accessToken = getAccessToken();
   const storagePeriod = 7;
   const url = createPath(
