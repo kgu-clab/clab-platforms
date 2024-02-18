@@ -25,4 +25,5 @@ export const QUERY_KEY = {
   MEMBERSHIP_FEE: 'MembershipFee',
   UPLOADEDFILE: 'UploadedFile',
   ACTIVITY: 'Activity',
+  ACTIVITY_FEEDBACK: 'ActivityBoards',
 };

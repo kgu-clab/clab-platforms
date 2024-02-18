@@ -9,16 +9,27 @@ import type {
   ActivityGroupMemberType,
   ActivityPhotoItem,
   ActivityRequestType,
+  SubmitBoardType,
 } from '@type/activity';
 import type { ScheduleItem } from '@type/schedule';
 
 interface patchActivityGroupMemberApplyArgs {
+  activityGroupId: number;
   memberId: string;
   status: string;
 }
 interface PatchActivityBoardArgs {
   activityGroupBoardId: number;
-  body: ActivityBoardType;
+  body: SubmitBoardType;
+}
+interface PostActivityGroupMemberApplyArgs {
+  activityGroupId: number;
+  body: ActivityRequestType;
+}
+interface PostActivityBoardArgs {
+  parentId?: number;
+  activityGroupId: number;
+  body: SubmitBoardType;
 }
 // 나의 활동 일정 조회
 export const getMyActivities = async (
@@ -108,23 +119,18 @@ export const getActivityApplierInfo = async () => {
 };
 
 // 활동 신청
-export const postActivityGroupMemberApply = async (
-  body: ActivityRequestType,
-) => {
+export const postActivityGroupMemberApply = async ({
+  activityGroupId,
+  body,
+}: PostActivityGroupMemberApplyArgs) => {
+  const params = { activityGroupId };
   const { data: formData } = await server.post<
     ActivityRequestType,
     BaseResponse<number>
   >({
-    url: END_POINT.ACTIVITY_GROUP_MEMBER_APPLY_FORM,
+    url: createCommonPagination(END_POINT.ACTIVITY_GROUP_MEMBER_APPLY, params),
     body,
   });
-  formData &&
-    body.activityGroupId &&
-    (await server.post<number, BaseResponse<number>>({
-      url: createCommonPagination(END_POINT.ACTIVITY_GROUP_MEMBER_APPLY, {
-        activityGroupId: body.activityGroupId,
-      }),
-    }));
   return formData;
 };
 
@@ -164,32 +170,28 @@ export const getActivityGroupMember = async (
 };
 
 // 신청 멤버 조회
-export const getActivityGroupApplyMember = async (
+export const getActivityGroupApplyByStatus = async (
   activityGroupId: number,
+  status: string,
   page: number,
   size: number,
 ) => {
-  const params = { activityGroupId, page, size };
-  const { data } = await server.get<PaginationType<ActivityRequestType>>({
-    url: createCommonPagination(
-      END_POINT.ACTIVITY_GROUP_ADMIN_APPLY_FORMS,
-      params,
-    ),
+  const params = { activityGroupId, status, page, size };
+  const { data } = await server.get<PaginationType<ActivityGroupMemberType>>({
+    url: createCommonPagination(END_POINT.ACTIVITY_GROUP_ADMIN_MEMBERS, params),
   });
 
   return data;
 };
 
-// 활동 신청 수락
+// 활동 신청 상태
 export const patchActivityGroupMemberApply = async ({
+  activityGroupId,
   memberId,
   status,
 }: patchActivityGroupMemberApplyArgs) => {
-  const params = { memberId, status };
-  const { data } = await server.patch<
-    ActivityRequestType,
-    BaseResponse<string>
-  >({
+  const params = { activityGroupId, memberId, status };
+  const { data } = await server.patch<unknown, BaseResponse<string>>({
     url: createCommonPagination(END_POINT.ACTIVITY_GROUP_ADMIN_ACCEPT, params),
   });
 
@@ -219,7 +221,7 @@ export const getActivityBoardsMyAssignment = async (parentId: number) => {
       params,
     ),
   });
-
+  console.log(data);
   return data;
 };
 
@@ -229,9 +231,40 @@ export const patchActivityBoard = async ({
   body,
 }: PatchActivityBoardArgs) => {
   const params = { activityGroupBoardId };
-  const { data } = await server.patch<ActivityBoardType, BaseResponse<number>>({
+  const { data } = await server.patch<SubmitBoardType, BaseResponse<number>>({
     url: createCommonPagination(END_POINT.ACTIVITY_GROUP_BOARDS, params),
     body,
+  });
+
+  return data;
+};
+
+// 게시물 작성
+export const postActivityBoard = async ({
+  parentId,
+  activityGroupId,
+  body,
+}: PostActivityBoardArgs) => {
+  let params;
+  if (parentId) {
+    params = { parentId, activityGroupId };
+  } else {
+    params = { activityGroupId };
+  }
+  const { data: formData } = await server.post<
+    SubmitBoardType,
+    BaseResponse<number>
+  >({
+    url: createCommonPagination(END_POINT.ACTIVITY_GROUP_BOARD, params),
+    body,
+  });
+  return formData;
+};
+
+// 제출 게시판 피드백 조회
+export const getActivityBoardsFeedback = async (parentId: number) => {
+  const { data } = await server.get<BaseResponse<ActivityBoardType>>({
+    url: END_POINT.ACTIVITY_GROUP_BOARD_FEEDBACK(parentId),
   });
 
   return data;

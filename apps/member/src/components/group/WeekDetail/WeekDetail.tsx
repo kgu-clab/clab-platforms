@@ -7,16 +7,16 @@ import { PATH_FINDER } from '@constants/path';
 import { useActivityGroupBoardsByParent } from '@hooks/queries/useActivityGroupBoardByParent';
 
 interface WeekDetailProps {
-  parentId: number;
+  parentId?: number;
   week: number;
   groupId: string;
-  title: string;
-  content: string;
+  title?: string;
+  content?: string;
   groupName: string;
 }
 
 const WeekDetail = ({
-  parentId,
+  parentId = 0,
   week,
   groupId,
   title,

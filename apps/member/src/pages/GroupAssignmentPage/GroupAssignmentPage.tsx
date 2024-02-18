@@ -1,49 +1,34 @@
 import Content from '@components/common/Content/Content';
 import AssignmentUploadSection from '@components/group/AssignmentUploadSection/AssignmentUploadSection';
 import { useLocation } from 'react-router-dom';
-import groupList from '@mocks/data/groupList.json';
-import ErrorPage from '@pages/ErrorPage/ErrorPage';
 import AssignmentFeedbackSection from '@components/group/AssignmentFeedbackSection/AssignmentFeedbackSection';
-
-interface assignmentData {
-  id: number;
-  title: string;
-  content: string;
-  deadline: string;
-}
-interface weeklyActivitiesData {
-  week: number;
-  content: string;
-  assignments: assignmentData[];
-}
-interface GroupData {
-  id: number;
-  name: string;
-  weeklyActivities: weeklyActivitiesData[];
-}
+import { useActivityGroupBoard } from '@hooks/queries/useActivityGroupBoard';
+import { useActivityGroupBoardsMyAssignment } from '@hooks/queries/useActivityGroupBoardsMyAssignment';
+import { COMMUNITY_MESSAGE } from '@constants/message';
 
 const GroupAssignmentPage = () => {
   const location = useLocation();
-  const { groupId, week, id } = location.state;
+  const { groupId, id, groupName } = location.state;
+  const { data: boardData } = useActivityGroupBoard(id);
+  const { data: mySubmit } = useActivityGroupBoardsMyAssignment(id);
 
-  const data: GroupData | undefined = groupList.find(
-    (group) => group.id === groupId,
-  );
-
-  if (data === undefined) {
-    return <ErrorPage />;
+  if (boardData === undefined) {
+    throw new Error(COMMUNITY_MESSAGE.NO_ARTICLE);
   }
-
   return (
     <Content>
       <AssignmentUploadSection
-        id={groupId}
-        week={week}
-        activityId={id}
-        name={data.name}
-        weeklyActivities={data.weeklyActivities}
+        id={id}
+        activityGroupId={groupId}
+        groupName={groupName}
+        weeklyActivities={boardData}
+        mySubmit={mySubmit}
       />
-      <AssignmentFeedbackSection />
+      <AssignmentFeedbackSection
+        assignmentId={id}
+        mySubmit={mySubmit}
+        activityGroupId={groupId}
+      />
     </Content>
   );
 };

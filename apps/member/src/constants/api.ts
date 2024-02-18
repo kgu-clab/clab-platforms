@@ -26,6 +26,12 @@ export const END_POINT = {
   MAIN_ACTIVITY_PHOTO: `/activity-photos`,
   MEMBERSHIP_FEE: `/membership-fees`,
   UPLOADEDFILE_MEMBERSHIP_FEE: `/files/membership-fee`,
+  UPLOADEDFILE_ACTIVITY_ASSIGNMENT: (
+    activityGroupId: number,
+    activityGroupBoardId: number,
+    memberId: string,
+  ) =>
+    `/files/assignment/${activityGroupId}/${activityGroupBoardId}/${memberId}`,
   COMMENTS: (boardId: string) => `/comments/${boardId}`,
   HIRE: (jobPostingId: string) => `/job-postings/${jobPostingId}`,
   NEWS: (newsId: string) => `/news/${newsId}`,
@@ -36,12 +42,16 @@ export const END_POINT = {
     `/activity-group/member/project/${activityGroupId}`,
   ACTIVITY_GROUP_BOARD_BY_CATRGORY: `/activity-group/boards/by-category`,
   ACTIVITY_GROUP_MEMBER_APPLIER: `/activity-group/member/apply-form/applier-information`,
-  ACTIVITY_GROUP_MEMBER_APPLY_FORM: `/activity-group/member/apply-form`,
   ACTIVITY_GROUP_MEMBER_APPLY: `/activity-group/member/apply`,
   ACTIVITY_GROUP_BOARD_BY_PARENT: `/activity-group/boards/by-parent`,
   ACTIVITY_GROUP_MEMBER: `/activity-group/member/members`,
-  ACTIVITY_GROUP_ADMIN_APPLY_FORMS: `/activity-group/admin/apply-forms`,
+  ACTIVITY_GROUP_ADMIN_MEMBERS: `/activity-group/admin/members`,
   ACTIVITY_GROUP_ADMIN_ACCEPT: `/activity-group/admin/accept`,
+  ACTIVITY_GROUP_BOARDS: `/activity-group/boards`,
+  ACTIVITY_GROUP_BOARDS_MY_ASSIGNMENT: `activity-group/boards/my-assignment`,
+  ACTIVITY_GROUP_BOARD: `/activity-group/boards`,
+  ACTIVITY_GROUP_BOARD_FEEDBACK: (parentId: number) =>
+    `/activity-group/boards/${parentId}`,
 };
 
 export const HTTP_STATUS_CODE = {

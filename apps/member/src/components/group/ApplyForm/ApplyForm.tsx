@@ -16,26 +16,28 @@ const ApplyForm = () => {
     20,
   );
   const { activityGroupMemberMutate } = useActivityGroupMemberApplyMutation();
+  const [activityGroupId, setActivityGroupId] = useState<number>(0);
   const [inputs, setInputs] = useState<ActivityRequestType>({
     applierName: applierData.name,
     applierId: applierData.id,
     applierDepartment: applierData.department,
     applierYear: String(applierData.grade),
-    activityGroupId: 0,
     applyReason: '',
   });
   const selectOption = groupData.items.map((item) => ({
     id: item.id,
     name: item.name,
   }));
-  const { activityGroupId, applyReason } = inputs;
-  const onChangeInputs = (
-    e: ChangeEvent<HTMLInputElement | HTMLSelectElement>,
-  ) => {
+  const { applyReason } = inputs;
+
+  const onChangeInputs = (e: ChangeEvent<HTMLInputElement>) => {
     setInputs((prev) => ({
       ...prev,
       [e.target.name]: e.target.value,
     }));
+  };
+  const onChangeId = (e: ChangeEvent<HTMLSelectElement>) => {
+    setActivityGroupId(Number(e.target.value));
   };
 
   const onClickCreate = () => {
@@ -43,7 +45,10 @@ const ApplyForm = () => {
       // 필수 입력 사항이 비어있을 경우
       alert('필수 입력 사항을 모두 입력해주세요.');
     } else {
-      activityGroupMemberMutate(inputs);
+      activityGroupMemberMutate({
+        activityGroupId: activityGroupId,
+        body: inputs,
+      });
     }
   };
 
@@ -94,8 +99,8 @@ const ApplyForm = () => {
           <Select
             name="activityGroupId"
             data={selectOption}
-            value={inputs.activityGroupId}
-            onChange={onChangeInputs}
+            value={activityGroupId}
+            onChange={onChangeId}
             className="w-full"
           />
         </div>

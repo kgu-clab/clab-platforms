@@ -15,10 +15,16 @@ export interface ActivityPhotoItem {
   isPublic: boolean;
 }
 
+enum MemberStatus {
+  ACCEPTED = 'ACCEPTED',
+  REJJECTED = 'REJECTED',
+  WAITING = 'WAITING',
+}
 export interface ActivityGroupMemberType {
   memberId: string;
   memberName: string;
   role: string;
+  status?: MemberStatus;
 }
 enum ActivityCategory {
   STUDY = 'STUDY',
@@ -44,7 +50,6 @@ export interface ActivityApplierType {
 }
 
 export interface ActivityRequestType {
-  activityGroupId?: number;
   applierName: string;
   applierId: string;
   applierDepartment: string;
@@ -53,24 +58,27 @@ export interface ActivityRequestType {
   createdAt?: string;
 }
 
-enum BoardType {
-  SUBMIT = 'SUBMIT',
-  NOTICE = 'NOTICE',
-  WEEKLY_ACTIVITY = 'WEEKLY_ACTIVITY',
-  FEEDBACK = 'FEEDBACK',
-  ASSIGNMENT = 'ASSIGNMENT',
-}
-interface assignmentFileType {
+export interface assignmentFileType {
   fileUrl: string;
   originalFileName: string;
-  storageDateTimeOfFile: string;
+  storagePeriod: number;
+  createdAt: string;
 }
+
 export interface ActivityBoardType {
-  id: number;
-  category: BoardType;
-  title: string;
-  content: string;
-  assignmentFiles?: Array<assignmentFileType>;
+  id?: number;
+  category: string;
+  title?: string;
+  content?: string;
+  files?: Array<assignmentFileType>;
   dueDateTime?: string;
   createdAt?: string;
+}
+
+export interface SubmitBoardType {
+  category: string;
+  title?: string;
+  content?: string;
+  fileUrls?: Array<string>;
+  dueDateTime?: string;
 }
