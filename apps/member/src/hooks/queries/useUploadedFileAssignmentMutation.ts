@@ -1,12 +1,12 @@
 import { postUploadedFileAssignment } from '@api/uploadedFile';
 import { useMutation } from '@tanstack/react-query';
 
-export const useUploadedFileAssignmentMutaion = () => {
-  const uploadedFileAssignmentMutaion = useMutation({
+export const useUploadedFileAssignmentMutation = () => {
+  const uploadedFileAssignmentMutation = useMutation({
     mutationFn: postUploadedFileAssignment,
   });
 
   return {
-    uploadedFileAssignmentMutate: uploadedFileAssignmentMutaion.mutate,
+    uploadedFileAssignmentMutate: uploadedFileAssignmentMutation.mutate,
   };
 };

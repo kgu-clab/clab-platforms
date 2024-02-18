@@ -4,8 +4,8 @@ import Header from '@components/common/Header/Header';
 import Section from '@components/common/Section/Section';
 import dayjs from 'dayjs';
 import type { ActivityBoardType } from '@type/activity';
-import { useUploadedFileAssignmentMutaion } from '@hooks/queries/useUploadedFileAssignmentMutaion';
 import { useMyProfile } from '@hooks/queries/useMyProfile';
+import { useUploadedFileAssignmentMutation } from '@hooks/queries/useUploadedFileAssignmentMutation';
 
 interface AssignmentUploadSectionProps {
   id: number;
@@ -25,7 +25,7 @@ const AssignmentUploadSection = ({
   const changeSubmitFileUploader = useRef<HTMLInputElement>(null);
   const submitFileUploader = useRef<HTMLInputElement>(null);
   const [timeRemaining, setTimeRemaining] = useState('');
-  const { uploadedFileAssignmentMutate } = useUploadedFileAssignmentMutaion();
+  const { uploadedFileAssignmentMutate } = useUploadedFileAssignmentMutation();
   const { data: myProfile } = useMyProfile();
   const [lastModifiedDate, setLastModifiedDate] = useState(
     dayjs(mySubmit.createdAt).format('YYYY-MM-DD HH:mm'),
