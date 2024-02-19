@@ -27,8 +27,6 @@ const colors = {
 };
 
 const InfoCard = ({ title, value, color }: InfoCardProps) => {
-  if (typeof value === 'number' && value === 0) return null;
-
   return (
     <div
       className={classNames(
@@ -36,8 +34,8 @@ const InfoCard = ({ title, value, color }: InfoCardProps) => {
         colors[color],
       )}
     >
-      <b>{value}</b>
-      <p className="font-semibold text-xs text-nowrap break-keep">{title}</p>
+      <b className='text-nowrap break-keep"'>{value}</b>
+      <p className="font-semibold text-xs">{title}</p>
     </div>
   );
 };
@@ -46,7 +44,7 @@ const InfoRow = ({ label, children }: InfoRow) => {
   return (
     <div>
       <label className="font-bold">{label}</label>
-      <p>{children}</p>
+      <div>{children}</div>
     </div>
   );
 };
@@ -68,7 +66,7 @@ const GroupCard = ({
 
   return (
     <div
-      className="flex cursor-pointer border rounded-lg"
+      className="flex cursor-pointer border rounded-lg h-[227px] hover:bg-gray-50 transition-colors"
       onClick={() =>
         navigate(PATH_FINDER.ACTIVITY_DETAIL(String(id)), {
           state: { category: category, id: id },
@@ -78,19 +76,18 @@ const GroupCard = ({
       <Image
         src={imageUrl}
         width="w-1/3"
-        height="h-[227px]"
         alt={name}
         className="rounded-l-lg object-cover border-r"
       />
       <div className="p-4 flex flex-col gap-2 w-2/3 divide-y">
-        <div className="grow">
+        <div className="h-full">
           <p className="font-bold text-lg">{name}</p>
           <p className="text-gray-600 text-sm">{content}</p>
         </div>
         <div className="grid md:grid-cols-2 md:divide-x pt-4 text-sm">
           <div className="pr-4 hidden md:block">
             <b>내용</b>
-            <div className="grid grid-cols-2 lg:grid-cols-3 gap-4 mt-2">
+            <div className="grid grid-cols-3 gap-4 mt-2">
               <InfoCard
                 title="주차"
                 color="yellow"
