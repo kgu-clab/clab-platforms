@@ -9,11 +9,7 @@ import { useActivityGroupMemberByStatus } from '@hooks/queries/useActivityGroupM
 
 const GroupPage = () => {
   const navigate = useNavigate();
-  const { data: groupData } = useActivityGroupMemberByStatus(
-    'PROGRESSING',
-    0,
-    20,
-  );
+  const { data } = useActivityGroupMemberByStatus();
 
   return (
     <Content>
@@ -22,22 +18,14 @@ const GroupPage = () => {
           활동신청
         </Button>
         <Button size="sm" color="blue">
-          새 그룹 만들기
+          새로운 그룹 만들기
         </Button>
       </Header>
       <Section>
-        <Section.Header
-          title={`현재 진행중인 그룹 ${groupData.items.length}`}
-        />
+        <Section.Header title={`현재 진행중인 그룹 ${data.items.length}`} />
         <Section.Body className="space-y-4">
-          {groupData.items.map(({ id, imageUrl, name, category }) => (
-            <GroupCard
-              key={id}
-              id={id}
-              imageUrl={imageUrl}
-              name={name}
-              category={category}
-            />
+          {data.items.map(({ id, ...rest }) => (
+            <GroupCard key={id} id={id} {...rest} />
           ))}
         </Section.Body>
       </Section>

@@ -7,6 +7,7 @@ import type {
   ActivityBoardType,
   ActivityGroupItem,
   ActivityGroupMemberType,
+  ActivityGroupStatusType,
   ActivityPhotoItem,
   ActivityRequestType,
   SubmitBoardType,
@@ -18,19 +19,23 @@ interface patchActivityGroupMemberApplyArgs {
   memberId: string;
   status: string;
 }
+
 interface PatchActivityBoardArgs {
   activityGroupBoardId: number;
   body: SubmitBoardType;
 }
+
 interface PostActivityGroupMemberApplyArgs {
   activityGroupId: number;
   body: ActivityRequestType;
 }
+
 interface PostActivityBoardArgs {
   parentId?: number;
   activityGroupId: number;
   body: SubmitBoardType;
 }
+
 // 나의 활동 일정 조회
 export const getMyActivities = async (
   startDateTime: string,
@@ -63,7 +68,7 @@ export const getActivityPhoto = async (page: number, size: number) => {
 
 // 활동 상태별 조회
 export const getActivityGroupByStatus = async (
-  activityGroupStatus: string,
+  activityGroupStatus: ActivityGroupStatusType,
   page: number,
   size: number,
 ) => {
@@ -76,16 +81,12 @@ export const getActivityGroupByStatus = async (
 };
 
 // 활동 정보 상세 조회
-export const getActivityDetail = async (
-  activityGroupId: number,
-  category: string,
-) => {
-  const url =
-    category === 'STUDY'
-      ? END_POINT.ACTIVITY_GROUP_MEMBER_STUDY(activityGroupId)
-      : END_POINT.ACTIVITY_GROUP_MEMBER_PROJECT(activityGroupId);
+export const getActivityDetail = async (id: number, category: string) => {
   const { data } = await server.get<BaseResponse<ActivityGroupItem>>({
-    url: url,
+    url:
+      category === 'STUDY'
+        ? END_POINT.ACTIVITY_GROUP_MEMBER_STUDY(id)
+        : END_POINT.ACTIVITY_GROUP_MEMBER_PROJECT(id),
   });
 
   return data;
@@ -221,7 +222,7 @@ export const getActivityBoardsMyAssignment = async (parentId: number) => {
       params,
     ),
   });
-  console.log(data);
+
   return data;
 };
 
