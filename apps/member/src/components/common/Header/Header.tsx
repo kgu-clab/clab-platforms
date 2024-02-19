@@ -9,27 +9,29 @@ interface HeaderProps {
 const Header = ({ title, children }: HeaderProps) => {
   const RenderTitle = () => {
     if (Array.isArray(title)) {
+      // 배열일 경우, 제목이 여러 개일 경우
       return (
         <div className="flex text-xl font-bold items-center">
           {title.map((name, index) => (
             <Fragment key={name}>
-              <span className="hover:bg-gray-100 rounded-lg cursor-pointer">
+              <span className="hover:bg-gray-100 rounded-lg cursor-pointer px-2 transition-colors">
                 {name}
               </span>
-              {index !== title.length - 1 && <GrNext className="mx-2" />}
+              {index !== title.length - 1 && <GrNext />}
             </Fragment>
           ))}
         </div>
       );
+    } else {
+      // 제목이 하나일 경우
+      return <h1 className="text-xl font-bold px-2">{title}</h1>;
     }
-
-    return <h1 className="text-xl font-bold">{title}</h1>;
   };
 
   return (
-    <div className="flex justify-between items-center rounded-lg border bg-white p-4">
+    <div className="flex justify-between items-center rounded-lg border bg-white py-4 px-2">
       <RenderTitle />
-      <div className="flex gap-4">{children}</div>
+      <div className="flex items-center gap-4">{children}</div>
     </div>
   );
 };
