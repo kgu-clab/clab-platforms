@@ -1,3 +1,7 @@
+type MemberStatusType = 'ACCEPTED' | 'REJECTED' | 'WAITING';
+type GroupCategoryType = 'STUDY' | 'PROJECT';
+export type ActivityGroupStatusType = 'WAITING' | 'PROGRESSING' | 'END';
+
 export interface ActivityItem {
   scheduleType: string;
   title: string;
@@ -15,31 +19,24 @@ export interface ActivityPhotoItem {
   isPublic: boolean;
 }
 
-enum MemberStatus {
-  ACCEPTED = 'ACCEPTED',
-  REJJECTED = 'REJECTED',
-  WAITING = 'WAITING',
-}
 export interface ActivityGroupMemberType {
   memberId: string;
   memberName: string;
   role: string;
-  status?: MemberStatus;
+  status?: MemberStatusType;
 }
-enum ActivityCategory {
-  STUDY = 'STUDY',
-  PROJECT = 'PROJECT',
-}
+
 export interface ActivityGroupItem {
   id: number;
-  category: ActivityCategory;
   name: string;
   content: string;
+  category: GroupCategoryType;
   subject: string;
-  status?: string;
-  imageUrl?: string;
-  groupMembers?: Array<ActivityGroupMemberType>;
-  curriculum?: string;
+  imageUrl: string;
+  leaderId: string;
+  leaderName: string;
+  participantCount: number;
+  weeklyActivityCount: number;
   createdAt: string;
 }
 export interface ActivityApplierType {
