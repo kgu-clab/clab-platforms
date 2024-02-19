@@ -1,25 +1,21 @@
 import Section from '@components/common/Section/Section';
+import { ActivityGroupItem } from '@type/activity';
 import { getDateSemester } from '@utils/date';
 import { LiaCertificateSolid } from 'react-icons/lia';
 import { MdOutlineDateRange } from 'react-icons/md';
 
-interface DetailInfoSectionProps {
-  name: string;
-  description: string;
-  category: string;
-  createdAt: string;
-}
+interface DetailInfoSectionProps extends ActivityGroupItem {}
 
 const DetailInfoSection = ({
   name,
-  description,
+  content,
   category,
   createdAt,
 }: DetailInfoSectionProps) => {
   return (
     <Section>
       <h1 className="text-xl font-bold">{name}</h1>
-      <p className="text-sm my-1">{description}</p>
+      <p className="text-sm my-1">{content}</p>
       <div className="text-sm flex items-center text-gray-500">
         <LiaCertificateSolid className="mr-1" />
         <span>{category}</span>

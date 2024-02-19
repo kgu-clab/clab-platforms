@@ -3,40 +3,38 @@ import Content from '@components/common/Content/Content';
 import Header from '@components/common/Header/Header';
 import GroupDetailSection from '@components/group/GroupDetailSection/GroupDetailSection';
 import { PATH_FINDER } from '@constants/path';
-import { useLocation, useNavigate } from 'react-router-dom';
-import ErrorPage from '@pages/ErrorPage/ErrorPage';
+import { useNavigate, useParams } from 'react-router-dom';
 import WeeklyActivitySection from '@components/group/WeeklyActivitySection/WeeklyActivitySection';
-import GroupNoticeSection from '@components/group/GroupNoticeSection/GroupNoticeSection';
 import Image from '@components/common/Image/Image';
 import { useActivityGroupMemberDetail } from '@hooks/queries/useActivityGroupMemberDetail';
 import { useActivityGroupBoardsByCategory } from '@hooks/queries/useActivityGroupBoardsByCategory';
+import { GROUP_MESSAGE } from '@constants/message';
+import type { GroupCategoryType } from '@type/activity';
+import GroupAlert from '@components/group/GroupAlert/GroupAlert';
 
 const GroupDetailPage = () => {
   const navigate = useNavigate();
-  const location = useLocation();
-  const id = location.state.id;
-  const category = location.state.category;
+  const { id, category } = useParams();
+
+  if (!id || !category) {
+    throw new Error(GROUP_MESSAGE.NO_ACTIVITY);
+  }
 
   const { data: groupDetailData } = useActivityGroupMemberDetail(
-    Number(id),
-    category,
+    id,
+    category as GroupCategoryType,
   );
 
   const { data: groupNoticeData } = useActivityGroupBoardsByCategory(
     Number(id),
     'NOTICE',
-    0,
-    20,
   );
+
   const { data: groupWeeklyActivityData } = useActivityGroupBoardsByCategory(
     Number(id),
     'WEEKLY_ACTIVITY',
-    0,
-    20,
   );
-  if (groupDetailData === undefined) {
-    return <ErrorPage />;
-  }
+
   return (
     <Content>
       <Header title={['활동', groupDetailData.name]}>
@@ -55,22 +53,14 @@ const GroupDetailPage = () => {
         </Button>
       </Header>
       <Image
-        src={groupDetailData.imageUrl}
-        alt={groupDetailData.name}
         width="w-full"
         height="h-[300px]"
+        src={groupDetailData.imageUrl}
+        alt={groupDetailData.name}
         className="object-cover rounded-lg border"
       />
-      <GroupDetailSection
-        name={groupDetailData.name}
-        category={groupDetailData.category}
-        description={groupDetailData.content}
-        createdAt={groupDetailData.createdAt}
-      />
-      <GroupNoticeSection
-        groupName={groupDetailData.name}
-        data={groupNoticeData.items}
-      />
+      <GroupDetailSection {...groupDetailData} />
+      <GroupAlert data={groupNoticeData.items} />
       <WeeklyActivitySection
         name={groupDetailData.name}
         groupId={id}

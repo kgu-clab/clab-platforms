@@ -1,5 +1,5 @@
 type MemberStatusType = 'ACCEPTED' | 'REJECTED' | 'WAITING';
-type GroupCategoryType = 'STUDY' | 'PROJECT';
+export type GroupCategoryType = 'STUDY' | 'PROJECT';
 export type ActivityGroupStatusType = 'WAITING' | 'PROGRESSING' | 'END';
 
 export interface ActivityItem {
@@ -66,10 +66,10 @@ export interface ActivityBoardType {
   id?: number;
   category: string;
   title?: string;
-  content?: string;
+  content: string;
   files?: Array<assignmentFileType>;
   dueDateTime?: string;
-  createdAt?: string;
+  createdAt: string;
 }
 
 export interface SubmitBoardType {
