@@ -4,7 +4,6 @@ import Section from '@components/common/Section/Section';
 import { Button } from '@clab/design-system';
 
 import { ChangeEvent, useCallback, useState } from 'react';
-import { useActivityGroupMemberApplierInfo } from '@hooks/queries/useActivityGroupMemberApplierInfo';
 import Select from '@components/common/Select/Select';
 import { useActivityGroupMemberByStatus } from '@hooks/queries/useActivityGroupMemberByStatus';
 import { useActivityGroupMemberApplyMutation } from '@hooks/queries/useActivityGroupMemberApplyMutation';
@@ -13,7 +12,6 @@ import Textarea from '@components/common/Textarea/Textarea';
 import Label from '@components/common/Label/Label';
 
 const GroupApplyPage = () => {
-  const { data: applierData } = useActivityGroupMemberApplierInfo();
   const { data: groupData } = useActivityGroupMemberByStatus();
   const { activityGroupMemberMutate } = useActivityGroupMemberApplyMutation();
   const toast = useToast();
@@ -45,10 +43,6 @@ const GroupApplyPage = () => {
     activityGroupMemberMutate({
       activityGroupId: groupID,
       body: {
-        applierName: applierData.name,
-        applierId: applierData.id,
-        applierDepartment: applierData.department,
-        applierYear: String(applierData.grade),
         applyReason: reason,
       },
     });
@@ -78,7 +72,7 @@ const GroupApplyPage = () => {
             id="reason"
             placeholder="지원동기를 입력해주세요."
             maxLength={1000}
-            className="h-80 w-full resize-none scrollbar-hide"
+            className="w-full resize-none h-80 scrollbar-hide"
             value={reason}
             onChange={handleReason}
           />
