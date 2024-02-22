@@ -1,14 +1,26 @@
 type MemberStatusType = 'ACCEPTED' | 'REJECTED' | 'WAITING';
-export type GroupCategoryType = 'STUDY' | 'PROJECT';
+type ActivityGroupBoardCategoryType =
+  | 'NOTICE'
+  | 'WEEKLY_ACTIVITY'
+  | 'FEEDBACK'
+  | 'ASSIGNMENT'
+  | 'SUBMIT';
+export type ActivityGroupCategoryType = 'STUDY' | 'PROJECT';
 export type ActivityGroupStatusType = 'WAITING' | 'PROGRESSING' | 'END';
 
-export interface ActivityItem {
-  scheduleType: string;
-  title: string;
-  detail: string;
-  startDateTime: string;
-  endDateTime: string;
-  activityGroupId: number;
+export interface ActivityGroupDetailType {
+  id: number;
+  category: ActivityGroupCategoryType;
+  subject: string;
+  name: string;
+  content: string;
+  status: ActivityGroupStatusType;
+  imageUrl: string;
+  groupMembers: ActivityGroupMemberType[];
+  curriculum: string;
+  activityGroupBoards: ActivityBoardType[];
+  createdAt: string;
+  isOwner: boolean;
 }
 
 export interface ActivityPhotoItem {
@@ -30,7 +42,7 @@ export interface ActivityGroupItem {
   id: number;
   name: string;
   content: string;
-  category: GroupCategoryType;
+  category: ActivityGroupCategoryType;
   subject: string;
   imageUrl: string;
   leaderId: string;
@@ -39,18 +51,8 @@ export interface ActivityGroupItem {
   weeklyActivityCount: number;
   createdAt: string;
 }
-export interface ActivityApplierType {
-  id: string;
-  name: string;
-  department: string;
-  grade: number;
-}
 
 export interface ActivityRequestType {
-  applierName: string;
-  applierId: string;
-  applierDepartment: string;
-  applierYear: string;
   applyReason: string;
   createdAt?: string;
 }
@@ -63,11 +65,12 @@ export interface assignmentFileType {
 }
 
 export interface ActivityBoardType {
-  id?: number;
-  category: string;
+  id: number;
+  parentId?: number;
+  category: ActivityGroupBoardCategoryType;
   title?: string;
   content: string;
-  files?: Array<assignmentFileType>;
+  files: Array<assignmentFileType>;
   dueDateTime?: string;
   createdAt: string;
 }
@@ -78,4 +81,8 @@ export interface SubmitBoardType {
   content?: string;
   fileUrls?: Array<string>;
   dueDateTime?: string;
+}
+
+export interface ActivityBoardWithAssignmentType extends ActivityBoardType {
+  assignments?: Array<ActivityBoardType>;
 }
