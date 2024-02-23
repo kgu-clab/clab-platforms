@@ -15,7 +15,7 @@ const Textarea = ({
   const hasValue = value.length > 0;
 
   return (
-    <div className="relative">
+    <div className="relative w-full">
       <textarea
         className={classNames(
           'border p-2 rounded-lg focus:bg-white outline-none transition-colors',
