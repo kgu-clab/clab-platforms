@@ -2,23 +2,23 @@ import { ACCESS_TOKEN_KEY, REFRESH_TOKEN_KEY } from '@constants/api';
 
 export const createPath = (...path: Array<string | number>): string => {
   return path
-    .map((path) => {
-      if (typeof path === 'string' || typeof path === 'number') {
-        return path.toString();
-      }
-      throw new Error('Invalid path type');
+    .map((path, index) => {
+      const pathStr = path.toString();
+      const prefix = index > 0 && !pathStr.startsWith('?') ? '/' : '';
+      return prefix + pathStr;
     })
-    .join('/')
+    .join('')
     .replace(/([^:])\/\/+/g, '$1/');
 };
 
 export const createCommonPagination = (
   endpoint: string,
-  params: Record<string, string | number | boolean>,
+  params: Record<string, string | number | boolean | undefined | null>,
 ) => {
   let url = `${endpoint}?`;
   Object.keys(params).forEach((key, index) => {
     const value = params[key];
+    if (value === null || value === undefined) return;
     if (index !== 0) {
       url += '&';
     }

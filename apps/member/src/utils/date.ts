@@ -36,7 +36,7 @@ export const calculateDDay = (date: string): number =>
  * @param {Date|string|number} date - 포맷할 날짜. Date 객체, 문자열 또는 타임스탬프일 수 있습니다.
  * @returns {string} 포맷된 날짜 문자열.
  */
-export const formattedDate = (date: string): string =>
+export const formattedDate = (date: string | undefined): string =>
   dayjs(date).format('YY.MM.DD(dd) HH:mm');
 
 /**
