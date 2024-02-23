@@ -17,7 +17,6 @@ import LibraryDetailPage from '@pages/LibraryDetailPage/LibraryDetailPage';
 import GroupPage from '@pages/GroupPage/GroupPage';
 import GroupApplyPage from '@pages/GroupApplyPage/GroupApplyPage';
 import GroupDetailPage from '@pages/GroupDetailPage/GroupDetailPage';
-import GroupStudentPage from '@pages/GroupStudentPage/GroupStudentPage';
 import GroupAssignmentPage from '@pages/GroupAssignmentPage/GroupAssignmentPage';
 import LoginPage from '@pages/LoginPage/LoginPage';
 import AuthPage from '@pages/AuthPage/AuthPage';
@@ -96,14 +95,6 @@ const AppRouter = () => {
           element: (
             <Suspense>
               <GroupDetailPage />
-            </Suspense>
-          ),
-        },
-        {
-          path: PATH.ACTIVITY_STUDENT,
-          element: (
-            <Suspense>
-              <GroupStudentPage />
             </Suspense>
           ),
         },
