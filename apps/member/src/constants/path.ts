@@ -20,7 +20,7 @@ export const PATH = {
   ACTIVITY: '/activity',
   ACTIVITY_APPLY: '/activity/apply',
   ACTIVITY_DETAIL: `/activity/:id`,
-  ACTIVITY_ASSIGNMENT: '/activity/:id/assignment',
+  ACTIVITY_ASSIGNMENT: '/activity/:id/:assignmentId',
   NEWS: '/news',
   BLOG: '/blog',
   LIBRARY: '/library',
@@ -38,6 +38,6 @@ export const PATH_FINDER = {
     createPath(PATH.COMMUNITY, sort, id),
   LIBRARY_DETAIL: (id: string) => createPath(PATH.LIBRARY, id),
   ACTIVITY_DETAIL: (id: number) => createPath(PATH.ACTIVITY, id),
-  ACTIVITY_ASSIGNMENT: (id: number) =>
-    createPath(PATH.ACTIVITY, id, 'assignment'),
+  ACTIVITY_ASSIGNMENT: (groupId: string, id: number) =>
+    createPath(PATH.ACTIVITY, groupId, id),
 };
