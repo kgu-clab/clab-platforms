@@ -57,7 +57,7 @@ export interface ActivityRequestType {
   createdAt?: string;
 }
 
-export interface assignmentFileType {
+export interface AssignmentFileType {
   fileUrl: string;
   originalFileName: string;
   storagePeriod: number;
@@ -66,17 +66,17 @@ export interface assignmentFileType {
 
 export interface ActivityBoardType {
   id: number;
-  parentId?: number;
+  parentId: number;
   category: ActivityGroupBoardCategoryType;
   title?: string;
   content: string;
-  files: Array<assignmentFileType>;
+  files: Array<AssignmentFileType>;
   dueDateTime?: string;
   createdAt: string;
 }
 
 export interface SubmitBoardType {
-  category: string;
+  category: ActivityGroupBoardCategoryType;
   title?: string;
   content?: string;
   fileUrls?: Array<string>;
