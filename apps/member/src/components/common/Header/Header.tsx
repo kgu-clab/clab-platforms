@@ -13,7 +13,7 @@ const Header = ({ title, children }: HeaderProps) => {
       return (
         <div className="flex items-center text-xl font-bold">
           {title.map((name, index) => (
-            <Fragment key={name}>
+            <Fragment key={index}>
               <span className="px-2 transition-colors rounded-lg cursor-pointer hover:bg-gray-100">
                 {name}
               </span>
