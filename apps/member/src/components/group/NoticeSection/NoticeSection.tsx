@@ -7,17 +7,17 @@ import classNames from 'classnames';
 import { useState } from 'react';
 import dayjs from 'dayjs';
 
-interface GroupAlertProps {
+interface NoticeSectionProps {
   data: Array<ActivityBoardType>;
 }
 
-interface GroupAlertItemProps {
+interface NoticeSectionItemProps {
   className?: string;
   onClick: (content: string) => void;
   data: ActivityBoardType;
 }
 
-const GroupAlert = ({ data }: GroupAlertProps) => {
+const NoticeSection = ({ data }: NoticeSectionProps) => {
   const { openModal } = useModal();
   const [open, setOpen] = useState(false);
 
@@ -40,9 +40,9 @@ const GroupAlert = ({ data }: GroupAlertProps) => {
   };
 
   return (
-    <Section>
+    <Section className="!p-2">
       <div className="flex items-center gap-2 divide-x">
-        <GroupAlert.Item data={latestNotice} onClick={onClickAlert} />
+        <NoticeSection.Item data={latestNotice} onClick={onClickAlert} />
         {otherNotices.length > 0 && (
           <DropdownButton
             isOpen={open}
@@ -60,7 +60,7 @@ const GroupAlert = ({ data }: GroupAlertProps) => {
         <hr className="my-2" />
         <div className="flex flex-col">
           {otherNotices.map((notice) => (
-            <GroupAlert.Item
+            <NoticeSection.Item
               key={notice.id}
               data={notice}
               onClick={onClickAlert}
@@ -72,7 +72,7 @@ const GroupAlert = ({ data }: GroupAlertProps) => {
   );
 };
 
-GroupAlert.Item = ({ className, data, onClick }: GroupAlertItemProps) => {
+NoticeSection.Item = ({ className, data, onClick }: NoticeSectionItemProps) => {
   return (
     <div
       className={classNames(
@@ -85,7 +85,7 @@ GroupAlert.Item = ({ className, data, onClick }: GroupAlertItemProps) => {
         onClick={() => onClick(data.content)}
       >
         <p className="w-full truncate">{data.title}</p>
-        <p className="whitespace-nowrap text-sm text-gray-500">
+        <p className="text-sm text-gray-500 whitespace-nowrap">
           {formattedDate(data.createdAt)}
         </p>
       </div>
@@ -93,4 +93,4 @@ GroupAlert.Item = ({ className, data, onClick }: GroupAlertItemProps) => {
   );
 };
 
-export default GroupAlert;
+export default NoticeSection;

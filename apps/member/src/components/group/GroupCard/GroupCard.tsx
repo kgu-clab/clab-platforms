@@ -35,7 +35,7 @@ const InfoCard = ({ title, value, color }: InfoCardProps) => {
       )}
     >
       <b className='text-nowrap break-keep"'>{value}</b>
-      <p className="font-semibold text-xs">{title}</p>
+      <p className="text-xs font-semibold">{title}</p>
     </div>
   );
 };
@@ -67,25 +67,21 @@ const GroupCard = ({
   return (
     <div
       className="flex cursor-pointer border rounded-lg h-[227px] hover:bg-gray-50 transition-colors"
-      onClick={() =>
-        navigate(PATH_FINDER.ACTIVITY_DETAIL(String(id)), {
-          state: { category: category, id: id },
-        })
-      }
+      onClick={() => navigate(PATH_FINDER.ACTIVITY_DETAIL(id))}
     >
       <Image
         src={imageUrl}
         width="w-1/3"
         alt={name}
-        className="rounded-l-lg object-cover border-r"
+        className="object-cover border-r rounded-l-lg"
       />
-      <div className="p-4 flex flex-col gap-2 w-2/3 divide-y">
+      <div className="flex flex-col w-2/3 gap-2 p-4 divide-y">
         <div className="h-full">
-          <p className="font-bold text-lg">{name}</p>
-          <p className="text-gray-600 text-sm">{content}</p>
+          <p className="text-lg font-bold">{name}</p>
+          <p className="text-sm text-gray-600">{content}</p>
         </div>
-        <div className="grid md:grid-cols-2 md:divide-x pt-4 text-sm">
-          <div className="pr-4 hidden md:block">
+        <div className="grid pt-4 text-sm md:grid-cols-2 md:divide-x">
+          <div className="hidden pr-4 md:block">
             <b>내용</b>
             <div className="grid grid-cols-3 gap-4 mt-2">
               <InfoCard
@@ -97,10 +93,10 @@ const GroupCard = ({
               <InfoCard title="대상" color="purple" value={subject} />
             </div>
           </div>
-          <div className="md:pl-4 text-sm flex flex-col justify-between">
+          <div className="flex flex-col justify-between text-sm md:pl-4">
             <InfoRow label="팀장">{`${leaderName}(${leaderId})`}</InfoRow>
             <InfoRow label="정보">
-              <div className="text-sm flex items-center text-gray-500">
+              <div className="flex items-center text-sm text-gray-500">
                 <LiaCertificateSolid className="mr-1" />
                 <span>{category}</span>
                 <span className="px-1">•</span>

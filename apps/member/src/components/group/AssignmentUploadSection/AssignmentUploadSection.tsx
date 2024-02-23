@@ -8,8 +8,8 @@ import { useMyProfile } from '@hooks/queries/useMyProfile';
 import { useUploadedFileAssignmentMutation } from '@hooks/queries/useUploadedFileAssignmentMutation';
 
 interface AssignmentUploadSectionProps {
-  id: number;
-  activityGroupId: number;
+  id: string;
+  activityGroupId: string;
   groupName: string;
   weeklyActivities: ActivityBoardType;
   mySubmit: ActivityBoardType;

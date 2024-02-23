@@ -6,8 +6,8 @@ import type { ActivityBoardType } from '@type/activity';
 import { useActivityGroupBoardFeedback } from '@hooks/queries/useActivityGroupBoardFeedback';
 
 interface AssignmentFeedbackSectionProps {
-  assignmentId: number;
-  activityGroupId: number;
+  assignmentId: string;
+  activityGroupId: string;
   mySubmit: ActivityBoardType;
 }
 

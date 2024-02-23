@@ -1,14 +1,17 @@
 import Content from '@components/common/Content/Content';
 import AssignmentUploadSection from '@components/group/AssignmentUploadSection/AssignmentUploadSection';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useParams } from 'react-router-dom';
 import AssignmentFeedbackSection from '@components/group/AssignmentFeedbackSection/AssignmentFeedbackSection';
 import { useActivityGroupBoard } from '@hooks/queries/useActivityGroupBoard';
 import { useActivityGroupBoardsMyAssignment } from '@hooks/queries/useActivityGroupBoardsMyAssignment';
-import { COMMUNITY_MESSAGE } from '@constants/message';
+import { COMMUNITY_MESSAGE, GROUP_MESSAGE } from '@constants/message';
 
 const GroupAssignmentPage = () => {
-  const location = useLocation();
-  const { groupId, id, groupName } = location.state;
+  const { id } = useParams();
+  const { state } = useLocation();
+
+  if (!id) throw new Error(GROUP_MESSAGE.NO_ACTIVITY);
+
   const { data: boardData } = useActivityGroupBoard(id);
   const { data: mySubmit } = useActivityGroupBoardsMyAssignment(id);
 
@@ -19,15 +22,15 @@ const GroupAssignmentPage = () => {
     <Content>
       <AssignmentUploadSection
         id={id}
-        activityGroupId={groupId}
-        groupName={groupName}
+        activityGroupId={id}
+        groupName={state?.name || '알 수 없는 활동'}
         weeklyActivities={boardData}
         mySubmit={mySubmit}
       />
       <AssignmentFeedbackSection
         assignmentId={id}
+        activityGroupId={id}
         mySubmit={mySubmit}
-        activityGroupId={groupId}
       />
     </Content>
   );

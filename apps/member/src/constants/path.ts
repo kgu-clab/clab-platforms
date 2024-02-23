@@ -18,11 +18,10 @@ export const PATH = {
   COMMUNITY_HIRE: '/community/hire',
   COMMUNITY_WRITE: '/community/write',
   ACTIVITY: '/activity',
-  ACTIVITY_DETAIL: `/activity/:id`,
   ACTIVITY_APPLY: '/activity/apply',
-  ACTIVITY_NOTICE: '/activity/:id/notice',
+  ACTIVITY_DETAIL: `/activity/:id`,
   ACTIVITY_STUDENT: '/activity/:id/student',
-  ACTIVITY_ASSIGNMENT: '/activity/:id/:assignmentId',
+  ACTIVITY_ASSIGNMENT: '/activity/:id/assignment',
   NEWS: '/news',
   BLOG: '/blog',
   LIBRARY: '/library',
@@ -39,9 +38,8 @@ export const PATH_FINDER = {
   COMMUNITY_POST: (sort: string, id: string) =>
     createPath(PATH.COMMUNITY, sort, id),
   LIBRARY_DETAIL: (id: string) => createPath(PATH.LIBRARY, id),
-  ACTIVITY_DETAIL: (id: string) => createPath(PATH.ACTIVITY, id),
+  ACTIVITY_DETAIL: (id: number) => createPath(PATH.ACTIVITY, id),
   ACTIVITY_STUDENT: (id: string) => createPath(PATH.ACTIVITY, id, 'student'),
-  ACTIVITY_NOTICE: (id: string) => createPath(PATH.ACTIVITY, id, 'notice'),
-  ACTIVITY_ASSIGNMENT: (id: string, assignmentId: string) =>
-    createPath(PATH.ACTIVITY, id, assignmentId),
+  ACTIVITY_ASSIGNMENT: (id: number) =>
+    createPath(PATH.ACTIVITY, id, 'assignment'),
 };
