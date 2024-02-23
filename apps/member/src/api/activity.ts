@@ -3,8 +3,8 @@ import { server } from './server';
 import { createCommonPagination } from '@utils/api';
 import { END_POINT } from '@constants/api';
 import type {
-  ActivityApplierType,
   ActivityBoardType,
+  ActivityGroupDetailType,
   ActivityGroupItem,
   ActivityGroupMemberType,
   ActivityGroupStatusType,
@@ -80,40 +80,10 @@ export const getActivityGroupByStatus = async (
   return data;
 };
 
-// 활동 정보 상세 조회
-export const getActivityDetail = async (id: number, category: string) => {
-  const { data } = await server.get<BaseResponse<ActivityGroupItem>>({
-    url:
-      category === 'STUDY'
-        ? END_POINT.ACTIVITY_GROUP_MEMBER_STUDY(id)
-        : END_POINT.ACTIVITY_GROUP_MEMBER_PROJECT(id),
-  });
-
-  return data;
-};
-
-// 활동 ID로 게시물 조회
-export const getActivityBoardsById = async (
-  activityGroupId: number,
-  category: string,
-  page: number,
-  size: number,
-) => {
-  const params = { activityGroupId, category, page, size };
-  const { data } = await server.get<PaginationType<ActivityBoardType>>({
-    url: createCommonPagination(
-      END_POINT.ACTIVITY_GROUP_BOARD_BY_CATRGORY,
-      params,
-    ),
-  });
-
-  return data;
-};
-
-// 신청자 정보
-export const getActivityApplierInfo = async () => {
-  const { data } = await server.get<BaseResponse<ActivityApplierType>>({
-    url: END_POINT.ACTIVITY_GROUP_MEMBER_APPLIER,
+// 활동 상세 조회
+export const getActivityGroupDetail = async (id: string) => {
+  const { data } = await server.get<BaseResponse<ActivityGroupDetailType>>({
+    url: END_POINT.ACTIVITY_GROUP_MEMBER(id),
   });
 
   return data;
@@ -125,46 +95,31 @@ export const postActivityGroupMemberApply = async ({
   body,
 }: PostActivityGroupMemberApplyArgs) => {
   const params = { activityGroupId };
-  const { data: formData } = await server.post<
-    ActivityRequestType,
-    BaseResponse<number>
-  >({
-    url: createCommonPagination(END_POINT.ACTIVITY_GROUP_MEMBER_APPLY, params),
-    body,
-  });
-  return formData;
-};
-
-// 부모 게시판 id로 자식 게시판 조회
-export const getActivityBoardLayer = async (
-  parentId: number,
-  page: number,
-  size: number,
-) => {
-  const params = {
-    parentId,
-    page,
-    size,
-  };
-  const { data } = await server.get<PaginationType<ActivityBoardType>>({
-    url: createCommonPagination(
-      END_POINT.ACTIVITY_GROUP_BOARD_BY_PARENT,
-      params,
-    ),
-  });
+  const { data } = await server.post<ActivityRequestType, BaseResponse<number>>(
+    {
+      url: createCommonPagination(
+        END_POINT.ACTIVITY_GROUP_MEMBER_APPLY,
+        params,
+      ),
+      body,
+    },
+  );
 
   return data;
 };
 
 // 활동 멤버 조회
 export const getActivityGroupMember = async (
-  activityGroupId: number,
+  activityGroupId: string,
   page: number,
   size: number,
 ) => {
   const params = { activityGroupId, page, size };
   const { data } = await server.get<PaginationType<ActivityGroupMemberType>>({
-    url: createCommonPagination(END_POINT.ACTIVITY_GROUP_MEMBER, params),
+    url: createCommonPagination(
+      END_POINT.ACTIVITY_GROUP_MEMBER_MEMBERS,
+      params,
+    ),
   });
 
   return data;
@@ -200,7 +155,7 @@ export const patchActivityGroupMemberApply = async ({
 };
 
 // 게시판 단일 조회
-export const getActivityBoard = async (activityGroupBoardId: number) => {
+export const getActivityBoard = async (activityGroupBoardId: string) => {
   const params = {
     activityGroupBoardId,
   };
@@ -212,7 +167,7 @@ export const getActivityBoard = async (activityGroupBoardId: number) => {
 };
 
 // 과제 제출 조회
-export const getActivityBoardsMyAssignment = async (parentId: number) => {
+export const getActivityBoardsMyAssignment = async (parentId: string) => {
   const params = {
     parentId,
   };
