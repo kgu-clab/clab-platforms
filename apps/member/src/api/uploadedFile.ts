@@ -1,20 +1,19 @@
-import { API_BASE_URL, END_POINT } from '@constants/api';
+import { END_POINT } from '@constants/api';
 import { createCommonPagination, createPath, getAccessToken } from '@utils/api';
-import { patchActivityBoard, postActivityBoard } from './activity';
+import type { BaseResponse, IDType } from '@type/api';
+import { server } from './server';
+import type { AssignmentFileType } from '@type/activity';
 
 interface postUploadedFileMembershipFeeArgs {
   storagePeriod: number;
   multipartFile: string;
 }
 interface postUploadedFileAssignmentArgs {
-  body: {
-    activityGroupId: number;
-    activityGroupBoard: number;
-    memberId: string;
-    storagePeriod: number;
-  };
-  multipartFile: FormData;
-  change: boolean;
+  groupId: IDType;
+  groupBoardId: IDType;
+  memberId: IDType;
+  storagePeriod: number;
+  files: FormData;
 }
 
 export const postUploadedFileMembershipFee = async ({
@@ -46,47 +45,25 @@ export const postUploadedFileMembershipFee = async ({
   return data;
 };
 
+// 활동 그룹 과제 업로드
 export const postUploadedFileAssignment = async ({
-  body,
-  multipartFile,
-  change,
+  groupId,
+  groupBoardId,
+  memberId,
+  storagePeriod,
+  files,
 }: postUploadedFileAssignmentArgs) => {
-  const accessToken = getAccessToken();
-  const storagePeriod = 7;
   const url = createPath(
-    API_BASE_URL,
-    END_POINT.UPLOADEDFILE_ACTIVITY_ASSIGNMENT(
-      body.activityGroupId,
-      body.activityGroupBoard,
-      body.memberId,
-    ),
+    END_POINT.UPLOADEDFILE_ACTIVITY_ASSIGNMENT(groupId, groupBoardId, memberId),
+    `?storagePeriod=${storagePeriod}`,
   );
-  const addUrl = `${url}?storagePeriod=${storagePeriod}`;
-  const { data: SubmitFileType } = await fetch(addUrl, {
-    method: 'POST',
-    headers: {
-      Authorization: `Bearer ${accessToken}`,
-    },
-    body: multipartFile,
-  }).then((response) => {
-    if (!response.ok) {
-      throw new Error('Network response was not ok');
-    }
-    return response.json();
+  const { data } = await server.post<
+    FormData,
+    BaseResponse<AssignmentFileType[]>
+  >({
+    url,
+    body: files,
   });
-  const boardBody = {
-    category: 'SUBMIT',
-    fileUrls: [SubmitFileType[0].fileUrl],
-  };
-  change
-    ? patchActivityBoard({
-        activityGroupBoardId: body.activityGroupBoard,
-        body: boardBody,
-      })
-    : postActivityBoard({
-        parentId: body.activityGroupBoard,
-        activityGroupId: body.activityGroupId,
-        body: boardBody,
-      });
-  return SubmitFileType;
+
+  return data;
 };

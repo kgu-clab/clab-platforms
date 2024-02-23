@@ -1,30 +1,35 @@
 import Content from '@components/common/Content/Content';
 import AssignmentUploadSection from '@components/group/AssignmentUploadSection/AssignmentUploadSection';
 import { useLocation, useParams } from 'react-router-dom';
-import AssignmentFeedbackSection from '@components/group/AssignmentFeedbackSection/AssignmentFeedbackSection';
+// import AssignmentFeedbackSection from '@components/group/AssignmentFeedbackSection/AssignmentFeedbackSection';
 import { useActivityGroupBoard } from '@hooks/queries/useActivityGroupBoard';
 import { useActivityGroupBoardsMyAssignment } from '@hooks/queries/useActivityGroupBoardsMyAssignment';
-import { COMMUNITY_MESSAGE, GROUP_MESSAGE } from '@constants/message';
+import { GROUP_MESSAGE } from '@constants/message';
+import Header from '@components/common/Header/Header';
+import Section from '@components/common/Section/Section';
+import AssignmentFeedbackSection from '@components/group/AssignmentFeedbackSection/AssignmentFeedbackSection';
 
 const GroupAssignmentPage = () => {
-  const { id } = useParams();
+  const { id, assignmentId } = useParams();
   const { state } = useLocation();
 
-  if (!id) throw new Error(GROUP_MESSAGE.NO_ACTIVITY);
+  if (!id || !assignmentId || !state?.name)
+    throw new Error(GROUP_MESSAGE.NO_ACTIVITY);
 
-  const { data: boardData } = useActivityGroupBoard(id);
-  const { data: mySubmit } = useActivityGroupBoardsMyAssignment(id);
+  const { data: boardData } = useActivityGroupBoard(assignmentId);
+  const { data: mySubmit } = useActivityGroupBoardsMyAssignment(boardData?.id);
 
-  if (boardData === undefined) {
-    throw new Error(COMMUNITY_MESSAGE.NO_ARTICLE);
-  }
   return (
     <Content>
+      <Header title={[...state.name]} />
+      <Section>
+        <Section.Header title="과제 설명" />
+        <p className="pt-3">{boardData?.content}</p>
+      </Section>
       <AssignmentUploadSection
-        id={id}
         activityGroupId={id}
-        groupName={state?.name || '알 수 없는 활동'}
-        weeklyActivities={boardData}
+        assignmentId={assignmentId}
+        dueDateTime={boardData?.dueDateTime}
         mySubmit={mySubmit}
       />
       <AssignmentFeedbackSection

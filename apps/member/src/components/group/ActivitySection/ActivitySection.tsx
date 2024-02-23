@@ -1,26 +1,37 @@
+import { GROUP_MESSAGE } from '@constants/message';
 import { PATH_FINDER } from '@constants/path';
 import type { ActivityBoardWithAssignmentType } from '@type/activity';
 import classNames from 'classnames';
 import { FaRegFileAlt } from 'react-icons/fa';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 
 interface ActivitySectionProps {
   data: Array<ActivityBoardWithAssignmentType>;
 }
 
-interface WeekDetailProps extends ActivityBoardWithAssignmentType {
+interface ActivitySectionItemProps extends ActivityBoardWithAssignmentType {
+  groundId: string;
   week: number;
 }
 
 const ActivitySection = ({ data }: ActivitySectionProps) => {
+  const { id } = useParams(); // 활동 그룹 ID
+
+  if (!id) throw new Error(GROUP_MESSAGE.NO_ACTIVITY);
+
   return (
     <div className="bg-white border divide-y rounded-lg">
       <div className="p-4 rounded-t-lg bg-sky-100">
         <h1 className="text-lg font-semibold">주차별 활동</h1>
       </div>
       <div className="divide-y">
-        {[...data].map(({ id, ...rest }, index) => (
-          <ActivitySection.Item key={id} id={id} week={index + 1} {...rest} />
+        {[...data].map(({ ...props }, index) => (
+          <ActivitySection.Item
+            key={index + 1}
+            groundId={id}
+            week={index + 1}
+            {...props}
+          />
         ))}
       </div>
     </div>
@@ -28,11 +39,12 @@ const ActivitySection = ({ data }: ActivitySectionProps) => {
 };
 
 ActivitySection.Item = ({
+  groundId,
   title,
   content,
   assignments,
   week,
-}: WeekDetailProps) => {
+}: ActivitySectionItemProps) => {
   return (
     <div className="p-4">
       <div className="flex items-center justify-between">
@@ -51,8 +63,8 @@ ActivitySection.Item = ({
           {assignments?.map(({ id, title: assignmentTitle }) => (
             <Link
               key={id}
-              to={PATH_FINDER.ACTIVITY_ASSIGNMENT(id)}
-              state={{ name: title }}
+              to={PATH_FINDER.ACTIVITY_ASSIGNMENT(groundId, id)}
+              state={{ name: [title, assignmentTitle] }}
               className="flex items-center cursor-pointer"
             >
               <FaRegFileAlt
