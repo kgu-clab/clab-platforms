@@ -3,13 +3,27 @@ import ProgressBar from '@components/common/ProgressBar/ProgressBar';
 import { BookItem } from '@type/book';
 import { FcBookmark } from 'react-icons/fc';
 import dayjs from 'dayjs';
+import useModal from '@hooks/common/useModal';
+import { useBookLoanReturnMutation } from '@hooks/queries/useBookLoanReturnMutation';
+import { useState } from 'react';
+import { useBookLoanExtendMutation } from '@hooks/queries/useBookLoanExtendMutation';
 
 interface BookPanelProps {
+  memberId: string;
   data: Array<BookItem>;
 }
 
-const ActionButton = ({ children }: { children: React.ReactNode }) => (
-  <button className="py-1.5 hover:bg-gray-100 hover:text-black">
+const ActionButton = ({
+  children,
+  onClick,
+}: {
+  children: React.ReactNode;
+  onClick?: () => void;
+}) => (
+  <button
+    className="py-1.5 hover:bg-gray-100 hover:text-black"
+    onClick={onClick}
+  >
     {children}
   </button>
 );
@@ -26,9 +40,49 @@ const checkDueDate = (createdAt: string) => {
   return end.diff(today, 'd');
 };
 
-const BookPanel = ({ data }: BookPanelProps) => {
+const BookPanel = ({ data, memberId }: BookPanelProps) => {
+  const { openModal } = useModal();
+  const { bookReturnMutate } = useBookLoanReturnMutation();
+  const { bookExtendMutate } = useBookLoanExtendMutation();
   const description =
     data.length > 0 ? `${data.length}권 대여중` : '빌린 도서가 없어요.';
+  const [selectedBookId, setSelectedBookId] = useState<number>(0);
+
+  const onClickBookButton = (sort: string) => {
+    openModal({
+      title: sort === 'return' ? '반납하기' : '연장하기',
+      content: (
+        <select
+          className="p-2 border rounded-md"
+          onChange={(e) => setSelectedBookId(Number(e.target.value))}
+        >
+          <option disabled value={0}>
+            미선택
+          </option>
+          {data.map(({ id, title }) => (
+            <option key={id} value={id}>
+              {title}
+            </option>
+          ))}
+        </select>
+      ),
+      accept: {
+        text: sort === 'return' ? '반납하기' : '연장하기',
+        onClick: () => {
+          sort === 'return'
+            ? bookReturnMutate({
+                bookId: selectedBookId,
+                borrowerId: memberId,
+              })
+            : bookExtendMutate({
+                bookId: selectedBookId,
+                borrowerId: memberId,
+              });
+        },
+      },
+    });
+  };
+
   return (
     <Panel>
       <Panel.Header
@@ -41,7 +95,7 @@ const BookPanel = ({ data }: BookPanelProps) => {
           <ul key={id}>
             <li className="font-semibold">
               <div className="flex items-baseline justify-between mb-2">
-                <span className="truncate mr-2">{title}</span>
+                <span className="mr-2 truncate">{title}</span>
                 <span className="text-xs w-fit text-nowrap">
                   D-{checkDueDate(createdAt)}
                 </span>
@@ -52,8 +106,12 @@ const BookPanel = ({ data }: BookPanelProps) => {
         ))}
       </Panel.Body>
       <Panel.Action>
-        <ActionButton>대여하기</ActionButton>
-        <ActionButton>반납하기</ActionButton>
+        <ActionButton onClick={() => onClickBookButton('extend')}>
+          연장하기
+        </ActionButton>
+        <ActionButton onClick={() => onClickBookButton('return')}>
+          반납하기
+        </ActionButton>
       </Panel.Action>
     </Panel>
   );

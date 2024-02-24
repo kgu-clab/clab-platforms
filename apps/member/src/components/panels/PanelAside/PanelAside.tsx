@@ -12,9 +12,9 @@ import { useMyProfile } from '@hooks/queries/useMyProfile';
 
 const PanelAside = () => {
   const { data: myNotificationsData } = useMyNotifications();
-  const { data: myBooksData } = useMyBookLoan();
   const { data: myActivities } = useMyActivity();
   const { data: myProfile } = useMyProfile();
+  const { data: myBooksData } = useMyBookLoan(0, 20, myProfile.id);
 
   return (
     <aside className="hidden xl:w-1/4 xl:block">
@@ -27,7 +27,7 @@ const PanelAside = () => {
         <AttendanceFairyPanel />
         <AlarmPanel data={myNotificationsData.items} />
         <ActivityPanel data={myActivities.items} />
-        <BookPanel data={myBooksData} />
+        <BookPanel data={myBooksData} memberId={myProfile.id} />
         <AccountPanel />
         <SetupPanel />
       </div>
