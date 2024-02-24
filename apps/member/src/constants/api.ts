@@ -18,6 +18,7 @@ export const END_POINT = {
   ACCUSES: '/accuses',
   BOOK: `/books`,
   BOOK_DETAIL: (id: string) => `/books/${id}`,
+  BOOK_LOAN: `/book-loan-records`,
   MY_NEWS: `/news`,
   MY_BLOG: `/blogs`,
   MY_HIRE: `/job-postings`,

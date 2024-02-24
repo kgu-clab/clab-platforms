@@ -36,7 +36,7 @@ const LibraryPage = () => {
       <Section>
         <Section.Header title="소장도서" />
         <Section.Body>
-          <LibraryBookList data={data.items.slice(4)} />
+          <LibraryBookList data={data.items.slice(0, 4)} />
           <div className="flex justify-center mt-4">
             <Pagination
               totalItems={data.totalItems}

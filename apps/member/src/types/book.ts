@@ -10,3 +10,8 @@ export interface BookItem {
   createdAt: string;
   updateTime: string | null;
 }
+
+export interface BookLoanRecordItem {
+  bookId: number;
+  borrowerId: string;
+}

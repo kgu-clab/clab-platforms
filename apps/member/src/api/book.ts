@@ -1,7 +1,7 @@
 import { server } from './server';
 import { createCommonPagination } from '@utils/api';
 import { END_POINT } from '@constants/api';
-import type { BookItem } from '@type/book';
+import type { BookItem, BookLoanRecordItem } from '@type/book';
 import type { BaseResponse, PaginationType } from '@type/api';
 
 // 도서 목록 조회
@@ -31,4 +31,14 @@ export const getMyBooks = async (page: number, size: number, id: string) => {
   });
 
   return data.items.filter((book) => book.borrowerId === id);
+};
+
+export const postBorrowBook = async (body: BookLoanRecordItem) => {
+  const borrowUrl = END_POINT.BOOK_LOAN + '/borrow';
+  const { data } = await server.post<BookLoanRecordItem, BaseResponse<number>>({
+    url: borrowUrl,
+    body,
+  });
+
+  return data;
 };
