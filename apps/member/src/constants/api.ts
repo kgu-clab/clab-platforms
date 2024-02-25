@@ -27,6 +27,8 @@ export const END_POINT = {
   MAIN_SCHEDULE: `/schedule`,
   MAIN_ACTIVITY_PHOTO: `/activity-photos`,
   COMMENTS: (id: string) => `/comments/${id}`,
+  MEMBERSHIP_FEE: `/membership-fees`,
+  UPLOADEDFILE_MEMBERSHIP_FEE: `/files/membership-fee`,
   HIRE: (jobPostingId: string) => `/job-postings/${jobPostingId}`,
   NEWS: (newsId: string) => `/news/${newsId}`,
 } as const;
