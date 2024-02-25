@@ -14,4 +14,7 @@ export interface BookItem {
 export interface BookLoanRecordItem {
   bookId: number;
   borrowerId: string;
+  borrowedAt?: string;
+  returnedAt?: string;
+  loanExtensionDate?: string;
 }

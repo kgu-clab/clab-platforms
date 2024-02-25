@@ -65,3 +65,18 @@ export const postExtendBook = async (body: BookLoanRecordItem) => {
 
   return data;
 };
+
+// 도서 대출 내역 검색
+export const getBookLoanByMemberId = async (
+  borrowerId: string,
+  page = 0,
+  size = 20,
+) => {
+  const loanUrl = END_POINT.BOOK_LOAN + '/search';
+  const params = { borrowerId, page, size };
+  const { data } = await server.get<PaginationType<BookLoanRecordItem>>({
+    url: createCommonPagination(loanUrl, params),
+  });
+
+  return data;
+};

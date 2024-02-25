@@ -5,8 +5,10 @@ import { FcBookmark } from 'react-icons/fc';
 import dayjs from 'dayjs';
 import useModal from '@hooks/common/useModal';
 import { useBookLoanReturnMutation } from '@hooks/queries/useBookLoanReturnMutation';
-import { useState } from 'react';
 import { useBookLoanExtendMutation } from '@hooks/queries/useBookLoanExtendMutation';
+import Select from '@components/common/Select/Select';
+import { useBookLoanRecordByMemberId } from '@hooks/queries/useBookLoanRecordById';
+import useToast from '@hooks/common/useToast';
 
 interface BookPanelProps {
   memberId: string;
@@ -28,56 +30,71 @@ const ActionButton = ({
   </button>
 );
 
-const checkProgress = (createdAt: string) => {
+const checkProgress = (date: string) => {
   const now = dayjs();
-  const end = dayjs(createdAt).add(14, 'd');
+  const end = dayjs(date).add(14, 'd');
   return (end.diff(now, 'd') * 100) % 14;
 };
 
-const checkDueDate = (createdAt: string) => {
+const checkExtendProgress = (startDate: string, endDate: string) => {
+  const now = dayjs();
+  const end = dayjs(endDate);
+  const start = dayjs(startDate);
+  const gap = end.diff(start, 'd');
+  return (end.diff(now, 'd') * 100) % gap;
+};
+
+const checkDueDate = (date: string) => {
   const today = dayjs();
-  const end = dayjs(createdAt).add(14, 'd');
+  const end = dayjs(date).add(14, 'd');
   return end.diff(today, 'd');
 };
 
 const BookPanel = ({ data, memberId }: BookPanelProps) => {
+  const today = dayjs();
   const { openModal } = useModal();
+  const toast = useToast();
+  const { data: myLoanBookData } = useBookLoanRecordByMemberId(memberId);
   const { bookReturnMutate } = useBookLoanReturnMutation();
   const { bookExtendMutate } = useBookLoanExtendMutation();
+  const selectData = data.map(({ id, title }) => ({ id, name: title }));
+  const myLoanSelectData = myLoanBookData.items.filter(
+    (id) => id.returnedAt === null,
+  );
   const description =
     data.length > 0 ? `${data.length}권 대여중` : '빌린 도서가 없어요.';
-  const [selectedBookId, setSelectedBookId] = useState<number>(0);
 
   const onClickBookButton = (sort: string) => {
+    let selectedBookId = 0;
+    if (myLoanSelectData.length === 0) {
+      toast({
+        state: 'error',
+        message: '대여된 도서가 없습니다.',
+      });
+      return;
+    }
     openModal({
       title: sort === 'return' ? '반납하기' : '연장하기',
       content: (
-        <select
-          className="p-2 border rounded-md"
-          onChange={(e) => setSelectedBookId(Number(e.target.value))}
-        >
-          <option disabled value={0}>
-            미선택
-          </option>
-          {data.map(({ id, title }) => (
-            <option key={id} value={id}>
-              {title}
-            </option>
-          ))}
-        </select>
+        <Select
+          data={selectData}
+          onChange={(e) => (selectedBookId = Number(e.target.value))}
+        />
       ),
       accept: {
         text: sort === 'return' ? '반납하기' : '연장하기',
         onClick: () => {
-          sort === 'return'
-            ? bookReturnMutate({
-                bookId: selectedBookId,
-                borrowerId: memberId,
-              })
-            : bookExtendMutate({
-                bookId: selectedBookId,
-                borrowerId: memberId,
-              });
+          if (selectedBookId >= 0) {
+            sort === 'return'
+              ? bookReturnMutate({
+                  bookId: selectData[selectedBookId].id,
+                  borrowerId: memberId,
+                })
+              : bookExtendMutate({
+                  bookId: selectData[selectedBookId].id,
+                  borrowerId: memberId,
+                });
+          }
         },
       },
     });
@@ -91,19 +108,40 @@ const BookPanel = ({ data, memberId }: BookPanelProps) => {
         description={description}
       />
       <Panel.Body className="space-y-4 text-sm">
-        {data.map(({ id, title, createdAt }) => (
-          <ul key={id}>
-            <li className="font-semibold">
-              <div className="flex items-baseline justify-between mb-2">
-                <span className="mr-2 truncate">{title}</span>
-                <span className="text-xs w-fit text-nowrap">
-                  D-{checkDueDate(createdAt)}
-                </span>
-              </div>
-              <ProgressBar value={checkProgress(createdAt)} />
-            </li>
-          </ul>
-        ))}
+        {data.map(({ id, title }) => {
+          const loanData = myLoanSelectData.find((book) => book.bookId === id);
+          if (!loanData) return null;
+
+          return (
+            <ul key={id}>
+              <li className="font-semibold">
+                <div className="flex items-baseline justify-between mb-2">
+                  <span className="mr-2 truncate">{title}</span>
+                  <span className="text-xs w-fit text-nowrap">
+                    D-
+                    {loanData.loanExtensionDate
+                      ? dayjs(loanData.loanExtensionDate).diff(today, 'd')
+                      : loanData.borrowedAt
+                        ? checkDueDate(loanData.borrowedAt)
+                        : 0}
+                  </span>
+                </div>
+                <ProgressBar
+                  value={
+                    loanData.loanExtensionDate && loanData.borrowedAt
+                      ? checkExtendProgress(
+                          loanData.borrowedAt,
+                          loanData.loanExtensionDate,
+                        )
+                      : loanData.borrowedAt
+                        ? checkProgress(loanData.borrowedAt)
+                        : 0
+                  }
+                />
+              </li>
+            </ul>
+          );
+        })}
       </Panel.Body>
       <Panel.Action>
         <ActionButton onClick={() => onClickBookButton('extend')}>
