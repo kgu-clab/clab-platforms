@@ -9,7 +9,7 @@ import {
 interface ModalState {
   isOpen: boolean;
   title: string;
-  content: string;
+  content: React.ReactNode;
   accept?: {
     text: string;
     onClick: () => void;
@@ -25,7 +25,7 @@ export const modalState = atom<ModalState>({
   default: {
     isOpen: false,
     title: '',
-    content: '',
+    content: null,
   },
 });
 

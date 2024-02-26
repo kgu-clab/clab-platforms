@@ -2,7 +2,7 @@ import { useSetModalStore } from '@store/modal';
 
 interface OpenModalProps {
   title?: string;
-  content: string;
+  content: React.ReactNode;
   accept?: {
     text: string;
     onClick: () => void;

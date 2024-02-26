@@ -14,9 +14,11 @@ export const END_POINT = {
   // -- 커뮤니티
   BOARDS: `/boards`,
   BOARDS_LIST: `/boards/list`,
-  BOARDERS_ITEM: (boardId: string) => `/boards/${boardId}`,
+  BOARDERS_ITEM: (id: string) => `/boards/${id}`,
   ACCUSES: '/accuses',
-  BOOK_LIST: `/books`,
+  BOOK: `/books`,
+  BOOK_DETAIL: (id: string) => `/books/${id}`,
+  BOOK_LOAN: `/book-loan-records`,
   MY_NEWS: `/news`,
   MY_BLOG: `/blogs`,
   MY_HIRE: `/job-postings`,
@@ -24,12 +26,12 @@ export const END_POINT = {
   MY_ACTIVITY: `/schedule/activity`,
   MAIN_SCHEDULE: `/schedule`,
   MAIN_ACTIVITY_PHOTO: `/activity-photos`,
+  COMMENTS: (id: string) => `/comments/${id}`,
   MEMBERSHIP_FEE: `/membership-fees`,
   UPLOADEDFILE_MEMBERSHIP_FEE: `/files/membership-fee`,
-  COMMENTS: (boardId: string) => `/comments/${boardId}`,
   HIRE: (jobPostingId: string) => `/job-postings/${jobPostingId}`,
   NEWS: (newsId: string) => `/news/${newsId}`,
-};
+} as const;
 
 export const HTTP_STATUS_CODE = {
   SUCCESS: 200,
@@ -41,4 +43,4 @@ export const HTTP_STATUS_CODE = {
   NOT_FOUND: 404,
   CONTENT_TOO_LARGE: 413,
   INTERNAL_SERVER_ERROR: 500,
-};
+} as const;

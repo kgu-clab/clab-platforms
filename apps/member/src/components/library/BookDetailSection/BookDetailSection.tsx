@@ -3,27 +3,21 @@ import { Link } from 'react-router-dom';
 import { Button } from '@clab/design-system';
 import Image from '@components/common/Image/Image';
 import { BOOK_STATE } from '@constants/state';
+import { BookItem, BookLoanRecordItem } from '@type/book';
+import { useBookLoanBorrowMutation } from '@hooks/queries/useBookLoanBorrowMutation';
+import { useMyProfile } from '@hooks/queries/useMyProfile';
 
 interface BookDetailSectionProps {
-  data: {
-    title: string;
-    image: string;
-    author: string;
-    publisher: string;
-    category: string;
-    date: string;
-    detail: string;
-    state: string;
-  };
+  data: BookItem;
 }
 
-interface BookInfoProps {
+interface BookInfoRowProps {
   to?: string;
   label: string;
   content: string;
 }
 
-const BookInfoRow = ({ to, label, content }: BookInfoProps) => {
+const BookInfoRow = ({ to, label, content }: BookInfoRowProps) => {
   return (
     <div className="flex">
       <p className="w-20 font-semibold">{label}</p>
@@ -39,38 +33,52 @@ const BookInfoRow = ({ to, label, content }: BookInfoProps) => {
 };
 
 const BookDetailSection = ({ data }: BookDetailSectionProps) => {
-  const { image, title, author, publisher, date, category, state, detail } =
-    data;
+  const { bookBorrowMutate } = useBookLoanBorrowMutation();
+  const { data: myInfo } = useMyProfile();
+  const { id, borrowerId, category, title, author, publisher, imageUrl } = data;
+
+  const onClickBorrow = (bookId: number) => {
+    const bookLoanInfo: BookLoanRecordItem = {
+      bookId: bookId,
+      borrowerId: myInfo.id,
+    };
+    bookBorrowMutate(bookLoanInfo);
+  };
 
   return (
     <Section>
       <div className="flex flex-col gap-2 px-2">
-        <div className="my-4 gap-4 lg:grid lg:grid-cols-2">
-          <div className="md:mb-4 lg:m-0 lg:max-w-3xl">
+        <div className="gap-4 my-4 lg:grid lg:grid-cols-2">
+          <div className="flex justify-center md:mb-4 lg:m-0 lg:max-w-3xl">
             <Image
-              src={image}
+              src={imageUrl}
               alt={title}
               width="w-[380px]"
-              className="object-cover shadow-xl"
+              className="object-cover transition-shadow shadow-md hover:shadow-xl"
             />
           </div>
-          <div className="flex flex-col gap-4 justify-between">
+          <div className="flex flex-col justify-between gap-4">
             <div className="space-y-2">
-              <h1 className="text-2xl font-bold pb-4">{title}</h1>
+              <h1 className="pb-4 text-2xl font-bold">{title}</h1>
               <BookInfoRow label="작가" content={author} />
               <BookInfoRow label="출판사" content={publisher} />
-              <BookInfoRow label="출간일" content={date} />
               <BookInfoRow label="분류" content={category} />
-              <BookInfoRow label="대여 상태" content={state} />
-              <BookInfoRow label="상세 정보" to={detail} content="교보문고" />
+              <BookInfoRow
+                label="대여 상태"
+                content={
+                  borrowerId ? BOOK_STATE.BORROWED : BOOK_STATE.AVAILABLE
+                }
+              />
             </div>
             <div className="w-full">
-              {state === BOOK_STATE.OK ? (
-                <Button className="w-full">대여하기</Button>
-              ) : (
-                <p className="text-xl font-bold pt-12 underline decoration-green-700">
+              {borrowerId ? (
+                <p className="pt-12 text-xl font-bold underline decoration-green-700">
                   이미 대여된 도서예요! 조금만 기다려주세요 ⏳
                 </p>
+              ) : (
+                <Button className="w-full" onClick={() => onClickBorrow(id)}>
+                  대여하기
+                </Button>
               )}
             </div>
           </div>

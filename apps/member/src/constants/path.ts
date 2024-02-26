@@ -31,17 +31,18 @@ export const PATH = {
   SITEMAP: '/sitemap',
   LOGIN: '/login',
   AUTH: '/auth',
-};
+} as const;
 
 export const PATH_FINDER = {
   NEWS_POST: (id: string) => createPath(PATH.NEWS, id),
   BLOG_POST: (id: string) => createPath(PATH.BLOG, id),
   COMMUNITY_POST: (sort: string, id: string) =>
     createPath(PATH.COMMUNITY, sort, id),
-  LIBRARY_DETAIL: (id: string) => createPath(PATH.LIBRARY, id),
+  LIBRARY_DETAIL: (id: string | number) => createPath(PATH.LIBRARY, id),
   ACTIVITY_DETAIL: (id: string) => createPath(PATH.ACTIVITY, id),
   ACTIVITY_STUDENT: (id: string) => createPath(PATH.ACTIVITY, id, 'student'),
   ACTIVITY_NOTICE: (id: string) => createPath(PATH.ACTIVITY, id, 'notice'),
   ACTIVITY_ASSIGNMENT: (id: string, assignmentId: string) =>
     createPath(PATH.ACTIVITY, id, assignmentId),
-};
+  BOOK_DETAIL: (id: string) => createPath(PATH.LIBRARY, id),
+} as const;
