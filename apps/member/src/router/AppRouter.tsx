@@ -1,39 +1,55 @@
-import { Suspense } from 'react';
+import { lazy, Suspense } from 'react';
 import { PATH } from '@constants/path';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 import AppLayout from './AppLayout';
 import ErrorPage from '@pages/ErrorPage/ErrorPage';
-import MainPage from '@pages/MainPage/MainPage';
-import CommunityPage from '@pages/CommunityPage/CommunityPage';
-import CommunityDetailPage from '@pages/CommunityDetailPage/CommunityDetailPage';
-import CommunityPostPage from '@pages/CommunityPostPage/CommunityPostPage';
-import CommunityWritePage from '@pages/CommunityWritePage/CommunityWritePage';
-import MyPage from '@pages/MyPage/MyPage';
-import CalendarPage from '@pages/CalendarPage/CalendarPage';
-import SupportPage from '@pages/SupportPage/SupportPage';
-import LibraryPage from '@pages/LibraryPage/LibraryPage';
-import LibraryDetailPage from '@pages/LibraryDetailPage/LibraryDetailPage';
-import GroupPage from '@pages/GroupPage/GroupPage';
-import GroupApplyPage from '@pages/GroupApplyPage/GroupApplyPage';
-import GroupDetailPage from '@pages/GroupDetailPage/GroupDetailPage';
-import GroupNoticeDetailPage from '@pages/GroupNoticeDetailPage/GroupNoticeDetailPage';
-import GroupStudentPage from '@pages/GroupStudentPage/GroupStudentPage';
-import GroupAssignmentPage from '@pages/GroupAssignmentPage/GroupAssignmentPage';
-import LoginPage from '@pages/LoginPage/LoginPage';
-import AuthPage from '@pages/AuthPage/AuthPage';
+
 import ProtectAuth from '@components/router/ProtectAuth';
 import MyPageSkeleton from '@pages/MyPage/MyPageSkeleton';
+
+const MainPage = lazy(() => import('@pages/MainPage/MainPage'));
+const CommunityPage = lazy(() => import('@pages/CommunityPage/CommunityPage'));
+const CommunityPostPage = lazy(
+  () => import('@pages/CommunityPostPage/CommunityPostPage'),
+);
+const CommunityDetailPage = lazy(
+  () => import('@pages/CommunityDetailPage/CommunityDetailPage'),
+);
+const CommunityWritePage = lazy(
+  () => import('@pages/CommunityWritePage/CommunityWritePage'),
+);
+const GroupPage = lazy(() => import('@pages/GroupPage/GroupPage'));
+const GroupApplyPage = lazy(
+  () => import('@pages/GroupApplyPage/GroupApplyPage'),
+);
+const GroupDetailPage = lazy(
+  () => import('@pages/GroupDetailPage/GroupDetailPage'),
+);
+const GroupNoticeDetailPage = lazy(
+  () => import('@pages/GroupNoticeDetailPage/GroupNoticeDetailPage'),
+);
+const GroupStudentPage = lazy(
+  () => import('@pages/GroupStudentPage/GroupStudentPage'),
+);
+const GroupAssignmentPage = lazy(
+  () => import('@pages/GroupAssignmentPage/GroupAssignmentPage'),
+);
+const LibraryPage = lazy(() => import('@pages/LibraryPage/LibraryPage'));
+const LibraryDetailPage = lazy(
+  () => import('@pages/LibraryDetailPage/LibraryDetailPage'),
+);
+const MyPage = lazy(() => import('@pages/MyPage/MyPage'));
+const CalendarPage = lazy(() => import('@pages/CalendarPage/CalendarPage'));
+const SupportPage = lazy(() => import('@pages/SupportPage/SupportPage'));
+const LoginPage = lazy(() => import('@pages/LoginPage/LoginPage'));
+const AuthPage = lazy(() => import('@pages/AuthPage/AuthPage'));
 
 const AppRouter = () => {
   const router = createBrowserRouter([
     {
       path: PATH.MAIN,
-      element: (
-        <Suspense>
-          <AppLayout />
-        </Suspense>
-      ),
+      element: <AppLayout />,
       errorElement: <ErrorPage />,
       children: [
         {
