@@ -65,7 +65,7 @@ const BookPanel = ({ data, memberId }: BookPanelProps) => {
     data.length > 0 ? `${data.length}권 대여중` : '빌린 도서가 없어요.';
 
   const onClickBookButton = (sort: string) => {
-    let selectedBookId = 0;
+    let selectedBookId = selectData[0].id;
     if (myLoanSelectData.length === 0) {
       toast({
         state: 'error',
@@ -84,16 +84,18 @@ const BookPanel = ({ data, memberId }: BookPanelProps) => {
       accept: {
         text: sort === 'return' ? '반납하기' : '연장하기',
         onClick: () => {
+          console.log(selectedBookId);
           if (selectedBookId >= 0) {
             sort === 'return'
               ? bookReturnMutate({
-                  bookId: selectData[selectedBookId].id,
+                  bookId: selectedBookId,
                   borrowerId: memberId,
                 })
               : bookExtendMutate({
-                  bookId: selectData[selectedBookId].id,
+                  bookId: selectedBookId,
                   borrowerId: memberId,
                 });
+            selectedBookId = selectData[0].id;
           }
         },
       },
