@@ -2,6 +2,7 @@ import Section from '@components/common/Section/Section';
 import Image from '@components/common/Image/Image';
 import type { MemberType } from '@type/member';
 import dayjs from 'dayjs';
+import { createImageUrl } from '@utils/api';
 
 interface BirthdayListProps {
   data: Array<MemberType>;
@@ -18,7 +19,7 @@ const BirthdayCard = ({ id, name, imageUrl, birth }: BirthdayCardProps) => {
   return (
     <div className="flex flex-col items-center gap-4 px-4 pt-2 rounded-lg">
       <Image
-        src={imageUrl}
+        src={imageUrl ? createImageUrl(imageUrl) : imageUrl}
         alt={name}
         width="w-24"
         height="h-24"

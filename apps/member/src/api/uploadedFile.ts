@@ -1,9 +1,17 @@
 import { END_POINT } from '@constants/api';
-import { createCommonPagination, getAccessToken } from '@utils/api';
+import { createCommonPagination, createPath, getAccessToken } from '@utils/api';
+import { server } from './server';
+import { BaseResponse } from '@type/api';
+import type { ProfileImageFileType } from '@type/uploadFile';
 
 interface postUploadedFileMembershipFeeArgs {
   storagePeriod: number;
   multipartFile: string;
+}
+interface postUploadedFileProfileImageArgs {
+  memberId: string;
+  storagePeriod: number;
+  multipartFile: FormData;
 }
 
 export const postUploadedFileMembershipFee = async ({
@@ -31,6 +39,25 @@ export const postUploadedFileMembershipFee = async ({
     return response.json();
   });
   console.log('image stored');
+
+  return data;
+};
+
+export const postUploadedFileProfileImage = async ({
+  memberId,
+  storagePeriod,
+  multipartFile,
+}: postUploadedFileProfileImageArgs) => {
+  const url =
+    createPath(END_POINT.UPLOADEDFILE_PROFILES(memberId)) +
+    `?storagePeriod=${storagePeriod}`;
+  const { data } = await server.post<
+    FormData,
+    BaseResponse<ProfileImageFileType>
+  >({
+    url,
+    body: multipartFile,
+  });
 
   return data;
 };

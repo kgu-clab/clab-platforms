@@ -2,6 +2,7 @@ export const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 export const ACCESS_TOKEN_KEY = 'ACCESS_TOKEN';
 export const REFRESH_TOKEN_KEY = 'REFRESH_TOKEN';
+export const FORM_DATA_KEY = 'multipartFile';
 
 export const END_POINT = {
   LOGIN_REISSUE: '/login/reissue',
@@ -29,6 +30,7 @@ export const END_POINT = {
   COMMENTS: (id: string) => `/comments/${id}`,
   MEMBERSHIP_FEE: `/membership-fees`,
   UPLOADEDFILE_MEMBERSHIP_FEE: `/files/membership-fee`,
+  UPLOADEDFILE_PROFILES: (memberId: string) => `/files/profiles/${memberId}`,
   HIRE: (jobPostingId: string) => `/job-postings/${jobPostingId}`,
   NEWS: (newsId: string) => `/news/${newsId}`,
 } as const;
