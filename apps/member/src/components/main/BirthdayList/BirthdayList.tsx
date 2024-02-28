@@ -16,13 +16,13 @@ interface BirthdayCardProps {
 
 const BirthdayCard = ({ id, name, imageUrl, birth }: BirthdayCardProps) => {
   return (
-    <div className="flex flex-col items-center gap-4 rounded-lg px-4 pt-2">
+    <div className="flex flex-col items-center gap-4 px-4 pt-2 rounded-lg">
       <Image
         src={imageUrl}
         alt={name}
         width="w-24"
         height="h-24"
-        className="rounded-full object-cover ring ring-red-500 ring-offset-2"
+        className="object-cover rounded-full ring ring-red-500 ring-offset-2"
       />
       <div className="text-center">
         <div className="text-sm font-semibold">
@@ -30,7 +30,7 @@ const BirthdayCard = ({ id, name, imageUrl, birth }: BirthdayCardProps) => {
           <p>{id}</p>
         </div>
         <p className="text-sm font-medium text-clab-main-light">
-          {dayjs(birth).format('YY월 DD일')}
+          {dayjs(birth).format('MM월 DD일')}
         </p>
       </div>
     </div>
@@ -43,7 +43,7 @@ const BirthdayList = ({ data }: BirthdayListProps) => {
       <Section.Header title="생일자를 소개합니다" />
       <Section.Body className="flex overflow-scroll scrollbar-hide">
         {data.length === 0 ? (
-          <p className="text-gray-500 w-full text-center">
+          <p className="w-full text-center text-gray-500">
             이번 달엔 생일자가 없어요!
           </p>
         ) : (
