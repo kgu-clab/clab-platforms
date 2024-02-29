@@ -37,14 +37,14 @@ const RequestForm = () => {
     if (!category || !amount || !content) {
       alert('필수 입력 사항을 확인해주세요');
     } else {
-      console.log(imageUploader.current?.files);
       if (imageUploader.current?.files?.length) {
-        console.log('checked');
         const files = imageUploader.current?.files[0];
         const formData = new FormData();
         formData.append('multipartFile', files, encodeURIComponent(files.name));
         membershipFeeMutate({ body: input, multipartFile: formData });
-        console.log('posted');
+        if (imageUploader.current) {
+          imageUploader.current.value = '';
+        }
       }
     }
     setInput({
@@ -57,7 +57,7 @@ const RequestForm = () => {
   return (
     <Section>
       <Section.Header title="신청서" />
-      <Section.Body className="mt-4 grid gap-2 md:grid-cols-2">
+      <Section.Body className="grid gap-2 mt-4 md:grid-cols-2">
         <Input
           id="category"
           name="category"
