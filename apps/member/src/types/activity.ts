@@ -86,3 +86,9 @@ export interface SubmitBoardType {
 export interface ActivityBoardWithAssignmentType extends ActivityBoardType {
   assignments?: Array<ActivityBoardType>;
 }
+
+export interface ActivityGroupBoardParserType {
+  notices: Array<ActivityBoardType>;
+  activities: Array<ActivityBoardType>;
+  assignments: Array<ActivityBoardType>;
+}

@@ -4,6 +4,7 @@ import { createCommonPagination } from '@utils/api';
 import { END_POINT } from '@constants/api';
 import type {
   ActivityBoardType,
+  ActivityGroupBoardParserType,
   ActivityGroupDetailType,
   ActivityGroupItem,
   ActivityGroupMemberType,
@@ -14,6 +15,7 @@ import type {
 } from '@type/activity';
 import type { ScheduleItem } from '@type/schedule';
 import { postUploadedFileAssignment } from './uploadedFile';
+import { groupBoardParser } from '@utils/group';
 
 interface patchActivityGroupMemberApplyArgs {
   activityGroupId: number;
@@ -80,9 +82,15 @@ export const getActivityGroupByStatus = async (
 
 // 활동 상세 조회
 export const getActivityGroupDetail = async (id: string) => {
-  const { data } = await server.get<BaseResponse<ActivityGroupDetailType>>({
+  const { data } = await server.get<
+    BaseResponse<ActivityGroupDetailType & ActivityGroupBoardParserType>
+  >({
     url: END_POINT.ACTIVITY_GROUP_MEMBER(id),
   });
+
+  const { notices, activities } = groupBoardParser(data.activityGroupBoards); // 게시판 분류 파싱
+  data.notices = notices;
+  data.activities = activities;
 
   return data;
 };
@@ -102,23 +110,6 @@ export const postActivityGroupMemberApply = async ({
       body,
     },
   );
-
-  return data;
-};
-
-// 활동 멤버 조회
-export const getActivityGroupMember = async (
-  activityGroupId: string,
-  page: number,
-  size: number,
-) => {
-  const params = { activityGroupId, page, size };
-  const { data } = await server.get<PaginationType<ActivityGroupMemberType>>({
-    url: createCommonPagination(
-      END_POINT.ACTIVITY_GROUP_MEMBER_MEMBERS,
-      params,
-    ),
-  });
 
   return data;
 };

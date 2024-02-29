@@ -6,7 +6,6 @@ export * from './useActivityGroupBoard';
 export * from './useActivityGroupBoardFeedback';
 export * from './useActivityGroupBoardMutation';
 export * from './useActivityGroupBoardsMyAssignment';
-export * from './useActivityGroupMember';
 export * from './useActivityGroupMemberApplyMutation';
 export * from './useActivityGroupMemberByStatus';
 export * from './useActivityPicture';

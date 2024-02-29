@@ -8,15 +8,13 @@ import { GROUP_MESSAGE } from '@constants/message';
 import NoticeSection from '@components/group/NoticeSection/NoticeSection';
 import { useActivityGroup } from '@hooks/queries/useActivityGroup';
 import useModal from '@hooks/common/useModal';
-import { useActivityGroupMember } from '@hooks/queries';
+
 import Table from '@components/common/Table/Table';
-import { setGroupFilter } from '@utils/group';
-import { useEffect, useState } from 'react';
-import type { ActivityBoardType } from '@type/activity';
 import { LiaCertificateSolid } from 'react-icons/lia';
 import { getDateSemester } from '@utils/date';
 import Section from '@components/common/Section/Section';
 import { MdOutlineDateRange } from 'react-icons/md';
+import { TABLE_HEAD } from '@constants/head';
 
 const GroupDetailPage = () => {
   const { id } = useParams();
@@ -24,18 +22,14 @@ const GroupDetailPage = () => {
 
   if (!id) throw new Error(GROUP_MESSAGE.NO_ACTIVITY);
 
-  const { data: detailData } = useActivityGroup(id);
-  const { data: memberData } = useActivityGroupMember(id);
-
-  const [notices, setNotices] = useState<ActivityBoardType[]>([]);
-  const [activities, setActivities] = useState<ActivityBoardType[]>([]);
+  const { data } = useActivityGroup(id);
 
   const handleOpenModal = () => {
     openModal({
       title: '참여자 목록',
       content: (
-        <Table head={['번호', '학번', '이름']} className="w-full">
-          {memberData.items.map(({ memberId, memberName }, index) => (
+        <Table head={TABLE_HEAD.ACTIVITY_GROUP_PARTICIPANTS} className="w-full">
+          {data.groupMembers.map(({ memberId, memberName }, index) => (
             <Table.Row key={index}>
               <td>{index + 1}</td>
               <td>{memberId}</td>
@@ -47,21 +41,24 @@ const GroupDetailPage = () => {
     });
   };
 
-  useEffect(() => {
-    const [notices, activities] = setGroupFilter(
-      detailData.activityGroupBoards,
-    );
-    setNotices(notices);
-    setActivities(activities);
-  }, [detailData.activityGroupBoards]);
+  const {
+    name,
+    imageUrl,
+    content,
+    category,
+    createdAt,
+    notices,
+    activities,
+    isOwner,
+  } = data;
 
   return (
     <Content>
-      <Header title={['활동', detailData.name]}>
+      <Header title={['활동', name]}>
         <Button size="sm" onClick={handleOpenModal}>
           참여자 목록
         </Button>
-        {detailData.isOwner && (
+        {isOwner && (
           <Button size="sm" color="red">
             관리
           </Button>
@@ -70,19 +67,19 @@ const GroupDetailPage = () => {
       <Image
         width="w-full"
         height="h-[300px]"
-        src={detailData.imageUrl}
-        alt={detailData.name}
+        src={imageUrl}
+        alt={name}
         className="object-cover border rounded-lg"
       />
       <Section>
-        <h1 className="text-xl font-bold">{detailData.name}</h1>
-        <p className="my-1 text-sm">{detailData.content}</p>
+        <h1 className="text-xl font-bold">{name}</h1>
+        <p className="my-1 text-sm">{content}</p>
         <div className="flex items-center text-sm text-gray-500">
           <LiaCertificateSolid className="mr-1" />
-          <span>{detailData.category}</span>
+          <span>{category}</span>
           <span className="px-2">•</span>
           <MdOutlineDateRange className="mr-1" />
-          <span>{getDateSemester(detailData.createdAt)}</span>
+          <span>{getDateSemester(createdAt)}</span>
         </div>
       </Section>
       <NoticeSection data={notices} />
