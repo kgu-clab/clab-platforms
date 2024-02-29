@@ -58,9 +58,11 @@ const BookPanel = ({ data, memberId }: BookPanelProps) => {
   const { bookReturnMutate } = useBookLoanReturnMutation();
   const { bookExtendMutate } = useBookLoanExtendMutation();
   const selectData = data.map(({ id, title }) => ({ id, name: title }));
-  const myLoanSelectData = myLoanBookData.items.filter(
-    (id) => id.returnedAt === null,
-  );
+  const myLoanSelectData =
+    myLoanBookData && myLoanBookData.items
+      ? myLoanBookData.items.filter((id) => id.returnedAt === null)
+      : [];
+
   const description =
     data.length > 0 ? `${data.length}권 대여중` : '빌린 도서가 없어요.';
 
