@@ -10,8 +10,11 @@ export const useTwoFactorLoginMutation = () => {
 
   const twoFactorLoginMutation = useMutation({
     mutationFn: postTwoFactorLogin,
-    onSuccess: ({ success, data }) => {
-      const { accessToken, refreshToken } = data;
+    onSuccess: ({ success, authHeader }) => {
+      if (!authHeader) return;
+
+      const parsedAuthHeader = JSON.parse(authHeader);
+      const { accessToken, refreshToken } = parsedAuthHeader;
 
       if (!code || !success) {
         alert(ERROR_MESSAGE.AUTH);
@@ -21,7 +24,9 @@ export const useTwoFactorLoginMutation = () => {
       if (accessToken && refreshToken) {
         // 로그인 성공, 서비스로 리다이렉트 합니다
         alert(SUCCESS_MESSAGE.AUTH);
-        window.location.href = `${REDIRECT(code)}/?a=${accessToken}&r=${refreshToken}`;
+        window.location.href = `${REDIRECT(
+          code,
+        )}/?a=${accessToken}&r=${refreshToken}`;
       } else {
         alert(ERROR_MESSAGE.AUTH);
       }
