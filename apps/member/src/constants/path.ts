@@ -21,6 +21,7 @@ export const PATH = {
   ACTIVITY: '/activity',
   ACTIVITY_APPLY: '/activity/apply',
   ACTIVITY_DETAIL: `/activity/:id`,
+  ACTIVITY_CONFIG: '/activity/:id/config',
   ACTIVITY_ASSIGNMENT: '/activity/:id/:assignmentId',
   NEWS: '/news',
   BLOG: '/blog',
@@ -39,6 +40,7 @@ export const PATH_FINDER = {
     createPath(PATH.COMMUNITY, sort, id),
   LIBRARY_DETAIL: (id: IDType) => createPath(PATH.LIBRARY, id),
   ACTIVITY_DETAIL: (id: IDType) => createPath(PATH.ACTIVITY, id),
+  ACTIVITY_CONFIG: (id: IDType) => createPath(PATH.ACTIVITY, id, 'config'),
   ACTIVITY_ASSIGNMENT: (groupId: IDType, id: IDType) =>
     createPath(PATH.ACTIVITY, groupId, id),
 };

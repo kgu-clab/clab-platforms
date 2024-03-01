@@ -19,7 +19,7 @@ export const END_POINT = {
   // -- 커뮤니티
   BOARDS: `/boards`,
   BOARDS_LIST: `/boards/list`,
-  BOARDERS_ITEM: (boardId: IDType) => `/boards/${boardId}`,
+  BOARDERS_ITEM: (id: IDType) => `/boards/${id}`,
   ACCUSES: '/accuses',
   BOOK_LIST: `/books`,
   MY_NEWS: `/news`,
@@ -33,9 +33,9 @@ export const END_POINT = {
   UPLOADEDFILE_MEMBERSHIP_FEE: `/files/membership-fee`,
   UPLOADEDFILE_ACTIVITY_ASSIGNMENT: (groupId: IDType, boardId: IDType) =>
     `/files/assignment/${groupId}/${boardId}`,
-  COMMENTS: (boardId: IDType) => `/comments/${boardId}`,
-  HIRE: (jobPostingId: IDType) => `/job-postings/${jobPostingId}`,
-  NEWS: (newsId: IDType) => `/news/${newsId}`,
+  COMMENTS: (id: IDType) => `/comments/${id}`,
+  HIRE: (id: IDType) => `/job-postings/${id}`,
+  NEWS: (id: IDType) => `/news/${id}`,
   ACTIVITY_GROUP_MEMBER_STATUS: `/activity-group/member/status`,
   ACTIVITY_GROUP_MEMBER: (id: IDType) => `/activity-group/member/${id}`,
   ACTIVITY_GROUP_BOARD_BY_CATEGORY: `/activity-group/boards/by-category`,
@@ -47,8 +47,6 @@ export const END_POINT = {
   ACTIVITY_GROUP_BOARDS: `/activity-group/boards`,
   ACTIVITY_GROUP_BOARDS_MY_ASSIGNMENT: `activity-group/boards/my-assignment`,
   ACTIVITY_GROUP_BOARD: `/activity-group/boards`,
-  ACTIVITY_GROUP_BOARD_FEEDBACK: (parentId: IDType) =>
-    `/activity-group/boards/${parentId}`,
 };
 
 export const HTTP_STATUS_CODE = {

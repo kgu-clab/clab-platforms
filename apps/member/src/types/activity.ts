@@ -1,5 +1,5 @@
 type MemberStatusType = 'ACCEPTED' | 'REJECTED' | 'WAITING';
-type ActivityGroupBoardCategoryType =
+export type ActivityGroupBoardCategoryType =
   | 'NOTICE'
   | 'WEEKLY_ACTIVITY'
   | 'FEEDBACK'
@@ -35,7 +35,11 @@ export interface ActivityGroupMemberType {
   memberId: string;
   memberName: string;
   role: string;
-  status?: MemberStatusType;
+  status: MemberStatusType;
+}
+
+export interface ActivityApplyMemberType extends ActivityGroupMemberType {
+  applyReason: string;
 }
 
 export interface ActivityGroupItem {
@@ -73,6 +77,7 @@ export interface ActivityBoardType {
   files: Array<AssignmentFileType>;
   dueDateTime?: string;
   createdAt: string;
+  feedbacks?: Array<ActivityBoardType>;
 }
 
 export interface SubmitBoardType {
@@ -87,7 +92,7 @@ export interface ActivityBoardWithAssignmentType extends ActivityBoardType {
   assignments?: Array<ActivityBoardType>;
 }
 
-export interface ActivityGroupBoardParserType {
+export interface ActivityGroupBoardParserType extends ActivityGroupDetailType {
   notices: Array<ActivityBoardType>;
   activities: Array<ActivityBoardType>;
   assignments: Array<ActivityBoardType>;

@@ -22,6 +22,7 @@ import LoginPage from '@pages/LoginPage/LoginPage';
 import AuthPage from '@pages/AuthPage/AuthPage';
 import ProtectAuth from '@components/router/ProtectAuth';
 import MyPageSkeleton from '@pages/MyPage/MyPageSkeleton';
+import GroupConfigPage from '@pages/GroupConfigPage/GroupConfigPage';
 
 const AppRouter = () => {
   const router = createBrowserRouter([
@@ -95,6 +96,14 @@ const AppRouter = () => {
           element: (
             <Suspense>
               <GroupDetailPage />
+            </Suspense>
+          ),
+        },
+        {
+          path: PATH.ACTIVITY_CONFIG,
+          element: (
+            <Suspense>
+              <GroupConfigPage />
             </Suspense>
           ),
         },
