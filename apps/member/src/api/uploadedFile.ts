@@ -8,6 +8,7 @@ interface postUploadedFileMembershipFeeArgs {
   storagePeriod: number;
   multipartFile: string;
 }
+
 interface postUploadedFileAssignmentArgs {
   groupId: IDType;
   groupBoardId: IDType;
@@ -60,6 +61,25 @@ export const postUploadedFileAssignment = async ({
   >({
     url,
     body: files,
+  });
+
+  return data;
+};
+
+export const postUploadedFileProfileImage = async ({
+  memberId,
+  storagePeriod,
+  multipartFile,
+}: postUploadedFileProfileImageArgs) => {
+  const url =
+    createPath(END_POINT.UPLOADEDFILE_PROFILES(memberId)) +
+    `?storagePeriod=${storagePeriod}`;
+  const { data } = await server.post<
+    FormData,
+    BaseResponse<ProfileImageFileType>
+  >({
+    url,
+    body: multipartFile,
   });
 
   return data;

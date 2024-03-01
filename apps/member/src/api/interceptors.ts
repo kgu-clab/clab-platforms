@@ -76,3 +76,17 @@ export const tokenHandler: Interceptor<Response> = async (response, method) => {
     reissueLock = false;
   }
 };
+
+export const contentTypeHandler: Interceptor<FetchOptions> = (request) => {
+  if (request.body instanceof FormData) {
+    // FormData 일 경우  Content-Type을 설정하지 않도록 합니다.
+    // Content-Type을 설정하지 않으면 FormData의 Content-Type이 설정되어 전송됩니다.
+  } else {
+    request.headers = {
+      ...request.headers,
+      'Content-Type': 'application/json',
+    };
+  }
+
+  return request;
+};

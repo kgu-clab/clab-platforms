@@ -9,6 +9,7 @@ import { useMyNotifications } from '@hooks/queries';
 import { useMyBookLoan } from '@hooks/queries/useMyBookLoan';
 import { useMyActivity } from '@hooks/queries/useMyActivity';
 import { useMyProfile } from '@hooks/queries/useMyProfile';
+import { createImageUrl } from '@utils/api';
 
 const PanelAside = () => {
   const { data: myNotificationsData } = useMyNotifications();
@@ -21,7 +22,7 @@ const PanelAside = () => {
       <div className="space-y-4">
         <ProfilePanel
           name={myProfile.name}
-          image={myProfile.imageUrl}
+          image={createImageUrl(myProfile.imageUrl)}
           createdAt={myProfile.createdAt}
         />
         <AttendanceFairyPanel />

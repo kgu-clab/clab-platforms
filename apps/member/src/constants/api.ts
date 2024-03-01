@@ -5,7 +5,6 @@ export const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 export const ACCESS_TOKEN_KEY = 'ACCESS_TOKEN';
 export const REFRESH_TOKEN_KEY = 'REFRESH_TOKEN';
 export const FORM_DATA_KEY = 'multipartFile';
-
 export const STORAGE_PERIOD = (period: number) => `?storagePeriod=${period}`;
 
 export const END_POINT = {
@@ -33,6 +32,10 @@ export const END_POINT = {
   MAIN_ACTIVITY_PHOTO: `/activity-photos`,
   MEMBERSHIP_FEE: `/membership-fees`,
   UPLOADEDFILE_MEMBERSHIP_FEE: `/files/membership-fee`,
+  UPLOADEDFILE_PROFILES: (memberId: string) => `/files/profiles/${memberId}`,
+  SHARED_ACCOUNT: `/shared-accounts`,
+  SHARED_ACCOUNT_STATUS: (usageId: number) =>
+    `/shared-accounts/usage/${usageId}`,
   UPLOADEDFILE_ACTIVITY_ASSIGNMENT: (groupId: IDType, boardId: IDType) =>
     `/files/assignment/${groupId}/${boardId}`,
   COMMENTS: (id: IDType) => `/comments/${id}`,

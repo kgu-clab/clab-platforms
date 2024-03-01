@@ -27,6 +27,8 @@ export const QUERY_KEY = {
   COMMENTS: 'Comments',
   MEMBERSHIP_FEE: 'MembershipFee',
   UPLOADEDFILE: 'UploadedFile',
+  SHARED_ACCOUNT: 'SharedAccount',
+  SHARED_ACCOUNT_USAGE: 'SharedAccountUsage',
   ACTIVITY: 'Activity',
   ACTIVITY_BOARDS: 'ActivityBoards',
   ACTIVITY_GROUP_APPLY: 'ActivityGroupApply',

@@ -4,9 +4,10 @@ import Image from '@components/common/Image/Image';
 import Section from '@components/common/Section/Section';
 import { useSetIsLoggedInStore } from '@store/auth';
 import { Input } from '@clab/design-system';
-import { removeTokens } from '@utils/api';
+import { createImageUrl, removeTokens } from '@utils/api';
 import { useUserInfoMutation } from '@hooks/queries';
 import { ProfileData } from '@type/profile';
+import { FORM_DATA_KEY } from '@constants/api';
 
 interface ProfileSectionProps {
   data: ProfileData;
@@ -16,13 +17,21 @@ const ProfileSection = ({ data }: ProfileSectionProps) => {
   const setIsLoggedIn = useSetIsLoggedInStore();
   const { userInfoMutate } = useUserInfoMutation();
 
+  const [profileImage, setProfileImage] = useState<string>(data.imageUrl);
   const [isEdit, setIsEdit] = useState<boolean>(false);
   const [inputs, setInputs] = useState<ProfileData>(data);
 
   const onClickEdit = () => {
     setIsEdit((prev) => {
       if (prev) {
-        userInfoMutate({ id: String(data.id), body: inputs });
+        const formData = new FormData();
+        const file = document.getElementById('imageUrl') as HTMLInputElement;
+        if (file.files?.length) formData.append(FORM_DATA_KEY, file.files[0]);
+        userInfoMutate({
+          id: data.id,
+          body: inputs,
+          multipartFile: file.files?.length ? formData : null,
+        });
       }
       return !prev;
     });
@@ -42,8 +51,19 @@ const ProfileSection = ({ data }: ProfileSectionProps) => {
     setInputs((prev) => ({ ...prev, [name]: value }));
   };
 
-  const { imageUrl, name, id, interests, contact, email, address, githubUrl } =
-    inputs;
+  const onChangeProfileImage = (e: ChangeEvent<HTMLInputElement>) => {
+    const reader = new FileReader();
+    reader.onload = () => {
+      if (reader.readyState === 2) {
+        setProfileImage(reader.result as string);
+      }
+    };
+    if (e.target.files && e.target.files.length > 0) {
+      reader.readAsDataURL(e.target.files[0]);
+    }
+  };
+
+  const { name, id, interests, contact, email, address, githubUrl } = inputs;
 
   return (
     <Section>
@@ -62,20 +82,30 @@ const ProfileSection = ({ data }: ProfileSectionProps) => {
         </div>
       </Section.Header>
       <Section.Body className="flex flex-col">
-        <div className="flex flex-col text-center items-center">
-          <Image
-            width="w-32"
-            height="h-32"
-            src={imageUrl}
-            alt={name}
-            className="rounded-full m-auto object-cover"
+        <div className="flex flex-col items-center text-center">
+          <label htmlFor="imageUrl" style={{ cursor: 'pointer' }}>
+            <Image
+              width="w-32"
+              height="h-32"
+              src={createImageUrl(profileImage)}
+              alt={name}
+              className="object-cover m-auto rounded-full"
+            />
+          </label>
+          <Input
+            style={{ display: 'none' }}
+            id="imageUrl"
+            name="imageUrl"
+            type="file"
+            onChange={onChangeProfileImage}
+            disabled={!isEdit}
           />
           <div className="mt-2">
             <p className="text-xl font-bold">{name}</p>
             <p className="text-sm font-semibold text-gray-500">{id}</p>
           </div>
         </div>
-        <div className="mt-4 grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-2 gap-4 mt-4">
           <Input
             id="분야"
             label="분야"

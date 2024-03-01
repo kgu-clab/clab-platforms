@@ -15,10 +15,13 @@ const LibraryPage = () => {
     page: 0,
     size: 16,
   });
-
   const { page, size } = pagination;
-
+  const { data: newBooks } = useBooks(0, 4);
   const { data } = useBooks(page, size);
+
+  const handlePageChange = (page: number) => {
+    setPagination({ ...pagination, page: page - 1 });
+  };
 
   return (
     <Content>
@@ -30,19 +33,19 @@ const LibraryPage = () => {
       <Section>
         <Section.Header title="신규" />
         <Section.Body>
-          <LibraryBookList data={data.items.slice(0, 4)} />
+          <LibraryBookList data={newBooks.items} />
         </Section.Body>
       </Section>
       <Section>
         <Section.Header title="소장도서" />
         <Section.Body>
-          <LibraryBookList data={data.items.slice(0, 4)} />
+          <LibraryBookList data={data.items} />
           <div className="flex justify-center mt-4">
             <Pagination
               totalItems={data.totalItems}
               pageLimit={5}
               postLimit={size}
-              setPage={(page) => setPagination({ ...pagination, page })}
+              setPage={handlePageChange}
               page={page}
             />
           </div>
