@@ -26,4 +26,5 @@ export const QUERY_KEY = {
   UPLOADEDFILE: 'UploadedFile',
   ACTIVITY: 'Activity',
   ACTIVITY_BOARDS: 'ActivityBoards',
+  ACTIVITY_BOARDS_MY_ASSIGNMENT: 'ActivityBoardsMyAssignment',
 };

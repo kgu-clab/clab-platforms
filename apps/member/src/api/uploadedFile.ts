@@ -1,4 +1,4 @@
-import { END_POINT } from '@constants/api';
+import { END_POINT, STORAGE_PERIOD } from '@constants/api';
 import { createCommonPagination, createPath, getAccessToken } from '@utils/api';
 import type { BaseResponse, IDType } from '@type/api';
 import { server } from './server';
@@ -11,7 +11,6 @@ interface postUploadedFileMembershipFeeArgs {
 interface postUploadedFileAssignmentArgs {
   groupId: IDType;
   groupBoardId: IDType;
-  memberId: IDType;
   storagePeriod: number;
   files: FormData;
 }
@@ -40,7 +39,6 @@ export const postUploadedFileMembershipFee = async ({
     }
     return response.json();
   });
-  console.log('image stored');
 
   return data;
 };
@@ -49,13 +47,12 @@ export const postUploadedFileMembershipFee = async ({
 export const postUploadedFileAssignment = async ({
   groupId,
   groupBoardId,
-  memberId,
   storagePeriod,
   files,
 }: postUploadedFileAssignmentArgs) => {
   const url = createPath(
-    END_POINT.UPLOADEDFILE_ACTIVITY_ASSIGNMENT(groupId, groupBoardId, memberId),
-    `?storagePeriod=${storagePeriod}`,
+    END_POINT.UPLOADEDFILE_ACTIVITY_ASSIGNMENT(groupId, groupBoardId),
+    STORAGE_PERIOD(storagePeriod),
   );
   const { data } = await server.post<
     FormData,

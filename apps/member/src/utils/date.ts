@@ -82,3 +82,19 @@ export const getDateSemester = (createdAt: string): string => {
   const semester = dayjs(createdAt).get('month') <= 5 ? 1 : 2;
   return `${year}년도 ${semester}학기`;
 };
+
+/**
+ * 주어진 참조 날짜와 확인하고자 하는 날짜를 비교하여 유효성을 평가합니다.
+ *
+ * @param {string | undefined} checkDateStr - 유효성을 확인하고자 하는 날짜를 나타내는 문자열입니다. 'YYYY-MM-DD' 형식이어야 합니다.
+ * @param {string | undefined} referenceDateStr - 유효성 판단의 기준이 되는 날짜를 나타내는 문자열입니다. 'YYYY-MM-DD' 형식이어야 합니다.
+ * @returns {boolean} 확인하고자 하는 날짜가 참조 날짜 이전이거나 같으면 true, 그렇지 않으면 false를 반환합니다.
+ */
+export const isDateValid = (
+  checkDateStr: string | undefined,
+  referenceDateStr: string | undefined,
+): boolean => {
+  const checkDate = dayjs(checkDateStr);
+  const referenceDate = dayjs(referenceDateStr);
+  return checkDate.isBefore(referenceDate) || checkDate.isSame(referenceDate);
+};

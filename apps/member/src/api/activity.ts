@@ -29,9 +29,17 @@ interface PostActivityGroupMemberApplyArgs {
 }
 
 interface PostActivityBoardArgs {
-  parentId?: string;
+  activityGroupId: number;
+  body: SubmitBoardType;
+  files?: FormData;
+  parentId?: number;
   memberId?: string;
-  activityGroupId: string;
+}
+
+interface PatchActivityBoardArgs {
+  activityGroupBoardId: IDType;
+  groupId: IDType;
+  groupBoardId: IDType;
   body: SubmitBoardType;
   files?: FormData;
 }
@@ -43,14 +51,13 @@ export const getMyActivities = async (
   page: number,
   size: number,
 ) => {
-  const params = {
-    startDateTime,
-    endDateTime,
-    page,
-    size,
-  };
   const { data } = await server.get<PaginationType<ScheduleItem>>({
-    url: createCommonPagination(END_POINT.MY_ACTIVITY, params),
+    url: createCommonPagination(END_POINT.MY_ACTIVITY, {
+      startDateTime,
+      endDateTime,
+      page,
+      size,
+    }),
   });
 
   return data;
@@ -58,9 +65,8 @@ export const getMyActivities = async (
 
 //활동 사진 조회
 export const getActivityPhoto = async (page: number, size: number) => {
-  const params = { page, size };
   const { data } = await server.get<PaginationType<ActivityPhotoItem>>({
-    url: createCommonPagination(END_POINT.MAIN_ACTIVITY_PHOTO, params),
+    url: createCommonPagination(END_POINT.MAIN_ACTIVITY_PHOTO, { page, size }),
   });
 
   return data;
@@ -72,9 +78,12 @@ export const getActivityGroupByStatus = async (
   page: number,
   size: number,
 ) => {
-  const params = { activityGroupStatus, page, size };
   const { data } = await server.get<PaginationType<ActivityGroupItem>>({
-    url: createCommonPagination(END_POINT.ACTIVITY_GROUP_MEMBER_STATUS, params),
+    url: createCommonPagination(END_POINT.ACTIVITY_GROUP_MEMBER_STATUS, {
+      activityGroupStatus,
+      page,
+      size,
+    }),
   });
 
   return data;
@@ -100,13 +109,11 @@ export const postActivityGroupMemberApply = async ({
   activityGroupId,
   body,
 }: PostActivityGroupMemberApplyArgs) => {
-  const params = { activityGroupId };
   const { data } = await server.post<ActivityRequestType, BaseResponse<number>>(
     {
-      url: createCommonPagination(
-        END_POINT.ACTIVITY_GROUP_MEMBER_APPLY,
-        params,
-      ),
+      url: createCommonPagination(END_POINT.ACTIVITY_GROUP_MEMBER_APPLY, {
+        activityGroupId,
+      }),
       body,
     },
   );
@@ -144,33 +151,28 @@ export const patchActivityGroupMemberApply = async ({
 };
 
 // 게시판 단일 조회
-export const getActivityBoard = async (activityGroupBoardId: string) => {
-  const params = {
-    activityGroupBoardId,
-  };
+export const getActivityBoard = async (activityGroupBoardId: number) => {
   const { data } = await server.get<BaseResponse<ActivityBoardType>>({
-    url: createCommonPagination(END_POINT.ACTIVITY_GROUP_BOARDS, params),
+    url: createCommonPagination(END_POINT.ACTIVITY_GROUP_BOARDS, {
+      activityGroupBoardId,
+    }),
   });
 
   return data;
 };
 
 // 나의 과제 제출 게시판 조회
-export const getActivityBoardsMyAssignment = async (parentId: IDType) => {
-  const params = {
-    parentId,
-  };
+export const getActivityBoardsMyAssignment = async (parentId: number) => {
   const { data } = await server.get<BaseResponse<ActivityBoardType>>({
-    url: createCommonPagination(
-      END_POINT.ACTIVITY_GROUP_BOARDS_MY_ASSIGNMENT,
-      params,
-    ),
+    url: createCommonPagination(END_POINT.ACTIVITY_GROUP_BOARDS_MY_ASSIGNMENT, {
+      parentId,
+    }),
   });
 
   return data;
 };
 
-// 게시물 작성
+// 활동 그룹 게시판 생성
 export const postActivityBoard = async ({
   parentId,
   memberId,
@@ -191,7 +193,6 @@ export const postActivityBoard = async ({
     const data = await postUploadedFileAssignment({
       groupId: activityGroupId,
       groupBoardId: parentId,
-      memberId: memberId,
       storagePeriod: 30, // 파일 보관 기간
       files,
     });
@@ -199,20 +200,59 @@ export const postActivityBoard = async ({
     fileUrl = data[0].fileUrl;
   }
 
-  const { data: formData } = await server.post<
+  const { data } = await server.post<
     SubmitBoardType,
-    BaseResponse<ActivityBoardType>
+    BaseResponse<{ id: number; parentId: number }>
   >({
     url: createCommonPagination(END_POINT.ACTIVITY_GROUP_BOARD, params),
     body: {
       ...body,
-      fileUrls: fileUrl ? [fileUrl] : [],
+      fileUrls: fileUrl ? [fileUrl] : undefined,
     },
   });
-  return formData;
+
+  return data;
 };
 
-// 제출 게시판 피드백 조회
+// 활동 그룹 게시판 수정
+export const patchActivityBoard = async ({
+  activityGroupBoardId,
+  groupId,
+  groupBoardId,
+  body,
+  files,
+}: PatchActivityBoardArgs) => {
+  let fileUrl: string | null = null;
+
+  if (groupId && groupBoardId && files) {
+    // 파일이 있을 경우 파일 업로드 진행
+    const data = await postUploadedFileAssignment({
+      groupId: groupId,
+      groupBoardId: groupBoardId,
+      storagePeriod: 30, // 파일 보관 기간
+      files,
+    });
+
+    fileUrl = data[0].fileUrl;
+  }
+
+  const { data } = await server.patch<
+    SubmitBoardType,
+    BaseResponse<{ id: number; parentId: number }>
+  >({
+    url: createCommonPagination(END_POINT.ACTIVITY_GROUP_BOARDS, {
+      activityGroupBoardId,
+    }),
+    body: {
+      ...body,
+      fileUrls: fileUrl ? [fileUrl] : undefined,
+    },
+  });
+
+  return data;
+};
+
+// 제출 게시판에 대한 유일한 피드백 게시판 조회
 export const getActivityBoardsFeedback = async (parentId: number) => {
   const { data } = await server.get<BaseResponse<ActivityBoardType>>({
     url: END_POINT.ACTIVITY_GROUP_BOARD_FEEDBACK(parentId),

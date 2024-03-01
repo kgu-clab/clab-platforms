@@ -1,22 +1,22 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { QUERY_KEY } from '@constants/key';
-import { postActivityBoard } from '@api/activity';
+import { patchActivityBoard } from '@api/activity';
 import useToast from '@hooks/common/useToast';
 
 /**
- * 활동 그룹 게시글을 생성합니다.
+ * 활동 그룹 게시글을 수정합니다.
  */
-export const useActivityGroupBoardMutation = () => {
+export const useActivityGroupBoardModifyMutation = () => {
   const queryClient = useQueryClient();
   const toast = useToast();
 
-  const activityGroupBoardMutation = useMutation({
-    mutationFn: postActivityBoard,
+  const activityGroupBoardModifyMutation = useMutation({
+    mutationFn: patchActivityBoard,
     onSuccess: (res) => {
       if (res) {
         toast({
           state: 'success',
-          message: '게시글이 작성되었습니다.',
+          message: '수정이 됐어요.',
         });
       }
       queryClient.invalidateQueries({
@@ -26,6 +26,6 @@ export const useActivityGroupBoardMutation = () => {
   });
 
   return {
-    activityGroupBoardMutate: activityGroupBoardMutation.mutate,
+    activityGroupBoardModifyMutate: activityGroupBoardModifyMutation.mutate,
   };
 };

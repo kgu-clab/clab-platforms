@@ -76,7 +76,7 @@ export interface ActivityBoardType {
 }
 
 export interface SubmitBoardType {
-  category: ActivityGroupBoardCategoryType;
+  category?: ActivityGroupBoardCategoryType;
   title?: string;
   content?: string;
   fileUrls?: Array<string>;

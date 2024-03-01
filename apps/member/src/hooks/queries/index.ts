@@ -4,6 +4,7 @@ export * from './useActivityGroupAdminAcceptMutation';
 export * from './useActivityGroupAdminApplyByStatus';
 export * from './useActivityGroupBoard';
 export * from './useActivityGroupBoardFeedback';
+export * from './useActivityGroupBoardModifyMutation';
 export * from './useActivityGroupBoardMutation';
 export * from './useActivityGroupBoardsMyAssignment';
 export * from './useActivityGroupMemberApplyMutation';
