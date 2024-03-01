@@ -3,14 +3,13 @@ import Footer from '@components/common/Footer/Footer';
 import Nav from '@components/common/Nav/Nav';
 import ScrollToTop from '@components/common/ScrollToTop/ScrollToTop';
 import PanelAside from '@components/panels/PanelAside/PanelAside';
-import classNames from 'classnames';
 import ProtectAuth from '@components/router/ProtectAuth';
 
 const View = () => {
   const banner = true;
 
   return (
-    <main className={classNames('m-nav min-h-screen bg-gray-50 pb-10')}>
+    <main className="min-h-screen pb-10 m-nav bg-gray-50">
       {banner && (
         <div className="py-4 text-xl font-semibold text-center">
           <h2 className="inline-block font-bold text-transparent bg-gradient-to-r from-sky-600 via-indigo-500 to-purple-500 bg-clip-text">

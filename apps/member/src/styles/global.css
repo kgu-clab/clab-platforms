@@ -42,11 +42,11 @@
     }
 
     .m-nav {
-        @apply mt-[52.5px] md:mt-[61px]
+        @apply mt-[61px]
     }
 
     .p-nav {
-        @apply pt-[52.5px] md:pt-[61px]
+        @apply pt-[61px]
     }
 
     .animation {
