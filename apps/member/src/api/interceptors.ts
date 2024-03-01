@@ -1,7 +1,7 @@
 import { server } from './server';
 import { API_BASE_URL, END_POINT, HTTP_STATUS_CODE } from '@constants/api';
 import type { Interceptor } from '@gwansikk/server-chain';
-import type { BaseResponse, TokenType } from '@type/api';
+import type { TokenType } from '@type/api';
 import {
   authorization,
   createPath,
@@ -16,9 +16,9 @@ let reissueLock = false;
 const retryRequest = async (
   response: Response,
   method: string,
-  delay = 300,
+  delay = 300, // 재요청 딜레이
 ) => {
-  await new Promise((resolve) => setTimeout(resolve, delay)); // 재요청 딜레이
+  await new Promise((resolve) => setTimeout(resolve, delay));
 
   const accessToken = getAccessToken();
   return fetch(response.url, {
@@ -32,49 +32,47 @@ const retryRequest = async (
 
 export const tokenHandler: Interceptor<Response> = async (response, method) => {
   const { status } = response;
-
-  if (
-    [HTTP_STATUS_CODE.UNAUTHORIZED, HTTP_STATUS_CODE.FORBIDDEN].includes(status)
-  ) {
-    const preRefreshToken = getRefreshToken();
-    if (!preRefreshToken) return response;
-
-    if (reissueLock) {
-      // 잠금이 걸려있는 경우, 토큰 갱신 될 때까지 재요청
-      return retryRequest(response, method);
-    } else {
-      // 토큰 갱신 중복 요청 방지
-      reissueLock = true;
-    }
-
-    const { success, data } = await fetch(
-      createPath(API_BASE_URL, END_POINT.LOGIN_REISSUE),
-      {
-        method: 'POST',
-        headers: {
-          ...authorization(preRefreshToken),
-          'Content-Type': 'application/json',
-        },
+  // 토큰 갱신이 필요 없는 경우 바로 반환
+  if (status !== HTTP_STATUS_CODE.UNAUTHORIZED) return response;
+  const preRefreshToken = getRefreshToken();
+  // 리프레시 토큰이 없는 경우 로그인 페이지로 이동
+  if (!preRefreshToken) {
+    removeTokens();
+    window.location.reload();
+    return response;
+  }
+  // 잠금 상태인 경우 토큰 갱신을 기다리고 재요청
+  if (reissueLock) {
+    return retryRequest(response, method);
+  }
+  // 토큰 갱신 중 요청이 여러 번 들어오는 것을 방지하기 위해 잠금 설정
+  reissueLock = true;
+  // 토큰 갱신 요청
+  try {
+    const res = await fetch(createPath(API_BASE_URL, END_POINT.LOGIN_REISSUE), {
+      method: 'POST',
+      headers: {
+        ...authorization(preRefreshToken),
+        'Content-Type': 'application/json',
       },
-    ).then(async (response) => {
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
-      }
-      return (await response.json()) as BaseResponse<TokenType>;
     });
 
-    if (success === true) {
-      const { accessToken, refreshToken } = data;
-      setTokens(accessToken, refreshToken);
-      server.setHeaders(authorization(accessToken));
-      reissueLock = false;
-      return retryRequest(response, method, 0);
-    } else {
-      // 토큰 갱신에 실패한 경우 로그아웃 처리
-      removeTokens();
-      window.location.reload();
-    }
-  }
+    const { accessToken, refreshToken } = JSON.parse(
+      res.headers.get('X-Clab-Auth') ?? '',
+    ) as TokenType;
 
-  return response;
+    if (!accessToken || !refreshToken) {
+      throw new Error('Invalid token response');
+    }
+
+    setTokens(accessToken, refreshToken);
+    server.setHeaders(authorization(accessToken));
+    return retryRequest(response, method); // 성공적으로 토큰을 갱신한 후 재요청
+  } catch (error) {
+    removeTokens();
+    window.location.reload();
+    return response;
+  } finally {
+    reissueLock = false;
+  }
 };

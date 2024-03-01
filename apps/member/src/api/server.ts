@@ -5,9 +5,6 @@ import { API_BASE_URL } from '@constants/api';
 export const server = ServerChain({
   key: 'server',
   baseURL: API_BASE_URL,
-  headers: {
-    'Content-Type': 'application/json',
-  },
   interceptors: {
     error: tokenHandler,
   },

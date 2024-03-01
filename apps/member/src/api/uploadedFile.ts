@@ -1,9 +1,18 @@
-import { END_POINT } from '@constants/api';
-import { createCommonPagination, getAccessToken } from '@utils/api';
+import { END_POINT, STORAGE_PERIOD } from '@constants/api';
+import { createCommonPagination, createPath, getAccessToken } from '@utils/api';
+import type { BaseResponse, IDType } from '@type/api';
+import { server } from './server';
+import type { AssignmentFileType } from '@type/activity';
 
 interface postUploadedFileMembershipFeeArgs {
   storagePeriod: number;
   multipartFile: string;
+}
+interface postUploadedFileAssignmentArgs {
+  groupId: IDType;
+  groupBoardId: IDType;
+  storagePeriod: number;
+  files: FormData;
 }
 
 export const postUploadedFileMembershipFee = async ({
@@ -30,7 +39,28 @@ export const postUploadedFileMembershipFee = async ({
     }
     return response.json();
   });
-  console.log('image stored');
+
+  return data;
+};
+
+// 활동 그룹 과제 업로드
+export const postUploadedFileAssignment = async ({
+  groupId,
+  groupBoardId,
+  storagePeriod,
+  files,
+}: postUploadedFileAssignmentArgs) => {
+  const url = createPath(
+    END_POINT.UPLOADEDFILE_ACTIVITY_ASSIGNMENT(groupId, groupBoardId),
+    STORAGE_PERIOD(storagePeriod),
+  );
+  const { data } = await server.post<
+    FormData,
+    BaseResponse<AssignmentFileType[]>
+  >({
+    url,
+    body: files,
+  });
 
   return data;
 };

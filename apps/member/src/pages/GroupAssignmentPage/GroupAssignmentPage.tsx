@@ -1,49 +1,44 @@
 import Content from '@components/common/Content/Content';
 import AssignmentUploadSection from '@components/group/AssignmentUploadSection/AssignmentUploadSection';
-import { useLocation } from 'react-router-dom';
-import groupList from '@mocks/data/groupList.json';
-import ErrorPage from '@pages/ErrorPage/ErrorPage';
-import AssignmentFeedbackSection from '@components/group/AssignmentFeedbackSection/AssignmentFeedbackSection';
-
-interface assignmentData {
-  id: number;
-  title: string;
-  content: string;
-  deadline: string;
-}
-interface weeklyActivitiesData {
-  week: number;
-  content: string;
-  assignments: assignmentData[];
-}
-interface GroupData {
-  id: number;
-  name: string;
-  weeklyActivities: weeklyActivitiesData[];
-}
+import { useLocation, useParams } from 'react-router-dom';
+import { useActivityGroupBoard } from '@hooks/queries/useActivityGroupBoard';
+import { useActivityGroupBoardsMyAssignment } from '@hooks/queries/useActivityGroupBoardsMyAssignment';
+import { GROUP_MESSAGE } from '@constants/message';
+import Header from '@components/common/Header/Header';
+import Section from '@components/common/Section/Section';
 
 const GroupAssignmentPage = () => {
-  const location = useLocation();
-  const { groupId, week, id } = location.state;
+  const { id, assignmentId } = useParams();
+  const { state } = useLocation();
 
-  const data: GroupData | undefined = groupList.find(
-    (group) => group.id === groupId,
-  );
+  if (!id || !assignmentId || !state?.name)
+    throw new Error(GROUP_MESSAGE.NO_ACTIVITY);
 
-  if (data === undefined) {
-    return <ErrorPage />;
-  }
+  const { data: board } = useActivityGroupBoard(+assignmentId);
+  const { data: myAssignment } =
+    useActivityGroupBoardsMyAssignment(+assignmentId);
+
+  const feedback = myAssignment?.[0].feedbacks?.[0];
 
   return (
     <Content>
+      <Header title={[...state.name]} />
+      <Section>
+        <Section.Header title="과제 설명" />
+        <p className="pt-3">{board?.content}</p>
+      </Section>
       <AssignmentUploadSection
-        id={groupId}
-        week={week}
-        activityId={id}
-        name={data.name}
-        weeklyActivities={data.weeklyActivities}
+        activityGroupId={+id}
+        assignmentId={+assignmentId}
+        dueDateTime={board?.dueDateTime}
+        myAssignment={myAssignment?.[0]}
       />
-      <AssignmentFeedbackSection />
+      <Section>
+        <Section.Header title="피드백" />
+        <p className="whitespace-pre-line break-keep">
+          {feedback?.content ? feedback.content : GROUP_MESSAGE.NO_FEEDBACK}
+        </p>
+      </Section>
     </Content>
   );
 };

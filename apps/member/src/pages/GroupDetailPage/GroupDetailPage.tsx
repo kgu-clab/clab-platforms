@@ -1,92 +1,70 @@
 import { Button } from '@clab/design-system';
 import Content from '@components/common/Content/Content';
 import Header from '@components/common/Header/Header';
-import GroupDetailSection from '@components/group/GroupDetailSection/GroupDetailSection';
-import { PATH_FINDER } from '@constants/path';
 import { useNavigate, useParams } from 'react-router-dom';
-import groupList from '@mocks/data/groupList.json';
-import ErrorPage from '@pages/ErrorPage/ErrorPage';
 import WeeklyActivitySection from '@components/group/WeeklyActivitySection/WeeklyActivitySection';
-import GroupNoticeSection from '@components/group/GroupNoticeSection/GroupNoticeSection';
-import Image from '@components/common/Image/Image';
-
-interface AssignmentsData {
-  id: number;
-  title: string;
-  content: string;
-  deadline: string;
-}
-interface NoticesData {
-  id: number;
-  title: string;
-  date: string;
-  content: string;
-}
-interface MembersData {
-  id: number;
-  memberId: string;
-  memberName: string;
-  department: string;
-  role: string;
-}
-interface DetailData {
-  id: number;
-  manager: string;
-  name: string;
-  image: string;
-  description: string;
-  category: string;
-  weeklyActivities: {
-    week: number;
-    content: string;
-    assignments: AssignmentsData[];
-  }[];
-  notices: NoticesData[];
-  members: MembersData[];
-  proposers: MembersData[];
-}
+import { GROUP_MESSAGE } from '@constants/message';
+import ActivityNoticeSection from '@components/group/ActivityNoticeSection/ActivityNoticeSection';
+import { useActivityGroup } from '@hooks/queries/useActivityGroup';
+import useModal from '@hooks/common/useModal';
+import Table from '@components/common/Table/Table';
+import { TABLE_HEAD } from '@constants/head';
+import { useMyProfile } from '@hooks/queries';
+import { PATH_FINDER } from '@constants/path';
+import ActivityDetailSection from '@components/group/ActivityDetailSection/ActivityDetailSection';
 
 const GroupDetailPage = () => {
+  const { id } = useParams();
   const navigate = useNavigate();
-  const { id } = useParams<{ id: string }>();
+  const { openModal } = useModal();
 
-  const data: DetailData | undefined = groupList.find(
-    (group) => group.id === Number(id),
+  if (!id) throw new Error(GROUP_MESSAGE.NO_ACTIVITY);
+
+  const { data: myProfile } = useMyProfile();
+  const { data } = useActivityGroup(+id);
+
+  const isParticipant = data.groupMembers.some(
+    (member) => member.memberId === myProfile.id,
   );
 
-  if (data === undefined) {
-    return <ErrorPage />;
-  }
+  const handleOpenModal = () => {
+    openModal({
+      title: '참여자 목록',
+      content: (
+        <Table head={TABLE_HEAD.ACTIVITY_GROUP_PARTICIPANTS} className="w-full">
+          {data.groupMembers.map(({ memberId, memberName }, index) => (
+            <Table.Row key={index}>
+              <td>{index + 1}</td>
+              <td>{memberId}</td>
+              <td>{memberName}</td>
+            </Table.Row>
+          ))}
+        </Table>
+      ),
+    });
+  };
 
   return (
     <Content>
       <Header title={['활동', data.name]}>
-        <Button
-          size="sm"
-          onClick={() => navigate(PATH_FINDER.ACTIVITY_STUDENT(Number(id)))}
-        >
-          인원목록
+        <Button size="sm" onClick={handleOpenModal}>
+          참여자 목록
         </Button>
-        <Button size="sm" color="red">
-          관리
-        </Button>
+        {data.isOwner && (
+          <Button
+            size="sm"
+            color="red"
+            onClick={() => navigate(PATH_FINDER.ACTIVITY_CONFIG(id))}
+          >
+            관리
+          </Button>
+        )}
       </Header>
-      <Image
-        src={data.image}
-        alt={data.name}
-        width="w-full"
-        height="h-[300px]"
-        className="object-cover rounded-lg border"
-      />
-      <GroupDetailSection
-        name={data.name}
-        category={data.category}
-        description={data.description}
-      />
-      <GroupNoticeSection data={data.notices} />
+      <ActivityDetailSection data={data} />
+      <ActivityNoticeSection data={data.notices} />
       <WeeklyActivitySection
-        id={Number(id)}
-        weeklyActivities={data.weeklyActivities}
+        data={data.activities}
+        isParticipant={isParticipant}
       />
     </Content>
   );

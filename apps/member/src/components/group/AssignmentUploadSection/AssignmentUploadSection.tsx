@@ -1,134 +1,165 @@
-import { useEffect, useState } from 'react';
-import { Button } from '@clab/design-system';
-import Header from '@components/common/Header/Header';
-import Section from '@components/common/Section/Section';
-import dayjs from 'dayjs';
+import { ChangeEvent, useEffect, useRef, useState } from 'react';
 
-interface assignmentData {
-  id: number;
-  title: string;
-  content: string;
-  deadline: string;
-}
+import { formattedDate, isDateValid } from '@utils/date';
+import { FORM_DATA_KEY } from '@constants/api';
+import File from '@components/common/File/File';
+import Table from '@components/common/Table/Table';
+import { Button } from '@clab/design-system';
+import Section from '@components/common/Section/Section';
+import type { ActivityBoardType, AssignmentFileType } from '@type/activity';
+import Textarea from '@components/common/Textarea/Textarea';
+import {
+  useActivityGroupBoardModifyMutation,
+  useActivityGroupBoardMutation,
+  useMyProfile,
+} from '@hooks/queries';
+import classNames from 'classnames';
+
 interface AssignmentUploadSectionProps {
-  week: number;
-  id: number;
-  activityId: number;
-  name: string;
-  weeklyActivities: {
-    week: number;
-    content: string;
-    assignments: assignmentData[];
-  }[];
+  activityGroupId: number;
+  assignmentId: number;
+  dueDateTime?: string;
+  myAssignment?: ActivityBoardType;
 }
 
 const AssignmentUploadSection = ({
-  week,
-  id,
-  activityId,
-  name,
-  weeklyActivities,
+  activityGroupId,
+  assignmentId,
+  dueDateTime,
+  myAssignment,
 }: AssignmentUploadSectionProps) => {
-  const [file, setFile] = useState<File>();
-  const [isSubmitted, setIsSubmitted] = useState(false);
-  const [lastModifiedDate, setLastModifiedDate] = useState('');
-  const [timeRemaining, setTimeRemaining] = useState('');
-  const [assignment, setAssignment] = useState<assignmentData>();
+  const { data: myProfile } = useMyProfile();
+  const { activityGroupBoardMutate } = useActivityGroupBoardMutation();
+  const { activityGroupBoardModifyMutate } =
+    useActivityGroupBoardModifyMutation();
 
-  useEffect(() => {
-    // weeklyActivities에서 해당 week의 데이터를 찾기
-    const weekData = weeklyActivities.find((w) => w.week === week);
-    if (weekData) {
-      // 과제 ID에 해당하는 과제 찾기
-      const assignmentData: assignmentData | undefined =
-        weekData.assignments.find((a) => a.id === activityId);
-      if (assignmentData) {
-        setAssignment(assignmentData);
-      }
+  const uploaderRef = useRef<HTMLInputElement>(null);
+  const [uploadedFile, setUploadedFile] = useState<AssignmentFileType | null>(
+    myAssignment?.files?.[0] || null,
+  );
+  const [description, setDescription] = useState<string>(
+    myAssignment?.content || '',
+  );
+
+  const handleDescriptionChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
+    setDescription(e.target.value);
+  };
+
+  const onClickDeleteFile = () => {
+    setUploadedFile(null);
+  };
+
+  const onClickSubmit = () => {
+    const formData = new FormData();
+    const file = uploaderRef.current?.files?.[0];
+
+    if (file) {
+      formData.append(FORM_DATA_KEY, file);
     }
-  }, [week, id, weeklyActivities, activityId]);
 
-  useEffect(() => {
-    // 제출되지 않았을 경우 남은 기간 계산
-    if (!isSubmitted && assignment) {
-      const deadlineDate = dayjs(assignment.deadline, 'YYYY-MM-DD HH:mm');
-      const today = dayjs();
-      const timeDiff = deadlineDate.diff(today, 'millisecond');
-
-      // 남은 시간이 음수인 경우 기한이 지난 것으로 처리
-      if (timeDiff > 0) {
-        // 남은 일수 계산
-        const daysRemaining = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
-        setTimeRemaining(`${daysRemaining}일 남음`);
-      } else {
-        setTimeRemaining('기한이 지났습니다');
-      }
-    }
-  }, [assignment, isSubmitted]);
-
-  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const selectedFile = event.target.files?.[0];
-    setFile(selectedFile); // 파일 상태 업데이트
-
-    // 파일이 선택되었다면 제출 상태를 false로 설정
-    if (selectedFile) {
-      setIsSubmitted(false);
+    if (myAssignment?.content || myAssignment?.files?.length) {
+      // 기존에 제출한 내용이나 파일이 있는 경우 수정으로 처리합니다.
+      activityGroupBoardModifyMutate({
+        activityGroupBoardId: myAssignment.id,
+        groupId: activityGroupId,
+        groupBoardId: assignmentId,
+        body: {
+          content: description,
+        },
+        files: file ? formData : undefined,
+      });
+    } else {
+      // 신규 제출
+      activityGroupBoardMutate({
+        parentId: assignmentId,
+        activityGroupId: activityGroupId,
+        memberId: myProfile.id,
+        body: {
+          category: 'SUBMIT',
+          content: description,
+        },
+        files: file ? formData : undefined,
+      });
     }
   };
 
-  const handleSubmit = (event: React.ChangeEvent<HTMLInputElement>) => {
-    event.preventDefault();
-
-    setIsSubmitted(true);
-
-    const now = new Date();
-    const localTime = now.toLocaleString('ko-KR', { timeZone: 'Asia/Seoul' });
-
-    setLastModifiedDate(localTime);
-  };
+  useEffect(() => {
+    if (myAssignment) {
+      setUploadedFile(myAssignment.files?.[0] || null);
+      setDescription(myAssignment.content || '');
+    }
+  }, [myAssignment]);
 
   return (
-    <div className="space-y-4">
-      <Header title={['활동', name, assignment ? assignment.title : '']} />
-      <Section>
-        <Section.Header title="과제 설명" />
-        <p className="pt-3">{assignment?.content}</p>
-      </Section>
-      <Section>
-        <Section.Header title="제출 상황" />
-        <table className="table mb-4 m-2 w-full table-fixed bg-white">
-          <tbody>
-            <tr className="border-b">
-              <td className="p-2">과제 제출 여부</td>
-              <td className="p-2">{isSubmitted ? '제출됨' : '미제출'}</td>
-            </tr>
-            <tr className="border-b">
-              <td className="p-2">종료 일시</td>
-              <td className="p-2">{assignment ? assignment.deadline : ''}</td>
-            </tr>
-            <tr className="border-b">
-              <td className="p-2">최종 수정 일시</td>
-              <td className="p-2">
-                {isSubmitted ? lastModifiedDate : timeRemaining}
-              </td>
-            </tr>
-            <tr>
-              <td className="p-2">첨부 파일</td>
-              <td className="p-2">
-                <Button onClick={() => handleSubmit}>
-                  {file ? file.name : '파일을 선택해주세요.'}
-                </Button>
-                {file && (
-                  <Button onClick={() => handleFileChange}>
-                    파일 수정하기
-                  </Button>
-                )}
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </Section>
-    </div>
+    <Section>
+      <Section.Header title="제출 상황" />
+      <Table>
+        <Table.Row>
+          <td className="w-1/3 p-2">과제 제출 여부</td>
+          <td className="p-2">{uploadedFile ? '제출 완료' : '미제출'}</td>
+        </Table.Row>
+        <Table.Row>
+          <Table.Cell>종료 일시</Table.Cell>
+          <Table.Cell>{formattedDate(dueDateTime)}</Table.Cell>
+        </Table.Row>
+        <Table.Row>
+          <Table.Cell>제출 일시</Table.Cell>
+          <Table.Cell
+            className={classNames({
+              'text-red-500': !isDateValid(
+                dueDateTime,
+                uploadedFile?.createdAt,
+              ),
+            })}
+          >
+            {uploadedFile
+              ? formattedDate(uploadedFile.createdAt)
+              : '아직 제출하지 않았습니다.'}
+          </Table.Cell>
+        </Table.Row>
+        <Table.Row>
+          <Table.Cell>첨부 파일</Table.Cell>
+          <Table.Cell>
+            {uploadedFile && (
+              <File href={uploadedFile.fileUrl}>
+                {uploadedFile.originalFileName}
+              </File>
+            )}
+            <input
+              ref={uploaderRef}
+              id="uploader"
+              type="file"
+              className={classNames(uploadedFile && 'hidden')}
+            />
+          </Table.Cell>
+        </Table.Row>
+        <Table.Row>
+          <Table.Cell>제출물 설명</Table.Cell>
+          <Table.Cell>
+            <Textarea
+              className="w-full"
+              placeholder={description || '제출물 설명을 입력해주세요.'}
+              value={description}
+              onChange={handleDescriptionChange}
+            />
+          </Table.Cell>
+        </Table.Row>
+      </Table>
+      <div className="flex gap-4 mt-2">
+        {uploadedFile && (
+          <Button className="w-full" color="orange" onClick={onClickDeleteFile}>
+            첨부파일 변경하기
+          </Button>
+        )}
+        <Button
+          className="w-full"
+          onClick={onClickSubmit}
+          disabled={description.length === 0}
+        >
+          제출하기
+        </Button>
+      </div>
+    </Section>
   );
 };
 
