@@ -24,12 +24,12 @@ const Calendar = ({ date }: CalendarProps) => {
   const events = transformEvents(data.items);
 
   //전 달 날짜
-  for (let i = date.day() - 1; i >= 0; i--) {
+  for (let i = date.day(); i >= 0; i--) {
     const day = date.subtract(1, 'month');
     dateElements.push(
       <div
         key={`${day.get('year')}-${day.get('month')}-${i}`}
-        className="h-20 border p-1 text-end text-sm text-gray-400"
+        className="h-20 p-1 text-sm text-gray-400 border text-end"
       >
         <p>{prevDaysInMonth - i}</p>
       </div>,
@@ -42,7 +42,7 @@ const Calendar = ({ date }: CalendarProps) => {
     const element = day.format('YYYY-MM-DD');
     const event = events[element];
     dateElements.push(
-      <div key={element} className="h-20 border p-1 text-end text-sm space-y-1">
+      <div key={element} className="h-20 p-1 space-y-1 text-sm border text-end">
         <p
           className={classNames({
             'rounded-full bg-red-500 text-white':
@@ -64,7 +64,7 @@ const Calendar = ({ date }: CalendarProps) => {
     dateElements.push(
       <div
         key={`${day.get('year')}-${day.get('month')}-${i}`}
-        className="h-20 border p-1 text-end text-sm text-gray-400"
+        className="h-20 p-1 text-sm text-gray-400 border text-end"
       >
         <p>{i}</p>
       </div>,

@@ -10,9 +10,9 @@ import { useBoardWriteMutation } from '@hooks/queries/useBoardWriteMutation';
 
 // name이 category와 매치되어야 합니다.
 const selectOptions = [
-  { id: 1, name: '자유' },
-  { id: 2, name: 'QnA' },
-  { id: 3, name: '졸업생' },
+  { value: 1, name: '자유' },
+  { value: 2, name: 'QnA' },
+  { value: 3, name: '졸업생' },
 ];
 
 const CommunityWritePage = () => {
@@ -47,7 +47,7 @@ const CommunityWritePage = () => {
         <div className="flex gap-2">
           <Select
             name="category"
-            data={selectOptions}
+            options={selectOptions}
             value={content.category}
             onChange={handleContent}
           />

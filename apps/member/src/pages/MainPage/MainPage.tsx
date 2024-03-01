@@ -1,5 +1,4 @@
 import Content from '@components/common/Content/Content';
-import AlertList from '@components/common/AlertList/AlertList';
 import ImageBanner from '@components/common/ImageBanner/ImageBanner';
 import NewsCardSection from '@components/main/NewsCardSection/NewsCardSection';
 import CommunitySection from '@components/main/CommunitySection/CommunitySection';
@@ -13,6 +12,7 @@ import { useBirthday } from '@hooks/queries/useBirthday';
 import { useActivityPicture } from '@hooks/queries/useActivityPicture';
 import { useSchedule } from '@hooks/queries/useSchedule';
 import { useBoards } from '@hooks/queries/useBoards';
+import MainAlert from '@components/main/MainAlert/MainAlert';
 
 const MainPage = () => {
   const { data: mainAlertData } = useSchedule({});
@@ -26,7 +26,7 @@ const MainPage = () => {
 
   return (
     <Content>
-      <AlertList data={mainAlertData.items} />
+      <MainAlert data={mainAlertData.items} />
       <ImageBanner data={mainBannerData.items} />
       <NewsCardSection to={PATH.NEWS} title="최근 동아리 소식은?" data={[]} />
       <CommunitySection>

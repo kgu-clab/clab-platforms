@@ -36,7 +36,7 @@ export const calculateDDay = (date: string): number =>
  * @param {Date|string|number} date - 포맷할 날짜. Date 객체, 문자열 또는 타임스탬프일 수 있습니다.
  * @returns {string} 포맷된 날짜 문자열.
  */
-export const formattedDate = (date: string): string =>
+export const formattedDate = (date: string | undefined): string =>
   dayjs(date).format('YY.MM.DD(dd) HH:mm');
 
 /**
@@ -69,4 +69,32 @@ export const transformEvents = (
     },
     {} as Record<string, ScheduleItem>,
   );
+};
+
+/**
+ * 주어진 날짜의 년도와 학기를 반환합니다.
+ *
+ * @param {string} createdAt - 주어진 날짜.
+ * @return {string} 주어진 날짜를 YY년도 1/2학기로 반환.
+ */
+export const getDateSemester = (createdAt: string): string => {
+  const year = dayjs(createdAt).format('YY');
+  const semester = dayjs(createdAt).get('month') <= 5 ? 1 : 2;
+  return `${year}년도 ${semester}학기`;
+};
+
+/**
+ * 주어진 참조 날짜와 확인하고자 하는 날짜를 비교하여 유효성을 평가합니다.
+ *
+ * @param {string | undefined} checkDateStr - 유효성을 확인하고자 하는 날짜를 나타내는 문자열입니다. 'YYYY-MM-DD' 형식이어야 합니다.
+ * @param {string | undefined} referenceDateStr - 유효성 판단의 기준이 되는 날짜를 나타내는 문자열입니다. 'YYYY-MM-DD' 형식이어야 합니다.
+ * @returns {boolean} 확인하고자 하는 날짜가 참조 날짜 이전이거나 같으면 true, 그렇지 않으면 false를 반환합니다.
+ */
+export const isDateValid = (
+  checkDateStr: string | undefined,
+  referenceDateStr: string | undefined,
+): boolean => {
+  const checkDate = dayjs(checkDateStr);
+  const referenceDate = dayjs(referenceDateStr);
+  return checkDate.isBefore(referenceDate) || checkDate.isSame(referenceDate);
 };

@@ -21,11 +21,20 @@ const CommunityDetailPage = () => {
 
   const navigate = useNavigate();
 
-  const [page, setPage] = useState(1);
-  const limit = 20;
+  const [pagination, setPagination] = useState({
+    page: 0,
+    size: 20,
+  });
+
+  const { page, size } = pagination;
 
   const name = categoryToTitle(type);
-  const data = useBoards(type, page - 1, limit).data.items;
+
+  const { data } = useBoards(type, page, size);
+
+  const handlePageChange = (page: number) => {
+    setPagination({ ...pagination, page: page - 1 });
+  };
 
   const onClickTitle = (id: string) => {
     navigate(PATH_FINDER.COMMUNITY_POST(type, id), {
@@ -37,27 +46,29 @@ const CommunityDetailPage = () => {
     <Content>
       <Header title={['커뮤니티', name]}>
         <p>
-          총 <span className="font-semibold">{data.length}개</span>의 게시글이
-          있어요
+          총 <span className="font-semibold">{data.totalItems}개</span>의
+          게시글이 있어요
         </p>
       </Header>
       <Section>
         <Table head={['번호', '제목', '작성자', '작성일']}>
-          {data.length === 0 ? (
+          {data.totalItems === 0 ? (
             <Table.Row>
               <td colSpan={4} className="py-4">
                 {COMMUNITY_MESSAGE.NO_ARTICLE}
               </td>
             </Table.Row>
           ) : (
-            data.map(({ id, title, writer, createdAt }, index) => (
+            data.items.map(({ id, title, writer, createdAt }, index) => (
               <Table.Row
                 key={id}
                 className="text-center"
                 onClick={() => onClickTitle(String(id))}
               >
-                <td className="py-2">{data.length - index}</td>
-                <td className="text-left py-2">{title}</td>
+                <td className="py-2">
+                  {data.totalItems - (index + page * size)}
+                </td>
+                <td className="py-2 text-left">{title}</td>
                 <td className="py-2">{writer ? writer : '-'}</td>
                 <td className="py-2">
                   {createdAt ? toYYMMDD(createdAt) : '-'}
@@ -66,13 +77,13 @@ const CommunityDetailPage = () => {
             ))
           )}
         </Table>
-        {data.length > 0 && (
+        {data.totalItems > 0 && (
           <Pagination
             className="flex justify-center"
-            totalItems={data.length}
+            totalItems={data.totalItems}
             pageLimit={5}
-            postLimit={limit}
-            setPage={setPage}
+            postLimit={size}
+            setPage={handlePageChange}
             page={page}
             sort={type}
           />

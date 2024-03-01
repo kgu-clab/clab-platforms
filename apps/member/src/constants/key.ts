@@ -27,4 +27,10 @@ export const QUERY_KEY = {
   COMMENTS: 'Comments',
   MEMBERSHIP_FEE: 'MembershipFee',
   UPLOADEDFILE: 'UploadedFile',
+  SHARED_ACCOUNT: 'SharedAccount',
+  SHARED_ACCOUNT_USAGE: 'SharedAccountUsage',
+  ACTIVITY: 'Activity',
+  ACTIVITY_BOARDS: 'ActivityBoards',
+  ACTIVITY_GROUP_APPLY: 'ActivityGroupApply',
+  ACTIVITY_BOARDS_MY_ASSIGNMENT: 'ActivityBoardsMyAssignment',
 } as const;
