@@ -4,7 +4,6 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 import AppLayout from './AppLayout';
 import ErrorPage from '@pages/ErrorPage/ErrorPage';
-
 import ProtectAuth from '@components/router/ProtectAuth';
 import MyPageSkeleton from '@pages/MyPage/MyPageSkeleton';
 
