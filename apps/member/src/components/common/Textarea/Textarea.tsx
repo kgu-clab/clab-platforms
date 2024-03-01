@@ -2,11 +2,15 @@ import classNames from 'classnames';
 import { ComponentPropsWithRef } from 'react';
 
 interface TextareaProps extends ComponentPropsWithRef<'textarea'> {
+  id?: string;
+  label?: string;
   value?: string;
   className?: string;
 }
 
 const Textarea = ({
+  id,
+  label,
   className,
   value = '',
   maxLength,
@@ -16,7 +20,13 @@ const Textarea = ({
 
   return (
     <div className="relative w-full">
+      {label && (
+        <label htmlFor={id} className="mb-1 ml-1 text-xs">
+          {label}
+        </label>
+      )}
       <textarea
+        id={id}
         className={classNames(
           'border p-2 rounded-lg focus:bg-white outline-none transition-colors',
           hasValue ? 'bg-white' : 'bg-gray-100',
