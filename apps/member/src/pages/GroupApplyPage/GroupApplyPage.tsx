@@ -20,8 +20,8 @@ const GroupApplyPage = () => {
   const [reason, setReason] = useState<string>('');
 
   const options = groupData.items.map((item) => ({
-    id: item.id,
     name: item.name,
+    value: item.id,
   }));
 
   const handleReason = useCallback((e: ChangeEvent<HTMLTextAreaElement>) => {
