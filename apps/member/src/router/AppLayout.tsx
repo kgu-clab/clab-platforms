@@ -7,29 +7,21 @@ import classNames from 'classnames';
 import ProtectAuth from '@components/router/ProtectAuth';
 
 const View = () => {
-  const mockBanner = {
-    banner: true,
-    message: '500,000원을 후원했습니다.',
-    name: '이석현 (201912023)',
-  };
-
-  const { banner, message, name } = mockBanner;
+  const banner = true;
 
   return (
-    <main
-      className={classNames('m-nav min-h-screen bg-gray-50 pb-10', {
-        'pt-10': banner === false,
-      })}
-    >
+    <main className={classNames('m-nav min-h-screen bg-gray-50 pb-10')}>
       {banner && (
-        <div className="py-4 text-center text-xl font-semibold">
-          <h1>&quot;{message}&quot;</h1>
+        <div className="py-4 text-xl font-semibold text-center">
+          <h2 className="inline-block font-bold text-transparent bg-gradient-to-r from-sky-600 via-indigo-500 to-purple-500 bg-clip-text">
+            OPEN-BETA
+          </h2>
           <p className="flex justify-center gap-2 text-xs text-gray-500">
-            {name}
+            현재 불안정하거나 구현되지 않는 기능이 있을 수 있습니다.
           </p>
         </div>
       )}
-      <div className="section flex gap-8">
+      <div className="flex gap-8 section">
         <PanelAside />
         <Outlet />
       </div>
