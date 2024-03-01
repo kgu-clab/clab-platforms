@@ -1,3 +1,4 @@
+import type { IDType } from '@type/api';
 import { createPath } from '@utils/api';
 
 export const NOT_FOUND_IMG = '/not_found.webp';
@@ -32,12 +33,12 @@ export const PATH = {
 };
 
 export const PATH_FINDER = {
-  NEWS_POST: (id: string) => createPath(PATH.NEWS, id),
-  BLOG_POST: (id: string) => createPath(PATH.BLOG, id),
-  COMMUNITY_POST: (sort: string, id: string) =>
+  NEWS_POST: (id: IDType) => createPath(PATH.NEWS, id),
+  BLOG_POST: (id: IDType) => createPath(PATH.BLOG, id),
+  COMMUNITY_POST: (sort: IDType, id: IDType) =>
     createPath(PATH.COMMUNITY, sort, id),
-  LIBRARY_DETAIL: (id: string) => createPath(PATH.LIBRARY, id),
-  ACTIVITY_DETAIL: (id: number) => createPath(PATH.ACTIVITY, id),
-  ACTIVITY_ASSIGNMENT: (groupId: string, id: number) =>
+  LIBRARY_DETAIL: (id: IDType) => createPath(PATH.LIBRARY, id),
+  ACTIVITY_DETAIL: (id: IDType) => createPath(PATH.ACTIVITY, id),
+  ACTIVITY_ASSIGNMENT: (groupId: IDType, id: IDType) =>
     createPath(PATH.ACTIVITY, groupId, id),
 };
