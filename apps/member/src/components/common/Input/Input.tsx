@@ -1,9 +1,7 @@
 import classNames from 'classnames';
 import { ComponentPropsWithRef } from 'react';
 
-interface InputProps extends ComponentPropsWithRef<'input'> {
-  className?: string;
-}
+interface InputProps extends ComponentPropsWithRef<'input'> {}
 
 const Input = ({ className, ...rest }: InputProps) => {
   return (

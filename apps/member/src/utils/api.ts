@@ -17,11 +17,12 @@ export const createPath = (...path: Array<string | number>): string => {
 
 export const createCommonPagination = (
   endpoint: string,
-  params: Record<string, string | number | boolean>,
+  params: Record<string, string | number | boolean | undefined | null>,
 ) => {
   let url = `${endpoint}?`;
   Object.keys(params).forEach((key, index) => {
     const value = params[key];
+    if (value === null || value === undefined) return;
     if (index !== 0) {
       url += '&';
     }

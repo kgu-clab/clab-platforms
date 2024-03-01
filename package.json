@@ -7,7 +7,7 @@
     "packages/*"
   ],
   "scripts": {
-    "setup": "yarn install && yarn build:design-system",
+    "setup": "yarn install && yarn dlx @yarnpkg/sdks vscode && yarn build:design-system",
     "postinstall": "husky install",
     "lint-staged": "lint-staged",
     "dev:auth": "yarn workspace auth dev",

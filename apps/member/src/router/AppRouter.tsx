@@ -4,7 +4,6 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 import AppLayout from './AppLayout';
 import ErrorPage from '@pages/ErrorPage/ErrorPage';
-
 import ProtectAuth from '@components/router/ProtectAuth';
 import MyPageSkeleton from '@pages/MyPage/MyPageSkeleton';
 
@@ -26,14 +25,11 @@ const GroupApplyPage = lazy(
 const GroupDetailPage = lazy(
   () => import('@pages/GroupDetailPage/GroupDetailPage'),
 );
-const GroupNoticeDetailPage = lazy(
-  () => import('@pages/GroupNoticeDetailPage/GroupNoticeDetailPage'),
-);
-const GroupStudentPage = lazy(
-  () => import('@pages/GroupStudentPage/GroupStudentPage'),
-);
 const GroupAssignmentPage = lazy(
   () => import('@pages/GroupAssignmentPage/GroupAssignmentPage'),
+);
+const GroupConfigPage = lazy(
+  () => import('@pages/GroupConfigPage/GroupConfigPage'),
 );
 const LibraryPage = lazy(() => import('@pages/LibraryPage/LibraryPage'));
 const LibraryDetailPage = lazy(
@@ -117,18 +113,10 @@ const AppRouter = () => {
           ),
         },
         {
-          path: PATH.ACTIVITY_NOTICE,
+          path: PATH.ACTIVITY_CONFIG,
           element: (
             <Suspense>
-              <GroupNoticeDetailPage />
-            </Suspense>
-          ),
-        },
-        {
-          path: PATH.ACTIVITY_STUDENT,
-          element: (
-            <Suspense>
-              <GroupStudentPage />
+              <GroupConfigPage />
             </Suspense>
           ),
         },

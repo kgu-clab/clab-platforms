@@ -13,10 +13,12 @@ interface Pagination<T = unknown> {
   items: Array<T>;
 }
 
+export interface PaginationType<T = unknown>
+  extends BaseResponse<Pagination<T>> {}
+
+export type IDType = string | number;
+
 export interface TokenType {
   accessToken: string;
   refreshToken: string;
 }
-
-export interface PaginationType<T = unknown>
-  extends BaseResponse<Pagination<T>> {}

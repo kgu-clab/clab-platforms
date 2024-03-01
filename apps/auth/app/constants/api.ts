@@ -1,3 +1,5 @@
+export const API_BASE_URL = 'https://api.clab.page';
+
 export const END_POINTS = {
   LOGIN: '/login',
   TWO_FACTOR_LOGIN: '/login/authenticator',

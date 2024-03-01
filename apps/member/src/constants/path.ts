@@ -1,3 +1,4 @@
+import type { IDType } from '@type/api';
 import { createPath } from '@utils/api';
 
 export const NOT_FOUND_IMG = '/not_found.webp';
@@ -18,10 +19,9 @@ export const PATH = {
   COMMUNITY_HIRE: '/community/hire',
   COMMUNITY_WRITE: '/community/write',
   ACTIVITY: '/activity',
-  ACTIVITY_DETAIL: `/activity/:id`,
   ACTIVITY_APPLY: '/activity/apply',
-  ACTIVITY_NOTICE: '/activity/:id/notice',
-  ACTIVITY_STUDENT: '/activity/:id/student',
+  ACTIVITY_DETAIL: `/activity/:id`,
+  ACTIVITY_CONFIG: '/activity/:id/config',
   ACTIVITY_ASSIGNMENT: '/activity/:id/:assignmentId',
   NEWS: '/news',
   BLOG: '/blog',
@@ -34,15 +34,14 @@ export const PATH = {
 } as const;
 
 export const PATH_FINDER = {
-  NEWS_POST: (id: string) => createPath(PATH.NEWS, id),
-  BLOG_POST: (id: string) => createPath(PATH.BLOG, id),
-  COMMUNITY_POST: (sort: string, id: string) =>
+  NEWS_POST: (id: IDType) => createPath(PATH.NEWS, id),
+  BLOG_POST: (id: IDType) => createPath(PATH.BLOG, id),
+  COMMUNITY_POST: (sort: IDType, id: IDType) =>
     createPath(PATH.COMMUNITY, sort, id),
-  LIBRARY_DETAIL: (id: string | number) => createPath(PATH.LIBRARY, id),
-  ACTIVITY_DETAIL: (id: string) => createPath(PATH.ACTIVITY, id),
-  ACTIVITY_STUDENT: (id: string) => createPath(PATH.ACTIVITY, id, 'student'),
-  ACTIVITY_NOTICE: (id: string) => createPath(PATH.ACTIVITY, id, 'notice'),
-  ACTIVITY_ASSIGNMENT: (id: string, assignmentId: string) =>
-    createPath(PATH.ACTIVITY, id, assignmentId),
+  LIBRARY_DETAIL: (id: IDType) => createPath(PATH.LIBRARY, id),
+  ACTIVITY_DETAIL: (id: IDType) => createPath(PATH.ACTIVITY, id),
+  ACTIVITY_CONFIG: (id: IDType) => createPath(PATH.ACTIVITY, id, 'config'),
+  ACTIVITY_ASSIGNMENT: (groupId: IDType, id: IDType) =>
+    createPath(PATH.ACTIVITY, groupId, id),
   BOOK_DETAIL: (id: string) => createPath(PATH.LIBRARY, id),
 } as const;

@@ -1,15 +1,16 @@
 import classNames from 'classnames';
 import { ComponentPropsWithRef } from 'react';
 
-interface SelectProps extends ComponentPropsWithRef<'select'> {
-  className?: string;
-  data: {
-    id: number;
-    name: string;
-  }[];
+interface SelectOptions {
+  name: string | number;
+  value: string | number;
 }
 
-const Select = ({ className, data, ...rest }: SelectProps) => {
+interface SelectProps extends ComponentPropsWithRef<'select'> {
+  options: SelectOptions[];
+}
+
+const Select = ({ className, options = [], ...rest }: SelectProps) => {
   return (
     <select
       className={classNames('border p-2 rounded-md', className)}
@@ -18,8 +19,8 @@ const Select = ({ className, data, ...rest }: SelectProps) => {
       <option disabled value={0}>
         미선택
       </option>
-      {data.map(({ id, name }) => (
-        <option key={id} value={id}>
+      {options.map(({ name, value }) => (
+        <option key={value} value={value}>
           {name}
         </option>
       ))}

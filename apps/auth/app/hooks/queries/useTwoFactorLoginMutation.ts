@@ -10,8 +10,11 @@ export const useTwoFactorLoginMutation = () => {
 
   const twoFactorLoginMutation = useMutation({
     mutationFn: postTwoFactorLogin,
-    onSuccess: ({ success, data }) => {
-      const { accessToken, refreshToken } = data;
+    onSuccess: ({ success, authHeader }) => {
+      if (!authHeader) return;
+
+      const parsedAuthHeader = JSON.parse(authHeader);
+      const { accessToken, refreshToken } = parsedAuthHeader;
 
       if (!code || !success) {
         alert(ERROR_MESSAGE.AUTH);
