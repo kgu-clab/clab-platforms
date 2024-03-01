@@ -1,7 +1,7 @@
 import { server } from './server';
 import { API_BASE_URL, END_POINT, HTTP_STATUS_CODE } from '@constants/api';
-import type { FetchOptions, Interceptor } from '@gwansikk/server-chain';
-import type { BaseResponse, TokenType } from '@type/api';
+import type { Interceptor } from '@gwansikk/server-chain';
+import type { TokenType } from '@type/api';
 import {
   authorization,
   createPath,
@@ -33,9 +33,7 @@ const retryRequest = async (
 export const tokenHandler: Interceptor<Response> = async (response, method) => {
   const { status } = response;
 
-  if (
-    [HTTP_STATUS_CODE.UNAUTHORIZED, HTTP_STATUS_CODE.FORBIDDEN].includes(status)
-  ) {
+  if ([HTTP_STATUS_CODE.UNAUTHORIZED].includes(status)) {
     const preRefreshToken = getRefreshToken();
     if (!preRefreshToken) return response;
 
@@ -47,7 +45,7 @@ export const tokenHandler: Interceptor<Response> = async (response, method) => {
       reissueLock = true;
     }
 
-    const { success, data } = await fetch(
+    const { accessToken, refreshToken } = await fetch(
       createPath(API_BASE_URL, END_POINT.LOGIN_REISSUE),
       {
         method: 'POST',
@@ -56,39 +54,31 @@ export const tokenHandler: Interceptor<Response> = async (response, method) => {
           'Content-Type': 'application/json',
         },
       },
-    ).then(async (response) => {
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
-      }
-      return (await response.json()) as BaseResponse<TokenType>;
-    });
+    )
+      .then(async (response) => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
 
-    if (success === true) {
-      const { accessToken, refreshToken } = data;
+        return JSON.parse(
+          response.headers.get('X-Clab-Auth') ?? '',
+        ) as unknown as TokenType;
+      })
+      .catch((e) => {
+        console.error('Token reissue error', e);
+        // 토큰 갱신에 실패한 경우 로그아웃 처리
+        removeTokens();
+        window.location.reload();
+        return { accessToken: null, refreshToken: null };
+      });
+
+    if (accessToken && refreshToken) {
       setTokens(accessToken, refreshToken);
       server.setHeaders(authorization(accessToken));
       reissueLock = false;
       return retryRequest(response, method, 0);
-    } else {
-      // 토큰 갱신에 실패한 경우 로그아웃 처리
-      removeTokens();
-      window.location.reload();
     }
   }
 
   return response;
-};
-
-export const contentTypeHandler: Interceptor<FetchOptions> = (request) => {
-  if (request.body instanceof FormData) {
-    // FormData 일 경우  Content-Type을 설정하지 않도록 합니다.
-    // Content-Type을 설정하지 않으면 FormData의 Content-Type이 설정되어 전송됩니다.
-  } else {
-    request.headers = {
-      ...request.headers,
-      'Content-Type': 'application/json',
-    };
-  }
-
-  return request;
 };
