@@ -31,7 +31,7 @@ export const PATH = {
   SITEMAP: '/sitemap',
   LOGIN: '/login',
   AUTH: '/auth',
-};
+} as const;
 
 export const PATH_FINDER = {
   NEWS_POST: (id: IDType) => createPath(PATH.NEWS, id),
@@ -43,4 +43,5 @@ export const PATH_FINDER = {
   ACTIVITY_CONFIG: (id: IDType) => createPath(PATH.ACTIVITY, id, 'config'),
   ACTIVITY_ASSIGNMENT: (groupId: IDType, id: IDType) =>
     createPath(PATH.ACTIVITY, groupId, id),
-};
+  BOOK_DETAIL: (id: string) => createPath(PATH.LIBRARY, id),
+} as const;
