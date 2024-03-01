@@ -33,6 +33,9 @@ export const END_POINT = {
   UPLOADEDFILE_PROFILES: (memberId: string) => `/files/profiles/${memberId}`,
   HIRE: (jobPostingId: string) => `/job-postings/${jobPostingId}`,
   NEWS: (newsId: string) => `/news/${newsId}`,
+  SHARED_ACCOUNT: `/shared-accounts`,
+  SHARED_ACCOUNT_STATUS: (usageId: number) =>
+    `/shared-accounts/usage/${usageId}`,
 } as const;
 
 export const HTTP_STATUS_CODE = {

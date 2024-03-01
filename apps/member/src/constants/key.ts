@@ -27,4 +27,6 @@ export const QUERY_KEY = {
   COMMENTS: 'Comments',
   MEMBERSHIP_FEE: 'MembershipFee',
   UPLOADEDFILE: 'UploadedFile',
+  SHARED_ACCOUNT: 'SharedAccount',
+  SHARED_ACCOUNT_USAGE: 'SharedAccountUsage',
 } as const;
