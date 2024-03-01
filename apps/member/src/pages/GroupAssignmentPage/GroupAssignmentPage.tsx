@@ -6,7 +6,6 @@ import { useActivityGroupBoardsMyAssignment } from '@hooks/queries/useActivityGr
 import { GROUP_MESSAGE } from '@constants/message';
 import Header from '@components/common/Header/Header';
 import Section from '@components/common/Section/Section';
-import { useActivityGroupBoardFeedback } from '@hooks/queries';
 
 const GroupAssignmentPage = () => {
   const { id, assignmentId } = useParams();
@@ -18,7 +17,8 @@ const GroupAssignmentPage = () => {
   const { data: board } = useActivityGroupBoard(+assignmentId);
   const { data: myAssignment } =
     useActivityGroupBoardsMyAssignment(+assignmentId);
-  const { data: feedback } = useActivityGroupBoardFeedback(myAssignment.id);
+
+  const feedback = myAssignment?.[0].feedbacks?.[0];
 
   return (
     <Content>
@@ -31,7 +31,7 @@ const GroupAssignmentPage = () => {
         activityGroupId={+id}
         assignmentId={+assignmentId}
         dueDateTime={board?.dueDateTime}
-        myAssignment={myAssignment}
+        myAssignment={myAssignment?.[0]}
       />
       <Section>
         <Section.Header title="피드백" />

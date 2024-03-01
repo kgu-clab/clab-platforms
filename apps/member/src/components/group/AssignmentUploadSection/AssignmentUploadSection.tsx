@@ -57,8 +57,8 @@ const AssignmentUploadSection = ({
       formData.append(FORM_DATA_KEY, file);
     }
 
-    if (myAssignment?.content) {
-      // 수정
+    if (myAssignment?.content || myAssignment?.files?.length) {
+      // 기존에 제출한 내용이나 파일이 있는 경우 수정으로 처리합니다.
       activityGroupBoardModifyMutate({
         activityGroupBoardId: myAssignment.id,
         groupId: activityGroupId,
