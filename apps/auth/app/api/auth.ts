@@ -1,22 +1,9 @@
-import { ServerResponse } from '@type/server';
-import { END_POINTS } from '../constants/api';
-import { server } from './server';
+import { API_BASE_URL, END_POINTS } from '../constants/api';
 
 interface PostLoginBody {
   [key: string]: string;
   id: string;
   password: string;
-}
-
-interface PostLoginResponse extends ServerResponse {
-  data: string | null;
-}
-
-interface PostTwoFactorLoginResponse extends ServerResponse {
-  data: {
-    accessToken: string;
-    refreshToken: string;
-  };
 }
 
 interface PostTwoFactorLoginBody {
@@ -26,20 +13,48 @@ interface PostTwoFactorLoginBody {
 }
 
 export const postLogin = async (body: PostLoginBody) => {
-  const response = await server.post<PostLoginBody, PostLoginResponse>({
-    url: END_POINTS.LOGIN,
-    body,
+  const url = API_BASE_URL + END_POINTS.LOGIN;
+  const response = await fetch(url, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(body),
   });
 
+  if (!response.ok) {
+    throw new Error('Network response was not ok');
+  }
+
+  const authHeader = response.headers.get('X-Clab-Auth');
+  const responseBody = await response.json();
+
   return {
-    ...response,
+    success: responseBody.success,
+    authHeader: authHeader,
     id: body.id,
   };
 };
 
 export const postTwoFactorLogin = async (body: PostTwoFactorLoginBody) => {
-  return await server.post<PostTwoFactorLoginBody, PostTwoFactorLoginResponse>({
-    url: END_POINTS.TWO_FACTOR_LOGIN,
-    body,
+  const url = API_BASE_URL + END_POINTS.TWO_FACTOR_LOGIN;
+  const response = await fetch(url, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(body),
   });
+
+  if (!response.ok) {
+    throw new Error('Network response was not ok');
+  }
+
+  const authHeader = response.headers.get('X-Clab-Auth');
+  const responseBody = await response.json();
+
+  return {
+    success: responseBody.success,
+    authHeader: authHeader,
+  };
 };
