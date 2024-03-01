@@ -1,30 +1,28 @@
 import { Button } from '@clab/design-system';
 import Content from '@components/common/Content/Content';
 import Header from '@components/common/Header/Header';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import WeeklyActivitySection from '@components/group/WeeklyActivitySection/WeeklyActivitySection';
-import Image from '@components/common/Image/Image';
 import { GROUP_MESSAGE } from '@constants/message';
 import ActivityNoticeSection from '@components/group/ActivityNoticeSection/ActivityNoticeSection';
 import { useActivityGroup } from '@hooks/queries/useActivityGroup';
 import useModal from '@hooks/common/useModal';
-
 import Table from '@components/common/Table/Table';
-import { LiaCertificateSolid } from 'react-icons/lia';
-import { getDateSemester } from '@utils/date';
-import Section from '@components/common/Section/Section';
-import { MdOutlineDateRange } from 'react-icons/md';
 import { TABLE_HEAD } from '@constants/head';
 import { useMyProfile } from '@hooks/queries';
+import { PATH_FINDER } from '@constants/path';
+import ActivityDetailSection from '@components/group/ActivityDetailSection/ActivityDetailSection';
 
 const GroupDetailPage = () => {
   const { id } = useParams();
+  const navigate = useNavigate();
   const { openModal } = useModal();
 
   if (!id) throw new Error(GROUP_MESSAGE.NO_ACTIVITY);
 
   const { data: myProfile } = useMyProfile();
-  const { data } = useActivityGroup(id);
+  const { data } = useActivityGroup(+id);
+
   const isParticipant = data.groupMembers.some(
     (member) => member.memberId === myProfile.id,
   );
@@ -53,29 +51,16 @@ const GroupDetailPage = () => {
           참여자 목록
         </Button>
         {data.isOwner && (
-          <Button size="sm" color="red">
+          <Button
+            size="sm"
+            color="red"
+            onClick={() => navigate(PATH_FINDER.ACTIVITY_CONFIG(id))}
+          >
             관리
           </Button>
         )}
       </Header>
-      <Image
-        width="w-full"
-        height="h-[300px]"
-        src={data.imageUrl}
-        alt={data.name}
-        className="object-cover border rounded-lg"
-      />
-      <Section>
-        <h1 className="text-xl font-bold">{data.name}</h1>
-        <p className="my-1 text-sm">{data.content}</p>
-        <div className="flex items-center text-sm text-gray-500">
-          <LiaCertificateSolid className="mr-1" />
-          <span>{data.category}</span>
-          <span className="px-2">•</span>
-          <MdOutlineDateRange className="mr-1" />
-          <span>{getDateSemester(data.createdAt)}</span>
-        </div>
-      </Section>
+      <ActivityDetailSection data={data} />
       <ActivityNoticeSection data={data.notices} />
       <WeeklyActivitySection
         data={data.activities}
