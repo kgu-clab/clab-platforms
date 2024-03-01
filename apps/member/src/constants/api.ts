@@ -21,7 +21,9 @@ export const END_POINT = {
   BOARDS_LIST: `/boards/list`,
   BOARDERS_ITEM: (id: IDType) => `/boards/${id}`,
   ACCUSES: '/accuses',
-  BOOK_LIST: `/books`,
+  BOOK: `/books`,
+  BOOK_DETAIL: (id: string) => `/books/${id}`,
+  BOOK_LOAN: `/book-loan-records`,
   MY_NEWS: `/news`,
   MY_BLOG: `/blogs`,
   MY_HIRE: `/job-postings`,
@@ -47,7 +49,7 @@ export const END_POINT = {
   ACTIVITY_GROUP_BOARDS: `/activity-group/boards`,
   ACTIVITY_GROUP_BOARDS_MY_ASSIGNMENT: `activity-group/boards/my-assignment`,
   ACTIVITY_GROUP_BOARD: `/activity-group/boards`,
-};
+} as const;
 
 export const HTTP_STATUS_CODE = {
   SUCCESS: 200,
@@ -60,4 +62,4 @@ export const HTTP_STATUS_CODE = {
   CONTENT_TOO_LARGE: 413,
   INTERNAL_SERVER_ERROR: 500,
   CLAB_AUTH_SUCCESS: 1200,
-};
+} as const;

@@ -16,7 +16,8 @@
     "qrcode.react": "^3.1.0",
     "react": "^18",
     "react-dom": "^18",
-    "recoil": "^0.7.7"
+    "recoil": "^0.7.7",
+    "sharp": "^0.33.2"
   },
   "devDependencies": {
     "@clab/design-system": "workspace:^",

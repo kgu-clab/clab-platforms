@@ -2,7 +2,7 @@ export const ATOM_KEY = {
   IS_LOGGED_IN: 'isLoggedInState',
   MODAL: 'modalState',
   TOAST: 'toastState',
-};
+} as const;
 
 export const QUERY_KEY = {
   MY_PROFILE: 'MyProfile',
@@ -15,6 +15,9 @@ export const QUERY_KEY = {
   BORDER_FREE: 'BorderFREE',
   BORDER_QNA: 'BorderQNA',
   BORDER_GRADUATED: 'BorderGraduated',
+  BOOK: 'Book',
+  BOOK_DETAIL: 'BookDetail',
+  BOOK_LOAN_RECORD: 'BookLoanRecord',
   NEWS: 'News',
   BLOG: 'Blog',
   HIRE: 'Hire',
@@ -28,4 +31,4 @@ export const QUERY_KEY = {
   ACTIVITY_BOARDS: 'ActivityBoards',
   ACTIVITY_GROUP_APPLY: 'ActivityGroupApply',
   ACTIVITY_BOARDS_MY_ASSIGNMENT: 'ActivityBoardsMyAssignment',
-};
+} as const;

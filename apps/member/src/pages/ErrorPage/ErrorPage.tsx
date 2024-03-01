@@ -4,6 +4,7 @@ import Footer from '@components/common/Footer/Footer';
 import Linker from '@components/common/Linker/Linker';
 import ScrollToTop from '@components/common/ScrollToTop/ScrollToTop';
 import ProtectAuth from '@components/router/ProtectAuth';
+import { PATH } from '@constants/path';
 
 const ErrorPage = () => {
   const error = useRouteError();
@@ -26,8 +27,8 @@ const ErrorPage = () => {
           <div className="section flex min-h-screen flex-col items-center justify-center gap-4">
             <BiMessageAltError className="w-20 h-20" />
             <div className="text-center">
-              <h1 className="text-5xl text-clab-main">{`${errorStatus || '오류'}`}</h1>
-              <h2>{errorMessage || 'ERROR'}</h2>
+              <h1 className="text-5xl text-clab-main">{`${errorStatus || '알 수 없는 오류'}`}</h1>
+              <h2>{errorMessage}</h2>
               <p className="mt-2 text-xl">
                 불편을 드려 죄송합니다. 오류가 발생했어요. 😭
               </p>
@@ -39,7 +40,10 @@ const ErrorPage = () => {
               <p>감사합니다.</p>
             </div>
             <div className="flex gap-4">
-              <Linker to="/" className="text-sky-500 hover:text-sky-600">
+              <Linker
+                to={PATH.MAIN}
+                className="text-sky-500 hover:text-sky-600"
+              >
                 메인으로
               </Linker>
               <Linker to={-1} className="text-gray-500 hover:text-gray-600">
