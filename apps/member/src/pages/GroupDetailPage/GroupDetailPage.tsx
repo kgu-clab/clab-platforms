@@ -2,10 +2,10 @@ import { Button } from '@clab/design-system';
 import Content from '@components/common/Content/Content';
 import Header from '@components/common/Header/Header';
 import { useParams } from 'react-router-dom';
-import ActivitySection from '@components/group/ActivitySection/ActivitySection';
+import WeeklyActivitySection from '@components/group/WeeklyActivitySection/WeeklyActivitySection';
 import Image from '@components/common/Image/Image';
 import { GROUP_MESSAGE } from '@constants/message';
-import NoticeSection from '@components/group/NoticeSection/NoticeSection';
+import ActivityNoticeSection from '@components/group/ActivityNoticeSection/ActivityNoticeSection';
 import { useActivityGroup } from '@hooks/queries/useActivityGroup';
 import useModal from '@hooks/common/useModal';
 
@@ -15,6 +15,7 @@ import { getDateSemester } from '@utils/date';
 import Section from '@components/common/Section/Section';
 import { MdOutlineDateRange } from 'react-icons/md';
 import { TABLE_HEAD } from '@constants/head';
+import { useMyProfile } from '@hooks/queries';
 
 const GroupDetailPage = () => {
   const { id } = useParams();
@@ -22,7 +23,11 @@ const GroupDetailPage = () => {
 
   if (!id) throw new Error(GROUP_MESSAGE.NO_ACTIVITY);
 
+  const { data: myProfile } = useMyProfile();
   const { data } = useActivityGroup(id);
+  const isParticipant = data.groupMembers.some(
+    (member) => member.memberId === myProfile.id,
+  );
 
   const handleOpenModal = () => {
     openModal({
@@ -41,24 +46,13 @@ const GroupDetailPage = () => {
     });
   };
 
-  const {
-    name,
-    imageUrl,
-    content,
-    category,
-    createdAt,
-    notices,
-    activities,
-    isOwner,
-  } = data;
-
   return (
     <Content>
-      <Header title={['활동', name]}>
+      <Header title={['활동', data.name]}>
         <Button size="sm" onClick={handleOpenModal}>
           참여자 목록
         </Button>
-        {isOwner && (
+        {data.isOwner && (
           <Button size="sm" color="red">
             관리
           </Button>
@@ -67,23 +61,26 @@ const GroupDetailPage = () => {
       <Image
         width="w-full"
         height="h-[300px]"
-        src={imageUrl}
-        alt={name}
+        src={data.imageUrl}
+        alt={data.name}
         className="object-cover border rounded-lg"
       />
       <Section>
-        <h1 className="text-xl font-bold">{name}</h1>
-        <p className="my-1 text-sm">{content}</p>
+        <h1 className="text-xl font-bold">{data.name}</h1>
+        <p className="my-1 text-sm">{data.content}</p>
         <div className="flex items-center text-sm text-gray-500">
           <LiaCertificateSolid className="mr-1" />
-          <span>{category}</span>
+          <span>{data.category}</span>
           <span className="px-2">•</span>
           <MdOutlineDateRange className="mr-1" />
-          <span>{getDateSemester(createdAt)}</span>
+          <span>{getDateSemester(data.createdAt)}</span>
         </div>
       </Section>
-      <NoticeSection data={notices} />
-      <ActivitySection data={activities} />
+      <ActivityNoticeSection data={data.notices} />
+      <WeeklyActivitySection
+        data={data.activities}
+        isParticipant={isParticipant}
+      />
     </Content>
   );
 };

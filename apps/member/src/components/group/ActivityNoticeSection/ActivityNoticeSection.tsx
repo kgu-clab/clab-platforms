@@ -7,17 +7,17 @@ import classNames from 'classnames';
 import { useState } from 'react';
 import dayjs from 'dayjs';
 
-interface NoticeSectionProps {
+interface ActivityNoticeSectionProps {
   data: Array<ActivityBoardType>;
 }
 
-interface NoticeSectionItemProps {
+interface ActivityNoticeSectionItemProps {
   className?: string;
   onClick: (content: string) => void;
   data: ActivityBoardType;
 }
 
-const NoticeSection = ({ data }: NoticeSectionProps) => {
+const ActivityNoticeSection = ({ data }: ActivityNoticeSectionProps) => {
   const { openModal } = useModal();
   const [open, setOpen] = useState(false);
 
@@ -42,7 +42,10 @@ const NoticeSection = ({ data }: NoticeSectionProps) => {
   return (
     <Section className="!p-2">
       <div className="flex items-center gap-2 divide-x">
-        <NoticeSection.Item data={latestNotice} onClick={onClickAlert} />
+        <ActivityNoticeSection.Item
+          data={latestNotice}
+          onClick={onClickAlert}
+        />
         {otherNotices.length > 0 && (
           <DropdownButton
             isOpen={open}
@@ -60,7 +63,7 @@ const NoticeSection = ({ data }: NoticeSectionProps) => {
         <hr className="my-2" />
         <div className="flex flex-col">
           {otherNotices.map((notice) => (
-            <NoticeSection.Item
+            <ActivityNoticeSection.Item
               key={notice.id}
               data={notice}
               onClick={onClickAlert}
@@ -72,7 +75,11 @@ const NoticeSection = ({ data }: NoticeSectionProps) => {
   );
 };
 
-NoticeSection.Item = ({ className, data, onClick }: NoticeSectionItemProps) => {
+ActivityNoticeSection.Item = ({
+  className,
+  data,
+  onClick,
+}: ActivityNoticeSectionItemProps) => {
   return (
     <div
       className={classNames(
@@ -93,4 +100,4 @@ NoticeSection.Item = ({ className, data, onClick }: NoticeSectionItemProps) => {
   );
 };
 
-export default NoticeSection;
+export default ActivityNoticeSection;
