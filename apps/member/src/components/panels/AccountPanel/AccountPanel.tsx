@@ -12,6 +12,7 @@ import { useSharedAccounts } from '@hooks/queries/useSharedAccounts';
 import dayjs from 'dayjs';
 import { useSharedAccountsChangeStatusMutation } from '@hooks/queries/useSharedAccountsChangeStatusMutation';
 import { formattedDate } from '@utils/date';
+import { SELECT_OPTIONS } from '@constants/select';
 
 interface AccountButtonProps {
   label: string;
@@ -36,13 +37,6 @@ const AccountButton = ({
   );
 };
 
-const selectOptionList = [
-  { id: 1, name: '1시간' },
-  { id: 2, name: '2시간' },
-  { id: 3, name: '3시간' },
-  { id: 4, name: '4시간' },
-];
-
 const AccountPanel = () => {
   const { openModal } = useModal();
   const { sharedAccountsUsageMutate } = useSharedAccountsUsageMutation();
@@ -51,6 +45,7 @@ const AccountPanel = () => {
   const { data: accountUsageList } = useSharedAccountsUsage();
   const { data: accountData } = useSharedAccounts();
   const { data: myProfile } = useMyProfile();
+
   const [open, setOpen] = useState(true);
   const [selectedButton, setSelectedButton] = useState<string>('');
 
@@ -130,7 +125,7 @@ const AccountPanel = () => {
             )}
             <Select
               className="w-full"
-              data={selectOptionList}
+              options={SELECT_OPTIONS.ACCOUNT_PANEL}
               onChange={(e) => (selectedTime = Number(e.target.value))}
             />
           </div>

@@ -4,7 +4,13 @@ import { END_POINT } from '@constants/api';
 import type { BookItem, BookLoanRecordItem } from '@type/book';
 import type { BaseResponse, PaginationType } from '@type/api';
 
-// 도서 목록 조회
+interface PostBorrowBookArgs extends BookLoanRecordItem {
+  memberId: string;
+}
+
+/**
+ * 도서 목록 조회
+ */
 export const getBooks = async (page: number, size: number) => {
   const params = { page, size };
   const { data } = await server.get<PaginationType<BookItem>>({
@@ -14,8 +20,10 @@ export const getBooks = async (page: number, size: number) => {
   return data;
 };
 
-// 도서 상세 조회
-export const getBookDetail = async (id: string) => {
+/**
+ * 도서 상세 조회
+ */
+export const getBookDetail = async (id: number) => {
   const { data } = await server.get<BaseResponse<BookItem>>({
     url: END_POINT.BOOK_DETAIL(id),
   });
@@ -23,8 +31,10 @@ export const getBookDetail = async (id: string) => {
   return data;
 };
 
-// 나의 대출내역 조회
-export const getMyBooks = async (page: number, size: number, id: string) => {
+/**
+ * 나의 대출내역 조회
+ */
+export const getMyBooks = async (id: string, page: number, size: number) => {
   const params = { page, size };
   const { data } = await server.get<PaginationType<BookItem>>({
     url: createCommonPagination(END_POINT.BOOK, params),
@@ -33,49 +43,54 @@ export const getMyBooks = async (page: number, size: number, id: string) => {
   return data.items.filter((book) => book.borrowerId === id);
 };
 
-// 도서 대출
-export const postBorrowBook = async (body: BookLoanRecordItem) => {
+/**
+ * 도서 대출
+ */
+export const postBorrowBook = async (body: PostBorrowBookArgs) => {
   const borrowUrl = END_POINT.BOOK_LOAN + '/borrow';
   const { data } = await server.post<BookLoanRecordItem, BaseResponse<number>>({
     url: borrowUrl,
     body,
   });
 
-  return data;
+  return { memberId: body.memberId, bookId: body.bookId, data };
 };
 
-// 도서 반납
+/**
+ * 도서 반납
+ */
 export const postReturnBook = async (body: BookLoanRecordItem) => {
-  const returnUrl = END_POINT.BOOK_LOAN + '/return';
   const { data } = await server.post<BookLoanRecordItem, BaseResponse<number>>({
-    url: returnUrl,
+    url: END_POINT.BOOK_LOAN_RETURN,
     body,
   });
 
-  return data;
+  return { memberId: body.borrowerId, bookId: body.bookId, data };
 };
 
-// 도서 연장
+/**
+ * 도서 연장
+ */
 export const postExtendBook = async (body: BookLoanRecordItem) => {
-  const extendUrl = END_POINT.BOOK_LOAN + '/extend';
   const { data } = await server.post<BookLoanRecordItem, BaseResponse<number>>({
-    url: extendUrl,
+    url: END_POINT.BOOK_LOAN_EXTEND,
     body,
   });
 
-  return data;
+  return { memberId: body.borrowerId, bookId: data };
 };
 
-// 도서 대출 내역 검색
+/**
+ * 도서 대출 내역 검색
+ */
 export const getBookLoanByMemberId = async (
   borrowerId: string,
   page = 0,
   size = 20,
 ) => {
-  const loanUrl = END_POINT.BOOK_LOAN + '/search';
   const params = { borrowerId, page, size };
   const { data } = await server.get<PaginationType<BookLoanRecordItem>>({
-    url: createCommonPagination(loanUrl, params),
+    url: createCommonPagination(END_POINT.BOOK_LOAN_SEARCH, params),
   });
 
   return data;

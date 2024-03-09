@@ -19,3 +19,16 @@ export const isNumber = (value: unknown): boolean => {
 export const getRandomInt = (max: number): number => {
   return Math.floor(Math.random() * (max + 1));
 };
+
+/**
+ * 천 단위로 쉼표를 추가하여 숫자를 형식화합니다.
+ *
+ * @param value 형식화할 숫자입니다.
+ * @returns 쉼표가 추가된 형식화된 숫자입니다.
+ */
+export const formatComma = (value: number | string): string => {
+  if (!value) {
+    return '';
+  }
+  return String(value).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+};

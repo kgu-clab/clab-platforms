@@ -8,12 +8,19 @@ import { useBookLoanReturnMutation } from '@hooks/queries/useBookLoanReturnMutat
 import { useBookLoanExtendMutation } from '@hooks/queries/useBookLoanExtendMutation';
 import Select from '@components/common/Select/Select';
 import { useBookLoanRecordByMemberId } from '@hooks/queries/useBookLoanRecordById';
-import useToast from '@hooks/common/useToast';
+import {
+  checkDueDate,
+  checkExtendProgress,
+  checkProgress,
+  now,
+} from '@utils/date';
 
 interface BookPanelProps {
   memberId: string;
-  data: Array<BookItem>;
+  data: BookItem[];
 }
+
+type BookPanelActionType = '반납하기' | '연장하기';
 
 const ActionButton = ({
   children,
@@ -30,74 +37,49 @@ const ActionButton = ({
   </button>
 );
 
-const checkProgress = (date: string) => {
-  const now = dayjs();
-  const end = dayjs(date).add(14, 'd');
-  return (end.diff(now, 'd') * 100) % 14;
-};
-
-const checkExtendProgress = (startDate: string, endDate: string) => {
-  const now = dayjs();
-  const end = dayjs(endDate);
-  const start = dayjs(startDate);
-  const gap = end.diff(start, 'd');
-  return (end.diff(now, 'd') * 100) % gap;
-};
-
-const checkDueDate = (date: string) => {
-  const today = dayjs();
-  const end = dayjs(date).add(14, 'd');
-  return end.diff(today, 'd');
-};
-
-const BookPanel = ({ data, memberId }: BookPanelProps) => {
-  const today = dayjs();
+const BookPanel = ({ memberId, data }: BookPanelProps) => {
   const { openModal } = useModal();
-  const toast = useToast();
+
   const { data: myLoanBookData } = useBookLoanRecordByMemberId(memberId);
   const { bookReturnMutate } = useBookLoanReturnMutation();
   const { bookExtendMutate } = useBookLoanExtendMutation();
-  const selectData = data.map(({ id, title }) => ({ id, name: title }));
-  const myLoanSelectData =
-    myLoanBookData && myLoanBookData.items
-      ? myLoanBookData.items.filter((id) => id.returnedAt === null)
-      : [];
 
-  const description =
-    data.length > 0 ? `${data.length}권 대여중` : '빌린 도서가 없어요.';
+  const selectOptions = data.map(({ title, id }) => ({
+    name: title,
+    value: id,
+  }));
 
-  const onClickBookButton = (sort: string) => {
-    let selectedBookId = selectData[0].id;
-    if (myLoanSelectData.length === 0) {
-      toast({
-        state: 'error',
-        message: '대여된 도서가 없습니다.',
-      });
-      return;
-    }
+  const myLoanSelectData = myLoanBookData.items.filter(
+    (id) => id.returnedAt === null,
+  );
+
+  const onClickBookButton = (title: BookPanelActionType) => {
+    let selectedBookId = selectOptions[0].value; // 기본값으로 첫 번째 책 선택
+
     openModal({
-      title: sort === 'return' ? '반납하기' : '연장하기',
+      title,
       content: (
         <Select
-          data={selectData}
+          className="w-full"
+          options={selectOptions}
           onChange={(e) => (selectedBookId = Number(e.target.value))}
         />
       ),
       accept: {
-        text: sort === 'return' ? '반납하기' : '연장하기',
+        text: title,
         onClick: () => {
-          console.log(selectedBookId);
-          if (selectedBookId >= 0) {
-            sort === 'return'
-              ? bookReturnMutate({
-                  bookId: selectedBookId,
-                  borrowerId: memberId,
-                })
-              : bookExtendMutate({
-                  bookId: selectedBookId,
-                  borrowerId: memberId,
-                });
-            selectedBookId = selectData[0].id;
+          if (title === '반납하기') {
+            // 반납하기
+            bookReturnMutate({
+              borrowerId: memberId,
+              bookId: selectedBookId,
+            });
+          } else {
+            // 연장하기
+            bookExtendMutate({
+              bookId: selectedBookId,
+              borrowerId: memberId,
+            });
           }
         },
       },
@@ -109,7 +91,9 @@ const BookPanel = ({ data, memberId }: BookPanelProps) => {
       <Panel.Header
         icon={<FcBookmark />}
         label="도서"
-        description={description}
+        description={
+          data.length > 0 ? `${data.length}권 대여중` : '빌린 도서가 없어요.'
+        }
       />
       <Panel.Body className="space-y-4 text-sm">
         {data.map(({ id, title }) => {
@@ -124,7 +108,7 @@ const BookPanel = ({ data, memberId }: BookPanelProps) => {
                   <span className="text-xs w-fit text-nowrap">
                     D-
                     {loanData.loanExtensionDate
-                      ? dayjs(loanData.loanExtensionDate).diff(today, 'd')
+                      ? dayjs(loanData.loanExtensionDate).diff(now(), 'd')
                       : loanData.borrowedAt
                         ? checkDueDate(loanData.borrowedAt)
                         : 0}
@@ -147,14 +131,16 @@ const BookPanel = ({ data, memberId }: BookPanelProps) => {
           );
         })}
       </Panel.Body>
-      <Panel.Action>
-        <ActionButton onClick={() => onClickBookButton('extend')}>
-          연장하기
-        </ActionButton>
-        <ActionButton onClick={() => onClickBookButton('return')}>
-          반납하기
-        </ActionButton>
-      </Panel.Action>
+      {data.length > 0 && (
+        <Panel.Action>
+          <ActionButton onClick={() => onClickBookButton('연장하기')}>
+            연장하기
+          </ActionButton>
+          <ActionButton onClick={() => onClickBookButton('반납하기')}>
+            반납하기
+          </ActionButton>
+        </Panel.Action>
+      )}
     </Panel>
   );
 };
