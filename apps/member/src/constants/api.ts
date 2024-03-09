@@ -32,7 +32,7 @@ export const END_POINT = {
   MAIN_ACTIVITY_PHOTO: `/activity-photos`,
   MEMBERSHIP_FEE: `/membership-fees`,
   UPLOADEDFILE_MEMBERSHIP_FEE: `/files/membership-fee`,
-  UPLOADEDFILE_PROFILES: (memberId: string) => `/files/profiles/${memberId}`,
+  UPLOADEDFILE_PROFILES: (id: number) => `/files/profiles/${id}`,
   SHARED_ACCOUNT: `/shared-accounts`,
   SHARED_ACCOUNT_STATUS: (usageId: number) =>
     `/shared-accounts/usage/${usageId}`,

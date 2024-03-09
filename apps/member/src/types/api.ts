@@ -22,3 +22,7 @@ export interface TokenType {
   accessToken: string;
   refreshToken: string;
 }
+
+export interface ArgsWithFiles {
+  multipartFile: FormData | null;
+}

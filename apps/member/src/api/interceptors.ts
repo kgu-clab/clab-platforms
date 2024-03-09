@@ -1,6 +1,6 @@
 import { server } from './server';
 import { API_BASE_URL, END_POINT, HTTP_STATUS_CODE } from '@constants/api';
-import type { Interceptor } from '@gwansikk/server-chain';
+import type { FetchOptions, Interceptor } from '@gwansikk/server-chain';
 import type { TokenType } from '@type/api';
 import {
   authorization,
