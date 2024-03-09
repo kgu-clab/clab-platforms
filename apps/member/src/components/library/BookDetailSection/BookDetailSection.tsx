@@ -53,13 +53,13 @@ const BookDetailSection = ({ data }: BookDetailSectionProps) => {
             <Image
               src={imageUrl}
               alt={title}
-              width="w-[380px]"
-              className="object-cover transition-shadow shadow-md hover:shadow-xl"
+              width="w-[300px]"
+              className="object-cover shadow-lg"
             />
           </div>
           <div className="flex flex-col justify-between gap-4">
             <div className="space-y-2">
-              <h1 className="pb-4 text-2xl font-bold">{title}</h1>
+              <h1 className="pb-4 text-2xl font-bold break-keep">{title}</h1>
               <BookInfoRow label="작가" content={author} />
               <BookInfoRow label="출판사" content={publisher} />
               <BookInfoRow label="분류" content={category} />

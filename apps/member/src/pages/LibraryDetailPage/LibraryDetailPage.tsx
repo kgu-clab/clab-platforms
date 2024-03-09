@@ -15,7 +15,6 @@ const LibraryDetailPage = () => {
     <Content>
       <Header title={['도서관', data.title]} />
       <BookDetailSection data={data} />
-      <Header title="대출내역" />
     </Content>
   );
 };
