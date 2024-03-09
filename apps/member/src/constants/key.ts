@@ -10,7 +10,7 @@ export const QUERY_KEY = {
   MY_NOTIFICATIONS: 'MyNotifications',
   MY_COMMENTS: 'MyComments',
   MY_ACTIVITY: 'MyActivity',
-  MY_BOOK_LIST: 'MyBookList',
+  MY_BOOK: 'MyBook',
   BORDER_NOTICE: 'BorderNotice',
   BORDER_FREE: 'BorderFREE',
   BORDER_QNA: 'BorderQNA',

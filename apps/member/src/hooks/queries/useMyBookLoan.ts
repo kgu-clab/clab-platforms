@@ -2,9 +2,12 @@ import { getMyBooks } from '@api/book';
 import { QUERY_KEY } from '@constants/key';
 import { useSuspenseQuery } from '@tanstack/react-query';
 
-export const useMyBookLoan = (page = 0, size = 20, id: string) => {
+/**
+ * 내가 대여한 도서 목록을 조회합니다.
+ */
+export const useMyBookLoan = (id: string, page = 0, size = 20) => {
   return useSuspenseQuery({
-    queryKey: [QUERY_KEY.MY_BOOK_LIST, page, size],
-    queryFn: () => getMyBooks(page, size, id),
+    queryFn: () => getMyBooks(id, page, size),
+    queryKey: [QUERY_KEY.MY_BOOK, id],
   });
 };

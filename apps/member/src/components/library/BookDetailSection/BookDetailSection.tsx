@@ -3,9 +3,9 @@ import { Link } from 'react-router-dom';
 import { Button } from '@clab/design-system';
 import Image from '@components/common/Image/Image';
 import { BOOK_STATE } from '@constants/state';
-import { BookItem, BookLoanRecordItem } from '@type/book';
 import { useBookLoanBorrowMutation } from '@hooks/queries/useBookLoanBorrowMutation';
 import { useMyProfile } from '@hooks/queries/useMyProfile';
+import type { BookItem } from '@type/book';
 
 interface BookDetailSectionProps {
   data: BookItem;
@@ -33,16 +33,16 @@ const BookInfoRow = ({ to, label, content }: BookInfoRowProps) => {
 };
 
 const BookDetailSection = ({ data }: BookDetailSectionProps) => {
-  const { bookBorrowMutate } = useBookLoanBorrowMutation();
   const { data: myInfo } = useMyProfile();
+  const { bookBorrowMutate } = useBookLoanBorrowMutation();
   const { id, borrowerId, category, title, author, publisher, imageUrl } = data;
 
   const onClickBorrow = (bookId: number) => {
-    const bookLoanInfo: BookLoanRecordItem = {
+    bookBorrowMutate({
+      memberId: myInfo.id,
       bookId: bookId,
       borrowerId: myInfo.id,
-    };
-    bookBorrowMutate(bookLoanInfo);
+    });
   };
 
   return (
@@ -72,7 +72,7 @@ const BookDetailSection = ({ data }: BookDetailSectionProps) => {
             </div>
             <div className="w-full">
               {borrowerId ? (
-                <p className="pt-12 text-xl font-bold underline decoration-green-700">
+                <p className="pt-12 text-xl font-bold text-center underline decoration-green-700 lg:text-left">
                   이미 대여된 도서예요! 조금만 기다려주세요 ⏳
                 </p>
               ) : (

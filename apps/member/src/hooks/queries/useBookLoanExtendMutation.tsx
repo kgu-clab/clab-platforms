@@ -3,25 +3,28 @@ import { QUERY_KEY } from '@constants/key';
 import useToast from '@hooks/common/useToast';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
+/**
+ * 대출한 도서를 연장합니다.
+ */
 export const useBookLoanExtendMutation = () => {
   const queryClient = useQueryClient();
   const toast = useToast();
 
   const bookExtendMutation = useMutation({
     mutationFn: postExtendBook,
-    onSuccess: (res) => {
-      if (!res) {
-        toast({
-          state: 'error',
-          message: '연장에 실패했습니다.',
-        });
-      } else {
+    onSuccess: ({ memberId, bookId }) => {
+      if (bookId) {
         queryClient.invalidateQueries({
-          queryKey: [QUERY_KEY.BOOK_LOAN_RECORD],
+          queryKey: [QUERY_KEY.BOOK_LOAN_RECORD, memberId],
         });
         toast({
           state: 'success',
-          message: '연장 되었습니다.',
+          message: '성공적으로 연장되었습니다.',
+        });
+      } else {
+        toast({
+          state: 'error',
+          message: '연장에 실패했습니다.',
         });
       }
     },

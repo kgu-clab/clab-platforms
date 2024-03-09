@@ -13,7 +13,7 @@ const PanelAside = () => {
   const { data: myNotificationsData } = useMyNotifications();
   const { data: myActivities } = useMyActivity();
   const { data: myProfile } = useMyProfile();
-  const { data: myBooksData } = useMyBookLoan(0, 20, myProfile.id);
+  const { data: myBooksData } = useMyBookLoan(myProfile.id);
 
   return (
     <aside className="hidden xl:w-1/4 xl:block">
