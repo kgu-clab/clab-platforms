@@ -2,8 +2,8 @@ import { FcSettings } from 'react-icons/fc';
 
 const SetupPanel = () => {
   return (
-    <button className="m-auto flex w-fit items-center justify-center rounded-full border bg-white p-2 hover:bg-gray-100">
-      <FcSettings className="h-5 w-5" />
+    <button className="flex items-center justify-center p-2 m-auto bg-white border rounded-full w-fit hover:bg-gray-100">
+      <FcSettings size={20} />
     </button>
   );
 };

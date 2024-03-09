@@ -1,6 +1,6 @@
 import Image from '@components/common/Image/Image';
 import Panel from '@components/common/Panel/Panel';
-
+import { createImageUrl } from '@utils/api';
 import { calculateDDay } from '@utils/date';
 import { getRandomInt } from '@utils/math';
 
@@ -29,7 +29,7 @@ const ProfilePanel = ({ name, image, createdAt }: ProfilePanelProps) => {
               <Image
                 width="w-10"
                 height="h-10"
-                src={image}
+                src={createImageUrl(image)}
                 alt="프로필사진"
                 className="object-cover rounded-full"
               />
@@ -42,7 +42,7 @@ const ProfilePanel = ({ name, image, createdAt }: ProfilePanelProps) => {
             </p>
           </div>
         </div>
-        <p className="mt-4 rounded-md bg-gray-100 py-1 text-center text-xs font-semibold">
+        <p className="py-1 mt-4 text-xs font-semibold text-center bg-gray-100 rounded-md">
           &quot;{tips[getRandomInt(tips.length - 1)]}&quot;
         </p>
       </Panel.Body>

@@ -4,12 +4,10 @@ import AlarmPanel from '../AlarmPanel/AlarmPanel';
 import ActivityPanel from '../ActivityPanel/ActivityPanel';
 import BookPanel from '../BookPanel/BookPanel';
 import AccountPanel from '../AccountPanel/AccountPanel';
-import SetupPanel from '../SetupPanel/SetupPanel';
 import { useMyNotifications } from '@hooks/queries';
 import { useMyBookLoan } from '@hooks/queries/useMyBookLoan';
 import { useMyActivity } from '@hooks/queries/useMyActivity';
 import { useMyProfile } from '@hooks/queries/useMyProfile';
-import { createImageUrl } from '@utils/api';
 
 const PanelAside = () => {
   const { data: myNotificationsData } = useMyNotifications();
@@ -22,7 +20,7 @@ const PanelAside = () => {
       <div className="space-y-4">
         <ProfilePanel
           name={myProfile.name}
-          image={createImageUrl(myProfile.imageUrl)}
+          image={myProfile.imageUrl}
           createdAt={myProfile.createdAt}
         />
         <AttendanceFairyPanel />
@@ -30,7 +28,6 @@ const PanelAside = () => {
         <ActivityPanel data={myActivities.items} />
         <BookPanel data={myBooksData} memberId={myProfile.id} />
         <AccountPanel />
-        <SetupPanel />
       </div>
     </aside>
   );
