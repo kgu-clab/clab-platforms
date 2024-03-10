@@ -34,8 +34,8 @@ const Comment = ({
       />
       <div className="w-full ml-2">
         <p className="text-sm font-semibold">{writer}</p>
-        <p className="text-sm py-2">{children}</p>
-        <div className="flex justify-end text-sm gap-4">
+        <p className="py-2 text-sm whitespace-pre-wrap">{children}</p>
+        <div className="flex justify-end gap-4 text-sm">
           <p className="text-gray-500">{formattedDate('2021-11-22')}</p>
           <button onClick={onClickReport}>신고</button>
           {!isReply && <button onClick={onClickReply}>답글 쓰기</button>}
