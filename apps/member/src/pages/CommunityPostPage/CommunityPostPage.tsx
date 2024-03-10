@@ -80,31 +80,46 @@ const CommunityPostPage = () => {
             <Post.Head
               title={data.title}
               src={data.memberImageUrl}
-              writer={data.writer}
+              writer={data.writer || 'C-Lab PLAY'}
+              roleLevel={1}
               createAt={data.createdAt}
             />
             {isHireItem(data) ? (
               <HireContentSection {...data} />
             ) : isEditMode ? (
               <Textarea
+                className="w-full min-h-96"
                 value={contents}
                 placeholder={data.content}
                 onChange={(e) => setContents(e.target.value)}
               />
             ) : (
-              <Post.Body>{data.content}</Post.Body>
+              <Post.Body>
+                {data.content}
+                {'articleUrl' in data && data.articleUrl && (
+                  <a
+                    className="block mb-2 text-sm text-right text-gray-500 hover:underline hover:text-black"
+                    target="_blank"
+                    href={data.articleUrl}
+                  >
+                    해당 아티클을 더 읽고 싶다면?
+                  </a>
+                )}
+              </Post.Body>
             )}
             <Post.Footer>
               <Button onClick={onClickAccuses} size="sm" color="red">
                 신고
               </Button>
-              <Button
-                size="sm"
-                color={isEditMode ? 'blue' : 'white'}
-                onClick={onClickModify}
-              >
-                {isEditMode ? '저장' : '수정'}
-              </Button>
+              {data.isOwner && (
+                <Button
+                  size="sm"
+                  color={isEditMode ? 'blue' : 'white'}
+                  onClick={onClickModify}
+                >
+                  {isEditMode ? '저장' : '수정'}
+                </Button>
+              )}
             </Post.Footer>
           </Post>
         )}
