@@ -18,7 +18,7 @@ export const ERROR_MESSAGE = {
 export const REDIRECT = (code: string) => {
   return (
     {
-      'clab.page': 'https://member.clab.page/auth',
+      play: 'https://play.clab.page/auth',
       dev: 'http://localhost:6002/auth',
     }[code] || 'https://clab.page'
   );
