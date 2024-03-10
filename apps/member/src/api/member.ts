@@ -26,11 +26,7 @@ export const patchUserInfo = async ({
 }: PatchUserInfoArgs) => {
   let userInfoData;
   if (multipartFile) {
-    const data = await postUploadedFileProfileImage({
-      memberId: body.id,
-      storagePeriod: 30,
-      multipartFile: multipartFile,
-    });
+    const data = await postUploadedFileProfileImage(multipartFile);
 
     userInfoData = {
       ...body,

@@ -7,5 +7,6 @@ export interface ProfileData {
   address: string;
   githubUrl: string;
   imageUrl: string;
+  roleLevel: number;
   createdAt: string;
 }

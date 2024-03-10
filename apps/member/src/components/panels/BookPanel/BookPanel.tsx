@@ -49,9 +49,8 @@ const BookPanel = ({ memberId, data }: BookPanelProps) => {
     value: id,
   }));
 
-  const myLoanSelectData = myLoanBookData.items.filter(
-    (id) => id.returnedAt === null,
-  );
+  const myLoanSelectData =
+    myLoanBookData?.items?.filter((id) => id.returnedAt === null) || [];
 
   const onClickBookButton = (title: BookPanelActionType) => {
     let selectedBookId = selectOptions[0].value; // 기본값으로 첫 번째 책 선택
@@ -96,40 +95,48 @@ const BookPanel = ({ memberId, data }: BookPanelProps) => {
         }
       />
       <Panel.Body className="space-y-4 text-sm">
-        {data.map(({ id, title }) => {
-          const loanData = myLoanSelectData.find((book) => book.bookId === id);
-          if (!loanData) return null;
+        {data.length > 0 ? (
+          data.map(({ id, title }) => {
+            const loanData = myLoanSelectData.find(
+              (book) => book.bookId === id,
+            );
+            if (!loanData) return null;
 
-          return (
-            <ul key={id}>
-              <li className="font-semibold">
-                <div className="flex items-baseline justify-between mb-2">
-                  <span className="mr-2 truncate">{title}</span>
-                  <span className="text-xs w-fit text-nowrap">
-                    D-
-                    {loanData.loanExtensionDate
-                      ? dayjs(loanData.loanExtensionDate).diff(now(), 'd')
-                      : loanData.borrowedAt
-                        ? checkDueDate(loanData.borrowedAt)
-                        : 0}
-                  </span>
-                </div>
-                <ProgressBar
-                  value={
-                    loanData.loanExtensionDate && loanData.borrowedAt
-                      ? checkExtendProgress(
-                          loanData.borrowedAt,
-                          loanData.loanExtensionDate,
-                        )
-                      : loanData.borrowedAt
-                        ? checkProgress(loanData.borrowedAt)
-                        : 0
-                  }
-                />
-              </li>
-            </ul>
-          );
-        })}
+            return (
+              <ul key={id}>
+                <li className="font-semibold">
+                  <div className="flex items-baseline justify-between mb-2">
+                    <span className="mr-2 truncate">{title}</span>
+                    <span className="text-xs w-fit text-nowrap">
+                      D-
+                      {loanData.loanExtensionDate
+                        ? dayjs(loanData.loanExtensionDate).diff(now(), 'd')
+                        : loanData.borrowedAt
+                          ? checkDueDate(loanData.borrowedAt)
+                          : 0}
+                    </span>
+                  </div>
+                  <ProgressBar
+                    value={
+                      loanData.loanExtensionDate && loanData.borrowedAt
+                        ? checkExtendProgress(
+                            loanData.borrowedAt,
+                            loanData.loanExtensionDate,
+                          )
+                        : loanData.borrowedAt
+                          ? checkProgress(loanData.borrowedAt)
+                          : 0
+                    }
+                  />
+                </li>
+              </ul>
+            );
+          })
+        ) : (
+          <p className="text-xs text-center bg-gray-100 py-1.5 rounded-lg">
+            언제든지 도서관에서 도서를 대여할 수 있어요.
+          </p>
+        )}
       </Panel.Body>
       {data.length > 0 && (
         <Panel.Action>

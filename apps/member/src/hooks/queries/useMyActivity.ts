@@ -6,6 +6,9 @@ import dayjs from 'dayjs';
 const today = dayjs().format('YYYY-MM-DDTHH:mm:ss.SSS');
 const endDay = dayjs().add(6, 'month').format('YYYY-MM-DDTHH:mm:ss.SSS');
 
+/**
+ * 내 활동을 조회합니다. (최근 6개월)
+ */
 export const useMyActivity = (
   startDateTime = String(today),
   endDateTime = String(endDay),
@@ -13,7 +16,7 @@ export const useMyActivity = (
   size = 20,
 ) => {
   return useSuspenseQuery({
-    queryKey: [QUERY_KEY.MY_ACTIVITY, startDateTime, endDateTime, page, size],
     queryFn: () => getMyActivities(startDateTime, endDateTime, page, size),
+    queryKey: [QUERY_KEY.MY_ACTIVITY, startDateTime, endDateTime, page, size],
   });
 };
