@@ -3,6 +3,11 @@
 경기대학교 개발보안동아리 C-Lab의 공식 프론트엔드 시스템이에요.  
 지속적으로 늘어나는 동아리의 프론트엔드 프로젝트를 유연하고 생산성 있게 관리하기 위해 [모노레포(Monorepo)](https://en.wikipedia.org/wiki/Monorepo) 환경이 만들어졌어요.
 
+clab.page의 프로젝트는 다음과 같은 특징을 가지고 있어요
+
+- 모든 디자인은 `Mobile First Design`로 제작되었어요.
+- 일관된 사용자 경험을 제공하기 위해 자체 개발 `design-system`을 사용하고 있어요.
+
 ## Apps
 
 ![clab page](https://github.com/KGU-C-Lab/clab.page/assets/39869096/2611c6e1-6b42-45aa-9489-7a92c5a18ec7)
@@ -24,7 +29,7 @@
 동아리원이 아니더라도 누구나 기여할 수 있습니다. 해당 프로젝트에 기여하고 싶다면 아래 문서를 참고해주세요.  
 [CONTRIBUTING.md](CONTRIBUTING.md)
 
-## FAQ
+## FAQs
 
 <details>
   <summary>저희 동아리에서도 이 시스템을 사용해도 되나요?</summary>
@@ -34,6 +39,11 @@
 <details>
   <summary>시스템에서 오류를 발견했어요. 어떻게 해야 하나요?</summary>
   모든 사용자의 기여를 환영합니다! 버그를 발견하셨거나 프로젝트에 기여하고 싶으신 경우, 프로젝트의 <code>Contributing</code> 섹션을 확인해주세요.
+</details>
+
+<details>
+  <summary>기타 문의 사항이 있어요. 어디서 할 수 있나요?</summary>
+  Github에 기재된 <code>EMail</code>에 문의 남겨주시거나 공식 홈페이지 <code>라이브챗(채널톡)</code>을 이용해주세요.
 </details>
 
 ## License
