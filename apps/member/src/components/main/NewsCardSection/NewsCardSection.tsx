@@ -1,4 +1,3 @@
-import MoreButton from '@components/common/MoreButton/MoreButton';
 import NewsCard from '@components/common/NewsCard/NewsCard';
 import Section from '@components/common/Section/Section';
 import { COMMUNITY_MESSAGE } from '@constants/message';
@@ -9,20 +8,20 @@ import { CommunityPostItem } from '@type/community';
 interface NewsCardSectionProps {
   to: string;
   title: string;
-  data: Array<BlogPostItem | CommunityPostItem>;
+  data?: Array<BlogPostItem | CommunityPostItem>;
 }
 
-const NewsCardSection = ({ to, title, data }: NewsCardSectionProps) => {
+const NewsCardSection = ({ to, title, data = [] }: NewsCardSectionProps) => {
   const post_path = to === PATH.NEWS ? PATH.NEWS : PATH.BLOG;
 
   return (
     <Section>
-      <Section.Header title={title}>
-        <MoreButton to={to} />
-      </Section.Header>
+      <Section.Header title={title}></Section.Header>
       <Section.Body className="flex gap-2 overflow-scroll scrollbar-hide">
         {data.length === 0 ? (
-          <p className="text-gray-500">{COMMUNITY_MESSAGE.NO_ARTICLE}</p>
+          <p className="w-full text-center text-gray-500">
+            {COMMUNITY_MESSAGE.NO_ARTICLE}
+          </p>
         ) : (
           data.map((news, index) => (
             <NewsCard key={index} to={post_path} {...news} />
