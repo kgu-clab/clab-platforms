@@ -1,4 +1,5 @@
 export interface ProfileData {
+  password?: string;
   name: string;
   id: string;
   interests: string;

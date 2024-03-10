@@ -5,10 +5,10 @@ import { useMyNotifications, useMyBoards, useMyComments } from '@hooks/queries';
 import { useMyProfile } from '@hooks/queries/useMyProfile';
 
 const MyPage = () => {
-  const { data: myBoardsData } = useMyBoards();
-  const { data: myNotificationsData } = useMyNotifications();
-  const { data: myCommentsData } = useMyComments();
   const { data: myProfile } = useMyProfile();
+  const { data: myNotificationsData } = useMyNotifications(0, 10);
+  const { data: myBoardsData } = useMyBoards(0, 10);
+  const { data: myCommentsData } = useMyComments(0, 10);
 
   return (
     <Content>
