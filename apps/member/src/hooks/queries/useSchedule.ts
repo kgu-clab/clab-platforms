@@ -19,7 +19,7 @@ export const useSchedule = ({
   start = defaultStartDate,
   end = defaultEndDate,
   page = 0,
-  size = 10,
+  size = 62,
 }: UseMainScheduleArgs) => {
   return useSuspenseQuery({
     queryKey: [QUERY_KEY.SCHEDULE, start, end, page, size],
