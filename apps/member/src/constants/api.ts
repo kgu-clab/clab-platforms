@@ -36,8 +36,8 @@ export const END_POINT = {
   MAIN_SCHEDULE: `/schedule`,
   MAIN_ACTIVITY_PHOTO: `/activity-photos`,
   MEMBERSHIP_FEE: `/membership-fees`,
-  UPLOADEDFILE_MEMBERSHIP_FEE: `/files/membership-fee`,
-  UPLOADEDFILE_PROFILES: (id: number) => `/files/profiles/${id}`,
+  UPLOADEDFILE_MEMBERSHIP_FEE: '/files/membership-fee',
+  UPLOADEDFILE_PROFILES: '/files/profiles',
   SHARED_ACCOUNT: `/shared-accounts`,
   SHARED_ACCOUNT_STATUS: (usageId: number) =>
     `/shared-accounts/usage/${usageId}`,
