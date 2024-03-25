@@ -32,6 +32,12 @@ const retryRequest = async (
 
 export const tokenHandler: Interceptor<Response> = async (response, method) => {
   const { status } = response;
+  // 서버 에러인 경우 토큰을 삭제하고 페이지를 새로고침
+  if (status === HTTP_STATUS_CODE.INTERNAL_SERVER_ERROR) {
+    removeTokens();
+    window.location.reload();
+    return response;
+  }
   // 토큰 갱신이 필요 없는 경우 바로 반환
   if (status !== HTTP_STATUS_CODE.UNAUTHORIZED) return response;
   const preRefreshToken = getRefreshToken();

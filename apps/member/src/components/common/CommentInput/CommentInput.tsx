@@ -38,10 +38,11 @@ const CommentInput = ({ id, value, onChange, parentId }: CommentInputProps) => {
   };
 
   return (
-    <div className="flex gap-2">
+    <div className="flex items-center gap-2">
       <Textarea
-        className="border p-2 w-full"
+        className="w-full p-2 border"
         placeholder="댓글을 입력해주세요."
+        maxLength={200}
         value={value}
         onChange={onChange}
       />

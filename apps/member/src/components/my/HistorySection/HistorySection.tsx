@@ -16,12 +16,12 @@ const HistorySection = ({ title, data }: HistorySectionProps) => {
       <Section.Header title={title} />
       <Section.Body className="text-sm">
         {data.map((item) => {
-          // NotificationItem
           if ('content' in item) {
+            // NotificationItem or CommentItem
             const { id, content, createdAt } = item as NotificationItem;
             return (
               <ListButton key={id} to="">
-                <p className="w-full truncate pr-4">{content}</p>
+                <p className="pr-4 truncate grow">{content}</p>
                 <p className="text-clab-main-light">{toYYMMDD(createdAt)}</p>
               </ListButton>
             );
@@ -30,16 +30,7 @@ const HistorySection = ({ title, data }: HistorySectionProps) => {
             const { id, title, createdAt } = item as BoardItem;
             return (
               <ListButton key={id} to="">
-                <p className="w-full truncate pr-4">{title}</p>
-                <p className="text-clab-main-light">{toYYMMDD(createdAt)}</p>
-              </ListButton>
-            );
-          } else if ('writerName' in item) {
-            // CommentItem
-            const { id, content, createdAt } = item as CommentItem;
-            return (
-              <ListButton key={id} to="">
-                <p className="w-full truncate pr-4">{content}</p>
+                <p className="pr-4 truncate grow">{title}</p>
                 <p className="text-clab-main-light">{toYYMMDD(createdAt)}</p>
               </ListButton>
             );

@@ -17,12 +17,6 @@ interface postUploadedFileAssignmentArgs {
   files: FormData;
 }
 
-interface postUploadedFileProfileImageArgs {
-  memberId: number;
-  storagePeriod: number;
-  multipartFile: FormData;
-}
-
 /**
  * 회비 증빙 사진 업로드
  */
@@ -72,14 +66,8 @@ export const postUploadedFileAssignment = async ({
 /**
  * 멤버 프로필 사진 업로드
  */
-export const postUploadedFileProfileImage = async ({
-  memberId,
-  storagePeriod,
-  multipartFile,
-}: postUploadedFileProfileImageArgs) => {
-  const url =
-    createPath(END_POINT.UPLOADEDFILE_PROFILES(memberId)) +
-    `?storagePeriod=${storagePeriod}`;
+export const postUploadedFileProfileImage = async (multipartFile: FormData) => {
+  const url = createPath(END_POINT.UPLOADEDFILE_PROFILES, STORAGE_PERIOD(9999));
   const { data } = await server.post<
     FormData,
     BaseResponse<ProfileImageFileType>

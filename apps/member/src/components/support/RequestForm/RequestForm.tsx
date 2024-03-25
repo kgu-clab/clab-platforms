@@ -88,14 +88,16 @@ const RequestForm = () => {
           value={formatComma(amount)}
           onChange={handleInputChange}
         />
-        <Input
-          id="content"
-          name="content"
-          label="사유"
-          placeholder="요청 사유를 상세하게 작성해주세요"
-          value={content}
-          onChange={handleInputChange}
-        />
+        <div className="col-span-2">
+          <Input
+            id="content"
+            name="content"
+            label="사유"
+            placeholder="요청 사유를 상세하게 작성해주세요"
+            value={content}
+            onChange={handleInputChange}
+          />
+        </div>
         <Input
           id="membershipFormUploader"
           name="membershipFormUploader"

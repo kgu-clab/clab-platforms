@@ -1,9 +1,7 @@
-import AttendanceFairyPanel from '@components/panels/AttendanceFairyPanel/AttendanceFairyPanel';
 import ProfilePanel from '@components/panels/ProfilePanel/ProfilePanel';
 import AlarmPanel from '../AlarmPanel/AlarmPanel';
 import ActivityPanel from '../ActivityPanel/ActivityPanel';
 import BookPanel from '../BookPanel/BookPanel';
-import AccountPanel from '../AccountPanel/AccountPanel';
 import { useMyNotifications } from '@hooks/queries';
 import { useMyBookLoan } from '@hooks/queries/useMyBookLoan';
 import { useMyActivity } from '@hooks/queries/useMyActivity';
@@ -18,16 +16,13 @@ const PanelAside = () => {
   return (
     <aside className="hidden xl:w-1/4 xl:block">
       <div className="space-y-4">
-        <ProfilePanel
-          name={myProfile.name}
-          image={myProfile.imageUrl}
-          createdAt={myProfile.createdAt}
+        <ProfilePanel data={myProfile} />
+        <AlarmPanel
+          data={myNotificationsData.items}
+          totalLength={myNotificationsData.totalItems}
         />
-        <AttendanceFairyPanel />
-        <AlarmPanel data={myNotificationsData.items} />
         <ActivityPanel data={myActivities.items} />
         <BookPanel data={myBooksData} memberId={myProfile.id} />
-        <AccountPanel />
       </div>
     </aside>
   );

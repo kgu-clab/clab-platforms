@@ -9,7 +9,7 @@ import { useSuspenseQuery } from '@tanstack/react-query';
  */
 export const useActivityGroup = (id: number) => {
   return useSuspenseQuery({
-    queryKey: [QUERY_KEY.ACTIVITY, id],
     queryFn: () => getActivityGroupDetail(id),
+    queryKey: [QUERY_KEY.ACTIVITY, id],
   });
 };

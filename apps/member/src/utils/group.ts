@@ -1,7 +1,6 @@
 import type {
   ActivityBoardType,
   ActivityBoardWithAssignmentType,
-  ActivityGroupBoardParserType,
 } from '@type/activity';
 
 /**
@@ -14,10 +13,7 @@ import type {
  * - `activities`: 활동(주차별 정보)을 담고 있는 배열입니다. 각 활동 정보는 `assignments` 배열도 포함할 수 있습니다.
  * - `assignments`: 과제를 담고 있는 배열입니다. 과제는 관련 활동에도 추가됩니다.
  */
-
-export const groupBoardParser = (
-  data: Array<ActivityBoardType>,
-): ActivityGroupBoardParserType => {
+export const groupBoardParser = (data: Array<ActivityBoardType>) => {
   const notices: Array<ActivityBoardType> = [];
   const activities: Array<ActivityBoardType> = [];
   const assignments: Array<ActivityBoardType> = [];
@@ -43,5 +39,9 @@ export const groupBoardParser = (
     }
   });
 
-  return { notices, activities, assignments };
+  return {
+    notices: notices,
+    activities: activities,
+    assignments: assignments,
+  };
 };

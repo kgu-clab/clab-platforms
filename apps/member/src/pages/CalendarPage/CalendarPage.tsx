@@ -43,12 +43,7 @@ const CalendarPage = () => {
             &gt;
           </button>
         </Section.Header>
-        <Section.Body className="grid grid-cols-7 border-t">
-          {['일', '월', '화', '수', '목', '금', '토'].map((day) => (
-            <div key={day} className="border-x bg-gray-100 text-center">
-              {day}
-            </div>
-          ))}
+        <Section.Body className="grid grid-cols-7">
           <Calendar date={date} />
         </Section.Body>
       </Section>

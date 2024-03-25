@@ -7,6 +7,7 @@ import Section from '@components/common/Section/Section';
 import Select from '@components/common/Select/Select';
 import Textarea from '@components/common/Textarea/Textarea';
 import { useBoardWriteMutation } from '@hooks/queries/useBoardWriteMutation';
+import { DEFAULT } from '@constants/default';
 
 // name이 category와 매치되어야 합니다.
 const selectOptions = [
@@ -48,7 +49,7 @@ const CommunityWritePage = () => {
           <Select
             name="category"
             options={selectOptions}
-            value={content.category}
+            defaultValue={DEFAULT.SELECT}
             onChange={handleContent}
           />
           <Input
@@ -56,13 +57,15 @@ const CommunityWritePage = () => {
             name="title"
             type="text"
             placeholder="제목을 입력해주세요"
+            maxLength={60}
             value={content.title}
             onChange={handleContent}
           />
         </div>
         <Textarea
           name="content"
-          className="min-h-80"
+          className="w-full min-h-96"
+          maxLength={1000}
           placeholder="내용을 입력해주세요."
           value={content.content}
           onChange={handleContent}

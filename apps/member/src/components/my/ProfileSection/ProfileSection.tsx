@@ -8,18 +8,33 @@ import { createImageUrl, removeTokens } from '@utils/api';
 import { useUserInfoMutation } from '@hooks/queries';
 import { ProfileData } from '@type/profile';
 import { FORM_DATA_KEY } from '@constants/api';
+import classNames from 'classnames';
+import { getProfileRingStyle } from '@utils/style';
+import useToast from '@hooks/common/useToast';
+import useModal from '@hooks/common/useModal';
 
 interface ProfileSectionProps {
   data: ProfileData;
 }
 
+interface ProfileType extends ProfileData {
+  password: string;
+  passwordCheck: string;
+}
+
 const ProfileSection = ({ data }: ProfileSectionProps) => {
   const setIsLoggedIn = useSetIsLoggedInStore();
   const { userInfoMutate } = useUserInfoMutation();
+  const { openModal } = useModal();
+  const toast = useToast();
 
   const [profileImage, setProfileImage] = useState<string>(data.imageUrl);
   const [isEdit, setIsEdit] = useState<boolean>(false);
-  const [inputs, setInputs] = useState<ProfileData>(data);
+  const [inputs, setInputs] = useState<ProfileType>({
+    ...data,
+    password: '',
+    passwordCheck: '',
+  });
 
   const onClickEdit = () => {
     setIsEdit((prev) => {
@@ -27,9 +42,22 @@ const ProfileSection = ({ data }: ProfileSectionProps) => {
         const formData = new FormData();
         const file = document.getElementById('imageUrl') as HTMLInputElement;
         if (file.files?.length) formData.append(FORM_DATA_KEY, file.files[0]);
+        let newPassword = undefined;
+        if (inputs.password === inputs.passwordCheck) {
+          newPassword = inputs.passwordCheck;
+        } else {
+          toast({
+            state: 'error',
+            message: '비밀번호 변경이 일치하지 않습니다. 다시 확인해주세요.',
+          });
+          return prev;
+        }
         userInfoMutate({
           id: data.id,
-          body: inputs,
+          body: {
+            ...inputs,
+            password: newPassword,
+          },
           multipartFile: file.files?.length ? formData : null,
         });
       }
@@ -38,15 +66,20 @@ const ProfileSection = ({ data }: ProfileSectionProps) => {
   };
 
   const onClickLogout = () => {
-    const result = confirm('정말 로그아웃 하시겠습니까?');
-
-    if (result) {
-      removeTokens();
-      setIsLoggedIn(false);
-    }
+    openModal({
+      title: '로그아웃',
+      content: '정말 로그아웃 하시겠습니까?',
+      accept: {
+        text: '로그아웃',
+        onClick: () => {
+          removeTokens();
+          setIsLoggedIn(false);
+        },
+      },
+    });
   };
 
-  const onChange = (e: ChangeEvent<HTMLInputElement>) => {
+  const handleInputsChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setInputs((prev) => ({ ...prev, [name]: value }));
   };
@@ -63,7 +96,17 @@ const ProfileSection = ({ data }: ProfileSectionProps) => {
     }
   };
 
-  const { name, id, interests, contact, email, address, githubUrl } = inputs;
+  const {
+    name,
+    id,
+    interests,
+    contact,
+    email,
+    address,
+    password,
+    passwordCheck,
+    githubUrl,
+  } = inputs;
 
   return (
     <Section>
@@ -83,13 +126,21 @@ const ProfileSection = ({ data }: ProfileSectionProps) => {
       </Section.Header>
       <Section.Body className="flex flex-col">
         <div className="flex flex-col items-center text-center">
-          <label htmlFor="imageUrl" style={{ cursor: 'pointer' }}>
+          <label
+            htmlFor="imageUrl"
+            className={classNames(
+              'rounded-full ring ring-offset-1',
+              getProfileRingStyle(data.roleLevel),
+            )}
+          >
             <Image
               width="w-32"
               height="h-32"
               src={createImageUrl(profileImage)}
               alt={name}
-              className="object-cover m-auto rounded-full"
+              className={classNames('object-cover m-auto rounded-full', {
+                'cursor-pointer': isEdit,
+              })}
             />
           </label>
           <Input
@@ -113,7 +164,7 @@ const ProfileSection = ({ data }: ProfileSectionProps) => {
             value={interests}
             placeholder={data.interests}
             disabled={!isEdit}
-            onChange={onChange}
+            onChange={handleInputsChange}
           />
           <Input
             id="연락처"
@@ -122,7 +173,7 @@ const ProfileSection = ({ data }: ProfileSectionProps) => {
             value={contact}
             placeholder={data.contact}
             disabled={!isEdit}
-            onChange={onChange}
+            onChange={handleInputsChange}
           />
           <Input
             id="이메일"
@@ -131,7 +182,7 @@ const ProfileSection = ({ data }: ProfileSectionProps) => {
             value={email}
             placeholder={data.email}
             disabled={!isEdit}
-            onChange={onChange}
+            onChange={handleInputsChange}
           />
           <Input
             id="주소"
@@ -140,7 +191,7 @@ const ProfileSection = ({ data }: ProfileSectionProps) => {
             value={address}
             placeholder={data.address}
             disabled={!isEdit}
-            onChange={onChange}
+            onChange={handleInputsChange}
           />
           <div className="col-span-2">
             <Input
@@ -150,9 +201,29 @@ const ProfileSection = ({ data }: ProfileSectionProps) => {
               value={githubUrl}
               placeholder={data.githubUrl}
               disabled={!isEdit}
-              onChange={onChange}
+              onChange={handleInputsChange}
             />
           </div>
+          <Input
+            id="비밀번호 변경"
+            label="비밀번호 변경"
+            type="password"
+            name="password"
+            value={password}
+            placeholder={password}
+            disabled={!isEdit}
+            onChange={handleInputsChange}
+          />
+          <Input
+            id="비밀번호 변경 확인"
+            label="비밀번호 변경 확인"
+            type="password"
+            name="passwordCheck"
+            value={passwordCheck}
+            placeholder={passwordCheck}
+            disabled={!isEdit}
+            onChange={handleInputsChange}
+          />
         </div>
       </Section.Body>
     </Section>

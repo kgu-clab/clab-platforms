@@ -28,7 +28,7 @@ const MainPage = () => {
     <Content>
       <MainAlert data={mainAlertData.items} />
       <ImageBanner data={mainBannerData.items} />
-      <NewsCardSection to={PATH.NEWS} title="최근 동아리 소식은?" data={[]} />
+      <NewsCardSection to={PATH.NEWS} title="최근 동아리 소식은?" />
       <CommunitySection>
         <CommunitySection.List
           title="공지사항"
