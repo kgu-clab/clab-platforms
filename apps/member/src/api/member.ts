@@ -9,6 +9,7 @@ interface PatchUserInfoArgs {
   body: ProfileData;
   multipartFile: FormData | null;
 }
+
 // 내 정보
 export const getMyProfile = async () => {
   const { data } = await server.get<BaseResponse<ProfileData>>({
@@ -24,21 +25,14 @@ export const patchUserInfo = async ({
   body,
   multipartFile,
 }: PatchUserInfoArgs) => {
-  let userInfoData;
   if (multipartFile) {
     const data = await postUploadedFileProfileImage(multipartFile);
-
-    userInfoData = {
-      ...body,
-      imageUrl: data.fileUrl,
-    };
-  } else {
-    userInfoData = body;
+    body['imageUrl'] = data.fileUrl;
   }
 
   const { data } = await server.patch<ProfileData, BaseResponse<string>>({
     url: END_POINT.MY_INFO_EDIT(id),
-    body: userInfoData,
+    body,
   });
 
   return data;
