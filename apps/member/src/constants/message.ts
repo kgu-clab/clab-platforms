@@ -1,5 +1,5 @@
 export const ERROR_MESSAGE = {
-  default: '⚠️ 뭔가 잘못됐어요..',
+  DEFAULT: '오류가 발생했어요. 잠시후에 다시 시도해주세요.',
 } as const;
 
 export const COMMUNITY_MESSAGE = {
