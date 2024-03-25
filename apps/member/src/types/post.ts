@@ -4,4 +4,5 @@ export interface PostItem {
   title: string;
   writer: string;
   createdAt: string;
+  isOwner: boolean;
 }

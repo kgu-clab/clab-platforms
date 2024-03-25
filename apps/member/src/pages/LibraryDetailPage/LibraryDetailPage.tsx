@@ -7,15 +7,15 @@ import { LIBRARY_MESSAGE } from '@constants/message';
 
 const LibraryDetailPage = () => {
   const { id } = useParams<{ id: string }>();
-  const { data } = useBookDetails(id);
 
-  if (!data) throw new Error(LIBRARY_MESSAGE.NO_BOOK);
+  if (!id) throw new Error(LIBRARY_MESSAGE.NO_BOOK);
+
+  const { data } = useBookDetails(+id);
 
   return (
     <Content>
       <Header title={['도서관', data.title]} />
       <BookDetailSection data={data} />
-      <Header title="대출내역" />
     </Content>
   );
 };

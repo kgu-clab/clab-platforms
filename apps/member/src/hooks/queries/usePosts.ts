@@ -12,6 +12,9 @@ import type {
 
 type PostsType = CommunityPostDetailItem | NewsItem | HireItem;
 
+/**
+ * 카테고리에 따른 게시글을 가져옵니다.
+ */
 export const usePosts = (category: CommunityCategoryType, id: string) => {
   const queryOptions = {
     notice: {
@@ -43,7 +46,7 @@ export const usePosts = (category: CommunityCategoryType, id: string) => {
   const options = queryOptions[category];
 
   return useSuspenseQuery<PostsType, Error, PostsType, string[]>({
-    queryKey: [options.queryKey, id],
     queryFn: options.queryFn,
+    queryKey: [options.queryKey, category, id],
   });
 };

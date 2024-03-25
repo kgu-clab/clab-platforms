@@ -1,23 +1,31 @@
 import { Button } from '@clab/design-system';
-import { ChangeEvent, useRef, useState } from 'react';
-
+import { ChangeEvent, useCallback, useRef, useState } from 'react';
 import { Input } from '@clab/design-system';
 import Section from '@components/common/Section/Section';
 import { useMembershipFeeMutation } from '@hooks/queries/useMembershipFeeMutation';
 import { MembershipFeeType } from '@type/membershipFee';
+import Select from '@components/common/Select/Select';
+import { SELECT_OPTIONS } from '@constants/select';
+import { formatComma } from '@utils/math';
+import useToast from '@hooks/common/useToast';
+import Label from '@components/common/Label/Label';
+import { DEFAULT } from '@constants/default';
+import { FORM_DATA_KEY } from '@constants/api';
 
 const RequestForm = () => {
+  const toast = useToast();
   const { membershipFeeMutate } = useMembershipFeeMutation();
+
   const imageUploader = useRef<HTMLInputElement>(null);
   const [input, setInput] = useState<MembershipFeeType>({
-    category: '',
+    category: DEFAULT.SELECT,
     amount: 0,
     content: '',
   });
 
   const { category, amount, content } = input;
 
-  const onChangeInputs = (e: ChangeEvent<HTMLInputElement>) => {
+  const handleInputChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
     setInput((prev) => ({
       ...prev,
       [e.target.name]:
@@ -25,32 +33,35 @@ const RequestForm = () => {
           ? parseFloat(e.target.value.replace(/,/g, ''))
           : e.target.value,
     }));
-  };
+  }, []);
 
-  const addComma = (amount: number) => {
-    if (!amount) return '';
-    const returnString = String(amount).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-    return returnString;
-  };
+  const handleInputSelect = useCallback((e: ChangeEvent<HTMLSelectElement>) => {
+    setInput((prev) => ({
+      ...prev,
+      [e.target.name]: e.target.value,
+    }));
+  }, []);
 
   const onClickRequest = async () => {
-    if (!category || !amount || !content) {
-      alert('필수 입력 사항을 확인해주세요');
-    } else {
-      if (imageUploader.current?.files?.length) {
-        const files = imageUploader.current?.files[0];
-        const formData = new FormData();
-        formData.append('multipartFile', files, encodeURIComponent(files.name));
-        membershipFeeMutate({ body: input, multipartFile: formData });
-        if (imageUploader.current) {
-          imageUploader.current.value = '';
-        }
-      }
+    if (
+      category === 'none' ||
+      !amount ||
+      !content ||
+      !imageUploader.current?.files?.length
+    ) {
+      return toast({
+        state: 'error',
+        message: '신청서 항목을 모두 작성해주세요.',
+      });
     }
-    setInput({
-      category: '',
-      amount: 0,
-      content: '',
+
+    const formData = new FormData();
+    const files = imageUploader.current?.files[0];
+    formData.append(FORM_DATA_KEY, files, encodeURIComponent(files.name));
+
+    membershipFeeMutate({
+      body: input,
+      multipartFile: imageUploader.current?.files?.length ? formData : null,
     });
   };
 
@@ -58,31 +69,35 @@ const RequestForm = () => {
     <Section>
       <Section.Header title="신청서" />
       <Section.Body className="grid gap-2 mt-4 md:grid-cols-2">
-        <Input
-          id="category"
-          name="category"
-          label="분류"
-          placeholder="신청 분류를 작성해주세요"
-          value={category}
-          onChange={onChangeInputs}
-        />
+        <div className="flex flex-col">
+          <Label className="mb-1 ml-1 text-xs">분류</Label>
+          <Select
+            className="w-full"
+            name="category"
+            options={SELECT_OPTIONS.SUPPORT_FORM}
+            value={category}
+            onChange={handleInputSelect}
+          />
+        </div>
         <Input
           id="amount"
           name="amount"
           label="금액"
           inputMode="numeric"
           placeholder="구매 금액을 작성해주세요"
-          value={addComma(amount)}
-          onChange={onChangeInputs}
+          value={formatComma(amount)}
+          onChange={handleInputChange}
         />
-        <Input
-          id="content"
-          name="content"
-          label="사유"
-          placeholder="요청 사유를 작성해주세요"
-          value={content}
-          onChange={onChangeInputs}
-        />
+        <div className="col-span-2">
+          <Input
+            id="content"
+            name="content"
+            label="사유"
+            placeholder="요청 사유를 상세하게 작성해주세요"
+            value={content}
+            onChange={handleInputChange}
+          />
+        </div>
         <Input
           id="membershipFormUploader"
           name="membershipFormUploader"

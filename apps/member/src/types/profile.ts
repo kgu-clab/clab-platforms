@@ -1,4 +1,5 @@
 export interface ProfileData {
+  password?: string;
   name: string;
   id: string;
   interests: string;
@@ -7,5 +8,6 @@ export interface ProfileData {
   address: string;
   githubUrl: string;
   imageUrl: string;
+  roleLevel: number;
   createdAt: string;
 }

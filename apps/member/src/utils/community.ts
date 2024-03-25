@@ -28,7 +28,6 @@ export const isHireItem = (item: any): item is HireItem => {
   return (
     item &&
     item.careerLevel &&
-    item.employmentType &&
     item.companyName &&
     item.recruitmentPeriod &&
     item.jobPostingUrl

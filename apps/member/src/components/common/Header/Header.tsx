@@ -31,7 +31,7 @@ const Header = ({ title, children }: HeaderProps) => {
   return (
     <div className="flex items-center justify-between px-2 py-4 bg-white border rounded-lg">
       <RenderTitle />
-      <div className="flex items-center gap-4">{children}</div>
+      <div className="flex items-center gap-4 pr-2">{children}</div>
     </div>
   );
 };

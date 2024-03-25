@@ -30,4 +30,5 @@ export interface CommunityPostDetailItem extends PostItem {
   content: string;
   likes: number;
   hasLikeByMe: boolean;
+  isOwner: boolean;
 }

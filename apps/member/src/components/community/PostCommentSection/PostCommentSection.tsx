@@ -6,6 +6,7 @@ import { useCommentList } from '@hooks/queries/useCommentList';
 import CommentInput from '@components/common/CommentInput/CommentInput';
 import { useAccusesMutation } from '@hooks/queries/useAccusesMutation';
 import useModal from '@hooks/common/useModal';
+import { createImageUrl } from '@utils/api';
 
 interface PostCommentSectionProps {
   id: string;
@@ -74,7 +75,11 @@ const PostCommentSection = ({ id }: PostCommentSectionProps) => {
               <div key={commentId} className="space-y-2">
                 {/* ROOT */}
                 <Comment
-                  image={writerImageUrl ? writerImageUrl : getPokemonImage()}
+                  image={
+                    writerImageUrl
+                      ? createImageUrl(writerImageUrl)
+                      : getPokemonImage()
+                  }
                   writer={writer}
                   onClickReport={() => onClickReport(commentId)}
                   onClickReply={() => onClickReComment(commentId)}
@@ -88,7 +93,9 @@ const PostCommentSection = ({ id }: PostCommentSectionProps) => {
                       <Comment
                         key={replyId}
                         image={
-                          writerImageUrl ? writerImageUrl : getPokemonImage()
+                          writerImageUrl
+                            ? createImageUrl(writerImageUrl)
+                            : getPokemonImage()
                         }
                         isReply
                         writer={writer}

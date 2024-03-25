@@ -1,4 +1,5 @@
 import classNames from 'classnames';
+import { DEFAULT } from '@constants/default';
 import { ComponentPropsWithRef } from 'react';
 
 interface SelectOptions {
@@ -7,16 +8,16 @@ interface SelectOptions {
 }
 
 interface SelectProps extends ComponentPropsWithRef<'select'> {
-  options: SelectOptions[];
+  options: readonly SelectOptions[];
 }
 
-const Select = ({ className, options = [], ...rest }: SelectProps) => {
+const Select = ({ options = [], className, ...rest }: SelectProps) => {
   return (
     <select
       className={classNames('border p-2 rounded-md', className)}
       {...rest}
     >
-      <option disabled value={0}>
+      <option disabled value={DEFAULT.SELECT}>
         미선택
       </option>
       {options.map(({ name, value }) => (

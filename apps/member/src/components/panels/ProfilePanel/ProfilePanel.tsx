@@ -1,8 +1,11 @@
 import Image from '@components/common/Image/Image';
 import Panel from '@components/common/Panel/Panel';
-
+import { ProfileData } from '@type/profile';
+import { createImageUrl } from '@utils/api';
 import { calculateDDay } from '@utils/date';
 import { getRandomInt } from '@utils/math';
+import { getProfileRingStyle } from '@utils/style';
+import classNames from 'classnames';
 
 const tips = [
   '오늘은 맛집 게시글을 작성하는건 어때요?',
@@ -14,35 +17,38 @@ const tips = [
 ];
 
 interface ProfilePanelProps {
-  name: string;
-  image: string;
-  createdAt: string;
+  data: ProfileData;
 }
 
-const ProfilePanel = ({ name, image, createdAt }: ProfilePanelProps) => {
+const ProfilePanel = ({ data }: ProfilePanelProps) => {
   return (
     <Panel>
       <Panel.Body>
         <div className="flex gap-4">
           <div className="p-1">
-            <div className="rounded-full ring ring-orange-500 ring-offset-1">
+            <div
+              className={classNames(
+                'rounded-full ring ring-offset-1',
+                getProfileRingStyle(data.roleLevel),
+              )}
+            >
               <Image
                 width="w-10"
                 height="h-10"
-                src={image}
+                src={createImageUrl(data.imageUrl)}
                 alt="프로필사진"
                 className="object-cover rounded-full"
               />
             </div>
           </div>
           <div className="flex flex-col justify-between">
-            <p className="text-lg font-bold">반가워요! {name}님</p>
+            <p className="text-lg font-bold">반가워요! {data.name}님</p>
             <p className="text-sm font-semibold">
-              C-Lab과 함께한 지 {calculateDDay(createdAt)}일 ❤️
+              C-Lab과 함께한 지 {calculateDDay(data.createdAt)}일 ❤️
             </p>
           </div>
         </div>
-        <p className="mt-4 rounded-md bg-gray-100 py-1 text-center text-xs font-semibold">
+        <p className="py-1 mt-4 text-xs font-semibold text-center bg-gray-100 rounded-md">
           &quot;{tips[getRandomInt(tips.length - 1)]}&quot;
         </p>
       </Panel.Body>
