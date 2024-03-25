@@ -1,4 +1,4 @@
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, useCallback, useState } from 'react';
 import { Button } from '@clab/design-system';
 import Image from '@components/common/Image/Image';
 import Section from '@components/common/Section/Section';
@@ -17,51 +17,45 @@ interface ProfileSectionProps {
   data: ProfileData;
 }
 
-interface ProfileType extends ProfileData {
-  password: string;
-  passwordCheck: string;
-}
-
 const ProfileSection = ({ data }: ProfileSectionProps) => {
   const setIsLoggedIn = useSetIsLoggedInStore();
   const { userInfoMutate } = useUserInfoMutation();
-  const { openModal } = useModal();
+  const { openModal, updateModal } = useModal();
   const toast = useToast();
 
   const [profileImage, setProfileImage] = useState<string>(data.imageUrl);
   const [isEdit, setIsEdit] = useState<boolean>(false);
-  const [inputs, setInputs] = useState<ProfileType>({
-    ...data,
+  const [inputs, setInputs] = useState<ProfileData>(data);
+  const [newPassword, setNewPassword] = useState({
     password: '',
     passwordCheck: '',
   });
 
-  const onClickEdit = () => {
-    setIsEdit((prev) => {
-      if (prev) {
-        const formData = new FormData();
-        const file = document.getElementById('imageUrl') as HTMLInputElement;
-        if (file.files?.length) formData.append(FORM_DATA_KEY, file.files[0]);
-        let newPassword = undefined;
-        if (inputs.password === inputs.passwordCheck) {
-          newPassword = inputs.passwordCheck;
-        } else {
-          toast({
-            state: 'error',
-            message: '비밀번호 변경이 일치하지 않습니다. 다시 확인해주세요.',
-          });
-          return prev;
-        }
-        userInfoMutate({
-          id: data.id,
-          body: {
-            ...inputs,
-            password: newPassword,
-          },
-          multipartFile: file.files?.length ? formData : null,
-        });
-      }
-      return !prev;
+  const onClickChangePassword = () => {
+    openModal({
+      title: '비밀번호 변경',
+      content: (
+        <div className="space-y-4">
+          <Input
+            id="새로운 비밀번호"
+            label="새로운 비밀번호"
+            type="password"
+            name="password"
+            onChange={handlePasswordChange}
+          />
+          <Input
+            id="비밀번호 확인"
+            label="비밀번호 확인"
+            type="password"
+            name="passwordCheck"
+            onChange={handlePasswordChange}
+          />
+        </div>
+      ),
+      accept: {
+        text: '변경하기',
+        onClick: onClickChangePasswordAccept,
+      },
     });
   };
 
@@ -79,34 +73,64 @@ const ProfileSection = ({ data }: ProfileSectionProps) => {
     });
   };
 
-  const handleInputsChange = (e: ChangeEvent<HTMLInputElement>) => {
+  const handleIsEditClick = () => {
+    setIsEdit((prev) => {
+      if (prev) {
+        const formData = new FormData();
+        const file = document.getElementById('imageUrl') as HTMLInputElement;
+        if (file.files?.length) formData.append(FORM_DATA_KEY, file.files[0]);
+
+        userInfoMutate({
+          id: data.id,
+          body: inputs,
+          multipartFile: file.files?.length ? formData : null,
+        });
+      }
+      return !prev;
+    });
+  };
+
+  const handleInputsChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setInputs((prev) => ({ ...prev, [name]: value }));
+  }, []);
+
+  const handlePasswordChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setNewPassword((prev) => ({ ...prev, [name]: value }));
+    updateModal();
   };
 
-  const onChangeProfileImage = (e: ChangeEvent<HTMLInputElement>) => {
-    const reader = new FileReader();
-    reader.onload = () => {
-      if (reader.readyState === 2) {
-        setProfileImage(reader.result as string);
-      }
-    };
-    if (e.target.files && e.target.files.length > 0) {
-      reader.readAsDataURL(e.target.files[0]);
+  const onClickChangePasswordAccept = () => {
+    if (newPassword.password !== newPassword.passwordCheck) {
+      return toast({
+        state: 'error',
+        message: '비밀번호가 일치하지 않습니다.',
+      });
     }
+    userInfoMutate({
+      id: data.id,
+      body: { ...inputs, password: newPassword.password },
+      multipartFile: null,
+    });
   };
 
-  const {
-    name,
-    id,
-    interests,
-    contact,
-    email,
-    address,
-    password,
-    passwordCheck,
-    githubUrl,
-  } = inputs;
+  const onChangeProfileImage = useCallback(
+    (e: ChangeEvent<HTMLInputElement>) => {
+      const reader = new FileReader();
+      reader.onload = () => {
+        if (reader.readyState === 2) {
+          setProfileImage(reader.result as string);
+        }
+      };
+      if (e.target.files && e.target.files.length > 0) {
+        reader.readAsDataURL(e.target.files[0]);
+      }
+    },
+    [],
+  );
+
+  const { name, id, interests, contact, email, address, githubUrl } = inputs;
 
   return (
     <Section>
@@ -115,10 +139,15 @@ const ProfileSection = ({ data }: ProfileSectionProps) => {
           <Button
             color={isEdit ? 'green' : 'orange'}
             size="sm"
-            onClick={onClickEdit}
+            onClick={handleIsEditClick}
           >
             {isEdit ? '저장' : '수정'}
           </Button>
+          {isEdit && (
+            <Button size="sm" onClick={onClickChangePassword}>
+              비빌번호 변경
+            </Button>
+          )}
           <Button color="red" size="sm" onClick={onClickLogout}>
             로그아웃
           </Button>
@@ -204,26 +233,6 @@ const ProfileSection = ({ data }: ProfileSectionProps) => {
               onChange={handleInputsChange}
             />
           </div>
-          <Input
-            id="비밀번호 변경"
-            label="비밀번호 변경"
-            type="password"
-            name="password"
-            value={password}
-            placeholder={password}
-            disabled={!isEdit}
-            onChange={handleInputsChange}
-          />
-          <Input
-            id="비밀번호 변경 확인"
-            label="비밀번호 변경 확인"
-            type="password"
-            name="passwordCheck"
-            value={passwordCheck}
-            placeholder={passwordCheck}
-            disabled={!isEdit}
-            onChange={handleInputsChange}
-          />
         </div>
       </Section.Body>
     </Section>

@@ -7,6 +7,7 @@ import {
 } from 'recoil';
 
 interface ModalState {
+  key: string;
   isOpen: boolean;
   title: string;
   content: React.ReactNode;
@@ -23,6 +24,7 @@ interface ModalState {
 export const modalState = atom<ModalState>({
   key: ATOM_KEY.MODAL,
   default: {
+    key: '',
     isOpen: false,
     title: '',
     content: null,
