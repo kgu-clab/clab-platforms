@@ -1,16 +1,18 @@
 import { server } from './server';
 import { END_POINT } from '@constants/api';
+import { postUploadedFileProfileImage } from './uploadedFile';
 import type { BaseResponse } from '@type/api';
 import type { ProfileData } from '@type/profile';
-import { postUploadedFileProfileImage } from './uploadedFile';
+import type { MemberProfileRequestType } from '@type/member';
 
 interface PatchUserInfoArgs {
   id: string;
-  body: ProfileData;
+  body: MemberProfileRequestType;
   multipartFile: FormData | null;
 }
-
-// 내 정보
+/**
+ * 내 프로필 조회
+ */
 export const getMyProfile = async () => {
   const { data } = await server.get<BaseResponse<ProfileData>>({
     url: END_POINT.MY_PROFILE,
@@ -18,8 +20,9 @@ export const getMyProfile = async () => {
 
   return data;
 };
-
-// 내 정보 수정
+/**
+ * 멤버 정보 수정
+ */
 export const patchUserInfo = async ({
   id,
   body,
@@ -30,7 +33,10 @@ export const patchUserInfo = async ({
     body['imageUrl'] = data.fileUrl;
   }
 
-  const { data } = await server.patch<ProfileData, BaseResponse<string>>({
+  const { data } = await server.patch<
+    MemberProfileRequestType,
+    BaseResponse<string>
+  >({
     url: END_POINT.MY_INFO_EDIT(id),
     body,
   });

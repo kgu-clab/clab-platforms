@@ -4,5 +4,5 @@ export const BOOK_STATE = {
 } as const;
 
 export const DATE_FORMAT = {
-  WITH_TIME: 'YYYY-MM-DDTHH:mm:ss.SSS',
+  WITH_TIME: 'YYYY-MM-DD',
 } as const;

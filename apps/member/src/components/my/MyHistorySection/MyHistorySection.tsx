@@ -5,12 +5,12 @@ import type { BoardItem } from '@type/board';
 import type { NotificationItem } from '@type/notification';
 import { CommentItem } from '@type/comment';
 
-interface HistorySectionProps {
+interface MyHistorySectionProps {
   title: string;
   data: Array<NotificationItem | BoardItem | CommentItem>;
 }
 
-const HistorySection = ({ title, data }: HistorySectionProps) => {
+const MyHistorySection = ({ title, data }: MyHistorySectionProps) => {
   return (
     <Section>
       <Section.Header title={title} />
@@ -41,4 +41,4 @@ const HistorySection = ({ title, data }: HistorySectionProps) => {
   );
 };
 
-export default HistorySection;
+export default MyHistorySection;

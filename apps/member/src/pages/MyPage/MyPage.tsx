@@ -1,8 +1,9 @@
 import Content from '@components/common/Content/Content';
-import HistorySection from '@components/my/HistorySection/HistorySection';
-import ProfileSection from '@components/my/ProfileSection/ProfileSection';
+import MyHistorySection from '@components/my/MyHistorySection/MyHistorySection';
+import MyProfileSection from '@components/my/MyProfileSection/MyProfileSection';
 import { useMyNotifications, useMyBoards, useMyComments } from '@hooks/queries';
 import { useMyProfile } from '@hooks/queries/useMyProfile';
+import { Grid } from '@clab/design-system';
 
 const MyPage = () => {
   const { data: myProfile } = useMyProfile();
@@ -12,10 +13,17 @@ const MyPage = () => {
 
   return (
     <Content>
-      <ProfileSection data={myProfile} />
-      <HistorySection title="지난 알림" data={myNotificationsData.items} />
-      <HistorySection title="나의 게시글" data={myBoardsData.items} />
-      <HistorySection title="나의 댓글" data={myCommentsData.items} />
+      <MyProfileSection data={myProfile} />
+      <MyHistorySection title="지난 알림" data={myNotificationsData.items} />
+      <Grid col={2} gap="md">
+        <MyHistorySection title="회비 신청 내역" data={[]} />
+        <MyHistorySection title="도서 대출 내역" data={[]} />
+      </Grid>
+      <MyHistorySection title="나의 활동" data={[]} />
+      <Grid col={2} gap="md">
+        <MyHistorySection title="나의 게시글" data={myBoardsData.items} />
+        <MyHistorySection title="나의 댓글" data={myCommentsData.items} />
+      </Grid>
     </Content>
   );
 };
