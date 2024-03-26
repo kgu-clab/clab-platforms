@@ -1,8 +1,8 @@
-export const API_BASE_URL = 'https://api.clab.page';
+export const API_BASE_URL = 'https://api.clab.page/api';
 
 export const END_POINTS = {
-  LOGIN: '/login',
-  TWO_FACTOR_LOGIN: '/login/authenticator',
+  LOGIN: '/v1/login',
+  TWO_FACTOR_LOGIN: '/v1/login/authenticator',
 } as const;
 
 export const SUCCESS_MESSAGE = {
@@ -11,7 +11,7 @@ export const SUCCESS_MESSAGE = {
 
 export const ERROR_MESSAGE = {
   AUTH: '인증에 실패했습니다.',
-  SERVER: '오류가 발생했습니다. 잠시 후 다시 시도해주세요.',
+  SERVER: '로그인에 실패했습니다. 입력 정보를 다시 확인해주세요.',
 } as const;
 
 // OAuth 백엔드가 개발 전까지 임시로 사용합니다
