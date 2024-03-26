@@ -21,9 +21,11 @@ const Select = ({
 }: SelectProps) => {
   return (
     <div className={classNames('flex flex-col', className)}>
-      <label htmlFor={id} className="mb-1 ml-1 text-xs">
-        {label}
-      </label>
+      {label && (
+        <label htmlFor={id} className="mb-1 ml-1 text-xs">
+          {label}
+        </label>
+      )}
       <select
         id={id}
         className="w-full h-full p-2 border rounded-md disabled:bg-gray-50"
