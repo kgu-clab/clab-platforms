@@ -23,7 +23,7 @@ export const END_POINT = {
   BOOK: `/books`,
   BOOK_DETAIL: (id: number) => `/books/${id}`,
   BOOK_LOAN: `/book-loan-records`,
-  BOOK_LOAN_SEARCH: `/book-loan-records/search`,
+  BOOK_LOAN_CONDITIONS: `/book-loan-records/conditions`,
   BOOK_LOAN_BORROW: `/book-loan-records/borrow`,
   BOOK_LOAN_EXTEND: `/book-loan-records/extend`,
   BOOK_LOAN_RETURN: `/book-loan-records/return`,

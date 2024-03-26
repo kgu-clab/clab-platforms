@@ -90,7 +90,7 @@ export const getBookLoanByMemberId = async (
 ) => {
   const params = { borrowerId, page, size };
   const { data } = await server.get<PaginationType<BookLoanRecordItem>>({
-    url: createCommonPagination(END_POINT.BOOK_LOAN_SEARCH, params),
+    url: createCommonPagination(END_POINT.BOOK_LOAN_CONDITIONS, params),
   });
 
   return data;

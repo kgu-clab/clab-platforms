@@ -45,15 +45,15 @@ interface PatchActivityBoardArgs {
 
 // 나의 활동 일정 조회
 export const getMyActivities = async (
-  startDateTime: string,
-  endDateTime: string,
+  startDate: string,
+  endDate: string,
   page: number,
   size: number,
 ) => {
   const { data } = await server.get<PaginationType<ScheduleItem>>({
     url: createCommonPagination(END_POINT.MY_ACTIVITY, {
-      startDateTime,
-      endDateTime,
+      startDate,
+      endDate,
       page,
       size,
     }),
