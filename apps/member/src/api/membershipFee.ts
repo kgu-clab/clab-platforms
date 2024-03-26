@@ -2,31 +2,46 @@ import { server } from './server';
 import { END_POINT } from '@constants/api';
 import { createCommonPagination } from '@utils/api';
 import { postUploadedFileMembershipFee } from './uploadedFile';
-import type { ArgsWithFiles, BaseResponse, PaginationType } from '@type/api';
+import type {
+  ArgsWithFiles,
+  BaseResponse,
+  PaginationPramsType,
+  PaginationType,
+} from '@type/api';
 import type { MembershipFeeType } from '@type/membershipFee';
 
-interface postMembershipFeeArgs extends ArgsWithFiles {
-  body: MembershipFeeType;
+interface GetMembershipFeeParamsType extends PaginationPramsType {
+  memberId?: string;
+  memberName?: string;
+  category?: string;
 }
 
+interface PostMembershipFeePramsType extends ArgsWithFiles {
+  body: MembershipFeeType;
+}
 /**
- * 회비 신청 정보 조회
+ * 회비 정보 조회
  */
-export const getMembershipFee = async (page: number, size: number) => {
-  const params = { page, size };
+export const getMembershipFee = async ({
+  memberId,
+  memberName,
+  category,
+  page,
+  size,
+}: GetMembershipFeeParamsType) => {
+  const params = { memberId, memberName, category, page, size };
   const { data } = await server.get<PaginationType<MembershipFeeType>>({
     url: createCommonPagination(END_POINT.MEMBERSHIP_FEE, params),
   });
   return data;
 };
-
 /**
  * 회비 신청
  */
 export const postMembershipFee = async ({
   body,
   multipartFile,
-}: postMembershipFeeArgs) => {
+}: PostMembershipFeePramsType) => {
   if (multipartFile) {
     const data = await postUploadedFileMembershipFee({
       storagePeriod: 365,

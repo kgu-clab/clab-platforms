@@ -6,5 +6,5 @@ export interface MembershipFeeType {
   amount: number;
   content: string;
   imageUrl?: string;
-  createdAt?: string;
+  createdAt: string;
 }
