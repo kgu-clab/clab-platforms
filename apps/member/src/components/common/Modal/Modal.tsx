@@ -1,28 +1,22 @@
-import { ReactNode } from 'react';
+import { PropsWithChildren } from 'react';
 import useModal from '@hooks/common/useModal';
 import classNames from 'classnames';
 
-interface ModalProps {
-  children: ReactNode;
+interface ModalProps extends PropsWithChildren {
+  className?: string;
 }
 
-interface ModalHeaderProps {
-  title: string;
-  children: ReactNode;
-}
-
-interface ModalButtonProps {
+interface ModalButtonProps extends ModalProps {
   color: 'gray' | 'red' | 'sky' | 'orange';
-  children: ReactNode;
   onClick?: () => void;
 }
 
-const Modal = ({ children }: ModalProps) => {
+const Modal = ({ children }: PropsWithChildren) => {
   const { closeModal } = useModal();
 
   return (
     <div
-      className="fixed z-50 inset-0"
+      className="fixed inset-0 z-40"
       aria-labelledby="modalTitle"
       aria-modal="true"
       role="dialog"
@@ -32,9 +26,9 @@ const Modal = ({ children }: ModalProps) => {
           <div
             className="absolute inset-0 bg-gray-600/50"
             onClick={closeModal}
-          ></div>
+          />
         </div>
-        <div className="inline-block w-full bg-white rounded-lg text-center sm:text-left overflow-hidden shadow-lg transform sm:max-w-lg">
+        <div className="inline-block w-full p-4 space-y-4 overflow-hidden text-center transform bg-white rounded-lg shadow-lg sm:text-left sm:max-w-lg">
           {children}
         </div>
       </div>
@@ -42,28 +36,43 @@ const Modal = ({ children }: ModalProps) => {
   );
 };
 
-Modal.Body = ({ title, children }: ModalHeaderProps) => {
+Modal.Header = ({ className, children }: ModalProps) => {
   return (
-    <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
-      <header>
-        <h3 className="text-xl leading-6 font-semibold">{title}</h3>
-      </header>
-      <main className="mt-2 break-keep min-h-20 text-gray-500 text-sm whitespace-pre-wrap">
+    <header>
+      <h3 className={classNames('text-xl font-semibold leading-6', className)}>
         {children}
-      </main>
-    </div>
+      </h3>
+    </header>
   );
 };
 
-Modal.Footer = ({ children }: { children: React.ReactNode }) => {
+Modal.Body = ({ className, children }: ModalProps) => {
   return (
-    <footer className="px-4 py-3 sm:px-6 flex justify-end gap-2 text-sm font-semibold">
+    <main
+      className={classNames(
+        'text-sm text-gray-500 whitespace-pre-wrap break-keep min-h-20',
+        className,
+      )}
+    >
+      {children}
+    </main>
+  );
+};
+
+Modal.Footer = ({ className, children }: ModalProps) => {
+  return (
+    <footer
+      className={classNames(
+        'flex justify-end gap-2 text-sm font-semibold',
+        className,
+      )}
+    >
       {children}
     </footer>
   );
 };
 
-Modal.Button = ({ color, children, onClick }: ModalButtonProps) => {
+Modal.Button = ({ color, onClick, className, children }: ModalButtonProps) => {
   const colorStyle = {
     red: 'border-red-300 bg-red-100 text-red-500 hover:bg-red-200',
     sky: 'border-sky-300 bg-sky-100 text-sky-500 hover:bg-sky-200',
@@ -78,6 +87,7 @@ Modal.Button = ({ color, children, onClick }: ModalButtonProps) => {
       className={classNames(
         'rounded-lg border py-1 w-full transition-colors',
         colorStyle[color],
+        className,
       )}
       onClick={onClick}
     >
