@@ -1,6 +1,7 @@
 import type { IDType } from '@type/api';
 
-export const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+export const SERVER_BASE_URL: string = import.meta.env.VITE_SERVER_BASE_URL;
+export const API_BASE_URL: string = import.meta.env.VITE_API_BASE_URL;
 
 export const ACCESS_TOKEN_KEY = 'ACCESS_TOKEN';
 export const REFRESH_TOKEN_KEY = 'REFRESH_TOKEN';
