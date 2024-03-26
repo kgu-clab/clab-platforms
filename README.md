@@ -1,12 +1,17 @@
 # clab.page
 
-경기대학교 개발보안동아리 C-Lab의 공식 프론트엔드 시스템이에요.  
-지속적으로 늘어나는 동아리의 프론트엔드 프로젝트를 유연하고 생산성 있게 관리하기 위해 [모노레포(Monorepo)](https://en.wikipedia.org/wiki/Monorepo) 환경이 만들어졌어요.
+경기대학교 개발보안동아리 [C-Lab](https://www.clab.page/)의 공식 프론트엔드 시스템이에요.  
+지속적으로 늘어나는 프론트엔드 프로젝트를 유연하고 생산성 있게 관리하기 위해 [모노레포(Monorepo)](https://en.wikipedia.org/wiki/Monorepo) 환경으로 만들어졌어요.
 
-clab.page의 프로젝트는 다음과 같은 특징을 가지고 있어요
+해당 프로젝트는 단순히 C-Lab 동아리 내에서 사용할 목적으로 시작되었지만, 그 취지와 목표는 훨씬 더 넓고 깊은 의미를 지니고 있어요.  
+동아리나 모임, 그리고 **다양한 단체들이 운영과정에서 마주할 수 있는 다양한 문제점을 해결하고자 기획**하게 되었어요. `소통의 어려움`, `자료 공유의 번거로움`, `활동 계획의 비효율성` 그리고 `동아리 활동의 기록과 회고` 등 문제를 해결하고자 하며 결과적으로는 **모든 구성원이 만족하고 몰입할 수 있는 활동 환경을 조성**하는 것을 궁극적인 목표로 하고 있어요.
+
+## Features
+
+> 해당 모노레포에 있는 모든 프로젝트는 다음과 같은 특징을 가지고 있어요.
 
 - 모든 디자인은 `Mobile First Design`로 제작되었어요.
-- 일관된 사용자 경험을 제공하기 위해 자체 개발 `design-system`을 사용하고 있어요.
+-  일관된 사용자 경험을 제공하기 위해 자체 개발 `design-system`을 사용하고 있어요.
 
 ## Apps
 
@@ -24,6 +29,12 @@ clab.page의 프로젝트는 다음과 같은 특징을 가지고 있어요
 - [hooks](/packages/hooks/README.md): 공통적으로 사용하는 React Hooks 라이브러리에요.
 - [icon](/packages/icon/README.md): 공통적으로 사용하는 아이콘팩이에요.
 
+## Server
+
+> Server, Infra, Back-end에 대한 정보는 다른 저장소에서 확인할 수 있어요.
+
+- [clab-server](https://github.com/KGU-C-Lab/clab-server): 경기대학교 개발보안동아리 C-Lab의 공식 백엔드 시스템이에요.
+
 ## Contributing
 
 동아리원이 아니더라도 누구나 기여할 수 있습니다. 해당 프로젝트에 기여하고 싶다면 아래 문서를 참고해주세요.  
@@ -32,7 +43,7 @@ clab.page의 프로젝트는 다음과 같은 특징을 가지고 있어요
 ## FAQs
 
 <details>
-  <summary>저희 동아리에서도 이 시스템을 사용해도 되나요?</summary>
+  <summary>해당 시스템을 자유롭게 사용해도 되나요?</summary>
   네, 가능합니다! 이 프로젝트는 GNU 라이센스 하에 배포되어 있으며, 라이센스 조건에 따라 자유롭게 사용하실 수 있습니다.
 </details>
 
@@ -43,7 +54,7 @@ clab.page의 프로젝트는 다음과 같은 특징을 가지고 있어요
 
 <details>
   <summary>기타 문의 사항이 있어요. 어디서 할 수 있나요?</summary>
-  Github에 기재된 <code>EMail</code>에 문의 남겨주시거나 공식 홈페이지 <code>라이브챗(채널톡)</code>을 이용해주세요.
+  Github에 기재된 <code>EMail</code>에 문의 남겨주시거나 [공식 홈페이지](https://www.clab.page/) <code>라이브챗(채널톡)</code>을 이용해주세요.
 </details>
 
 ## License
