@@ -1,8 +1,15 @@
+import type { CommunityCategoryKorType } from './community';
+
 export interface CommentItem {
   id: number;
   writerName: string;
   writerImageUrl: string;
   content: string;
+  boardId: number;
+  boardCategory: CommunityCategoryKorType;
+  hasLikeByMe: boolean;
+  likes: number;
+  writer: string;
   createdAt: string;
 }
 

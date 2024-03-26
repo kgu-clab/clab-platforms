@@ -1,5 +1,6 @@
-import type { IDType } from '@type/api';
 import { createPath } from '@utils/api';
+import type { IDType } from '@type/api';
+import type { CommunityCategoryType } from '@type/community';
 
 export const NOT_FOUND_IMG = '/not_found.webp';
 
@@ -36,7 +37,7 @@ export const PATH = {
 export const PATH_FINDER = {
   NEWS_POST: (id: IDType) => createPath(PATH.NEWS, id),
   BLOG_POST: (id: IDType) => createPath(PATH.BLOG, id),
-  COMMUNITY_POST: (sort: IDType, id: IDType) =>
+  COMMUNITY_POST: (sort: CommunityCategoryType, id: IDType) =>
     createPath(PATH.COMMUNITY, sort, id),
   LIBRARY_DETAIL: (id: IDType) => createPath(PATH.LIBRARY, id),
   ACTIVITY_DETAIL: (id: IDType) => createPath(PATH.ACTIVITY, id),
