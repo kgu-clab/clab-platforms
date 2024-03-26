@@ -9,11 +9,17 @@ interface GridProps extends ComponentPropsWithRef<'div'> {
 }
 
 const Grid = forwardRef<HTMLDivElement, GridProps>(
-  ({ col = 1, gap = 'none', children }, ref) => {
+  ({ col = 1, gap = 'none', children, className, ...rest }, ref) => {
     return (
       <div
         ref={ref}
-        className={twMerge('grid', gridStyleCols[col], gridStyleGaps[gap])}
+        className={twMerge(
+          'grid',
+          gridStyleCols[col],
+          gridStyleGaps[gap],
+          className,
+        )}
+        {...rest}
       >
         {children}
       </div>
