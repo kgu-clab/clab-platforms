@@ -37,27 +37,32 @@ export const END_POINT = {
   MAIN_SCHEDULE: `/v1/schedule`,
   MAIN_ACTIVITY_PHOTO: `/v1/activity-photos`,
   MEMBERSHIP_FEE: `/v1/membership-fees`,
-  UPLOADEDFILE_MEMBERSHIP_FEE: '/v1/files/membership-fee',
-  UPLOADEDFILE_PROFILES: '/v1/files/profiles',
   SHARED_ACCOUNT: `/v1/shared-accounts`,
   SHARED_ACCOUNT_STATUS: (usageId: number) =>
     `/v1/shared-accounts/usage/${usageId}`,
-  UPLOADEDFILE_ACTIVITY_ASSIGNMENT: (groupId: IDType, boardId: IDType) =>
-    `/v1/files/assignment/${groupId}/${boardId}`,
   COMMENTS: (id: IDType) => `/v1/comments/${id}`,
   HIRE: (id: IDType) => `/v1/job-postings/${id}`,
   NEWS: (id: IDType) => `/v1/news/${id}`,
-  ACTIVITY_GROUP_MEMBER_STATUS: `/v1/activity-group/member/status`,
+  // -- 파일 업로드
+  UPLOADEDFILE_ACTIVITY_ASSIGNMENT: (groupId: IDType, boardId: IDType) =>
+    `/v1/files/assignment/${groupId}/${boardId}`,
+  UPLOADEDFILE_MEMBERSHIP_FEE: '/v1/files/membership-fee',
+  UPLOADEDFILE_PROFILES: '/v1/files/profiles',
+  // -- 활동그룹 멤버
   ACTIVITY_GROUP_MEMBER: (id: IDType) => `/v1/activity-group/member/${id}`,
-  ACTIVITY_GROUP_BOARD_BY_CATEGORY: `/v1/activity-group/boards/by-category`,
+  ACTIVITY_GROUP_MEMBER_MY: `/v1/activity-group/member/my`,
+  ACTIVITY_GROUP_MEMBER_STATUS: `/v1/activity-group/member/status`,
   ACTIVITY_GROUP_MEMBER_APPLY: `/v1/activity-group/member/apply`,
-  ACTIVITY_GROUP_BOARD_BY_PARENT: `/v1/activity-group/boards/by-parent`,
   ACTIVITY_GROUP_MEMBER_MEMBERS: `/v1/activity-group/member/members`,
+  // -- 활동그룹 관리
   ACTIVITY_GROUP_ADMIN_MEMBERS: `/v1/activity-group/admin/members`,
   ACTIVITY_GROUP_ADMIN_ACCEPT: `/v1/activity-group/admin/accept`,
-  ACTIVITY_GROUP_BOARDS: `/v1/activity-group/boards`,
-  ACTIVITY_GROUP_BOARDS_MY_ASSIGNMENT: `/v1/activity-group/boards/my-assignment`,
+  // -- 활동그룹 게시판
   ACTIVITY_GROUP_BOARD: `/v1/activity-group/boards`,
+  ACTIVITY_GROUP_BOARDS: `/v1/activity-group/boards`,
+  ACTIVITY_GROUP_BOARD_BY_PARENT: `/v1/activity-group/boards/by-parent`,
+  ACTIVITY_GROUP_BOARD_BY_CATEGORY: `/v1/activity-group/boards/by-category`,
+  ACTIVITY_GROUP_BOARDS_MY_ASSIGNMENT: `/v1/activity-group/boards/my-assignment`,
 } as const;
 
 export const HTTP_STATUS_CODE = {

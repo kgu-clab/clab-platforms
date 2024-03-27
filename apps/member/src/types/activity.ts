@@ -97,3 +97,12 @@ export interface ActivityGroupBoardParserType extends ActivityGroupDetailType {
   activities: Array<ActivityBoardType>;
   assignments: Array<ActivityBoardType>;
 }
+
+export interface ActivityGroupMemberMyType {
+  id: number;
+  category: ActivityGroupCategoryType;
+  imageUrl: string;
+  name: string;
+  subject: string;
+  createdAt: string;
+}
