@@ -2,8 +2,7 @@ import { server } from './server';
 import { END_POINT } from '@constants/api';
 import { postUploadedFileProfileImage } from './uploadedFile';
 import type { BaseResponse } from '@type/api';
-import type { ProfileData } from '@type/profile';
-import type { MemberProfileRequestType } from '@type/member';
+import type { MemberProfileRequestType, MemberProfileType } from '@type/member';
 
 interface PatchUserInfoArgs {
   id: string;
@@ -14,7 +13,7 @@ interface PatchUserInfoArgs {
  * 내 프로필 조회
  */
 export const getMyProfile = async () => {
-  const { data } = await server.get<BaseResponse<ProfileData>>({
+  const { data } = await server.get<BaseResponse<MemberProfileType>>({
     url: END_POINT.MY_PROFILE,
   });
 

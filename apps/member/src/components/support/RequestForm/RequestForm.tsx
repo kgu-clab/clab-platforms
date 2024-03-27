@@ -3,7 +3,6 @@ import { ChangeEvent, useCallback, useRef, useState } from 'react';
 import { Input } from '@clab/design-system';
 import Section from '@components/common/Section/Section';
 import { useMembershipFeeMutation } from '@hooks/queries/useMembershipFeeMutation';
-import { MembershipFeeType } from '@type/membershipFee';
 import Select from '@components/common/Select/Select';
 import { SELECT_OPTIONS } from '@constants/select';
 import { formatComma } from '@utils/math';
@@ -17,7 +16,7 @@ const RequestForm = () => {
   const { membershipFeeMutate } = useMembershipFeeMutation();
 
   const imageUploader = useRef<HTMLInputElement>(null);
-  const [input, setInput] = useState<MembershipFeeType>({
+  const [input, setInput] = useState({
     category: DEFAULT.SELECT,
     amount: 0,
     content: '',

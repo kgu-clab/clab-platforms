@@ -1,3 +1,20 @@
+/**
+ * 멤버 프로필 정보
+ */
+export interface MemberProfileType {
+  id: string;
+  name: string;
+  interests: string;
+  contact: string;
+  email: string;
+  address: string;
+  githubUrl: string;
+  imageUrl: string | null;
+  roleLevel: number;
+  createdAt: string;
+  password?: string;
+}
+
 export interface MemberType {
   id: string;
   password?: string;
@@ -26,5 +43,5 @@ export interface MemberProfileRequestType {
   interests?: string;
   githubUrl?: string;
   studentStatus?: string;
-  imageUrl?: string;
+  imageUrl?: string | null;
 }

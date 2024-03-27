@@ -1,19 +1,21 @@
 import Image from '@components/common/Image/Image';
-import type { ProfileData } from '@type/profile';
 import { createImageUrl } from '@utils/api';
 import { getProfileRingStyle } from '@utils/style';
 import classNames from 'classnames';
 import { useCallback, useEffect, useState } from 'react';
 import { Input } from '@clab/design-system';
+import type { MemberProfileType } from '@type/member';
 
 interface MyProfileImageProps {
-  data: ProfileData;
+  data: MemberProfileType;
   isEdit: boolean;
-  onChange: React.Dispatch<React.SetStateAction<ProfileData>>;
+  onChange: React.Dispatch<React.SetStateAction<MemberProfileType>>;
 }
 
 const MyProfileImage = ({ isEdit, data, onChange }: MyProfileImageProps) => {
-  const [profileImage, setProfileImage] = useState<string>(data.imageUrl);
+  const [profileImage, setProfileImage] = useState<string | null>(
+    data.imageUrl,
+  );
 
   const handleProfileImageChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {

@@ -2,7 +2,6 @@ import { ChangeEvent, useCallback, useState } from 'react';
 import Section from '@components/common/Section/Section';
 import { Input, Button, Grid } from '@clab/design-system';
 import { useUserInfoMutation } from '@hooks/queries';
-import { ProfileData } from '@type/profile';
 import { FORM_DATA_KEY } from '@constants/api';
 import Select from '@components/common/Select/Select';
 import { SELECT_OPTIONS } from '@constants/select';
@@ -11,9 +10,10 @@ import { isObjectsEqual } from '@utils/common';
 import ChangePasswordModal from '../ChangePasswordModal/ChangePasswordModal';
 import useModal from '@hooks/common/useModal';
 import MyProfileImage from '../MyProfileImage/MyProfileImage';
+import type { MemberProfileType } from '@type/member';
 
 interface MyProfileSectionProps {
-  data: ProfileData;
+  data: MemberProfileType;
 }
 
 const MyProfileSection = ({ data }: MyProfileSectionProps) => {
@@ -21,7 +21,7 @@ const MyProfileSection = ({ data }: MyProfileSectionProps) => {
   const { userInfoMutate } = useUserInfoMutation();
 
   const [isEdit, setIsEdit] = useState<boolean>(false);
-  const [inputs, setInputs] = useState<ProfileData>(data);
+  const [inputs, setInputs] = useState<MemberProfileType>(data);
 
   const handleIsEditClick = () => {
     setIsEdit((prev) => {
