@@ -44,5 +44,5 @@ export const PATH_FINDER = {
   ACTIVITY_CONFIG: (id: IDType) => createPath(PATH.ACTIVITY, id, 'config'),
   ACTIVITY_ASSIGNMENT: (groupId: IDType, id: IDType) =>
     createPath(PATH.ACTIVITY, groupId, id),
-  BOOK_DETAIL: (id: string) => createPath(PATH.LIBRARY, id),
+  BOOK_DETAIL: (id: number) => createPath(PATH.LIBRARY, id),
 } as const;

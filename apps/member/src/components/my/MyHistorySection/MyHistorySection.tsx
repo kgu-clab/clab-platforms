@@ -1,17 +1,20 @@
+import { useCallback } from 'react';
 import ListButton from '@components/common/ListButton/ListButton';
 import Section from '@components/common/Section/Section';
 import { toYYMMDD } from '@utils/date';
-import type { BoardItem } from '@type/board';
-import type { NotificationItem } from '@type/notification';
 import { CommentItem } from '@type/comment';
 import { PATH_FINDER } from '@constants/path';
 import { titleToCategory } from '@utils/community';
 import useModal from '@hooks/common/useModal';
-import { useCallback } from 'react';
-
+import type { BookLoanRecordConditionType } from '@type/book';
+import type { BoardItem } from '@type/board';
+import type { NotificationItem } from '@type/notification';
+import { Badge } from '@clab/design-system';
 interface MyHistorySectionProps {
   title: string;
-  data: Array<NotificationItem | BoardItem | CommentItem>;
+  data: Array<
+    NotificationItem | BoardItem | CommentItem | BookLoanRecordConditionType
+  >;
 }
 
 const MyHistorySection = ({ title, data }: MyHistorySectionProps) => {
@@ -32,8 +35,10 @@ const MyHistorySection = ({ title, data }: MyHistorySectionProps) => {
       <Section.Header title={title} />
       <Section.Body className="text-sm">
         {data.map((item) => {
+          /**
+           * 나의 댓글
+           */
           if ('boardId' in item) {
-            //  CommentItem
             const { id, boardId, boardCategory, content, createdAt } =
               item as CommentItem;
             return (
@@ -48,8 +53,31 @@ const MyHistorySection = ({ title, data }: MyHistorySectionProps) => {
                 <p className="text-clab-main-light">{toYYMMDD(createdAt)}</p>
               </ListButton>
             );
-          } else if ('content' in item) {
-            // NotificationItem
+          }
+          /**
+           * 도서 대출 내역
+           */
+          if ('bookId' in item) {
+            const { bookId, bookTitle, borrowedAt, returnedAt } =
+              item as BookLoanRecordConditionType;
+            return (
+              <ListButton key={bookId} to={PATH_FINDER.BOOK_DETAIL(bookId)}>
+                <p className="pr-4 space-x-2 truncate grow">
+                  <Badge color={returnedAt ? 'green' : 'yellow'}>
+                    {returnedAt ? '반납완료' : '대출중'}
+                  </Badge>
+                  <span>{bookTitle}</span>
+                </p>
+                <p className="text-clab-main-light">
+                  {toYYMMDD(borrowedAt || '')}
+                </p>
+              </ListButton>
+            );
+          }
+          /**
+           * 지난 알림
+           */
+          if ('content' in item) {
             const { id, content, createdAt } = item as CommentItem;
             return (
               <ListButton key={id} onClick={() => handleAlarmClick(content)}>
@@ -57,8 +85,11 @@ const MyHistorySection = ({ title, data }: MyHistorySectionProps) => {
                 <p className="text-clab-main-light">{toYYMMDD(createdAt)}</p>
               </ListButton>
             );
-          } else if ('title' in item) {
-            // BoardItem
+          }
+          /**
+           * 나의 게시글
+           */
+          if ('title' in item) {
             const { id, category, title, createdAt } = item as BoardItem;
             return (
               <ListButton

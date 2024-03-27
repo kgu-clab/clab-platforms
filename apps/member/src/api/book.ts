@@ -1,7 +1,11 @@
 import { server } from './server';
 import { createCommonPagination } from '@utils/api';
 import { END_POINT } from '@constants/api';
-import type { BookItem, BookLoanRecordItem } from '@type/book';
+import type {
+  BookItem,
+  BookLoanRecordConditionType,
+  BookLoanRecordItem,
+} from '@type/book';
 import type { BaseResponse, PaginationType } from '@type/api';
 
 interface PostBorrowBookArgs extends BookLoanRecordItem {
@@ -89,7 +93,9 @@ export const getBookLoanByMemberId = async (
   size = 20,
 ) => {
   const params = { borrowerId, page, size };
-  const { data } = await server.get<PaginationType<BookLoanRecordItem>>({
+  const { data } = await server.get<
+    PaginationType<BookLoanRecordConditionType>
+  >({
     url: createCommonPagination(END_POINT.BOOK_LOAN_CONDITIONS, params),
   });
 
