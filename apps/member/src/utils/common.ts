@@ -9,12 +9,12 @@ export function isObjectsEqual(obj1: object, obj2: object): boolean {
   // 두 객체의 참조가 같으면 빠르게 true를 반환합니다.
   if (obj1 === obj2) return true;
 
-  const obj1_sort = Object.keys(obj1)
-    .sort()
-    .reduce((obj, key) => ((obj[key] = obj1[key]), obj), {});
-  const obj2_sort = Object.keys(obj2)
-    .sort()
-    .reduce((obj, key) => ((obj[key] = obj2[key]), obj), {});
+  const sortedObj1: { [key: string]: unknown } = Object.fromEntries(
+    Object.entries(obj1).sort(),
+  );
+  const sortedObj2: { [key: string]: unknown } = Object.fromEntries(
+    Object.entries(obj2).sort(),
+  );
 
-  return JSON.stringify(obj1_sort) === JSON.stringify(obj2_sort);
+  return JSON.stringify(sortedObj1) === JSON.stringify(sortedObj2);
 }
