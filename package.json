@@ -16,7 +16,8 @@
     "build:auth": "yarn workspace auth build",
     "build:land": "yarn workspace land build",
     "build:member": "yarn workspace member build",
-    "build:design-system": "yarn workspace @clab/design-system build"
+    "build:design-system": "yarn workspace @clab/design-system build",
+    "test:member": "yarn workspace member tsc"
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": [
