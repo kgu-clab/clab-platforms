@@ -101,7 +101,8 @@ export function isBase64(url: string): boolean {
  * @param {string} imageUrl - 변환할 이미지 URL입니다.
  * @returns {string} - 조건에 따라 변환된 최종 이미지 URL입니다.
  */
-export function createImageUrl(imageUrl: string): string {
+export function createImageUrl(imageUrl: string | null): string {
+  if (!imageUrl) return '';
   if (isBase64(imageUrl)) return imageUrl;
   return imageUrl.startsWith('http')
     ? imageUrl
