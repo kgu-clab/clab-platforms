@@ -17,8 +17,8 @@ const Calendar = ({ date }: CalendarProps) => {
   const toDaysInMonth = date.daysInMonth();
 
   const { data } = useSchedule({
-    start: date.startOf('month').format(DATE_FORMAT.WITH_TIME),
-    end: date.endOf('month').format(DATE_FORMAT.WITH_TIME),
+    startDate: date.startOf('month').format(DATE_FORMAT.WITH_TIME),
+    endDate: date.endOf('month').format(DATE_FORMAT.WITH_TIME),
   });
 
   const events = transformEvents(data.items);
