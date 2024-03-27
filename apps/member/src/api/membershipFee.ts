@@ -10,6 +10,9 @@ import type {
 } from '@type/api';
 import type { MembershipFeeType } from '@type/membershipFee';
 
+interface MembershipFeeRequestType
+  extends Omit<MembershipFeeType, 'createdAt'> {}
+
 interface GetMembershipFeeParamsType extends PaginationPramsType {
   memberId?: string;
   memberName?: string;
@@ -17,7 +20,7 @@ interface GetMembershipFeeParamsType extends PaginationPramsType {
 }
 
 interface PostMembershipFeePramsType extends ArgsWithFiles {
-  body: MembershipFeeType;
+  body: MembershipFeeRequestType;
 }
 /**
  * 회비 정보 조회
@@ -51,7 +54,10 @@ export const postMembershipFee = async ({
     body['imageUrl'] = data[0].fileUrl;
   }
 
-  const { data } = await server.post<MembershipFeeType, BaseResponse<number>>({
+  const { data } = await server.post<
+    MembershipFeeRequestType,
+    BaseResponse<number>
+  >({
     url: END_POINT.MEMBERSHIP_FEE,
     body: body,
   });
