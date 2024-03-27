@@ -103,7 +103,7 @@ export function isBase64(url: string): boolean {
  */
 export function createImageUrl(imageUrl: string): string {
   if (isBase64(imageUrl)) return imageUrl;
-  return imageUrl.startsWith(SERVER_BASE_URL)
+  return imageUrl.startsWith('http')
     ? imageUrl
     : createPath(SERVER_BASE_URL, imageUrl);
 }
