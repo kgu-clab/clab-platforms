@@ -1,4 +1,4 @@
-import NewsCard from '@components/common/NewsCard/NewsCard';
+import Card from '@components/common/Card/Card';
 import Section from '@components/common/Section/Section';
 import { PATH_FINDER } from '@constants/path';
 import type { ActivityGroupMemberMyType } from '@type/activity';
@@ -13,10 +13,10 @@ const MyActivityGroupSection = ({ data }: MyActivityGroupSectionProps) => {
       <Section.Header title="나의 활동" />
       <Section.Body className="flex gap-2 overflow-scroll scrollbar-hide">
         {data.map((activityGroup) => (
-          <NewsCard
+          <Card
             key={activityGroup.id}
             to={PATH_FINDER.ACTIVITY_DETAIL(activityGroup.id)}
-            imageUrl={activityGroup.imageUrl}
+            image={activityGroup.imageUrl}
             title={activityGroup.name}
             description={activityGroup.subject}
           />
