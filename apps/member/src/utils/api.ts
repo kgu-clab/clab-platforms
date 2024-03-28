@@ -81,7 +81,7 @@ export function removeTokens() {
  * @param {string | null} token - 사용할 토큰입니다. 토큰이 없다면 null을 전달합니다.
  * @returns {Record<string, string>} - Authorization 헤더를 포함한 객체입니다.
  */
-export function authorization(token: string | null) {
+export function authorization(token: string | null): Record<string, string> {
   return {
     Authorization: `Bearer ${token}`,
   };
@@ -101,7 +101,7 @@ export function isBase64(url: string): boolean {
  * @param {string} imageUrl - 변환할 이미지 URL입니다.
  * @returns {string} - 조건에 따라 변환된 최종 이미지 URL입니다.
  */
-export function createImageUrl(imageUrl: string | null): string {
+export function createImageUrl(imageUrl: string | null | undefined): string {
   if (!imageUrl) return '';
   if (isBase64(imageUrl)) return imageUrl;
   return imageUrl.startsWith('http')
