@@ -11,7 +11,7 @@ import Label from '@components/common/Label/Label';
 import { DEFAULT } from '@constants/default';
 import { FORM_DATA_KEY } from '@constants/api';
 
-const RequestForm = () => {
+const SupportRequestForm = () => {
   const toast = useToast();
   const { membershipFeeMutate } = useMembershipFeeMutation();
 
@@ -24,22 +24,18 @@ const RequestForm = () => {
 
   const { category, amount, content } = input;
 
-  const handleInputChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
-    setInput((prev) => ({
-      ...prev,
-      [e.target.name]:
-        e.target.name === 'amount'
-          ? parseFloat(e.target.value.replace(/,/g, ''))
-          : e.target.value,
-    }));
-  }, []);
-
-  const handleInputSelect = useCallback((e: ChangeEvent<HTMLSelectElement>) => {
-    setInput((prev) => ({
-      ...prev,
-      [e.target.name]: e.target.value,
-    }));
-  }, []);
+  const handleInputChange = useCallback(
+    (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+      setInput((prev) => ({
+        ...prev,
+        [e.target.name]:
+          e.target.name === 'amount'
+            ? parseFloat(e.target.value.replace(/,/g, ''))
+            : e.target.value,
+      }));
+    },
+    [],
+  );
 
   const onClickRequest = async () => {
     if (
@@ -66,7 +62,7 @@ const RequestForm = () => {
 
   return (
     <Section>
-      <Section.Header title="신청서" />
+      <Section.Header title="회비 요청" />
       <Section.Body className="grid gap-2 mt-4 md:grid-cols-2">
         <div className="flex flex-col">
           <Label className="mb-1 ml-1 text-xs">분류</Label>
@@ -75,7 +71,7 @@ const RequestForm = () => {
             name="category"
             options={SELECT_OPTIONS.SUPPORT_FORM}
             value={category}
-            onChange={handleInputSelect}
+            onChange={handleInputChange}
           />
         </div>
         <Input
@@ -103,7 +99,7 @@ const RequestForm = () => {
           type="file"
           label="증빙 자료"
           ref={imageUploader}
-          className="border-none"
+          className="col-span-2 border-none"
         />
       </Section.Body>
       <Button className="w-full mt-6" onClick={onClickRequest}>
@@ -113,4 +109,4 @@ const RequestForm = () => {
   );
 };
 
-export default RequestForm;
+export default SupportRequestForm;

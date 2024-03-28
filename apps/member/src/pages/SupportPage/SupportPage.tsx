@@ -3,34 +3,34 @@ import Content from '@components/common/Content/Content';
 import Header from '@components/common/Header/Header';
 import Linker from '@components/common/Linker/Linker';
 import Section from '@components/common/Section/Section';
-
-import RequestForm from '@components/support/RequestForm/RequestForm';
+import SupportRequestForm from '@components/support/SupportRequestForm/SupportRequestForm';
+import SupportHistorySection from '@components/support/SupportHistorySection/SupportHistorySection';
 import { PATH } from '@constants/path';
 
 const stepContents = [
   {
     id: 1,
-    image: <SupportIcons.check />,
+    image: <SupportIcons.Check />,
     description: '회비 사용과 관련된 정보를 기입하여 제출해주세요.',
   },
   {
     id: 2,
-    image: <SupportIcons.next />,
+    image: <SupportIcons.Next />,
     description: '',
   },
   {
     id: 3,
-    image: <SupportIcons.checking />,
+    image: <SupportIcons.Checking />,
     description: '운영진이 신청서를 검토해요.',
   },
   {
     id: 4,
-    image: <SupportIcons.next />,
+    image: <SupportIcons.Next />,
     description: '',
   },
   {
     id: 5,
-    image: <SupportIcons.document />,
+    image: <SupportIcons.Document />,
     description: '승인 또는 거절의 결과를 안내해요.',
   },
 ];
@@ -40,7 +40,7 @@ const SupportPage = () => {
     <Content>
       <Header title="회비" />
       <Section>
-        <Section.Header title="회비 신청 절차"></Section.Header>
+        <Section.Header title="회비 신청 절차" />
         <Section.Body className="grid grid-cols-5 text-center">
           {stepContents.map(({ id, image, description }) => (
             <div
@@ -69,7 +69,8 @@ const SupportPage = () => {
           </div>
         </div>
       </Section>
-      <RequestForm />
+      <SupportRequestForm />
+      <SupportHistorySection />
     </Content>
   );
 };
