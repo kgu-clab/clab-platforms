@@ -1,4 +1,3 @@
-import { DEFAULT } from '@constants/default';
 import classNames from 'classnames';
 import { ComponentPropsWithRef } from 'react';
 
@@ -20,7 +19,7 @@ const Select = ({
   ...rest
 }: SelectProps) => {
   return (
-    <div className={classNames('flex flex-col', className)}>
+    <div className={classNames('flex flex-col h-full', className)}>
       {label && (
         <label htmlFor={id} className="mb-1 ml-1 text-xs">
           {label}
@@ -28,10 +27,10 @@ const Select = ({
       )}
       <select
         id={id}
-        className="w-full h-full p-2 border rounded-md disabled:bg-gray-50"
+        className="w-full p-2 border rounded-md grow disabled:bg-gray-50"
         {...rest}
       >
-        <option disabled value={DEFAULT.SELECT}>
+        <option disabled value={'none'}>
           미선택
         </option>
         {options.map(({ name, value }) => (
