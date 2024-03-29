@@ -1,13 +1,11 @@
-import Image from '@components/common/Image/Image';
 import ListButton from '@components/common/ListButton/ListButton';
 import Section from '@components/common/Section/Section';
 import useModal from '@hooks/common/useModal';
-import { createImageUrl } from '@utils/api';
 import { toYYMMDD } from '@utils/date';
-import { formatWon } from '@utils/string';
 import MembershipCategoryBadge from '@components/membership/MembershipCategoryBadge/MembershipCategoryBadge';
 import MembershipStatusBadge from '@components/membership/MembershipStatusBadge/MembershipStatusBadge';
 import type { MembershipFeeType } from '@type/membershipFee';
+import MembershipInfoModal from '@components/membership/MembershipInfoModal/MembershipInfoModal';
 
 interface MyMembershipFeeProps {
   data: Array<MembershipFeeType>;
@@ -21,28 +19,9 @@ const MyMembershipHistorySection = ({ data }: MyMembershipFeeProps) => {
    * 버튼 클릭 시 모달을 열어서 회비 신청 내역을 보여줍니다.
    */
   const handleButtonClick = (membership: MembershipFeeType) => {
-    const { imageUrl, category, status, content, amount, createdAt } =
-      membership;
     openModal({
       title: TITLE,
-      content: (
-        <div className="space-y-2">
-          <Image
-            src={createImageUrl(imageUrl)}
-            className="border rounded-lg"
-            alt="증빙자료"
-          />
-          <ul className="space-y-2 text-black">
-            <li className="space-x-2">
-              <MembershipCategoryBadge category={category} />
-              <MembershipStatusBadge status={status} />
-            </li>
-            <li>내용: {content}</li>
-            <li>금액: ₩{formatWon(amount)}</li>
-            <li>신청일: {toYYMMDD(createdAt)}</li>
-          </ul>
-        </div>
-      ),
+      content: <MembershipInfoModal data={membership} />,
     });
   };
 
