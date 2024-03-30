@@ -7,6 +7,7 @@ import Uploader from '@components/common/Uploader/Uploader';
 import { FcAnswers, FcMultipleDevices, FcTemplate } from 'react-icons/fc';
 import { SELECT_DEFAULT_OPTION } from '@constants/select';
 import type { SupportRequestDataType } from '@type/support';
+import Loading from '@components/common/Loading/Loading';
 
 const typeSelectOptions = [
   {
@@ -162,12 +163,16 @@ const SupportRequestForm = ({
         </ul>
         <Button
           type="submit"
-          color={checkSubmitValidation ? 'green' : 'red'}
+          color={checkSubmitValidation ? 'white' : 'red'}
           className="w-full"
         >
-          {checkSubmitValidation
-            ? '모든 준비가 끝났어요, 신청하기'
-            : '모든 항목이 입력되어야 해요'}
+          {isPending ? (
+            <Loading className="mx-auto" />
+          ) : checkSubmitValidation ? (
+            '모든 준비가 끝났어요, 신청하기'
+          ) : (
+            '모든 항목이 입력되어야 해요'
+          )}
         </Button>
       </div>
     </form>

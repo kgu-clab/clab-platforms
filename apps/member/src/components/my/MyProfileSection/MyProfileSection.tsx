@@ -10,6 +10,7 @@ import { isObjectsEqual } from '@utils/common';
 import ChangePasswordModal from '../ChangePasswordModal/ChangePasswordModal';
 import useModal from '@hooks/common/useModal';
 import MyProfileImage from '../MyProfileImage/MyProfileImage';
+import Loading from '@components/common/Loading/Loading';
 import type { MemberProfileType } from '@type/member';
 
 interface MyProfileSectionProps {
@@ -18,11 +19,14 @@ interface MyProfileSectionProps {
 
 const MyProfileSection = ({ data }: MyProfileSectionProps) => {
   const { openModal } = useModal();
-  const { userInfoMutate } = useUserInfoMutation();
+  const { userInfoMutate, isPending } = useUserInfoMutation();
 
   const [isEdit, setIsEdit] = useState<boolean>(false);
   const [inputs, setInputs] = useState<MemberProfileType>(data);
-
+  /**
+   * 수정 버튼 클릭 시
+   * - 수정모드일 경우 저장
+   */
   const handleIsEditClick = () => {
     setIsEdit((prev) => {
       const isModified = !isObjectsEqual(inputs, data);
@@ -31,16 +35,20 @@ const MyProfileSection = ({ data }: MyProfileSectionProps) => {
         const formData = new FormData();
         const file = document.getElementById('imageUrl') as HTMLInputElement;
         if (file.files?.length) formData.append(FORM_DATA_KEY, file.files[0]);
-        userInfoMutate({
-          id: data.id,
-          body: inputs,
-          multipartFile: file.files?.length ? formData : null,
-        });
+        if (!isPending) {
+          userInfoMutate({
+            id: data.id,
+            body: inputs,
+            multipartFile: file.files?.length ? formData : null,
+          });
+        }
       }
       return !prev;
     });
   };
-
+  /**
+   * 입력값이 변경될 때마다 상태를 업데이트합니다.
+   */
   const handleInputsChange = useCallback(
     (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
       const { name, value } = e.target;
@@ -48,8 +56,10 @@ const MyProfileSection = ({ data }: MyProfileSectionProps) => {
     },
     [],
   );
-
-  const onClickChangePassword = useCallback(() => {
+  /**
+   * 비밀번호 변경 모달을 엽니다.
+   */
+  const handleChangePasswordClick = useCallback(() => {
     openModal({
       title: '비밀번호 변경',
       custom: <ChangePasswordModal memberId={data.id} />,
@@ -63,7 +73,7 @@ const MyProfileSection = ({ data }: MyProfileSectionProps) => {
       <Section.Header title="나의 정보">
         <div className="flex gap-2">
           {isEdit && (
-            <Button size="sm" onClick={onClickChangePassword}>
+            <Button size="sm" onClick={handleChangePasswordClick}>
               비빌번호 변경
             </Button>
           )}
@@ -72,7 +82,7 @@ const MyProfileSection = ({ data }: MyProfileSectionProps) => {
             size="sm"
             onClick={handleIsEditClick}
           >
-            {isEdit ? '저장' : '수정'}
+            {isPending ? <Loading /> : isEdit ? '저장' : '수정'}
           </Button>
           {isEdit || <LogoutButton />}
         </div>
