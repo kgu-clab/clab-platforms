@@ -18,7 +18,9 @@ interface CellProps {
 
 const Table = ({ head, className, children }: TableProps) => {
   return (
-    <table className={classNames('table-auto', className)}>
+    <table
+      className={classNames('table-auto border-collapse w-full', className)}
+    >
       {head && (
         <thead>
           <tr className="text-center bg-gray-100">
@@ -43,7 +45,8 @@ Table.Row = ({ className, onClick, children }: PropsWithChildren<RowProps>) => {
   return (
     <tr
       className={classNames(
-        'items-center text-center hover:bg-gray-100',
+        'w-full text-center hover:bg-gray-50 transition-colors',
+        { 'cursor-pointer': onClick },
         className,
       )}
       onClick={onClick}
@@ -54,7 +57,16 @@ Table.Row = ({ className, onClick, children }: PropsWithChildren<RowProps>) => {
 };
 
 Table.Cell = ({ className, children }: PropsWithChildren<CellProps>) => {
-  return <td className={classNames('p-2', className)}>{children}</td>;
+  return (
+    <td
+      className={classNames(
+        'p-2 first:rounded-l-lg last:rounded-r-lg',
+        className,
+      )}
+    >
+      {children}
+    </td>
+  );
 };
 
 export default Table;
