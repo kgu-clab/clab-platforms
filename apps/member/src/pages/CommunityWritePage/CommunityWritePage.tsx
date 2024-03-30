@@ -6,7 +6,7 @@ import Section from '@components/common/Section/Section';
 import Select from '@components/common/Select/Select';
 import Textarea from '@components/common/Textarea/Textarea';
 import { useBoardWriteMutation } from '@hooks/queries/useBoardWriteMutation';
-import { DEFAULT } from '@constants/default';
+import { SELECT_DEFAULT_OPTION } from '@constants/select';
 
 // name이 category와 매치되어야 합니다.
 const selectOptions = [
@@ -48,7 +48,7 @@ const CommunityWritePage = () => {
           <Select
             name="category"
             options={selectOptions}
-            defaultValue={DEFAULT.SELECT}
+            defaultValue={SELECT_DEFAULT_OPTION}
             onChange={handleContent}
           />
           <Input
