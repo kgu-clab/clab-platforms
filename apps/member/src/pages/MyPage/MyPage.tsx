@@ -21,6 +21,7 @@ const MyPage = () => {
   const { data: myCommentsData } = useMyComments(0, 10);
   const { data: myMembershipFee } = useMembershipFee({
     memberId: myProfile.id,
+    size: 5,
   });
   const { data: myBookLoanRecord } = useBookLoanRecordByMemberId(myProfile.id);
   const { data: myActivityGroup } = useActivityGroupMemberMy();
