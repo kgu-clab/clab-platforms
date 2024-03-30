@@ -17,7 +17,7 @@ interface MembershipInfoModalUlProps {
 
 interface MembershipInfoModalLiProps {
   label: string;
-  content: string;
+  children: React.ReactNode;
 }
 
 const MembershipInfoModal = ({ data }: MembershipInfoModalProps) => {
@@ -34,29 +34,28 @@ const MembershipInfoModal = ({ data }: MembershipInfoModalProps) => {
 
   return (
     <div className="space-y-2">
-      <Image
-        src={createImageUrl(imageUrl)}
-        className="border rounded-lg"
-        alt="증빙자료"
-      />
-      <div className="space-x-2">
-        <MembershipCategoryBadge category={category} />
-        <MembershipStatusBadge status={status} />
+      <div className="max-h-[480px] overflow-auto border rounded-lg scrollbar-hide">
+        <Image src={createImageUrl(imageUrl)} alt="증빙자료" />
       </div>
+
+      <div className="space-x-2"></div>
       <MembershipInfoModal.Ul>
-        <MembershipInfoModal.Li
-          label="요청자"
-          content={`${memberName} (${memberId})`}
-        />
-        <MembershipInfoModal.Li label="내용" content={content} />
-        <MembershipInfoModal.Li
-          label="금액"
-          content={`₩${formatWon(amount)}`}
-        />
-        <MembershipInfoModal.Li
-          label="신청일"
-          content={formattedDate(createdAt)}
-        />
+        <MembershipInfoModal.Li label="상태">
+          <MembershipStatusBadge status={status} />
+        </MembershipInfoModal.Li>
+        <MembershipInfoModal.Li label="구분">
+          <MembershipCategoryBadge category={category} />
+        </MembershipInfoModal.Li>
+        <MembershipInfoModal.Li label="내용">{content}</MembershipInfoModal.Li>
+        <MembershipInfoModal.Li label="금액">
+          {`₩${formatWon(amount)}`}
+        </MembershipInfoModal.Li>
+        <MembershipInfoModal.Li label="요청자">
+          {`${memberName} (${memberId})`}
+        </MembershipInfoModal.Li>
+        <MembershipInfoModal.Li label="신청일">
+          {formattedDate(createdAt)}
+        </MembershipInfoModal.Li>
       </MembershipInfoModal.Ul>
     </div>
   );
@@ -71,11 +70,11 @@ MembershipInfoModal.Ul = ({ title, children }: MembershipInfoModalUlProps) => {
   );
 };
 
-MembershipInfoModal.Li = ({ label, content }: MembershipInfoModalLiProps) => {
+MembershipInfoModal.Li = ({ label, children }: MembershipInfoModalLiProps) => {
   return (
     <li className="flex items-center justify-between gap-4">
       <span>{label}</span>
-      <span className="font-semibold text-right truncate grow">{content}</span>
+      <span className="font-semibold text-right truncate grow">{children}</span>
     </li>
   );
 };
