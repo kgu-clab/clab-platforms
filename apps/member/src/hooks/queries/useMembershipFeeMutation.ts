@@ -24,5 +24,10 @@ export const useMembershipFeeMutation = () => {
     },
   });
 
-  return { membershipFeeMutate: membershipFeeMutation.mutate };
+  membershipFeeMutation.isSuccess;
+
+  return {
+    membershipFeeMutate: membershipFeeMutation.mutate,
+    isPending: membershipFeeMutation.isPending,
+  };
 };

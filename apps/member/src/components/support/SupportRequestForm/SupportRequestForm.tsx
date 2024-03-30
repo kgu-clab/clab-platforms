@@ -1,111 +1,176 @@
-import { Button } from '@clab/design-system';
-import { ChangeEvent, useCallback, useRef, useState } from 'react';
-import { Input } from '@clab/design-system';
-import Section from '@components/common/Section/Section';
-import { useMembershipFeeMutation } from '@hooks/queries/useMembershipFeeMutation';
-import Select from '@components/common/Select/Select';
-import { SELECT_OPTIONS } from '@constants/select';
+import { Button, Input, Checkbox, ButtonSelect } from '@clab/design-system';
+import { ChangeEvent, FormEvent, useCallback, useState } from 'react';
 import { formatComma } from '@utils/math';
 import useToast from '@hooks/common/useToast';
-import Label from '@components/common/Label/Label';
-import { DEFAULT } from '@constants/default';
-import { FORM_DATA_KEY } from '@constants/api';
+import Linker from '@components/common/Linker/Linker';
+import Uploader from '@components/common/Uploader/Uploader';
+import { FcAnswers, FcMultipleDevices, FcTemplate } from 'react-icons/fc';
+import { SELECT_DEFAULT_OPTION } from '@constants/select';
+import type { SupportRequestDataType } from '@type/support';
 
-const SupportRequestForm = () => {
+const typeSelectOptions = [
+  {
+    icon: <FcTemplate size={32} />,
+    value: '도서',
+  },
+  {
+    icon: <FcMultipleDevices size={32} />,
+    value: '물품',
+  },
+  {
+    icon: <FcAnswers size={32} />,
+    value: '기타',
+  },
+];
+
+interface SupportRequestFormProps {
+  isPending: boolean;
+  onSubmit: (data: SupportRequestDataType) => void;
+}
+
+const SupportRequestForm = ({
+  isPending,
+  onSubmit,
+}: SupportRequestFormProps) => {
   const toast = useToast();
-  const { membershipFeeMutate } = useMembershipFeeMutation();
-
-  const imageUploader = useRef<HTMLInputElement>(null);
-  const [input, setInput] = useState({
-    category: DEFAULT.SELECT,
+  const [checkList, setCheckList] = useState<boolean[]>([false, false, false]);
+  const [formData, setFormData] = useState<SupportRequestDataType>({
+    category: typeSelectOptions[0].value,
     amount: 0,
     content: '',
+    file: null,
   });
 
-  const { category, amount, content } = input;
+  const { category, amount, content, file } = formData;
 
-  const handleInputChange = useCallback(
-    (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-      setInput((prev) => ({
-        ...prev,
-        [e.target.name]:
-          e.target.name === 'amount'
-            ? parseFloat(e.target.value.replace(/,/g, ''))
-            : e.target.value,
-      }));
-    },
-    [],
-  );
-
-  const onClickRequest = async () => {
-    if (
-      category === 'none' ||
-      !amount ||
-      !content ||
-      !imageUploader.current?.files?.length
-    ) {
-      return toast({
-        state: 'error',
-        message: '신청서 항목을 모두 작성해주세요.',
-      });
+  const checkSubmitValidation =
+    !checkList.includes(false) && // 체크박스가 모두 체크되어 있을 경우
+    category !== SELECT_DEFAULT_OPTION && // 분류가 기본값이 아닐 경우
+    amount > 0 && // 금액이 0보다 클 경우
+    content.length !== 0 && // 사유가 작성되어 있을 경우
+    file; // 파일이 첨부되어 있을 경우
+  /**
+   * 입력값이 변경될 때마다 상태를 업데이트합니다.
+   */
+  const handleInputChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: name === 'amount' ? parseFloat(value.replace(/,/g, '')) : value,
+    }));
+  }, []);
+  /**
+   * 분류 선택값이 변경될 때마다 상태를 업데이트합니다.
+   */
+  const handleSelectChange = useCallback((value: string) => {
+    setFormData((prev) => ({
+      ...prev,
+      category: value,
+    }));
+  }, []);
+  /**
+   * 파일이 첨부될 때마다 상태를 업데이트합니다.
+   */
+  const handleFileAccepted = useCallback((file: File | null) => {
+    setFormData((prev) => ({
+      ...prev,
+      file,
+    }));
+  }, []);
+  /**
+   * 체크박스가 변경될 때마다 상태를 업데이트합니다.
+   */
+  const handleCheckboxChange = (index: number) => {
+    setCheckList((prev) => {
+      const next = [...prev];
+      next[index] = !prev[index];
+      return next;
+    });
+  };
+  /**
+   * 폼을 제출할 때 실행되는 이벤트입니다.
+   */
+  const handleOnSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (isPending) {
+      return;
     }
 
-    const formData = new FormData();
-    const files = imageUploader.current?.files[0];
-    formData.append(FORM_DATA_KEY, files, encodeURIComponent(files.name));
-
-    membershipFeeMutate({
-      body: input,
-      multipartFile: imageUploader.current?.files?.length ? formData : null,
-    });
+    if (!checkSubmitValidation) {
+      return toast({
+        state: 'error',
+        message: '모든 항목을 입력해주세요',
+      });
+    }
+    onSubmit(formData);
   };
 
   return (
-    <Section>
-      <Section.Header title="회비 요청" />
-      <Section.Body className="grid gap-2 mt-4 md:grid-cols-2">
-        <div className="flex flex-col">
-          <Label className="mb-1 ml-1 text-xs">분류</Label>
-          <Select
-            className="w-full"
-            name="category"
-            options={SELECT_OPTIONS.SUPPORT_FORM}
-            value={category}
-            onChange={handleInputChange}
-          />
-        </div>
+    <form onSubmit={handleOnSubmit} className="space-y-4">
+      <ButtonSelect options={typeSelectOptions} onChange={handleSelectChange} />
+      <div className="space-y-2">
         <Input
           id="amount"
           name="amount"
           label="금액"
           inputMode="numeric"
-          placeholder="구매 금액을 작성해주세요"
+          placeholder="최종 구매 금액을 작성해주세요."
           value={formatComma(amount)}
           onChange={handleInputChange}
         />
-        <div className="col-span-2">
-          <Input
-            id="content"
-            name="content"
-            label="사유"
-            placeholder="요청 사유를 상세하게 작성해주세요"
-            value={content}
-            onChange={handleInputChange}
-          />
-        </div>
         <Input
-          id="membershipFormUploader"
-          name="membershipFormUploader"
-          type="file"
-          label="증빙 자료"
-          ref={imageUploader}
-          className="col-span-2 border-none"
+          id="content"
+          name="content"
+          label="사유"
+          placeholder="구매 사유를 상세히 작성해주세요. 승인에 큰 영향을 미쳐요."
+          value={content}
+          onChange={handleInputChange}
         />
-      </Section.Body>
-      <Button className="w-full mt-6" onClick={onClickRequest}>
-        요청하기
-      </Button>
-    </Section>
+        <Uploader
+          label="증빙 자료"
+          accept="image/*"
+          onFileAccepted={handleFileAccepted}
+        />
+        <ul className="text-sm leading-loose">
+          <li>
+            <Checkbox
+              checked={checkList[0]}
+              onChange={() => handleCheckboxChange(0)}
+              label="해당 요청은 동아리 활동에 필요한 것이며, 동아리 활동과 관련이 없는
+              요청은 거절될 수 있어요."
+            />
+          </li>
+          <li>
+            <Checkbox
+              checked={checkList[1]}
+              onChange={() => handleCheckboxChange(1)}
+              label="회비 요청은 동아리 활동에 필요한지 여부에 대하여 운영진 회의후에
+              승인돼요."
+            />
+          </li>
+          <li>
+            <Checkbox
+              checked={checkList[2]}
+              onChange={() => handleCheckboxChange(2)}
+              label="회비를 통해 구매한 물품은 동아리의 소유가 되며, 모든 부원에게 공유
+              될 수 있어요."
+            />
+          </li>
+          <li>
+            <Linker to="">동아리규칙 알아보기</Linker>
+          </li>
+        </ul>
+        <Button
+          type="submit"
+          color={checkSubmitValidation ? 'green' : 'red'}
+          className="w-full"
+        >
+          {checkSubmitValidation
+            ? '모든 준비가 끝났어요, 신청하기'
+            : '모든 항목이 입력되어야 해요'}
+        </Button>
+      </div>
+    </form>
   );
 };
 
