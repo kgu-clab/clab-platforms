@@ -1,13 +1,12 @@
 import { ChangeEvent, useState } from 'react';
-import { Button } from '@clab/design-system';
+import { Button, Input } from '@clab/design-system';
 import Content from '@components/common/Content/Content';
 import Header from '@components/common/Header/Header';
-import Input from '@components/common/Input/Input';
 import Section from '@components/common/Section/Section';
 import Select from '@components/common/Select/Select';
 import Textarea from '@components/common/Textarea/Textarea';
 import { useBoardWriteMutation } from '@hooks/queries/useBoardWriteMutation';
-import { DEFAULT } from '@constants/default';
+import { SELECT_DEFAULT_OPTION } from '@constants/select';
 
 // name이 category와 매치되어야 합니다.
 const selectOptions = [
@@ -49,15 +48,16 @@ const CommunityWritePage = () => {
           <Select
             name="category"
             options={selectOptions}
-            defaultValue={DEFAULT.SELECT}
+            defaultValue={SELECT_DEFAULT_OPTION}
             onChange={handleContent}
           />
           <Input
-            className="grow"
+            id="title"
             name="title"
             type="text"
             placeholder="제목을 입력해주세요"
             maxLength={60}
+            className="grow"
             value={content.title}
             onChange={handleContent}
           />
@@ -70,8 +70,9 @@ const CommunityWritePage = () => {
           value={content.content}
           onChange={handleContent}
         />
-        <div>
+        <div className="flex items-center">
           <Input
+            id="wantAnonymous"
             name="wantAnonymous"
             type="checkbox"
             value={String(content.wantAnonymous)}

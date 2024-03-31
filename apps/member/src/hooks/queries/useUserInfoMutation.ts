@@ -22,5 +22,8 @@ export const useUserInfoMutation = () => {
     },
   });
 
-  return { userInfoMutate: userInfoMutation.mutate };
+  return {
+    userInfoMutate: userInfoMutation.mutate,
+    isPending: userInfoMutation.isPending,
+  };
 };

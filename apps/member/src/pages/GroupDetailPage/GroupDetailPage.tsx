@@ -1,4 +1,4 @@
-import { Button } from '@clab/design-system';
+import { Button, Table } from '@clab/design-system';
 import Content from '@components/common/Content/Content';
 import Header from '@components/common/Header/Header';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -7,7 +7,6 @@ import { GROUP_MESSAGE } from '@constants/message';
 import ActivityNoticeSection from '@components/group/ActivityNoticeSection/ActivityNoticeSection';
 import { useActivityGroup } from '@hooks/queries/useActivityGroup';
 import useModal from '@hooks/common/useModal';
-import Table from '@components/common/Table/Table';
 import { TABLE_HEAD } from '@constants/head';
 import { useMyProfile } from '@hooks/queries';
 import { PATH_FINDER } from '@constants/path';

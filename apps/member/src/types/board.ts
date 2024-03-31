@@ -1,6 +1,9 @@
+import type { CommunityCategoryKorType } from './community';
+
 export interface BoardItem {
   id: number;
-  memberName: string;
+  category: CommunityCategoryKorType;
   title: string;
+  writer: string;
   createdAt: string;
 }

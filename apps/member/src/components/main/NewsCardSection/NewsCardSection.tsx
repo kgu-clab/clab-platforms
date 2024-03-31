@@ -1,9 +1,9 @@
-import NewsCard from '@components/common/NewsCard/NewsCard';
+import Card from '@components/common/Card/Card';
 import Section from '@components/common/Section/Section';
 import { COMMUNITY_MESSAGE } from '@constants/message';
 import { PATH } from '@constants/path';
-import { BlogPostItem } from '@type/blog';
-import { CommunityPostItem } from '@type/community';
+import type { BlogPostItem } from '@type/blog';
+import type { CommunityPostItem } from '@type/community';
 
 interface NewsCardSectionProps {
   to: string;
@@ -24,7 +24,7 @@ const NewsCardSection = ({ to, title, data = [] }: NewsCardSectionProps) => {
           </p>
         ) : (
           data.map((news, index) => (
-            <NewsCard key={index} to={post_path} {...news} />
+            <Card key={index} to={post_path} {...news} />
           ))
         )}
       </Section.Body>

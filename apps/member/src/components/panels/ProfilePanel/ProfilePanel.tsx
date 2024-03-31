@@ -1,6 +1,6 @@
 import Image from '@components/common/Image/Image';
 import Panel from '@components/common/Panel/Panel';
-import { ProfileData } from '@type/profile';
+import type { MemberProfileType } from '@type/member';
 import { createImageUrl } from '@utils/api';
 import { calculateDDay } from '@utils/date';
 import { getRandomInt } from '@utils/math';
@@ -17,7 +17,7 @@ const tips = [
 ];
 
 interface ProfilePanelProps {
-  data: ProfileData;
+  data: MemberProfileType;
 }
 
 const ProfilePanel = ({ data }: ProfilePanelProps) => {

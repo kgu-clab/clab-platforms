@@ -16,6 +16,11 @@ interface Pagination<T = unknown> {
 export interface PaginationType<T = unknown>
   extends BaseResponse<Pagination<T>> {}
 
+export interface PaginationPramsType {
+  page?: number;
+  size?: number;
+}
+
 export type IDType = string | number;
 
 export interface TokenType {

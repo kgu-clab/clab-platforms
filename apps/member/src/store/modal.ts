@@ -11,6 +11,7 @@ interface ModalState {
   isOpen: boolean;
   title: string;
   content: React.ReactNode;
+  custom: React.ReactNode;
   accept?: {
     text: string;
     onClick: () => void;
@@ -28,6 +29,7 @@ export const modalState = atom<ModalState>({
     isOpen: false,
     title: '',
     content: null,
+    custom: null,
   },
 });
 

@@ -8,7 +8,7 @@ const preventScroll = (e: WheelEvent | TouchEvent) => {
 };
 
 const ModalContainer = () => {
-  const { isOpen, title, content, accept, cancel } = useGetModalStore();
+  const { isOpen, title, content, custom, accept, cancel } = useGetModalStore();
   const { closeModal } = useModal();
 
   const handleKeyDown = useCallback(
@@ -46,23 +46,25 @@ const ModalContainer = () => {
 
   return (
     <div id="modal-container">
-      {isOpen && (
-        <Modal>
-          <Modal.Body title={title}>{content}</Modal.Body>
-          <Modal.Footer>
-            {accept && (
-              <Modal.Button color="orange" onClick={onClickAccept}>
-                {accept.text}
-              </Modal.Button>
-            )}
-            {cancel && (
-              <Modal.Button color="gray" onClick={onClickCancel}>
-                {cancel.text}
-              </Modal.Button>
-            )}
-          </Modal.Footer>
-        </Modal>
-      )}
+      {isOpen &&
+        (custom || (
+          <Modal>
+            <Modal.Header>{title}</Modal.Header>
+            <Modal.Body>{content}</Modal.Body>
+            <Modal.Footer>
+              {accept && (
+                <Modal.Button color="orange" onClick={onClickAccept}>
+                  {accept.text}
+                </Modal.Button>
+              )}
+              {cancel && (
+                <Modal.Button color="gray" onClick={onClickCancel}>
+                  {cancel.text}
+                </Modal.Button>
+              )}
+            </Modal.Footer>
+          </Modal>
+        ))}
     </div>
   );
 };

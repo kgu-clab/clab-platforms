@@ -4,7 +4,8 @@ import { now } from '@utils/date';
 interface OpenModalProps {
   key?: string;
   title?: string;
-  content: React.ReactNode;
+  content?: React.ReactNode;
+  custom?: React.ReactNode;
   accept?: {
     text: string;
     onClick: () => void;
@@ -24,6 +25,7 @@ const useModal = () => {
     key = now().toString(),
     title = 'C-Lab PLAY',
     content,
+    custom,
     accept,
     cancel,
   }: OpenModalProps) => {
@@ -32,6 +34,7 @@ const useModal = () => {
       isOpen: true,
       title,
       content,
+      custom,
       ...(accept && { accept }),
       cancel: {
         text: cancel?.text || '닫기',
@@ -46,15 +49,15 @@ const useModal = () => {
     setModal((prev) => ({ ...prev, isOpen: false }));
   };
   /**
-   * update modal
+   * force update modal
    * - when you need to update modal content
    * - ex) when you need to update modal content after user input
    */
-  const updateModal = () => {
+  const forceUpdateModal = () => {
     setModal((prev) => ({ ...prev, key: now().toString() }));
   };
 
-  return { openModal, closeModal, updateModal };
+  return { openModal, closeModal, forceUpdateModal };
 };
 
 export default useModal;

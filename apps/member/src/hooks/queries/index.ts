@@ -29,3 +29,4 @@ export * from './useNews';
 export * from './usePosts';
 export * from './useSchedule';
 export * from './useUserInfoMutation';
+export * from './useActivityGroupMemberMy';

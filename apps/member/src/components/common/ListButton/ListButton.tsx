@@ -1,24 +1,35 @@
 import classNames from 'classnames';
-import React from 'react';
-import { Link } from 'react-router-dom';
+import { ComponentPropsWithRef, useCallback } from 'react';
+import { useNavigate } from 'react-router-dom';
 
-interface ListButtonProps {
-  to: string;
-  className?: string;
-  children: React.ReactNode;
+interface ListButtonProps extends ComponentPropsWithRef<'button'> {
+  to?: string;
 }
 
-const ListButton = ({ to, className, children }: ListButtonProps) => {
+const ListButton = ({
+  to,
+  className,
+  children,
+  onClick,
+  ...rest
+}: ListButtonProps) => {
+  const navigate = useNavigate();
+
+  const onClickLink = useCallback(() => {
+    to && navigate(to);
+  }, [navigate, to]);
+
   return (
-    <Link
-      to={to}
+    <button
+      onClick={to ? onClickLink : onClick}
       className={classNames(
-        'flex items-center rounded p-1 transition hover:bg-gray-100 hover:font-medium',
+        'flex items-center rounded p-1 transition hover:bg-gray-100 hover:font-medium w-full text-left',
         className,
       )}
+      {...rest}
     >
       {children}
-    </Link>
+    </button>
   );
 };
 

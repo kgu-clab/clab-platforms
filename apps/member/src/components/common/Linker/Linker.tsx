@@ -1,27 +1,23 @@
 import classNames from 'classnames';
+import { PropsWithChildren } from 'react';
+import { Link } from 'react-router-dom';
 
-import { useNavigate } from 'react-router-dom';
-
-interface LinkerProps {
+interface LinkerProps extends PropsWithChildren {
   to: string | Partial<Location>;
-  onClick?: () => void;
   className?: string;
-  children: React.ReactNode;
 }
 
 const Linker = ({ to, className, children }: LinkerProps) => {
-  const navigate = useNavigate();
-
   return (
-    <a
-      onClick={() => navigate(to)}
+    <Link
+      to={to}
       className={classNames(
-        "text-bold cursor-pointer underline after:content-['_↗']",
+        "font-semibold hover:underline underline-offset-2 text-black/50 hover:text-black after:content-['_↗']",
         className,
       )}
     >
       {children}
-    </a>
+    </Link>
   );
 };
 
