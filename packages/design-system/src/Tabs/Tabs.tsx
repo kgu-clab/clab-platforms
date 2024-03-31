@@ -1,12 +1,9 @@
 import React from 'react';
 import { useCallback, useState } from 'react';
 import { twMerge } from 'tailwind-merge';
-import {
-  ButtonSelectOptionProps,
-  ButtonSelectProps,
-} from './ButtonSelect.types';
+import { TabsOptionProps, TabsProps } from './Tabs.types';
 
-const ButtonSelect = ({ options, value, onChange }: ButtonSelectProps) => {
+const Tabs = ({ options, value, onChange }: TabsProps) => {
   const [selected, setSelected] = useState(value || options[0].value);
 
   const handleOptionClick = useCallback(
@@ -20,7 +17,7 @@ const ButtonSelect = ({ options, value, onChange }: ButtonSelectProps) => {
   return (
     <div className="flex items-center w-full">
       {options.map((option, index) => (
-        <ButtonSelect.Option
+        <Tabs.Option
           key={index}
           className={twMerge(
             selected === option.value && 'border-clab-main font-semibold',
@@ -31,13 +28,13 @@ const ButtonSelect = ({ options, value, onChange }: ButtonSelectProps) => {
             {option.icon}
           </span>
           <span>{option.value}</span>
-        </ButtonSelect.Option>
+        </Tabs.Option>
       ))}
     </div>
   );
 };
 
-const Option = ({ className, children, ...rest }: ButtonSelectOptionProps) => {
+const Option = ({ className, children, ...rest }: TabsOptionProps) => {
   return (
     <button
       type="button"
@@ -52,8 +49,8 @@ const Option = ({ className, children, ...rest }: ButtonSelectOptionProps) => {
   );
 };
 
-Option.displayName = 'ButtonSelectOption';
+Option.displayName = 'TabsOption';
 
-ButtonSelect.Option = Option;
+Tabs.Option = Option;
 
-export default ButtonSelect;
+export default Tabs;
