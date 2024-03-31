@@ -6,6 +6,7 @@ import useModal from '@hooks/common/useModal';
 import MembershipInfoModal from '@components/membership/MembershipInfoModal/MembershipInfoModal';
 import Table from '@components/common/Table/Table';
 import type { MembershipFeeType } from '@type/membershipFee';
+import { TABLE_HEAD } from '@constants/head';
 
 const SupportHistorySection = () => {
   const { openModal } = useModal();
@@ -22,12 +23,11 @@ const SupportHistorySection = () => {
 
   return (
     <Section>
-      <Section.Header title="신청 내역" />
+      <Section.Header title="신청 내역">
+        최근에 신청된 회비 신청 내역이에요
+      </Section.Header>
       <Section.Body>
-        <Table
-          className="w-full"
-          head={['번호', '상태', '구분', '요청자', '신청일']}
-        >
+        <Table head={TABLE_HEAD.SUPPORT_HISTORY}>
           {data.items.map((membership) => (
             <Table.Row
               key={membership.id}
