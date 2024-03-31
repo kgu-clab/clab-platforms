@@ -1,4 +1,4 @@
-import { Button, Input, Checkbox, ButtonSelect } from '@clab/design-system';
+import { Button, Input, Checkbox, Tabs } from '@clab/design-system';
 import { ChangeEvent, FormEvent, useCallback, useState } from 'react';
 import { formatComma } from '@utils/math';
 import useToast from '@hooks/common/useToast';
@@ -6,10 +6,10 @@ import Linker from '@components/common/Linker/Linker';
 import Uploader from '@components/common/Uploader/Uploader';
 import { FcAnswers, FcMultipleDevices, FcTemplate } from 'react-icons/fc';
 import { SELECT_DEFAULT_OPTION } from '@constants/select';
-import type { SupportRequestDataType } from '@type/support';
 import Loading from '@components/common/Loading/Loading';
+import type { SupportRequestDataType } from '@type/support';
 
-const typeSelectOptions = [
+const tabsOptions = [
   {
     icon: <FcTemplate size={32} />,
     value: '도서',
@@ -36,19 +36,21 @@ const SupportRequestForm = ({
   const toast = useToast();
   const [checkList, setCheckList] = useState<boolean[]>([false, false, false]);
   const [formData, setFormData] = useState<SupportRequestDataType>({
-    category: typeSelectOptions[0].value,
+    category: tabsOptions[0].value,
     amount: 0,
     content: '',
+    account: '',
     file: null,
   });
 
-  const { category, amount, content, file } = formData;
+  const { category, amount, account, content, file } = formData;
 
   const checkSubmitValidation =
     !checkList.includes(false) && // 체크박스가 모두 체크되어 있을 경우
     category !== SELECT_DEFAULT_OPTION && // 분류가 기본값이 아닐 경우
     amount > 0 && // 금액이 0보다 클 경우
     content.length !== 0 && // 사유가 작성되어 있을 경우
+    account.length !== 0 && // 계좌번호가 작성되어 있을 경우
     file; // 파일이 첨부되어 있을 경우
   /**
    * 입력값이 변경될 때마다 상태를 업데이트합니다.
@@ -63,7 +65,7 @@ const SupportRequestForm = ({
   /**
    * 분류 선택값이 변경될 때마다 상태를 업데이트합니다.
    */
-  const handleSelectChange = useCallback((value: string) => {
+  const handleTabsChange = useCallback((value: string) => {
     setFormData((prev) => ({
       ...prev,
       category: value,
@@ -108,22 +110,30 @@ const SupportRequestForm = ({
 
   return (
     <form onSubmit={handleOnSubmit} className="space-y-4">
-      <ButtonSelect options={typeSelectOptions} onChange={handleSelectChange} />
+      <Tabs options={tabsOptions} onChange={handleTabsChange} />
       <div className="space-y-2">
         <Input
           id="amount"
           name="amount"
           label="금액"
           inputMode="numeric"
-          placeholder="최종 구매 금액을 작성해주세요."
+          placeholder="최종 결제 금액을 입력해주세요."
           value={formatComma(amount)}
+          onChange={handleInputChange}
+        />
+        <Input
+          id="account"
+          name="account"
+          label="은행 / 계좌번호"
+          placeholder="승인이 되면 해당 계좌로 결제대금을 입금해드려요."
+          value={account}
           onChange={handleInputChange}
         />
         <Input
           id="content"
           name="content"
           label="사유"
-          placeholder="구매 사유를 상세히 작성해주세요. 승인에 큰 영향을 미쳐요."
+          placeholder="사용 목적을 상세하게 작성해주세요."
           value={content}
           onChange={handleInputChange}
         />

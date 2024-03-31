@@ -5,5 +5,6 @@ export interface SupportRequestDataType {
   category: string;
   amount: number;
   content: string;
+  account: string;
   file: File | null;
 }
