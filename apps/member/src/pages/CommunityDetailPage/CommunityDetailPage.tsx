@@ -1,9 +1,7 @@
 import Content from '@components/common/Content/Content';
 import Header from '@components/common/Header/Header';
 import { useNavigate, useParams } from 'react-router-dom';
-import type { CommunityCategoryType } from '@type/community';
 import Section from '@components/common/Section/Section';
-import Table from '@components/common/Table/Table';
 import Pagination from '@components/common/Pagination/Pagination';
 import { useState } from 'react';
 import { PATH_FINDER } from '@constants/path';
@@ -11,6 +9,8 @@ import { toYYMMDD } from '@utils/date';
 import { useBoards } from '@hooks/queries/useBoards';
 import { categoryToTitle, isCommunityCategoryType } from '@utils/community';
 import { COMMUNITY_MESSAGE } from '@constants/message';
+import { Table } from '@clab/design-system';
+import type { CommunityCategoryType } from '@type/community';
 
 const CommunityDetailPage = () => {
   const { type } = useParams<{ type: CommunityCategoryType }>();

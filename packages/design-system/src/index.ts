@@ -10,3 +10,4 @@ export * from './Input';
 export * from './Badge';
 export * from './Checkbox';
 export * from './Tabs';
+export * from './Table';

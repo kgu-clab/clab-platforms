@@ -1,10 +1,8 @@
 import { ChangeEvent, useEffect, useRef, useState } from 'react';
-
 import { formattedDate, isDateValid } from '@utils/date';
 import { FORM_DATA_KEY } from '@constants/api';
 import File from '@components/common/File/File';
-import Table from '@components/common/Table/Table';
-import { Button } from '@clab/design-system';
+import { Button, Table } from '@clab/design-system';
 import Section from '@components/common/Section/Section';
 import type { ActivityBoardType, AssignmentFileType } from '@type/activity';
 import Textarea from '@components/common/Textarea/Textarea';

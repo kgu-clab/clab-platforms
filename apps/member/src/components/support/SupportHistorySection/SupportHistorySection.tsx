@@ -4,9 +4,9 @@ import { formattedDate } from '@utils/date';
 import MembershipStatusBadge from '@components/membership/MembershipStatusBadge/MembershipStatusBadge';
 import useModal from '@hooks/common/useModal';
 import MembershipInfoModal from '@components/membership/MembershipInfoModal/MembershipInfoModal';
-import Table from '@components/common/Table/Table';
-import type { MembershipFeeType } from '@type/membershipFee';
 import { TABLE_HEAD } from '@constants/head';
+import { Table } from '@clab/design-system';
+import type { MembershipFeeType } from '@type/membershipFee';
 
 const SupportHistorySection = () => {
   const { openModal } = useModal();

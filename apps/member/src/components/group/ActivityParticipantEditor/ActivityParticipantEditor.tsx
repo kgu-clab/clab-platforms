@@ -1,7 +1,5 @@
-import { Button } from '@clab/design-system';
+import { Button, Table } from '@clab/design-system';
 import Section from '@components/common/Section/Section';
-import Table from '@components/common/Table/Table';
-
 import { useActivityGroupAdminApplyByStatus } from '@hooks/queries/useActivityGroupAdminApplyByStatus';
 import { useActivityGroupAdminAcceptMutation } from '@hooks/queries/useActivityGroupAdminAcceptMutation';
 import { TABLE_HEAD } from '@constants/head';
