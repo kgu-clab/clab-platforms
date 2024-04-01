@@ -48,12 +48,13 @@ const BookDetailSection = ({ data }: BookDetailSectionProps) => {
   return (
     <Section>
       <div className="flex flex-col gap-2 px-2">
-        <div className="gap-4 my-4 lg:grid lg:grid-cols-2">
+        <div className="gap-4 my-4 space-y-4 lg:grid lg:grid-cols-2">
           <div className="flex justify-center md:mb-4 lg:m-0 lg:max-w-3xl">
             <Image
               src={imageUrl}
               alt={title}
               width="w-[300px]"
+              height="max-h-[384px]"
               className="object-cover shadow-lg"
             />
           </div>
