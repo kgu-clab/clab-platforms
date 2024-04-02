@@ -15,18 +15,16 @@ const Tabs = ({ options, value, onChange }: TabsProps) => {
   );
 
   return (
-    <div className="flex items-center w-full">
+    <div className="flex items-center w-full border divide-x rounded-lg">
       {options.map((option, index) => (
         <Tabs.Option
           key={index}
           className={twMerge(
-            selected === option.value && 'border-clab-main font-semibold',
+            selected === option.value && 'bg-gray-50 font-semibold',
           )}
           onClick={() => handleOptionClick(option.value)}
         >
-          <span className="p-1 bg-gray-100 rounded-lg w-fit">
-            {option.icon}
-          </span>
+          <span className="p-1 bg-gray-100 rounded w-fit">{option.icon}</span>
           <span>{option.value}</span>
         </Tabs.Option>
       ))}
@@ -39,7 +37,7 @@ const Option = ({ className, children, ...rest }: TabsOptionProps) => {
     <button
       type="button"
       className={twMerge(
-        'first:rounded-l-lg last:rounded-r-lg border w-full hover:border-clab-main transition-colors p-4 flex flex-col items-center justify-center',
+        'first:rounded-l-lg last:rounded-r-lg w-full hover:bg-gray-50 transition-colors p-2 flex flex-col items-center justify-center gap-1',
         className,
       )}
       {...rest}
