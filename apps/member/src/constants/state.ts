@@ -1,5 +1,5 @@
 export const BOOK_STATE = {
-  BORROWED: '대출중',
+  BORROWED: '대여중',
   AVAILABLE: '대여가능',
 } as const;
 
