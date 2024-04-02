@@ -1,47 +1,16 @@
-import { getMyHire } from '@api/hire';
-import { getNews } from '@api/news';
+import { getBoards } from '@api/board';
 import { QUERY_KEY } from '@constants/key';
 import { useSuspenseQuery } from '@tanstack/react-query';
-import { categoryToTitle } from '@utils/community';
-import type { CommunityCategoryType } from '@type/community';
-import { getBoardsList } from '@api/board';
+import type { PaginationPramsType } from '@type/api';
 
-export const useBoards = (
-  category: CommunityCategoryType,
-  page = 0,
-  size = 6,
-) => {
-  const queryOptions = {
-    notice: {
-      queryKey: QUERY_KEY.BORDER_NOTICE,
-      queryFn: () => getBoardsList(categoryToTitle('notice'), page, size),
-    },
-    free: {
-      queryKey: QUERY_KEY.BORDER_FREE,
-      queryFn: () => getBoardsList(categoryToTitle('free'), page, size),
-    },
-    qna: {
-      queryKey: QUERY_KEY.BORDER_QNA,
-      queryFn: () => getBoardsList(categoryToTitle('qna'), page, size),
-    },
-    graduated: {
-      queryKey: QUERY_KEY.BORDER_GRADUATED,
-      queryFn: () => getBoardsList(categoryToTitle('graduated'), page, size),
-    },
-    news: {
-      queryKey: QUERY_KEY.NEWS,
-      queryFn: () => getNews(page, size),
-    },
-    hire: {
-      queryKey: QUERY_KEY.HIRE,
-      queryFn: () => getMyHire(page, size),
-    },
-  };
+interface UseBoardsParams extends PaginationPramsType {}
 
-  const options = queryOptions[category];
-
+/**
+ * 커뮤니티 게시글 목록을 조회합니다.
+ */
+export const useBoards = ({ page = 0, size = 20 }: UseBoardsParams) => {
   return useSuspenseQuery({
-    queryKey: [options.queryKey, category, page, size],
-    queryFn: options.queryFn,
+    queryKey: [QUERY_KEY.BOARDS],
+    queryFn: () => getBoards(page, size),
   });
 };

@@ -6,7 +6,7 @@ import Pagination from '@components/common/Pagination/Pagination';
 import { useState } from 'react';
 import { PATH_FINDER } from '@constants/path';
 import { toYYMMDD } from '@utils/date';
-import { useBoards } from '@hooks/queries/useBoards';
+import { useBoardsList } from '@hooks/queries/useBoardsList';
 import { categoryToTitle, isCommunityCategoryType } from '@utils/community';
 import { COMMUNITY_MESSAGE } from '@constants/message';
 import { Table } from '@clab/design-system';
@@ -27,10 +27,8 @@ const CommunityDetailPage = () => {
   });
 
   const { page, size } = pagination;
-
   const name = categoryToTitle(type);
-
-  const { data } = useBoards(type, page, size);
+  const { data } = useBoardsList({ category: type, page, size });
 
   const handlePageChange = (page: number) => {
     setPagination({ ...pagination, page: page - 1 });

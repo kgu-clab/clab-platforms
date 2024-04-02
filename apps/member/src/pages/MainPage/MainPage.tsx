@@ -4,21 +4,22 @@ import NewsCardSection from '@components/main/NewsCardSection/NewsCardSection';
 import CommunitySection from '@components/main/CommunitySection/CommunitySection';
 import BirthdayList from '@components/main/BirthdayList/BirthdayList';
 import { PATH } from '@constants/path';
-
-import { useNews } from '@hooks/queries/useNews';
-import { useBlog } from '@hooks/queries/useBlog';
-import { useHire } from '@hooks/queries/useHire';
-import { useBirthday } from '@hooks/queries/useBirthday';
-import { useActivityPicture } from '@hooks/queries/useActivityPicture';
-import { useSchedule } from '@hooks/queries/useSchedule';
-import { useBoards } from '@hooks/queries/useBoards';
+import {
+  useNews,
+  useBlog,
+  useSchedule,
+  useActivityPicture,
+  useBirthday,
+  useHire,
+} from '@hooks/queries';
+import { useBoardsList } from '@hooks/queries/useBoardsList';
 import MainAlert from '@components/main/MainAlert/MainAlert';
 
 const MainPage = () => {
   const { data: mainAlertData } = useSchedule({});
   const { data: mainBannerData } = useActivityPicture();
-  const { data: noticeData } = useBoards('notice');
-  const { data: QnAData } = useBoards('qna');
+  const { data: noticeData } = useBoardsList({ category: 'notice' });
+  const { data: QnAData } = useBoardsList({ category: 'qna' });
   const { data: birthdayData } = useBirthday();
   const { data: blogData } = useBlog();
   const { data: ITNewsData } = useNews();
