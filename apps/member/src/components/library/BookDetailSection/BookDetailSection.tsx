@@ -1,90 +1,86 @@
 import Section from '@components/common/Section/Section';
-import { Link } from 'react-router-dom';
-import { Button } from '@clab/design-system';
 import Image from '@components/common/Image/Image';
+import { Button, DetailsList, Badge, Grid, Tabs } from '@clab/design-system';
 import { BOOK_STATE } from '@constants/state';
 import { useBookLoanBorrowMutation } from '@hooks/queries/useBookLoanBorrowMutation';
 import { useMyProfile } from '@hooks/queries/useMyProfile';
+import { useCallback } from 'react';
+import { createImageUrl } from '@utils/api';
+import { SELECT_DEFAULT_OPTION } from '@constants/select';
+import kyoboIcon from '@assets/webp/kyobobook.webp';
+import aladinIcon from '@assets/webp/aladin.webp';
+import yes24Icon from '@assets/svg/yes24.svg';
 import type { BookItem } from '@type/book';
 
 interface BookDetailSectionProps {
   data: BookItem;
 }
 
-interface BookInfoRowProps {
-  to?: string;
-  label: string;
-  content: string;
-}
-
-const BookInfoRow = ({ to, label, content }: BookInfoRowProps) => {
-  return (
-    <div className="flex">
-      <p className="w-20 font-semibold">{label}</p>
-      {to ? (
-        <Link to={to} className="content-link">
-          {content}
-        </Link>
-      ) : (
-        <p className="content-text">{content}</p>
-      )}
-    </div>
-  );
-};
+const tabsOptions = [
+  {
+    icon: <img src={kyoboIcon} alt="" className="size-6" />,
+    value: '교보문고',
+  },
+  {
+    icon: <img src={yes24Icon} alt="" className="size-6" />,
+    value: '예스24',
+  },
+  {
+    icon: <img src={aladinIcon} alt="" className="rounded-lg size-6" />,
+    value: '알라딘',
+  },
+];
 
 const BookDetailSection = ({ data }: BookDetailSectionProps) => {
   const { data: myInfo } = useMyProfile();
   const { bookBorrowMutate } = useBookLoanBorrowMutation();
   const { id, borrowerId, category, title, author, publisher, imageUrl } = data;
 
-  const onClickBorrow = (bookId: number) => {
-    bookBorrowMutate({
-      memberId: myInfo.id,
-      bookId: bookId,
-      borrowerId: myInfo.id,
-    });
-  };
+  const handleBorrowClick = useCallback(
+    (bookId: number) => {
+      bookBorrowMutate({
+        memberId: myInfo.id,
+        bookId: bookId,
+        borrowerId: myInfo.id,
+      });
+    },
+    [bookBorrowMutate, myInfo.id],
+  );
 
   return (
     <Section>
-      <div className="flex flex-col gap-2 px-2">
-        <div className="gap-4 my-4 space-y-4 lg:grid lg:grid-cols-2">
-          <div className="flex justify-center md:mb-4 lg:m-0 lg:max-w-3xl">
-            <Image
-              src={imageUrl}
-              alt={title}
-              width="w-[300px]"
-              height="max-h-[384px]"
-              className="object-cover shadow-lg"
-            />
+      <Grid gap="lg" className="lg:grid-cols-2">
+        <Image
+          src={createImageUrl(imageUrl)}
+          alt={title}
+          className="object-cover shadow-lg"
+        />
+        <div className="flex flex-col justify-between gap-4">
+          <div className="space-y-4">
+            <h1 className="text-2xl font-bold break-keep">{title}</h1>
+            <DetailsList>
+              <DetailsList.Item label="작가">{author}</DetailsList.Item>
+              <DetailsList.Item label="출판사">{publisher}</DetailsList.Item>
+              <DetailsList.Item label="분류">{category}</DetailsList.Item>
+              <DetailsList.Item label="대여 상태">
+                <Badge color={borrowerId ? 'red' : 'green'}>
+                  {borrowerId ? BOOK_STATE.BORROWED : BOOK_STATE.AVAILABLE}
+                </Badge>
+              </DetailsList.Item>
+            </DetailsList>
+            <Tabs value={SELECT_DEFAULT_OPTION} options={tabsOptions} />
           </div>
-          <div className="flex flex-col justify-between gap-4">
-            <div className="space-y-2">
-              <h1 className="pb-4 text-2xl font-bold break-keep">{title}</h1>
-              <BookInfoRow label="작가" content={author} />
-              <BookInfoRow label="출판사" content={publisher} />
-              <BookInfoRow label="분류" content={category} />
-              <BookInfoRow
-                label="대여 상태"
-                content={
-                  borrowerId ? BOOK_STATE.BORROWED : BOOK_STATE.AVAILABLE
-                }
-              />
-            </div>
-            <div className="w-full">
-              {borrowerId ? (
-                <p className="pt-12 text-xl font-bold text-center underline decoration-green-700 lg:text-left">
-                  이미 대여된 도서예요! 조금만 기다려주세요 ⏳
-                </p>
-              ) : (
-                <Button className="w-full" onClick={() => onClickBorrow(id)}>
-                  대여하기
-                </Button>
-              )}
-            </div>
-          </div>
+          <Button
+            className="w-full"
+            disabled={!!borrowerId}
+            onClick={() => handleBorrowClick(id)}
+          >
+            {borrowerId
+              ? '이미 대여된 도서예요! 조금만 기다려주세요'
+              : '대여하기'}
+          </Button>
         </div>
-      </div>
+      </Grid>
     </Section>
   );
 };
