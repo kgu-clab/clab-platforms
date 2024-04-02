@@ -4,6 +4,7 @@ import Header from '@components/common/Header/Header';
 import BookDetailSection from '@components/library/BookDetailSection/BookDetailSection';
 import { useBookDetails } from '@hooks/queries/useBookDetails';
 import { LIBRARY_MESSAGE } from '@constants/message';
+import BookLoanHistorySection from '@components/library/BookLoanHistorySection/BookLoanHistorySection';
 
 const LibraryDetailPage = () => {
   const { id } = useParams<{ id: string }>();
@@ -16,6 +17,7 @@ const LibraryDetailPage = () => {
     <Content>
       <Header title={['도서관', data.title]} />
       <BookDetailSection data={data} />
+      <BookLoanHistorySection bookId={data.id} />
     </Content>
   );
 };
