@@ -12,7 +12,7 @@ import { useMyProfile } from '@hooks/queries/useMyProfile';
 import { Grid } from '@clab/design-system';
 import MyMembershipHistorySection from '@components/my/MyMembershipHistorySection/MyMembershipHistorySection';
 import MyActivityGroupSection from '@components/my/MyActivityGroupSection/MyActivityGroupSection';
-import { useBookLoanRecordByMemberId } from '@hooks/queries/useBookLoanRecordById';
+import { useBookLoanRecordConditions } from '@hooks/queries/useBookLoanRecordConditions';
 
 const MyPage = () => {
   const { data: myProfile } = useMyProfile();
@@ -23,7 +23,9 @@ const MyPage = () => {
     memberId: myProfile.id,
     size: 5,
   });
-  const { data: myBookLoanRecord } = useBookLoanRecordByMemberId(myProfile.id);
+  const { data: myBookLoanRecord } = useBookLoanRecordConditions({
+    borrowerId: myProfile.id,
+  });
   const { data: myActivityGroup } = useActivityGroupMemberMy();
 
   return (

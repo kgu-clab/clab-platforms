@@ -6,12 +6,21 @@ import type {
   BookLoanRecordConditionType,
   BookLoanRecordItem,
 } from '@type/book';
-import type { BaseResponse, PaginationType } from '@type/api';
+import type {
+  BaseResponse,
+  PaginationPramsType,
+  PaginationType,
+} from '@type/api';
 
 interface PostBorrowBookArgs extends BookLoanRecordItem {
   memberId: string;
 }
 
+interface GetBookLoanRecordConditionsPrams extends PaginationPramsType {
+  bookId?: number;
+  borrowerId?: string;
+  isReturned?: boolean;
+}
 /**
  * 도서 목록 조회
  */
@@ -23,7 +32,6 @@ export const getBooks = async (page: number, size: number) => {
 
   return data;
 };
-
 /**
  * 도서 상세 조회
  */
@@ -34,7 +42,6 @@ export const getBookDetail = async (id: number) => {
 
   return data;
 };
-
 /**
  * 나의 대출내역 조회
  */
@@ -46,7 +53,6 @@ export const getMyBooks = async (id: string, page: number, size: number) => {
 
   return data.items.filter((book) => book.borrowerId === id);
 };
-
 /**
  * 도서 대출
  */
@@ -59,7 +65,6 @@ export const postBorrowBook = async (body: PostBorrowBookArgs) => {
 
   return { memberId: body.memberId, bookId: body.bookId, data };
 };
-
 /**
  * 도서 반납
  */
@@ -71,7 +76,6 @@ export const postReturnBook = async (body: BookLoanRecordItem) => {
 
   return { memberId: body.borrowerId, bookId: body.bookId, data };
 };
-
 /**
  * 도서 연장
  */
@@ -83,20 +87,26 @@ export const postExtendBook = async (body: BookLoanRecordItem) => {
 
   return { memberId: body.borrowerId, bookId: data };
 };
-
 /**
- * 도서 대출 내역 검색
+ * 도서 대출 내역 조회
  */
-export const getBookLoanByMemberId = async (
-  borrowerId: string,
+export const getBookLoanRecordConditions = async ({
+  bookId,
+  borrowerId,
+  isReturned,
   page = 0,
   size = 20,
-) => {
-  const params = { borrowerId, page, size };
+}: GetBookLoanRecordConditionsPrams) => {
   const { data } = await server.get<
     PaginationType<BookLoanRecordConditionType>
   >({
-    url: createCommonPagination(END_POINT.BOOK_LOAN_CONDITIONS, params),
+    url: createCommonPagination(END_POINT.BOOK_LOAN_CONDITIONS, {
+      bookId,
+      borrowerId,
+      isReturned,
+      page,
+      size,
+    }),
   });
 
   return data;

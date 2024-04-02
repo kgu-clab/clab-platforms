@@ -7,13 +7,13 @@ import useModal from '@hooks/common/useModal';
 import { useBookLoanReturnMutation } from '@hooks/queries/useBookLoanReturnMutation';
 import { useBookLoanExtendMutation } from '@hooks/queries/useBookLoanExtendMutation';
 import Select from '@components/common/Select/Select';
-import { useBookLoanRecordByMemberId } from '@hooks/queries/useBookLoanRecordById';
 import {
   checkDueDate,
   checkExtendProgress,
   checkProgress,
   now,
 } from '@utils/date';
+import { useBookLoanRecordConditions } from '@hooks/queries';
 
 interface BookPanelProps {
   memberId: string;
@@ -40,7 +40,9 @@ const ActionButton = ({
 const BookPanel = ({ memberId, data }: BookPanelProps) => {
   const { openModal } = useModal();
 
-  const { data: myLoanBookData } = useBookLoanRecordByMemberId(memberId);
+  const { data: myLoanBookData } = useBookLoanRecordConditions({
+    borrowerId: memberId,
+  });
   const { bookReturnMutate } = useBookLoanReturnMutation();
   const { bookExtendMutate } = useBookLoanExtendMutation();
 
