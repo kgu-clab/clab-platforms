@@ -1,6 +1,7 @@
 import classNames from 'classnames';
 import Image from '../Image/Image';
 import { formattedDate } from '@utils/date';
+import { getProfileRingStyle } from '@utils/style';
 
 interface CommentProps {
   isReply?: boolean;
@@ -26,11 +27,14 @@ const Comment = ({
       })}
     >
       <Image
-        className="rounded-full"
         width="w-10"
         height="h-10"
         src={image}
-        alt="프로필사진"
+        alt={writer}
+        className={classNames(
+          'rounded-full ring ring-offset-1',
+          getProfileRingStyle(1),
+        )}
       />
       <div className="w-full ml-2">
         <p className="text-sm font-semibold">{writer}</p>

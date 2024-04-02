@@ -1,7 +1,6 @@
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import Comment from '@components/common/Comment/Comment';
 import Section from '@components/common/Section/Section';
-import { getPokemonImage } from '@mocks/mocks';
 import { useCommentList } from '@hooks/queries/useCommentList';
 import CommentInput from '@components/common/CommentInput/CommentInput';
 import { useAccusesMutation } from '@hooks/queries/useAccusesMutation';
@@ -13,17 +12,16 @@ interface PostCommentSectionProps {
 }
 
 const PostCommentSection = ({ id }: PostCommentSectionProps) => {
-  const [input, setInput] = useState<string>('');
-  const [reInput, setReInput] = useState<string[]>([]);
-  const [checkReComment, setCheckReComment] = useState<boolean[]>([false]);
-
-  const { openModal } = useModal();
-
   const { data } = useCommentList(id);
   const { accusesMutate } = useAccusesMutation();
 
-  const onClickReport = async (commentId: number) => {
-    openModal({
+  const { openModal } = useModal();
+  const [comment, setComment] = useState<string>('');
+  const [reComment, setReComment] = useState<string[]>([]);
+  const [checkReComment, setCheckReComment] = useState<boolean[]>([false]);
+
+  const handleReportClick = async (commentId: number) => {
+    return openModal({
       title: '🚨 신고하기',
       content:
         '댓글에 신고 횟수가 많아지면 운영진이 해당 댓글을 검토합니다.\n정말 해당 댓글을 신고하시겠습니까?',
@@ -40,7 +38,14 @@ const PostCommentSection = ({ id }: PostCommentSectionProps) => {
     });
   };
 
-  const onClickReComment = (commentIndex: number) => {
+  const handleCommentChange = useCallback(
+    (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+      setComment(e.target.value);
+    },
+    [],
+  );
+
+  const handleReplyClick = (commentIndex: number) => {
     setCheckReComment((prevCheckReComment) => {
       const updatedCheckReComment = [...prevCheckReComment];
       updatedCheckReComment[commentIndex] = !prevCheckReComment[commentIndex];
@@ -48,71 +53,58 @@ const PostCommentSection = ({ id }: PostCommentSectionProps) => {
     });
   };
 
-  const handleInput = (e: string) => {
-    setInput(e);
-  };
-
-  const handleReInput = (commentIndex: number, value: string) => {
-    setReInput((prevReInput) => {
-      const updatedReInput = [...prevReInput];
-      updatedReInput[commentIndex] = value;
-      return updatedReInput;
-    });
-  };
+  const handleReCommentChange = useCallback(
+    (commentIndex: number, value: string) => {
+      setReComment((prevReInput) => {
+        const updatedReInput = [...prevReInput];
+        updatedReInput[commentIndex] = value;
+        return updatedReInput;
+      });
+    },
+    [],
+  );
 
   return (
     <Section>
       <div className="space-y-4">
-        <h3 className="text-lg font-bold">댓글 {data?.items?.length ?? 0}</h3>
-        <CommentInput
-          id={id}
-          value={input}
-          onChange={(e) => handleInput(e.target.value)}
-        />
+        <h3 className="text-lg font-bold">댓글 {data.items?.length ?? 0}</h3>
+        <CommentInput id={id} value={comment} onChange={handleCommentChange} />
         <div className="space-y-4">
-          {data?.items?.map(
+          {data.items.map(
             ({ id: commentId, writer, writerImageUrl, content, children }) => (
               <div key={commentId} className="space-y-2">
                 {/* ROOT */}
                 <Comment
-                  image={
-                    writerImageUrl
-                      ? createImageUrl(writerImageUrl)
-                      : getPokemonImage()
-                  }
+                  image={createImageUrl(writerImageUrl)}
                   writer={writer}
-                  onClickReport={() => onClickReport(commentId)}
-                  onClickReply={() => onClickReComment(commentId)}
+                  onClickReport={() => handleReportClick(commentId)}
+                  onClickReply={() => handleReplyClick(commentId)}
                 >
                   {content}
                 </Comment>
                 {/* CHILDREN */}
                 <div className="ml-5 space-y-2">
-                  {children?.map(
-                    ({ id: replyId, writer, writerImageUrl, content }) => (
-                      <Comment
-                        key={replyId}
-                        image={
-                          writerImageUrl
-                            ? createImageUrl(writerImageUrl)
-                            : getPokemonImage()
-                        }
-                        isReply
-                        writer={writer}
-                        onClickReport={() => onClickReport(replyId)}
-                        onClickReply={() => onClickReComment(replyId)}
-                      >
-                        {content}
-                      </Comment>
-                    ),
-                  )}
-                  {/* Reply Input */}
+                  {children?.map(({ id, writer, writerImageUrl, content }) => (
+                    <Comment
+                      key={id}
+                      image={createImageUrl(writerImageUrl)}
+                      isReply
+                      writer={writer}
+                      onClickReport={() => handleReportClick(id)}
+                      onClickReply={() => handleReplyClick(id)}
+                    >
+                      {content}
+                    </Comment>
+                  ))}
+                  {/* Reply */}
                   {checkReComment[commentId] && (
                     <CommentInput
                       id={id}
                       parentId={commentId}
-                      value={reInput[commentId] || ''}
-                      onChange={(e) => handleReInput(commentId, e.target.value)}
+                      value={reComment[commentId] || ''}
+                      onChange={(e) =>
+                        handleReCommentChange(commentId, e.target.value)
+                      }
                     />
                   )}
                 </div>
