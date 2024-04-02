@@ -4,20 +4,11 @@ import MembershipCategoryBadge from '../MembershipCategoryBadge/MembershipCatego
 import MembershipStatusBadge from '../MembershipStatusBadge/MembershipStatusBadge';
 import { formatWon } from '@utils/string';
 import { formattedDate } from '@utils/date';
+import { DetailsList } from '@clab/design-system';
 import type { MembershipFeeType } from '@type/membershipFee';
 
 interface MembershipInfoModalProps {
   data: MembershipFeeType;
-}
-
-interface MembershipInfoModalUlProps {
-  title?: string;
-  children: React.ReactNode;
-}
-
-interface MembershipInfoModalLiProps {
-  label: string;
-  children: React.ReactNode;
 }
 
 const MembershipInfoModal = ({ data }: MembershipInfoModalProps) => {
@@ -39,43 +30,25 @@ const MembershipInfoModal = ({ data }: MembershipInfoModalProps) => {
       </div>
 
       <div className="space-x-2"></div>
-      <MembershipInfoModal.Ul>
-        <MembershipInfoModal.Li label="상태">
+      <DetailsList>
+        <DetailsList.Item label="상태">
           <MembershipStatusBadge status={status} />
-        </MembershipInfoModal.Li>
-        <MembershipInfoModal.Li label="구분">
+        </DetailsList.Item>
+        <DetailsList.Item label="구분">
           <MembershipCategoryBadge category={category} />
-        </MembershipInfoModal.Li>
-        <MembershipInfoModal.Li label="내용">{content}</MembershipInfoModal.Li>
-        <MembershipInfoModal.Li label="금액">
+        </DetailsList.Item>
+        <DetailsList.Item label="내용">{content}</DetailsList.Item>
+        <DetailsList.Item label="금액">
           {`₩${formatWon(amount)}`}
-        </MembershipInfoModal.Li>
-        <MembershipInfoModal.Li label="요청자">
+        </DetailsList.Item>
+        <DetailsList.Item label="요청자">
           {`${memberName} (${memberId})`}
-        </MembershipInfoModal.Li>
-        <MembershipInfoModal.Li label="신청일">
+        </DetailsList.Item>
+        <DetailsList.Item label="신청일">
           {formattedDate(createdAt)}
-        </MembershipInfoModal.Li>
-      </MembershipInfoModal.Ul>
+        </DetailsList.Item>
+      </DetailsList>
     </div>
-  );
-};
-
-MembershipInfoModal.Ul = ({ title, children }: MembershipInfoModalUlProps) => {
-  return (
-    <ul className="p-4 leading-loose text-black bg-gray-100 rounded-lg">
-      {title && <h2 className="pb-4 text-lg font-semibold">{title}</h2>}
-      {children}
-    </ul>
-  );
-};
-
-MembershipInfoModal.Li = ({ label, children }: MembershipInfoModalLiProps) => {
-  return (
-    <li className="flex items-center justify-between gap-4">
-      <span>{label}</span>
-      <span className="font-semibold text-right truncate grow">{children}</span>
-    </li>
   );
 };
 
