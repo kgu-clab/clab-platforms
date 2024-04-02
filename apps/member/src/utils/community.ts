@@ -68,8 +68,9 @@ export function titleToCategory(
  * @returns {boolean} 문자열이 유효한 커뮤니티 카테고리 타입이면 true, 그렇지 않으면 false
  */
 export function isCommunityCategoryType(
-  type: string,
+  type?: string,
 ): type is CommunityCategoryType {
+  if (!type) return false;
   return ['notice', 'free', 'qna', 'graduated', 'news', 'hire'].includes(type);
 }
 

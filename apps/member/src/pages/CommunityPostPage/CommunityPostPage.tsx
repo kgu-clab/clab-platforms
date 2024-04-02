@@ -22,7 +22,7 @@ import type { CommunityCategoryType } from '@type/community';
 const CommunityPostPage = () => {
   const { type, id } = useParams<{ type: CommunityCategoryType; id: string }>();
 
-  if (!type || !id || !isCommunityCategoryType(type)) {
+  if (!id || !isCommunityCategoryType(type)) {
     throw new Error('잘못된 접근입니다.');
   }
 
@@ -75,54 +75,52 @@ const CommunityPostPage = () => {
     <Content>
       <Header title={['커뮤니티', subTitle]} />
       <Section>
-        {data && (
-          <Post>
-            <Post.Head
-              title={data.title}
-              src={data.memberImageUrl}
-              writer={data.writer || 'C-Lab PLAY'}
-              roleLevel={1}
-              createAt={data.createdAt}
+        <Post>
+          <Post.Head
+            title={data.title}
+            src={data.memberImageUrl}
+            writer={data.writer || 'C-Lab PLAY'}
+            roleLevel={1}
+            createAt={data.createdAt}
+          />
+          {isHireItem(data) ? (
+            <HireContentSection {...data} />
+          ) : isEditMode ? (
+            <Textarea
+              className="w-full min-h-96"
+              value={contents}
+              placeholder={data.content}
+              onChange={(e) => setContents(e.target.value)}
             />
-            {isHireItem(data) ? (
-              <HireContentSection {...data} />
-            ) : isEditMode ? (
-              <Textarea
-                className="w-full min-h-96"
-                value={contents}
-                placeholder={data.content}
-                onChange={(e) => setContents(e.target.value)}
-              />
-            ) : (
-              <Post.Body>
-                {data.content}
-                {'articleUrl' in data && data.articleUrl && (
-                  <a
-                    className="block mb-2 text-sm text-right text-gray-500 hover:underline hover:text-black"
-                    target="_blank"
-                    href={data.articleUrl}
-                  >
-                    해당 아티클을 더 읽고 싶다면?
-                  </a>
-                )}
-              </Post.Body>
-            )}
-            <Post.Footer>
-              <Button onClick={onClickAccuses} size="sm" color="red">
-                신고
-              </Button>
-              {data.isOwner && (
-                <Button
-                  size="sm"
-                  color={isEditMode ? 'blue' : 'white'}
-                  onClick={onClickModify}
+          ) : (
+            <Post.Body>
+              {data.content}
+              {'articleUrl' in data && data.articleUrl && (
+                <a
+                  className="block mb-2 text-sm text-right text-gray-500 hover:underline hover:text-black"
+                  target="_blank"
+                  href={data.articleUrl}
                 >
-                  {isEditMode ? '저장' : '수정'}
-                </Button>
+                  해당 아티클을 더 읽고 싶다면?
+                </a>
               )}
-            </Post.Footer>
-          </Post>
-        )}
+            </Post.Body>
+          )}
+          <Post.Footer>
+            <Button onClick={onClickAccuses} size="sm" color="red">
+              신고
+            </Button>
+            {data.isOwner && (
+              <Button
+                size="sm"
+                color={isEditMode ? 'blue' : 'white'}
+                onClick={onClickModify}
+              >
+                {isEditMode ? '저장' : '수정'}
+              </Button>
+            )}
+          </Post.Footer>
+        </Post>
       </Section>
       {!isHireItem(data) && <PostCommentSection id={id} />}
     </Content>
