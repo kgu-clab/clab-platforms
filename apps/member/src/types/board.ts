@@ -7,6 +7,9 @@ export interface BoardType {
 }
 
 export interface BoardItem extends BoardType {
-  writer: string;
+  writerId: number;
+  content: string;
+  commentCount: number;
+  writerName: string;
   createdAt: string;
 }

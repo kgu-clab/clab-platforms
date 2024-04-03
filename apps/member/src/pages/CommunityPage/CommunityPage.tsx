@@ -1,22 +1,22 @@
-import Content from '@components/common/Content/Content';
-import Header from '@components/common/Header/Header';
+import { useNavigate } from 'react-router-dom';
 import { Button } from '@clab/design-system';
 import { PATH } from '@constants/path';
-import { useNavigate } from 'react-router-dom';
+import Content from '@components/common/Content/Content';
+import Header from '@components/common/Header/Header';
 import CommunitySection from '@components/main/CommunitySection/CommunitySection';
-import { useBoards } from '@hooks/queries/useBoards';
-import { useHire } from '@hooks/queries/useHire';
-import { useNews } from '@hooks/queries/useNews';
+import CommunityBoardCollectSection from '@components/community/CommunityBoardCollectSection/CommunityBoardCollectSection';
+import { useHire, useNews, useBoardsList, useBoards } from '@hooks/queries';
 
 const CommunityPage = () => {
   const navigate = useNavigate();
 
-  const { data: noticeData } = useBoards('notice');
-  const { data: freeData } = useBoards('free');
-  const { data: QnAData } = useBoards('qna');
-  const { data: graduatedData } = useBoards('graduated');
-  const { data: newsData } = useNews();
+  const { data: noticeData } = useBoardsList({ category: 'notice' });
+  const { data: freeData } = useBoardsList({ category: 'free' });
+  const { data: QnAData } = useBoardsList({ category: 'qna' });
+  const { data: graduatedData } = useBoardsList({ category: 'graduated' });
+  const { data: newsData } = useNews(0, 6);
   const { data: hireData } = useHire();
+  const { data: allBoardsData } = useBoards({ page: 0, size: 6 });
 
   return (
     <Content>
@@ -57,6 +57,7 @@ const CommunityPage = () => {
           to={PATH.COMMUNITY_HIRE}
         />
       </CommunitySection>
+      <CommunityBoardCollectSection data={allBoardsData.items} />
     </Content>
   );
 };
