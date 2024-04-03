@@ -14,7 +14,7 @@ const CommunityPage = () => {
   const { data: freeData } = useBoardsList({ category: 'free' });
   const { data: QnAData } = useBoardsList({ category: 'qna' });
   const { data: graduatedData } = useBoardsList({ category: 'graduated' });
-  const { data: newsData } = useNews(0, 6);
+  const { data: newsData } = useNews();
   const { data: hireData } = useHire();
   const { data: allBoardsData } = useBoards({ page: 0, size: 6 });
 
