@@ -13,9 +13,11 @@
     "dev:auth": "yarn workspace auth dev",
     "dev:land": "yarn workspace land dev",
     "dev:member": "yarn workspace member dev",
+    "dev:time": "yarn workspace time dev",
     "build:auth": "yarn workspace auth build",
     "build:land": "yarn workspace land build",
     "build:member": "yarn workspace member build",
+    "build:time": "yarn workspace time build",
     "build:design-system": "yarn workspace @clab/design-system build"
   },
   "lint-staged": {
