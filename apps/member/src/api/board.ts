@@ -4,7 +4,7 @@ import { END_POINT } from '@constants/api';
 import { createCommonPagination } from '@utils/api';
 import type { BoardItem } from '@type/board';
 import type {
-  CommunityCategoryKorType,
+  CommunityCategoryType,
   CommunityPostDetailItem,
   CommunityWriteItem,
 } from '@type/community';
@@ -40,13 +40,16 @@ export const getBoards = async (page: number, size: number) => {
  * 커뮤니티 게시글 카테고리별 조회
  */
 export const getBoardsList = async (
-  category: CommunityCategoryKorType,
+  category: CommunityCategoryType,
   page: number,
   size: number,
 ) => {
-  const params = { category, page, size };
   const { data } = await server.get<PaginationType<PostItem>>({
-    url: createCommonPagination(END_POINT.BOARDS_LIST, params),
+    url: createCommonPagination(END_POINT.BOARDS_LIST, {
+      category: category.toUpperCase(),
+      page,
+      size,
+    }),
   });
 
   return data;

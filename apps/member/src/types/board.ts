@@ -1,8 +1,8 @@
-import type { CommunityCategoryKorType } from './community';
+import type { CommunityCategoryType } from './community';
 
 export interface BoardType {
   id: number;
-  category: CommunityCategoryKorType;
+  category: CommunityCategoryType;
   title: string;
 }
 

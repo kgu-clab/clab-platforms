@@ -1,4 +1,4 @@
-import type { CommunityCategoryKorType } from './community';
+import type { CommunityCategoryType } from './community';
 
 export interface CommentItem {
   id: number;
@@ -6,7 +6,7 @@ export interface CommentItem {
   writerImageUrl: string;
   content: string;
   boardId: number;
-  boardCategory: CommunityCategoryKorType;
+  boardCategory: CommunityCategoryType;
   hasLikeByMe: boolean;
   likes: number;
   writer: string;

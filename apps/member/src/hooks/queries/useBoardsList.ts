@@ -2,10 +2,9 @@ import { getMyHire } from '@api/hire';
 import { getNews } from '@api/news';
 import { QUERY_KEY } from '@constants/key';
 import { useSuspenseQuery } from '@tanstack/react-query';
-import { categoryToTitle } from '@utils/community';
-import type { CommunityCategoryType } from '@type/community';
 import { getBoardsList } from '@api/board';
 import { PaginationPramsType } from '@type/api';
+import type { CommunityCategoryType } from '@type/community';
 
 interface UseBoardsListParams extends PaginationPramsType {
   category: CommunityCategoryType;
@@ -22,19 +21,19 @@ export const useBoardsList = ({
   const queryOptions = {
     notice: {
       queryKey: QUERY_KEY.BORDER_NOTICE,
-      queryFn: () => getBoardsList(categoryToTitle('notice'), page, size),
+      queryFn: () => getBoardsList('notice', page, size),
     },
     free: {
       queryKey: QUERY_KEY.BORDER_FREE,
-      queryFn: () => getBoardsList(categoryToTitle('free'), page, size),
+      queryFn: () => getBoardsList('free', page, size),
     },
     qna: {
       queryKey: QUERY_KEY.BORDER_QNA,
-      queryFn: () => getBoardsList(categoryToTitle('qna'), page, size),
+      queryFn: () => getBoardsList('qna', page, size),
     },
     graduated: {
       queryKey: QUERY_KEY.BORDER_GRADUATED,
-      queryFn: () => getBoardsList(categoryToTitle('graduated'), page, size),
+      queryFn: () => getBoardsList('graduated', page, size),
     },
     news: {
       queryKey: QUERY_KEY.NEWS,
