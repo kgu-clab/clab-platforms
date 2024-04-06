@@ -43,15 +43,17 @@ const CommunityBoardCollectSection = ({
                 <p className="font-semibold truncate">{title}</p>
                 <p className="text-gray-500 truncate">{content}</p>
               </div>
-              <p className="flex items-center gap-1">
-                <LiaCommentSolid />
-                {commentCount}
-              </p>
-              <div className="flex flex-col">
-                <p>
-                  {writerName} {writerId && `(${writerId})`}
+              <div className="flex justify-between gap-2">
+                <p className="flex items-center w-12 gap-1">
+                  <LiaCommentSolid />
+                  {commentCount}
                 </p>
-                <p>{formattedDate(createdAt)}</p>
+                <div className="w-32">
+                  <p>
+                    {writerName} {writerId && `(${writerId})`}
+                  </p>
+                  <p>{formattedDate(createdAt)}</p>
+                </div>
               </div>
             </Link>
           ),
