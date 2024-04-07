@@ -39,8 +39,7 @@ const MyHistorySection = ({ title, data }: MyHistorySectionProps) => {
            * 나의 댓글
            */
           if ('boardId' in item) {
-            const { id, boardId, boardCategory, content, createdAt } =
-              item as CommentItem;
+            const { id, boardId, boardCategory, content, createdAt } = item;
             return (
               <ListButton
                 key={id}
@@ -66,7 +65,7 @@ const MyHistorySection = ({ title, data }: MyHistorySectionProps) => {
                   <span>{bookTitle}</span>
                 </p>
                 <p className="text-clab-main-light">
-                  {toYYMMDD(borrowedAt || '')}
+                  {toYYMMDD(borrowedAt ?? '')}
                 </p>
               </ListButton>
             );
