@@ -7,6 +7,7 @@ import { HireItem } from '@type/hire';
 import { NewsItem } from '@type/news';
 import { createPath } from '@utils/api';
 import { COMMUNITY_MESSAGE } from '@constants/message';
+import { toDecodeHTMLEntities } from '@utils/string';
 import classNames from 'classnames';
 
 interface CommunitySectionProps {
@@ -43,7 +44,9 @@ CommunitySection.List = ({ title, to, data }: CommunitySectionListProps) => {
         ) : (
           data.map(({ id, title, createdAt }) => (
             <ListButton key={id} to={createPath(to, id)}>
-              <p className="w-full truncate pr-4">{title}</p>
+              <p className="w-full pr-4 truncate">
+                {toDecodeHTMLEntities(title)}
+              </p>
               <p className="text-clab-main-light">{toYYMMDD(createdAt)}</p>
             </ListButton>
           ))
