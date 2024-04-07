@@ -5,7 +5,6 @@ import { useCommentList } from '@hooks/queries/useCommentList';
 import CommentInput from '@components/common/CommentInput/CommentInput';
 import { useAccusesMutation } from '@hooks/queries/useAccusesMutation';
 import useModal from '@hooks/common/useModal';
-import { createImageUrl } from '@utils/api';
 
 interface PostCommentSectionProps {
   id: string;
@@ -66,53 +65,49 @@ const PostCommentSection = ({ id }: PostCommentSectionProps) => {
 
   return (
     <Section>
-      <div className="space-y-4">
-        <h3 className="text-lg font-bold">댓글 {data.items?.length ?? 0}</h3>
+      <h3 className="text-lg font-bold">댓글 {data.items?.length ?? 0}</h3>
+      <Section.Body>
         <CommentInput id={id} value={comment} onChange={handleCommentChange} />
-        <div className="space-y-4">
-          {data.items.map(
-            ({ id: commentId, writer, writerImageUrl, content, children }) => (
-              <div key={commentId} className="space-y-2">
-                {/* ROOT */}
-                <Comment
-                  image={createImageUrl(writerImageUrl)}
-                  writer={writer}
-                  onClickReport={() => handleReportClick(commentId)}
-                  onClickReply={() => handleReplyClick(commentId)}
-                >
-                  {content}
-                </Comment>
-                {/* CHILDREN */}
-                <div className="ml-5 space-y-2">
-                  {children?.map(({ id, writer, writerImageUrl, content }) => (
-                    <Comment
-                      key={id}
-                      image={createImageUrl(writerImageUrl)}
-                      isReply
-                      writer={writer}
-                      onClickReport={() => handleReportClick(id)}
-                      onClickReply={() => handleReplyClick(id)}
-                    >
-                      {content}
-                    </Comment>
-                  ))}
-                  {/* Reply */}
-                  {checkReComment[commentId] && (
-                    <CommentInput
-                      id={id}
-                      parentId={commentId}
-                      value={reComment[commentId] || ''}
-                      onChange={(e) =>
-                        handleReCommentChange(commentId, e.target.value)
-                      }
-                    />
-                  )}
-                </div>
+        <div className="divide-y">
+          {data.items.map(({ id: commentId, content, children, ...rest }) => (
+            <div key={commentId} className="p-3">
+              {/* ROOT */}
+              <Comment
+                {...rest}
+                onClickReport={() => handleReportClick(commentId)}
+                onClickReply={() => handleReplyClick(commentId)}
+              >
+                {content}
+              </Comment>
+              {/* CHILDREN */}
+              <div className="ml-4 space-y-2">
+                {children?.map(({ id, content, ...rest }) => (
+                  <Comment
+                    key={id}
+                    onClickReport={() => handleReportClick(id)}
+                    onClickReply={() => handleReplyClick(id)}
+                    isReply
+                    {...rest}
+                  >
+                    {content}
+                  </Comment>
+                ))}
+                {/* Reply */}
+                {checkReComment[commentId] && (
+                  <CommentInput
+                    id={id}
+                    parentId={commentId}
+                    value={reComment[commentId] || ''}
+                    onChange={(e) =>
+                      handleReCommentChange(commentId, e.target.value)
+                    }
+                  />
+                )}
               </div>
-            ),
-          )}
+            </div>
+          ))}
         </div>
-      </div>
+      </Section.Body>
     </Section>
   );
 };
