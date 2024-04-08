@@ -1,5 +1,11 @@
+import { ClassValue, clsx } from 'clsx';
+import { twMerge } from 'tailwind-merge';
 import * as entities from 'entities';
 import type { MembershipStatusType } from '@type/membershipFee';
+
+export const cn = (...inputs: ClassValue[]) => {
+  return twMerge(clsx(inputs));
+};
 
 /**
  * 주어진 숫자를 한국식 통화 형식으로 포맷합니다.

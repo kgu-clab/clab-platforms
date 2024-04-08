@@ -13,6 +13,7 @@
     "@gwansikk/server-chain": "^0.5.2",
     "@tanstack/react-query": "^5.18.1",
     "classnames": "^2.5.1",
+    "clsx": "^2.1.0",
     "dayjs": "^1.11.10",
     "entities": "^4.5.0",
     "framer-motion": "^10.18.0",
@@ -21,7 +22,8 @@
     "react-dropzone": "^14.2.3",
     "react-icons": "^5.0.1",
     "react-router-dom": "^6.21.2",
-    "recoil": "^0.7.7"
+    "recoil": "^0.7.7",
+    "tailwind-merge": "^2.2.2"
   },
   "devDependencies": {
     "@clab/design-system": "workspace:^",
