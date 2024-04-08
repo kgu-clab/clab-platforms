@@ -3,9 +3,12 @@ import { Button } from '@clab/design-system';
 import { PATH } from '@constants/path';
 import Content from '@components/common/Content/Content';
 import Header from '@components/common/Header/Header';
-import CommunitySection from '@components/main/CommunitySection/CommunitySection';
 import CommunityBoardCollectSection from '@components/community/CommunityBoardCollectSection/CommunityBoardCollectSection';
 import { useHire, useNews, useBoardsList, useBoards } from '@hooks/queries';
+import {
+  BoardSection,
+  BoardSectionItem,
+} from '@components/community/BoardSection';
 
 const CommunityPage = () => {
   const navigate = useNavigate();
@@ -16,7 +19,7 @@ const CommunityPage = () => {
   const { data: graduatedData } = useBoardsList({ category: 'graduated' });
   const { data: newsData } = useNews();
   const { data: hireData } = useHire();
-  const { data: allBoardsData } = useBoards({ page: 0, size: 6 });
+  const { data: collectData } = useBoards({ page: 0, size: 6 });
 
   return (
     <Content>
@@ -25,39 +28,39 @@ const CommunityPage = () => {
           글쓰기
         </Button>
       </Header>
-      <CommunitySection>
-        <CommunitySection.List
+      <BoardSection>
+        <BoardSectionItem
           title="공지사항"
           data={noticeData.items}
           to={PATH.COMMUNITY_NOTICE}
         />
-        <CommunitySection.List
+        <BoardSectionItem
           title="자유"
           data={freeData.items}
           to={PATH.COMMUNITY_FREE}
         />
-        <CommunitySection.List
+        <BoardSectionItem
           title="QnA"
           data={QnAData.items}
           to={PATH.COMMUNITY_QNA}
         />
-        <CommunitySection.List
+        <BoardSectionItem
           title="졸업생"
           data={graduatedData.items}
           to={PATH.COMMUNITY_GRADUATED}
         />
-        <CommunitySection.List
+        <BoardSectionItem
           title="IT 뉴스"
           data={newsData.items}
           to={PATH.COMMUNITY_NEWS}
         />
-        <CommunitySection.List
+        <BoardSectionItem
           title="채용 정보"
           data={hireData.items}
           to={PATH.COMMUNITY_HIRE}
         />
-      </CommunitySection>
-      <CommunityBoardCollectSection data={allBoardsData.items} />
+      </BoardSection>
+      <CommunityBoardCollectSection data={collectData.items} />
     </Content>
   );
 };

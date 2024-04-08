@@ -1,41 +1,34 @@
-import Section from '@components/common/Section/Section';
 import ListButton from '@components/common/ListButton/ListButton';
 import MoreButton from '@components/common/MoreButton/MoreButton';
-import { toYYMMDD } from '@utils/date';
-import { CommunityPostItem } from '@type/community';
-import { HireItem } from '@type/hire';
-import { NewsItem } from '@type/news';
-import { createPath } from '@utils/api';
+import Section from '@components/common/Section/Section';
 import { COMMUNITY_MESSAGE } from '@constants/message';
-import { toDecodeHTMLEntities } from '@utils/string';
-import classNames from 'classnames';
+import { createPath } from '@utils/api';
+import { toYYMMDD } from '@utils/date';
+import { cn, toDecodeHTMLEntities } from '@utils/string';
+import type { HireItem } from '@type/hire';
+import type { NewsItem } from '@type/news';
+import type { CommunityPostItem } from '@type/community';
+import type { StrictPropsWithChildren } from '@type/component';
 
-interface CommunitySectionProps {
-  children: React.ReactNode;
-}
-
-interface CommunitySectionListProps {
+interface BoardSectionItemProps {
   title: string;
   to: string;
   data: Array<CommunityPostItem | HireItem | NewsItem>;
 }
 
-const CommunitySection = ({ children }: CommunitySectionProps) => {
-  return (
-    <div className="flex flex-col gap-4 text-sm xl:grid xl:grid-cols-2">
-      {children}
-    </div>
-  );
+const BoardSection = ({ children }: StrictPropsWithChildren) => {
+  return <div className="grid gap-4 text-sm xl:grid-cols-2">{children}</div>;
 };
+BoardSection.displayName = 'BoardSection';
 
-CommunitySection.List = ({ title, to, data }: CommunitySectionListProps) => {
+const BoardSectionItem = ({ title, to, data }: BoardSectionItemProps) => {
   return (
     <Section>
       <Section.Header title={title}>
         <MoreButton to={to} />
       </Section.Header>
       <Section.Body
-        className={classNames({
+        className={cn({
           'grow flex flex-col justify-center text-center': data.length === 0,
         })}
       >
@@ -55,5 +48,6 @@ CommunitySection.List = ({ title, to, data }: CommunitySectionListProps) => {
     </Section>
   );
 };
+BoardSectionItem.displayName = 'BoardSectionItem';
 
-export default CommunitySection;
+export { BoardSection, BoardSectionItem };
