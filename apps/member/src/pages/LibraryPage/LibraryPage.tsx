@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import Content from '@components/common/Content/Content';
 import Header from '@components/common/Header/Header';
 import { Button } from '@clab/design-system';
@@ -9,20 +8,14 @@ import Section from '@components/common/Section/Section';
 import LibraryBookList from '@components/library/LibraryBookList/LibraryBookList';
 import Pagination from '@components/common/Pagination/Pagination';
 import LibraryNewBooksSection from '@components/library/LibraryNewBooksSection/LibraryNewBooksSection';
+import { usePagination } from '@hooks/common/usePagination';
 
 const LibraryPage = () => {
   const navigate = useNavigate();
-  const [pagination, setPagination] = useState({
-    page: 0,
-    size: 16,
-  });
-  const { page, size } = pagination;
-  const { data: newBooks } = useBooks(0, 4);
-  const { data } = useBooks(page, size);
+  const { page, size, handlePageChange } = usePagination();
 
-  const handlePageChange = (page: number) => {
-    setPagination({ ...pagination, page: page - 1 });
-  };
+  const { data: newBookData } = useBooks(0, 4);
+  const { data: bookData } = useBooks(page, size);
 
   return (
     <Content>
@@ -31,19 +24,18 @@ const LibraryPage = () => {
           희망도서 신청하기
         </Button>
       </Header>
-      <LibraryNewBooksSection data={newBooks.items} />
+      <LibraryNewBooksSection data={newBookData.items} />
       <Section>
         <Section.Header title="소장 도서 둘러보기">
           <Pagination
-            totalItems={data.totalItems}
-            pageLimit={5}
+            totalItems={bookData.totalItems}
             postLimit={size}
-            setPage={handlePageChange}
+            onChange={handlePageChange}
             page={page}
           />
         </Section.Header>
         <Section.Body>
-          <LibraryBookList data={data.items} />
+          <LibraryBookList data={bookData.items} />
         </Section.Body>
       </Section>
     </Content>
