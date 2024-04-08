@@ -11,7 +11,7 @@ import type {
 import type { PostItem } from '@type/post';
 
 interface PatchBoardsParams {
-  id: string;
+  id: number;
   body: CommunityWriteItem;
 }
 
@@ -60,7 +60,10 @@ export const getBoardsList = async (
 export const postBoardsWrite = async (body: CommunityWriteItem) => {
   const { data } = await server.post<CommunityWriteItem, BaseResponse<number>>({
     url: END_POINT.BOARDS,
-    body,
+    body: {
+      ...body,
+      category: body.category.toUpperCase(),
+    },
   });
 
   return data;
@@ -81,7 +84,10 @@ export const getBoardsDetail = async (id: string) => {
 export const patchBoards = async ({ id, body }: PatchBoardsParams) => {
   const { data } = await server.patch<CommunityWriteItem, BaseResponse>({
     url: END_POINT.BOARDERS_ITEM(id),
-    body,
+    body: {
+      ...body,
+      category: body.category.toUpperCase(),
+    },
   });
 
   return data;
