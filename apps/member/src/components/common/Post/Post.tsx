@@ -1,32 +1,42 @@
-import { PropsWithChildren } from 'react';
-import Image from '../Image/Image';
 import { formattedDate } from '@utils/date';
 import Share from '../Share/Share';
 import { MODE } from '@constants/environment';
 import { createImageUrl } from '@utils/api';
 import { getProfileRingStyle } from '@utils/style';
-import classNames from 'classnames';
+import { cn } from '@utils/string';
+import { StrictPropsWithChildren } from '@type/component';
+import Image from '../Image/Image';
 
 interface PostHeaderProps {
   title: string;
-  src?: string;
-  writer: string;
-  roleLevel: number;
-  createAt: string;
+  createdAt: string;
+  src?: string | null;
+  writer?: string;
+  roleLevel?: number | null;
 }
 
-const Post = ({ children }: PropsWithChildren) => {
-  return <div className="flex flex-col gap-4">{children}</div>;
+interface Props extends StrictPropsWithChildren {
+  className?: string;
+}
+
+const Post = ({ className, children }: Props) => {
+  return <div className={cn('flex flex-col gap-4', className)}>{children}</div>;
 };
 
-Post.Head = ({ title, src, writer, roleLevel, createAt }: PostHeaderProps) => {
+Post.Head = ({
+  title,
+  src = '',
+  writer = 'C-Lab',
+  roleLevel = 1,
+  createdAt,
+}: PostHeaderProps) => {
   return (
     <div className="space-y-4">
       <h2 className="text-lg font-semibold">{title}</h2>
       <div className="flex items-center justify-between">
-        <div className="flex gap-2">
+        <div className="flex gap-3">
           <div
-            className={classNames(
+            className={cn(
               'rounded-full ring ring-offset-1',
               getProfileRingStyle(roleLevel),
             )}
@@ -35,13 +45,13 @@ Post.Head = ({ title, src, writer, roleLevel, createAt }: PostHeaderProps) => {
               className="rounded-full"
               width="w-10"
               height="w-10"
-              src={createImageUrl(src || '')}
+              src={createImageUrl(src)}
               alt="작성자 프로필사진"
             />
           </div>
           <div className="text-sm">
             <p className="font-semibold">{writer}</p>
-            <p>{formattedDate(createAt)}</p>
+            <p>{formattedDate(createdAt)}</p>
           </div>
         </div>
         {MODE !== 'production' && <Share />}
@@ -51,12 +61,18 @@ Post.Head = ({ title, src, writer, roleLevel, createAt }: PostHeaderProps) => {
   );
 };
 
-Post.Body = ({ children }: PropsWithChildren) => {
-  return <h2 className="break-words whitespace-pre-wrap">{children}</h2>;
+Post.Body = ({ className, children }: Props) => {
+  return (
+    <div className={cn('break-words whitespace-pre-wrap', className)}>
+      {children}
+    </div>
+  );
 };
 
-Post.Footer = ({ children }: PropsWithChildren) => {
-  return <div className="flex justify-end gap-2">{children}</div>;
+Post.Footer = ({ className, children }: Props) => {
+  return (
+    <div className={cn('flex justify-end gap-2', className)}>{children}</div>
+  );
 };
 
 export default Post;

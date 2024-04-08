@@ -101,6 +101,7 @@ const PostCommentSection = ({ id }: PostCommentSectionProps) => {
                     onChange={(e) =>
                       handleReCommentChange(commentId, e.target.value)
                     }
+                    className="pl-4 mt-2 border-l"
                   />
                 )}
               </div>

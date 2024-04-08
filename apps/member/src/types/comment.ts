@@ -15,12 +15,15 @@ export interface CommentItem {
 
 export interface CommentListItem {
   id: number;
-  writer: string;
+  writerId: string | null;
+  writerName: string;
   writerImageUrl: string;
+  writerRoleLevel: number;
   content: string;
   children: Array<CommentListItem>;
   likes: number;
   hasLikeByMe: boolean;
+  isOwner: boolean;
   createdAt: string;
 }
 

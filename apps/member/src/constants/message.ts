@@ -1,5 +1,6 @@
 export const ERROR_MESSAGE = {
   DEFAULT: '오류가 발생했어요. 잠시후에 다시 시도해주세요.',
+  NOT_FOUND: '잘못된 접근이에요.',
 } as const;
 
 export const COMMUNITY_MESSAGE = {

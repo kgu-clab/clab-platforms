@@ -3,7 +3,6 @@ import type {
   CommunityCategoryKorType,
   CommunityCategoryType,
 } from '@type/community';
-import type { HireItem } from '@type/hire';
 
 /**
  * 주어진 커뮤니티 카테고리에 해당하는 한국어 제목을 반환합니다.
@@ -72,20 +71,4 @@ export function isCommunityCategoryType(
 ): type is CommunityCategoryType {
   if (!type) return false;
   return ['notice', 'free', 'qna', 'graduated', 'news', 'hire'].includes(type);
-}
-
-/**
- * 주어진 객체가 유효한 채용 정보 아이템인지 확인합니다.
- *
- * @param {any} item - 검사할 객체
- * @returns {boolean} 객체가 유효한 채용 정보 아이템이면 true, 그렇지 않으면 false
- */
-export function isHireItem(item: any): item is HireItem {
-  return (
-    item &&
-    item.careerLevel &&
-    item.companyName &&
-    item.recruitmentPeriod &&
-    item.jobPostingUrl
-  );
 }
