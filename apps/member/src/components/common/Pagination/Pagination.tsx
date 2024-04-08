@@ -1,13 +1,12 @@
-import { useEffect, useState } from 'react';
 import { cn } from '@utils/string';
 import { MdOutlineNavigateNext } from 'react-icons/md';
-import type { PaginationOnChange } from '@type/common';
+import type { PaginationOnChange } from '@type/component';
 
 interface PaginationProps {
   page: number;
   postLimit: number;
   totalItems: number;
-  onChange?: PaginationOnChange;
+  onChange: PaginationOnChange;
   className?: string;
 }
 
@@ -19,25 +18,17 @@ const Pagination = ({
   className,
 }: PaginationProps) => {
   const totalPages = Math.ceil(totalItems / postLimit);
-  const [startPage, setStartPage] = useState(1);
-  const [endPage, setEndPage] = useState(totalPages);
-  const [currentPage, setCurrentPage] = useState(1);
 
   const pageNumber = [];
+  const startPage = Math.max(1, page - 2);
+  const endPage = Math.min(totalPages, startPage + 4);
   for (let i = startPage; i <= endPage; i++) {
     pageNumber.push(i);
   }
 
-  const handleCurrentPageClick = (index: number) => {
-    const changePage = Math.max(1, Math.min(index, totalPages));
-    onChange && onChange(changePage);
-    setCurrentPage(changePage);
+  const handleCurrentPageClick = (page: number) => {
+    onChange(Math.max(1, Math.min(page, totalPages)));
   };
-
-  useEffect(() => {
-    setStartPage(page - (page % 5) + 1);
-    setEndPage(Math.min(totalPages, page - (page % 5) + 5));
-  }, [page, totalPages]);
 
   return (
     <div className={cn('flex items-center space-x-4', className)}>
@@ -50,21 +41,21 @@ const Pagination = ({
       {pageNumber.length === 0 ? (
         <span>1</span>
       ) : (
-        pageNumber.map((page) => (
+        pageNumber.map((index) => (
           <button
-            key={page}
+            key={index}
             className={cn('underline-offset-4 text-gray-500', {
-              'underline text-clab-main': currentPage === page,
+              'underline text-clab-main': page + 1 === index,
             })}
-            onClick={() => handleCurrentPageClick(page)}
+            onClick={() => handleCurrentPageClick(index)}
           >
-            {page}
+            {index}
           </button>
         ))
       )}
       <button
         onClick={() => handleCurrentPageClick(Math.ceil(+postLimit))}
-        className="px-1 text-gray-500 border rounded"
+        className="px-0.5 text-gray-500 border rounded"
       >
         <MdOutlineNavigateNext size={20} />
       </button>
