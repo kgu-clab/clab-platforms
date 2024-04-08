@@ -1,44 +1,62 @@
-import { ChangeEvent, useState } from 'react';
-import { Button, Input } from '@clab/design-system';
+import { ChangeEvent, useCallback, useState } from 'react';
+import { Button, Input, Checkbox } from '@clab/design-system';
 import Content from '@components/common/Content/Content';
 import Header from '@components/common/Header/Header';
 import Section from '@components/common/Section/Section';
 import Select from '@components/common/Select/Select';
 import Textarea from '@components/common/Textarea/Textarea';
 import { useBoardWriteMutation } from '@hooks/queries/useBoardWriteMutation';
-import { SELECT_DEFAULT_OPTION } from '@constants/select';
-
-// name이 category와 매치되어야 합니다.
-const selectOptions = [
-  { value: 1, name: '자유' },
-  { value: 2, name: 'QnA' },
-  { value: 3, name: '졸업생' },
-];
+import useToast from '@hooks/common/useToast';
+import {
+  SELECT_DEFAULT_OPTION,
+  SELECT_OPTIONS_COMMUNITY_TYPE,
+} from '@constants/select';
 
 const CommunityWritePage = () => {
+  const toast = useToast();
   const { boardWriteMutate } = useBoardWriteMutation();
 
-  const [content, setContent] = useState({
-    category: 0,
+  const [postInfo, setPostInfo] = useState({
+    category: SELECT_DEFAULT_OPTION,
     title: '',
     content: '',
     wantAnonymous: false,
   });
 
-  const handleContent = (
-    e: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>,
-  ) => {
-    const value =
-      e.target.type === 'checkbox' ? !content.wantAnonymous : e.target.value;
-    setContent((prev) => {
-      return { ...prev, [e.target.name]: value };
-    });
-  };
+  const handleContentChange = useCallback(
+    (
+      e: ChangeEvent<
+        HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
+      >,
+    ) =>
+      setPostInfo((prev) => {
+        return { ...prev, [e.target.name]: e.target.value };
+      }),
+    [],
+  );
 
-  const onClickSubmit = () => {
-    const categoryName = selectOptions[content.category - 1]?.name;
-    boardWriteMutate({ ...content, category: categoryName });
-  };
+  const handleCheckboxChange = useCallback(
+    (e: ChangeEvent<HTMLInputElement>) =>
+      setPostInfo((prev) => {
+        return { ...prev, [e.target.name]: e.target.checked };
+      }),
+    [],
+  );
+
+  const handleSubmitClick = useCallback(() => {
+    if (
+      !postInfo.title ||
+      !postInfo.content ||
+      postInfo.category === SELECT_DEFAULT_OPTION
+    ) {
+      return toast({
+        state: 'error',
+        message: '모든 항목을 입력해주세요.',
+      });
+    }
+
+    boardWriteMutate(postInfo);
+  }, [boardWriteMutate, postInfo, toast]);
 
   return (
     <Content>
@@ -47,40 +65,36 @@ const CommunityWritePage = () => {
         <div className="flex gap-2">
           <Select
             name="category"
-            options={selectOptions}
+            options={SELECT_OPTIONS_COMMUNITY_TYPE}
             defaultValue={SELECT_DEFAULT_OPTION}
-            onChange={handleContent}
+            onChange={handleContentChange}
           />
           <Input
             id="title"
             name="title"
-            type="text"
             placeholder="제목을 입력해주세요"
-            maxLength={60}
             className="grow"
-            value={content.title}
-            onChange={handleContent}
+            maxLength={100}
+            value={postInfo.title}
+            onChange={handleContentChange}
           />
         </div>
         <Textarea
           name="content"
           className="w-full min-h-96"
-          maxLength={1000}
+          maxLength={2000}
           placeholder="내용을 입력해주세요."
-          value={content.content}
-          onChange={handleContent}
+          value={postInfo.content}
+          onChange={handleContentChange}
         />
-        <div className="flex items-center">
-          <Input
-            id="wantAnonymous"
-            name="wantAnonymous"
-            type="checkbox"
-            value={String(content.wantAnonymous)}
-            onChange={handleContent}
-          />
-          <span className="pl-2">익명</span>
-        </div>
-        <Button onClick={onClickSubmit}>등록</Button>
+        <Checkbox
+          id="wantAnonymous"
+          name="wantAnonymous"
+          label="익명"
+          checked={postInfo.wantAnonymous}
+          onChange={handleCheckboxChange}
+        />
+        <Button onClick={handleSubmitClick}>등록</Button>
       </Section>
     </Content>
   );
