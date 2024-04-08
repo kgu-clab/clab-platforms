@@ -1,64 +1,63 @@
-import classNames from 'classnames';
-import { useEffect, useState } from 'react';
-import { MdOutlineSkipNext } from 'react-icons/md';
+import { cn } from '@utils/string';
+import { MdOutlineNavigateNext } from 'react-icons/md';
+import type { PaginationOnChange } from '@type/component';
 
 interface PaginationProps {
-  className?: string;
-  totalItems: number;
-  pageLimit: number;
-  postLimit: number;
-  setPage: (page: number) => void;
   page: number;
-  sort?: string;
+  postLimit: number;
+  totalItems: number;
+  onChange: PaginationOnChange;
+  className?: string;
 }
 
 const Pagination = ({
-  className,
-  totalItems,
-  pageLimit,
-  postLimit,
-  setPage,
   page,
+  postLimit,
+  totalItems,
+  onChange,
+  className,
 }: PaginationProps) => {
   const totalPages = Math.ceil(totalItems / postLimit);
-  const [startPage, setStartPage] = useState(1);
-  const [endPage, setEndPage] = useState(Math.min(pageLimit, totalPages));
-  const [clickedButton, setClickedButton] = useState(1);
 
   const pageNumber = [];
+  const startPage = Math.max(1, page - 2);
+  const endPage = Math.min(totalPages, startPage + 4);
   for (let i = startPage; i <= endPage; i++) {
     pageNumber.push(i);
   }
 
-  const handleButtonClick = (index: number) => {
-    setPage(index);
-    setClickedButton(index);
+  const handleCurrentPageClick = (page: number) => {
+    onChange(Math.max(1, Math.min(page, totalPages)));
   };
 
-  useEffect(() => {
-    setStartPage(page - (page % 5) + 1);
-    setEndPage(Math.min(totalPages, page - (page % 5) + 5));
-  }, [page, totalPages, pageLimit]);
-
   return (
-    <div className={classNames('flex items-center', className)}>
-      <button onClick={() => handleButtonClick(1)}>
-        <MdOutlineSkipNext className="rotate-180" />
+    <div className={cn('flex items-center space-x-4', className)}>
+      <button
+        onClick={() => handleCurrentPageClick(-postLimit)}
+        className="px-1 text-gray-500 border rounded"
+      >
+        <MdOutlineNavigateNext size={20} className="rotate-180" />
       </button>
-      {pageNumber.map((index) => (
-        <div key={index}>
+      {pageNumber.length === 0 ? (
+        <span>1</span>
+      ) : (
+        pageNumber.map((index) => (
           <button
-            className={classNames('rounded-full px-2', {
-              underline: clickedButton === index,
+            key={index}
+            className={cn('underline-offset-4 text-gray-500', {
+              'underline text-clab-main': page + 1 === index,
             })}
-            onClick={() => handleButtonClick(index)}
+            onClick={() => handleCurrentPageClick(index)}
           >
             {index}
           </button>
-        </div>
-      ))}
-      <button onClick={() => handleButtonClick(totalPages)}>
-        <MdOutlineSkipNext />
+        ))
+      )}
+      <button
+        onClick={() => handleCurrentPageClick(Math.ceil(+postLimit))}
+        className="px-0.5 text-gray-500 border rounded"
+      >
+        <MdOutlineNavigateNext size={20} />
       </button>
     </div>
   );

@@ -1,7 +1,16 @@
 import classNames from 'classnames';
+import { type PropsWithChildren } from 'react';
 
-interface SectionProps {
-  children: React.ReactNode;
+interface SectionProps extends PropsWithChildren {
+  className?: string;
+}
+
+interface SectionHeaderProps extends PropsWithChildren {
+  title: string;
+  description?: string;
+}
+
+interface SectionBodyProps extends PropsWithChildren {
   className?: string;
 }
 
@@ -18,24 +27,17 @@ const Section = ({ className, children }: SectionProps) => {
   );
 };
 
-interface SectionHeaderProps {
-  title: string;
-  children?: React.ReactNode;
-}
-
-Section.Header = ({ title, children }: SectionHeaderProps) => {
+Section.Header = ({ children, title, description }: SectionHeaderProps) => {
   return (
     <div className="flex items-center justify-between">
       <p className="text-xl font-bold leading-loose text-black">{title}</p>
-      <div>{children}</div>
+      <div className="flex items-center">
+        <p className="text-sm font-semibold text-gray-500">{description}</p>
+        {children}
+      </div>
     </div>
   );
 };
-
-interface SectionBodyProps {
-  className?: string;
-  children: React.ReactNode;
-}
 
 Section.Body = ({ className, children }: SectionBodyProps) => {
   return <div className={classNames('mt-4', className)}>{children}</div>;

@@ -4,12 +4,12 @@ import Section from '@components/common/Section/Section';
 import { toYYMMDD } from '@utils/date';
 import { CommentItem } from '@type/comment';
 import { PATH_FINDER } from '@constants/path';
-import { titleToCategory } from '@utils/community';
 import useModal from '@hooks/common/useModal';
+import { Badge } from '@clab/design-system';
 import type { BookLoanRecordConditionType } from '@type/book';
 import type { BoardItem } from '@type/board';
 import type { NotificationItem } from '@type/notification';
-import { Badge } from '@clab/design-system';
+
 interface MyHistorySectionProps {
   title: string;
   data: Array<
@@ -39,15 +39,11 @@ const MyHistorySection = ({ title, data }: MyHistorySectionProps) => {
            * 나의 댓글
            */
           if ('boardId' in item) {
-            const { id, boardId, boardCategory, content, createdAt } =
-              item as CommentItem;
+            const { id, boardId, boardCategory, content, createdAt } = item;
             return (
               <ListButton
                 key={id}
-                to={PATH_FINDER.COMMUNITY_POST(
-                  titleToCategory(boardCategory),
-                  boardId,
-                )}
+                to={PATH_FINDER.COMMUNITY_POST(boardCategory, boardId)}
               >
                 <p className="pr-4 truncate grow">{content}</p>
                 <p className="text-clab-main-light">{toYYMMDD(createdAt)}</p>
@@ -69,7 +65,7 @@ const MyHistorySection = ({ title, data }: MyHistorySectionProps) => {
                   <span>{bookTitle}</span>
                 </p>
                 <p className="text-clab-main-light">
-                  {toYYMMDD(borrowedAt || '')}
+                  {toYYMMDD(borrowedAt ?? '')}
                 </p>
               </ListButton>
             );
@@ -94,7 +90,7 @@ const MyHistorySection = ({ title, data }: MyHistorySectionProps) => {
             return (
               <ListButton
                 key={id}
-                to={PATH_FINDER.COMMUNITY_POST(titleToCategory(category), id)}
+                to={PATH_FINDER.COMMUNITY_POST(category, id)}
               >
                 <p className="pr-4 truncate grow">{title}</p>
                 <p className="text-clab-main-light">{toYYMMDD(createdAt)}</p>

@@ -6,12 +6,15 @@ import {
 
 /**
  * 여러 개의 경로를 안전하게 연결하여 전체 경로를 생성합니다.
- * @param {...Array<string | number>} path - 연결할 경로 조각들입니다.
- * @returns {string} - 생성된 전체 경로 문자열입니다.
+ * @param {...Array<string | number>} path - 연결할 경로들입니다.
+ * @returns {string} - 연결된 전체 경로 문자열입니다.
  */
-export function createPath(...path: Array<string | number>): string {
+export function createPath(
+  ...path: Array<string | number | undefined>
+): string {
   return path
     .map((path, index) => {
+      if (path === undefined) return;
       const pathStr = path.toString();
       const prefix = index > 0 && !pathStr.startsWith('?') ? '/' : '';
       return prefix + pathStr;

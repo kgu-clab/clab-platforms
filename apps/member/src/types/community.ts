@@ -26,9 +26,11 @@ export interface CommunityWriteItem {
 }
 
 export interface CommunityPostDetailItem extends PostItem {
-  memberImageUrl: string;
+  writerId: string | null; // 익명일 경우 null
+  writerRoleLevel: number | null; // 익명일 경우 null
+  writerImageUrl: string | null; // 기본 사진일 경우 null
   content: string;
   likes: number;
   hasLikeByMe: boolean;
-  isOwner: boolean;
+  files: [];
 }

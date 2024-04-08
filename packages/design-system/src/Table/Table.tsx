@@ -14,7 +14,7 @@ const Table = ({ head, className, children, ...rest }: TableProps) => {
             {head.map((item, index) => (
               <th
                 key={index}
-                className="py-2 first:rounded-l-lg last:rounded-r-lg"
+                className="p-2 first:rounded-l-lg last:rounded-r-lg text-nowrap"
               >
                 {item}
               </th>

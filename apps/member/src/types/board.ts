@@ -1,9 +1,15 @@
-import type { CommunityCategoryKorType } from './community';
+import type { CommunityCategoryType } from './community';
 
-export interface BoardItem {
+export interface BoardType {
   id: number;
-  category: CommunityCategoryKorType;
+  category: CommunityCategoryType;
   title: string;
-  writer: string;
+}
+
+export interface BoardItem extends BoardType {
+  writerId: string;
+  content: string;
+  commentCount: number;
+  writerName: string;
   createdAt: string;
 }

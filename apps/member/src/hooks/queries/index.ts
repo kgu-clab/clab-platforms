@@ -14,6 +14,7 @@ export * from './useBlog';
 export * from './useBoardModifyMutation';
 export * from './useBoardWriteMutation';
 export * from './useBoards';
+export * from './useBoardsList';
 export * from './useCommentList';
 export * from './useCommentWriteMutation';
 export * from './useHire';
