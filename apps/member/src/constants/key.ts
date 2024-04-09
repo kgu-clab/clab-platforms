@@ -24,6 +24,7 @@ export const QUERY_KEY = {
   HIRE: 'Hire',
   BIRTHDAY: 'Birthday',
   SCHEDULE: 'Schedule',
+  SCHEDULE_COLLECT: 'ScheduleCollect',
   MAIN_ACTIVITY_PHOTO: 'MainActivityPhoto',
   COMMENTS: 'Comments',
   MEMBERSHIP_FEE: 'MembershipFee',

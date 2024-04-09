@@ -6,7 +6,11 @@ import type {
   PaginationPramsType,
   PaginationType,
 } from '@type/api';
-import type { ScheduleItem, ScheduleRegisterItem } from '@type/schedule';
+import type {
+  ScheduleCollect,
+  ScheduleItem,
+  ScheduleRegisterItem,
+} from '@type/schedule';
 
 interface GetScheduleParams extends PaginationPramsType {
   startDate: string;
@@ -26,6 +30,16 @@ export const getSchedule = async ({
   const params = { startDate, endDate, page, size };
   const { data } = await server.get<PaginationType<ScheduleItem>>({
     url: createCommonPagination(END_POINT.MAIN_SCHEDULE, params),
+  });
+
+  return data;
+};
+/**
+ * 일정 모아보기
+ */
+export const getScheduleCollect = async () => {
+  const { data } = await server.get<BaseResponse<ScheduleCollect>>({
+    url: END_POINT.SCHEDULE_COLLECT,
   });
 
   return data;

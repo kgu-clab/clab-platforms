@@ -1,3 +1,5 @@
+type SchedulePriority = 'HIGH' | 'MIDDLE' | 'LOW';
+
 export interface ScheduleItem {
   id: number;
   title: string;
@@ -5,6 +7,7 @@ export interface ScheduleItem {
   activityName: string | null;
   startDate: string;
   endDate: string;
+  priority: SchedulePriority;
 }
 
 export interface ScheduleRegisterItem {
@@ -14,4 +17,9 @@ export interface ScheduleRegisterItem {
   startDateTime: string;
   endDateTime: string;
   activityGroupId?: number;
+}
+
+export interface ScheduleCollect {
+  totalScheduleCount: number;
+  totalEventCount: number;
 }

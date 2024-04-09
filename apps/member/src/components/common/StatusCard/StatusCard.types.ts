@@ -1,5 +1,5 @@
 export interface StatusCardProps {
   icon: React.ReactNode;
-  label: string;
+  label: string | number;
   description: string;
 }
