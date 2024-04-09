@@ -3,7 +3,7 @@ export interface BaseResponse<T = unknown> {
   data: T;
 }
 
-interface Pagination<T = unknown> {
+export interface Pagination<T = unknown> {
   currentPage: number;
   hasPrevious: boolean;
   hasNext: boolean;

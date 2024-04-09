@@ -3,8 +3,16 @@ import { getNews } from '@api/news';
 import { QUERY_KEY } from '@constants/key';
 import { useSuspenseQuery } from '@tanstack/react-query';
 import { getBoardsList } from '@api/board';
-import { PaginationPramsType } from '@type/api';
+import type { Pagination, PaginationPramsType } from '@type/api';
 import type { CommunityCategoryType } from '@type/community';
+import type { PostItem } from '@type/post';
+import type { NewsItem } from '@type/news';
+import type { HireItem } from '@type/hire';
+
+interface QueryOptions {
+  queryKey: string;
+  queryFn: () => Promise<Pagination<PostItem | NewsItem | HireItem>>;
+}
 
 interface UseBoardsListParams extends PaginationPramsType {
   category: CommunityCategoryType;
@@ -18,7 +26,7 @@ export const useBoardsList = ({
   page = 0,
   size = 6,
 }: UseBoardsListParams) => {
-  const queryOptions = {
+  const queryOptions: QueryOptions = {
     notice: {
       queryKey: QUERY_KEY.BORDER_NOTICE,
       queryFn: () => getBoardsList('notice', page, size),
