@@ -5,14 +5,19 @@ import { useCallback } from 'react';
 import { cn } from '@utils/string';
 import dayjs from 'dayjs';
 
+interface CalendarScheduleProps extends ScheduleItem {
+  day: dayjs.Dayjs;
+}
+
 const CalendarSchedule = ({
+  day,
   title,
   detail,
   startDate,
   endDate,
-}: ScheduleItem) => {
+}: CalendarScheduleProps) => {
   const { openModal } = useModal();
-  const isSameDate = dayjs(startDate).isSame(endDate, 'date');
+  const isDateDiff = dayjs(startDate).diff(endDate, 'd');
 
   const handleScheduleClick = useCallback(
     (detail: string, start: string, end: string) => {
@@ -32,9 +37,24 @@ const CalendarSchedule = ({
 
   return (
     <button
-      className={cn('w-full px-2 text-xs text-left truncate bg-red-100', {
-        'rounded bg-blue-100': isSameDate,
-      })}
+      className={cn(
+        'w-full px-2 text-xs text-left truncate',
+        isDateDiff === 0 ? 'bg-blue-100 rounded' : 'bg-red-100',
+        {
+          'rounded-l bg-red-100':
+            isDateDiff !== 0 && day.isSame(startDate, 'date'),
+        },
+        {
+          'bg-red-100':
+            isDateDiff !== 0 &&
+            day.isAfter(startDate, 'date') &&
+            day.isBefore(endDate, 'date'),
+        },
+        {
+          'rounded-r bg-red-100':
+            isDateDiff !== 0 && day.isSame(endDate, 'date'),
+        },
+      )}
       onClick={() => handleScheduleClick(detail, startDate, endDate)}
     >
       {title}

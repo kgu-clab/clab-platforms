@@ -51,7 +51,7 @@ const CalendarSection = () => {
             {day.format('D')}
           </p>
           {events[day.format('YYYY-MM-DD')]?.map((event) => (
-            <CalendarSchedule key={event.id} {...event} />
+            <CalendarSchedule key={event.id} day={day} {...event} />
           ))}
         </div>
       </td>,
