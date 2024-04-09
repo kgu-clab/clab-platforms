@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 interface LinkerProps extends PropsWithChildren {
   to: string | Partial<Location>;
   className?: string;
-  target: React.HTMLAttributeAnchorTarget;
+  target?: React.HTMLAttributeAnchorTarget;
 }
 
 const Linker = ({ to, target, className, children }: LinkerProps) => {
