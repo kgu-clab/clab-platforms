@@ -1,6 +1,6 @@
 import { PostItem } from './post';
 
-export interface NewsItem extends Omit<PostItem, 'writerName'> {
+export interface NewsItem extends PostItem {
   articleUrl: string;
   date: string;
   source: string;

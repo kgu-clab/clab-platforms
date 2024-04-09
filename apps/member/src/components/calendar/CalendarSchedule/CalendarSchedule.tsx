@@ -1,36 +1,64 @@
 import useModal from '@hooks/common/useModal';
 import { formattedDate } from '@utils/date';
 import type { ScheduleItem } from '@type/schedule';
+import { useCallback } from 'react';
+import { cn } from '@utils/string';
+import dayjs from 'dayjs';
+
+interface CalendarScheduleProps extends ScheduleItem {
+  day: dayjs.Dayjs;
+}
 
 const CalendarSchedule = ({
+  day,
   title,
   detail,
   startDate,
   endDate,
-}: ScheduleItem) => {
+}: CalendarScheduleProps) => {
   const { openModal } = useModal();
+  const isDateDiff = dayjs(startDate).diff(endDate, 'd');
 
-  const onClickSchedule = (detail: string, start: string, end: string) => {
-    let date = `${formattedDate(start)} ~ ${formattedDate(end)}`;
-
-    if (start === end) {
+  const handleScheduleClick = useCallback(
+    (detail: string, start: string, end: string) => {
       // 시작일과 종료일이 같은 경우, 종료일은 표시하지 않는다.
-      date = `${formattedDate(start)}`;
-    }
+      const date =
+        start === end
+          ? `${formattedDate(start)}`
+          : `${formattedDate(start)} ~ ${formattedDate(end)}`;
 
-    openModal({
-      title: '📆 일정',
-      content: `내용: ${detail}\n일시: ${date}`,
-    });
-  };
+      openModal({
+        title: '📆 일정',
+        content: `일시: ${date}\n내용: ${detail}`,
+      });
+    },
+    [openModal],
+  );
 
   return (
-    <p
-      className="cursor-pointer text-xs border-l-2 border-red-500 hover:bg-gray-50"
-      onClick={() => onClickSchedule(detail, startDate, endDate)}
+    <button
+      className={cn(
+        'w-full px-2 text-xs text-left truncate',
+        isDateDiff === 0 ? 'bg-blue-100 rounded' : 'bg-red-100',
+        {
+          'rounded-l bg-red-100':
+            isDateDiff !== 0 && day.isSame(startDate, 'date'),
+        },
+        {
+          'bg-red-100':
+            isDateDiff !== 0 &&
+            day.isAfter(startDate, 'date') &&
+            day.isBefore(endDate, 'date'),
+        },
+        {
+          'rounded-r bg-red-100':
+            isDateDiff !== 0 && day.isSame(endDate, 'date'),
+        },
+      )}
+      onClick={() => handleScheduleClick(detail, startDate, endDate)}
     >
       {title}
-    </p>
+    </button>
   );
 };
 

@@ -1,5 +1,5 @@
 import { cn } from '@utils/string';
-import { MdOutlineNavigateNext } from 'react-icons/md';
+import ArrowButton from '../ArrowButton/ArrowButton';
 import type { PaginationOnChange } from '@type/component';
 
 interface PaginationProps {
@@ -19,12 +19,12 @@ const Pagination = ({
 }: PaginationProps) => {
   const totalPages = Math.ceil(totalItems / postLimit);
 
-  const pageNumber = [];
-  const startPage = Math.max(1, page - 2);
+  const startPage = Math.max(1, page - 1);
   const endPage = Math.min(totalPages, startPage + 4);
-  for (let i = startPage; i <= endPage; i++) {
-    pageNumber.push(i);
-  }
+  const pageNumber = Array.from(
+    { length: endPage - startPage + 1 },
+    (_, index) => startPage + index,
+  );
 
   const handleCurrentPageClick = (page: number) => {
     onChange(Math.max(1, Math.min(page, totalPages)));
@@ -32,12 +32,7 @@ const Pagination = ({
 
   return (
     <div className={cn('flex items-center space-x-4', className)}>
-      <button
-        onClick={() => handleCurrentPageClick(-postLimit)}
-        className="px-1 text-gray-500 border rounded"
-      >
-        <MdOutlineNavigateNext size={20} className="rotate-180" />
-      </button>
+      <ArrowButton onClick={() => handleCurrentPageClick(-postLimit)} />
       {pageNumber.length === 0 ? (
         <span>1</span>
       ) : (
@@ -53,12 +48,10 @@ const Pagination = ({
           </button>
         ))
       )}
-      <button
-        onClick={() => handleCurrentPageClick(Math.ceil(+postLimit))}
-        className="px-0.5 text-gray-500 border rounded"
-      >
-        <MdOutlineNavigateNext size={20} />
-      </button>
+      <ArrowButton
+        direction="next"
+        onClick={() => handleCurrentPageClick(+postLimit)}
+      />
     </div>
   );
 };

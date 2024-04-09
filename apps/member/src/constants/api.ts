@@ -5,8 +5,10 @@ export const API_BASE_URL: string = import.meta.env.VITE_API_BASE_URL;
 
 export const ACCESS_TOKEN_KEY = 'ACCESS_TOKEN';
 export const REFRESH_TOKEN_KEY = 'REFRESH_TOKEN';
+
 export const FORM_DATA_KEY = 'multipartFile';
 export const STORAGE_PERIOD = (period: number) => `?storagePeriod=${period}`;
+export const MAX_PAGINATION_SIZE = 99999;
 
 export const END_POINT = {
   LOGIN_REISSUE: '/v1/login/reissue',
@@ -35,6 +37,7 @@ export const END_POINT = {
   MY_BIRTHDAY: `/v1/members/birthday`,
   MY_ACTIVITY: `/v1/schedule/activity`,
   MAIN_SCHEDULE: `/v1/schedule`,
+  SCHEDULE_COLLECT: `/v1/schedule/collect`,
   MAIN_ACTIVITY_PHOTO: `/v1/activity-photos`,
   MEMBERSHIP_FEE: `/v1/membership-fees`,
   SHARED_ACCOUNT: `/v1/shared-accounts`,

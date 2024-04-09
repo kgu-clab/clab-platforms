@@ -16,8 +16,7 @@ export type EmploymentType =
   | 'ASSISTANT'
   | 'PART_TIME';
 
-export interface HireItem
-  extends Omit<PostItem, 'writerName' | 'isOwner' | 'category'> {
+export interface HireItem extends Omit<PostItem, 'isOwner' | 'category'> {
   careerLevel: CareerLevel;
   recruitmentPeriod: string;
   jobPostingUrl: string;

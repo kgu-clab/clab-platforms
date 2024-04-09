@@ -3,7 +3,7 @@ export interface BaseResponse<T = unknown> {
   data: T;
 }
 
-interface Pagination<T = unknown> {
+export interface Pagination<T = unknown> {
   currentPage: number;
   hasPrevious: boolean;
   hasNext: boolean;
@@ -17,6 +17,13 @@ export interface PaginationType<T = unknown>
   extends BaseResponse<Pagination<T>> {}
 
 export interface PaginationPramsType {
+  page?: number;
+  size?: number;
+}
+/**
+ * `PaginationPramsType`를 대체하기 위한 페이지네이션 파라미터 타입입니다.
+ */
+export interface WithPaginationPrams {
   page?: number;
   size?: number;
 }
