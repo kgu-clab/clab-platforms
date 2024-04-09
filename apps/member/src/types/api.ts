@@ -20,6 +20,13 @@ export interface PaginationPramsType {
   page?: number;
   size?: number;
 }
+/**
+ * `PaginationPramsType`를 대체하기 위한 페이지네이션 파라미터 타입입니다.
+ */
+export interface WithPaginationPrams {
+  page?: number;
+  size?: number;
+}
 
 export type IDType = string | number;
 
