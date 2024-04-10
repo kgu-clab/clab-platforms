@@ -1,3 +1,4 @@
+import { Suspense } from 'react';
 import Content from '@components/common/Content/Content';
 import ImageBanner from '@components/common/ImageBanner/ImageBanner';
 import NewsCardSection from '@components/main/NewsCardSection/NewsCardSection';
@@ -6,20 +7,18 @@ import { PATH } from '@constants/path';
 import {
   useNews,
   useBlog,
-  useSchedule,
   useActivityPicture,
   useBirthday,
   useHire,
 } from '@hooks/queries';
 import { useBoardsList } from '@hooks/queries/useBoardsList';
-import MainAlert from '@components/main/MainAlert/MainAlert';
+import MainNoticeSection from '@components/main/MainNoticeSection/MainNoticeSection';
 import {
   BoardSection,
   BoardSectionItem,
 } from '@components/community/BoardSection';
 
 const MainPage = () => {
-  const { data: mainAlertData } = useSchedule({});
   const { data: mainBannerData } = useActivityPicture();
   const { data: noticeData } = useBoardsList({ category: 'notice' });
   const { data: QnAData } = useBoardsList({ category: 'qna' });
@@ -30,7 +29,9 @@ const MainPage = () => {
 
   return (
     <Content>
-      <MainAlert data={mainAlertData.items} />
+      <Suspense>
+        <MainNoticeSection />
+      </Suspense>
       <ImageBanner data={mainBannerData.items} />
       <NewsCardSection to={PATH.NEWS} title="최근 동아리 소식은?" />
       <BoardSection>
