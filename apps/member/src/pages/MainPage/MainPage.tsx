@@ -1,25 +1,18 @@
 import { Suspense } from 'react';
 import Content from '@components/common/Content/Content';
-import ImageBanner from '@components/common/ImageBanner/ImageBanner';
 import NewsCardSection from '@components/main/NewsCardSection/NewsCardSection';
 import BirthdayList from '@components/main/BirthdayList/BirthdayList';
 import { PATH } from '@constants/path';
-import {
-  useNews,
-  useBlog,
-  useActivityPicture,
-  useBirthday,
-  useHire,
-} from '@hooks/queries';
+import { useNews, useBlog, useBirthday, useHire } from '@hooks/queries';
 import { useBoardsList } from '@hooks/queries/useBoardsList';
 import MainNoticeSection from '@components/main/MainNoticeSection/MainNoticeSection';
 import {
   BoardSection,
   BoardSectionItem,
 } from '@components/community/BoardSection';
+import MainBanner from '@components/main/MainBanner/MainBanner';
 
 const MainPage = () => {
-  const { data: mainBannerData } = useActivityPicture();
   const { data: noticeData } = useBoardsList({ category: 'notice' });
   const { data: QnAData } = useBoardsList({ category: 'qna' });
   const { data: birthdayData } = useBirthday();
@@ -32,7 +25,9 @@ const MainPage = () => {
       <Suspense>
         <MainNoticeSection />
       </Suspense>
-      <ImageBanner data={mainBannerData.items} />
+      <Suspense>
+        <MainBanner />
+      </Suspense>
       <NewsCardSection to={PATH.NEWS} title="최근 동아리 소식은?" />
       <BoardSection>
         <BoardSectionItem

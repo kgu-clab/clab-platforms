@@ -8,7 +8,7 @@ export * from './useActivityGroupBoardMutation';
 export * from './useActivityGroupBoardsMyAssignment';
 export * from './useActivityGroupMemberApplyMutation';
 export * from './useActivityGroupMemberByStatus';
-export * from './useActivityPicture';
+export * from './useActivityPhoto';
 export * from './useBirthday';
 export * from './useBlog';
 export * from './useBoardModifyMutation';
