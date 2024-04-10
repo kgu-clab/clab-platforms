@@ -11,7 +11,6 @@ import type {
 } from '@type/community';
 
 type PostsType = CommunityPostDetailItem | NewsItem | HireItem;
-
 /**
  * 카테고리에 따른 게시글을 가져옵니다.
  */
@@ -33,6 +32,10 @@ export const usePosts = (category: CommunityCategoryType, id: string) => {
       queryKey: QUERY_KEY.BORDER_GRADUATED,
       queryFn: () => getBoardsDetail(id),
     },
+    organization: {
+      queryKey: QUERY_KEY.ORGANIZATION,
+      queryFn: () => getBoardsDetail(id),
+    },
     news: {
       queryKey: QUERY_KEY.NEWS,
       queryFn: () => getNewsPost(id),
@@ -41,12 +44,10 @@ export const usePosts = (category: CommunityCategoryType, id: string) => {
       queryKey: QUERY_KEY.HIRE,
       queryFn: () => getHirePost(id),
     },
-  };
-
-  const options = queryOptions[category];
+  }[category];
 
   return useSuspenseQuery<PostsType, Error, PostsType, string[]>({
-    queryFn: options.queryFn,
-    queryKey: [options.queryKey, category, id],
+    queryKey: [queryOptions.queryKey, category, id],
+    queryFn: queryOptions.queryFn,
   });
 };

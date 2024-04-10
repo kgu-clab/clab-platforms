@@ -1,6 +1,7 @@
 export interface BlogPostItem {
+  id: number;
   title: string;
   subTitle: string;
-  content: string;
   imageUrl: string;
+  createdAt: string;
 }

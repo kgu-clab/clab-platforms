@@ -1,8 +1,7 @@
 import { Suspense } from 'react';
 import Content from '@components/common/Content/Content';
-import NewsCardSection from '@components/main/NewsCardSection/NewsCardSection';
 import { PATH } from '@constants/path';
-import { useNews, useBlog, useHire } from '@hooks/queries';
+import { useNews, useHire } from '@hooks/queries';
 import { useBoardsList } from '@hooks/queries/useBoardsList';
 import MainNoticeSection from '@components/main/MainNoticeSection/MainNoticeSection';
 import {
@@ -11,11 +10,12 @@ import {
 } from '@components/community/BoardSection';
 import MainBanner from '@components/main/MainBanner/MainBanner';
 import BirthdaySection from '@components/main/BirthdaySection/BirthdaySection';
+import BlogSection from '@components/main/BlogSection/BlogSection';
+import OrganizationNewsSection from '@components/main/OrganizationNewsSection/OrganizationNewsSection';
 
 const MainPage = () => {
   const { data: noticeData } = useBoardsList({ category: 'notice' });
   const { data: QnAData } = useBoardsList({ category: 'qna' });
-  const { data: blogData } = useBlog();
   const { data: ITNewsData } = useNews();
   const { data: hireData } = useHire();
 
@@ -27,7 +27,9 @@ const MainPage = () => {
       <Suspense>
         <MainBanner />
       </Suspense>
-      <NewsCardSection to={PATH.NEWS} title="최근 동아리 소식은?" />
+      <Suspense>
+        <OrganizationNewsSection />
+      </Suspense>
       <BoardSection>
         <BoardSectionItem
           title="공지사항"
@@ -43,11 +45,9 @@ const MainPage = () => {
       <Suspense>
         <BirthdaySection />
       </Suspense>
-      <NewsCardSection
-        to={PATH.BLOG}
-        title="기술 블로그"
-        data={blogData.items}
-      />
+      <Suspense>
+        <BlogSection />
+      </Suspense>
       <BoardSection>
         <BoardSectionItem
           title="IT 소식"

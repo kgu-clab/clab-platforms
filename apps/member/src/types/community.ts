@@ -6,7 +6,8 @@ export type CommunityCategoryType =
   | 'qna'
   | 'graduated'
   | 'news'
-  | 'hire';
+  | 'hire'
+  | 'organization';
 
 export type CommunityCategoryKorType =
   | '공지사항'
@@ -14,7 +15,8 @@ export type CommunityCategoryKorType =
   | 'QnA'
   | '졸업생'
   | 'IT 뉴스'
-  | '채용 정보';
+  | '채용 정보'
+  | '소식';
 
 export interface CommunityPostItem extends PostItem {}
 
