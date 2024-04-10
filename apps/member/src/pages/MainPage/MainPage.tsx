@@ -1,9 +1,8 @@
 import { Suspense } from 'react';
 import Content from '@components/common/Content/Content';
 import NewsCardSection from '@components/main/NewsCardSection/NewsCardSection';
-import BirthdayList from '@components/main/BirthdayList/BirthdayList';
 import { PATH } from '@constants/path';
-import { useNews, useBlog, useBirthday, useHire } from '@hooks/queries';
+import { useNews, useBlog, useHire } from '@hooks/queries';
 import { useBoardsList } from '@hooks/queries/useBoardsList';
 import MainNoticeSection from '@components/main/MainNoticeSection/MainNoticeSection';
 import {
@@ -11,11 +10,11 @@ import {
   BoardSectionItem,
 } from '@components/community/BoardSection';
 import MainBanner from '@components/main/MainBanner/MainBanner';
+import BirthdaySection from '@components/main/BirthdaySection/BirthdaySection';
 
 const MainPage = () => {
   const { data: noticeData } = useBoardsList({ category: 'notice' });
   const { data: QnAData } = useBoardsList({ category: 'qna' });
-  const { data: birthdayData } = useBirthday();
   const { data: blogData } = useBlog();
   const { data: ITNewsData } = useNews();
   const { data: hireData } = useHire();
@@ -41,7 +40,9 @@ const MainPage = () => {
           data={QnAData.items}
         />
       </BoardSection>
-      <BirthdayList data={birthdayData.items} />
+      <Suspense>
+        <BirthdaySection />
+      </Suspense>
       <NewsCardSection
         to={PATH.BLOG}
         title="기술 블로그"
