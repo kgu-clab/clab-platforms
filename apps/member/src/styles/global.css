@@ -37,17 +37,6 @@
 
 
 @layer components {
-    .section {
-        @apply container mx-auto px-5
-    }
-
-    .m-nav {
-        @apply mt-[61px]
-    }
-
-    .p-nav {
-        @apply pt-[61px]
-    }
 
     .animation {
         @apply transition ease-in-out hover:shadow-lg

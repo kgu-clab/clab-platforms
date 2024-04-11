@@ -9,18 +9,13 @@ interface InputProps extends ComponentPropsWithRef<'input'> {
 const Input = forwardRef<HTMLInputElement, InputProps>(
   ({ label, id, className, ...rest }, ref) => {
     return (
-      <div className="flex flex-col">
+      <div className={twMerge('flex flex-col', className)}>
         {label && (
-          <label htmlFor={id} className="text-xs mb-1 ml-1">
+          <label htmlFor={id} className="mb-1 ml-1 text-xs">
             {label}
           </label>
         )}
-        <input
-          ref={ref}
-          id={id}
-          className={twMerge('border rounded-lg p-2', className)}
-          {...rest}
-        />
+        <input ref={ref} id={id} className="p-2 border rounded-lg" {...rest} />
       </div>
     );
   },

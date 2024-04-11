@@ -1,16 +1,20 @@
 import Content from '@components/common/Content/Content';
 import Header from '@components/common/Header/Header';
 import { useNavigate, useParams } from 'react-router-dom';
-import type { CommunityCategoryType } from '@type/community';
 import Section from '@components/common/Section/Section';
-import Table from '@components/common/Table/Table';
 import Pagination from '@components/common/Pagination/Pagination';
-import { useState } from 'react';
+import { useCallback } from 'react';
 import { PATH_FINDER } from '@constants/path';
 import { toYYMMDD } from '@utils/date';
-import { useBoards } from '@hooks/queries/useBoards';
+import { useBoardsList } from '@hooks/queries/useBoardsList';
 import { categoryToTitle, isCommunityCategoryType } from '@utils/community';
 import { COMMUNITY_MESSAGE } from '@constants/message';
+import { Table } from '@clab/design-system';
+import { toDecodeHTMLEntities } from '@utils/string';
+import { TABLE_HEAD } from '@constants/head';
+import { SERVICE_NAME } from '@constants/environment';
+import { usePagination } from '@hooks/common/usePagination';
+import type { CommunityCategoryType } from '@type/community';
 
 const CommunityDetailPage = () => {
   const { type } = useParams<{ type: CommunityCategoryType }>();
@@ -20,74 +24,62 @@ const CommunityDetailPage = () => {
   }
 
   const navigate = useNavigate();
+  const { page, size, handlePageChange } = usePagination();
+  const { data } = useBoardsList({ category: type, page, size });
 
-  const [pagination, setPagination] = useState({
-    page: 0,
-    size: 20,
-  });
-
-  const { page, size } = pagination;
-
-  const name = categoryToTitle(type);
-
-  const { data } = useBoards(type, page, size);
-
-  const handlePageChange = (page: number) => {
-    setPagination({ ...pagination, page: page - 1 });
-  };
-
-  const onClickTitle = (id: string) => {
-    navigate(PATH_FINDER.COMMUNITY_POST(type, id), {
-      state: { sort: type, id: id },
-    });
-  };
+  const handleBoardClick = useCallback(
+    (id: number) => {
+      navigate(PATH_FINDER.COMMUNITY_POST(type, id));
+    },
+    [navigate, type],
+  );
 
   return (
     <Content>
-      <Header title={['커뮤니티', name]}>
+      <Header title={['커뮤니티', categoryToTitle(type)]}>
         <p>
           총 <span className="font-semibold">{data.totalItems}개</span>의
           게시글이 있어요
         </p>
       </Header>
-      <Section>
-        <Table head={['번호', '제목', '작성자', '작성일']}>
+      <Section className="space-y-2">
+        <Table head={TABLE_HEAD.COMMUNITY_DETAIL}>
           {data.totalItems === 0 ? (
             <Table.Row>
-              <td colSpan={4} className="py-4">
+              <Table.Cell colSpan={4}>
                 {COMMUNITY_MESSAGE.NO_ARTICLE}
-              </td>
+              </Table.Cell>
             </Table.Row>
           ) : (
-            data.items.map(({ id, title, writer, createdAt }, index) => (
+            data.items.map(({ id, title, writerName, createdAt }, index) => (
               <Table.Row
                 key={id}
-                className="text-center"
-                onClick={() => onClickTitle(String(id))}
+                className="text-center text-nowrap"
+                onClick={() => handleBoardClick(id)}
               >
-                <td className="py-2">
+                <Table.Cell className="w-1/12">
                   {data.totalItems - (index + page * size)}
-                </td>
-                <td className="py-2 text-left">{title}</td>
-                <td className="py-2">{writer ? writer : '-'}</td>
-                <td className="py-2">
-                  {createdAt ? toYYMMDD(createdAt) : '-'}
-                </td>
+                </Table.Cell>
+                <Table.Cell className="w-7/12 text-left truncate">
+                  {toDecodeHTMLEntities(title)}
+                </Table.Cell>
+                <Table.Cell className="w-3/12">
+                  {writerName || SERVICE_NAME}
+                </Table.Cell>
+                <Table.Cell className="w-1/12">
+                  {toYYMMDD(createdAt)}
+                </Table.Cell>
               </Table.Row>
             ))
           )}
         </Table>
-        {data.totalItems > 0 && (
-          <Pagination
-            className="flex justify-center"
-            totalItems={data.totalItems}
-            pageLimit={5}
-            postLimit={size}
-            setPage={handlePageChange}
-            page={page}
-            sort={type}
-          />
-        )}
+        <Pagination
+          className="justify-center"
+          totalItems={data.totalItems}
+          postLimit={size}
+          onChange={handlePageChange}
+          page={page}
+        />
       </Section>
     </Content>
   );

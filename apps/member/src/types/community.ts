@@ -6,7 +6,8 @@ export type CommunityCategoryType =
   | 'qna'
   | 'graduated'
   | 'news'
-  | 'hire';
+  | 'hire'
+  | 'organization';
 
 export type CommunityCategoryKorType =
   | '공지사항'
@@ -14,7 +15,8 @@ export type CommunityCategoryKorType =
   | 'QnA'
   | '졸업생'
   | 'IT 뉴스'
-  | '채용 정보';
+  | '채용 정보'
+  | '소식';
 
 export interface CommunityPostItem extends PostItem {}
 
@@ -26,9 +28,11 @@ export interface CommunityWriteItem {
 }
 
 export interface CommunityPostDetailItem extends PostItem {
-  memberImageUrl: string;
+  writerId: string | null; // 익명일 경우 null
+  writerRoleLevel: number | null; // 익명일 경우 null
+  writerImageUrl: string | null; // 기본 사진일 경우 null
   content: string;
   likes: number;
   hasLikeByMe: boolean;
-  isOwner: boolean;
+  files: [];
 }

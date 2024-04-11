@@ -7,6 +7,7 @@ import type {
   ActivityBoardType,
   ActivityGroupBoardParserType,
   ActivityGroupItem,
+  ActivityGroupMemberMyType,
   ActivityGroupStatusType,
   ActivityPhotoItem,
   ActivityRequestType,
@@ -43,17 +44,19 @@ interface PatchActivityBoardArgs {
   files?: FormData;
 }
 
-// 나의 활동 일정 조회
+/**
+ * 나의 활동 일정 조회
+ */
 export const getMyActivities = async (
-  startDateTime: string,
-  endDateTime: string,
+  startDate: string,
+  endDate: string,
   page: number,
   size: number,
 ) => {
   const { data } = await server.get<PaginationType<ScheduleItem>>({
     url: createCommonPagination(END_POINT.MY_ACTIVITY, {
-      startDateTime,
-      endDateTime,
+      startDate,
+      endDate,
       page,
       size,
     }),
@@ -61,8 +64,9 @@ export const getMyActivities = async (
 
   return data;
 };
-
-//활동 사진 조회
+/**
+ * 활동 사진 조회
+ */
 export const getActivityPhoto = async (page: number, size: number) => {
   const { data } = await server.get<PaginationType<ActivityPhotoItem>>({
     url: createCommonPagination(END_POINT.MAIN_ACTIVITY_PHOTO, { page, size }),
@@ -70,8 +74,9 @@ export const getActivityPhoto = async (page: number, size: number) => {
 
   return data;
 };
-
-// 활동 상태별 조회
+/**
+ * 활동 상태별 조회
+ */
 export const getActivityGroupByStatus = async (
   activityGroupStatus: ActivityGroupStatusType,
   page: number,
@@ -87,8 +92,9 @@ export const getActivityGroupByStatus = async (
 
   return data;
 };
-
-// 활동 상세 조회
+/**
+ * 활동 상세 조회
+ */
 export const getActivityGroupDetail = async (id: number) => {
   const { data } = await server.get<BaseResponse<ActivityGroupBoardParserType>>(
     {
@@ -102,8 +108,9 @@ export const getActivityGroupDetail = async (id: number) => {
 
   return data;
 };
-
-// 활동 신청
+/**
+ * 활동 신청
+ */
 export const postActivityGroupMemberApply = async ({
   activityGroupId,
   body,
@@ -119,8 +126,9 @@ export const postActivityGroupMemberApply = async ({
 
   return data;
 };
-
-// 상태별 활동 멤버 조회
+/**
+ * 상태별 활동 멤버 조회
+ */
 export const getActivityGroupApplyByStatus = async (
   activityGroupId: number,
   page: number,
@@ -136,8 +144,22 @@ export const getActivityGroupApplyByStatus = async (
 
   return data;
 };
+/**
+ * 나의 활동 목록 조회
+ */
+export const getActivityGroupMemberMy = async (page: number, size: number) => {
+  const { data } = await server.get<PaginationType<ActivityGroupMemberMyType>>({
+    url: createCommonPagination(END_POINT.ACTIVITY_GROUP_MEMBER_MY, {
+      page,
+      size,
+    }),
+  });
 
-// 활동 신청 상태
+  return data;
+};
+/**
+ * 활동 신청 상태
+ */
 export const patchActivityGroupMemberApply = async ({
   activityGroupId,
   memberId,
@@ -150,8 +172,9 @@ export const patchActivityGroupMemberApply = async ({
 
   return data;
 };
-
-// 게시판 단일 조회
+/**
+ * 게시판 단일 조회
+ */
 export const getActivityBoard = async (activityGroupBoardId: number) => {
   const { data } = await server.get<BaseResponse<ActivityBoardType>>({
     url: createCommonPagination(END_POINT.ACTIVITY_GROUP_BOARDS, {
@@ -161,8 +184,9 @@ export const getActivityBoard = async (activityGroupBoardId: number) => {
 
   return data;
 };
-
-// 나의 과제 제출 게시판 조회
+/**
+ * 나의 과제 제출 게시판 조회
+ */
 export const getActivityBoardsMyAssignment = async (parentId: number) => {
   const { data } = await server.get<BaseResponse<ActivityBoardType[]>>({
     url: createCommonPagination(END_POINT.ACTIVITY_GROUP_BOARDS_MY_ASSIGNMENT, {
@@ -172,8 +196,9 @@ export const getActivityBoardsMyAssignment = async (parentId: number) => {
 
   return data;
 };
-
-// 활동 그룹 게시판 생성
+/**
+ * 활동 그룹 게시판 생성
+ */
 export const postActivityBoard = async ({
   parentId,
   memberId,
@@ -214,8 +239,9 @@ export const postActivityBoard = async ({
 
   return data;
 };
-
-// 활동 그룹 게시판 수정
+/**
+ * 활동 그룹 게시판 수정
+ */
 export const patchActivityBoard = async ({
   activityGroupBoardId,
   groupId,

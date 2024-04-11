@@ -13,18 +13,22 @@ interface commentWriteArgs {
   boardId: string;
   body: CommentWriteItem;
 }
-
-// 나의 댓글 조회
+/**
+ * 나의 댓글 조회
+ */
 export const getMyComments = async (page: number, size: number) => {
-  const params = { page, size };
   const { data } = await server.get<PaginationType<CommentItem>>({
-    url: createCommonPagination(END_POINT.MY_COMMENTS, params),
+    url: createCommonPagination(END_POINT.MY_COMMENTS, {
+      page,
+      size,
+    }),
   });
 
   return data;
 };
-
-// 댓글 목록 조회
+/**
+ * 댓글 목록 조회
+ */
 export const getCommentList = async (
   id: string,
   page: number,
@@ -37,20 +41,19 @@ export const getCommentList = async (
 
   return data;
 };
-
-// 댓글 작성
+/**
+ * 댓글 작성
+ */
 export const postCommentWrite = async ({
   parentId,
   boardId,
   body,
 }: commentWriteArgs) => {
-  let url = createPath(END_POINT.COMMENTS(boardId));
-  if (parentId) {
-    url += `?parentId=${parentId}`;
-  }
-
   const { data } = await server.post<CommentWriteItem, BaseResponse>({
-    url,
+    url: createPath(
+      END_POINT.COMMENTS(boardId),
+      parentId && `?parentId=${parentId}`,
+    ),
     body,
   });
 

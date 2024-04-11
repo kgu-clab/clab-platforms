@@ -1,8 +1,10 @@
+import type { CommunityCategoryType } from './community';
+
 export interface PostItem {
   id: number;
-  category?: string;
   title: string;
-  writer: string;
+  writerName: string;
   createdAt: string;
   isOwner: boolean;
+  category?: CommunityCategoryType;
 }

@@ -18,3 +18,10 @@ export interface BookLoanRecordItem {
   returnedAt?: string;
   loanExtensionDate?: string;
 }
+
+export interface BookLoanRecordConditionType extends BookLoanRecordItem {
+  bookTitle: string;
+  bookImageUrl: string;
+  dueDate: string | null;
+  loanExtensionCount: number | null;
+}

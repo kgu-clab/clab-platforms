@@ -1,23 +1,31 @@
 import classNames from 'classnames';
 import Image from '../Image/Image';
 import { formattedDate } from '@utils/date';
+import { getProfileRingStyle } from '@utils/style';
+import { createImageUrl } from '@utils/api';
 
 interface CommentProps {
-  isReply?: boolean;
-  writer: string;
-  image: string;
+  writerId: string | null;
+  writerName: string;
+  writerRoleLevel: number | null;
+  writerImageUrl: string | null;
+  createdAt: string;
   children: React.ReactNode;
   onClickReport: () => void;
   onClickReply: () => void;
+  isReply?: boolean;
 }
 
 const Comment = ({
-  isReply = false,
-  writer,
-  image,
+  writerId,
+  writerName,
+  writerRoleLevel,
+  writerImageUrl,
+  createdAt,
   children,
   onClickReport,
   onClickReply,
+  isReply,
 }: CommentProps) => {
   return (
     <div
@@ -26,17 +34,20 @@ const Comment = ({
       })}
     >
       <Image
-        className="rounded-full"
         width="w-10"
         height="h-10"
-        src={image}
-        alt="프로필사진"
+        src={createImageUrl(writerImageUrl)}
+        alt={writerName}
+        className={classNames(
+          'rounded-full ring ring-offset-1',
+          getProfileRingStyle(writerRoleLevel),
+        )}
       />
-      <div className="w-full ml-2">
-        <p className="text-sm font-semibold">{writer}</p>
-        <p className="py-2 text-sm whitespace-pre-wrap">{children}</p>
-        <div className="flex justify-end gap-4 text-sm">
-          <p className="text-gray-500">{formattedDate('2021-11-22')}</p>
+      <div className="w-full ml-3 text-sm">
+        <p className="font-semibold">{`${writerName} ${writerId ? `(${writerId})` : ''}`}</p>
+        <p className="whitespace-pre-wrap">{children}</p>
+        <div className="flex justify-end gap-4">
+          <p className="text-gray-500">{formattedDate(createdAt)}</p>
           <button onClick={onClickReport}>신고</button>
           {!isReply && <button onClick={onClickReply}>답글 쓰기</button>}
         </div>

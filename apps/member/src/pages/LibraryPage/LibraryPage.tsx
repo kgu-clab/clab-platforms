@@ -7,21 +7,15 @@ import { useBooks } from '@hooks/queries/useBooks';
 import Section from '@components/common/Section/Section';
 import LibraryBookList from '@components/library/LibraryBookList/LibraryBookList';
 import Pagination from '@components/common/Pagination/Pagination';
-import { useState } from 'react';
+import LibraryNewBooksSection from '@components/library/LibraryNewBooksSection/LibraryNewBooksSection';
+import { usePagination } from '@hooks/common/usePagination';
 
 const LibraryPage = () => {
   const navigate = useNavigate();
-  const [pagination, setPagination] = useState({
-    page: 0,
-    size: 16,
-  });
-  const { page, size } = pagination;
-  const { data: newBooks } = useBooks(0, 4);
-  const { data } = useBooks(page, size);
+  const { page, size, handlePageChange } = usePagination();
 
-  const handlePageChange = (page: number) => {
-    setPagination({ ...pagination, page: page - 1 });
-  };
+  const { data: newBookData } = useBooks(0, 4);
+  const { data: bookData } = useBooks(page, size);
 
   return (
     <Content>
@@ -30,25 +24,18 @@ const LibraryPage = () => {
           희망도서 신청하기
         </Button>
       </Header>
+      <LibraryNewBooksSection data={newBookData.items} />
       <Section>
-        <Section.Header title="신규" />
+        <Section.Header title="소장 도서 둘러보기">
+          <Pagination
+            totalItems={bookData.totalItems}
+            postLimit={size}
+            onChange={handlePageChange}
+            page={page}
+          />
+        </Section.Header>
         <Section.Body>
-          <LibraryBookList data={newBooks.items} />
-        </Section.Body>
-      </Section>
-      <Section>
-        <Section.Header title="소장도서" />
-        <Section.Body>
-          <LibraryBookList data={data.items} />
-          <div className="flex justify-center mt-4">
-            <Pagination
-              totalItems={data.totalItems}
-              pageLimit={5}
-              postLimit={size}
-              setPage={handlePageChange}
-              page={page}
-            />
-          </div>
+          <LibraryBookList data={bookData.items} />
         </Section.Body>
       </Section>
     </Content>

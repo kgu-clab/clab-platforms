@@ -19,7 +19,7 @@ const BookCard = ({
 
   return (
     <div
-      className="flex flex-col group space-y-1 border rounded-lg cursor-pointer"
+      className="flex flex-col space-y-1 overflow-hidden border rounded-lg cursor-pointer group"
       onClick={() => navigate(PATH_FINDER.LIBRARY_DETAIL(id))}
     >
       <Image
@@ -27,10 +27,10 @@ const BookCard = ({
         alt={title}
         width="w-full"
         height="h-[200px]"
-        className="object-cover border-b rounded-t-lg group-hover:scale-125 transition-transform ease-in-out"
+        className="object-cover transition-transform ease-in-out border-b group-hover:scale-110"
         overflow
       />
-      <div className="flex flex-col grow justify-between text-sm p-2">
+      <div className="flex flex-col justify-between p-2 text-sm grow">
         <div>
           <p className="font-semibold group-hover:underline">{title}</p>
           <p className="text-gray-500">

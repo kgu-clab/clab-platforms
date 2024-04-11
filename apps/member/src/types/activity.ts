@@ -1,3 +1,5 @@
+import type { ProfileImageFileType } from './uploadFile';
+
 type MemberStatusType = 'ACCEPTED' | 'REJECTED' | 'WAITING';
 export type ActivityGroupBoardCategoryType =
   | 'NOTICE'
@@ -26,7 +28,7 @@ export interface ActivityGroupDetailType {
 export interface ActivityPhotoItem {
   id: number;
   title: string;
-  imageUrl: string;
+  files: ProfileImageFileType[];
   date: string;
   isPublic: boolean;
 }
@@ -96,4 +98,13 @@ export interface ActivityGroupBoardParserType extends ActivityGroupDetailType {
   notices: Array<ActivityBoardType>;
   activities: Array<ActivityBoardType>;
   assignments: Array<ActivityBoardType>;
+}
+
+export interface ActivityGroupMemberMyType {
+  id: number;
+  category: ActivityGroupCategoryType;
+  imageUrl: string;
+  name: string;
+  subject: string;
+  createdAt: string;
 }
