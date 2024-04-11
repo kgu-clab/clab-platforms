@@ -35,9 +35,9 @@ const CommunityBoardCollectSection = () => {
               <p className="flex items-center justify-center flex-shrink-0 font-semibold bg-gray-100 rounded-lg size-12">
                 {categoryToTitle(category)}
               </p>
-              <div className="flex flex-col min-w-0 grow">
+              <div className="grid w-full">
                 <p className="font-semibold truncate">{title}</p>
-                <p className="text-gray-500 truncate">{content}</p>
+                <p className="text-gray-500 truncate ">{content}</p>
               </div>
               <div className="flex justify-between gap-2">
                 <p className="flex items-center w-12 gap-1">

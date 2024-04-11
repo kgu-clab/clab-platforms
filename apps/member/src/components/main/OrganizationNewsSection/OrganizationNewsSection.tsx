@@ -11,17 +11,19 @@ const OrganizationNewsSection = () => {
   return (
     <Section>
       <Section.Header title="최근 동아리 소식" />
-      <Section.Body className="flex gap-2 overflow-scroll scrollbar-hide">
+      <Section.Body className="grid">
         {data.items.length === 0 ? (
           <EmptyBox>{COMMUNITY_MESSAGE.NO_ARTICLE}</EmptyBox>
         ) : (
-          data.items.map((news) => (
-            <PostCard
-              key={news.id}
-              to={PATH_FINDER.COMMUNITY_POST('organization', news.id)}
-              {...news}
-            />
-          ))
+          <div className="flex items-center overflow-auto">
+            {data.items.map((news) => (
+              <PostCard
+                key={news.id}
+                to={PATH_FINDER.COMMUNITY_POST('organization', news.id)}
+                {...news}
+              />
+            ))}
+          </div>
         )}
       </Section.Body>
     </Section>
