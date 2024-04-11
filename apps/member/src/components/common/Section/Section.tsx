@@ -1,7 +1,8 @@
-import classNames from 'classnames';
+import { cn } from '@utils/string';
 import { type PropsWithChildren } from 'react';
+import type { StrictPropsWithChildren } from '@type/component';
 
-interface SectionProps extends PropsWithChildren {
+interface SectionProps extends StrictPropsWithChildren {
   className?: string;
 }
 
@@ -10,17 +11,14 @@ interface SectionHeaderProps extends PropsWithChildren {
   description?: string;
 }
 
-interface SectionBodyProps extends PropsWithChildren {
+interface SectionBodyProps extends StrictPropsWithChildren {
   className?: string;
 }
 
 const Section = ({ className, children }: SectionProps) => {
   return (
     <div
-      className={classNames(
-        'flex flex-col rounded-lg border bg-white p-4',
-        className,
-      )}
+      className={cn('flex flex-col rounded-lg border bg-white p-4', className)}
     >
       {children}
     </div>
@@ -40,7 +38,7 @@ Section.Header = ({ children, title, description }: SectionHeaderProps) => {
 };
 
 Section.Body = ({ className, children }: SectionBodyProps) => {
-  return <div className={classNames('mt-4', className)}>{children}</div>;
+  return <div className={cn('mt-4', className)}>{children}</div>;
 };
 
 export default Section;

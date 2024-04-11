@@ -14,16 +14,14 @@ const PanelAside = () => {
   const { data: myBooksData } = useMyBookLoan(myProfile.id);
 
   return (
-    <aside className="hidden xl:w-1/4 xl:block">
-      <div className="space-y-4">
-        <ProfilePanel data={myProfile} />
-        <AlarmPanel
-          data={myNotificationsData.items}
-          totalLength={myNotificationsData.totalItems}
-        />
-        <ActivityPanel data={myActivities.items} />
-        <BookPanel data={myBooksData} memberId={myProfile.id} />
-      </div>
+    <aside className="hidden w-1/4 space-y-4 xl:block">
+      <ProfilePanel data={myProfile} />
+      <AlarmPanel
+        data={myNotificationsData.items}
+        totalLength={myNotificationsData.totalItems}
+      />
+      <ActivityPanel data={myActivities.items} />
+      <BookPanel data={myBooksData} memberId={myProfile.id} />
     </aside>
   );
 };

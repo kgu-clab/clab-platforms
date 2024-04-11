@@ -9,15 +9,14 @@ import type { PostItem } from '@type/post';
 import type { NewsItem } from '@type/news';
 import type { HireItem } from '@type/hire';
 
-interface QueryOptions {
-  queryKey: string;
-  queryFn: () => Promise<Pagination<PostItem | NewsItem | HireItem>>;
-}
-
 interface UseBoardsListParams extends PaginationPramsType {
   category: CommunityCategoryType;
 }
 
+type QueryOptions = {
+  queryKey: string;
+  queryFn: () => Promise<Pagination<PostItem | NewsItem | HireItem>>;
+};
 /**
  * 커뮤니티 게시글를 카테고리별로 조회합니다.
  */
@@ -42,6 +41,10 @@ export const useBoardsList = ({
     graduated: {
       queryKey: QUERY_KEY.BORDER_GRADUATED,
       queryFn: () => getBoardsList('graduated', page, size),
+    },
+    organization: {
+      queryKey: QUERY_KEY.ORGANIZATION,
+      queryFn: () => getBoardsList('organization', page, size),
     },
     news: {
       queryKey: QUERY_KEY.NEWS,

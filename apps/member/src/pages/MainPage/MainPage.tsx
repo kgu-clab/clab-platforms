@@ -1,67 +1,51 @@
+import { Suspense } from 'react';
 import Content from '@components/common/Content/Content';
-import ImageBanner from '@components/common/ImageBanner/ImageBanner';
-import NewsCardSection from '@components/main/NewsCardSection/NewsCardSection';
-import BirthdayList from '@components/main/BirthdayList/BirthdayList';
-import { PATH } from '@constants/path';
+import MainNoticeSection from '@components/main/MainNoticeSection/MainNoticeSection';
+import MainBanner from '@components/main/MainBanner/MainBanner';
+import BirthdaySection from '@components/main/BirthdaySection/BirthdaySection';
+import BlogSection from '@components/main/BlogSection/BlogSection';
+import OrganizationNewsSection from '@components/main/OrganizationNewsSection/OrganizationNewsSection';
+import { BoardSection } from '@components/community/BoardSection';
 import {
-  useNews,
-  useBlog,
-  useSchedule,
-  useActivityPicture,
-  useBirthday,
-  useHire,
-} from '@hooks/queries';
-import { useBoardsList } from '@hooks/queries/useBoardsList';
-import MainAlert from '@components/main/MainAlert/MainAlert';
-import {
-  BoardSection,
-  BoardSectionItem,
-} from '@components/community/BoardSection';
+  HireBoard,
+  NewsBoard,
+  NoticeBoard,
+  QnABoard,
+} from '@components/community/Board';
 
 const MainPage = () => {
-  const { data: mainAlertData } = useSchedule({});
-  const { data: mainBannerData } = useActivityPicture();
-  const { data: noticeData } = useBoardsList({ category: 'notice' });
-  const { data: QnAData } = useBoardsList({ category: 'qna' });
-  const { data: birthdayData } = useBirthday();
-  const { data: blogData } = useBlog();
-  const { data: ITNewsData } = useNews();
-  const { data: hireData } = useHire();
-
   return (
     <Content>
-      <MainAlert data={mainAlertData.items} />
-      <ImageBanner data={mainBannerData.items} />
-      <NewsCardSection to={PATH.NEWS} title="최근 동아리 소식은?" />
+      <Suspense>
+        <MainNoticeSection />
+      </Suspense>
+      <Suspense>
+        <MainBanner />
+      </Suspense>
+      <Suspense>
+        <OrganizationNewsSection />
+      </Suspense>
       <BoardSection>
-        <BoardSectionItem
-          title="공지사항"
-          to={PATH.COMMUNITY_NOTICE}
-          data={noticeData.items}
-        />
-        <BoardSectionItem
-          title="QnA"
-          to={PATH.COMMUNITY_QNA}
-          data={QnAData.items}
-        />
+        <Suspense>
+          <NoticeBoard />
+        </Suspense>
+        <Suspense>
+          <QnABoard />
+        </Suspense>
       </BoardSection>
-      <BirthdayList data={birthdayData.items} />
-      <NewsCardSection
-        to={PATH.BLOG}
-        title="기술 블로그"
-        data={blogData.items}
-      />
+      <Suspense>
+        <BirthdaySection />
+      </Suspense>
+      <Suspense>
+        <BlogSection />
+      </Suspense>
       <BoardSection>
-        <BoardSectionItem
-          title="IT 소식"
-          to={PATH.COMMUNITY_NEWS}
-          data={ITNewsData.items}
-        />
-        <BoardSectionItem
-          title="채용 정보"
-          to={PATH.COMMUNITY_HIRE}
-          data={hireData.items}
-        />
+        <Suspense>
+          <NewsBoard />
+        </Suspense>
+        <Suspense>
+          <HireBoard />
+        </Suspense>
       </BoardSection>
     </Content>
   );

@@ -24,8 +24,8 @@ export const PATH = {
   ACTIVITY_DETAIL: `/activity/:id`,
   ACTIVITY_CONFIG: '/activity/:id/config',
   ACTIVITY_ASSIGNMENT: '/activity/:id/:assignmentId',
-  NEWS: '/news',
   BLOG: '/blog',
+  BLOG_DETAIL: '/blog/:id',
   LIBRARY: '/library',
   LIBRARY_DETAIL: '/library/:id',
   SUPPORT: '/support',
@@ -35,7 +35,6 @@ export const PATH = {
 } as const;
 
 export const PATH_FINDER = {
-  NEWS_POST: (id: IDType) => createPath(PATH.NEWS, id),
   BLOG_POST: (id: IDType) => createPath(PATH.BLOG, id),
   COMMUNITY_POST: (sort: CommunityCategoryType, id: IDType) =>
     createPath(PATH.COMMUNITY, sort, id),

@@ -4,6 +4,16 @@ import type {
   CommunityCategoryType,
 } from '@type/community';
 
+const CommunityCategory: CommunityCategoryType[] = [
+  'notice',
+  'free',
+  'qna',
+  'graduated',
+  'news',
+  'hire',
+  'organization',
+] as const;
+
 /**
  * 주어진 커뮤니티 카테고리에 해당하는 한국어 제목을 반환합니다.
  *
@@ -27,6 +37,8 @@ export function categoryToTitle(
       return 'IT 뉴스';
     case 'hire':
       return '채용 정보';
+    case 'organization':
+      return '소식';
     default:
       throw new Error('Invalid title');
   }
@@ -55,6 +67,8 @@ export function titleToCategory(
       return 'news';
     case '채용 정보':
       return 'hire';
+    case '소식':
+      return 'organization';
     default:
       throw new Error('Invalid title');
   }
@@ -63,12 +77,12 @@ export function titleToCategory(
 /**
  * 주어진 문자열이 유효한 커뮤니티 카테고리 타입인지 확인합니다.
  *
- * @param {string} type - 검사할 문자열
+ * @param {string} value - 검사할 문자열
  * @returns {boolean} 문자열이 유효한 커뮤니티 카테고리 타입이면 true, 그렇지 않으면 false
  */
 export function isCommunityCategoryType(
-  type?: string,
-): type is CommunityCategoryType {
-  if (!type) return false;
-  return ['notice', 'free', 'qna', 'graduated', 'news', 'hire'].includes(type);
+  value?: string,
+): value is CommunityCategoryType {
+  if (!value) return false;
+  return CommunityCategory.includes(value as CommunityCategoryType);
 }
