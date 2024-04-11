@@ -310,6 +310,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@channel.io/channel-web-sdk-loader@npm:^1.1.7":
+  version: 1.1.7
+  resolution: "@channel.io/channel-web-sdk-loader@npm:1.1.7"
+  checksum: 77572f88c0a82a01eb8326c2c16ee2b2625ad458a2d34784ba858c3a588627106d76c6c3adfc14897c39051c2313d6bb3322f95d290a116477717461e9c2e903
+  languageName: node
+  linkType: hard
+
 "@clab/design-system@workspace:^, @clab/design-system@workspace:packages/design-system":
   version: 0.0.0-use.local
   resolution: "@clab/design-system@workspace:packages/design-system"
@@ -5121,6 +5128,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "member@workspace:apps/member"
   dependencies:
+    "@channel.io/channel-web-sdk-loader": "npm:^1.1.7"
     "@clab/design-system": "workspace:^"
     "@gwansikk/server-chain": "npm:^0.5.2"
     "@tanstack/react-query": "npm:^5.18.1"

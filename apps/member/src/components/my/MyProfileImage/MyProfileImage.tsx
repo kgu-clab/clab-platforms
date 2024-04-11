@@ -2,7 +2,7 @@ import Image from '@components/common/Image/Image';
 import { createImageUrl } from '@utils/api';
 import { getProfileRingStyle } from '@utils/style';
 import classNames from 'classnames';
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { Input } from '@clab/design-system';
 import type { MemberProfileType } from '@type/member';
 
@@ -13,16 +13,29 @@ interface MyProfileImageProps {
 }
 
 const MyProfileImage = ({ isEdit, data, onChange }: MyProfileImageProps) => {
-  const [profileImage, setProfileImage] = useState<string | null>(
-    data.imageUrl,
-  );
-
+  const imageInputRef = useRef<HTMLInputElement>(null);
+  const [image, setImage] = useState<string | null>(data.imageUrl);
+  /**
+   * 사진 변경 버튼 클릭 이벤트
+   */
+  const handleChangeButtonClick = useCallback(() => {
+    imageInputRef.current?.click();
+  }, []);
+  /**
+   * 삭제 버튼 클릭 이벤트
+   */
+  const onClickRemoveProfileImage = useCallback(() => {
+    setImage(null);
+  }, []);
+  /**
+   * 프로필 이미지 변경 이벤트
+   */
   const handleProfileImageChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
       const reader = new FileReader();
       reader.onload = () => {
         if (reader.readyState === 2) {
-          setProfileImage(reader.result as string);
+          setImage(reader.result as string);
         }
       };
       if (e.target.files && e.target.files.length > 0) {
@@ -31,14 +44,12 @@ const MyProfileImage = ({ isEdit, data, onChange }: MyProfileImageProps) => {
     },
     [],
   );
-
-  const onClickRemoveProfileImage = useCallback(() => {
-    setProfileImage('');
-  }, []);
-
+  /**
+   * 이미지 변경 시 상위 상태 업데이트
+   */
   useEffect(() => {
-    onChange((prev) => ({ ...prev, imageUrl: profileImage }));
-  }, [onChange, profileImage]);
+    onChange((prev) => ({ ...prev, imageUrl: image }));
+  }, [onChange, image]);
 
   return (
     <div className="flex flex-col items-center text-center">
@@ -52,14 +63,15 @@ const MyProfileImage = ({ isEdit, data, onChange }: MyProfileImageProps) => {
         <Image
           width="w-32"
           height="h-32"
-          src={createImageUrl(profileImage)}
-          alt=""
+          src={createImageUrl(image)}
+          alt={data.name}
           className={classNames('object-cover rounded-full bg-white', {
             'cursor-pointer': isEdit,
           })}
         />
       </label>
       <Input
+        ref={imageInputRef}
         id="imageUrl"
         name="imageUrl"
         type="file"
@@ -70,7 +82,7 @@ const MyProfileImage = ({ isEdit, data, onChange }: MyProfileImageProps) => {
       <div className="mt-4">
         {isEdit && (
           <div className="space-x-2 text-xs text-sky-500">
-            <button>사진 변경</button>
+            <button onClick={handleChangeButtonClick}>사진 변경</button>
             <button onClick={onClickRemoveProfileImage}>삭제</button>
           </div>
         )}

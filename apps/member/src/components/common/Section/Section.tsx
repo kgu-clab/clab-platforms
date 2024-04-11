@@ -17,9 +17,7 @@ interface SectionBodyProps extends StrictPropsWithChildren {
 
 const Section = ({ className, children }: SectionProps) => {
   return (
-    <div
-      className={cn('flex flex-col rounded-lg border bg-white p-4', className)}
-    >
+    <div className={cn('rounded-lg border bg-white p-4', className)}>
       {children}
     </div>
   );

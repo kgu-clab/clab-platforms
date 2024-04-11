@@ -16,7 +16,7 @@ interface BookDetailSectionProps {
   data: BookItem;
 }
 
-const tabsOptions = [
+const options = [
   {
     icon: <img src={kyoboIcon} alt="" className="size-6" />,
     value: '교보문고',
@@ -29,7 +29,7 @@ const tabsOptions = [
     icon: <img src={aladinIcon} alt="" className="rounded-lg size-6" />,
     value: '알라딘',
   },
-];
+] as const;
 
 const BookDetailSection = ({ data }: BookDetailSectionProps) => {
   const { data: myInfo } = useMyProfile();
@@ -51,9 +51,10 @@ const BookDetailSection = ({ data }: BookDetailSectionProps) => {
     <Section>
       <Grid gap="lg" className="lg:grid-cols-2">
         <Image
+          width="p-4"
           src={createImageUrl(imageUrl)}
           alt={title}
-          className="object-cover shadow-lg"
+          className="object-cover drop-shadow-lg"
         />
         <div className="flex flex-col justify-between gap-4">
           <div className="space-y-4">
@@ -68,7 +69,7 @@ const BookDetailSection = ({ data }: BookDetailSectionProps) => {
                 </Badge>
               </DetailsList.Item>
             </DetailsList>
-            <Tabs value={SELECT_DEFAULT_OPTION} options={tabsOptions} />
+            <Tabs value={SELECT_DEFAULT_OPTION} options={options} />
           </div>
           <Button
             className="w-full"

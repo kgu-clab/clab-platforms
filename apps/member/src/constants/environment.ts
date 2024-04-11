@@ -9,3 +9,7 @@ export const MODE: Mode = import.meta.env.VITE_MODE;
  * 데이터가 존재하지 않을 경우 서비스 이름으로 대체하기 위해 사용합니다.
  */
 export const SERVICE_NAME = memberConfig.name;
+/**
+ * 채널톡 토큰을 가져옵니다.
+ */
+export const CHANNEL_TALK_TOKEN = import.meta.env.VITE_CHANNEL_TALK_TOKEN;

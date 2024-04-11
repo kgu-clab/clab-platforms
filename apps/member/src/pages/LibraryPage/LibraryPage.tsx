@@ -26,16 +26,16 @@ const LibraryPage = () => {
       </Header>
       <LibraryNewBooksSection data={newBookData.items} />
       <Section>
-        <Section.Header title="소장 도서 둘러보기">
+        <Section.Header title="소장 도서 둘러보기" />
+        <Section.Body>
+          <LibraryBookList data={bookData.items} />
           <Pagination
+            className="justify-center mt-4"
             totalItems={bookData.totalItems}
             postLimit={size}
             onChange={handlePageChange}
             page={page}
           />
-        </Section.Header>
-        <Section.Body>
-          <LibraryBookList data={bookData.items} />
         </Section.Body>
       </Section>
     </Content>

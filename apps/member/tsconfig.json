@@ -21,7 +21,8 @@
       "@store/*": ["./src/store/*"],
       "@style/*": ["./src/style/*"],
       "@type/*": ["./src/types/*"],
-      "@utils/*": ["./src/utils/*"]
+      "@utils/*": ["./src/utils/*"],
+      "@/*": ["./src/*"]
     }
   },
   "include": ["src", "member.config.ts"],
