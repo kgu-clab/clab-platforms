@@ -13,6 +13,8 @@ const LibraryDetailPage = () => {
 
   const { data } = useBookDetails(+id);
 
+  if (!data?.id) throw new Error(LIBRARY_MESSAGE.NO_BOOK);
+
   return (
     <Content>
       <Header title={['도서관', data.title]} />
