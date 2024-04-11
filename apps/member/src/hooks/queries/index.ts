@@ -11,6 +11,7 @@ export * from './useActivityGroupMemberByStatus';
 export * from './useActivityPhoto';
 export * from './useBirthday';
 export * from './useBlog';
+export * from './useBlogDetail';
 export * from './useBoardModifyMutation';
 export * from './useBoardWriteMutation';
 export * from './useBoards';

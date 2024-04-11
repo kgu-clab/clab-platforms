@@ -30,9 +30,11 @@ export const END_POINT = {
   BOOK_LOAN_BORROW: `/v1/book-loan-records/borrow`,
   BOOK_LOAN_EXTEND: `/v1/book-loan-records/extend`,
   BOOK_LOAN_RETURN: `/v1/book-loan-records/return`,
+  // -- 블로그
+  BLOG: `/v1/blogs`,
+  BLOG_DETAIL: (id: number) => `/v1/blogs/${id}`,
   ACCUSES: '/v1/accuses',
   MY_NEWS: `/v1/news`,
-  MY_BLOG: `/v1/blogs`,
   MY_HIRE: `/v1/job-postings`,
   MY_BIRTHDAY: `/v1/members/birthday`,
   MY_ACTIVITY: `/v1/schedule/activity`,

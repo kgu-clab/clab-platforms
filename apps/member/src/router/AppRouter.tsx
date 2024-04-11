@@ -6,6 +6,7 @@ import AppLayout from './AppLayout';
 import ErrorPage from '@pages/ErrorPage/ErrorPage';
 import ProtectAuth from '@components/router/ProtectAuth';
 import MyPageSkeleton from '@pages/MyPage/MyPageSkeleton';
+import { SectionSkeleton } from '@components/common/Section';
 
 const MainPage = lazy(() => import('@pages/MainPage/MainPage'));
 const CommunityPage = lazy(() => import('@pages/CommunityPage/CommunityPage'));
@@ -40,6 +41,7 @@ const CalendarPage = lazy(() => import('@pages/CalendarPage/CalendarPage'));
 const SupportPage = lazy(() => import('@pages/SupportPage/SupportPage'));
 const LoginPage = lazy(() => import('@pages/LoginPage/LoginPage'));
 const AuthPage = lazy(() => import('@pages/AuthPage/AuthPage'));
+const BlogPage = lazy(() => import('@pages/BlogPage/BlogPage'));
 
 const AppRouter = () => {
   const router = createBrowserRouter([
@@ -51,7 +53,7 @@ const AppRouter = () => {
         {
           path: PATH.MAIN,
           element: (
-            <Suspense>
+            <Suspense fallback={<SectionSkeleton />}>
               <MainPage />
             </Suspense>
           ),
@@ -59,7 +61,7 @@ const AppRouter = () => {
         {
           path: PATH.COMMUNITY,
           element: (
-            <Suspense>
+            <Suspense fallback={<SectionSkeleton />}>
               <CommunityPage />
             </Suspense>
           ),
@@ -85,6 +87,14 @@ const AppRouter = () => {
           element: (
             <Suspense>
               <CommunityWritePage />
+            </Suspense>
+          ),
+        },
+        {
+          path: PATH.BLOG_DETAIL,
+          element: (
+            <Suspense>
+              <BlogPage />
             </Suspense>
           ),
         },
