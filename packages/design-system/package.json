@@ -7,9 +7,10 @@
   "types": "dist/index.d.ts",
   "scripts": {
     "clean": "rimraf dist",
-    "build": "yarn clean && rollup -c --bundleConfigAsCjs"
+    "build": "pnpm clean && rollup -c --bundleConfigAsCjs"
   },
   "devDependencies": {
+    "@clab/config": "workspace:*",
     "@rollup/plugin-commonjs": "^25.0.7",
     "@rollup/plugin-node-resolve": "^15.2.3",
     "@rollup/plugin-terser": "^0.4.4",

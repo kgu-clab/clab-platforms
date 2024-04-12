@@ -1,19 +1,22 @@
+import { FcBookmark } from 'react-icons/fc';
+
 import Panel from '@components/common/Panel/Panel';
 import ProgressBar from '@components/common/ProgressBar/ProgressBar';
-import { BookItem } from '@type/book';
-import { FcBookmark } from 'react-icons/fc';
-import dayjs from 'dayjs';
-import useModal from '@hooks/common/useModal';
-import { useBookLoanReturnMutation } from '@hooks/queries/useBookLoanReturnMutation';
-import { useBookLoanExtendMutation } from '@hooks/queries/useBookLoanExtendMutation';
 import Select from '@components/common/Select/Select';
+
+import useModal from '@hooks/common/useModal';
+import { useBookLoanRecordConditions } from '@hooks/queries';
+import { useBookLoanExtendMutation } from '@hooks/queries/useBookLoanExtendMutation';
+import { useBookLoanReturnMutation } from '@hooks/queries/useBookLoanReturnMutation';
 import {
   checkDueDate,
   checkExtendProgress,
   checkProgress,
   now,
 } from '@utils/date';
-import { useBookLoanRecordConditions } from '@hooks/queries';
+import dayjs from 'dayjs';
+
+import { BookItem } from '@type/book';
 
 interface BookPanelProps {
   memberId: string;
@@ -107,9 +110,9 @@ const BookPanel = ({ memberId, data }: BookPanelProps) => {
             return (
               <ul key={id}>
                 <li className="font-semibold">
-                  <div className="flex items-baseline justify-between mb-2">
+                  <div className="mb-2 flex items-baseline justify-between">
                     <span className="mr-2 truncate">{title}</span>
-                    <span className="text-xs w-fit text-nowrap">
+                    <span className="w-fit text-nowrap text-xs">
                       D-
                       {loanData.loanExtensionDate
                         ? dayjs(loanData.loanExtensionDate).diff(now(), 'd')
@@ -135,7 +138,7 @@ const BookPanel = ({ memberId, data }: BookPanelProps) => {
             );
           })
         ) : (
-          <p className="text-xs text-center bg-gray-100 py-1.5 rounded-lg">
+          <p className="rounded-lg bg-gray-100 py-1.5 text-center text-xs">
             언제든지 도서관에서 도서를 대여할 수 있어요.
           </p>
         )}

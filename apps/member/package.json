@@ -7,6 +7,7 @@
     "dev": "vite --port 6002",
     "build": "tsc && vite build --mode production",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
+    "type": "tsc --noEmit",
     "preview": "vite preview"
   },
   "dependencies": {
@@ -27,7 +28,8 @@
     "tailwind-merge": "^2.2.2"
   },
   "devDependencies": {
-    "@clab/design-system": "workspace:^",
+    "@clab/config": "workspace:*",
+    "@clab/design-system": "workspace:*",
     "@types/node": "^20.11.19",
     "@types/react": "^18.2.43",
     "@types/react-dom": "^18.2.17",

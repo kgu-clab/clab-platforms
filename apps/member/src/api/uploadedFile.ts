@@ -1,9 +1,11 @@
-import { server } from './server';
 import { END_POINT, STORAGE_PERIOD } from '@constants/api';
 import { createPath } from '@utils/api';
-import { ProfileImageFileType } from '@type/uploadFile';
+
 import type { AssignmentFileType } from '@type/activity';
 import type { BaseResponse, IDType } from '@type/api';
+import { ProfileImageFileType } from '@type/uploadFile';
+
+import { server } from './server';
 
 interface postUploadedFileMembershipFeeArgs {
   storagePeriod: number;

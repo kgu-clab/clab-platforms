@@ -1,7 +1,9 @@
 import { END_POINT } from '@constants/api';
-import { server } from './server';
-import { BaseResponse } from '@type/api';
+
 import type { AccusesType } from '@type/accuses';
+import { BaseResponse } from '@type/api';
+
+import { server } from './server';
 
 // 신고하기
 export const postAccuses = async (body: AccusesType) => {

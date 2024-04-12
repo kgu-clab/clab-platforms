@@ -1,6 +1,7 @@
-import { cn } from '@utils/string';
 import { ComponentPropsWithRef, forwardRef } from 'react';
 import { MdOutlineNavigateNext } from 'react-icons/md';
+
+import { cn } from '@utils/string';
 
 interface ArrowButtonProps extends ComponentPropsWithRef<'button'> {
   direction?: 'prev' | 'next';
@@ -11,7 +12,7 @@ const ArrowButton = forwardRef<HTMLButtonElement, ArrowButtonProps>(
     return (
       <button
         ref={ref}
-        className={cn('px-0.5 text-gray-500 border rounded', className)}
+        className={cn('rounded border px-0.5 text-gray-500', className)}
         {...rest}
       >
         <MdOutlineNavigateNext
@@ -22,5 +23,6 @@ const ArrowButton = forwardRef<HTMLButtonElement, ArrowButtonProps>(
     );
   },
 );
+ArrowButton.displayName = 'ArrowButton';
 
 export default ArrowButton;

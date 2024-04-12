@@ -1,5 +1,7 @@
 import React, { ComponentPropsWithRef, forwardRef } from 'react';
+
 import { twMerge } from 'tailwind-merge';
+
 import { gridStyleCols, gridStyleGaps } from './Grid.style';
 import { GridStyleColsType, GridStyleGapsType } from './Grid.types';
 

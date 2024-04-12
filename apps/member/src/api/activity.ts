@@ -1,7 +1,7 @@
-import type { BaseResponse, IDType, PaginationType } from '@type/api';
-import { server } from './server';
-import { createCommonPagination } from '@utils/api';
 import { END_POINT } from '@constants/api';
+import { createCommonPagination } from '@utils/api';
+import { groupBoardParser } from '@utils/group';
+
 import type {
   ActivityApplyMemberType,
   ActivityBoardType,
@@ -13,9 +13,11 @@ import type {
   ActivityRequestType,
   SubmitBoardType,
 } from '@type/activity';
+import type { BaseResponse, IDType, PaginationType } from '@type/api';
 import type { ScheduleItem } from '@type/schedule';
+
+import { server } from './server';
 import { postUploadedFileAssignment } from './uploadedFile';
-import { groupBoardParser } from '@utils/group';
 
 interface patchActivityGroupMemberApplyArgs {
   activityGroupId: number;

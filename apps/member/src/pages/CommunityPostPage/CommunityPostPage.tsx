@@ -1,14 +1,17 @@
-import Content from '@components/common/Content/Content';
-import PostCommentSection from '@components/community/PostCommentSection/PostCommentSection';
 import { useParams } from 'react-router-dom';
+
+import Content from '@components/common/Content/Content';
 import Header from '@components/common/Header/Header';
 import Section from '@components/common/Section/Section';
-import { categoryToTitle, isCommunityCategoryType } from '@utils/community';
-import { usePosts } from '@hooks/queries/usePosts';
-import { ERROR_MESSAGE } from '@constants/message';
-import CommunityNewsPost from '@components/community/CommunityNewsPost/CommunityNewsPost';
 import CommunityBoardPost from '@components/community/CommunityBoardPost/CommunityBoardPost';
 import CommunityHirePost from '@components/community/CommunityHirePost/CommunityHirePost';
+import CommunityNewsPost from '@components/community/CommunityNewsPost/CommunityNewsPost';
+import PostCommentSection from '@components/community/PostCommentSection/PostCommentSection';
+
+import { ERROR_MESSAGE } from '@constants/message';
+import { usePosts } from '@hooks/queries/usePosts';
+import { categoryToTitle, isCommunityCategoryType } from '@utils/community';
+
 import type { CommunityCategoryType } from '@type/community';
 
 const CommunityPostPage = () => {

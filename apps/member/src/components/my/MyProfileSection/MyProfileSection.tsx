@@ -1,17 +1,22 @@
 import { ChangeEvent, useCallback, useState } from 'react';
-import Section from '@components/common/Section/Section';
-import { Input, Button, Grid } from '@clab/design-system';
-import { useUserInfoMutation } from '@hooks/queries';
-import { FORM_DATA_KEY } from '@constants/api';
-import Select from '@components/common/Select/Select';
-import { SELECT_OPTIONS } from '@constants/select';
-import LogoutButton from '@components/common/LogoutButton/LogoutButton';
-import { isObjectsEqual } from '@utils/common';
-import ChangePasswordModal from '../ChangePasswordModal/ChangePasswordModal';
-import useModal from '@hooks/common/useModal';
-import MyProfileImage from '../MyProfileImage/MyProfileImage';
+
+import { Button, Grid, Input } from '@clab/design-system';
+
 import Loading from '@components/common/Loading/Loading';
+import LogoutButton from '@components/common/LogoutButton/LogoutButton';
+import Section from '@components/common/Section/Section';
+import Select from '@components/common/Select/Select';
+
+import { FORM_DATA_KEY } from '@constants/api';
+import { SELECT_OPTIONS } from '@constants/select';
+import useModal from '@hooks/common/useModal';
+import { useUserInfoMutation } from '@hooks/queries';
+import { isObjectsEqual } from '@utils/common';
+
 import type { MemberProfileType } from '@type/member';
+
+import ChangePasswordModal from '../ChangePasswordModal/ChangePasswordModal';
+import MyProfileImage from '../MyProfileImage/MyProfileImage';
 
 interface MyProfileSectionProps {
   data: MemberProfileType;

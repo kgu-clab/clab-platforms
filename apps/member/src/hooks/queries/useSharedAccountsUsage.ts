@@ -1,6 +1,7 @@
 import { useSuspenseQuery } from '@tanstack/react-query';
-import { QUERY_KEY } from '@constants/key';
+
 import { getSharedAccountUsage } from '@api/SharedAccount';
+import { QUERY_KEY } from '@constants/key';
 
 export const useSharedAccountsUsage = (page = 0, size = 20) => {
   return useSuspenseQuery({

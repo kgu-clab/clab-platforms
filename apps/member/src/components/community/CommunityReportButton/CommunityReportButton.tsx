@@ -1,6 +1,7 @@
+import { Button } from '@clab/design-system';
+
 import useModal from '@hooks/common/useModal';
 import { useAccusesMutation } from '@hooks/queries';
-import { Button } from '@clab/design-system';
 
 interface CommunityReportButtonProps {
   id: number;

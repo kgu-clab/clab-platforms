@@ -1,19 +1,23 @@
+import { useCallback } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
+
+import { Table } from '@clab/design-system';
+
 import Content from '@components/common/Content/Content';
 import Header from '@components/common/Header/Header';
-import { useNavigate, useParams } from 'react-router-dom';
-import Section from '@components/common/Section/Section';
 import Pagination from '@components/common/Pagination/Pagination';
-import { useCallback } from 'react';
+import Section from '@components/common/Section/Section';
+
+import { SERVICE_NAME } from '@constants/environment';
+import { TABLE_HEAD } from '@constants/head';
+import { COMMUNITY_MESSAGE } from '@constants/message';
 import { PATH_FINDER } from '@constants/path';
-import { toYYMMDD } from '@utils/date';
+import { usePagination } from '@hooks/common/usePagination';
 import { useBoardsList } from '@hooks/queries/useBoardsList';
 import { categoryToTitle, isCommunityCategoryType } from '@utils/community';
-import { COMMUNITY_MESSAGE } from '@constants/message';
-import { Table } from '@clab/design-system';
+import { toYYMMDD } from '@utils/date';
 import { toDecodeHTMLEntities } from '@utils/string';
-import { TABLE_HEAD } from '@constants/head';
-import { SERVICE_NAME } from '@constants/environment';
-import { usePagination } from '@hooks/common/usePagination';
+
 import type { CommunityCategoryType } from '@type/community';
 
 const CommunityDetailPage = () => {
@@ -54,13 +58,13 @@ const CommunityDetailPage = () => {
             data.items.map(({ id, title, writerName, createdAt }, index) => (
               <Table.Row
                 key={id}
-                className="text-center text-nowrap"
+                className="text-nowrap text-center"
                 onClick={() => handleBoardClick(id)}
               >
                 <Table.Cell className="w-1/12">
                   {data.totalItems - (index + page * size)}
                 </Table.Cell>
-                <Table.Cell className="w-7/12 text-left truncate">
+                <Table.Cell className="w-7/12 truncate text-left">
                   {toDecodeHTMLEntities(title)}
                 </Table.Cell>
                 <Table.Cell className="w-3/12">

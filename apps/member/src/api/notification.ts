@@ -1,8 +1,10 @@
-import { PaginationType } from '@type/api';
-import { server } from './server';
-import type { NotificationItem } from '@type/notification';
-import { createCommonPagination } from '@utils/api';
 import { END_POINT } from '@constants/api';
+import { createCommonPagination } from '@utils/api';
+
+import { PaginationType } from '@type/api';
+import type { NotificationItem } from '@type/notification';
+
+import { server } from './server';
 
 // 나의 알림 조회
 export const getMyNotifications = async (page: number, size: number) => {

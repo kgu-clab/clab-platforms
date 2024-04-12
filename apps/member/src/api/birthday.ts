@@ -1,8 +1,10 @@
-import { PaginationType } from '@type/api';
-import { server } from './server';
-import { createCommonPagination } from '@utils/api';
 import { END_POINT } from '@constants/api';
+import { createCommonPagination } from '@utils/api';
+
+import { PaginationType } from '@type/api';
 import type { MemberType } from '@type/member';
+
+import { server } from './server';
 
 // 이달의 생일자 조회
 export const getBirthday = async (

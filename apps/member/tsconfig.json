@@ -1,14 +1,6 @@
 {
-  "extends": "../../tsconfig.json",
+  "extends": "@clab/config/tsconfig.react.json",
   "compilerOptions": {
-    "useDefineForClassFields": true,
-    "moduleResolution": "bundler",
-    "allowImportingTsExtensions": true,
-    "jsx": "react-jsx",
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "noFallthroughCasesInSwitch": true,
-    "baseUrl": ".",
     "paths": {
       "@api/*": ["./src/api/*"],
       "@assets/*": ["./src/assets/*"],

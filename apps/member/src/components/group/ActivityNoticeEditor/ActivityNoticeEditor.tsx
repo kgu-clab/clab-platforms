@@ -1,10 +1,14 @@
-import Section from '@components/common/Section/Section';
-import { Input, Button } from '@clab/design-system';
-import ActivityNoticeSection from '../ActivityNoticeSection/ActivityNoticeSection';
-import type { ActivityBoardType } from '@type/activity';
 import { useState } from 'react';
-import Textarea from '@components/common/Textarea/Textarea';
+
+import { Button, Input } from '@clab/design-system';
+
 import Hr from '@components/common/Hr/Hr';
+import Section from '@components/common/Section/Section';
+import Textarea from '@components/common/Textarea/Textarea';
+
+import type { ActivityBoardType } from '@type/activity';
+
+import ActivityNoticeSection from '../ActivityNoticeSection/ActivityNoticeSection';
 
 interface ActivityNoticeEditorProps {
   data: Array<ActivityBoardType>;

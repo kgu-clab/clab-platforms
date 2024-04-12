@@ -1,9 +1,12 @@
+import { useNavigate } from 'react-router-dom';
+
 import Image from '@components/common/Image/Image';
+
+import { PATH_FINDER } from '@constants/path';
 import { BOOK_STATE } from '@constants/state';
 import classNames from 'classnames';
+
 import type { BookItem } from '@type/book';
-import { useNavigate } from 'react-router-dom';
-import { PATH_FINDER } from '@constants/path';
 
 interface BookCardProps extends BookItem {}
 
@@ -19,7 +22,7 @@ const BookCard = ({
 
   return (
     <div
-      className="flex flex-col space-y-1 overflow-hidden border rounded-lg cursor-pointer group"
+      className="group flex cursor-pointer flex-col space-y-1 overflow-hidden rounded-lg border"
       onClick={() => navigate(PATH_FINDER.LIBRARY_DETAIL(id))}
     >
       <Image
@@ -27,20 +30,20 @@ const BookCard = ({
         alt={title}
         width="w-full"
         height="h-[200px]"
-        className="object-cover transition-transform ease-in-out border-b group-hover:scale-110"
+        className="border-b object-cover transition-transform ease-in-out group-hover:scale-110"
         overflow
       />
-      <div className="flex flex-col justify-between p-2 text-sm grow">
+      <div className="flex grow flex-col justify-between p-2 text-sm">
         <div>
           <p className="font-semibold group-hover:underline">{title}</p>
           <p className="text-gray-500">
             {author} | {publisher}
           </p>
         </div>
-        <div className="flex items-center gap-1 mt-2">
+        <div className="mt-2 flex items-center gap-1">
           <span
             className={classNames(
-              'w-1.5 h-1.5 rounded-full',
+              'h-1.5 w-1.5 rounded-full',
               borrowerId ? 'bg-green-600' : 'bg-pink-600',
             )}
           />

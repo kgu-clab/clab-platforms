@@ -1,3 +1,14 @@
+import {
+  FcCalculator,
+  FcComboChart,
+  FcDownload,
+  FcGraduationCap,
+  FcLandscape,
+  FcMultipleDevices,
+  FcReading,
+  FcViewDetails,
+} from 'react-icons/fc';
+
 import PageLayout from '@components/common/PageLayout';
 import {
   HomeCard,
@@ -5,17 +16,8 @@ import {
   HomeCardHeader,
   HomeCardIcon,
 } from '@components/home/HomeCard';
+
 import { PATH } from '@constants/path';
-import {
-  FcComboChart,
-  FcCalculator,
-  FcReading,
-  FcMultipleDevices,
-  FcDownload,
-  FcGraduationCap,
-  FcLandscape,
-  FcViewDetails,
-} from 'react-icons/fc';
 
 const buttons = [
   {
@@ -80,8 +82,8 @@ const buttons = [
 export default function Home() {
   return (
     <PageLayout nav footer className="space-y-4">
-      <div className="text-xl font-semibold text-center">
-        <h2 className="inline-block font-bold text-transparent bg-gradient-to-r from-sky-600 via-indigo-500 to-purple-500 bg-clip-text">
+      <div className="text-center text-xl font-semibold">
+        <h2 className="inline-block bg-gradient-to-r from-sky-600 via-indigo-500 to-purple-500 bg-clip-text font-bold text-transparent">
           OPEN-BETA
         </h2>
         <p className="flex justify-center gap-2 text-xs text-gray-500">

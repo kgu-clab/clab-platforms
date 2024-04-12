@@ -1,12 +1,14 @@
-import { lazy, Suspense } from 'react';
+import { Suspense, lazy } from 'react';
+import { RouterProvider, createBrowserRouter } from 'react-router-dom';
+
+import { SectionSkeleton } from '@components/common/Section';
+import ProtectAuth from '@components/router/ProtectAuth';
+
 import { PATH } from '@constants/path';
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import ErrorPage from '@pages/ErrorPage/ErrorPage';
+import MyPageSkeleton from '@pages/MyPage/MyPageSkeleton';
 
 import AppLayout from './AppLayout';
-import ErrorPage from '@pages/ErrorPage/ErrorPage';
-import ProtectAuth from '@components/router/ProtectAuth';
-import MyPageSkeleton from '@pages/MyPage/MyPageSkeleton';
-import { SectionSkeleton } from '@components/common/Section';
 
 const MainPage = lazy(() => import('@pages/MainPage/MainPage'));
 const CommunityPage = lazy(() => import('@pages/CommunityPage/CommunityPage'));

@@ -1,6 +1,8 @@
 import React from 'react';
 import { useCallback, useState } from 'react';
+
 import { twMerge } from 'tailwind-merge';
+
 import { TabsOptionProps, TabsProps } from './Tabs.types';
 
 const Tabs = ({ options, value, onChange }: TabsProps) => {
@@ -15,7 +17,7 @@ const Tabs = ({ options, value, onChange }: TabsProps) => {
   );
 
   return (
-    <div className="flex items-center w-full border divide-x rounded-lg">
+    <div className="flex w-full items-center divide-x rounded-lg border">
       {options.map((option, index) => (
         <Tabs.Option
           key={index}
@@ -24,7 +26,7 @@ const Tabs = ({ options, value, onChange }: TabsProps) => {
           )}
           onClick={() => handleOptionClick(option.value)}
         >
-          <span className="p-1 bg-gray-100 rounded w-fit">{option.icon}</span>
+          <span className="w-fit rounded bg-gray-100 p-1">{option.icon}</span>
           <span>{option.value}</span>
         </Tabs.Option>
       ))}
@@ -37,7 +39,7 @@ const Option = ({ className, children, ...rest }: TabsOptionProps) => {
     <button
       type="button"
       className={twMerge(
-        'first:rounded-l-lg last:rounded-r-lg w-full hover:bg-gray-50 transition-colors p-2 flex flex-col items-center justify-center gap-1',
+        'flex w-full flex-col items-center justify-center gap-1 p-2 transition-colors first:rounded-l-lg last:rounded-r-lg hover:bg-gray-50',
         className,
       )}
       {...rest}

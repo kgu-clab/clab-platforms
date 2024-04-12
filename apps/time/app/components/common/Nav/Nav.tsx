@@ -1,7 +1,9 @@
 import React from 'react';
-import Link from 'next/link';
 import { FiUser } from 'react-icons/fi';
+
 import { PATH } from '@constants/path';
+import Image from 'next/image';
+import Link from 'next/link';
 
 const links = [
   <Link key={PATH.HOME} href={PATH.HOME}>
@@ -32,13 +34,13 @@ const actions = [
 
 const Nav = () => {
   return (
-    <nav className="fixed top-0 w-full bg-white border-b">
-      <div className="container flex items-center justify-between h-14 text-nowrap">
+    <nav className="fixed top-0 w-full border-b bg-white">
+      <div className="container flex h-14 items-center justify-between text-nowrap">
         <div className="flex items-center gap-2 sm:w-1/5">
-          <img src="/favicon.ico" alt="c-lab" className="size-8" />
+          <Image src="/favicon.ico" alt="c-lab" className="size-8" />
           <h1 className="text-xl font-semibold">경기타임</h1>
         </div>
-        <ul className="items-center justify-center hidden w-3/5 gap-4 text-sm sm:flex">
+        <ul className="hidden w-3/5 items-center justify-center gap-4 text-sm sm:flex">
           {links.map((link) => link)}
         </ul>
         <div className="flex items-center justify-end gap-4 text-sm sm:w-1/5">

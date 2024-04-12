@@ -1,6 +1,7 @@
-import classNames from 'classnames';
-import { FiChevronDown } from 'react-icons/fi';
 import { useState } from 'react';
+import { FiChevronDown } from 'react-icons/fi';
+
+import classNames from 'classnames';
 
 interface DropdownButtonProps {
   className?: string;
@@ -11,7 +12,7 @@ interface DropdownButtonProps {
 const DropdownButton = ({
   className,
   onClick,
-  isOpen = false
+  isOpen = false,
 }: DropdownButtonProps) => {
   const [open, setOpen] = useState(isOpen);
 
@@ -26,8 +27,8 @@ const DropdownButton = ({
         className={classNames(
           'h-5 w-5 cursor-pointer rounded-full transition hover:bg-gray-100',
           {
-            'rotate-180': open
-          }
+            'rotate-180': open,
+          },
         )}
       />
     </div>

@@ -1,18 +1,21 @@
-import Panel from '@components/common/Panel/Panel';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { FcBusiness } from 'react-icons/fc';
-import { Button, Input, type ButtonColorType } from '@clab/design-system';
-import { useSharedAccountsUsageMutation } from '@hooks/queries/useSharedAccountsUsageMutation';
-import useModal from '@hooks/common/useModal';
-import { useSharedAccountsUsage } from '@hooks/queries/useSharedAccountsUsage';
+
+import { Button, type ButtonColorType, Input } from '@clab/design-system';
+
+import Panel from '@components/common/Panel/Panel';
 import Select from '@components/common/Select/Select';
-import classNames from 'classnames';
+
+import { SELECT_OPTIONS } from '@constants/select';
+import useModal from '@hooks/common/useModal';
 import { useMyProfile } from '@hooks/queries/useMyProfile';
 import { useSharedAccounts } from '@hooks/queries/useSharedAccounts';
-import dayjs from 'dayjs';
 import { useSharedAccountsChangeStatusMutation } from '@hooks/queries/useSharedAccountsChangeStatusMutation';
+import { useSharedAccountsUsage } from '@hooks/queries/useSharedAccountsUsage';
+import { useSharedAccountsUsageMutation } from '@hooks/queries/useSharedAccountsUsageMutation';
 import { formattedDate } from '@utils/date';
-import { SELECT_OPTIONS } from '@constants/select';
+import classNames from 'classnames';
+import dayjs from 'dayjs';
 
 interface AccountButtonProps {
   label: string;
@@ -98,7 +101,7 @@ const AccountPanel = () => {
           <div className="flex flex-col space-y-2">
             {inflearnInuse && (
               <p>
-                예약만 가능해요! {formattedDate(inflearnLastUse?.endTime || '')}
+                예약만 가능해요! {formattedDate(inflearnLastUse?.endTime ?? '')}
                 까지 사용될 예정이에요.
               </p>
             )}
@@ -172,10 +175,6 @@ const AccountPanel = () => {
       },
     });
   };
-
-  useEffect(() => {
-    if (selectedButton !== '') clickInflearn();
-  }, [selectedButton]);
 
   return (
     <Panel>

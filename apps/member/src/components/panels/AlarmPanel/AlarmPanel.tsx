@@ -1,7 +1,10 @@
 import { useCallback, useState } from 'react';
 import { FcAbout } from 'react-icons/fc';
+
 import Panel from '@components/common/Panel/Panel';
+
 import useModal from '@hooks/common/useModal';
+
 import type { NotificationItem } from '@type/notification';
 
 interface AlarmPanelProps {
@@ -42,13 +45,13 @@ const AlarmPanel = ({ data, totalLength }: AlarmPanelProps) => {
             <p
               key={id}
               onClick={() => onClickAlarm(content)}
-              className="rounded-md leading-relaxed transition hover:translate-x-1.5 hover:font-semibold truncate cursor-pointer"
+              className="cursor-pointer truncate rounded-md leading-relaxed transition hover:translate-x-1.5 hover:font-semibold"
             >
               {content}
             </p>
           ))
         ) : (
-          <p className="text-xs text-center bg-gray-100 py-1.5 rounded-lg">
+          <p className="rounded-lg bg-gray-100 py-1.5 text-center text-xs">
             새로운 알림이 없어요.
           </p>
         )}

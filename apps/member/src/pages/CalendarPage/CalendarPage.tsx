@@ -1,8 +1,9 @@
 import { Suspense } from 'react';
-import Content from '@components/common/Content/Content';
-import Header from '@components/common/Header/Header';
+
 import CalendarSection from '@components/calendar/CalendarSection/CalendarSection';
 import CalendarStatusSection from '@components/calendar/CalendarStatusSection/CalendarStatusSection';
+import Content from '@components/common/Content/Content';
+import Header from '@components/common/Header/Header';
 
 const CalendarPage = () => {
   return (

@@ -14,7 +14,8 @@ const File = ({ children, href }: FileProps) => {
     <a
       href={href}
       target="_blank"
-      className="hover:underline underline-offset-4"
+      className="underline-offset-4 hover:underline"
+      rel="noreferrer"
     >
       {children}
     </a>

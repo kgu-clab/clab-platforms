@@ -1,0 +1,10 @@
+coverage
+public
+dist
+pnpm-lock.yaml
+pnpm-workspace.yaml
+# Ignore config files
+.eslintrc.*
+commitlint.config.js
+tailwind.config.js
+postcss.config.js

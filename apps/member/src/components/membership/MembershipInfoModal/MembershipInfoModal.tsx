@@ -1,11 +1,15 @@
+import { DetailsList } from '@clab/design-system';
+
 import Image from '@components/common/Image/Image';
+
 import { createImageUrl } from '@utils/api';
+import { formattedDate } from '@utils/date';
+import { formatWon } from '@utils/string';
+
+import type { MembershipFeeType } from '@type/membershipFee';
+
 import MembershipCategoryBadge from '../MembershipCategoryBadge/MembershipCategoryBadge';
 import MembershipStatusBadge from '../MembershipStatusBadge/MembershipStatusBadge';
-import { formatWon } from '@utils/string';
-import { formattedDate } from '@utils/date';
-import { DetailsList } from '@clab/design-system';
-import type { MembershipFeeType } from '@type/membershipFee';
 
 interface MembershipInfoModalProps {
   data: MembershipFeeType;
@@ -25,7 +29,7 @@ const MembershipInfoModal = ({ data }: MembershipInfoModalProps) => {
 
   return (
     <div className="space-y-2">
-      <div className="max-h-[480px] overflow-auto border rounded-lg scrollbar-hide">
+      <div className="scrollbar-hide max-h-[480px] overflow-auto rounded-lg border">
         <Image src={createImageUrl(imageUrl)} alt="증빙자료" />
       </div>
 

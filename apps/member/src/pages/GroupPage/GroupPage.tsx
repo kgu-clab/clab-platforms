@@ -1,10 +1,13 @@
+import { useNavigate } from 'react-router-dom';
+
 import { Button } from '@clab/design-system';
+
 import Content from '@components/common/Content/Content';
 import Header from '@components/common/Header/Header';
-import { PATH } from '@constants/path';
-import { useNavigate } from 'react-router-dom';
 import Section from '@components/common/Section/Section';
 import GroupCard from '@components/group/GroupCard/GroupCard';
+
+import { PATH } from '@constants/path';
 import { useActivityGroupMemberByStatus } from '@hooks/queries/useActivityGroupMemberByStatus';
 
 const GroupPage = () => {

@@ -1,10 +1,14 @@
-import Section from '@components/common/Section/Section';
-import { Input, Button } from '@clab/design-system';
-import Textarea from '@components/common/Textarea/Textarea';
-import type { ActivityBoardWithAssignmentType } from '@type/activity';
 import { useState } from 'react';
-import WeeklyActivityCard from '../WeeklyActivityCard/WeeklyActivityCard';
+
+import { Button, Input } from '@clab/design-system';
+
 import Hr from '@components/common/Hr/Hr';
+import Section from '@components/common/Section/Section';
+import Textarea from '@components/common/Textarea/Textarea';
+
+import type { ActivityBoardWithAssignmentType } from '@type/activity';
+
+import WeeklyActivityCard from '../WeeklyActivityCard/WeeklyActivityCard';
 
 interface ActivityPostEditorProps {
   groupId: number;
@@ -65,7 +69,7 @@ const ActivityPostEditor = ({ groupId, data }: ActivityPostEditorProps) => {
       </Section>
       {data.map((activity, index) => (
         <Section key={activity.id} className="relative">
-          <div className="absolute space-x-2 top-4 right-4">
+          <div className="absolute right-4 top-4 space-x-2">
             <Button size="sm" color="orange">
               과제 관리
             </Button>

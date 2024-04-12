@@ -1,6 +1,7 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { QUERY_KEY } from '@constants/key';
+
 import { patchActivityBoard } from '@api/activity';
+import { QUERY_KEY } from '@constants/key';
 import useToast from '@hooks/common/useToast';
 
 /**

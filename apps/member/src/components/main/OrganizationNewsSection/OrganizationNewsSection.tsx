@@ -1,6 +1,7 @@
 import EmptyBox from '@components/common/EmptyBox/EmptyBox';
 import PostCard from '@components/common/PostCard/PostCard';
 import Section from '@components/common/Section/Section';
+
 import { COMMUNITY_MESSAGE } from '@constants/message';
 import { PATH_FINDER } from '@constants/path';
 import { useBoardsList } from '@hooks/queries';

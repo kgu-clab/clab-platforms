@@ -1,4 +1,6 @@
+/* eslint-disable react/display-name */
 import { PropsWithChildren } from 'react';
+
 import useModal from '@hooks/common/useModal';
 import classNames from 'classnames';
 
@@ -21,14 +23,14 @@ const Modal = ({ children }: PropsWithChildren) => {
       aria-modal="true"
       role="dialog"
     >
-      <div className="flex items-center justify-center min-h-screen px-5">
+      <div className="flex min-h-screen items-center justify-center px-5">
         <div className="fixed inset-0">
           <div
             className="absolute inset-0 bg-gray-600/50"
             onClick={closeModal}
           />
         </div>
-        <div className="inline-block w-full p-4 space-y-4 overflow-hidden text-center transform bg-white rounded-lg shadow-lg sm:text-left sm:max-w-lg">
+        <div className="inline-block w-full space-y-4 overflow-hidden rounded-lg bg-white p-4 text-center shadow-lg sm:max-w-lg sm:text-left">
           {children}
         </div>
       </div>
@@ -50,7 +52,7 @@ Modal.Body = ({ className, children }: ModalProps) => {
   return (
     <main
       className={classNames(
-        'text-sm text-gray-500 whitespace-pre-wrap break-keep min-h-20',
+        'min-h-20 whitespace-pre-wrap break-keep text-sm text-gray-500',
         className,
       )}
     >
@@ -85,7 +87,7 @@ Modal.Button = ({ color, onClick, className, children }: ModalButtonProps) => {
     <button
       type="button"
       className={classNames(
-        'rounded-lg border py-1 w-full transition-colors',
+        'w-full rounded-lg border py-1 transition-colors',
         colorStyle[color],
         className,
       )}

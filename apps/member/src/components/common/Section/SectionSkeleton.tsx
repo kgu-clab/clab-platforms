@@ -2,7 +2,7 @@ import Section from './Section';
 
 const SectionSkeleton = () => {
   return (
-    <Section className="w-full h-96 animate-pulse">
+    <Section className="h-96 w-full animate-pulse">
       <Section.Header title=""></Section.Header>
     </Section>
   );

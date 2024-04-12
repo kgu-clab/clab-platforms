@@ -1,5 +1,5 @@
 name: "\U0001F528 Refactor"
-description: "리팩터링을 해야할 부분이 있나요?"
+description: '리팩터링을 해야할 부분이 있나요?'
 labels: "\U0001F528 Refactor"
 body:
   - type: textarea

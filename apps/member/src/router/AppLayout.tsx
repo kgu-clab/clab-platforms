@@ -1,16 +1,17 @@
 import { Outlet } from 'react-router-dom';
+
 import Footer from '@components/common/Footer/Footer';
 import Nav from '@components/common/Nav/Nav';
 import ScrollToTop from '@components/common/ScrollToTop/ScrollToTop';
+import TextBanner from '@components/common/TextBanner/TextBanner';
 import PanelAside from '@components/panels/PanelAside/PanelAside';
 import ProtectAuth from '@components/router/ProtectAuth';
-import TextBanner from '@components/common/TextBanner/TextBanner';
 
 const View = () => {
   const banner = true;
 
   return (
-    <main className="flex flex-col min-h-screen py-14 bg-gray-50">
+    <main className="flex min-h-screen flex-col bg-gray-50 py-14">
       {banner && (
         <TextBanner
           label="OPEN-BETA"

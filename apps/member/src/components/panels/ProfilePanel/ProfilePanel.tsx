@@ -1,11 +1,13 @@
 import Image from '@components/common/Image/Image';
 import Panel from '@components/common/Panel/Panel';
-import type { MemberProfileType } from '@type/member';
+
 import { createImageUrl } from '@utils/api';
 import { calculateDDay } from '@utils/date';
 import { getRandomInt } from '@utils/math';
 import { getProfileRingStyle } from '@utils/style';
 import classNames from 'classnames';
+
+import type { MemberProfileType } from '@type/member';
 
 const tips = [
   '오늘은 맛집 게시글을 작성하는건 어때요?',
@@ -37,7 +39,7 @@ const ProfilePanel = ({ data }: ProfilePanelProps) => {
                 height="h-10"
                 src={createImageUrl(data.imageUrl)}
                 alt="프로필사진"
-                className="object-cover rounded-full"
+                className="rounded-full object-cover"
               />
             </div>
           </div>
@@ -48,7 +50,7 @@ const ProfilePanel = ({ data }: ProfilePanelProps) => {
             </p>
           </div>
         </div>
-        <p className="py-1 mt-4 text-xs font-semibold text-center bg-gray-100 rounded-md">
+        <p className="mt-4 rounded-md bg-gray-100 py-1 text-center text-xs font-semibold">
           &quot;{tips[getRandomInt(tips.length - 1)]}&quot;
         </p>
       </Panel.Body>

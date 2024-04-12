@@ -1,6 +1,7 @@
-import Link from 'next/link';
 import React from 'react';
+
 import { PATH } from '@constants/path';
+import Link from 'next/link';
 
 const links = [
   {
@@ -19,8 +20,8 @@ const links = [
 
 const Footer = () => {
   return (
-    <footer className="p-10 text-center bg-white border-t">
-      <ul className="flex justify-center text-sm divide-x">
+    <footer className="border-t bg-white p-10 text-center">
+      <ul className="flex justify-center divide-x text-sm">
         {links.map(({ name, path }) => (
           <Link key={name} href={path} className="px-2">
             {name}

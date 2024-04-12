@@ -1,10 +1,11 @@
-import { ATOM_KEY } from '@constants/key';
 import {
   atom,
   useRecoilState,
   useRecoilValue,
   useSetRecoilState,
 } from 'recoil';
+
+import { ATOM_KEY } from '@constants/key';
 
 interface ModalState {
   key: string;

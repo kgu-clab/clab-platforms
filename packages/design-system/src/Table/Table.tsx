@@ -1,20 +1,22 @@
 import React from 'react';
-import { CellProps, RowProps, TableProps } from './Table.types';
+
 import { twMerge } from 'tailwind-merge';
+
+import { CellProps, RowProps, TableProps } from './Table.types';
 
 const Table = ({ head, className, children, ...rest }: TableProps) => {
   return (
     <table
-      className={twMerge('table-auto border-collapse w-full', className)}
+      className={twMerge('w-full table-auto border-collapse', className)}
       {...rest}
     >
       {head && (
         <thead>
-          <tr className="text-center bg-gray-100">
+          <tr className="bg-gray-100 text-center">
             {head.map((item, index) => (
               <th
                 key={index}
-                className="p-2 first:rounded-l-lg last:rounded-r-lg text-nowrap"
+                className="text-nowrap p-2 first:rounded-l-lg last:rounded-r-lg"
               >
                 {item}
               </th>
@@ -23,7 +25,7 @@ const Table = ({ head, className, children, ...rest }: TableProps) => {
         </thead>
       )}
 
-      <tbody className="text-sm divide-y">{children}</tbody>
+      <tbody className="divide-y text-sm">{children}</tbody>
     </table>
   );
 };
@@ -32,7 +34,7 @@ const Row = ({ className, onClick, children, ...rest }: RowProps) => {
   return (
     <tr
       className={twMerge(
-        'w-full text-center hover:bg-gray-50 transition-colors',
+        'w-full text-center transition-colors hover:bg-gray-50',
         onClick && 'cursor-pointer',
         className,
       )}

@@ -1,5 +1,6 @@
-import classNames from 'classnames';
 import { ComponentPropsWithRef, forwardRef } from 'react';
+
+import classNames from 'classnames';
 
 interface TextareaProps extends ComponentPropsWithRef<'textarea'> {
   label?: string;
@@ -21,7 +22,7 @@ const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
           id={id}
           ref={ref}
           className={classNames(
-            'border p-2 rounded-lg focus:bg-white outline-none transition-colors',
+            'rounded-lg border p-2 outline-none transition-colors focus:bg-white',
             hasValue ? 'bg-white' : 'bg-gray-100',
             className,
           )}
@@ -32,7 +33,7 @@ const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
         {maxLength && (
           <div
             className={classNames(
-              'absolute bottom-4 right-2 bg-white text-xs px-2 rounded-lg boarder font-medium border',
+              'boarder absolute bottom-4 right-2 rounded-lg border bg-white px-2 text-xs font-medium',
               {
                 'text-red-500': value.length >= maxLength,
               },
@@ -45,5 +46,6 @@ const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
     );
   },
 );
+Textarea.displayName = 'Textarea';
 
 export default Textarea;

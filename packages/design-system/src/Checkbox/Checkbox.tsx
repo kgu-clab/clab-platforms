@@ -1,5 +1,7 @@
 import React, { forwardRef } from 'react';
+
 import { twMerge } from 'tailwind-merge';
+
 import { CheckboxProps } from './Checkbox.types';
 
 const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(

@@ -1,13 +1,18 @@
-import Post from '@components/common/Post/Post';
-import { toDecodeHTMLEntities } from '@utils/string';
-import Textarea from '@components/common/Textarea/Textarea';
 import { useCallback, useState } from 'react';
+
 import { Button } from '@clab/design-system';
+
+import Post from '@components/common/Post/Post';
+import Textarea from '@components/common/Textarea/Textarea';
+
 import useBoardModifyMutation from '@hooks/queries/useBoardModifyMutation';
+import { toDecodeHTMLEntities } from '@utils/string';
+
 import type {
   CommunityCategoryType,
   CommunityPostDetailItem,
 } from '@type/community';
+
 import CommunityReportButton from '../CommunityReportButton/CommunityReportButton';
 
 interface CommunityBoardPostProps {
@@ -59,7 +64,7 @@ const CommunityBoardPost = ({ type, data }: CommunityBoardPostProps) => {
       />
       {isEditMode ? (
         <Textarea
-          className="w-full min-h-96"
+          className="min-h-96 w-full"
           maxLength={2000}
           value={contents}
           placeholder={data.content}

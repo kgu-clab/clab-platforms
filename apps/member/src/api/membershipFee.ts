@@ -1,17 +1,19 @@
-import { server } from './server';
 import { END_POINT } from '@constants/api';
 import { createCommonPagination } from '@utils/api';
-import { postUploadedFileMembershipFee } from './uploadedFile';
+
 import type {
-  BaseResponse,
-  PaginationType,
-  PaginationPramsType,
   ArgsWithFiles,
+  BaseResponse,
+  PaginationPramsType,
+  PaginationType,
 } from '@type/api';
 import type {
   MembershipFeeRequestType,
   MembershipFeeType,
 } from '@type/membershipFee';
+
+import { server } from './server';
+import { postUploadedFileMembershipFee } from './uploadedFile';
 
 interface GetMembershipFeeParamsType extends PaginationPramsType {
   memberId?: string;

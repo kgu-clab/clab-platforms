@@ -1,9 +1,11 @@
 'use client';
 
-import { forwardRef, ComponentPropsWithoutRef } from 'react';
-import { StrictPropsWithChildren } from '@type/common';
+import { ComponentPropsWithoutRef, forwardRef } from 'react';
+
 import { cn } from '@utils/component';
 import { useRouter } from 'next/navigation';
+
+import { StrictPropsWithChildren } from '@type/common';
 
 interface HomeCardProps extends ComponentPropsWithoutRef<'button'> {
   to: string;
@@ -17,13 +19,13 @@ const HomeCard = forwardRef<HTMLButtonElement, HomeCardProps>(
       <button
         ref={ref}
         className={cn(
-          'w-full bg-white border rounded-lg disabled:bg-inherit',
+          'w-full rounded-lg border bg-white disabled:bg-inherit',
           className,
         )}
         onClick={() => router.push(to)}
         {...rest}
       >
-        <div className="flex flex-col h-full p-4 text-left break-keep">
+        <div className="flex h-full flex-col break-keep p-4 text-left">
           {children}
         </div>
       </button>
@@ -60,7 +62,7 @@ const HomeCardIcon = forwardRef<HTMLDivElement, StrictPropsWithChildren>(
     return (
       <div
         ref={ref}
-        className="flex flex-col items-end justify-end h-full mt-2"
+        className="mt-2 flex h-full flex-col items-end justify-end"
       >
         {children}
       </div>

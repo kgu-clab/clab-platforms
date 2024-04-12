@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react';
+
+import { server } from '@api/server';
 import { useToken } from '@hooks/common/useToken';
 import AppRouter from '@router/AppRouter';
 import { useSetIsLoggedInStore } from '@store/auth';
-import { server } from '@api/server';
 import { authorization } from '@utils/api';
 
 const App = () => {

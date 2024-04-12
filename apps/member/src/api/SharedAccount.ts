@@ -1,12 +1,14 @@
 import { END_POINT } from '@constants/api';
-import { BaseResponse, PaginationType } from '@type/api';
-import { server } from './server';
 import { createCommonPagination, createPath } from '@utils/api';
+
+import { BaseResponse, PaginationType } from '@type/api';
 import type {
   AccountType,
   SharedAccountUsageType,
   SharedAccountUserItem,
 } from '@type/sharedAccount';
+
+import { server } from './server';
 
 interface patchSharedAccountStatusArgs {
   usageId: number;

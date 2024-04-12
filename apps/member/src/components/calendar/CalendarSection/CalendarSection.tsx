@@ -1,9 +1,12 @@
 import { startTransition, useCallback, useState } from 'react';
+
 import ArrowButton from '@components/common/ArrowButton/ArrowButton';
 import Section from '@components/common/Section/Section';
+
 import { useSchedule } from '@hooks/queries';
 import { now, transformEvents } from '@utils/date';
 import { cn } from '@utils/string';
+
 import CalendarSchedule from '../CalendarSchedule/CalendarSchedule';
 
 const today = now();
@@ -41,11 +44,11 @@ const CalendarSection = () => {
     const isToday = day.isSame(today, 'day');
 
     days.push(
-      <td key={day.format('DD-MM-YYYY')} className="border h-28">
-        <div className="flex flex-col items-end h-full space-y-1">
+      <td key={day.format('DD-MM-YYYY')} className="h-28 border">
+        <div className="flex h-full flex-col items-end space-y-1">
           <p
-            className={cn('text-sm text-center rounded-full size-5 m-1', {
-              'text-white bg-red-500': isToday,
+            className={cn('m-1 size-5 rounded-full text-center text-sm', {
+              'bg-red-500 text-white': isToday,
             })}
           >
             {day.format('D')}

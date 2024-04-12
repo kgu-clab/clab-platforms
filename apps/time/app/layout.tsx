@@ -1,6 +1,7 @@
+import { cn } from '@utils/component';
 import type { Metadata } from 'next';
 import { Noto_Sans_KR } from 'next/font/google';
-import { cn } from '@utils/component';
+
 import './globals.css';
 
 const inter = Noto_Sans_KR({ subsets: ['latin'] });
@@ -21,7 +22,7 @@ export default function RootLayout({
   return (
     <html lang="ko">
       <body
-        className={cn(inter.className, 'bg-gray-50 min-h-screen flex flex-col')}
+        className={cn(inter.className, 'flex min-h-screen flex-col bg-gray-50')}
       >
         {children}
       </body>

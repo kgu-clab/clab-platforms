@@ -1,8 +1,11 @@
-import Section from '@components/common/Section/Section';
-import { BookItem } from '@type/book';
-import Image from '@components/common/Image/Image';
 import { Link } from 'react-router-dom';
+
+import Image from '@components/common/Image/Image';
+import Section from '@components/common/Section/Section';
+
 import { PATH_FINDER } from '@constants/path';
+
+import { BookItem } from '@type/book';
 
 interface LibraNewBooksSectionProps {
   data: BookItem[];
@@ -19,15 +22,15 @@ const LibraryNewBooksSection = ({ data }: LibraNewBooksSectionProps) => {
           <Link
             key={id}
             to={PATH_FINDER.BOOK_DETAIL(id)}
-            className="relative flex flex-col gap-2 transition-transform group hover:scale-110"
+            className="group relative flex flex-col gap-2 transition-transform hover:scale-110"
           >
             <div className="overflow-hidden rounded-lg">
               <Image src={imageUrl} alt={title} className="object-cover " />
             </div>
 
-            <div className="absolute inset-0 transition-all rounded-lg opacity-0 pointer-events-none group-hover:opacity-100 bg-gradient-to-t from-black/60 via-black/30" />
-            <div className="absolute bottom-0 px-2 text-white transition-all opacity-0 group-hover:-translate-y-5 group-hover:opacity-100">
-              <p className="font-semibold break-keep">{title}</p>
+            <div className="pointer-events-none absolute inset-0 rounded-lg bg-gradient-to-t from-black/60 via-black/30 opacity-0 transition-all group-hover:opacity-100" />
+            <div className="absolute bottom-0 px-2 text-white opacity-0 transition-all group-hover:-translate-y-5 group-hover:opacity-100">
+              <p className="break-keep font-semibold">{title}</p>
               <p className="text-sm">
                 {author} | {publisher}
               </p>

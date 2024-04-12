@@ -1,5 +1,6 @@
-import classNames from 'classnames';
 import { LuLoader2 } from 'react-icons/lu';
+
+import classNames from 'classnames';
 
 interface LoadingProps {
   size?: number;

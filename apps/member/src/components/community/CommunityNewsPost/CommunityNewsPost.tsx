@@ -1,7 +1,10 @@
 import Linker from '@components/common/Linker/Linker';
 import Post from '@components/common/Post/Post';
+
 import { toDecodeHTMLEntities } from '@utils/string';
+
 import type { NewsItem } from '@type/news';
+
 import CommunityReportButton from '../CommunityReportButton/CommunityReportButton';
 
 interface CommunityNewsPostProps {

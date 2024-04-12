@@ -1,6 +1,7 @@
 import { PATH } from '@constants/path';
-import { BoardSectionItem } from '../BoardSection';
 import { useBoardsList, useHire, useNews } from '@hooks/queries';
+
+import { BoardSectionItem } from '../BoardSection';
 
 const NoticeBoard = () => {
   const { data } = useBoardsList({ category: 'notice' });

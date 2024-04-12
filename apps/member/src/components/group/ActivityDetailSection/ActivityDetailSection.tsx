@@ -1,10 +1,14 @@
-import Image from '@components/common/Image/Image';
-import Section from '@components/common/Section/Section';
-import type { ActivityGroupBoardParserType } from '@type/activity';
-import { getDateSemester } from '@utils/date';
 import { LiaCertificateSolid } from 'react-icons/lia';
 import { MdOutlineDateRange } from 'react-icons/md';
 import { PiStudent } from 'react-icons/pi';
+
+import Image from '@components/common/Image/Image';
+import Section from '@components/common/Section/Section';
+
+import { getDateSemester } from '@utils/date';
+
+import type { ActivityGroupBoardParserType } from '@type/activity';
+
 interface ActivityDetailSectionProps {
   data: ActivityGroupBoardParserType;
 }
@@ -17,7 +21,7 @@ const ActivityDetailSection = ({ data }: ActivityDetailSectionProps) => {
         height="h-[300px]"
         src={data.imageUrl}
         alt={data.name}
-        className="object-cover border rounded-lg"
+        className="rounded-lg border object-cover"
       />
       <Section>
         <h1 className="text-xl font-bold">{data.name}</h1>

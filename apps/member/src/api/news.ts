@@ -1,8 +1,10 @@
-import { BaseResponse, PaginationType } from '@type/api';
-import { server } from './server';
-import { createCommonPagination } from '@utils/api';
 import { END_POINT } from '@constants/api';
+import { createCommonPagination } from '@utils/api';
+
+import { BaseResponse, PaginationType } from '@type/api';
 import type { NewsItem } from '@type/news';
+
+import { server } from './server';
 
 // 뉴스 조회
 export const getNews = async (page: number, size: number) => {

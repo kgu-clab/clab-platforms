@@ -1,13 +1,17 @@
 import { useCallback } from 'react';
+
+import { Badge } from '@clab/design-system';
+
 import ListButton from '@components/common/ListButton/ListButton';
 import Section from '@components/common/Section/Section';
-import { toYYMMDD } from '@utils/date';
-import { CommentItem } from '@type/comment';
+
 import { PATH_FINDER } from '@constants/path';
 import useModal from '@hooks/common/useModal';
-import { Badge } from '@clab/design-system';
-import type { BookLoanRecordConditionType } from '@type/book';
+import { toYYMMDD } from '@utils/date';
+
 import type { BoardItem } from '@type/board';
+import type { BookLoanRecordConditionType } from '@type/book';
+import { CommentItem } from '@type/comment';
 import type { NotificationItem } from '@type/notification';
 
 interface MyHistorySectionProps {
@@ -45,7 +49,7 @@ const MyHistorySection = ({ title, data }: MyHistorySectionProps) => {
                 key={id}
                 to={PATH_FINDER.COMMUNITY_POST(boardCategory, boardId)}
               >
-                <p className="pr-4 truncate grow">{content}</p>
+                <p className="grow truncate pr-4">{content}</p>
                 <p className="text-clab-main-light">{toYYMMDD(createdAt)}</p>
               </ListButton>
             );
@@ -58,7 +62,7 @@ const MyHistorySection = ({ title, data }: MyHistorySectionProps) => {
               item as BookLoanRecordConditionType;
             return (
               <ListButton key={bookId} to={PATH_FINDER.BOOK_DETAIL(bookId)}>
-                <p className="pr-4 space-x-2 truncate grow">
+                <p className="grow space-x-2 truncate pr-4">
                   <Badge color={returnedAt ? 'green' : 'yellow'}>
                     {returnedAt ? '반납완료' : '대출중'}
                   </Badge>
@@ -77,7 +81,7 @@ const MyHistorySection = ({ title, data }: MyHistorySectionProps) => {
             const { id, content, createdAt } = item as CommentItem;
             return (
               <ListButton key={id} onClick={() => handleAlarmClick(content)}>
-                <p className="pr-4 truncate grow">{content}</p>
+                <p className="grow truncate pr-4">{content}</p>
                 <p className="text-clab-main-light">{toYYMMDD(createdAt)}</p>
               </ListButton>
             );
@@ -92,7 +96,7 @@ const MyHistorySection = ({ title, data }: MyHistorySectionProps) => {
                 key={id}
                 to={PATH_FINDER.COMMUNITY_POST(category, id)}
               >
-                <p className="pr-4 truncate grow">{title}</p>
+                <p className="grow truncate pr-4">{title}</p>
                 <p className="text-clab-main-light">{toYYMMDD(createdAt)}</p>
               </ListButton>
             );

@@ -1,4 +1,5 @@
 import React, { ComponentPropsWithRef, forwardRef } from 'react';
+
 import { twMerge } from 'tailwind-merge';
 
 interface InputProps extends ComponentPropsWithRef<'input'> {
@@ -15,7 +16,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
             {label}
           </label>
         )}
-        <input ref={ref} id={id} className="p-2 border rounded-lg" {...rest} />
+        <input ref={ref} id={id} className="rounded-lg border p-2" {...rest} />
       </div>
     );
   },

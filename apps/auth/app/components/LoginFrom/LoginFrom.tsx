@@ -1,11 +1,14 @@
 'use client';
 
 import { ChangeEvent, useState } from 'react';
+
 import { Button, Input } from '@clab/design-system';
+
 import { useLoginMutation } from '@hooks/queries/useLoginMutation';
-import { AUTH_ATOM_STATE, useAuthStore } from '@store/auth';
-import TwoFactorFrom from '../TwoFactorFrom/TwoFactorFrom';
 import { useCode } from '@hooks/useCode';
+import { AUTH_ATOM_STATE, useAuthStore } from '@store/auth';
+
+import TwoFactorFrom from '../TwoFactorFrom/TwoFactorFrom';
 
 const LoginFrom = () => {
   const auth = useAuthStore();

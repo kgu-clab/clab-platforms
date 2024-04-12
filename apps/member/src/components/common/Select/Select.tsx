@@ -1,5 +1,6 @@
-import classNames from 'classnames';
 import { ComponentPropsWithRef, forwardRef } from 'react';
+
+import classNames from 'classnames';
 
 interface SelectOptions {
   name: string | number;
@@ -23,7 +24,7 @@ const Select = forwardRef<HTMLSelectElement, SelectProps>(
         <select
           ref={ref}
           id={id}
-          className="w-full p-2 border rounded-md grow disabled:bg-gray-50"
+          className="w-full grow rounded-md border p-2 disabled:bg-gray-50"
           {...rest}
         >
           <option disabled value={'none'}>
@@ -39,5 +40,6 @@ const Select = forwardRef<HTMLSelectElement, SelectProps>(
     );
   },
 );
+Select.displayName = 'Select';
 
 export default Select;

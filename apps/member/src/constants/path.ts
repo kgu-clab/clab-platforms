@@ -1,4 +1,5 @@
 import { createPath } from '@utils/api';
+
 import type { IDType } from '@type/api';
 import type { CommunityCategoryType } from '@type/community';
 

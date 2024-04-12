@@ -1,29 +1,15 @@
 {
-  "extends": "../../tsconfig.json",
+  "extends": "@clab/config/tsconfig.next.json",
   "compilerOptions": {
-    "target": "es5",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
-    "allowJs": true,
-    "forceConsistentCasingInFileNames": true,
-    "esModuleInterop": true,
-    "moduleResolution": "node",
-    "jsx": "preserve",
-    "incremental": true,
-    "skipLibCheck": true,
-    "plugins": [
-      {
-        "name": "next"
-      }
-    ]
+    "paths": {
+      "@api/*": ["./app/api/*"],
+      "@components/*": ["./app/components/*"],
+      "@constants/*": ["./app/constants/*"],
+      "@hooks/*": ["./app/hooks/*"],
+      "@store/*": ["./app/store/*"],
+      "@type/*": ["./app/types/*"],
+      "@/*": ["./*"]
+    }
   },
-  "include": [
-    "next-env.d.ts",
-    "**/*.ts",
-    "**/*.tsx",
-    ".next/types/**/*.ts"
-  ]
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"]
 }

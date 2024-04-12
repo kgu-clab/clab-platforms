@@ -1,14 +1,16 @@
-import { QUERY_KEY } from '@constants/key';
 import { useSuspenseQuery } from '@tanstack/react-query';
+
 import { getBoardsDetail } from '@api/board';
-import { getNewsPost } from '@api/news';
 import { getHirePost } from '@api/hire';
-import type { NewsItem } from '@type/news';
-import type { HireItem } from '@type/hire';
+import { getNewsPost } from '@api/news';
+import { QUERY_KEY } from '@constants/key';
+
 import type {
   CommunityCategoryType,
   CommunityPostDetailItem,
 } from '@type/community';
+import type { HireItem } from '@type/hire';
+import type { NewsItem } from '@type/news';
 
 type PostsType = CommunityPostDetailItem | NewsItem | HireItem;
 /**

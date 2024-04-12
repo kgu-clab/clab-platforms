@@ -1,13 +1,15 @@
+import { useSuspenseQuery } from '@tanstack/react-query';
+
+import { getBoardsList } from '@api/board';
 import { getMyHire } from '@api/hire';
 import { getNews } from '@api/news';
 import { QUERY_KEY } from '@constants/key';
-import { useSuspenseQuery } from '@tanstack/react-query';
-import { getBoardsList } from '@api/board';
+
 import type { Pagination, PaginationPramsType } from '@type/api';
 import type { CommunityCategoryType } from '@type/community';
-import type { PostItem } from '@type/post';
-import type { NewsItem } from '@type/news';
 import type { HireItem } from '@type/hire';
+import type { NewsItem } from '@type/news';
+import type { PostItem } from '@type/post';
 
 interface UseBoardsListParams extends PaginationPramsType {
   category: CommunityCategoryType;

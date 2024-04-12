@@ -1,5 +1,7 @@
 import React, { ComponentPropsWithRef, ReactNode } from 'react';
+
 import { twMerge } from 'tailwind-merge';
+
 import { buttonStyleColored, buttonStyleSized } from './Button.style';
 import type { ButtonColorType, ButtonSizeType } from './Button.types';
 
@@ -20,7 +22,7 @@ const Button = ({
   return (
     <button
       className={twMerge(
-        'font-semibold text-sm rounded-lg border transition-colors',
+        'rounded-lg border text-sm font-semibold transition-colors',
         buttonStyleColored(color),
         buttonStyleSized(size),
         className,

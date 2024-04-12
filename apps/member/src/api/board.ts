@@ -1,7 +1,7 @@
-import { BaseResponse, PaginationType } from '@type/api';
-import { server } from './server';
 import { END_POINT } from '@constants/api';
 import { createCommonPagination } from '@utils/api';
+
+import { BaseResponse, PaginationType } from '@type/api';
 import type { BoardItem } from '@type/board';
 import type {
   CommunityCategoryType,
@@ -9,6 +9,8 @@ import type {
   CommunityWriteItem,
 } from '@type/community';
 import type { PostItem } from '@type/post';
+
+import { server } from './server';
 
 interface PatchBoardsParams {
   id: number;

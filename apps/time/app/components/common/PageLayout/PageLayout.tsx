@@ -1,7 +1,9 @@
 import React from 'react';
-import Nav from '../Nav';
-import Footer from '../Footer';
+
 import { cn } from '@utils/component';
+
+import Footer from '../Footer';
+import Nav from '../Nav';
 
 interface PageProps {
   nav?: boolean;
@@ -19,7 +21,7 @@ const Page = ({
   return (
     <>
       {nav && <Nav />}
-      <main className={cn('max-w-xl m-auto mt-14 p-4', className)}>
+      <main className={cn('m-auto mt-14 max-w-xl p-4', className)}>
         {children}
       </main>
       {footer && <Footer />}

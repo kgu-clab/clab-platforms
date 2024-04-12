@@ -1,9 +1,13 @@
+import { useCallback, useEffect, useRef, useState } from 'react';
+
+import { Input } from '@clab/design-system';
+
 import Image from '@components/common/Image/Image';
+
 import { createImageUrl } from '@utils/api';
 import { getProfileRingStyle } from '@utils/style';
 import classNames from 'classnames';
-import { useCallback, useEffect, useRef, useState } from 'react';
-import { Input } from '@clab/design-system';
+
 import type { MemberProfileType } from '@type/member';
 
 interface MyProfileImageProps {
@@ -65,7 +69,7 @@ const MyProfileImage = ({ isEdit, data, onChange }: MyProfileImageProps) => {
           height="h-32"
           src={createImageUrl(image)}
           alt={data.name}
-          className={classNames('object-cover rounded-full bg-white', {
+          className={classNames('rounded-full bg-white object-cover', {
             'cursor-pointer': isEdit,
           })}
         />

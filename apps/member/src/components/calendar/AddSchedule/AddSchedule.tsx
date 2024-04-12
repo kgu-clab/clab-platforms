@@ -1,9 +1,13 @@
-import { Button, Input } from '@clab/design-system';
-import Section from '@components/common/Section/Section';
 import { ChangeEvent, useState } from 'react';
-import type { ScheduleRegisterItem } from '@type/schedule';
-import dayjs from 'dayjs';
+
+import { Button, Input } from '@clab/design-system';
+
+import Section from '@components/common/Section/Section';
+
 import { postSchedule } from '@api/schedule';
+import dayjs from 'dayjs';
+
+import type { ScheduleRegisterItem } from '@type/schedule';
 
 const AddSchedule = () => {
   const [inputs, setInputs] = useState<ScheduleRegisterItem>({

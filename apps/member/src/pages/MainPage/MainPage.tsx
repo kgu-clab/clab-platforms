@@ -1,17 +1,18 @@
 import { Suspense } from 'react';
+
 import Content from '@components/common/Content/Content';
-import MainNoticeSection from '@components/main/MainNoticeSection/MainNoticeSection';
-import MainBanner from '@components/main/MainBanner/MainBanner';
-import BirthdaySection from '@components/main/BirthdaySection/BirthdaySection';
-import BlogSection from '@components/main/BlogSection/BlogSection';
-import OrganizationNewsSection from '@components/main/OrganizationNewsSection/OrganizationNewsSection';
-import { BoardSection } from '@components/community/BoardSection';
 import {
   HireBoard,
   NewsBoard,
   NoticeBoard,
   QnABoard,
 } from '@components/community/Board';
+import { BoardSection } from '@components/community/BoardSection';
+import BirthdaySection from '@components/main/BirthdaySection/BirthdaySection';
+import BlogSection from '@components/main/BlogSection/BlogSection';
+import MainBanner from '@components/main/MainBanner/MainBanner';
+import MainNoticeSection from '@components/main/MainNoticeSection/MainNoticeSection';
+import OrganizationNewsSection from '@components/main/OrganizationNewsSection/OrganizationNewsSection';
 
 const MainPage = () => {
   return (

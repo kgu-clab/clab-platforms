@@ -1,6 +1,8 @@
 import PostCard from '@components/common/PostCard/PostCard';
 import Section from '@components/common/Section/Section';
+
 import { PATH_FINDER } from '@constants/path';
+
 import type { ActivityGroupMemberMyType } from '@type/activity';
 
 interface MyActivityGroupSectionProps {
@@ -11,7 +13,7 @@ const MyActivityGroupSection = ({ data }: MyActivityGroupSectionProps) => {
   return (
     <Section>
       <Section.Header title="나의 활동" />
-      <Section.Body className="flex gap-2 overflow-scroll scrollbar-hide">
+      <Section.Body className="scrollbar-hide flex gap-2 overflow-scroll">
         {data.map((activityGroup) => (
           <PostCard
             key={activityGroup.id}

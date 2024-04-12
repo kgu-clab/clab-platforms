@@ -17,8 +17,8 @@ const list = [
 
 const Footer = () => {
   return (
-    <footer className="p-10 text-center bg-white border-t">
-      <ul className="flex justify-center text-sm font-semibold divide-x">
+    <footer className="border-t bg-white p-10 text-center">
+      <ul className="flex justify-center divide-x text-sm font-semibold">
         {list.map(({ name }) => (
           <Link key={name} className="px-2" to="">
             {name}

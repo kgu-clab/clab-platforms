@@ -1,9 +1,11 @@
+import { FcAlarmClock, FcCalendar, FcLeave, FcOvertime } from 'react-icons/fc';
+
 import Section from '@components/common/Section/Section';
 import StatusCard from '@components/common/StatusCard/StatusCard';
+
 import { useSchedule } from '@hooks/queries';
-import { calculateDDay, findClosestEvent, transformEvents } from '@utils/date';
-import { FcCalendar, FcLeave, FcOvertime, FcAlarmClock } from 'react-icons/fc';
 import { useScheduleCollect } from '@hooks/queries/useScheduleCollect';
+import { calculateDDay, findClosestEvent, transformEvents } from '@utils/date';
 
 const CalendarStatusSection = () => {
   const { data: yearData } = useScheduleCollect();
@@ -20,7 +22,7 @@ const CalendarStatusSection = () => {
         title="모아보기"
         description="일정을 한 눈에 확인하세요"
       />
-      <Section.Body className="grid grid-cols-2 gap-4 md:grid-cols-4 break-keep">
+      <Section.Body className="grid grid-cols-2 gap-4 break-keep md:grid-cols-4">
         <StatusCard
           icon={<FcCalendar size={32} />}
           label={`${yearData.totalScheduleCount}회`}

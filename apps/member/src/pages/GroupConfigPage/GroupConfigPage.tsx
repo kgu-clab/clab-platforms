@@ -1,12 +1,14 @@
+import { useParams } from 'react-router-dom';
+
 import Content from '@components/common/Content/Content';
 import Header from '@components/common/Header/Header';
-import ActivityProfileEditor from '@components/group/ActivityProfileEditor/ActivityProfileEditor';
+import ActivityNoticeEditor from '@components/group/ActivityNoticeEditor/ActivityNoticeEditor';
 import ActivityParticipantEditor from '@components/group/ActivityParticipantEditor/ActivityParticipantEditor';
+import ActivityPostEditor from '@components/group/ActivityPostEditor/ActivityPostEditor';
+import ActivityProfileEditor from '@components/group/ActivityProfileEditor/ActivityProfileEditor';
+
 import { GROUP_MESSAGE } from '@constants/message';
 import { useActivityGroup } from '@hooks/queries/useActivityGroup';
-import { useParams } from 'react-router-dom';
-import ActivityNoticeEditor from '@components/group/ActivityNoticeEditor/ActivityNoticeEditor';
-import ActivityPostEditor from '@components/group/ActivityPostEditor/ActivityPostEditor';
 
 const GroupConfigPage = () => {
   const { id } = useParams();
