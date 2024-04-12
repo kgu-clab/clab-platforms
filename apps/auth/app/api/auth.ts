@@ -1,12 +1,12 @@
 import { API_BASE_URL, END_POINTS } from '../constants/api';
 
-interface PostLoginBody {
+export interface PostLoginBody {
   [key: string]: string;
   id: string;
   password: string;
 }
 
-interface PostTwoFactorLoginBody {
+export interface PostTwoFactorLoginBody {
   [key: string]: string;
   memberId: string;
   totp: string;

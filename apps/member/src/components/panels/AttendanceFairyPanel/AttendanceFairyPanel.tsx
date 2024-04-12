@@ -1,7 +1,10 @@
 import { useState } from 'react';
-import Panel from '@components/common/Panel/Panel';
-import fairy from '@assets/webp/fairy.webp';
+
 import { Button } from '@clab/design-system';
+
+import Panel from '@components/common/Panel/Panel';
+
+import fairy from '@assets/webp/fairy.webp';
 
 const AttendanceFairyPanel = () => {
   const [open, setOpen] = useState(true);
@@ -13,7 +16,7 @@ const AttendanceFairyPanel = () => {
   return (
     <Panel>
       <Panel.Header
-        icon={<img src={fairy} alt="출석요정" className="h-5 w-5" />}
+        icon={<img src={fairy} alt="출석요정" className="size-5" />}
         label="출석요정"
         description="출석요청이 왔어요!"
         isOpen={open}

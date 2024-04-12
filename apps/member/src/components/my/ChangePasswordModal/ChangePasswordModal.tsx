@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
+
 import { Input } from '@clab/design-system';
+
+import Modal from '@components/common/Modal/Modal';
+
 import useModal from '@hooks/common/useModal';
 import useToast from '@hooks/common/useToast';
 import { useUserInfoMutation } from '@hooks/queries';
 import classNames from 'classnames';
-import Modal from '@components/common/Modal/Modal';
 
 interface NewPasswordType {
   password: string;
@@ -77,7 +80,7 @@ const ChangePasswordModal = ({ memberId }: ChangePasswordModalProps) => {
           onChange={handlePasswordChange}
         />
         <p
-          className={classNames('text-center pt-2', {
+          className={classNames('pt-2 text-center', {
             'text-red-500': !isPasswordValid || isPasswordEmpty,
           })}
         >

@@ -1,7 +1,8 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
+
+import { patchSharedAccountStatus } from '@api/SharedAccount';
 import { QUERY_KEY } from '@constants/key';
 import useToast from '@hooks/common/useToast';
-import { patchSharedAccountStatus } from '@api/SharedAccount';
 
 export const useSharedAccountsChangeStatusMutation = () => {
   const queryClient = useQueryClient();

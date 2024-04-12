@@ -1,8 +1,10 @@
-import { BaseResponse, PaginationType } from '@type/api';
-import { server } from './server';
-import { createCommonPagination } from '@utils/api';
 import { END_POINT } from '@constants/api';
+import { createCommonPagination } from '@utils/api';
+
+import { BaseResponse, PaginationType } from '@type/api';
 import type { HireItem } from '@type/hire';
+
+import { server } from './server';
 
 // 채용 공고 조회
 export const getMyHire = async (page: number, size: number) => {

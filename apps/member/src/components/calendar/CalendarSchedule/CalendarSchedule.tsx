@@ -1,9 +1,11 @@
+import { useCallback } from 'react';
+
 import useModal from '@hooks/common/useModal';
 import { formattedDate } from '@utils/date';
-import type { ScheduleItem } from '@type/schedule';
-import { useCallback } from 'react';
 import { cn } from '@utils/string';
 import dayjs from 'dayjs';
+
+import type { ScheduleItem } from '@type/schedule';
 
 interface CalendarScheduleProps extends ScheduleItem {
   day: dayjs.Dayjs;
@@ -38,8 +40,8 @@ const CalendarSchedule = ({
   return (
     <button
       className={cn(
-        'w-full px-2 text-xs text-left truncate',
-        isDateDiff === 0 ? 'bg-blue-100 rounded' : 'bg-red-100',
+        'w-full truncate px-2 text-left text-xs',
+        isDateDiff === 0 ? 'rounded bg-blue-100' : 'bg-red-100',
         {
           'rounded-l bg-red-100':
             isDateDiff !== 0 && day.isSame(startDate, 'date'),

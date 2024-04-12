@@ -1,8 +1,10 @@
-import { server } from './server';
 import { END_POINT } from '@constants/api';
-import { postUploadedFileProfileImage } from './uploadedFile';
+
 import type { BaseResponse } from '@type/api';
 import type { MemberProfileRequestType, MemberProfileType } from '@type/member';
+
+import { server } from './server';
+import { postUploadedFileProfileImage } from './uploadedFile';
 
 interface PatchUserInfoArgs {
   id: string;

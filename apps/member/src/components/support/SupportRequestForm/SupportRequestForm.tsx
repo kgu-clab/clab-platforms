@@ -1,12 +1,16 @@
-import { Button, Input, Checkbox, Tabs } from '@clab/design-system';
 import { ChangeEvent, FormEvent, useCallback, useState } from 'react';
-import { formatComma } from '@utils/math';
-import useToast from '@hooks/common/useToast';
-import Linker from '@components/common/Linker/Linker';
-import Uploader from '@components/common/Uploader/Uploader';
 import { FcAnswers, FcMultipleDevices, FcTemplate } from 'react-icons/fc';
-import { SELECT_DEFAULT_OPTION } from '@constants/select';
+
+import { Button, Checkbox, Input, Tabs } from '@clab/design-system';
+
+import Linker from '@components/common/Linker/Linker';
 import Loading from '@components/common/Loading/Loading';
+import Uploader from '@components/common/Uploader/Uploader';
+
+import { SELECT_DEFAULT_OPTION } from '@constants/select';
+import useToast from '@hooks/common/useToast';
+import { formatComma } from '@utils/math';
+
 import type { SupportRequestDataType } from '@type/support';
 
 const tabsOptions = [

@@ -1,8 +1,11 @@
 import { useState } from 'react';
-import Textarea from '../Textarea/Textarea';
+
 import { Button, Checkbox } from '@clab/design-system';
+
 import { useCommentWriteMutation } from '@hooks/queries/useCommentWriteMutation';
 import { cn } from '@utils/string';
+
+import Textarea from '../Textarea/Textarea';
 
 interface CommentInputProps {
   id: string;
@@ -48,7 +51,7 @@ const CommentInput = ({
   return (
     <div className={cn('flex items-center gap-2', className)}>
       <Textarea
-        className="w-full h-full p-2 border resize-none"
+        className="size-full resize-none border p-2"
         placeholder="댓글을 입력해주세요."
         maxLength={200}
         value={value}

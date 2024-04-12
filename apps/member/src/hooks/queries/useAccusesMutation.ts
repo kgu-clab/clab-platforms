@@ -1,6 +1,7 @@
+import { useMutation } from '@tanstack/react-query';
+
 import { postAccuses } from '@api/accuse';
 import useToast from '@hooks/common/useToast';
-import { useMutation } from '@tanstack/react-query';
 
 export const useAccusesMutation = () => {
   const toast = useToast();

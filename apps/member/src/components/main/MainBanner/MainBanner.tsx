@@ -1,4 +1,5 @@
 import Image from '@components/common/Image/Image';
+
 import { useActivityPhoto } from '@hooks/queries';
 import { createImageUrl } from '@utils/api';
 
@@ -12,7 +13,7 @@ const MainBanner = () => {
   const { title, date, files } = data.items[0];
 
   return (
-    <div className="relative flex items-center gap-2 overflow-hidden border rounded-lg h-60">
+    <div className="relative flex h-60 items-center gap-2 overflow-hidden rounded-lg border">
       <Image
         width="w-full"
         height="h-full"
@@ -20,8 +21,8 @@ const MainBanner = () => {
         alt={title}
         className="object-cover"
       />
-      <div className="absolute inset-0 w-full h-full rounded-lg pointer-events-none to-bg-black-10 bg-gradient-to-t from-black/40 via-black/0" />
-      <div className="absolute bottom-0 p-4 pointer-events-none whitespace-nowrap text-start">
+      <div className="to-bg-black-10 pointer-events-none absolute inset-0 size-full rounded-lg bg-gradient-to-t from-black/40 via-black/0" />
+      <div className="pointer-events-none absolute bottom-0 whitespace-nowrap p-4 text-start">
         <p className="text-2xl font-bold text-white">{title}</p>
         <p className="font-medium text-white">{date}</p>
       </div>

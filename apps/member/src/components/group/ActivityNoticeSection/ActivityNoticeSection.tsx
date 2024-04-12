@@ -1,11 +1,15 @@
+/* eslint-disable react/display-name */
+import { useState } from 'react';
+
 import DropdownButton from '@components/common/DropdownButton/DropdownButton';
-import useModal from '@hooks/common/useModal';
 import Section from '@components/common/Section/Section';
-import type { ActivityBoardType } from '@type/activity';
+
+import useModal from '@hooks/common/useModal';
 import { formattedDate } from '@utils/date';
 import classNames from 'classnames';
-import { useState } from 'react';
 import dayjs from 'dayjs';
+
+import type { ActivityBoardType } from '@type/activity';
 
 interface ActivityNoticeSectionProps {
   data: Array<ActivityBoardType>;
@@ -83,16 +87,16 @@ ActivityNoticeSection.Item = ({
   return (
     <div
       className={classNames(
-        'w-full hover:bg-gray-100 p-2 rounded-lg transition-colors duration-300 ease-in-out',
+        'w-full rounded-lg p-2 transition-colors duration-300 ease-in-out hover:bg-gray-100',
         className,
       )}
     >
       <div
-        className="flex items-center justify-between gap-2 cursor-pointer"
+        className="flex cursor-pointer items-center justify-between gap-2"
         onClick={() => onClick(data.content)}
       >
         <p className="w-full truncate">{data.title}</p>
-        <p className="text-sm text-gray-500 whitespace-nowrap">
+        <p className="whitespace-nowrap text-sm text-gray-500">
           {formattedDate(data.createdAt)}
         </p>
       </div>

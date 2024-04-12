@@ -1,11 +1,13 @@
-import { ATOM_KEY } from '@constants/key';
-import type { ToastStateType } from '@type/toast';
 import {
   atom,
   useRecoilState,
   useRecoilValue,
   useSetRecoilState,
 } from 'recoil';
+
+import { ATOM_KEY } from '@constants/key';
+
+import type { ToastStateType } from '@type/toast';
 
 interface ToastItem {
   id: number;

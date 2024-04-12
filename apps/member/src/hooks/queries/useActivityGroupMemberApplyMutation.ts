@@ -1,6 +1,7 @@
+import { useMutation } from '@tanstack/react-query';
+
 import { postActivityGroupMemberApply } from '@api/activity';
 import useToast from '@hooks/common/useToast';
-import { useMutation } from '@tanstack/react-query';
 
 /**
  * 활동을 신청합니다.

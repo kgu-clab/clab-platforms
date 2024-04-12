@@ -1,6 +1,7 @@
 import { SyntheticEvent, useState } from 'react';
-import classNames from 'classnames';
+
 import { NOT_FOUND_IMG } from '@constants/path';
+import classNames from 'classnames';
 
 interface ImageProps {
   src?: string;
@@ -42,7 +43,7 @@ const Image = ({
       })}
     >
       <img
-        className={classNames('w-full h-full', className, {
+        className={classNames('h-full w-full', className, {
           'animate-pulse bg-gray-200': loading,
           'bg-gray-50': error,
           'cursor-pointer': onClick,

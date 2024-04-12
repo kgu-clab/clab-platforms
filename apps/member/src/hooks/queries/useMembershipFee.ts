@@ -1,6 +1,8 @@
-import { QUERY_KEY } from '@constants/key';
 import { useSuspenseQuery } from '@tanstack/react-query';
+
 import { getMembershipFee } from '@api/membershipFee';
+import { QUERY_KEY } from '@constants/key';
+
 import { PaginationPramsType } from '@type/api';
 
 interface UseMembershipFeeParamsType extends PaginationPramsType {

@@ -1,10 +1,12 @@
 import { useCallback, useState } from 'react';
+
 import Comment from '@components/common/Comment/Comment';
-import Section from '@components/common/Section/Section';
-import { useCommentList } from '@hooks/queries/useCommentList';
 import CommentInput from '@components/common/CommentInput/CommentInput';
-import { useAccusesMutation } from '@hooks/queries/useAccusesMutation';
+import Section from '@components/common/Section/Section';
+
 import useModal from '@hooks/common/useModal';
+import { useAccusesMutation } from '@hooks/queries/useAccusesMutation';
+import { useCommentList } from '@hooks/queries/useCommentList';
 
 interface PostCommentSectionProps {
   id: string;
@@ -101,7 +103,7 @@ const PostCommentSection = ({ id }: PostCommentSectionProps) => {
                     onChange={(e) =>
                       handleReCommentChange(commentId, e.target.value)
                     }
-                    className="pl-4 mt-2 border-l"
+                    className="mt-2 border-l pl-4"
                   />
                 )}
               </div>

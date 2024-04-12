@@ -1,6 +1,8 @@
 import { useCallback, useLayoutEffect } from 'react';
+
 import useModal from '@hooks/common/useModal';
 import { useGetModalStore } from '@store/modal';
+
 import Modal from './Modal';
 
 const preventScroll = (e: WheelEvent | TouchEvent) => {

@@ -1,7 +1,9 @@
-import Panel from '@components/common/Panel/Panel';
-import { ScheduleItem } from '@type/schedule';
 import { useCallback, useState } from 'react';
 import { FcTimeline } from 'react-icons/fc';
+
+import Panel from '@components/common/Panel/Panel';
+
+import { ScheduleItem } from '@type/schedule';
 
 interface ActivityPanelProps {
   data: ScheduleItem[];
@@ -31,7 +33,7 @@ const ActivityPanel = ({ data }: ActivityPanelProps) => {
         <Panel.Body isOpen={open}>
           {data.length ? (
             <div className="space-y-4 text-sm">
-              <ul className="p-2 text-gray-500 list-disc list-inside bg-gray-100 rounded-md">
+              <ul className="list-inside list-disc rounded-md bg-gray-100 p-2 text-gray-500">
                 {data.map(({ id, activityName }) => (
                   <li key={id} className="font-semibold">
                     {activityName}
@@ -40,7 +42,7 @@ const ActivityPanel = ({ data }: ActivityPanelProps) => {
               </ul>
             </div>
           ) : (
-            <p className="text-xs text-center bg-gray-100 py-1.5 rounded-lg">
+            <p className="rounded-lg bg-gray-100 py-1.5 text-center text-xs">
               새로운 활동을 참여하는 건 어떨까요?
             </p>
           )}

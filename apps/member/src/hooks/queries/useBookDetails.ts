@@ -1,6 +1,7 @@
+import { useSuspenseQuery } from '@tanstack/react-query';
+
 import { getBookDetail } from '@api/book';
 import { QUERY_KEY } from '@constants/key';
-import { useSuspenseQuery } from '@tanstack/react-query';
 
 /**
  * 도서 상세 정보를 조회합니다.

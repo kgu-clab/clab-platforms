@@ -1,7 +1,5 @@
-import { server } from './server';
 import { API_BASE_URL, END_POINT, HTTP_STATUS_CODE } from '@constants/api';
 import type { FetchOptions, Interceptor } from '@gwansikk/server-chain';
-import type { TokenType } from '@type/api';
 import {
   authorization,
   createPath,
@@ -11,11 +9,15 @@ import {
   setTokens,
 } from '@utils/api';
 
+import type { TokenType } from '@type/api';
+
+import { server } from './server';
+
 let reissueLock = false;
 
 const retryRequest = async (
   response: Response,
-  method: string,
+  method: string | undefined,
   delay = 300, // 재요청 딜레이
 ) => {
   await new Promise((resolve) => setTimeout(resolve, delay));

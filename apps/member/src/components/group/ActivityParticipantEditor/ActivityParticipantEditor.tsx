@@ -1,9 +1,11 @@
 import { Button, Table } from '@clab/design-system';
+
 import Section from '@components/common/Section/Section';
-import { useActivityGroupAdminApplyByStatus } from '@hooks/queries/useActivityGroupAdminApplyByStatus';
-import { useActivityGroupAdminAcceptMutation } from '@hooks/queries/useActivityGroupAdminAcceptMutation';
+
 import { TABLE_HEAD } from '@constants/head';
 import useModal from '@hooks/common/useModal';
+import { useActivityGroupAdminAcceptMutation } from '@hooks/queries/useActivityGroupAdminAcceptMutation';
+import { useActivityGroupAdminApplyByStatus } from '@hooks/queries/useActivityGroupAdminApplyByStatus';
 
 interface ActivityParticipantEditorProps {
   groupId: number;
@@ -44,7 +46,7 @@ const ActivityParticipantEditor = ({
     <Section>
       <h1 className="pb-4 text-xl font-semibold">참여자 관리</h1>
       {!applyMemberList.items ? (
-        <div className="w-full p-5 text-center border border-red-200 rounded-lg bg-red-50">
+        <div className="w-full rounded-lg border border-red-200 bg-red-50 p-5 text-center">
           <p className="text-red-800">신청자가 없습니다.</p>
         </div>
       ) : (

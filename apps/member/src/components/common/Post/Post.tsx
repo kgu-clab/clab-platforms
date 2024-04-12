@@ -1,11 +1,14 @@
-import { formattedDate } from '@utils/date';
-import Share from '../Share/Share';
+/* eslint-disable react/display-name */
 import { MODE } from '@constants/environment';
 import { createImageUrl } from '@utils/api';
-import { getProfileRingStyle } from '@utils/style';
+import { formattedDate } from '@utils/date';
 import { cn } from '@utils/string';
+import { getProfileRingStyle } from '@utils/style';
+
 import { StrictPropsWithChildren } from '@type/component';
+
 import Image from '../Image/Image';
+import Share from '../Share/Share';
 
 interface PostHeaderProps {
   title: string;
@@ -63,7 +66,7 @@ Post.Head = ({
 
 Post.Body = ({ className, children }: Props) => {
   return (
-    <div className={cn('break-words whitespace-pre-wrap', className)}>
+    <div className={cn('whitespace-pre-wrap break-words', className)}>
       {children}
     </div>
   );

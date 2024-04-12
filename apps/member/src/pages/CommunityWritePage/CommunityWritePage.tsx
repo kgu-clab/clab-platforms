@@ -1,16 +1,19 @@
 import { ChangeEvent, useCallback, useState } from 'react';
-import { Button, Input, Checkbox } from '@clab/design-system';
+
+import { Button, Checkbox, Input } from '@clab/design-system';
+
 import Content from '@components/common/Content/Content';
 import Header from '@components/common/Header/Header';
 import Section from '@components/common/Section/Section';
 import Select from '@components/common/Select/Select';
 import Textarea from '@components/common/Textarea/Textarea';
-import { useBoardWriteMutation } from '@hooks/queries/useBoardWriteMutation';
-import useToast from '@hooks/common/useToast';
+
 import {
   SELECT_DEFAULT_OPTION,
   SELECT_OPTIONS_COMMUNITY_TYPE,
 } from '@constants/select';
+import useToast from '@hooks/common/useToast';
+import { useBoardWriteMutation } from '@hooks/queries/useBoardWriteMutation';
 
 const CommunityWritePage = () => {
   const toast = useToast();
@@ -81,7 +84,7 @@ const CommunityWritePage = () => {
         </div>
         <Textarea
           name="content"
-          className="w-full min-h-96"
+          className="min-h-96 w-full"
           maxLength={2000}
           placeholder="내용을 입력해주세요."
           value={postInfo.content}

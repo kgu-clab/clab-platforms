@@ -14,7 +14,7 @@ const Header = ({ title, children }: HeaderProps) => {
         <div className="flex items-center text-xl font-bold">
           {title.map((name, index) => (
             <Fragment key={index}>
-              <span className="px-2 transition-colors rounded-lg cursor-pointer hover:bg-gray-100">
+              <span className="cursor-pointer rounded-lg px-2 transition-colors hover:bg-gray-100">
                 {name}
               </span>
               {index !== title.length - 1 && <GrNext />}
@@ -29,7 +29,7 @@ const Header = ({ title, children }: HeaderProps) => {
   };
 
   return (
-    <div className="flex items-center justify-between px-2 py-4 bg-white border rounded-lg">
+    <div className="flex items-center justify-between rounded-lg border bg-white px-2 py-4">
       <RenderTitle />
       <div className="flex items-center gap-4 pr-2">{children}</div>
     </div>

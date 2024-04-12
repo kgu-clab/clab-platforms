@@ -1,6 +1,7 @@
-import { QUERY_KEY } from '@constants/key';
-import { getBirthday } from '@api/birthday';
 import { useSuspenseQuery } from '@tanstack/react-query';
+
+import { getBirthday } from '@api/birthday';
+import { QUERY_KEY } from '@constants/key';
 import dayjs from 'dayjs';
 
 const today = dayjs();

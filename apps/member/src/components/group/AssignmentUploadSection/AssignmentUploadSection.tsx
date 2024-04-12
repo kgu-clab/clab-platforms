@@ -1,17 +1,21 @@
 import { ChangeEvent, useEffect, useRef, useState } from 'react';
-import { formattedDate, isDateValid } from '@utils/date';
-import { FORM_DATA_KEY } from '@constants/api';
-import File from '@components/common/File/File';
+
 import { Button, Table } from '@clab/design-system';
+
+import File from '@components/common/File/File';
 import Section from '@components/common/Section/Section';
-import type { ActivityBoardType, AssignmentFileType } from '@type/activity';
 import Textarea from '@components/common/Textarea/Textarea';
+
+import { FORM_DATA_KEY } from '@constants/api';
 import {
   useActivityGroupBoardModifyMutation,
   useActivityGroupBoardMutation,
   useMyProfile,
 } from '@hooks/queries';
+import { formattedDate, isDateValid } from '@utils/date';
 import classNames from 'classnames';
+
+import type { ActivityBoardType, AssignmentFileType } from '@type/activity';
 
 interface AssignmentUploadSectionProps {
   activityGroupId: number;
@@ -143,7 +147,7 @@ const AssignmentUploadSection = ({
           </Table.Cell>
         </Table.Row>
       </Table>
-      <div className="flex gap-4 mt-2">
+      <div className="mt-2 flex gap-4">
         {uploadedFile && (
           <Button className="w-full" color="orange" onClick={onClickDeleteFile}>
             첨부파일 변경하기

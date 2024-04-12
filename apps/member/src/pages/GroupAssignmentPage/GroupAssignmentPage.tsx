@@ -1,11 +1,13 @@
-import Content from '@components/common/Content/Content';
-import AssignmentUploadSection from '@components/group/AssignmentUploadSection/AssignmentUploadSection';
 import { useLocation, useParams } from 'react-router-dom';
-import { useActivityGroupBoard } from '@hooks/queries/useActivityGroupBoard';
-import { useActivityGroupBoardsMyAssignment } from '@hooks/queries/useActivityGroupBoardsMyAssignment';
-import { GROUP_MESSAGE } from '@constants/message';
+
+import Content from '@components/common/Content/Content';
 import Header from '@components/common/Header/Header';
 import Section from '@components/common/Section/Section';
+import AssignmentUploadSection from '@components/group/AssignmentUploadSection/AssignmentUploadSection';
+
+import { GROUP_MESSAGE } from '@constants/message';
+import { useActivityGroupBoard } from '@hooks/queries/useActivityGroupBoard';
+import { useActivityGroupBoardsMyAssignment } from '@hooks/queries/useActivityGroupBoardsMyAssignment';
 
 const GroupAssignmentPage = () => {
   const { id, assignmentId } = useParams();

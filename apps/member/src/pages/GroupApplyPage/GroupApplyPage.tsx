@@ -1,15 +1,17 @@
-import Content from '@components/common/Content/Content';
-import Header from '@components/common/Header/Header';
-import Section from '@components/common/Section/Section';
+import { ChangeEvent, useCallback, useState } from 'react';
+
 import { Button } from '@clab/design-system';
 
-import { ChangeEvent, useCallback, useState } from 'react';
-import Select from '@components/common/Select/Select';
-import { useActivityGroupMemberByStatus } from '@hooks/queries/useActivityGroupMemberByStatus';
-import { useActivityGroupMemberApplyMutation } from '@hooks/queries/useActivityGroupMemberApplyMutation';
-import useToast from '@hooks/common/useToast';
-import Textarea from '@components/common/Textarea/Textarea';
+import Content from '@components/common/Content/Content';
+import Header from '@components/common/Header/Header';
 import Label from '@components/common/Label/Label';
+import Section from '@components/common/Section/Section';
+import Select from '@components/common/Select/Select';
+import Textarea from '@components/common/Textarea/Textarea';
+
+import useToast from '@hooks/common/useToast';
+import { useActivityGroupMemberApplyMutation } from '@hooks/queries/useActivityGroupMemberApplyMutation';
+import { useActivityGroupMemberByStatus } from '@hooks/queries/useActivityGroupMemberByStatus';
 
 const GroupApplyPage = () => {
   const { data: groupData } = useActivityGroupMemberByStatus();
@@ -72,7 +74,7 @@ const GroupApplyPage = () => {
             id="reason"
             placeholder="지원동기를 입력해주세요."
             maxLength={1000}
-            className="w-full resize-none h-80 scrollbar-hide"
+            className="scrollbar-hide h-80 w-full resize-none"
             value={reason}
             onChange={handleReason}
           />

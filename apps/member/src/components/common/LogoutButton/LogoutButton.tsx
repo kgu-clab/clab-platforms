@@ -1,8 +1,10 @@
+import { ComponentPropsWithRef } from 'react';
+
 import { Button } from '@clab/design-system';
+
 import useModal from '@hooks/common/useModal';
 import { useSetIsLoggedInStore } from '@store/auth';
 import { removeTokens } from '@utils/api';
-import { ComponentPropsWithRef } from 'react';
 
 interface LogoutButtonProps
   extends Omit<ComponentPropsWithRef<'button'>, 'color' | 'size' | 'onClick'> {}

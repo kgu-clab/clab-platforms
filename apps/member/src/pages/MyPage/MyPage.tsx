@@ -1,18 +1,20 @@
+import { Grid } from '@clab/design-system';
+
 import Content from '@components/common/Content/Content';
+import MyActivityGroupSection from '@components/my/MyActivityGroupSection/MyActivityGroupSection';
 import MyHistorySection from '@components/my/MyHistorySection/MyHistorySection';
+import MyMembershipHistorySection from '@components/my/MyMembershipHistorySection/MyMembershipHistorySection';
 import MyProfileSection from '@components/my/MyProfileSection/MyProfileSection';
+
 import {
-  useMyNotifications,
+  useActivityGroupMemberMy,
+  useMembershipFee,
   useMyBoards,
   useMyComments,
-  useMembershipFee,
-  useActivityGroupMemberMy,
+  useMyNotifications,
 } from '@hooks/queries';
-import { useMyProfile } from '@hooks/queries/useMyProfile';
-import { Grid } from '@clab/design-system';
-import MyMembershipHistorySection from '@components/my/MyMembershipHistorySection/MyMembershipHistorySection';
-import MyActivityGroupSection from '@components/my/MyActivityGroupSection/MyActivityGroupSection';
 import { useBookLoanRecordConditions } from '@hooks/queries/useBookLoanRecordConditions';
+import { useMyProfile } from '@hooks/queries/useMyProfile';
 
 const MyPage = () => {
   const { data: myProfile } = useMyProfile();

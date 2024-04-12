@@ -1,8 +1,10 @@
+import { Badge, Table } from '@clab/design-system';
+
 import Section from '@components/common/Section/Section';
-import { Table, Badge } from '@clab/design-system';
+
+import { TABLE_HEAD } from '@constants/head';
 import { useBookLoanRecordConditions } from '@hooks/queries';
 import { formattedDate } from '@utils/date';
-import { TABLE_HEAD } from '@constants/head';
 
 interface BookLoanHistorySectionProps {
   bookId: number;

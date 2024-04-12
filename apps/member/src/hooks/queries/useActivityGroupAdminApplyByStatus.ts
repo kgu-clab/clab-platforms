@@ -1,6 +1,7 @@
+import { useSuspenseQuery } from '@tanstack/react-query';
+
 import { getActivityGroupApplyByStatus } from '@api/activity';
 import { QUERY_KEY } from '@constants/key';
-import { useSuspenseQuery } from '@tanstack/react-query';
 
 /**
  * 활동 그룹의 신청자 목록을 가져옵니다.

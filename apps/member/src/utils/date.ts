@@ -1,6 +1,8 @@
-import type { ScheduleItem } from '@type/schedule';
 import dayjs from 'dayjs';
 import 'dayjs/locale/ko';
+
+import type { ScheduleItem } from '@type/schedule';
+
 dayjs.locale('ko');
 /**
  * 오늘 날짜를 dayjs 객체로 반환합니다.

@@ -1,5 +1,7 @@
 import React, { ComponentPropsWithRef, forwardRef } from 'react';
+
 import { twMerge } from 'tailwind-merge';
+
 import { badgeStyleColored } from './Badge.style';
 import type { BadgeColorType } from './Badge.types';
 
@@ -13,7 +15,7 @@ const Badge = forwardRef<HTMLSpanElement, BadgeProps>(
       <span
         ref={ref}
         className={twMerge(
-          'px-2 text-sm font-medium rounded',
+          'rounded px-2 text-sm font-medium',
           badgeStyleColored[color],
         )}
       >

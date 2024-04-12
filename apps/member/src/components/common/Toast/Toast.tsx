@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react';
+import { FcApproval, FcCancel, FcHighPriority } from 'react-icons/fc';
+
 import { useSetToastStore } from '@store/toast';
-import type { ToastStateType } from '@type/toast';
 import classNames from 'classnames';
 
-import { FcApproval, FcHighPriority, FcCancel } from 'react-icons/fc';
+import type { ToastStateType } from '@type/toast';
 
 interface ToastProps {
   id: number;

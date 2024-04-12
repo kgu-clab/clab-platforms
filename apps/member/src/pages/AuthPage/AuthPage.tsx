@@ -1,8 +1,9 @@
 import { useEffect } from 'react';
-import { useSearchParams, useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
+
+import { server } from '@api/server';
 import { PATH } from '@constants/path';
 import { useSetIsLoggedInStore } from '@store/auth';
-import { server } from '@api/server';
 import { authorization, removeTokens, setTokens } from '@utils/api';
 
 const AuthPage = () => {

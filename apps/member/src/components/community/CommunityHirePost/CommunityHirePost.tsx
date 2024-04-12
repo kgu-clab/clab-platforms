@@ -1,8 +1,12 @@
+import { Button, DetailsList } from '@clab/design-system';
+
 import Post from '@components/common/Post/Post';
+
 import { toDecodeHTMLEntities } from '@utils/string';
-import { DetailsList, Button } from '@clab/design-system';
-import CommunityReportButton from '../CommunityReportButton/CommunityReportButton';
+
 import type { CareerLevel, EmploymentType, HireItem } from '@type/hire';
+
+import CommunityReportButton from '../CommunityReportButton/CommunityReportButton';
 
 interface CommunityHirePostProps {
   data: HireItem;
@@ -45,7 +49,7 @@ const CommunityHirePost = ({ data }: CommunityHirePostProps) => {
         title={toDecodeHTMLEntities(data.title)}
         createdAt={data.createdAt}
       />
-      <Post.Body className="w-full max-w-md mx-auto space-y-4">
+      <Post.Body className="mx-auto w-full max-w-md space-y-4">
         <DetailsList>
           <DetailsList.Item label="기업명">{data.companyName}</DetailsList.Item>
           <DetailsList.Item label="경력 수준">

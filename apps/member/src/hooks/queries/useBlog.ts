@@ -1,6 +1,8 @@
+import { useSuspenseQuery } from '@tanstack/react-query';
+
 import { getBlog } from '@api/blog';
 import { QUERY_KEY } from '@constants/key';
-import { useSuspenseQuery } from '@tanstack/react-query';
+
 /**
  * 블로그 포스트 리스트를 조회합니다.
  */

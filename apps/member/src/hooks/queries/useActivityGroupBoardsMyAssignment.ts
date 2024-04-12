@@ -1,6 +1,7 @@
+import { useSuspenseQuery } from '@tanstack/react-query';
+
 import { getActivityBoardsMyAssignment } from '@api/activity';
 import { QUERY_KEY } from '@constants/key';
-import { useSuspenseQuery } from '@tanstack/react-query';
 
 /**
  * 내가 과제를 제출한 활동 그룹의 게시판을 조회합니다.

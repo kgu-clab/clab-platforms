@@ -1,6 +1,7 @@
 import { useCallback } from 'react';
 import { useDropzone } from 'react-dropzone';
-import { BsImage, BsFileEarmarkArrowUp } from 'react-icons/bs';
+import { BsFileEarmarkArrowUp, BsImage } from 'react-icons/bs';
+
 import { Button } from '@clab/design-system';
 
 interface UploaderProps {
@@ -53,11 +54,11 @@ const Uploader = ({
     <div className="flex flex-col">
       {label && <label className="mb-1 ml-1 text-xs">{label}</label>}
       <div
-        className="flex items-center justify-center text-gray-600 border-2 border-dashed rounded-lg cursor-pointer min-h-56 bg-gray-50"
+        className="flex min-h-56 cursor-pointer items-center justify-center rounded-lg border-2 border-dashed bg-gray-50 text-gray-600"
         {...getRootProps()}
       >
         <input {...getInputProps()} />
-        <div className="flex flex-col items-center justify-center gap-2 px-4 text-sm text-center break-keep">
+        <div className="flex flex-col items-center justify-center gap-2 break-keep px-4 text-center text-sm">
           {acceptedFiles.length ? (
             <ul className="leading-loose">
               {acceptedFiles.map((file, index) => (

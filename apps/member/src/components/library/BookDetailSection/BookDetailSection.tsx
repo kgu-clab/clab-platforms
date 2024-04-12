@@ -1,15 +1,20 @@
-import Section from '@components/common/Section/Section';
+import { useCallback } from 'react';
+
+import { Badge, Button, DetailsList, Grid, Tabs } from '@clab/design-system';
+
 import Image from '@components/common/Image/Image';
-import { Button, DetailsList, Badge, Grid, Tabs } from '@clab/design-system';
+import Section from '@components/common/Section/Section';
+
+import { SELECT_DEFAULT_OPTION } from '@constants/select';
 import { BOOK_STATE } from '@constants/state';
 import { useBookLoanBorrowMutation } from '@hooks/queries/useBookLoanBorrowMutation';
 import { useMyProfile } from '@hooks/queries/useMyProfile';
-import { useCallback } from 'react';
 import { createImageUrl } from '@utils/api';
-import { SELECT_DEFAULT_OPTION } from '@constants/select';
-import kyoboIcon from '@assets/webp/kyobobook.webp';
-import aladinIcon from '@assets/webp/aladin.webp';
+
 import yes24Icon from '@assets/svg/yes24.svg';
+import aladinIcon from '@assets/webp/aladin.webp';
+import kyoboIcon from '@assets/webp/kyobobook.webp';
+
 import type { BookItem } from '@type/book';
 
 interface BookDetailSectionProps {
@@ -26,7 +31,7 @@ const options = [
     value: '예스24',
   },
   {
-    icon: <img src={aladinIcon} alt="" className="rounded-lg size-6" />,
+    icon: <img src={aladinIcon} alt="" className="size-6 rounded-lg" />,
     value: '알라딘',
   },
 ] as const;
@@ -58,7 +63,7 @@ const BookDetailSection = ({ data }: BookDetailSectionProps) => {
         />
         <div className="flex flex-col justify-between gap-4">
           <div className="space-y-4">
-            <h1 className="text-2xl font-bold break-keep">{title}</h1>
+            <h1 className="break-keep text-2xl font-bold">{title}</h1>
             <DetailsList>
               <DetailsList.Item label="작가">{author}</DetailsList.Item>
               <DetailsList.Item label="출판사">{publisher}</DetailsList.Item>

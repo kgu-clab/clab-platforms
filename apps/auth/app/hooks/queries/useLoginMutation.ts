@@ -1,11 +1,12 @@
 import { useMutation } from '@tanstack/react-query';
+
 import { postLogin } from '@api/auth';
+import { ERROR_MESSAGE } from '@constants/api';
 import {
   AUTH_ATOM_DEFAULT,
   AUTH_ATOM_STATE,
   useSetAuthStore,
 } from '@store/auth';
-import { ERROR_MESSAGE } from '@constants/api';
 
 export const useLoginMutation = () => {
   const setAuth = useSetAuthStore();

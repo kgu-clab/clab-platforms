@@ -1,8 +1,9 @@
 import { useMutation } from '@tanstack/react-query';
-import { AUTH_ATOM_DEFAULT, useSetAuthStore } from '@store/auth';
+
 import { postTwoFactorLogin } from '@api/auth';
 import { ERROR_MESSAGE, REDIRECT, SUCCESS_MESSAGE } from '@constants/api';
 import { useCode } from '@hooks/useCode';
+import { AUTH_ATOM_DEFAULT, useSetAuthStore } from '@store/auth';
 
 export const useTwoFactorLoginMutation = () => {
   const setAuth = useSetAuthStore();

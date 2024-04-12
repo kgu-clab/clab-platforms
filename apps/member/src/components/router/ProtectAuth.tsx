@@ -1,6 +1,7 @@
+import { Navigate, Outlet } from 'react-router-dom';
+
 import { PATH } from '@constants/path';
 import { useGetIsLoggedInStore } from '@store/auth';
-import { Navigate, Outlet } from 'react-router-dom';
 
 interface ProtectAuthProps {
   protect?: boolean;

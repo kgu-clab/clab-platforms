@@ -1,10 +1,12 @@
+import { LiaCommentSolid } from 'react-icons/lia';
+import { Link } from 'react-router-dom';
+
 import Section from '@components/common/Section/Section';
+
 import { PATH_FINDER } from '@constants/path';
 import { useBoards } from '@hooks/queries';
 import { categoryToTitle } from '@utils/community';
 import { formattedDate } from '@utils/date';
-import { LiaCommentSolid } from 'react-icons/lia';
-import { Link } from 'react-router-dom';
 
 const CommunityBoardCollectSection = () => {
   const { data } = useBoards({ page: 0, size: 6 });
@@ -30,17 +32,17 @@ const CommunityBoardCollectSection = () => {
             <Link
               key={id}
               to={PATH_FINDER.COMMUNITY_POST(category, id)}
-              className="flex items-center gap-4 p-2 text-sm transition-colors border rounded-lg hover:border-clab-main-light text-nowrap"
+              className="hover:border-clab-main-light flex items-center gap-4 text-nowrap rounded-lg border p-2 text-sm transition-colors"
             >
-              <p className="flex items-center justify-center flex-shrink-0 font-semibold bg-gray-100 rounded-lg size-12">
+              <p className="flex size-12 shrink-0 items-center justify-center rounded-lg bg-gray-100 font-semibold">
                 {categoryToTitle(category)}
               </p>
               <div className="grid w-full">
-                <p className="font-semibold truncate">{title}</p>
-                <p className="text-gray-500 truncate ">{content}</p>
+                <p className="truncate font-semibold">{title}</p>
+                <p className="truncate text-gray-500 ">{content}</p>
               </div>
               <div className="flex justify-between gap-2">
-                <p className="flex items-center w-12 gap-1">
+                <p className="flex w-12 items-center gap-1">
                   <LiaCommentSolid />
                   {commentCount}
                 </p>

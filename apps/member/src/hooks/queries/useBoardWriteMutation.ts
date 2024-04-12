@@ -1,8 +1,10 @@
+import { useNavigate } from 'react-router-dom';
+
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+
 import { postBoardsWrite } from '@api/board';
 import { QUERY_KEY } from '@constants/key';
 import useToast from '@hooks/common/useToast';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { useNavigate } from 'react-router-dom';
 
 export const useBoardWriteMutation = () => {
   const queryClient = useQueryClient();

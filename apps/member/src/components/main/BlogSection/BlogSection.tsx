@@ -1,9 +1,10 @@
-import { useBlog } from '@hooks/queries';
-import Section from '@components/common/Section/Section';
-import { COMMUNITY_MESSAGE } from '@constants/message';
-import PostCard from '@components/common/PostCard/PostCard';
-import { PATH_FINDER } from '@constants/path';
 import EmptyBox from '@components/common/EmptyBox/EmptyBox';
+import PostCard from '@components/common/PostCard/PostCard';
+import Section from '@components/common/Section/Section';
+
+import { COMMUNITY_MESSAGE } from '@constants/message';
+import { PATH_FINDER } from '@constants/path';
+import { useBlog } from '@hooks/queries';
 
 const BlogSection = () => {
   const { data } = useBlog();

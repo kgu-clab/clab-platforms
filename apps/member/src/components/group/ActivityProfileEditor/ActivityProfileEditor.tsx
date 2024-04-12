@@ -1,9 +1,13 @@
-import Section from '@components/common/Section/Section';
-import { Input, Button } from '@clab/design-system';
-import type { ActivityGroupBoardParserType } from '@type/activity';
 import { ChangeEvent, useState } from 'react';
-import ActivityDetailSection from '../ActivityDetailSection/ActivityDetailSection';
+
+import { Button, Input } from '@clab/design-system';
+
+import Section from '@components/common/Section/Section';
 import Textarea from '@components/common/Textarea/Textarea';
+
+import type { ActivityGroupBoardParserType } from '@type/activity';
+
+import ActivityDetailSection from '../ActivityDetailSection/ActivityDetailSection';
 
 interface ActivityProfileEditorProps {
   data: ActivityGroupBoardParserType;

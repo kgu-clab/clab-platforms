@@ -1,6 +1,7 @@
+import { useSuspenseQuery } from '@tanstack/react-query';
+
 import { getMyActivities } from '@api/activity';
 import { QUERY_KEY } from '@constants/key';
-import { useSuspenseQuery } from '@tanstack/react-query';
 import { now } from '@utils/date';
 
 /**

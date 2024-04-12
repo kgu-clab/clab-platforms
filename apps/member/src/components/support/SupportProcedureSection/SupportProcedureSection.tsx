@@ -1,15 +1,15 @@
+import {
+  FcFilingCabinet,
+  FcMoneyTransfer,
+  FcReading,
+  FcSurvey,
+} from 'react-icons/fc';
+
 import Section from '@components/common/Section/Section';
 import {
   StatusCard,
   type StatusCardProps,
 } from '@components/common/StatusCard';
-
-import {
-  FcSurvey,
-  FcReading,
-  FcMoneyTransfer,
-  FcFilingCabinet,
-} from 'react-icons/fc';
 
 const stepContents: StatusCardProps[] = [
   {
@@ -42,7 +42,7 @@ const SupportProcedureSection = () => {
   return (
     <Section>
       <Section.Header title="회비 사용 절차는 이렇게 진행돼요" />
-      <Section.Body className="grid grid-cols-2 gap-4 md:grid-cols-4 break-keep">
+      <Section.Body className="grid grid-cols-2 gap-4 break-keep md:grid-cols-4">
         {stepContents.map(({ icon, label, description }) => (
           <StatusCard
             key={label}

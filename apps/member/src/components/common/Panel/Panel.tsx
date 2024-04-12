@@ -1,4 +1,6 @@
+/* eslint-disable react/display-name */
 import classNames from 'classnames';
+
 import DropdownButton from '../DropdownButton/DropdownButton';
 
 interface PanelProps {
@@ -42,7 +44,7 @@ Panel.Header = ({
   onClick,
 }: PanelHeaderProps) => {
   return (
-    <div className="flex items-center justify-between m-4">
+    <div className="m-4 flex items-center justify-between">
       <div className="flex items-center gap-2 text-xl font-bold text-black">
         <span className="rounded-md bg-gray-100 p-1">{icon}</span>
         <span className="grow text-nowrap">{label}</span>
@@ -78,7 +80,7 @@ Panel.Action = ({ children, className }: PanelActionProps) => {
   return (
     <div
       className={classNames(
-        'grid grid-cols-2 divide-x text-center text-sm font-semibold text-gray-500 border-t',
+        'grid grid-cols-2 divide-x border-t text-center text-sm font-semibold text-gray-500',
         className,
       )}
     >

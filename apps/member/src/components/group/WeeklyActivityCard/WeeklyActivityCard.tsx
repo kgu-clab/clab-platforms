@@ -1,8 +1,10 @@
-import { PATH_FINDER } from '@constants/path';
-import useToast from '@hooks/common/useToast';
-import { ActivityBoardType } from '@type/activity';
 import { FaRegFileAlt } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
+
+import { PATH_FINDER } from '@constants/path';
+import useToast from '@hooks/common/useToast';
+
+import { ActivityBoardType } from '@type/activity';
 
 interface WeeklyActivityCardProps {
   index: number;
@@ -47,12 +49,12 @@ const WeeklyActivityCard = ({
       </div>
       <div className="overflow-hidden transition duration-500 ease-in-out">
         <div className="mt-2 space-y-4">
-          <p className="text-sm whitespace-pre-line break-keep">{content}</p>
+          <p className="whitespace-pre-line break-keep text-sm">{content}</p>
           {assignments?.map(({ id: assignmentId, title: assignmentTitle }) => (
             <div
               key={assignmentId}
               onClick={() => onClick(assignmentId, [title, assignmentTitle])}
-              className="flex items-center cursor-pointer"
+              className="flex cursor-pointer items-center"
             >
               <FaRegFileAlt
                 size={25}

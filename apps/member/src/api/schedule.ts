@@ -1,6 +1,6 @@
-import { server } from './server';
 import { END_POINT } from '@constants/api';
 import { createCommonPagination } from '@utils/api';
+
 import type {
   BaseResponse,
   PaginationPramsType,
@@ -11,6 +11,8 @@ import type {
   ScheduleItem,
   ScheduleRegisterItem,
 } from '@type/schedule';
+
+import { server } from './server';
 
 interface GetScheduleParams extends PaginationPramsType {
   startDate: string;

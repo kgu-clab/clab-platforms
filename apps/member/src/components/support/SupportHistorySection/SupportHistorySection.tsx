@@ -1,11 +1,14 @@
+import { Table } from '@clab/design-system';
+
 import Section from '@components/common/Section/Section';
+import MembershipInfoModal from '@components/membership/MembershipInfoModal/MembershipInfoModal';
+import MembershipStatusBadge from '@components/membership/MembershipStatusBadge/MembershipStatusBadge';
+
+import { TABLE_HEAD } from '@constants/head';
+import useModal from '@hooks/common/useModal';
 import { useMembershipFee } from '@hooks/queries';
 import { formattedDate } from '@utils/date';
-import MembershipStatusBadge from '@components/membership/MembershipStatusBadge/MembershipStatusBadge';
-import useModal from '@hooks/common/useModal';
-import MembershipInfoModal from '@components/membership/MembershipInfoModal/MembershipInfoModal';
-import { TABLE_HEAD } from '@constants/head';
-import { Table } from '@clab/design-system';
+
 import type { MembershipFeeType } from '@type/membershipFee';
 
 const SupportHistorySection = () => {

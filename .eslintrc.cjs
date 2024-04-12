@@ -13,6 +13,7 @@ module.exports = {
     },
   },
   rules: {
+    'tailwindcss/no-custom-classname': 'off',
     '@typescript-eslint/explicit-module-boundary-types': 'off',
     'no-console': 'error',
   },

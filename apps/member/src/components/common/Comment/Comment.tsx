@@ -1,8 +1,9 @@
-import classNames from 'classnames';
-import Image from '../Image/Image';
+import { createImageUrl } from '@utils/api';
 import { formattedDate } from '@utils/date';
 import { getProfileRingStyle } from '@utils/style';
-import { createImageUrl } from '@utils/api';
+import classNames from 'classnames';
+
+import Image from '../Image/Image';
 
 interface CommentProps {
   writerId: string | null;
@@ -30,7 +31,7 @@ const Comment = ({
   return (
     <div
       className={classNames('flex', {
-        'last:border-l-white border-l pl-5': isReply,
+        'border-l pl-5 last:border-l-white': isReply,
       })}
     >
       <Image
@@ -43,7 +44,7 @@ const Comment = ({
           getProfileRingStyle(writerRoleLevel),
         )}
       />
-      <div className="w-full ml-3 text-sm">
+      <div className="ml-3 w-full text-sm">
         <p className="font-semibold">{`${writerName} ${writerId ? `(${writerId})` : ''}`}</p>
         <p className="whitespace-pre-wrap">{children}</p>
         <div className="flex justify-end gap-4">

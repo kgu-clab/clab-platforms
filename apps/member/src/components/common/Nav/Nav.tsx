@@ -1,8 +1,9 @@
-import useModal from '@hooks/common/useModal';
+import { FiGrid, FiSearch, FiUser } from 'react-icons/fi';
 import { Link, useLocation } from 'react-router-dom';
-import { PATH } from '@constants/path';
+
 import { MODE } from '@constants/environment';
-import { FiSearch, FiUser, FiGrid } from 'react-icons/fi';
+import { PATH } from '@constants/path';
+import useModal from '@hooks/common/useModal';
 
 const Nav = () => {
   const location = useLocation();
@@ -27,8 +28,8 @@ const Nav = () => {
   };
 
   return (
-    <nav className="fixed top-0 left-0 z-30 w-full bg-white border-b">
-      <div className="container flex items-center justify-between h-14">
+    <nav className="fixed left-0 top-0 z-30 w-full border-b bg-white">
+      <div className="container flex h-14 items-center justify-between">
         <div className="flex items-center gap-10 lg:gap-20">
           <Link className="flex items-center gap-2 text-xl" to={PATH.MAIN}>
             <img src="/favicon.ico" alt="c-lab" className="size-7" />

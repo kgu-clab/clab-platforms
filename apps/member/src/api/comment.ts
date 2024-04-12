@@ -1,12 +1,14 @@
-import { BaseResponse, PaginationType } from '@type/api';
-import { server } from './server';
-import { createCommonPagination, createPath } from '@utils/api';
 import { END_POINT } from '@constants/api';
+import { createCommonPagination, createPath } from '@utils/api';
+
+import { BaseResponse, PaginationType } from '@type/api';
 import type {
   CommentItem,
   CommentListItem,
   CommentWriteItem,
 } from '@type/comment';
+
+import { server } from './server';
 
 interface commentWriteArgs {
   parentId?: number;

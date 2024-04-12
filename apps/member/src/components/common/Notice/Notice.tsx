@@ -1,7 +1,8 @@
+import { useCallback } from 'react';
+
 import useModal from '@hooks/common/useModal';
 import { calculateDDay, formattedDate } from '@utils/date';
 import { cn } from '@utils/string';
-import { useCallback } from 'react';
 
 interface NoticeProps {
   title: string;
@@ -33,7 +34,7 @@ const Notice = ({
     renderDDay = (
       <div
         className={cn(
-          'min-w-[4rem] rounded-full text-center text-sm text-white font-semibold bg-red-400',
+          'min-w-[4rem] rounded-full bg-red-400 text-center text-sm font-semibold text-white',
           {
             'bg-yellow-400': dDay >= 14,
             'bg-sky-400': dDay >= 30,
@@ -48,19 +49,19 @@ const Notice = ({
   return (
     <div
       className={cn(
-        'w-full hover:bg-gray-100 rounded-lg transition-colors',
+        'w-full rounded-lg transition-colors hover:bg-gray-100',
         className,
       )}
     >
       <button
-        className="flex items-center justify-between w-full gap-2 outline-none cursor-pointer"
+        className="flex w-full cursor-pointer items-center justify-between gap-2 outline-none"
         onClick={handleNoticeClick}
       >
         <div className="flex items-center gap-2">
           {showDDay && renderDDay}
           <p className="w-full truncate">{title}</p>
         </div>
-        <p className="text-sm text-gray-500 whitespace-nowrap">
+        <p className="whitespace-nowrap text-sm text-gray-500">
           {formattedDate(date)}
         </p>
       </button>

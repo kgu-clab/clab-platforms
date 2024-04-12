@@ -1,11 +1,13 @@
-import Section from '@components/common/Section/Section';
 import { useState } from 'react';
+
 import DropdownButton from '@components/common/DropdownButton/DropdownButton';
-import classNames from 'classnames';
 import Notice from '@components/common/Notice/Notice';
-import { useSchedule } from '@hooks/queries';
+import Section from '@components/common/Section/Section';
+
 import { DATE_FORMAT } from '@constants/state';
+import { useSchedule } from '@hooks/queries';
 import { now } from '@utils/date';
+import classNames from 'classnames';
 
 const MainNoticeSection = () => {
   const { data } = useSchedule({
@@ -24,7 +26,7 @@ const MainNoticeSection = () => {
 
   return (
     <Section>
-      <div className="flex items-center w-full gap-2 divide-x">
+      <div className="flex w-full items-center gap-2 divide-x">
         <Notice
           title={closestNotice.title}
           content={closestNotice.detail}

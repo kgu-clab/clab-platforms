@@ -1,6 +1,8 @@
 import { cn } from '@utils/string';
-import ArrowButton from '../ArrowButton/ArrowButton';
+
 import type { PaginationOnChange } from '@type/component';
+
+import ArrowButton from '../ArrowButton/ArrowButton';
 
 interface PaginationProps {
   page: number;
@@ -39,8 +41,8 @@ const Pagination = ({
         pageNumber.map((index) => (
           <button
             key={index}
-            className={cn('underline-offset-4 text-gray-500', {
-              'underline text-clab-main': page + 1 === index,
+            className={cn('text-gray-500 underline-offset-4', {
+              'text-clab-main underline': page + 1 === index,
             })}
             onClick={() => handleCurrentPageClick(index)}
           >

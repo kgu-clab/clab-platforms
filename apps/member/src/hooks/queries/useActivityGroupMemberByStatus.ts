@@ -1,6 +1,8 @@
+import { useSuspenseQuery } from '@tanstack/react-query';
+
 import { getActivityGroupByStatus } from '@api/activity';
 import { QUERY_KEY } from '@constants/key';
-import { useSuspenseQuery } from '@tanstack/react-query';
+
 import type { ActivityGroupStatusType } from '@type/activity';
 
 /**

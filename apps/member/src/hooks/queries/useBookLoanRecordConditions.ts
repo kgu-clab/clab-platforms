@@ -1,6 +1,8 @@
+import { useSuspenseQuery } from '@tanstack/react-query';
+
 import { getBookLoanRecordConditions } from '@api/book';
 import { QUERY_KEY } from '@constants/key';
-import { useSuspenseQuery } from '@tanstack/react-query';
+
 import type { PaginationPramsType } from '@type/api';
 
 interface UseBookLoanRecordConditionsPrams extends PaginationPramsType {

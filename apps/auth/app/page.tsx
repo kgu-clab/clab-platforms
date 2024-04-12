@@ -2,6 +2,7 @@ import Information from '@components/Information/Information';
 import LoginFrom from '@components/LoginFrom/LoginFrom';
 import Footer from '@components/common/Footer/Footer';
 import HelpLink from '@components/common/HelpLink/HelpLink';
+
 import Image from 'next/image';
 
 export default function Home() {

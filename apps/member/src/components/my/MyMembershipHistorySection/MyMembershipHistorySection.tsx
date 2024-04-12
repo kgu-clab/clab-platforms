@@ -1,10 +1,12 @@
 import ListButton from '@components/common/ListButton/ListButton';
 import Section from '@components/common/Section/Section';
+import MembershipInfoModal from '@components/membership/MembershipInfoModal/MembershipInfoModal';
+import MembershipStatusBadge from '@components/membership/MembershipStatusBadge/MembershipStatusBadge';
+
 import useModal from '@hooks/common/useModal';
 import { toYYMMDD } from '@utils/date';
-import MembershipStatusBadge from '@components/membership/MembershipStatusBadge/MembershipStatusBadge';
+
 import type { MembershipFeeType } from '@type/membershipFee';
-import MembershipInfoModal from '@components/membership/MembershipInfoModal/MembershipInfoModal';
 
 interface MyMembershipFeeProps {
   data: Array<MembershipFeeType>;
@@ -33,7 +35,7 @@ const MyMembershipHistorySection = ({ data }: MyMembershipFeeProps) => {
             key={membership.id}
             onClick={() => handleButtonClick(membership)}
           >
-            <p className="pr-4 space-x-2 truncate grow">
+            <p className="grow space-x-2 truncate pr-4">
               <MembershipStatusBadge status={membership.status} />
               <span>{membership.content}</span>
             </p>

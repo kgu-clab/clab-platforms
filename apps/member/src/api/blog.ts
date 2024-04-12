@@ -1,8 +1,11 @@
-import { BaseResponse, PaginationType } from '@type/api';
-import { server } from './server';
-import { createCommonPagination } from '@utils/api';
 import { END_POINT } from '@constants/api';
+import { createCommonPagination } from '@utils/api';
+
+import { BaseResponse, PaginationType } from '@type/api';
 import type { BlogPost } from '@type/blog';
+
+import { server } from './server';
+
 /**
  * 블로그 포스트 조회
  */

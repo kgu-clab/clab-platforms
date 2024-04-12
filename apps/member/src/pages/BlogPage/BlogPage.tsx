@@ -1,13 +1,15 @@
+import { useParams } from 'react-router-dom';
+
+import Content from '@components/common/Content/Content';
+import Header from '@components/common/Header/Header';
 import Image from '@components/common/Image/Image';
+import { Section } from '@components/common/Section';
 import Share from '@components/common/Share/Share';
+
 import { ERROR_MESSAGE } from '@constants/message';
 import { useBlogDetail } from '@hooks/queries';
-import { useParams } from 'react-router-dom';
-import { formattedDate } from '@utils/date';
-import Content from '@components/common/Content/Content';
 import { createImageUrl } from '@utils/api';
-import { Section } from '@components/common/Section';
-import Header from '@components/common/Header/Header';
+import { formattedDate } from '@utils/date';
 
 const BlogPage = () => {
   const { id } = useParams<{ id: string }>();
@@ -28,11 +30,11 @@ const BlogPage = () => {
         <Image
           src={createImageUrl(imageUrl)}
           alt={title}
-          className="object-cover border rounded-lg"
+          className="rounded-lg border object-cover"
         />
-        <div className="my-6 space-y-2 text-center break-keep">
-          <h2 className="text-4xl font-bold text-clab-main">{title}</h2>
-          <div className="font-medium text-clab-main-light">
+        <div className="my-6 space-y-2 break-keep text-center">
+          <h2 className="text-clab-main text-4xl font-bold">{title}</h2>
+          <div className="text-clab-main-light font-medium">
             <p>{subTitle}</p>
             <p>
               {name} ({memberId}) • {formattedDate(createdAt)}

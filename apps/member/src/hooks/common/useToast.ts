@@ -1,4 +1,5 @@
 import { useSetToastStore } from '@store/toast';
+
 import type { ToastStateType } from '@type/toast';
 
 interface AddToastProps {

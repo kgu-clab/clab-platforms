@@ -1,9 +1,11 @@
+import { useSuspenseQuery } from '@tanstack/react-query';
+
 import { getSchedule } from '@api/schedule';
 import { QUERY_KEY } from '@constants/key';
 import { DATE_FORMAT } from '@constants/state';
-import { useSuspenseQuery } from '@tanstack/react-query';
-import type { WithPaginationPrams } from '@type/api';
 import dayjs from 'dayjs';
+
+import type { WithPaginationPrams } from '@type/api';
 
 interface UseMainSchedulePrams extends WithPaginationPrams {
   startDate?: string;

@@ -1,14 +1,17 @@
+import { useNavigate } from 'react-router-dom';
+
+import { Button } from '@clab/design-system';
+
 import Content from '@components/common/Content/Content';
 import Header from '@components/common/Header/Header';
-import { Button } from '@clab/design-system';
-import { useNavigate } from 'react-router-dom';
-import { PATH } from '@constants/path';
-import { useBooks } from '@hooks/queries/useBooks';
+import Pagination from '@components/common/Pagination/Pagination';
 import Section from '@components/common/Section/Section';
 import LibraryBookList from '@components/library/LibraryBookList/LibraryBookList';
-import Pagination from '@components/common/Pagination/Pagination';
 import LibraryNewBooksSection from '@components/library/LibraryNewBooksSection/LibraryNewBooksSection';
+
+import { PATH } from '@constants/path';
 import { usePagination } from '@hooks/common/usePagination';
+import { useBooks } from '@hooks/queries/useBooks';
 
 const LibraryPage = () => {
   const navigate = useNavigate();
@@ -30,7 +33,7 @@ const LibraryPage = () => {
         <Section.Body>
           <LibraryBookList data={bookData.items} />
           <Pagination
-            className="justify-center mt-4"
+            className="mt-4 justify-center"
             totalItems={bookData.totalItems}
             postLimit={size}
             onChange={handlePageChange}
