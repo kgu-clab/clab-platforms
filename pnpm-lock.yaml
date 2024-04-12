@@ -81,8 +81,11 @@ importers:
         specifier: ^0.33.2
         version: 0.33.3
     devDependencies:
+      '@clab/config':
+        specifier: workspace:*
+        version: link:../../packages/config
       '@clab/design-system':
-        specifier: workspace:^
+        specifier: workspace:*
         version: link:../../packages/design-system
       '@types/node':
         specifier: ^20
@@ -124,6 +127,12 @@ importers:
         specifier: ^18
         version: 18.2.0(react@18.2.0)
     devDependencies:
+      '@clab/config':
+        specifier: workspace:*
+        version: link:../../packages/config
+      '@clab/design-system':
+        specifier: workspace:*
+        version: link:../../packages/design-system
       '@types/node':
         specifier: ^20
         version: 20.12.7
@@ -200,8 +209,11 @@ importers:
         specifier: ^2.2.2
         version: 2.2.2
     devDependencies:
+      '@clab/config':
+        specifier: workspace:*
+        version: link:../../packages/config
       '@clab/design-system':
-        specifier: workspace:^
+        specifier: workspace:*
         version: link:../../packages/design-system
       '@types/node':
         specifier: ^20.11.19
@@ -279,8 +291,11 @@ importers:
         specifier: ^2.2.2
         version: 2.2.2
     devDependencies:
+      '@clab/config':
+        specifier: workspace:*
+        version: link:../../packages/config
       '@clab/design-system':
-        specifier: workspace:^
+        specifier: workspace:*
         version: link:../../packages/design-system
       '@types/node':
         specifier: ^20
@@ -310,6 +325,8 @@ importers:
         specifier: ^5
         version: 5.4.5
 
+  packages/config: {}
+
   packages/design-system:
     dependencies:
       react:
@@ -319,6 +336,9 @@ importers:
         specifier: ^18.2.0
         version: 18.2.0(react@18.2.0)
     devDependencies:
+      '@clab/config':
+        specifier: workspace:*
+        version: link:../config
       '@rollup/plugin-commonjs':
         specifier: ^25.0.7
         version: 25.0.7(rollup@4.14.1)

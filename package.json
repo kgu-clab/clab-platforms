@@ -10,6 +10,11 @@
     "preinstall": "npx only-allow pnpm",
     "postinstall": "husky install && pnpm build:design-system",
     "lint-staged": "lint-staged",
+    "dev": "pnpm -r run dev",
+    "build": "pnpm -r run build",
+    "type": "pnpm -r run type",
+    "lint": "eslint .",
+    "format": "prettier --write .",
     "dev:auth": "pnpm --filter auth dev",
     "dev:land": "pnpm --filter land dev",
     "dev:member": "pnpm --filter member dev",
@@ -23,9 +28,9 @@
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": [
-      "eslint --fix --cache",
-      "prettier --write"
-    ]
+      "eslint --fix --cache"
+    ],
+    "**/*": "prettier --write --ignore-unknown"
   },
   "devDependencies": {
     "@commitlint/cli": "^19.0.3",

@@ -17,7 +17,8 @@
     "tailwind-merge": "^2.2.2"
   },
   "devDependencies": {
-    "@clab/design-system": "workspace:^",
+    "@clab/config": "workspace:*",
+    "@clab/design-system": "workspace:*",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",

@@ -1,22 +1,23 @@
 {
+  "root": true,
   "extends": [
-    "eslint:recommended", // ESLint의 기본 규칙 집합
-    "plugin:react/recommended", // React 규칙
-    "plugin:@typescript-eslint/recommended", // TypeScript 규칙
-    "plugin:@typescript-eslint/eslint-recommended", // TypeScript에 대한 ESLint 기본 규칙 비활성화
-    "next/core-web-vitals" // Next.js의 성능 관련 규칙
+    "eslint:recommended",
+    "plugin:react/recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:@typescript-eslint/eslint-recommended",
+    "next/core-web-vitals"
   ],
   "parser": "@typescript-eslint/parser",
 
   "settings": {
     "react": {
-      "version": "detect" // React 버전 자동 감지
+      "version": "detect"
     }
   },
   "rules": {
-    "react/react-in-jsx-scope": "off", // React 17 이상에서는 필요 없음
-    "@typescript-eslint/explicit-module-boundary-types": "off", // 모든 함수의 반환 타입 명시를 강제하지 않음
-    "react/prop-types": "off", // TypeScript를 사용할 경우 propTypes는 필요 없음
+    "react/react-in-jsx-scope": "off",
+    "@typescript-eslint/explicit-module-boundary-types": "off",
+    "react/prop-types": "off",
     "no-console": "error"
   },
   "env": { "browser": true, "es2020": true }
