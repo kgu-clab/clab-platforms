@@ -6,6 +6,7 @@
     "skipLibCheck": true,
     "strict": true,
     "noEmit": true,
+    "moduleResolution": "node",
     "resolveJsonModule": true,
     "isolatedModules": true
   },

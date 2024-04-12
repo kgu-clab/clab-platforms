@@ -7,7 +7,7 @@
   "types": "dist/index.d.ts",
   "scripts": {
     "clean": "rimraf dist",
-    "build": "yarn clean && rollup -c --bundleConfigAsCjs"
+    "build": "pnpm clean && rollup -c --bundleConfigAsCjs"
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^25.0.7",

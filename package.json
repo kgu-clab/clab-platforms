@@ -1,25 +1,25 @@
 {
   "name": "clab.page",
   "private": true,
-  "packageManager": "yarn@4.0.2",
+  "packageManager": "pnpm@8.15.6",
   "workspaces": [
     "apps/*",
     "packages/*"
   ],
   "scripts": {
-    "setup": "yarn install && yarn dlx @yarnpkg/sdks vscode && yarn build:design-system",
-    "postinstall": "husky install",
+    "preinstall": "npx only-allow pnpm",
+    "postinstall": "husky install && pnpm build:design-system",
     "lint-staged": "lint-staged",
-    "dev:auth": "yarn workspace auth dev",
-    "dev:land": "yarn workspace land dev",
-    "dev:member": "yarn workspace member dev",
-    "dev:time": "yarn workspace time dev",
-    "build:auth": "yarn workspace auth build",
-    "build:land": "yarn workspace land build",
-    "build:member": "yarn workspace member build",
-    "build:time": "yarn workspace time build",
-    "build:design-system": "yarn workspace @clab/design-system build",
-    "type:member": "yarn workspace member tsc"
+    "dev:auth": "pnpm --filter auth dev",
+    "dev:land": "pnpm --filter land dev",
+    "dev:member": "pnpm --filter member dev",
+    "dev:time": "pnpm --filter time dev",
+    "build:auth": "pnpm --filter auth build",
+    "build:land": "pnpm --filter land build",
+    "build:member": "pnpm --filter member build",
+    "build:time": "pnpm --filter time build",
+    "build:design-system": "pnpm --filter @clab/design-system build",
+    "type:member": "pnpm --filter member type"
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": [
@@ -40,7 +40,7 @@
     "eslint-plugin-react": "^7.33.2",
     "husky": "^9.0.11",
     "lint-staged": "^15.2.0",
-    "prettier": "^3.2.1",
+    "prettier": "^3.2.5",
     "typescript": "^5.3.3"
   }
 }
