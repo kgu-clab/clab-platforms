@@ -30,6 +30,6 @@ export const useBookLoanRecordConditions = ({
         page,
         size,
       }),
-    queryKey: [QUERY_KEY.BOOK_LOAN_RECORD_CONDITIONS, bookId],
+    queryKey: [QUERY_KEY.BOOK_LOAN_RECORD_CONDITIONS, borrowerId, size],
   });
 };
