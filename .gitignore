@@ -1,4 +1,6 @@
 .env
+.env.*
+!.env.example
 .eslintcache
 
 # Logs
