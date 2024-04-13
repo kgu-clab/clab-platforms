@@ -87,7 +87,7 @@ export const postExtendBook = async (body: BookLoanRecordItem) => {
     body,
   });
 
-  return { memberId: body.borrowerId, bookId: data };
+  return data;
 };
 /**
  * 도서 대출 내역 조회
