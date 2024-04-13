@@ -14,11 +14,11 @@ import type {
 
 import { server } from './server';
 
-interface PostBorrowBookArgs extends BookLoanRecordItem {
+export interface PostBorrowBookPrams extends BookLoanRecordItem {
   memberId: string;
 }
 
-interface GetBookLoanRecordConditionsPrams extends PaginationPramsType {
+export interface GetBookLoanRecordConditionsPrams extends PaginationPramsType {
   bookId?: number;
   borrowerId?: string;
   isReturned?: boolean;
@@ -58,8 +58,8 @@ export const getMyBooks = async (id: string, page: number, size: number) => {
 /**
  * 도서 대출
  */
-export const postBorrowBook = async (body: PostBorrowBookArgs) => {
-  const borrowUrl = END_POINT.BOOK_LOAN + '/borrow';
+export const postBorrowBook = async (body: PostBorrowBookPrams) => {
+  const borrowUrl = END_POINT.BOOK_LOAN_BORROW;
   const { data } = await server.post<BookLoanRecordItem, BaseResponse<number>>({
     url: borrowUrl,
     body,
