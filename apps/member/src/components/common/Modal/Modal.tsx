@@ -30,7 +30,7 @@ const Modal = ({ children }: PropsWithChildren) => {
             onClick={closeModal}
           />
         </div>
-        <div className="inline-block w-full space-y-4 overflow-hidden rounded-lg bg-white p-4 text-center shadow-lg sm:max-w-lg sm:text-left">
+        <div className="z-50 inline-block w-full space-y-4 overflow-hidden rounded-lg bg-white p-4 text-center shadow-lg sm:max-w-lg sm:text-left">
           {children}
         </div>
       </div>
