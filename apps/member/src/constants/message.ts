@@ -16,3 +16,9 @@ export const GROUP_MESSAGE = {
 export const LIBRARY_MESSAGE = {
   NO_BOOK: '해당 도서를 찾아봤지만 없는 것 같아요.',
 } as const;
+
+export const MY_MESSAGE = {
+  NO_HISTORY: '내역이 없어요.',
+  NO_MEMBERSHIP: '회비 신청 내역이 없어요.',
+  NO_ACTIVITY: '활동 내역이 없어요.',
+} as const;

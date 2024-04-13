@@ -25,9 +25,8 @@ export const END_POINT = {
   // -- 도서
   BOOK: `/v1/books`,
   BOOK_DETAIL: (id: number) => `/v1/books/${id}`,
-  BOOK_LOAN: `/v1/book-loan-records`,
+  BOOK_LOAN_BORROW: `/v1/book-loan-records`,
   BOOK_LOAN_CONDITIONS: `/v1/book-loan-records/conditions`,
-  BOOK_LOAN_BORROW: `/v1/book-loan-records/borrow`,
   BOOK_LOAN_EXTEND: `/v1/book-loan-records/extend`,
   BOOK_LOAN_RETURN: `/v1/book-loan-records/return`,
   // -- 블로그

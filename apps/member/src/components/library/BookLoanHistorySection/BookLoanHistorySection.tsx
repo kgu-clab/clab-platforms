@@ -15,9 +15,10 @@ const BookLoanHistorySection = ({ bookId }: BookLoanHistorySectionProps) => {
 
   return (
     <Section>
-      <Section.Header title="대여 내역">
-        최근에 신청된 대여 내역이에요
-      </Section.Header>
+      <Section.Header
+        title="대여 내역"
+        description="최근 대여 내역이에요"
+      ></Section.Header>
       <Section.Body>
         <Table head={TABLE_HEAD.BOOK_LOAN_RECORD}>
           {data.items.map(({ borrowerId, borrowedAt, returnedAt }, index) => (

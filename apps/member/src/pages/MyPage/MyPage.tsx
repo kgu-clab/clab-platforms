@@ -23,12 +23,13 @@ const MyPage = () => {
   const { data: myCommentsData } = useMyComments(0, 10);
   const { data: myMembershipFee } = useMembershipFee({
     memberId: myProfile.id,
-    size: 5,
+    size: 10,
   });
   const { data: myBookLoanRecord } = useBookLoanRecordConditions({
     borrowerId: myProfile.id,
+    size: 10,
   });
-  const { data: myActivityGroup } = useActivityGroupMemberMy();
+  const { data: myActivityGroup } = useActivityGroupMemberMy(0, 10);
 
   return (
     <Content>

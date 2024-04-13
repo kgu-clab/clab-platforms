@@ -23,15 +23,15 @@ interface BookDetailSectionProps {
 
 const options = [
   {
-    icon: <img src={kyoboIcon} alt="" className="size-6" />,
+    icon: <img src={kyoboIcon} alt="교보문고" className="size-6" />,
     value: '교보문고',
   },
   {
-    icon: <img src={yes24Icon} alt="" className="size-6" />,
+    icon: <img src={yes24Icon} alt="예스24" className="size-6" />,
     value: '예스24',
   },
   {
-    icon: <img src={aladinIcon} alt="" className="size-6 rounded-lg" />,
+    icon: <img src={aladinIcon} alt="알라딘" className="size-6 rounded-lg" />,
     value: '알라딘',
   },
 ] as const;

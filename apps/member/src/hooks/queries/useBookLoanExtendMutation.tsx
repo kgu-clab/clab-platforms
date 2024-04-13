@@ -13,10 +13,16 @@ export const useBookLoanExtendMutation = () => {
 
   const bookExtendMutation = useMutation({
     mutationFn: postExtendBook,
-    onSuccess: ({ memberId, bookId }) => {
-      if (bookId) {
+    onSuccess: (data, variables) => {
+      if (data) {
         queryClient.invalidateQueries({
-          queryKey: [QUERY_KEY.BOOK_LOAN_RECORD, memberId],
+          queryKey: [QUERY_KEY.MY_BOOK, variables.borrowerId],
+        });
+        queryClient.invalidateQueries({
+          queryKey: [
+            QUERY_KEY.BOOK_LOAN_RECORD_CONDITIONS,
+            variables.borrowerId,
+          ],
         });
         toast({
           state: 'success',
@@ -25,7 +31,7 @@ export const useBookLoanExtendMutation = () => {
       } else {
         toast({
           state: 'error',
-          message: '연장에 실패했습니다.',
+          message: '대여 연장은 최대 2회까지 가능합니다.',
         });
       }
     },

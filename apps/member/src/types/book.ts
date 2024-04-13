@@ -13,6 +13,7 @@ export interface BookItem {
 
 export interface BookLoanRecordItem {
   bookId: number;
+  dueDate?: string | null;
   borrowerId: string;
   borrowedAt?: string;
   returnedAt?: string;
@@ -22,6 +23,5 @@ export interface BookLoanRecordItem {
 export interface BookLoanRecordConditionType extends BookLoanRecordItem {
   bookTitle: string;
   bookImageUrl: string;
-  dueDate: string | null;
   loanExtensionCount: number | null;
 }

@@ -20,6 +20,7 @@ export const QUERY_KEY = {
   BOOK: 'Book',
   BOOK_DETAIL: 'BookDetail',
   BOOK_LOAN_RECORD: 'BookLoanRecord',
+  BOOK_LOAN_RECORD_CONDITIONS: 'BookLoanRecordConditions',
   NEWS: 'News',
   BLOG: 'Blog',
   HIRE: 'Hire',
