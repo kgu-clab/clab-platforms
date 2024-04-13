@@ -65,7 +65,7 @@ export const postBorrowBook = async (body: PostBorrowBookPrams) => {
     body,
   });
 
-  return { memberId: body.memberId, bookId: body.bookId, data };
+  return data;
 };
 /**
  * 도서 반납
@@ -76,7 +76,7 @@ export const postReturnBook = async (body: BookLoanRecordItem) => {
     body,
   });
 
-  return { memberId: body.borrowerId, bookId: body.bookId, data };
+  return data;
 };
 /**
  * 도서 연장

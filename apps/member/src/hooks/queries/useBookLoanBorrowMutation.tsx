@@ -13,16 +13,19 @@ export const useBookLoanBorrowMutation = () => {
 
   const bookBorrowMutation = useMutation({
     mutationFn: postBorrowBook,
-    onSuccess: ({ memberId, bookId, data }) => {
+    onSuccess: (data, variables) => {
       if (data) {
         queryClient.invalidateQueries({
-          queryKey: [QUERY_KEY.BOOK_DETAIL, bookId],
+          queryKey: [QUERY_KEY.BOOK_DETAIL, variables.bookId],
         });
         queryClient.invalidateQueries({
-          queryKey: [QUERY_KEY.MY_BOOK, memberId],
+          queryKey: [QUERY_KEY.BOOK_LOAN_RECORD_CONDITIONS, variables.bookId],
         });
         queryClient.invalidateQueries({
-          queryKey: [QUERY_KEY.BOOK_LOAN_RECORD, memberId],
+          queryKey: [QUERY_KEY.MY_BOOK, variables.borrowerId],
+        });
+        queryClient.invalidateQueries({
+          queryKey: [QUERY_KEY.BOOK_LOAN_RECORD, variables.borrowerId],
         });
         toast({
           state: 'success',

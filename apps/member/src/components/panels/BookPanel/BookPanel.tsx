@@ -55,7 +55,7 @@ const BookPanel = ({ memberId, data }: BookPanelProps) => {
   }));
 
   const myLoanSelectData =
-    myLoanBookData?.items?.filter((id) => id.returnedAt === null) || [];
+    myLoanBookData.items?.filter((id) => id.returnedAt === null) || [];
 
   const onClickBookButton = (title: BookPanelActionType) => {
     let selectedBookId = selectOptions[0].value; // 기본값으로 첫 번째 책 선택
