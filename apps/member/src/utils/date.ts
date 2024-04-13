@@ -139,16 +139,6 @@ export function isDateValid(
   return checkDate.isBefore(referenceDate) || checkDate.isSame(referenceDate);
 }
 /**
- * 14일 기간 기반으로 작업 또는 이벤트의 진행 상황을 백분율로 계산합니다.
- *
- * @param {string} date - 작업 또는 이벤트의 시작 날짜 (Day.js와 호환 가능한 형식).
- * @returns {number} 14일 기간 내 진행 상황을 나타내는 백분율 (0-100).
- */
-export function checkProgress(date: string): number {
-  const end = dayjs(date).add(14, 'd');
-  return (end.diff(now(), 'd') * 100) % 14;
-}
-/**
  * 시작 날짜와 종료 날짜 사이의 맞춤 시간 기간 내 진행 상황을 백분율로 계산합니다.
  * 14일 기간을 넘어서는 작업이나 기간 연장에 유용합니다.
  *
@@ -168,10 +158,12 @@ export function checkExtendProgress(
 /**
  * 기본 14일 유예 기간을 포함한 지정된 마감 날짜까지 남은 일 수를 계산합니다.
  *
- * @param {string} date - 작업 또는 이벤트의 마감 날짜.
+ * @param {string} borrowedAt - 책을 빌린 날짜.
+ * @param {string} dueDate - 반납 예정 날짜.
  * @returns {number} 남은 일 수. 마감 날짜가 지났으면 음수 값이 반환됩니다.
  */
-export function checkDueDate(date: string): number {
-  const end = dayjs(date).add(14, 'd');
-  return end.diff(now(), 'd');
+export function checkDueDate(borrowedAt: string, dueDate: string): number {
+  const startDate = dayjs(borrowedAt);
+  const endDate = dayjs(dueDate);
+  return endDate.diff(startDate, 'd');
 }

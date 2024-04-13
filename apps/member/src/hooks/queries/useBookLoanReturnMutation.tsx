@@ -19,7 +19,7 @@ export const useBookLoanReturnMutation = () => {
           queryKey: [QUERY_KEY.BOOK_DETAIL, variables.bookId],
         });
         queryClient.invalidateQueries({
-          queryKey: [QUERY_KEY.BOOK_LOAN_RECORD_CONDITIONS, variables.bookId],
+          queryKey: [QUERY_KEY.BOOK_LOAN_RECORD_CONDITIONS],
         });
         queryClient.invalidateQueries({
           queryKey: [QUERY_KEY.BOOK_LOAN_RECORD, variables.borrowerId],

@@ -8,13 +8,7 @@ import useModal from '@hooks/common/useModal';
 import { useBookLoanRecordConditions } from '@hooks/queries';
 import { useBookLoanExtendMutation } from '@hooks/queries/useBookLoanExtendMutation';
 import { useBookLoanReturnMutation } from '@hooks/queries/useBookLoanReturnMutation';
-import {
-  checkDueDate,
-  checkExtendProgress,
-  checkProgress,
-  now,
-} from '@utils/date';
-import dayjs from 'dayjs';
+import { checkDueDate, checkExtendProgress } from '@utils/date';
 
 import { BookItem } from '@type/book';
 
@@ -114,24 +108,14 @@ const BookPanel = ({ memberId, data }: BookPanelProps) => {
                     <span className="mr-2 truncate">{title}</span>
                     <span className="w-fit text-nowrap text-xs">
                       D-
-                      {loanData.loanExtensionDate
-                        ? dayjs(loanData.loanExtensionDate).diff(now(), 'd')
-                        : loanData.borrowedAt
-                          ? checkDueDate(loanData.borrowedAt)
-                          : 0}
+                      {checkDueDate(loanData.borrowedAt!, loanData.dueDate!)}
                     </span>
                   </div>
                   <ProgressBar
-                    value={
-                      loanData.loanExtensionDate && loanData.borrowedAt
-                        ? checkExtendProgress(
-                            loanData.borrowedAt,
-                            loanData.loanExtensionDate,
-                          )
-                        : loanData.borrowedAt
-                          ? checkProgress(loanData.borrowedAt)
-                          : 0
-                    }
+                    value={checkExtendProgress(
+                      loanData.borrowedAt!,
+                      loanData.dueDate!,
+                    )}
                   />
                 </li>
               </ul>

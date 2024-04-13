@@ -18,6 +18,12 @@ export const useBookLoanExtendMutation = () => {
         queryClient.invalidateQueries({
           queryKey: [QUERY_KEY.MY_BOOK, variables.borrowerId],
         });
+        queryClient.invalidateQueries({
+          queryKey: [
+            QUERY_KEY.BOOK_LOAN_RECORD_CONDITIONS,
+            variables.borrowerId,
+          ],
+        });
         toast({
           state: 'success',
           message: '성공적으로 연장되었습니다.',
