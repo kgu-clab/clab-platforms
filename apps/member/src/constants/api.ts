@@ -29,6 +29,7 @@ export const END_POINT = {
   BOOK_LOAN_CONDITIONS: `/v1/book-loan-records/conditions`,
   BOOK_LOAN_EXTEND: `/v1/book-loan-records/extend`,
   BOOK_LOAN_RETURN: `/v1/book-loan-records/return`,
+  BOOK_LOAN_OVERDUE: `/v1/book-loan-records/overdue`,
   // -- 블로그
   BLOG: `/v1/blogs`,
   BLOG_DETAIL: (id: number) => `/v1/blogs/${id}`,

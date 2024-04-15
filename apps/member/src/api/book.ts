@@ -5,11 +5,13 @@ import type {
   BaseResponse,
   PaginationPramsType,
   PaginationType,
+  WithPaginationPrams,
 } from '@type/api';
 import type {
   BookItem,
   BookLoanRecordConditionType,
   BookLoanRecordItem,
+  BookLoanRecordOverDueResponse,
 } from '@type/book';
 
 import { server } from './server';
@@ -106,6 +108,24 @@ export const getBookLoanRecordConditions = async ({
       bookId,
       borrowerId,
       isReturned,
+      page,
+      size,
+    }),
+  });
+
+  return data;
+};
+/**
+ * 도서 연체자 조회
+ */
+export const getBookLoanRecordOverdue = async ({
+  page,
+  size,
+}: WithPaginationPrams) => {
+  const { data } = await server.get<
+    PaginationType<BookLoanRecordOverDueResponse>
+  >({
+    url: createCommonPagination(END_POINT.BOOK_LOAN_OVERDUE, {
       page,
       size,
     }),
