@@ -8,6 +8,7 @@ import type {
   PaginationType,
 } from '@type/api';
 import type {
+  MembershipFeePatchBody,
   MembershipFeeRequestType,
   MembershipFeeType,
 } from '@type/membershipFee';
@@ -23,6 +24,11 @@ interface GetMembershipFeeParamsType extends PaginationPramsType {
 
 interface PostMembershipFeePramsType extends ArgsWithFiles {
   body: MembershipFeeRequestType;
+}
+
+export interface PathMembershipFeePrams {
+  id: number;
+  body: MembershipFeePatchBody;
 }
 /**
  * 회비 정보 조회
@@ -65,4 +71,21 @@ export const postMembershipFee = async ({
     url: END_POINT.MEMBERSHIP_FEE,
     body: body,
   });
+};
+/**
+ * 회비 정보 수정
+ */
+export const pathMembershipFee = async ({
+  id,
+  body,
+}: PathMembershipFeePrams) => {
+  const { data } = await server.patch<
+    MembershipFeePatchBody,
+    BaseResponse<number>
+  >({
+    url: END_POINT.MEMBERSHIP_FEE_ID(id),
+    body: body,
+  });
+
+  return data;
 };

@@ -40,7 +40,10 @@ export const END_POINT = {
   MAIN_SCHEDULE: `/v1/schedule`,
   SCHEDULE_COLLECT: `/v1/schedule/collect`,
   MAIN_ACTIVITY_PHOTO: `/v1/activity-photos`,
+  // -- 회비
   MEMBERSHIP_FEE: `/v1/membership-fees`,
+  MEMBERSHIP_FEE_ID: (id: number) => `/v1/membership-fees/${id}`,
+  // -- 공유 계정
   SHARED_ACCOUNT: `/v1/shared-accounts`,
   SHARED_ACCOUNT_STATUS: (usageId: number) =>
     `/v1/shared-accounts/usage/${usageId}`,

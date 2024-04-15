@@ -21,7 +21,7 @@ export const useMembershipFee = ({
   size = 20,
 }: UseMembershipFeeParamsType = {}) => {
   return useSuspenseQuery({
-    queryKey: [QUERY_KEY.MEMBERSHIP_FEE, memberId],
+    queryKey: [QUERY_KEY.MEMBERSHIP_FEE, size, page],
     queryFn: () =>
       getMembershipFee({
         memberId,

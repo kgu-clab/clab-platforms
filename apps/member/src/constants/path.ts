@@ -31,6 +31,7 @@ export const PATH = {
   LIBRARY_DETAIL: '/library/:id',
   SUPPORT: '/support',
   SITEMAP: '/sitemap',
+  MANAGE: '/manage',
   LOGIN: '/login',
   AUTH: '/auth',
 } as const;
