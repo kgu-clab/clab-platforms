@@ -14,16 +14,26 @@ export interface MembershipFeeRequestType {
 }
 /**
  * 회비 정보 인터페이스
+ * account 필드는 열람 권한이 없을 경우 null
  */
-export interface MembershipFeeType extends MembershipFeeRequestType {
+export interface MembershipFeeType
+  extends Omit<MembershipFeeRequestType, 'account'> {
   id: number;
   memberId: string;
   memberName: string;
-  category: string;
-  account: string;
-  amount: number;
-  content: string;
   imageUrl: string;
   status: MembershipStatusType;
   createdAt: string;
+  account: string | null;
+}
+/**
+ * 회비 정보 수정 인터페이스
+ */
+export interface MembershipFeePatchBody {
+  category?: string;
+  account?: string;
+  amount?: number;
+  content?: string;
+  imageUrl?: string;
+  status?: MembershipStatusType;
 }
