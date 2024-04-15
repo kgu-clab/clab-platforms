@@ -6,6 +6,7 @@ import ProtectAuth from '@components/router/ProtectAuth';
 
 import { PATH } from '@constants/path';
 import ErrorPage from '@pages/ErrorPage/ErrorPage';
+import ManagePage from '@pages/ManagePage/ManagePage';
 import MyPageSkeleton from '@pages/MyPage/MyPageSkeleton';
 
 import AppLayout from './AppLayout';
@@ -177,6 +178,14 @@ const AppRouter = () => {
           element: (
             <Suspense>
               <SupportPage />
+            </Suspense>
+          ),
+        },
+        {
+          path: PATH.MANAGE,
+          element: (
+            <Suspense>
+              <ManagePage />
             </Suspense>
           ),
         },
