@@ -8,7 +8,7 @@ import dayjs from 'dayjs';
 interface BirthdayCardProps {
   id: string;
   name: string;
-  imageUrl?: string;
+  imageUrl: string | null;
   birth: string;
 }
 
