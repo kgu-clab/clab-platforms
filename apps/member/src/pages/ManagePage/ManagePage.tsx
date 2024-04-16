@@ -3,6 +3,7 @@ import { Suspense } from 'react';
 import Content from '@components/common/Content/Content';
 import Header from '@components/common/Header/Header';
 import ManageLibrarySection from '@components/manage/ManageLibrarySection/ManageLibrarySection';
+import ManageNoticeSection from '@components/manage/ManageNoticeSection/ManageNoticeSection';
 import SupportHistorySection from '@components/support/SupportHistorySection/SupportHistorySection';
 
 const ManagePage = () => {
@@ -14,6 +15,9 @@ const ManagePage = () => {
       </Suspense>
       <Suspense>
         <ManageLibrarySection />
+      </Suspense>
+      <Suspense>
+        <ManageNoticeSection />
       </Suspense>
     </Content>
   );
