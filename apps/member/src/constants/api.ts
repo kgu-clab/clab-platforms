@@ -21,7 +21,7 @@ export const END_POINT = {
   MY_INFO_EDIT: (id: IDType) => `/v1/members/${id}`,
   // -- 커뮤니티
   BOARDS: `/v1/boards`,
-  BOARDS_LIST: `/v1/boards/list`,
+  BOARDS_LIST: `/v1/boards/category`,
   BOARDERS_ITEM: (id: IDType) => `/v1/boards/${id}`,
   // -- 도서
   BOOK: `/v1/books`,
