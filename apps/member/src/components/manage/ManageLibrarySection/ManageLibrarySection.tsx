@@ -2,6 +2,7 @@ import { useCallback, useState } from 'react';
 
 import { Badge, Menubar, MenubarItem, Table } from '@clab/design-system';
 
+import ActionButton from '@components/common/ActionButton/ActionButton';
 import Pagination from '@components/common/Pagination/Pagination';
 import { Section } from '@components/common/Section';
 import MemberInfoModal from '@components/modal/MemberInfoModal/MemberInfoModal';
@@ -66,9 +67,11 @@ const ManageLibrarySection = () => {
                 </Badge>
               </Table.Cell>
               <Table.Cell>
-                <button onClick={() => handleContactButtonClick(borrowerId)}>
+                <ActionButton
+                  onClick={() => handleContactButtonClick(borrowerId)}
+                >
                   정보
-                </button>
+                </ActionButton>
               </Table.Cell>
             </Table.Row>
           ),
@@ -89,9 +92,11 @@ const ManageLibrarySection = () => {
               <Table.Cell>{formattedDate(dueDate)}</Table.Cell>
               <Table.Cell>{calculateDDay(dueDate)}</Table.Cell>
               <Table.Cell>
-                <button onClick={() => handleContactButtonClick(borrowerId)}>
+                <ActionButton
+                  onClick={() => handleContactButtonClick(borrowerId)}
+                >
                   정보
-                </button>
+                </ActionButton>
               </Table.Cell>
             </Table.Row>
           ),
