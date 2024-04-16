@@ -10,14 +10,14 @@ import type {
 import type {
   BookItem,
   BookLoanRecordConditionType,
-  BookLoanRecordItem,
   BookLoanRecordOverDueResponse,
 } from '@type/book';
 
 import { server } from './server';
 
-export interface PostBorrowBookPrams extends BookLoanRecordItem {
-  memberId: string;
+export interface BorrowerBookInfo {
+  bookId: number;
+  borrowerId: string;
 }
 
 export interface GetBookLoanRecordConditionsPrams extends PaginationPramsType {
@@ -60,9 +60,9 @@ export const getMyBooks = async (id: string, page: number, size: number) => {
 /**
  * 도서 대출
  */
-export const postBorrowBook = async (body: PostBorrowBookPrams) => {
+export const postBorrowBook = async (body: BorrowerBookInfo) => {
   const borrowUrl = END_POINT.BOOK_LOAN_BORROW;
-  const { data } = await server.post<BookLoanRecordItem, BaseResponse<number>>({
+  const { data } = await server.post<BorrowerBookInfo, BaseResponse<number>>({
     url: borrowUrl,
     body,
   });
@@ -72,8 +72,8 @@ export const postBorrowBook = async (body: PostBorrowBookPrams) => {
 /**
  * 도서 반납
  */
-export const postReturnBook = async (body: BookLoanRecordItem) => {
-  const { data } = await server.post<BookLoanRecordItem, BaseResponse<number>>({
+export const postReturnBook = async (body: BorrowerBookInfo) => {
+  const { data } = await server.post<BorrowerBookInfo, BaseResponse<number>>({
     url: END_POINT.BOOK_LOAN_RETURN,
     body,
   });
@@ -83,8 +83,8 @@ export const postReturnBook = async (body: BookLoanRecordItem) => {
 /**
  * 도서 연장
  */
-export const postExtendBook = async (body: BookLoanRecordItem) => {
-  const { data } = await server.post<BookLoanRecordItem, BaseResponse<number>>({
+export const postExtendBook = async (body: BorrowerBookInfo) => {
+  const { data } = await server.post<BorrowerBookInfo, BaseResponse<number>>({
     url: END_POINT.BOOK_LOAN_EXTEND,
     body,
   });

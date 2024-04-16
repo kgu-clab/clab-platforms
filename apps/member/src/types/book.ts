@@ -11,20 +11,17 @@ export interface BookItem {
   updateTime: string | null;
 }
 
-export interface BookLoanRecordItem {
+export interface BookLoanRecordConditionType {
   bookId: number;
   borrowerId: string;
   borrowerName: string;
   dueDate: string;
   borrowedAt: string;
   returnedAt: string | null;
-  loanExtensionDate?: string;
-}
-
-export interface BookLoanRecordConditionType extends BookLoanRecordItem {
   bookTitle: string;
   bookImageUrl: string;
   loanExtensionCount: number | null;
+  loanExtensionDate?: string;
 }
 
 export interface BookLoanRecordOverDueResponse {

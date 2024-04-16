@@ -69,8 +69,8 @@ const BookPanel = ({ memberId, data }: BookPanelProps) => {
           if (title === '반납하기') {
             // 반납하기
             bookReturnMutate({
-              borrowerId: memberId,
               bookId: selectedBookId,
+              borrowerId: memberId,
             });
           } else {
             // 연장하기
