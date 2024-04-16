@@ -29,11 +29,11 @@ const Section = ({ className, children }: SectionProps) => {
 Section.Header = ({ children, title, description }: SectionHeaderProps) => {
   return (
     <div className="flex items-center justify-between">
-      <p className="text-xl font-bold leading-loose text-black">{title}</p>
-      <div className="flex items-center">
+      <div>
+        <h2 className="text-xl font-bold text-black">{title}</h2>
         <p className="text-sm font-semibold text-gray-500">{description}</p>
-        {children}
       </div>
+      <div className="flex items-center">{children}</div>
     </div>
   );
 };
