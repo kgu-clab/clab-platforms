@@ -12,6 +12,7 @@ export const MAX_PAGINATION_SIZE = 99999;
 
 export const END_POINT = {
   LOGIN_REISSUE: '/v1/login/reissue',
+  MEMBERS: '/v1/members',
   // -- 마이페이지
   MY_PROFILE: '/v1/members/my-profile',
   MY_BOARDS: '/v1/boards/my-boards',

@@ -11,6 +11,7 @@ export const QUERY_KEY = {
   MY_COMMENTS: 'MyComments',
   MY_ACTIVITY: 'MyActivity',
   MY_BOOK: 'MyBook',
+  MEMBERS: 'Members',
   BOARDS: 'Boards',
   BORDER_NOTICE: 'BorderNotice',
   BORDER_FREE: 'BorderFREE',
