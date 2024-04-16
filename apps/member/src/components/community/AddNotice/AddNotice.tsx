@@ -7,7 +7,13 @@ import Textarea from '@components/common/Textarea/Textarea';
 import useToast from '@hooks/common/useToast';
 import { useBoardWriteMutation } from '@hooks/queries';
 
-const AddNotice = () => {
+import type { CommunityCategoryType } from '@type/community';
+
+interface AddBoardProps {
+  category: CommunityCategoryType;
+}
+
+const AddBoard = ({ category }: AddBoardProps) => {
   const toast = useToast();
   const { boardWriteMutate } = useBoardWriteMutation();
 
@@ -36,10 +42,10 @@ const AddNotice = () => {
     }
     boardWriteMutate({
       ...noticeInfo,
-      category: 'notice',
-      wantAnonymous: true,
+      category: category,
+      wantAnonymous: false,
     });
-  }, [boardWriteMutate, noticeInfo, toast]);
+  }, [boardWriteMutate, category, noticeInfo, toast]);
 
   return (
     <div className="space-y-2">
@@ -61,10 +67,10 @@ const AddNotice = () => {
         onChange={handleInputsChange}
       />
       <Button className="w-full" onClick={handleSubmitClick}>
-        등록
+        추가하기
       </Button>
     </div>
   );
 };
 
-export default AddNotice;
+export default AddBoard;

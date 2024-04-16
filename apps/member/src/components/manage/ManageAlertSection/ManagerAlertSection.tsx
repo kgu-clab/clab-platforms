@@ -4,35 +4,46 @@ import { useNavigate } from 'react-router-dom';
 import { Menubar, MenubarItem, Table } from '@clab/design-system';
 
 import ActionButton from '@components/common/ActionButton/ActionButton';
+import Pagination from '@components/common/Pagination/Pagination';
 import { Section } from '@components/common/Section';
+import AddBoard from '@components/community/AddNotice/AddNotice';
 
 import { SERVICE_NAME } from '@constants/environment';
 import { TABLE_HEAD } from '@constants/head';
 import { PATH_FINDER } from '@constants/path';
 import useModal from '@hooks/common/useModal';
+import { usePagination } from '@hooks/common/usePagination';
 import { useBoardDeleteMutation, useBoardsList } from '@hooks/queries';
+import { categoryToTitle } from '@utils/community';
 import { toYYMMDD } from '@utils/date';
 import { toDecodeHTMLEntities } from '@utils/string';
 
-import AddNotice from '../AddNotice/AddNotice';
+import type { CommunityCategoryType } from '@type/community';
+
+interface ManagerAlertSectionProps {
+  category: CommunityCategoryType;
+}
 
 type Mode = 'view' | 'add';
 
 const HEAD = [...TABLE_HEAD.COMMUNITY_DETAIL, '기능'];
 
-const ManageNoticeSection = () => {
+const ManagerAlertSection = ({ category }: ManagerAlertSectionProps) => {
   const navigate = useNavigate();
   const { openModal } = useModal();
   const { boardDeleteMutate } = useBoardDeleteMutation();
-  const { data } = useBoardsList({ category: 'notice' });
+  const { data } = useBoardsList({ category: category });
 
   const [mode, setMode] = useState<Mode>('view');
+  const { page, size, handlePageChange } = usePagination();
+
+  const title = categoryToTitle(category);
 
   const handleTableRowClick = useCallback(
     (id: number) => {
-      navigate(PATH_FINDER.COMMUNITY_POST('notice', id));
+      navigate(PATH_FINDER.COMMUNITY_POST(category, id));
     },
-    [navigate],
+    [category, navigate],
   );
 
   const handleMenubarItemClick = useCallback((mode: Mode) => {
@@ -43,16 +54,15 @@ const ManageNoticeSection = () => {
     (e: React.MouseEvent<HTMLButtonElement, MouseEvent>, id: number) => {
       e.stopPropagation();
       return openModal({
-        title: '공지사항 삭제',
-        content:
-          '해당 공지사항을 정말 삭제하시겠습니까?\n삭제된 데이터는 복구할 수 없습니다.',
+        title: `${title} 삭제`,
+        content: `해당 ${title}을 정말 삭제하시겠습니까?\n삭제된 데이터는 복구할 수 없습니다.`,
         accept: {
           text: '삭제',
           onClick: () => boardDeleteMutate(id),
         },
       });
     },
-    [boardDeleteMutate, openModal],
+    [boardDeleteMutate, openModal, title],
   );
 
   const renderView = {
@@ -84,14 +94,14 @@ const ManageNoticeSection = () => {
         ))}
       </Table>
     ),
-    add: <AddNotice />,
+    add: <AddBoard category={category} />,
   }[mode];
 
   return (
     <Section>
       <Section.Header
-        title="공지사항"
-        description="공지사항을 추가하거나 삭제할 수 있어요"
+        title={title}
+        description={`${title}을 추가하거나 삭제할 수 있어요`}
       >
         <Menubar>
           <MenubarItem
@@ -108,9 +118,20 @@ const ManageNoticeSection = () => {
           </MenubarItem>
         </Menubar>
       </Section.Header>
-      <Section.Body>{renderView}</Section.Body>
+      <Section.Body>
+        {renderView}
+        {mode === 'view' && (
+          <Pagination
+            className="mt-4 justify-center"
+            totalItems={data.totalItems}
+            postLimit={size}
+            onChange={handlePageChange}
+            page={page}
+          />
+        )}
+      </Section.Body>
     </Section>
   );
 };
 
-export default ManageNoticeSection;
+export default ManagerAlertSection;

@@ -94,7 +94,7 @@ const SupportHistorySection = ({
         </Table>
         {withPagination && (
           <Pagination
-            className="mt-2 justify-center"
+            className="mt-4 justify-center"
             totalItems={data.totalItems}
             postLimit={size}
             onChange={handlePageChange}

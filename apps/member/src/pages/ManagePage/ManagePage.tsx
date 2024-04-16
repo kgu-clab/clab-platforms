@@ -2,8 +2,8 @@ import { Suspense } from 'react';
 
 import Content from '@components/common/Content/Content';
 import Header from '@components/common/Header/Header';
+import ManagerAlertSection from '@components/manage/ManageAlertSection/ManagerAlertSection';
 import ManageLibrarySection from '@components/manage/ManageLibrarySection/ManageLibrarySection';
-import ManageNoticeSection from '@components/manage/ManageNoticeSection/ManageNoticeSection';
 import SupportHistorySection from '@components/support/SupportHistorySection/SupportHistorySection';
 
 const ManagePage = () => {
@@ -17,7 +17,10 @@ const ManagePage = () => {
         <ManageLibrarySection />
       </Suspense>
       <Suspense>
-        <ManageNoticeSection />
+        <ManagerAlertSection category="notice" />
+      </Suspense>
+      <Suspense>
+        <ManagerAlertSection category="organization" />
       </Suspense>
     </Content>
   );
