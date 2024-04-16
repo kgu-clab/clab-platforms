@@ -1,4 +1,4 @@
-import { useCallback, useLayoutEffect } from 'react';
+import { Suspense, useCallback, useLayoutEffect } from 'react';
 
 import useModal from '@hooks/common/useModal';
 import { useGetModalStore } from '@store/modal';
@@ -48,25 +48,27 @@ const ModalContainer = () => {
 
   return (
     <div id="modal-container">
-      {isOpen &&
-        (custom || (
-          <Modal>
-            <Modal.Header>{title}</Modal.Header>
-            <Modal.Body>{content}</Modal.Body>
-            <Modal.Footer>
-              {accept && (
-                <Modal.Button color="orange" onClick={onClickAccept}>
-                  {accept.text}
-                </Modal.Button>
-              )}
-              {cancel && (
-                <Modal.Button color="gray" onClick={onClickCancel}>
-                  {cancel.text}
-                </Modal.Button>
-              )}
-            </Modal.Footer>
-          </Modal>
-        ))}
+      <Suspense>
+        {isOpen &&
+          (custom || (
+            <Modal>
+              <Modal.Header>{title}</Modal.Header>
+              <Modal.Body>{content}</Modal.Body>
+              <Modal.Footer>
+                {accept && (
+                  <Modal.Button color="orange" onClick={onClickAccept}>
+                    {accept.text}
+                  </Modal.Button>
+                )}
+                {cancel && (
+                  <Modal.Button color="gray" onClick={onClickCancel}>
+                    {cancel.text}
+                  </Modal.Button>
+                )}
+              </Modal.Footer>
+            </Modal>
+          ))}
+      </Suspense>
     </div>
   );
 };
