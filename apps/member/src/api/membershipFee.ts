@@ -2,10 +2,10 @@ import { END_POINT } from '@constants/api';
 import { createCommonPagination } from '@utils/api';
 
 import type {
-  ArgsWithFiles,
   BaseResponse,
   PaginationPramsType,
   PaginationType,
+  WithFilePrams,
 } from '@type/api';
 import type {
   MembershipFeePatchBody,
@@ -22,9 +22,9 @@ interface GetMembershipFeeParamsType extends PaginationPramsType {
   category?: string;
 }
 
-interface PostMembershipFeePramsType extends ArgsWithFiles {
-  body: MembershipFeeRequestType;
-}
+export interface PostMembershipFeePramsType
+  extends MembershipFeeRequestType,
+    WithFilePrams {}
 
 export interface PathMembershipFeePrams {
   id: number;
@@ -56,8 +56,8 @@ export const getMembershipFee = async ({
  * 회비 신청
  */
 export const postMembershipFee = async ({
-  body,
   multipartFile,
+  ...body
 }: PostMembershipFeePramsType) => {
   if (multipartFile) {
     const data = await postUploadedFileMembershipFee({

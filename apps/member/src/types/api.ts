@@ -35,6 +35,6 @@ export interface TokenType {
   refreshToken: string;
 }
 
-export interface ArgsWithFiles {
-  multipartFile: FormData | null;
+export interface WithFilePrams {
+  multipartFile: FormData;
 }
