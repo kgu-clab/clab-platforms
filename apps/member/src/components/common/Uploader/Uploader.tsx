@@ -1,6 +1,6 @@
 import { useCallback } from 'react';
 import { useDropzone } from 'react-dropzone';
-import { BsFileEarmarkArrowUp, BsImage } from 'react-icons/bs';
+import { BsFileEarmarkArrowUp, BsFileEarmarkDiff } from 'react-icons/bs';
 
 import { Button } from '@clab/design-system';
 
@@ -78,10 +78,12 @@ const Uploader = ({
             </>
           ) : (
             <>
-              <BsImage size={46} />
+              <BsFileEarmarkDiff size={46} />
               <p>파일을 여기로 끌어다 놓아주세요.</p>
               <p>또는</p>
-              <Button type="button">파일 선택하기</Button>
+              <Button type="button" size="sm">
+                파일 선택하기
+              </Button>
             </>
           )}
         </div>
