@@ -26,7 +26,7 @@ const Section = ({ className, children }: SectionProps) => {
   );
 };
 
-Section.Header = ({ children, title, description }: SectionHeaderProps) => {
+const Header = ({ children, title, description }: SectionHeaderProps) => {
   return (
     <div className="flex items-center justify-between">
       <div>
@@ -38,8 +38,15 @@ Section.Header = ({ children, title, description }: SectionHeaderProps) => {
   );
 };
 
-Section.Body = ({ className, children }: SectionBodyProps) => {
+const Body = ({ className, children }: SectionBodyProps) => {
   return <div className={cn('mt-4', className)}>{children}</div>;
 };
+
+Section.displayName = 'Section';
+Header.displayName = 'SectionHeader';
+Body.displayName = 'SectionBody';
+
+Section.Header = Header;
+Section.Body = Body;
 
 export default Section;
