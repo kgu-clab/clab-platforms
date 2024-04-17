@@ -1,9 +1,9 @@
 import Linker from '@components/common/Linker/Linker';
 import Section from '@components/common/Section/Section';
 
-import { FORM_DATA_KEY } from '@constants/api';
 import { PATH } from '@constants/path';
 import { useMembershipFeeMutation } from '@hooks/queries/useMembershipFeeMutation';
+import { createFormData } from '@utils/api';
 
 import type { SupportRequestDataType } from '@type/support';
 
@@ -15,17 +15,9 @@ const SupportRequestSection = () => {
    * 사용 신청서를 제출합니다.
    */
   const handleRequestSubmit = async (data: SupportRequestDataType) => {
-    const formData = new FormData();
-    if (data.file) {
-      formData.append(
-        FORM_DATA_KEY,
-        data.file,
-        encodeURIComponent(data.file.name),
-      );
-    }
     membershipFeeMutate({
-      body: data,
-      multipartFile: formData.get(FORM_DATA_KEY) ? formData : null,
+      ...data,
+      multipartFile: createFormData(data.file),
     });
   };
 
