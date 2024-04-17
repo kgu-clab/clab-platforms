@@ -9,11 +9,11 @@ import { useBoardWriteMutation } from '@hooks/queries';
 
 import type { CommunityCategoryType } from '@type/community';
 
-interface AddBoardProps {
+interface AddBoardFormProps {
   category: CommunityCategoryType;
 }
 
-const AddBoard = ({ category }: AddBoardProps) => {
+const AddBoardForm = ({ category }: AddBoardFormProps) => {
   const toast = useToast();
   const { boardWriteMutate } = useBoardWriteMutation();
 
@@ -73,4 +73,4 @@ const AddBoard = ({ category }: AddBoardProps) => {
   );
 };
 
-export default AddBoard;
+export default AddBoardForm;

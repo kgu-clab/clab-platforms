@@ -6,10 +6,10 @@ import { Menubar, MenubarItem, Table } from '@clab/design-system';
 import ActionButton from '@components/common/ActionButton/ActionButton';
 import Pagination from '@components/common/Pagination/Pagination';
 import { Section } from '@components/common/Section';
-import AddBoard from '@components/community/AddNotice/AddNotice';
+import AddBoardForm from '@components/community/AddBoardForm/AddBoardForm';
 
 import { SERVICE_NAME } from '@constants/environment';
-import { TABLE_HEAD } from '@constants/head';
+import { TABLE_HEAD, TABLE_HEAD_ACTION } from '@constants/head';
 import { PATH_FINDER } from '@constants/path';
 import useModal from '@hooks/common/useModal';
 import { usePagination } from '@hooks/common/usePagination';
@@ -25,8 +25,6 @@ interface ManagerAlertSectionProps {
 }
 
 type Mode = 'view' | 'add';
-
-const HEAD = [...TABLE_HEAD.COMMUNITY_DETAIL, '기능'];
 
 const ManagerAlertSection = ({ category }: ManagerAlertSectionProps) => {
   const navigate = useNavigate();
@@ -67,21 +65,21 @@ const ManagerAlertSection = ({ category }: ManagerAlertSectionProps) => {
 
   const renderView = {
     view: (
-      <Table head={HEAD}>
+      <Table head={[...TABLE_HEAD.COMMUNITY_DETAIL, TABLE_HEAD_ACTION]}>
         {data.items.map(({ id, title, writerId, writerName, createdAt }) => (
           <Table.Row
             key={id}
             className="text-nowrap text-center"
             onClick={() => handleTableRowClick(id)}
           >
-            <Table.Cell className="w-1/12">{id}</Table.Cell>
-            <Table.Cell className="w-5/12 truncate text-left">
+            <Table.Cell>{id}</Table.Cell>
+            <Table.Cell className="w-full truncate text-left">
               {toDecodeHTMLEntities(title)}
             </Table.Cell>
-            <Table.Cell className="w-3/12">
+            <Table.Cell>
               {writerId ? `${writerName} (${writerId})` : SERVICE_NAME}
             </Table.Cell>
-            <Table.Cell className="w-1/12">{toYYMMDD(createdAt)}</Table.Cell>
+            <Table.Cell>{toYYMMDD(createdAt)}</Table.Cell>
             <Table.Cell className="space-x-2">
               <ActionButton
                 color="red"
@@ -94,7 +92,7 @@ const ManagerAlertSection = ({ category }: ManagerAlertSectionProps) => {
         ))}
       </Table>
     ),
-    add: <AddBoard category={category} />,
+    add: <AddBoardForm category={category} />,
   }[mode];
 
   return (
