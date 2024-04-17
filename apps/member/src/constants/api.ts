@@ -7,7 +7,7 @@ export const ACCESS_TOKEN_KEY = 'ACCESS_TOKEN';
 export const REFRESH_TOKEN_KEY = 'REFRESH_TOKEN';
 
 export const FORM_DATA_KEY = 'multipartFile';
-export const STORAGE_PERIOD = (period: number) => `?storagePeriod=${period}`;
+export const STORAGE_PERIOD = (period = 99999) => `?storagePeriod=${period}`;
 export const MAX_PAGINATION_SIZE = 99999;
 
 export const END_POINT = {
@@ -57,6 +57,7 @@ export const END_POINT = {
     `/v1/files/assignment/${groupId}/${boardId}`,
   UPLOADEDFILE_MEMBERSHIP_FEE: '/v1/files/membership-fee',
   UPLOADEDFILE_PROFILES: '/v1/files/profiles',
+  UPLOADEDFILE_ACTIVITY_PHOTO: '/v1/files/activity-photos',
   // -- 활동그룹 멤버
   ACTIVITY_GROUP_MEMBER: (id: IDType) => `/v1/activity-group/member/${id}`,
   ACTIVITY_GROUP_MEMBER_MY: `/v1/activity-group/member/my`,
