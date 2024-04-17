@@ -13,9 +13,9 @@ const Table = ({ head, className, children, ...rest }: TableProps) => {
       {head && (
         <thead>
           <tr className="bg-gray-100 text-center">
-            {head.map((item, index) => (
+            {head.map((item) => (
               <th
-                key={index}
+                key={item}
                 className="text-nowrap p-2 first:rounded-l-lg last:rounded-r-lg"
               >
                 {item}
@@ -57,6 +57,7 @@ const Cell = ({ className, children, ...rest }: CellProps) => {
   );
 };
 
+Table.displayName = 'Table';
 Row.displayName = 'TableRow';
 Cell.displayName = 'TableCell';
 
