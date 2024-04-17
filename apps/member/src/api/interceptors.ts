@@ -1,4 +1,5 @@
 import { API_BASE_URL, END_POINT, HTTP_STATUS_CODE } from '@constants/api';
+import { MODE } from '@constants/environment';
 import type { FetchOptions, Interceptor } from '@gwansikk/server-chain';
 import {
   authorization,
@@ -34,8 +35,11 @@ const retryRequest = async (
 
 export const tokenHandler: Interceptor<Response> = async (response, method) => {
   const { status } = response;
-  // 서버 에러인 경우 토큰을 삭제하고 페이지를 새로고침
-  if (status === HTTP_STATUS_CODE.INTERNAL_SERVER_ERROR) {
+  // 프로덕션 환경에서 서버 에러가 발생한 경우 토큰을 삭제하고 페이지를 새로고침
+  if (
+    MODE === 'production' &&
+    status === HTTP_STATUS_CODE.INTERNAL_SERVER_ERROR
+  ) {
     removeTokens();
     window.location.reload();
     return response;

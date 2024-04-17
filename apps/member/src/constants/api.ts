@@ -7,11 +7,12 @@ export const ACCESS_TOKEN_KEY = 'ACCESS_TOKEN';
 export const REFRESH_TOKEN_KEY = 'REFRESH_TOKEN';
 
 export const FORM_DATA_KEY = 'multipartFile';
-export const STORAGE_PERIOD = (period: number) => `?storagePeriod=${period}`;
+export const STORAGE_PERIOD = (period = 99999) => `?storagePeriod=${period}`;
 export const MAX_PAGINATION_SIZE = 99999;
 
 export const END_POINT = {
   LOGIN_REISSUE: '/v1/login/reissue',
+  MEMBERS: '/v1/members',
   // -- 마이페이지
   MY_PROFILE: '/v1/members/my-profile',
   MY_BOARDS: '/v1/boards/my-boards',
@@ -20,7 +21,7 @@ export const END_POINT = {
   MY_INFO_EDIT: (id: IDType) => `/v1/members/${id}`,
   // -- 커뮤니티
   BOARDS: `/v1/boards`,
-  BOARDS_LIST: `/v1/boards/list`,
+  BOARDS_LIST: `/v1/boards/category`,
   BOARDERS_ITEM: (id: IDType) => `/v1/boards/${id}`,
   // -- 도서
   BOOK: `/v1/books`,
@@ -29,6 +30,7 @@ export const END_POINT = {
   BOOK_LOAN_CONDITIONS: `/v1/book-loan-records/conditions`,
   BOOK_LOAN_EXTEND: `/v1/book-loan-records/extend`,
   BOOK_LOAN_RETURN: `/v1/book-loan-records/return`,
+  BOOK_LOAN_OVERDUE: `/v1/book-loan-records/overdue`,
   // -- 블로그
   BLOG: `/v1/blogs`,
   BLOG_DETAIL: (id: number) => `/v1/blogs/${id}`,
@@ -40,7 +42,10 @@ export const END_POINT = {
   MAIN_SCHEDULE: `/v1/schedule`,
   SCHEDULE_COLLECT: `/v1/schedule/collect`,
   MAIN_ACTIVITY_PHOTO: `/v1/activity-photos`,
+  // -- 회비
   MEMBERSHIP_FEE: `/v1/membership-fees`,
+  MEMBERSHIP_FEE_ID: (id: number) => `/v1/membership-fees/${id}`,
+  // -- 공유 계정
   SHARED_ACCOUNT: `/v1/shared-accounts`,
   SHARED_ACCOUNT_STATUS: (usageId: number) =>
     `/v1/shared-accounts/usage/${usageId}`,
@@ -52,6 +57,7 @@ export const END_POINT = {
     `/v1/files/assignment/${groupId}/${boardId}`,
   UPLOADEDFILE_MEMBERSHIP_FEE: '/v1/files/membership-fee',
   UPLOADEDFILE_PROFILES: '/v1/files/profiles',
+  UPLOADEDFILE_ACTIVITY_PHOTO: '/v1/files/activity-photos',
   // -- 활동그룹 멤버
   ACTIVITY_GROUP_MEMBER: (id: IDType) => `/v1/activity-group/member/${id}`,
   ACTIVITY_GROUP_MEMBER_MY: `/v1/activity-group/member/my`,

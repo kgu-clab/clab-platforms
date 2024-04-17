@@ -22,6 +22,7 @@ const MembershipInfoModal = ({ data }: MembershipInfoModalProps) => {
     status,
     memberName,
     memberId,
+    account,
     content,
     amount,
     createdAt,
@@ -42,6 +43,7 @@ const MembershipInfoModal = ({ data }: MembershipInfoModalProps) => {
           <MembershipCategoryBadge category={category} />
         </DetailsList.Item>
         <DetailsList.Item label="내용">{content}</DetailsList.Item>
+        {account && <DetailsList.Item label="계좌">{account}</DetailsList.Item>}
         <DetailsList.Item label="금액">
           {`₩${formatWon(amount)}`}
         </DetailsList.Item>

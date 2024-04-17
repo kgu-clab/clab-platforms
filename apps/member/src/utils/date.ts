@@ -167,3 +167,13 @@ export function checkDueDate(borrowedAt: string, dueDate: string): number {
   const endDate = dayjs(dueDate);
   return endDate.diff(startDate, 'd');
 }
+
+/**
+ * 주어진 날짜를 한국 시간대로 변환하여 ISO 문자열로 반환합니다.
+ *
+ * @param date 변환할 날짜 문자열
+ * @returns 한국 시간대로 변환된 ISO 문자열
+ */
+export function toKoreaISOString(date: string): string {
+  return dayjs(date).format('YYYY-MM-DDTHH:mm:ss') + 'Z';
+}

@@ -25,8 +25,6 @@ export const useMembershipFeeMutation = () => {
     },
   });
 
-  membershipFeeMutation.isSuccess;
-
   return {
     membershipFeeMutate: membershipFeeMutation.mutate,
     isPending: membershipFeeMutation.isPending,

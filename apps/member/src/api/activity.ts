@@ -1,5 +1,5 @@
 import { END_POINT } from '@constants/api';
-import { createCommonPagination } from '@utils/api';
+import { createCommonPagination, createFormData } from '@utils/api';
 import { groupBoardParser } from '@utils/group';
 
 import type {
@@ -10,6 +10,7 @@ import type {
   ActivityGroupMemberMyType,
   ActivityGroupStatusType,
   ActivityPhotoItem,
+  ActivityPhotosBody,
   ActivityRequestType,
   SubmitBoardType,
 } from '@type/activity';
@@ -17,33 +18,42 @@ import type { BaseResponse, IDType, PaginationType } from '@type/api';
 import type { ScheduleItem } from '@type/schedule';
 
 import { server } from './server';
-import { postUploadedFileAssignment } from './uploadedFile';
+import {
+  postFilesActivityPhotos,
+  postUploadedFileAssignment,
+} from './uploadedFile';
 
-interface patchActivityGroupMemberApplyArgs {
+export interface PatchActivityGroupMemberApplyPrams {
   activityGroupId: number;
   memberId: string;
   status: string;
 }
 
-interface PostActivityGroupMemberApplyArgs {
+export interface PostActivityGroupMemberApplyPrams {
   activityGroupId: number;
   body: ActivityRequestType;
 }
 
-interface PostActivityBoardArgs {
+export interface PostActivityBoardPrams {
   activityGroupId: number;
   body: SubmitBoardType;
-  files?: FormData;
   parentId?: number;
   memberId?: string;
+  files?: FormData;
 }
 
-interface PatchActivityBoardArgs {
+export interface PatchActivityBoardPrams {
   activityGroupBoardId: IDType;
   groupId: IDType;
   groupBoardId: IDType;
   body: SubmitBoardType;
   files?: FormData;
+}
+
+export interface PostActivityPhotoPrams {
+  title: string;
+  date: string;
+  file: File;
 }
 
 /**
@@ -116,7 +126,7 @@ export const getActivityGroupDetail = async (id: number) => {
 export const postActivityGroupMemberApply = async ({
   activityGroupId,
   body,
-}: PostActivityGroupMemberApplyArgs) => {
+}: PostActivityGroupMemberApplyPrams) => {
   const { data } = await server.post<ActivityRequestType, BaseResponse<number>>(
     {
       url: createCommonPagination(END_POINT.ACTIVITY_GROUP_MEMBER_APPLY, {
@@ -166,7 +176,7 @@ export const patchActivityGroupMemberApply = async ({
   activityGroupId,
   memberId,
   status,
-}: patchActivityGroupMemberApplyArgs) => {
+}: PatchActivityGroupMemberApplyPrams) => {
   const params = { activityGroupId, memberId, status };
   const { data } = await server.patch<unknown, BaseResponse<string>>({
     url: createCommonPagination(END_POINT.ACTIVITY_GROUP_ADMIN_ACCEPT, params),
@@ -207,7 +217,7 @@ export const postActivityBoard = async ({
   activityGroupId,
   body,
   files,
-}: PostActivityBoardArgs) => {
+}: PostActivityBoardPrams) => {
   const params = {
     parentId: parentId,
     memberId: memberId,
@@ -250,7 +260,7 @@ export const patchActivityBoard = async ({
   groupBoardId,
   body,
   files,
-}: PatchActivityBoardArgs) => {
+}: PatchActivityBoardPrams) => {
   let fileUrl: string | null = null;
 
   if (groupId && groupBoardId && files) {
@@ -275,6 +285,23 @@ export const patchActivityBoard = async ({
     body: {
       ...body,
       fileUrls: fileUrl ? [fileUrl] : undefined,
+    },
+  });
+
+  return data;
+};
+/**
+ * 활동 사진 등록
+ */
+export const postActivityPhoto = async (body: PostActivityPhotoPrams) => {
+  const fileData = await postFilesActivityPhotos(createFormData(body.file));
+  const fileUrl = fileData[0].fileUrl;
+
+  const { data } = await server.post<ActivityPhotosBody, BaseResponse<number>>({
+    url: END_POINT.MAIN_ACTIVITY_PHOTO,
+    body: {
+      ...body,
+      fileUrlList: [fileUrl],
     },
   });
 

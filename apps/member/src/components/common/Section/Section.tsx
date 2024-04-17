@@ -26,20 +26,27 @@ const Section = ({ className, children }: SectionProps) => {
   );
 };
 
-Section.Header = ({ children, title, description }: SectionHeaderProps) => {
+const Header = ({ children, title, description }: SectionHeaderProps) => {
   return (
     <div className="flex items-center justify-between">
-      <p className="text-xl font-bold leading-loose text-black">{title}</p>
-      <div className="flex items-center">
+      <div>
+        <h2 className="text-xl font-bold text-black">{title}</h2>
         <p className="text-sm font-semibold text-gray-500">{description}</p>
-        {children}
       </div>
+      <div className="flex items-center">{children}</div>
     </div>
   );
 };
 
-Section.Body = ({ className, children }: SectionBodyProps) => {
+const Body = ({ className, children }: SectionBodyProps) => {
   return <div className={cn('mt-4', className)}>{children}</div>;
 };
+
+Section.displayName = 'Section';
+Header.displayName = 'SectionHeader';
+Body.displayName = 'SectionBody';
+
+Section.Header = Header;
+Section.Body = Body;
 
 export default Section;

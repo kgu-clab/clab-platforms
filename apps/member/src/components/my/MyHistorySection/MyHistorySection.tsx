@@ -51,7 +51,7 @@ const MyHistorySection = ({ title, data }: MyHistorySectionProps) => {
               const { boardId, boardCategory, content, createdAt } = item;
               return (
                 <ListButton
-                  key={createdAt}
+                  key={index}
                   to={PATH_FINDER.COMMUNITY_POST(boardCategory, boardId)}
                 >
                   <p className="grow truncate pr-4">{content}</p>
@@ -65,10 +65,7 @@ const MyHistorySection = ({ title, data }: MyHistorySectionProps) => {
             if ('bookId' in item) {
               const { bookId, bookTitle, borrowedAt, returnedAt } = item;
               return (
-                <ListButton
-                  key={bookId + index}
-                  to={PATH_FINDER.BOOK_DETAIL(bookId)}
-                >
+                <ListButton key={index} to={PATH_FINDER.BOOK_DETAIL(bookId)}>
                   <p className="grow space-x-2 truncate pr-4">
                     <Badge color={returnedAt ? 'green' : 'yellow'}>
                       {returnedAt ? '반납완료' : '대출중'}
@@ -88,7 +85,7 @@ const MyHistorySection = ({ title, data }: MyHistorySectionProps) => {
               const { content, createdAt } = item as CommentItem;
               return (
                 <ListButton
-                  key={createdAt}
+                  key={index}
                   onClick={() => handleAlarmClick(content)}
                 >
                   <p className="grow truncate pr-4">{content}</p>

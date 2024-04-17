@@ -29,7 +29,10 @@ const LibraryPage = () => {
       </Header>
       <LibraryNewBooksSection data={newBookData.items} />
       <Section>
-        <Section.Header title="소장 도서 둘러보기" />
+        <Section.Header
+          title="둘러보기"
+          description="소장 도서를 둘러볼 수 있어요"
+        />
         <Section.Body>
           <LibraryBookList data={bookData.items} />
           <Pagination

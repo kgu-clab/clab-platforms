@@ -1,4 +1,5 @@
-type SchedulePriority = 'HIGH' | 'MIDDLE' | 'LOW';
+export type ScheduleType = 'ALL' | 'STUDY' | 'PROJECT';
+export type SchedulePriority = 'HIGH' | 'MEDIUM' | 'LOW';
 
 export interface ScheduleItem {
   id: number;
@@ -11,11 +12,12 @@ export interface ScheduleItem {
 }
 
 export interface ScheduleRegisterItem {
-  scheduleType?: string;
+  scheduleType: ScheduleType;
   title: string;
   detail: string;
   startDateTime: string;
   endDateTime: string;
+  priority: SchedulePriority;
   activityGroupId?: number;
 }
 

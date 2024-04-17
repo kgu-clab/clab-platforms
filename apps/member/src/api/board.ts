@@ -94,3 +94,13 @@ export const patchBoards = async ({ id, body }: PatchBoardsParams) => {
 
   return data;
 };
+/**
+ * 커뮤니티 게시글 삭제
+ */
+export const deleteBoards = async (id: number) => {
+  const { data } = await server.del<never, BaseResponse<number>>({
+    url: END_POINT.BOARDERS_ITEM(id),
+  });
+
+  return data;
+};

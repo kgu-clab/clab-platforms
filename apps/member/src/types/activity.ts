@@ -74,9 +74,9 @@ export interface ActivityBoardType {
   id: number;
   parentId: number;
   category: ActivityGroupBoardCategoryType;
-  title?: string;
   content: string;
   files: Array<AssignmentFileType>;
+  title?: string;
   dueDateTime?: string;
   createdAt: string;
   feedbacks?: Array<ActivityBoardType>;
@@ -107,4 +107,10 @@ export interface ActivityGroupMemberMyType {
   name: string;
   subject: string;
   createdAt: string;
+}
+
+export interface ActivityPhotosBody {
+  title: string;
+  fileUrlList: Array<string>;
+  date: string;
 }

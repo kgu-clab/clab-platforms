@@ -2,12 +2,13 @@ import { END_POINT } from '@constants/api';
 import { createCommonPagination } from '@utils/api';
 
 import type {
-  ArgsWithFiles,
   BaseResponse,
   PaginationPramsType,
   PaginationType,
+  WithFilePrams,
 } from '@type/api';
 import type {
+  MembershipFeePatchBody,
   MembershipFeeRequestType,
   MembershipFeeType,
 } from '@type/membershipFee';
@@ -21,8 +22,13 @@ interface GetMembershipFeeParamsType extends PaginationPramsType {
   category?: string;
 }
 
-interface PostMembershipFeePramsType extends ArgsWithFiles {
-  body: MembershipFeeRequestType;
+export interface PostMembershipFeePramsType
+  extends MembershipFeeRequestType,
+    WithFilePrams {}
+
+export interface PathMembershipFeePrams {
+  id: number;
+  body: MembershipFeePatchBody;
 }
 /**
  * 회비 정보 조회
@@ -50,8 +56,8 @@ export const getMembershipFee = async ({
  * 회비 신청
  */
 export const postMembershipFee = async ({
-  body,
   multipartFile,
+  ...body
 }: PostMembershipFeePramsType) => {
   if (multipartFile) {
     const data = await postUploadedFileMembershipFee({
@@ -65,4 +71,21 @@ export const postMembershipFee = async ({
     url: END_POINT.MEMBERSHIP_FEE,
     body: body,
   });
+};
+/**
+ * 회비 정보 수정
+ */
+export const pathMembershipFee = async ({
+  id,
+  body,
+}: PathMembershipFeePrams) => {
+  const { data } = await server.patch<
+    MembershipFeePatchBody,
+    BaseResponse<number>
+  >({
+    url: END_POINT.MEMBERSHIP_FEE_ID(id),
+    body: body,
+  });
+
+  return data;
 };

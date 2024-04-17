@@ -44,7 +44,6 @@ const BookDetailSection = ({ data }: BookDetailSectionProps) => {
   const handleBorrowClick = useCallback(
     (bookId: number) => {
       bookBorrowMutate({
-        memberId: myInfo.id,
         bookId: bookId,
         borrowerId: myInfo.id,
       });
