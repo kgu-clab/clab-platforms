@@ -14,12 +14,13 @@ import { useBookLoanRecordConditions } from '@hooks/queries';
 import { useBookLoanRecordOverdue } from '@hooks/queries/useBookLoanRecordOverdue';
 import { calculateDDay, formattedDate } from '@utils/date';
 
-type View = 'condition' | 'overdue';
+type Mode = 'condition' | 'overdue';
 
 const ManageLibrarySection = () => {
-  const [view, setView] = useState<View>('condition');
   const { page, size, handlePageChange } = usePagination();
   const { openModal } = useModal();
+
+  const [mode, setMode] = useState<Mode>('condition');
 
   const { data: bookLoanRecordCondition } = useBookLoanRecordConditions({
     isReturned: false,
@@ -31,13 +32,7 @@ const ManageLibrarySection = () => {
     size,
   });
 
-  const handleMenubarItemClick = useCallback(
-    (view: View) => {
-      setView(view);
-      handlePageChange(1);
-    },
-    [handlePageChange],
-  );
+  const handleMenubarItemClick = useCallback((mode: Mode) => setMode(mode), []);
 
   const handleContactButtonClick = useCallback(
     (id: string) => {
@@ -49,15 +44,20 @@ const ManageLibrarySection = () => {
     [openModal],
   );
 
-  const renderView = {
+  const renderMode = {
     condition: (
-      <Table head={TABLE_HEAD.BOOK_LOAN_RECORD}>
+      <Table head={['도서명', ...TABLE_HEAD.BOOK_LOAN_RECORD]}>
         {bookLoanRecordCondition.items.map(
-          (
-            { borrowerId, borrowerName, dueDate, borrowedAt, returnedAt },
-            index,
-          ) => (
-            <Table.Row key={index}>
+          ({
+            bookTitle,
+            borrowerId,
+            borrowerName,
+            dueDate,
+            borrowedAt,
+            returnedAt,
+          }) => (
+            <Table.Row key={borrowerId + bookTitle + borrowedAt}>
+              <Table.Cell>{bookTitle}</Table.Cell>
               <Table.Cell>{`${borrowerName} (${borrowerId})`}</Table.Cell>
               <Table.Cell>{formattedDate(borrowedAt)}</Table.Cell>
               <Table.Cell>{formattedDate(dueDate)}</Table.Cell>
@@ -81,11 +81,8 @@ const ManageLibrarySection = () => {
     overdue: (
       <Table head={TABLE_HEAD.BOOK_LOAN_RECORDS_OVERDUE}>
         {bookLoanRecordOverdue.items.map(
-          (
-            { bookTitle, borrowerId, borrowerName, dueDate, borrowedAt },
-            index,
-          ) => (
-            <Table.Row key={index}>
+          ({ bookTitle, borrowerId, borrowerName, dueDate, borrowedAt }) => (
+            <Table.Row key={borrowerId + bookTitle + borrowedAt}>
               <Table.Cell>{bookTitle}</Table.Cell>
               <Table.Cell>{`${borrowerName} (${borrowerId})`}</Table.Cell>
               <Table.Cell>{formattedDate(borrowedAt)}</Table.Cell>
@@ -103,7 +100,7 @@ const ManageLibrarySection = () => {
         )}
       </Table>
     ),
-  }[view];
+  }[mode];
 
   return (
     <Section>
@@ -113,13 +110,13 @@ const ManageLibrarySection = () => {
       >
         <Menubar>
           <MenubarItem
-            selected={view === 'condition'}
+            selected={mode === 'condition'}
             onClick={() => handleMenubarItemClick('condition')}
           >
             대여
           </MenubarItem>
           <MenubarItem
-            selected={view === 'overdue'}
+            selected={mode === 'overdue'}
             onClick={() => handleMenubarItemClick('overdue')}
           >
             연체
@@ -127,13 +124,13 @@ const ManageLibrarySection = () => {
         </Menubar>
       </Section.Header>
       <Section.Body>
-        {renderView}
+        {renderMode}
         <Pagination
           className="mt-4 justify-center"
           page={page}
           postLimit={size}
           totalItems={
-            view === 'condition'
+            mode === 'condition'
               ? bookLoanRecordCondition.totalItems
               : bookLoanRecordOverdue.totalItems
           }
