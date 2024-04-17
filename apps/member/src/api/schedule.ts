@@ -1,5 +1,6 @@
 import { END_POINT } from '@constants/api';
-import { createCommonPagination } from '@utils/api';
+import { createCommonPagination, createPath } from '@utils/api';
+import { toKoreaISOString } from '@utils/date';
 
 import type {
   BaseResponse,
@@ -55,7 +56,21 @@ export const postSchedule = async (body: ScheduleRegisterItem) => {
     BaseResponse<number>
   >({
     url: END_POINT.MAIN_SCHEDULE,
-    body,
+    body: {
+      ...body,
+      startDateTime: toKoreaISOString(body.startDateTime),
+      endDateTime: toKoreaISOString(body.endDateTime),
+    },
+  });
+
+  return data;
+};
+/**
+ * 일정 삭제
+ */
+export const deleteSchedule = async (id: number) => {
+  const { data } = await server.del<unknown, BaseResponse<number>>({
+    url: createPath(END_POINT.MAIN_SCHEDULE, id),
   });
 
   return data;

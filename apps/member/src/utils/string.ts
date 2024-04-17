@@ -3,6 +3,7 @@ import * as entities from 'entities';
 import { twMerge } from 'tailwind-merge';
 
 import type { MembershipStatusType } from '@type/membershipFee';
+import type { SchedulePriority } from '@type/schedule';
 
 export const cn = (...inputs: ClassValue[]) => {
   return twMerge(clsx(inputs));
@@ -45,4 +46,23 @@ export function toMembershipStatusText(status: MembershipStatusType): string {
 export function toDecodeHTMLEntities(string?: string) {
   if (!string) return '';
   return entities.decodeHTML(string);
+}
+/**
+ * 중요도를 텍스트로 변환하는 함수입니다.
+ *
+ * @param priority - 중요도 값 ('HIGH', 'MEDIUM', 'LOW')
+ * @returns 중요도에 해당하는 텍스트
+ * @throws 알 수 없는 중요도일 경우 에러를 throw합니다.
+ */
+export function toPriorityText(priority: SchedulePriority) {
+  switch (priority) {
+    case 'HIGH':
+      return '높음';
+    case 'MEDIUM':
+      return '중간';
+    case 'LOW':
+      return '낮음';
+    default:
+      throw new Error(`Unknown priority: ${priority}`);
+  }
 }

@@ -12,4 +12,9 @@ export const TABLE_HEAD = {
     '연체일수',
     '기능',
   ],
+  CALENDAR_SCHEDULE: ['번호', '제목', '시작일', '종료일', '중요도', '기능'],
 } as const;
+/**
+ * 관리자 페이지에서 기능을 나타내는 상수
+ */
+export const TABLE_HEAD_ACTION = '기능';
