@@ -1,17 +1,21 @@
 import { useCallback, useState } from 'react';
 
-import { Badge, Menubar, MenubarItem, Table } from '@clab/design-system';
+import { Menubar, MenubarItem, Table } from '@clab/design-system';
 
 import ActionButton from '@components/common/ActionButton/ActionButton';
 import Pagination from '@components/common/Pagination/Pagination';
 import { Section } from '@components/common/Section';
+import BookLoanConditionStatusBadge from '@components/library/BookLoanConditionStatusBadge/BookLoanConditionStatusBadge';
 import MemberInfoModal from '@components/modal/MemberInfoModal/MemberInfoModal';
 
 import { TABLE_HEAD } from '@constants/head';
 import useModal from '@hooks/common/useModal';
 import { usePagination } from '@hooks/common/usePagination';
-import { useBookLoanRecordConditions } from '@hooks/queries';
-import { useBookLoanRecordOverdue } from '@hooks/queries/useBookLoanRecordOverdue';
+import {
+  useBookLoanRecordApproveMutation,
+  useBookLoanRecordConditions,
+  useBookLoanRecordOverdue,
+} from '@hooks/queries';
 import { calculateDDay, formattedDate } from '@utils/date';
 
 type Mode = 'condition' | 'overdue';
@@ -22,6 +26,7 @@ const ManageLibrarySection = () => {
 
   const [mode, setMode] = useState<Mode>('condition');
 
+  const { bookLoanRecordApproveMutate } = useBookLoanRecordApproveMutation();
   const { data: bookLoanRecordCondition } = useBookLoanRecordConditions({
     isReturned: false,
     page,
@@ -33,6 +38,13 @@ const ManageLibrarySection = () => {
   });
 
   const handleMenubarItemClick = useCallback((mode: Mode) => setMode(mode), []);
+
+  const handleApproveButtonClick = useCallback(
+    (id: number) => {
+      bookLoanRecordApproveMutate(id);
+    },
+    [bookLoanRecordApproveMutate],
+  );
 
   const handleContactButtonClick = useCallback(
     (id: string) => {
@@ -46,9 +58,10 @@ const ManageLibrarySection = () => {
 
   const renderMode = {
     condition: (
-      <Table head={['도서명', ...TABLE_HEAD.BOOK_LOAN_RECORD]}>
+      <Table head={['도서명', ...TABLE_HEAD.BOOK_LOAN_RECORD, '기능']}>
         {bookLoanRecordCondition.items.map(
           ({
+            bookLoanRecordId,
             bookTitle,
             borrowerId,
             borrowerName,
@@ -56,17 +69,25 @@ const ManageLibrarySection = () => {
             borrowedAt,
             returnedAt,
           }) => (
-            <Table.Row key={borrowerId + bookTitle + borrowedAt}>
+            <Table.Row key={bookLoanRecordId}>
               <Table.Cell>{bookTitle}</Table.Cell>
               <Table.Cell>{`${borrowerName} (${borrowerId})`}</Table.Cell>
               <Table.Cell>{formattedDate(borrowedAt)}</Table.Cell>
               <Table.Cell>{formattedDate(dueDate)}</Table.Cell>
               <Table.Cell>
-                <Badge color={returnedAt ? 'green' : 'red'}>
-                  {returnedAt ? '반납완료' : '대여중'}
-                </Badge>
+                <BookLoanConditionStatusBadge
+                  borrowedAt={borrowedAt}
+                  returnedAt={returnedAt}
+                />
               </Table.Cell>
-              <Table.Cell>
+              <Table.Cell className="space-x-2">
+                {dueDate === null && (
+                  <ActionButton
+                    onClick={() => handleApproveButtonClick(bookLoanRecordId)}
+                  >
+                    승인
+                  </ActionButton>
+                )}
                 <ActionButton
                   onClick={() => handleContactButtonClick(borrowerId)}
                 >
