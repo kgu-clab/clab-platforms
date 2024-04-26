@@ -7,7 +7,7 @@ import useToast from '@hooks/common/useToast';
 /**
  * 대출한 도서를 연장합니다.
  */
-export const useBookLoanExtendMutation = () => {
+export function useBookLoanExtendMutation() {
   const queryClient = useQueryClient();
   const toast = useToast();
 
@@ -26,16 +26,16 @@ export const useBookLoanExtendMutation = () => {
         });
         toast({
           state: 'success',
-          message: '성공적으로 연장되었습니다.',
+          message: '해당 도서 대여 기간을 연장했어요.',
         });
       } else {
         toast({
           state: 'error',
-          message: '대여 연장은 최대 2회까지 가능합니다.',
+          message: '도서 대여 연장은 최대 2회까지 가능해요.',
         });
       }
     },
   });
 
   return { bookExtendMutate: bookExtendMutation.mutate };
-};
+}

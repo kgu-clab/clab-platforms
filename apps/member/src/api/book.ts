@@ -1,9 +1,8 @@
 import { END_POINT } from '@constants/api';
-import { createCommonPagination } from '@utils/api';
+import { createCommonPagination, createPath } from '@utils/api';
 
 import type {
   BaseResponse,
-  PaginationPramsType,
   PaginationType,
   WithPaginationPrams,
 } from '@type/api';
@@ -15,12 +14,12 @@ import type {
 
 import { server } from './server';
 
-export interface BorrowerBookInfo {
+export interface BookLoanRequestData {
   bookId: number;
   borrowerId: string;
 }
 
-export interface GetBookLoanRecordConditionsPrams extends PaginationPramsType {
+export interface BookLoanRecordSearchOptions extends WithPaginationPrams {
   bookId?: number;
   borrowerId?: string;
   isReturned?: boolean;
@@ -28,79 +27,78 @@ export interface GetBookLoanRecordConditionsPrams extends PaginationPramsType {
 /**
  * 도서 목록 조회
  */
-export const getBooks = async (page: number, size: number) => {
-  const params = { page, size };
+export async function getBooks(page: number, size: number) {
   const { data } = await server.get<PaginationType<BookItem>>({
-    url: createCommonPagination(END_POINT.BOOK, params),
+    url: createCommonPagination(END_POINT.BOOK, { page, size }),
   });
 
   return data;
-};
+}
 /**
  * 도서 상세 조회
  */
-export const getBookDetail = async (id: number) => {
+export async function getBookDetail(id: number) {
   const { data } = await server.get<BaseResponse<BookItem>>({
     url: END_POINT.BOOK_DETAIL(id),
   });
 
   return data;
-};
+}
 /**
  * 나의 대출내역 조회
  */
-export const getMyBooks = async (id: string, page: number, size: number) => {
-  const params = { page, size };
+export async function getMyBooks(id: string, page: number, size: number) {
   const { data } = await server.get<PaginationType<BookItem>>({
-    url: createCommonPagination(END_POINT.BOOK, params),
+    url: createCommonPagination(END_POINT.BOOK, { page, size }),
   });
 
   return data.items.filter((book) => book.borrowerId === id);
-};
+}
 /**
  * 도서 대출
  */
-export const postBorrowBook = async (body: BorrowerBookInfo) => {
-  const borrowUrl = END_POINT.BOOK_LOAN_BORROW;
-  const { data } = await server.post<BorrowerBookInfo, BaseResponse<number>>({
-    url: borrowUrl,
+export async function postBorrowBook(body: BookLoanRequestData) {
+  return server.post<BookLoanRequestData, BaseResponse<number>>({
+    url: END_POINT.BOOK_LOAN_BORROW,
     body,
   });
-
-  return data;
-};
+}
 /**
  * 도서 반납
  */
-export const postReturnBook = async (body: BorrowerBookInfo) => {
-  const { data } = await server.post<BorrowerBookInfo, BaseResponse<number>>({
-    url: END_POINT.BOOK_LOAN_RETURN,
-    body,
-  });
+export async function postReturnBook(body: BookLoanRequestData) {
+  const { data } = await server.post<BookLoanRequestData, BaseResponse<number>>(
+    {
+      url: END_POINT.BOOK_LOAN_RETURN,
+      body,
+    },
+  );
 
   return data;
-};
+}
 /**
  * 도서 연장
  */
-export const postExtendBook = async (body: BorrowerBookInfo) => {
-  const { data } = await server.post<BorrowerBookInfo, BaseResponse<number>>({
-    url: END_POINT.BOOK_LOAN_EXTEND,
-    body,
-  });
+export async function postExtendBook(body: BookLoanRequestData) {
+  const { data } = await server.post<BookLoanRequestData, BaseResponse<number>>(
+    {
+      url: END_POINT.BOOK_LOAN_EXTEND,
+      body,
+    },
+  );
 
   return data;
-};
+}
 /**
  * 도서 대출 내역 조회
  */
-export const getBookLoanRecordConditions = async ({
+export async function getBookLoanRecordConditions({
   bookId,
   borrowerId,
   isReturned,
   page = 0,
   size = 20,
-}: GetBookLoanRecordConditionsPrams) => {
+}: BookLoanRecordSearchOptions) {
   const { data } = await server.get<
     PaginationType<BookLoanRecordConditionType>
   >({
@@ -114,14 +112,14 @@ export const getBookLoanRecordConditions = async ({
   });
 
   return data;
-};
+}
 /**
  * 도서 연체자 조회
  */
-export const getBookLoanRecordOverdue = async ({
+export async function getBookLoanRecordOverdue({
   page,
   size,
-}: WithPaginationPrams) => {
+}: WithPaginationPrams) {
   const { data } = await server.get<
     PaginationType<BookLoanRecordOverDueResponse>
   >({
@@ -132,4 +130,12 @@ export const getBookLoanRecordOverdue = async ({
   });
 
   return data;
-};
+}
+/**
+ * 도서 대출 승인
+ */
+export async function patchBookLoanRecordApprove(id: number) {
+  return server.patch<null, BaseResponse<number>>({
+    url: createPath(END_POINT.BOOK_LOAN_RECORD_APPROVE, id),
+  });
+}

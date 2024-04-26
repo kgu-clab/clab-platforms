@@ -8,8 +8,7 @@ import Section from '@components/common/Section/Section';
 import { BOOK_STORE_URL } from '@constants/path';
 import { SELECT_DEFAULT_OPTION } from '@constants/select';
 import { BOOK_STATE } from '@constants/state';
-import { useBookLoanBorrowMutation } from '@hooks/queries/useBookLoanBorrowMutation';
-import { useMyProfile } from '@hooks/queries/useMyProfile';
+import { useBookLoanBorrowMutation, useMyProfile } from '@hooks/queries';
 import { createImageUrl } from '@utils/api';
 import { bookReviewParser, toBookstore } from '@utils/string';
 
@@ -69,7 +68,7 @@ const BookDetailSection = ({ data }: BookDetailSectionProps) => {
   const handleTabsChange = (value: string) => {
     const bookStore = toBookstore(value as BookstoreKorean);
     const url = bookReviewParser(reviewLinks);
-    const targetUrl = url[bookStore] || `${BOOK_STORE_URL[bookStore]}${title}`;
+    const targetUrl = url[bookStore] ?? `${BOOK_STORE_URL[bookStore]}${title}`;
     window.open(targetUrl, '_blank');
   };
 

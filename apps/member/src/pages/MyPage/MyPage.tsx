@@ -8,12 +8,12 @@ import MyProfileSection from '@components/my/MyProfileSection/MyProfileSection';
 
 import {
   useActivityGroupMemberMy,
+  useBookLoanRecordConditions,
   useMembershipFee,
   useMyBoards,
   useMyComments,
   useMyNotifications,
 } from '@hooks/queries';
-import { useBookLoanRecordConditions } from '@hooks/queries/useBookLoanRecordConditions';
 import { useMyProfile } from '@hooks/queries/useMyProfile';
 
 const MyPage = () => {
