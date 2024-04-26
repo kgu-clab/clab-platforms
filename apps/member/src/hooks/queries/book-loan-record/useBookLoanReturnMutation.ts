@@ -17,6 +17,9 @@ export function useBookLoanReturnMutation() {
     onSuccess: (data, variables) => {
       if (data) {
         queryClient.invalidateQueries({
+          queryKey: [QUERY_KEY.BOOK],
+        });
+        queryClient.invalidateQueries({
           queryKey: [QUERY_KEY.BOOK_DETAIL, variables.bookId],
         });
         queryClient.invalidateQueries({
