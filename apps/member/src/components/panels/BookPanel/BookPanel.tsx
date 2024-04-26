@@ -5,9 +5,11 @@ import ProgressBar from '@components/common/ProgressBar/ProgressBar';
 import Select from '@components/common/Select/Select';
 
 import useModal from '@hooks/common/useModal';
-import { useBookLoanRecordConditions } from '@hooks/queries';
-import { useBookLoanExtendMutation } from '@hooks/queries/useBookLoanExtendMutation';
-import { useBookLoanReturnMutation } from '@hooks/queries/useBookLoanReturnMutation';
+import {
+  useBookLoanExtendMutation,
+  useBookLoanRecordConditions,
+  useBookLoanReturnMutation,
+} from '@hooks/queries';
 import { checkDueDate, checkExtendProgress } from '@utils/date';
 
 import { BookItem } from '@type/book';

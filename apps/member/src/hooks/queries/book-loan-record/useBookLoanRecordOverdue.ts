@@ -10,10 +10,10 @@ interface UseBookLoanRecordOverduePrams extends WithPaginationPrams {}
 /**
  * 도서 연체자를 조회합니다.
  */
-export const useBookLoanRecordOverdue = ({
+export function useBookLoanRecordOverdue({
   page = 0,
   size = 20,
-}: UseBookLoanRecordOverduePrams = {}) => {
+}: UseBookLoanRecordOverduePrams = {}) {
   return useSuspenseQuery({
     queryFn: () =>
       getBookLoanRecordOverdue({
@@ -22,4 +22,4 @@ export const useBookLoanRecordOverdue = ({
       }),
     queryKey: [QUERY_KEY.BOOK_LOAN_RECORD_OVERDUE, { page, size }],
   });
-};
+}

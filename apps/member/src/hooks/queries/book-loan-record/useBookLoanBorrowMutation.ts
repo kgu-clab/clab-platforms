@@ -1,53 +1,52 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 import { postBorrowBook } from '@api/book';
+import { HTTP_ERROR_MESSAGE } from '@constants/api';
 import { QUERY_KEY } from '@constants/key';
+import { ERROR_MESSAGE } from '@constants/message';
 import useToast from '@hooks/common/useToast';
 
 /**
  * 도서 대출을 요청합니다.
  */
-export const useBookLoanBorrowMutation = () => {
+export function useBookLoanBorrowMutation() {
   const queryClient = useQueryClient();
   const toast = useToast();
 
   const bookBorrowMutation = useMutation({
     mutationFn: postBorrowBook,
-    onSuccess: (data, variables) => {
-      if (data) {
+    onSuccess: ({ success, errorMessage }, { bookId, borrowerId }) => {
+      if (success) {
         queryClient.invalidateQueries({
-          queryKey: [QUERY_KEY.BOOK_DETAIL, variables.bookId],
+          queryKey: [QUERY_KEY.BOOK_DETAIL, bookId],
         });
         queryClient.invalidateQueries({
-          queryKey: [
-            QUERY_KEY.BOOK_LOAN_RECORD_CONDITIONS,
-            variables.borrowerId,
-          ],
+          queryKey: [QUERY_KEY.BOOK_LOAN_RECORD_CONDITIONS, bookId],
         });
         queryClient.invalidateQueries({
-          queryKey: [QUERY_KEY.MY_BOOK, variables.borrowerId],
+          queryKey: [QUERY_KEY.MY_BOOK, borrowerId],
         });
         queryClient.invalidateQueries({
-          queryKey: [QUERY_KEY.BOOK_LOAN_RECORD, variables.borrowerId],
+          queryKey: [QUERY_KEY.BOOK_LOAN_RECORD, borrowerId],
         });
         toast({
           state: 'success',
-          message: '성공적으로 도서를 대출했습니다.',
+          message: '해당 도서를 대여 신청했어요.',
         });
-      } else {
+      } else if (errorMessage) {
         toast({
           state: 'error',
-          message: '도서 대출에 실패했습니다.',
+          message: HTTP_ERROR_MESSAGE[errorMessage],
         });
       }
     },
     onError: () => {
       toast({
         state: 'error',
-        message: '도서 대출에 실패했습니다.',
+        message: ERROR_MESSAGE.NETWORK,
       });
     },
   });
 
   return { bookBorrowMutate: bookBorrowMutation.mutate };
-};
+}

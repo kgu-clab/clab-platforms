@@ -2,10 +2,11 @@ import { ClassValue, clsx } from 'clsx';
 import * as entities from 'entities';
 import { twMerge } from 'tailwind-merge';
 
+import type { Bookstore, BookstoreKorean } from '@type/book';
 import type { MembershipStatusType } from '@type/membershipFee';
 import type { SchedulePriority } from '@type/schedule';
 
-export const cn = (...inputs: ClassValue[]) => {
+export const cn = (...inputs: ClassValue[]): string => {
   return twMerge(clsx(inputs));
 };
 
@@ -65,4 +66,50 @@ export function toPriorityText(priority: SchedulePriority) {
     default:
       throw new Error(`Unknown priority: ${priority}`);
   }
+}
+/**
+ * BookStoreKorean 값을 BookStore 값(영문)으로 변환합니다.
+ * @param value 변환할 BookStore 값입니다.
+ * @returns 변환된 BookStore 값을 반환합니다.
+ * @throws {Error} 알 수 없는 BookStore 값일 경우 에러를 throw합니다.
+ */
+export function toBookstore(value: BookstoreKorean): Bookstore {
+  switch (value) {
+    case '교보문고':
+      return 'kyobobook';
+    case '예스24':
+      return 'yes24';
+    case '알라딘':
+      return 'aladin';
+    default:
+      throw new Error(`Unknown BookStore value: ${value}`);
+  }
+}
+/**
+ * 주어진 리뷰 정보를 파싱하여 온라인 서점 별로 링크를 생성합니다.
+ * @param links 링크 배열
+ * @returns 온라인 서점 별로 링크를 생성한 객체
+ */
+export function bookReviewParser(links: string[]) {
+  return links.reduce(
+    (acc, link) => {
+      const key = link.includes('kyobobook')
+        ? 'kyobobook'
+        : link.includes('yes24')
+          ? 'yes24'
+          : link.includes('aladin')
+            ? 'aladin'
+            : undefined;
+      if (!key) return acc;
+      return {
+        ...acc,
+        [key]: link,
+      };
+    },
+    {
+      kyobobook: undefined,
+      yes24: undefined,
+      aladin: undefined,
+    },
+  );
 }

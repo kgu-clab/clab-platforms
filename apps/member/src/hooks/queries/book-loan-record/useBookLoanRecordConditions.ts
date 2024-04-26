@@ -14,13 +14,13 @@ interface UseBookLoanRecordConditionsPrams extends PaginationPramsType {
 /**
  * 도서 대출 내역을 조회합니다.
  */
-export const useBookLoanRecordConditions = ({
+export function useBookLoanRecordConditions({
   bookId,
   borrowerId,
   isReturned,
   page = 0,
   size = 20,
-}: UseBookLoanRecordConditionsPrams) => {
+}: UseBookLoanRecordConditionsPrams) {
   return useSuspenseQuery({
     queryFn: () =>
       getBookLoanRecordConditions({
@@ -30,6 +30,6 @@ export const useBookLoanRecordConditions = ({
         page,
         size,
       }),
-    queryKey: [QUERY_KEY.BOOK_LOAN_RECORD_CONDITIONS, borrowerId, size],
+    queryKey: [QUERY_KEY.BOOK_LOAN_RECORD_CONDITIONS, bookId || borrowerId],
   });
-};
+}

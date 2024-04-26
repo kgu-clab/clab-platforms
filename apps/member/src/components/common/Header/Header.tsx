@@ -1,22 +1,27 @@
 import { Fragment } from 'react';
 import { GrNext } from 'react-icons/gr';
+import { Link } from 'react-router-dom';
 
 interface HeaderProps {
   title: string | string[];
+  path?: string | string[];
   children?: React.ReactNode;
 }
 
-const Header = ({ title, children }: HeaderProps) => {
+const Header = ({ title, path, children }: HeaderProps) => {
   const RenderTitle = () => {
     if (Array.isArray(title)) {
       // 배열일 경우, 제목이 여러 개일 경우
       return (
         <div className="flex items-center text-xl font-bold">
           {title.map((name, index) => (
-            <Fragment key={index}>
-              <span className="cursor-pointer rounded-lg px-2 transition-colors hover:bg-gray-100">
+            <Fragment key={name}>
+              <Link
+                to={path?.[index] || ''}
+                className="rounded-lg px-2 transition-colors hover:bg-gray-100"
+              >
                 {name}
-              </span>
+              </Link>
               {index !== title.length - 1 && <GrNext />}
             </Fragment>
           ))}

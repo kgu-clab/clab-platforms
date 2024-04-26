@@ -35,10 +35,11 @@ export function calculateDDay(date: string): number {
 /**
  * 주어진 날짜를 'YY.MM.DD(dd) HH:mm' 형식으로 포맷합니다.
  *
- * @param {Date|string|number} date - 포맷할 날짜. Date 객체, 문자열 또는 타임스탬프일 수 있습니다.
+ * @param {string | undefined | null} date - 포맷할 날짜. Date 객체, 문자열 또는 타임스탬프일 수 있습니다.
  * @returns {string} 포맷된 날짜 문자열.
  */
-export function formattedDate(date: string | undefined): string {
+export function formattedDate(date: string | undefined | null): string {
+  if (!date) return '-';
   return dayjs(date).format('YY.MM.DD(dd) HH:mm');
 }
 /**
