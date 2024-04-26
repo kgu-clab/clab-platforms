@@ -1,59 +1,57 @@
-import { SyntheticEvent, useState } from 'react';
+import { ComponentPropsWithRef, SyntheticEvent, useState } from 'react';
 
 import { NOT_FOUND_IMG } from '@constants/path';
-import classNames from 'classnames';
+import { cn } from '@utils/string';
 
-interface ImageProps {
-  src?: string;
-  alt: string;
+interface ImageProps extends ComponentPropsWithRef<'img'> {
   width?: string;
   height?: string;
-  className?: string;
-  onClick?: () => void;
   overflow?: boolean;
 }
 
+type Status = 'loading' | 'error' | 'loaded';
+
 const Image = ({
-  src,
-  alt,
   width,
   height,
+  src,
+  overflow,
   className,
   onClick,
-  overflow,
+  ...rest
 }: ImageProps) => {
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(false);
+  const [status, setStatus] = useState<Status>('loading');
 
-  if (!src) src = NOT_FOUND_IMG;
-
-  const _width = width ? width : 'w-full';
-  const _height = height ? height : 'h-full';
+  const _width = width ?? 'w-full';
+  const _height = height ?? 'h-full';
 
   const handleError = (e: SyntheticEvent<HTMLImageElement>) => {
     e.currentTarget.src = NOT_FOUND_IMG;
-    setError(true);
-    setLoading(false);
+    setStatus('error');
   };
 
   return (
     <div
-      className={classNames(_width, _height, {
+      className={cn(_width, _height, {
         'overflow-hidden': overflow,
       })}
+      onClick={onClick}
     >
       <img
-        className={classNames('h-full w-full', className, {
-          'animate-pulse bg-gray-200': loading,
-          'bg-gray-50': error,
-          'cursor-pointer': onClick,
-        })}
-        src={src}
-        alt={alt}
-        onClick={onClick}
-        onLoad={() => setLoading(false)}
+        className={cn(
+          {
+            'animate-pulse bg-gray-200': status === 'loading',
+            'bg-gray-50': status === 'error',
+          },
+          _width,
+          _height,
+          className,
+        )}
+        src={src ?? NOT_FOUND_IMG}
+        onLoad={() => setStatus('loaded')}
         onError={handleError}
         loading="lazy"
+        {...rest}
       />
     </div>
   );
