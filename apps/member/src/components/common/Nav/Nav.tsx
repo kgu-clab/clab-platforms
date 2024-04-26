@@ -13,9 +13,7 @@ const Nav = () => {
   const navigate = useNavigate();
   const { openModal } = useModal();
 
-  const isSelected = (path: string) => {
-    return location.pathname.endsWith(path);
-  };
+  const pathName = location.pathname;
 
   const handleMenubarItemClick = useCallback(
     (path: string) => {
@@ -40,44 +38,44 @@ const Nav = () => {
           </Link>
           <Menubar gap="xl" className="text-sm">
             <MenubarItem
-              selected={isSelected(PATH.MAIN)}
+              selected={pathName === PATH.MAIN}
               onClick={() => handleMenubarItemClick(PATH.MAIN)}
             >
               홈
             </MenubarItem>
             <MenubarItem
-              selected={isSelected(PATH.CALENDER)}
+              selected={pathName.startsWith(PATH.CALENDER)}
               onClick={() => handleMenubarItemClick(PATH.CALENDER)}
             >
               일정
             </MenubarItem>
             <MenubarItem
-              selected={isSelected(PATH.ACTIVITY)}
+              selected={pathName.startsWith(PATH.ACTIVITY)}
               onClick={() => handleMenubarItemClick(PATH.ACTIVITY)}
             >
               활동
             </MenubarItem>
             <MenubarItem
-              selected={isSelected(PATH.COMMUNITY)}
+              selected={pathName.startsWith(PATH.COMMUNITY)}
               onClick={() => handleMenubarItemClick(PATH.COMMUNITY)}
             >
               커뮤니티
             </MenubarItem>
             <MenubarItem
-              selected={isSelected(PATH.LIBRARY)}
+              selected={pathName.startsWith(PATH.LIBRARY)}
               onClick={() => handleMenubarItemClick(PATH.LIBRARY)}
             >
               도서관
             </MenubarItem>
             <MenubarItem
-              selected={isSelected(PATH.SUPPORT)}
+              selected={pathName.startsWith(PATH.SUPPORT)}
               onClick={() => handleMenubarItemClick(PATH.SUPPORT)}
             >
               회비
             </MenubarItem>
             {MODE !== 'production' && (
               <MenubarItem
-                selected={isSelected(PATH.MANAGE)}
+                selected={pathName.startsWith(PATH.MANAGE)}
                 onClick={() => handleMenubarItemClick(PATH.MANAGE)}
               >
                 관리
