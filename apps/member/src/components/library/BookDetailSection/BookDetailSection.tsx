@@ -5,17 +5,19 @@ import { Badge, Button, DetailsList, Grid, Tabs } from '@clab/design-system';
 import Image from '@components/common/Image/Image';
 import Section from '@components/common/Section/Section';
 
+import { BOOK_STORE_URL } from '@constants/path';
 import { SELECT_DEFAULT_OPTION } from '@constants/select';
 import { BOOK_STATE } from '@constants/state';
 import { useBookLoanBorrowMutation } from '@hooks/queries/useBookLoanBorrowMutation';
 import { useMyProfile } from '@hooks/queries/useMyProfile';
 import { createImageUrl } from '@utils/api';
+import { bookReviewParser, toBookstore } from '@utils/string';
 
 import yes24Icon from '@assets/svg/yes24.svg';
 import aladinIcon from '@assets/webp/aladin.webp';
 import kyoboIcon from '@assets/webp/kyobobook.webp';
 
-import type { BookItem } from '@type/book';
+import type { BookItem, BookstoreKorean } from '@type/book';
 
 interface BookDetailSectionProps {
   data: BookItem;
@@ -31,7 +33,7 @@ const options = [
     value: '예스24',
   },
   {
-    icon: <img src={aladinIcon} alt="알라딘" className="size-6 rounded-lg" />,
+    icon: <img src={aladinIcon} alt="알라딘" className="size-6 rounded" />,
     value: '알라딘',
   },
 ] as const;
@@ -39,7 +41,16 @@ const options = [
 const BookDetailSection = ({ data }: BookDetailSectionProps) => {
   const { data: myInfo } = useMyProfile();
   const { bookBorrowMutate } = useBookLoanBorrowMutation();
-  const { id, borrowerId, category, title, author, publisher, imageUrl } = data;
+  const {
+    id,
+    borrowerId,
+    category,
+    title,
+    author,
+    publisher,
+    imageUrl,
+    reviewLinks,
+  } = data;
 
   const handleBorrowClick = useCallback(
     (bookId: number) => {
@@ -50,6 +61,17 @@ const BookDetailSection = ({ data }: BookDetailSectionProps) => {
     },
     [bookBorrowMutate, myInfo.id],
   );
+  /**
+   * 온라인 서점에서 책의 정보를 검색하는 함수입니다.
+   * 서버에 저장된 온라인 서점 URL이 존재할 경우 해당 URL로 이동합니다.
+   * 존재하지 않을 경우, 책 제목을 검색하여 검색 결과를 보여줍니다.
+   */
+  const handleTabsChange = (value: string) => {
+    const bookStore = toBookstore(value as BookstoreKorean);
+    const url = bookReviewParser(reviewLinks);
+    const targetUrl = url[bookStore] || `${BOOK_STORE_URL[bookStore]}${title}`;
+    window.open(targetUrl, '_blank');
+  };
 
   return (
     <Section>
@@ -62,7 +84,7 @@ const BookDetailSection = ({ data }: BookDetailSectionProps) => {
         />
         <div className="flex flex-col justify-between gap-4">
           <div className="space-y-4">
-            <h1 className="break-keep text-2xl font-bold">{title}</h1>
+            <h1 className="break-keep text-2xl font-semibold">{title}</h1>
             <DetailsList>
               <DetailsList.Item label="작가">{author}</DetailsList.Item>
               <DetailsList.Item label="출판사">{publisher}</DetailsList.Item>
@@ -73,13 +95,13 @@ const BookDetailSection = ({ data }: BookDetailSectionProps) => {
                 </Badge>
               </DetailsList.Item>
             </DetailsList>
-            <Tabs value={SELECT_DEFAULT_OPTION} options={options} />
+            <Tabs
+              value={SELECT_DEFAULT_OPTION}
+              options={options}
+              onChange={handleTabsChange}
+            />
           </div>
-          <Button
-            className="w-full"
-            disabled={!!borrowerId}
-            onClick={() => handleBorrowClick(id)}
-          >
+          <Button disabled={!!borrowerId} onClick={() => handleBorrowClick(id)}>
             {borrowerId
               ? '이미 대여된 도서예요! 조금만 기다려주세요'
               : '대여하기'}

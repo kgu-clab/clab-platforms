@@ -4,7 +4,9 @@ import type { IDType } from '@type/api';
 import type { CommunityCategoryType } from '@type/community';
 
 export const NOT_FOUND_IMG = '/not_found.webp';
-
+/**
+ * 페이지 라우팅 경로입니다.
+ */
 export const PATH = {
   ROOT: '',
   MAIN: '/',
@@ -35,7 +37,9 @@ export const PATH = {
   LOGIN: '/login',
   AUTH: '/auth',
 } as const;
-
+/**
+ * 페이지의 URL을 생성하는 함수입니다.
+ */
 export const PATH_FINDER = {
   BLOG_POST: (id: IDType) => createPath(PATH.BLOG, id),
   COMMUNITY_POST: (sort: CommunityCategoryType, id: IDType) =>
@@ -46,4 +50,13 @@ export const PATH_FINDER = {
   ACTIVITY_ASSIGNMENT: (groupId: IDType, id: IDType) =>
     createPath(PATH.ACTIVITY, groupId, id),
   BOOK_DETAIL: (id: number) => createPath(PATH.LIBRARY, id),
+} as const;
+/**
+ * 온라인 서점의 검색 URL입니다.
+ */
+export const BOOK_STORE_URL = {
+  kyobobook: 'https://search.kyobobook.co.kr/search?keyword=',
+  yes24: 'https://www.yes24.com/Product/Search?domain=ALL&query=',
+  aladin:
+    'https://www.aladin.co.kr/search/wsearchresult.aspx?SearchTarget=All&SearchWord=',
 } as const;

@@ -1,3 +1,6 @@
+export type Bookstore = 'kyobobook' | 'yes24' | 'aladin';
+export type BookstoreKorean = '교보문고' | '예스24' | '알라딘';
+
 export interface BookItem {
   id: number;
   borrowerId: string | null;
@@ -7,8 +10,10 @@ export interface BookItem {
   author: string;
   publisher: string;
   imageUrl: string;
+  reviewLinks: Array<string>;
+  dueDate: null;
   createdAt: string;
-  updateTime: string | null;
+  updatedAt: string | null;
 }
 
 export interface BookLoanRecordConditionType {
