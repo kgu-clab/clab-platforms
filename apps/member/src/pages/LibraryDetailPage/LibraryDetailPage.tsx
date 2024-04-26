@@ -6,6 +6,7 @@ import BookDetailSection from '@components/library/BookDetailSection/BookDetailS
 import BookLoanHistorySection from '@components/library/BookLoanHistorySection/BookLoanHistorySection';
 
 import { LIBRARY_MESSAGE } from '@constants/message';
+import { PATH } from '@constants/path';
 import { useBookDetails } from '@hooks/queries/useBookDetails';
 
 const LibraryDetailPage = () => {
@@ -19,9 +20,9 @@ const LibraryDetailPage = () => {
 
   return (
     <Content>
-      <Header title={['도서관', data.title]} />
+      <Header title={['도서관', data.title]} path={[PATH.LIBRARY]} />
       <BookDetailSection data={data} />
-      <BookLoanHistorySection bookId={data.id} />
+      <BookLoanHistorySection id={data.id} />
     </Content>
   );
 };

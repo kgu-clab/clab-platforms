@@ -79,15 +79,11 @@ export async function postReturnBook(body: BookLoanRequestData) {
 /**
  * 도서 연장
  */
-export async function postExtendBook(body: BookLoanRequestData) {
-  const { data } = await server.post<BookLoanRequestData, BaseResponse<number>>(
-    {
-      url: END_POINT.BOOK_LOAN_EXTEND,
-      body,
-    },
-  );
-
-  return data;
+export function postExtendBook(body: BookLoanRequestData) {
+  return server.post<BookLoanRequestData, BaseResponse<number>>({
+    url: END_POINT.BOOK_LOAN_EXTEND,
+    body,
+  });
 }
 /**
  * 도서 대출 내역 조회
@@ -134,7 +130,7 @@ export async function getBookLoanRecordOverdue({
 /**
  * 도서 대출 승인
  */
-export async function patchBookLoanRecordApprove(id: number) {
+export function patchBookLoanRecordApprove(id: number) {
   return server.patch<null, BaseResponse<number>>({
     url: createPath(END_POINT.BOOK_LOAN_RECORD_APPROVE, id),
   });
