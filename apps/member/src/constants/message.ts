@@ -1,5 +1,6 @@
 export const ERROR_MESSAGE = {
   DEFAULT: '오류가 발생했어요. 잠시후에 다시 시도해주세요.',
+  NETWORK: '네트워크 오류가 발생했어요. 잠시후에 다시 시도해주세요.',
   NOT_FOUND: '잘못된 접근이에요.',
   NO_FILE: '파일이 없어요.',
   NO_DATA: '모든 항목을 입력해주세요.',
