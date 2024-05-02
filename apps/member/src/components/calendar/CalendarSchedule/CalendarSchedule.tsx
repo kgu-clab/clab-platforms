@@ -1,7 +1,7 @@
 import { useCallback } from 'react';
 
 import useModal from '@hooks/common/useModal';
-import { formattedDate } from '@utils/date';
+import { formattedDate, now } from '@utils/date';
 import { cn } from '@utils/string';
 import dayjs from 'dayjs';
 
@@ -10,6 +10,8 @@ import type { ScheduleItem } from '@type/schedule';
 interface CalendarScheduleProps extends ScheduleItem {
   day: dayjs.Dayjs;
 }
+
+const today = now();
 
 const CalendarSchedule = ({
   day,
@@ -20,6 +22,7 @@ const CalendarSchedule = ({
 }: CalendarScheduleProps) => {
   const { openModal } = useModal();
   const isDateDiff = dayjs(startDate).diff(endDate, 'd');
+  const isBeforeToday = day.isBefore(today, 'day');
 
   const handleScheduleClick = useCallback(
     (detail: string, start: string, end: string) => {
@@ -56,6 +59,7 @@ const CalendarSchedule = ({
           'rounded-r bg-red-100':
             isDateDiff !== 0 && day.isSame(endDate, 'date'),
         },
+        { 'opacity-50': isBeforeToday },
       )}
       onClick={() => handleScheduleClick(detail, startDate, endDate)}
     >
