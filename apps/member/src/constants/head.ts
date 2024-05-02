@@ -13,6 +13,7 @@ export const TABLE_HEAD = {
     '기능',
   ],
   CALENDAR_SCHEDULE: ['번호', '제목', '시작일', '종료일', '중요도', '기능'],
+  CALENDAR_TABLE: ['날짜', '일정'],
 } as const;
 /**
  * 관리자 페이지에서 기능을 나타내는 상수

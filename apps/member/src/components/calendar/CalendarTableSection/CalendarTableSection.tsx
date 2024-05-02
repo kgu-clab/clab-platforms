@@ -4,6 +4,7 @@ import { Table } from '@clab/design-system';
 
 import { Section } from '@components/common/Section';
 
+import { TABLE_HEAD } from '@constants/head';
 import useModal from '@hooks/common/useModal';
 import { useSchedule } from '@hooks/queries';
 import { formattedDate, formattedDatePeriod } from '@utils/date';
@@ -24,7 +25,7 @@ const CalendarTableSection = () => {
 
   return (
     <Section>
-      <Table head={['날짜', '일정명']} className="table-fixed">
+      <Table head={TABLE_HEAD.CALENDAR_TABLE} className="table-fixed">
         {data.items.map(({ id, title, detail, startDate, endDate }) => (
           <Table.Row
             key={id}
