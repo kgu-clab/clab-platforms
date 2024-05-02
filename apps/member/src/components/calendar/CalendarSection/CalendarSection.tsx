@@ -42,10 +42,15 @@ const CalendarSection = () => {
 
   while (day.isBefore(endDay)) {
     const isToday = day.isSame(today, 'day');
+    const isBeforeToday = day.isBefore(today, 'day');
 
     days.push(
       <td key={day.format('DD-MM-YYYY')} className="h-28 border">
-        <div className="flex h-full flex-col items-end space-y-1">
+        <div
+          className={cn('flex h-full flex-col items-end gap-1', {
+            'bg-gray-50 opacity-60': isBeforeToday,
+          })}
+        >
           <p
             className={cn('m-1 size-5 rounded-full text-center text-sm', {
               'bg-red-500 text-white': isToday,

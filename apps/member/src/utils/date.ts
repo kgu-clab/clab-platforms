@@ -43,6 +43,20 @@ export function formattedDate(date: string | undefined | null): string {
   return dayjs(date).format('YY.MM.DD(dd) HH:mm');
 }
 /**
+ * 주어진 시작일과 종료일을 형식화된 날짜 기간 문자열로 반환합니다.
+ * 시작일과 종료일이 동일한 경우 시작일의 형식화된 날짜를 반환합니다.
+ * 시작일과 종료일이 다른 경우 시작일과 종료일을 형식화된 날짜로 연결한 문자열을 반환합니다.
+ * @param startDate 시작일을 나타내는 문자열
+ * @param endDate 종료일을 나타내는 문자열
+ * @returns 형식화된 날짜 기간 문자열
+ */
+export function formattedDatePeriod(startDate: string, endDate: string) {
+  return startDate === endDate
+    ? formattedDate(startDate)
+    : `${formattedDate(startDate)} ~ ${formattedDate(endDate)}`;
+}
+
+/**
  * 주어진 초를 'mm:ss' 형식으로 포맷합니다.
  *
  * @param {number} seconds - 초 단위의 시간.
