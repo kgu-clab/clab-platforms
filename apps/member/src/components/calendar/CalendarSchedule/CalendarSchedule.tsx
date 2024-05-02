@@ -1,7 +1,7 @@
 import { useCallback } from 'react';
 
 import useModal from '@hooks/common/useModal';
-import { formattedDate, now } from '@utils/date';
+import { formattedDatePeriod, now } from '@utils/date';
 import { cn } from '@utils/string';
 import dayjs from 'dayjs';
 
@@ -25,16 +25,10 @@ const CalendarSchedule = ({
   const isBeforeToday = day.isBefore(today, 'day');
 
   const handleScheduleClick = useCallback(
-    (detail: string, start: string, end: string) => {
-      // 시작일과 종료일이 같은 경우, 종료일은 표시하지 않는다.
-      const date =
-        start === end
-          ? `${formattedDate(start)}`
-          : `${formattedDate(start)} ~ ${formattedDate(end)}`;
-
+    (detail: string, startDate: string, endDate: string) => {
       openModal({
         title: '📆 일정',
-        content: `일시: ${date}\n내용: ${detail}`,
+        content: `일시: ${formattedDatePeriod(startDate, endDate)}\n내용: ${detail}`,
       });
     },
     [openModal],
