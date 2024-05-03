@@ -7,7 +7,7 @@ import { useBooks } from '@hooks/queries/useBooks';
 import BookCard from '../BookCard/BookCard';
 
 const LibraryBooksSection = () => {
-  const { page, size, handlePageChange } = usePagination();
+  const { page, size, handlePageChange } = usePagination(16);
 
   const { data } = useBooks(page, size);
 
