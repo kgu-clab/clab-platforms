@@ -1,6 +1,8 @@
 export const BOOK_STATE = {
-  BORROWED: '대여중',
+  WAIT: '대기',
   AVAILABLE: '대여가능',
+  BORROWED: '대여중',
+  RETURN: '반납완료',
 } as const;
 
 export const DATE_FORMAT = {
