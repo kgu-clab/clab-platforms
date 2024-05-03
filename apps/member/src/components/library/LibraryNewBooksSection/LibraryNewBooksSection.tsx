@@ -4,7 +4,7 @@ import Image from '@components/common/Image/Image';
 import Section from '@components/common/Section/Section';
 
 import { PATH_FINDER } from '@constants/path';
-import { useBooks } from '@hooks/queries/useBooks';
+import { useBooks } from '@hooks/queries/book';
 
 const LibraryNewBooksSection = () => {
   const { data } = useBooks(0, 4);

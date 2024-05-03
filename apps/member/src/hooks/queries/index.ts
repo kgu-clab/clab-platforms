@@ -36,3 +36,4 @@ export * from './useScheduleDeleteMutation';
 export * from './useUserInfoMutation';
 export * from './useActivityGroupMemberMy';
 export * from './book-loan-record';
+export * from './book';

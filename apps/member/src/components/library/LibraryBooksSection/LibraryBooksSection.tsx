@@ -2,7 +2,7 @@ import Pagination from '@components/common/Pagination/Pagination';
 import { Section } from '@components/common/Section';
 
 import { usePagination } from '@hooks/common/usePagination';
-import { useBooks } from '@hooks/queries/useBooks';
+import { useBooks } from '@hooks/queries/book';
 
 import BookCard from '../BookCard/BookCard';
 
