@@ -1,14 +1,14 @@
-import { createImageUrl } from '@utils/api';
 import { formattedDate } from '@utils/date';
-import { getProfileRingStyle } from '@utils/style';
 import classNames from 'classnames';
 
-import Image from '../Image/Image';
+import type { RoleLevel } from '@type/member';
+
+import Avatar from '../Avatar/Avatar';
 
 interface CommentProps {
   writerId: string | null;
   writerName: string;
-  writerRoleLevel: number | null;
+  writerRoleLevel: RoleLevel;
   writerImageUrl: string | null;
   createdAt: string;
   children: React.ReactNode;
@@ -34,16 +34,7 @@ const Comment = ({
         'border-l pl-5 last:border-l-white': isReply,
       })}
     >
-      <Image
-        width="w-10"
-        height="h-10"
-        src={createImageUrl(writerImageUrl)}
-        alt={writerName}
-        className={classNames(
-          'rounded-full ring ring-offset-1',
-          getProfileRingStyle(writerRoleLevel),
-        )}
-      />
+      <Avatar src={writerImageUrl} roleLevel={writerRoleLevel} />
       <div className="ml-3 w-full text-sm">
         <p className="font-semibold">{`${writerName} ${writerId ? `(${writerId})` : ''}`}</p>
         <p className="whitespace-pre-wrap">{children}</p>
