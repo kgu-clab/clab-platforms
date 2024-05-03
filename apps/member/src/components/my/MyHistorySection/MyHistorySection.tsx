@@ -1,10 +1,9 @@
 import { useCallback } from 'react';
 
-import { Badge } from '@clab/design-system';
-
 import EmptyBox from '@components/common/EmptyBox/EmptyBox';
 import ListButton from '@components/common/ListButton/ListButton';
 import Section from '@components/common/Section/Section';
+import BookLoanConditionStatusBadge from '@components/library/BookLoanConditionStatusBadge/BookLoanConditionStatusBadge';
 
 import { MY_MESSAGE } from '@constants/message';
 import { PATH_FINDER } from '@constants/path';
@@ -67,14 +66,17 @@ const MyHistorySection = ({ title, data }: MyHistorySectionProps) => {
               return (
                 <ListButton key={index} to={PATH_FINDER.BOOK_DETAIL(bookId)}>
                   <p className="grow space-x-2 truncate pr-4">
-                    <Badge color={returnedAt ? 'green' : 'yellow'}>
-                      {returnedAt ? '반납완료' : '대출중'}
-                    </Badge>
+                    <BookLoanConditionStatusBadge
+                      borrowedAt={borrowedAt}
+                      returnedAt={returnedAt}
+                    />
                     <span>{bookTitle}</span>
                   </p>
-                  <p className="text-clab-main-light">
-                    {toYYMMDD(borrowedAt ?? '')}
-                  </p>
+                  {returnedAt && (
+                    <p className="text-clab-main-light">
+                      {toYYMMDD(returnedAt)}
+                    </p>
+                  )}
                 </ListButton>
               );
             }
