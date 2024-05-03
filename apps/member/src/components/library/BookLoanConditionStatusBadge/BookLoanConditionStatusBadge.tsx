@@ -1,5 +1,7 @@
 import { Badge, BadgeColorType } from '@clab/design-system';
 
+import { BOOK_STATE } from '@constants/state';
+
 import type { BookLoanRecordConditionType } from '@type/book';
 
 interface BookLoanConditionStatusBadgeProps
@@ -9,7 +11,11 @@ const BookLoanConditionStatusBadge = ({
   borrowedAt,
   returnedAt,
 }: BookLoanConditionStatusBadgeProps) => {
-  const text = !borrowedAt ? '대기' : !returnedAt ? '대여중' : '반납완료';
+  const text = !borrowedAt
+    ? BOOK_STATE.WAIT
+    : !returnedAt
+      ? BOOK_STATE.BORROWED
+      : BOOK_STATE.RETURN;
   const color: BadgeColorType = !borrowedAt
     ? 'red'
     : !returnedAt

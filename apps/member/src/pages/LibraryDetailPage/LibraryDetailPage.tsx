@@ -7,7 +7,7 @@ import BookLoanHistorySection from '@components/library/BookLoanHistorySection/B
 
 import { LIBRARY_MESSAGE } from '@constants/message';
 import { PATH } from '@constants/path';
-import { useBookDetails } from '@hooks/queries/useBookDetails';
+import { useBookDetails } from '@hooks/queries/book';
 
 const LibraryDetailPage = () => {
   const { id } = useParams<{ id: string }>();
