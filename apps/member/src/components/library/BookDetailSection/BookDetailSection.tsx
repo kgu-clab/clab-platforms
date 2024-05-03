@@ -76,10 +76,11 @@ const BookDetailSection = ({ data }: BookDetailSectionProps) => {
     <Section>
       <Grid gap="lg" className="lg:grid-cols-2">
         <Image
-          width="p-4"
           src={createImageUrl(imageUrl)}
           alt={title}
-          className="object-cover drop-shadow-lg"
+          width="w-[420px]"
+          height="h-[520px]"
+          className="object-cover p-4 drop-shadow-lg"
         />
         <div className="flex flex-col justify-between gap-4">
           <div className="space-y-4">
@@ -94,17 +95,16 @@ const BookDetailSection = ({ data }: BookDetailSectionProps) => {
                 </Badge>
               </DetailsList.Item>
             </DetailsList>
-            <Tabs
-              value={SELECT_DEFAULT_OPTION}
-              options={options}
-              onChange={handleTabsChange}
-            />
+            <div>
+              <label className="mb-1 ml-1 text-xs">온라인 서점 바로가기</label>
+              <Tabs
+                value={SELECT_DEFAULT_OPTION}
+                options={options}
+                onChange={handleTabsChange}
+              />
+            </div>
           </div>
-          <Button disabled={!!borrowerId} onClick={() => handleBorrowClick(id)}>
-            {borrowerId
-              ? '이미 대여된 도서예요! 조금만 기다려주세요'
-              : '대여하기'}
-          </Button>
+          <Button onClick={() => handleBorrowClick(id)}>대여 신청하기</Button>
         </div>
       </Grid>
     </Section>
