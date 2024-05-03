@@ -4,7 +4,7 @@ import Image from '@components/common/Image/Image';
 
 import { PATH_FINDER } from '@constants/path';
 import { BOOK_STATE } from '@constants/state';
-import classNames from 'classnames';
+import { cn } from '@utils/string';
 
 import type { BookItem } from '@type/book';
 
@@ -28,29 +28,31 @@ const BookCard = ({
       <Image
         src={imageUrl}
         alt={title}
-        width="w-full"
         height="h-[200px]"
         className="border-b object-cover transition-transform ease-in-out group-hover:scale-110"
         overflow
       />
       <div className="flex grow flex-col justify-between p-2 text-sm">
-        <div>
-          <p className="font-semibold group-hover:underline">{title}</p>
-          <p className="text-gray-500">
-            {author} | {publisher}
+        <div className="break-keep">
+          <p className="line-clamp-2 font-semibold group-hover:underline">
+            {title}
           </p>
+          <div className="text-gray-500">
+            <p className="line-clamp-1">{author}</p>
+            <p className="line-clamp-1">{publisher}</p>
+          </div>
         </div>
         <div className="mt-2 flex items-center gap-1">
           <span
-            className={classNames(
-              'h-1.5 w-1.5 rounded-full',
-              borrowerId ? 'bg-green-600' : 'bg-pink-600',
+            className={cn(
+              'size-1.5 rounded-full',
+              borrowerId ? 'bg-pink-600' : 'bg-green-600',
             )}
           />
           <span
-            className={classNames(
+            className={cn(
               'text-xs',
-              borrowerId ? 'text-green-600' : 'text-pink-600',
+              borrowerId ? 'text-pink-600' : 'text-green-600',
             )}
           >
             {borrowerId ? BOOK_STATE.BORROWED : BOOK_STATE.AVAILABLE}
