@@ -6,9 +6,11 @@ import Section from '@components/common/Section/Section';
 import CommunityBoardPost from '@components/community/CommunityBoardPost/CommunityBoardPost';
 import CommunityHirePost from '@components/community/CommunityHirePost/CommunityHirePost';
 import CommunityNewsPost from '@components/community/CommunityNewsPost/CommunityNewsPost';
+import CommunityWriteButton from '@components/community/CommunityWriteButton/CommunityWriteButton';
 import PostCommentSection from '@components/community/PostCommentSection/PostCommentSection';
 
 import { ERROR_MESSAGE } from '@constants/message';
+import { PATH, PATH_FINDER, PATH_NAME } from '@constants/path';
 import { usePosts } from '@hooks/queries/usePosts';
 import { categoryToTitle, isCommunityCategoryType } from '@utils/community';
 
@@ -39,7 +41,12 @@ const CommunityPostPage = () => {
 
   return (
     <Content>
-      <Header title={['커뮤니티', categoryToTitle(type)]} />
+      <Header
+        title={[PATH_NAME.COMMUNITY, categoryToTitle(type), data.title]}
+        path={[PATH.COMMUNITY, PATH_FINDER.COMMUNITY_DETAIL(type)]}
+      >
+        <CommunityWriteButton />
+      </Header>
       <Section>{renderPost}</Section>
       {'writerRoleLevel' in data && <PostCommentSection id={id} />}
     </Content>

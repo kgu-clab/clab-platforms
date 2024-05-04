@@ -1,7 +1,4 @@
 import { Suspense } from 'react';
-import { useNavigate } from 'react-router-dom';
-
-import { Button } from '@clab/design-system';
 
 import Content from '@components/common/Content/Content';
 import Header from '@components/common/Header/Header';
@@ -14,19 +11,16 @@ import {
   QnABoard,
 } from '@components/community/Board';
 import { BoardSection } from '@components/community/BoardSection';
-import CommunityBoardCollectSection from '@components/community/CommunityBoardCollectSection/CommunityBoardCollectSection';
+import { CommunityBoardCollectSection } from '@components/community/CommunityBoardCollectSection';
+import CommunityWriteButton from '@components/community/CommunityWriteButton/CommunityWriteButton';
 
-import { PATH } from '@constants/path';
+import { PATH_NAME } from '@constants/path';
 
 const CommunityPage = () => {
-  const navigate = useNavigate();
-
   return (
     <Content>
-      <Header title={'커뮤니티'}>
-        <Button size="sm" onClick={() => navigate(PATH.COMMUNITY_WRITE)}>
-          글쓰기
-        </Button>
+      <Header title={PATH_NAME.COMMUNITY}>
+        <CommunityWriteButton />
       </Header>
       <BoardSection>
         <Suspense>

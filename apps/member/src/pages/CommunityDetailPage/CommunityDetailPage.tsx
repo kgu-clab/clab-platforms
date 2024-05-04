@@ -7,11 +7,12 @@ import Content from '@components/common/Content/Content';
 import Header from '@components/common/Header/Header';
 import Pagination from '@components/common/Pagination/Pagination';
 import Section from '@components/common/Section/Section';
+import CommunityWriteButton from '@components/community/CommunityWriteButton/CommunityWriteButton';
 
 import { SERVICE_NAME } from '@constants/environment';
 import { TABLE_HEAD } from '@constants/head';
-import { COMMUNITY_MESSAGE } from '@constants/message';
-import { PATH_FINDER } from '@constants/path';
+import { COMMUNITY_MESSAGE, ERROR_MESSAGE } from '@constants/message';
+import { PATH, PATH_FINDER, PATH_NAME } from '@constants/path';
 import { usePagination } from '@hooks/common/usePagination';
 import { useBoardsList } from '@hooks/queries/useBoardsList';
 import { categoryToTitle, isCommunityCategoryType } from '@utils/community';
@@ -24,7 +25,7 @@ const CommunityDetailPage = () => {
   const { type } = useParams<{ type: CommunityCategoryType }>();
 
   if (!type || !isCommunityCategoryType(type)) {
-    throw new Error('잘못된 접근입니다.');
+    throw new Error(ERROR_MESSAGE.NOT_FOUND);
   }
 
   const navigate = useNavigate();
@@ -40,11 +41,14 @@ const CommunityDetailPage = () => {
 
   return (
     <Content>
-      <Header title={['커뮤니티', categoryToTitle(type)]}>
+      <Header
+        title={[PATH_NAME.COMMUNITY, categoryToTitle(type)]}
+        path={[PATH.COMMUNITY]}
+      >
         <p>
-          총 <span className="font-semibold">{data.totalItems}개</span>의
-          게시글이 있어요
+          총 <b>{data.totalItems}개</b>의 게시글이 있어요
         </p>
+        <CommunityWriteButton />
       </Header>
       <Section className="space-y-2">
         <Table head={TABLE_HEAD.COMMUNITY_DETAIL}>
