@@ -42,6 +42,8 @@ export const PATH = {
  */
 export const PATH_FINDER = {
   BLOG_POST: (id: IDType) => createPath(PATH.BLOG, id),
+  COMMUNITY_DETAIL: (type: CommunityCategoryType) =>
+    createPath(PATH.COMMUNITY, type),
   COMMUNITY_POST: (sort: CommunityCategoryType, id: IDType) =>
     createPath(PATH.COMMUNITY, sort, id),
   LIBRARY_DETAIL: (id: IDType) => createPath(PATH.LIBRARY, id),
@@ -50,6 +52,12 @@ export const PATH_FINDER = {
   ACTIVITY_ASSIGNMENT: (groupId: IDType, id: IDType) =>
     createPath(PATH.ACTIVITY, groupId, id),
   BOOK_DETAIL: (id: number) => createPath(PATH.LIBRARY, id),
+} as const;
+/**
+ * 페이지의 이름입니다.
+ */
+export const PATH_NAME = {
+  COMMUNITY: '커뮤니티',
 } as const;
 /**
  * 온라인 서점의 검색 URL입니다.
