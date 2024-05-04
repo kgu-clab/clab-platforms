@@ -1,4 +1,5 @@
-import { PostItem } from './post';
+import type { RoleLevel } from './member';
+import type { PostItem } from './post';
 
 export type CommunityCategoryType =
   | 'notice'
@@ -28,7 +29,7 @@ export interface CommunityWriteItem {
 }
 
 export interface CommunityPostDetailItem extends PostItem {
-  writerRoleLevel: number | null; // 익명일 경우 null
+  writerRoleLevel: RoleLevel; // 익명일 경우 null
   writerImageUrl: string | null; // 기본 사진일 경우 null
   content: string;
   likes: number;

@@ -47,21 +47,24 @@ const SupportHistorySection = ({
     (membership: MembershipFeeType) => {
       const status: MembershipStatusType[] = ['PENDING', 'REJECTED']; // 해당 상태일 경우 승인 처리가 가능합니다.
       const isCantApproveStatus = status.includes(membership.status);
-      const accept = myProfile.roleLevel >= 3 && {
-        text: isCantApproveStatus ? '승인' : '반려',
-        onClick: () => {
-          membershipFeeModifyMutate({
-            id: membership.id,
-            body: {
-              status: isCantApproveStatus ? 'APPROVED' : 'REJECTED',
-            },
-          });
-        },
-      };
+      const accept =
+        myProfile.roleLevel! >= 3
+          ? {
+              text: isCantApproveStatus ? '승인' : '반려',
+              onClick: () => {
+                membershipFeeModifyMutate({
+                  id: membership.id,
+                  body: {
+                    status: isCantApproveStatus ? 'APPROVED' : 'REJECTED',
+                  },
+                });
+              },
+            }
+          : undefined;
       openModal({
         title: '회비 상세 내역',
         content: <MembershipInfoModal data={membership} />,
-        accept: accept || undefined,
+        accept,
       });
     },
     [membershipFeeModifyMutate, myProfile.roleLevel, openModal],
