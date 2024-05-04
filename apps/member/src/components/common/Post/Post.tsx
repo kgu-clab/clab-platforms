@@ -9,16 +9,16 @@ import type { RoleLevel } from '@type/member';
 import Avatar from '../Avatar/Avatar';
 import Share from '../Share/Share';
 
+interface Props extends StrictPropsWithChildren {
+  className?: string;
+}
+
 interface PostHeaderProps {
   title: string;
   createdAt: string;
   src?: string | null;
   writer?: string;
   roleLevel?: RoleLevel;
-}
-
-interface Props extends StrictPropsWithChildren {
-  className?: string;
 }
 
 const Post = ({ className, children }: Props) => {
@@ -53,7 +53,7 @@ const PostHead = ({
 const PostBody = ({ className, children }: Props) => {
   return (
     <div className={cn('whitespace-pre-wrap break-words', className)}>
-      {typeof children === 'string' ? toDecodeHTMLEntities(children) : children}
+      {toDecodeHTMLEntities(children as string)}
     </div>
   );
 };

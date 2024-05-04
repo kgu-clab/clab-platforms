@@ -1,4 +1,4 @@
-import { Fragment } from 'react';
+import React from 'react';
 import { GrNext } from 'react-icons/gr';
 import { Link } from 'react-router-dom';
 
@@ -9,33 +9,26 @@ interface HeaderProps {
 }
 
 const Header = ({ title, path, children }: HeaderProps) => {
-  const RenderTitle = () => {
-    if (Array.isArray(title)) {
-      // 배열일 경우, 제목이 여러 개일 경우
-      return (
-        <div className="flex items-center text-xl font-bold">
-          {title.map((name, index) => (
-            <Fragment key={name}>
-              <Link
-                to={path?.[index] || ''}
-                className="rounded-lg px-2 transition-colors hover:bg-gray-100"
-              >
-                {name}
-              </Link>
-              {index !== title.length - 1 && <GrNext />}
-            </Fragment>
-          ))}
-        </div>
-      );
-    } else {
-      // 제목이 하나일 경우
-      return <h1 className="px-2 text-xl font-bold">{title}</h1>;
-    }
-  };
+  const titles = Array.isArray(title) ? title : [title];
+  const paths = Array.isArray(path) ? path : [path];
 
   return (
     <div className="flex items-center justify-between rounded-lg border bg-white px-2 py-4">
-      <RenderTitle />
+      <div className="flex items-center text-xl font-bold">
+        {titles.map((name, index) => (
+          <React.Fragment key={name + index}>
+            <Link
+              to={paths[index] ?? ''}
+              className="rounded-lg px-2 transition-colors hover:bg-gray-100"
+            >
+              {name}
+            </Link>
+            {index !== titles.length - 1 && (
+              <GrNext className="text-gray-500" />
+            )}
+          </React.Fragment>
+        ))}
+      </div>
       <div className="flex items-center gap-4 pr-2">{children}</div>
     </div>
   );

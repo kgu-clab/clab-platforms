@@ -4,7 +4,7 @@ import type {
   CommunityCategoryType,
 } from '@type/community';
 
-const CommunityCategory: CommunityCategoryType[] = [
+const COMMUNITY_CATEGORY: CommunityCategoryType[] = [
   'notice',
   'free',
   'qna',
@@ -13,7 +13,6 @@ const CommunityCategory: CommunityCategoryType[] = [
   'hire',
   'organization',
 ] as const;
-
 /**
  * 주어진 커뮤니티 카테고리에 해당하는 한국어 제목을 반환합니다.
  *
@@ -24,26 +23,22 @@ const CommunityCategory: CommunityCategoryType[] = [
 export function categoryToTitle(
   category: CommunityCategoryType,
 ): CommunityCategoryKorType {
-  switch (category) {
-    case 'notice':
-      return '공지사항';
-    case 'free':
-      return '자유';
-    case 'qna':
-      return 'QnA';
-    case 'graduated':
-      return '졸업생';
-    case 'news':
-      return 'IT 뉴스';
-    case 'hire':
-      return '채용 정보';
-    case 'organization':
-      return '소식';
-    default:
-      throw new Error('Invalid title');
-  }
-}
+  const categoryMap: Record<CommunityCategoryType, CommunityCategoryKorType> = {
+    notice: '공지사항',
+    free: '자유',
+    qna: 'QnA',
+    graduated: '졸업생',
+    news: 'IT 뉴스',
+    hire: '채용 정보',
+    organization: '소식',
+  };
 
+  if (category in categoryMap) {
+    return categoryMap[category];
+  }
+
+  throw new Error(`Invalid category: ${category}`);
+}
 /**
  * 주어진 한국어 제목에 해당하는 커뮤니티 카테고리를 반환합니다.
  *
@@ -54,26 +49,25 @@ export function categoryToTitle(
 export function titleToCategory(
   title: CommunityCategoryKorType,
 ): CommunityCategoryType {
-  switch (title) {
-    case '공지사항':
-      return 'notice';
-    case '자유':
-      return 'free';
-    case 'QnA':
-      return 'qna';
-    case '졸업생':
-      return 'graduated';
-    case 'IT 뉴스':
-      return 'news';
-    case '채용 정보':
-      return 'hire';
-    case '소식':
-      return 'organization';
-    default:
-      throw new Error('Invalid title');
-  }
-}
+  const categoryKorMap: Record<
+    CommunityCategoryKorType,
+    CommunityCategoryType
+  > = {
+    공지사항: 'notice',
+    자유: 'free',
+    QnA: 'qna',
+    졸업생: 'graduated',
+    'IT 뉴스': 'news',
+    '채용 정보': 'hire',
+    소식: 'organization',
+  };
 
+  if (title in categoryKorMap) {
+    return categoryKorMap[title];
+  }
+
+  throw new Error(`Invalid title: ${title}`);
+}
 /**
  * 주어진 문자열이 유효한 커뮤니티 카테고리 타입인지 확인합니다.
  *
@@ -83,6 +77,5 @@ export function titleToCategory(
 export function isCommunityCategoryType(
   value?: string,
 ): value is CommunityCategoryType {
-  if (!value) return false;
-  return CommunityCategory.includes(value as CommunityCategoryType);
+  return !!value && COMMUNITY_CATEGORY.includes(value as CommunityCategoryType);
 }
