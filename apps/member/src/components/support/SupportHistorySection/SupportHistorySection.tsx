@@ -13,6 +13,7 @@ import { usePagination } from '@hooks/common/usePagination';
 import { useMembershipFee, useMyProfile } from '@hooks/queries';
 import { useMembershipFeeModifyMutation } from '@hooks/queries/useMembershipFeeModifyMutation';
 import { formattedDate } from '@utils/date';
+import { formatMemberName } from '@utils/string';
 
 import type {
   MembershipFeeType,
@@ -89,7 +90,7 @@ const SupportHistorySection = ({
               </Table.Cell>
               <Table.Cell> {membership.category}</Table.Cell>
               <Table.Cell>
-                {membership.memberName} ({membership.memberId})
+                {formatMemberName(membership.memberName, membership.memberId)}
               </Table.Cell>
               <Table.Cell>{formattedDate(membership.createdAt)}</Table.Cell>
             </Table.Row>
