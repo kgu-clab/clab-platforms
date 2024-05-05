@@ -4,7 +4,7 @@ import { patchBoards } from '@api/board';
 import { QUERY_KEY } from '@constants/key';
 import useToast from '@hooks/common/useToast';
 
-const useBoardModifyMutation = () => {
+export const useBoardModifyMutation = () => {
   const queryClient = useQueryClient();
   const toast = useToast();
 
@@ -29,5 +29,3 @@ const useBoardModifyMutation = () => {
 
   return { boardModifyMutate: boardModifyMutation.mutate };
 };
-
-export default useBoardModifyMutation;
