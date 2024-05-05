@@ -17,8 +17,6 @@ export * from './useBoardWriteMutation';
 export * from './useBoardDeleteMutation';
 export * from './useBoards';
 export * from './useBoardsList';
-export * from './useCommentList';
-export * from './useCommentWriteMutation';
 export * from './useHire';
 export * from './useMembershipFee';
 export * from './useMembershipFeeMutation';

@@ -32,11 +32,7 @@ export const getMyComments = async (page: number, size: number) => {
 /**
  * 댓글 목록 조회
  */
-export const getCommentList = async (
-  id: string,
-  page: number,
-  size: number,
-) => {
+export const getComments = async (id: string, page: number, size: number) => {
   const params = { id, page, size };
   const { data } = await server.get<ResponsePagination<CommentListItem>>({
     url: createCommonPagination(END_POINT.COMMENTS(id), params),
@@ -47,23 +43,18 @@ export const getCommentList = async (
 /**
  * 댓글 작성
  */
-export const postCommentWrite = async ({
+export const postCommentWrite = ({
   parentId,
   boardId,
   body,
 }: PostCommentWriteParams) => {
-  const { data } = await server.post<
-    CommentWriteRequestData,
-    BaseResponse<number>
-  >({
+  return server.post<CommentWriteRequestData, BaseResponse<number>>({
     url: createPath(
       END_POINT.COMMENTS(boardId),
       parentId && `?parentId=${parentId}`,
     ),
     body,
   });
-
-  return data;
 };
 /**
  * 댓글 삭제

@@ -4,14 +4,14 @@ import Comment from '@components/common/Comment/Comment';
 import CommentInput from '@components/common/CommentInput/CommentInput';
 import Section from '@components/common/Section/Section';
 
-import { useCommentList } from '@hooks/queries/useCommentList';
+import { useComments } from '@hooks/queries';
 
 interface PostCommentSectionProps {
   id: string;
 }
 
 const PostCommentSection = ({ id }: PostCommentSectionProps) => {
-  const { data } = useCommentList(id);
+  const { data } = useComments(id);
 
   const [comment, setComment] = useState<string>('');
   const [reComment, setReComment] = useState<string[]>([]);
