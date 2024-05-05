@@ -1,28 +1,23 @@
 import Avatar from '@components/common/Avatar/Avatar';
 import Panel from '@components/common/Panel/Panel';
 
+import { useMyProfile } from '@hooks/queries';
 import { calculateDDay } from '@utils/date';
 import { getRandomInt } from '@utils/math';
 
-import type { MemberProfileType } from '@type/member';
-
-const tips = [
+const TIPS = [
   '오늘은 맛집 게시글을 작성하는건 어때요?',
   '오늘은 어떤 책을 읽으셨나요?',
   '오늘은 어떤 활동을 하셨나요?',
   '후배들을 위한 조언을 남겨보세요!',
   '오늘은 어떤 일을 하셨나요?',
   '학교 주변 맛집을 추천해주세요!',
-];
+] as const;
 
-interface ProfilePanelProps extends MemberProfileType {}
+const ProfilePanel = () => {
+  const { data } = useMyProfile();
+  const { name, imageUrl, roleLevel, createdAt } = data;
 
-const ProfilePanel = ({
-  imageUrl,
-  name,
-  roleLevel,
-  createdAt,
-}: ProfilePanelProps) => {
   return (
     <Panel>
       <Panel.Body>
@@ -38,7 +33,7 @@ const ProfilePanel = ({
           </div>
         </div>
         <p className="mt-4 rounded-md bg-gray-100 py-1 text-center text-xs font-semibold">
-          &quot;{tips[getRandomInt(tips.length - 1)]}&quot;
+          &quot;{TIPS[getRandomInt(TIPS.length - 1)]}&quot;
         </p>
       </Panel.Body>
     </Panel>
