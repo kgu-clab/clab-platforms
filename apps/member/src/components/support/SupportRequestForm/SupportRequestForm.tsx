@@ -1,4 +1,4 @@
-import { ChangeEvent, FormEvent, useCallback, useState } from 'react';
+import { useEffect } from 'react';
 import { FcAnswers, FcMultipleDevices, FcTemplate } from 'react-icons/fc';
 
 import { Button, Checkbox, Input, Tabs } from '@clab/design-system';
@@ -9,11 +9,12 @@ import Uploader from '@components/common/Uploader/Uploader';
 
 import { SELECT_DEFAULT_OPTION } from '@constants/select';
 import useToast from '@hooks/common/useToast';
+import { useSupportRequestForm } from '@hooks/useSupportRequestForm';
 import { formatComma } from '@utils/math';
 
 import type { SupportRequestDataType } from '@type/support';
 
-const tabsOptions = [
+const TABS_OPTIONS = [
   {
     icon: <FcTemplate size={32} />,
     value: '도서',
@@ -26,84 +27,43 @@ const tabsOptions = [
     icon: <FcAnswers size={32} />,
     value: '기타',
   },
-];
+] as const;
 
 interface SupportRequestFormProps {
   isPending: boolean;
+  isSuccess: boolean;
   onSubmit: (data: SupportRequestDataType) => void;
 }
 
 const SupportRequestForm = ({
   isPending,
+  isSuccess,
   onSubmit,
 }: SupportRequestFormProps) => {
   const toast = useToast();
-  const [checkList, setCheckList] = useState<boolean[]>([false, false, false]);
-  const [formData, setFormData] = useState<SupportRequestDataType>({
-    category: tabsOptions[0].value,
-    amount: 0,
-    content: '',
-    account: '',
-    file: null,
-  });
+  const {
+    formData,
+    checkList,
+    handleCheckboxChange,
+    handleFileAccepted,
+    handleInputChange,
+    handleTabsChange,
+    resetFormData,
+  } = useSupportRequestForm();
 
-  const { category, amount, account, content, file } = formData;
-
-  const checkSubmitValidation =
+  const { category, amount, account, content } = formData;
+  const validation =
     !checkList.includes(false) && // 체크박스가 모두 체크되어 있을 경우
-    category !== SELECT_DEFAULT_OPTION && // 분류가 기본값이 아닐 경우
-    amount > 0 && // 금액이 0보다 클 경우
-    content.length !== 0 && // 사유가 작성되어 있을 경우
-    account.length !== 0 && // 계좌번호가 작성되어 있을 경우
-    file; // 파일이 첨부되어 있을 경우
-  /**
-   * 입력값이 변경될 때마다 상태를 업데이트합니다.
-   */
-  const handleInputChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: name === 'amount' ? parseFloat(value.replace(/,/g, '')) : value,
-    }));
-  }, []);
-  /**
-   * 분류 선택값이 변경될 때마다 상태를 업데이트합니다.
-   */
-  const handleTabsChange = useCallback((value: string) => {
-    setFormData((prev) => ({
-      ...prev,
-      category: value,
-    }));
-  }, []);
-  /**
-   * 파일이 첨부될 때마다 상태를 업데이트합니다.
-   */
-  const handleFileAccepted = useCallback((file: File | null) => {
-    setFormData((prev) => ({
-      ...prev,
-      file,
-    }));
-  }, []);
-  /**
-   * 체크박스가 변경될 때마다 상태를 업데이트합니다.
-   */
-  const handleCheckboxChange = (index: number) => {
-    setCheckList((prev) => {
-      const next = [...prev];
-      next[index] = !prev[index];
-      return next;
-    });
-  };
-  /**
-   * 폼을 제출할 때 실행되는 이벤트입니다.
-   */
-  const handleOnSubmit = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    if (isPending) {
-      return;
-    }
+    formData.category !== SELECT_DEFAULT_OPTION && // 분류가 기본값이 아닐 경우
+    formData.amount > 0 && // 금액이 0보다 클 경우
+    formData.content.length !== 0 && // 사유가 작성되어 있을 경우
+    formData.account.length !== 0 && // 계좌번호가 작성되어 있을 경우
+    formData.file; // 파일이 첨부되어 있을 경우
 
-    if (!checkSubmitValidation) {
+  const handleOnSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (isPending) return;
+    if (!validation) {
       return toast({
         state: 'error',
         message: '모든 항목을 입력해주세요',
@@ -112,9 +72,19 @@ const SupportRequestForm = ({
     onSubmit(formData);
   };
 
+  useEffect(() => {
+    if (isSuccess) {
+      resetFormData();
+    }
+  }, [isSuccess, resetFormData]);
+
   return (
     <form onSubmit={handleOnSubmit} className="space-y-4">
-      <Tabs options={tabsOptions} onChange={handleTabsChange} />
+      <Tabs
+        options={TABS_OPTIONS}
+        value={category}
+        onChange={handleTabsChange}
+      />
       <div className="space-y-2">
         <Input
           id="amount"
@@ -144,11 +114,13 @@ const SupportRequestForm = ({
         <Uploader
           label="증빙 자료"
           accept="image/*"
+          isSuccess={isSuccess}
           onFileAccepted={handleFileAccepted}
         />
         <ul className="text-sm leading-loose">
           <li>
             <Checkbox
+              id="checkbox-1"
               checked={checkList[0]}
               onChange={() => handleCheckboxChange(0)}
               label="해당 요청은 동아리 활동에 필요한 것이며, 동아리 활동과 관련이 없는
@@ -157,6 +129,7 @@ const SupportRequestForm = ({
           </li>
           <li>
             <Checkbox
+              id="checkbox-2"
               checked={checkList[1]}
               onChange={() => handleCheckboxChange(1)}
               label="회비 요청은 동아리 활동에 필요한지 여부에 대하여 운영진 회의후에
@@ -165,6 +138,7 @@ const SupportRequestForm = ({
           </li>
           <li>
             <Checkbox
+              id="checkbox-3"
               checked={checkList[2]}
               onChange={() => handleCheckboxChange(2)}
               label="회비를 통해 구매한 물품은 동아리의 소유가 되며, 모든 부원에게 공유
@@ -177,12 +151,12 @@ const SupportRequestForm = ({
         </ul>
         <Button
           type="submit"
-          color={checkSubmitValidation ? 'white' : 'red'}
+          color={validation ? 'green' : 'white'}
           className="w-full"
         >
           {isPending ? (
             <Loading className="mx-auto" />
-          ) : checkSubmitValidation ? (
+          ) : validation ? (
             '모든 준비가 끝났어요, 신청하기'
           ) : (
             '모든 항목이 입력되어야 해요'

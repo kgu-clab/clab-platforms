@@ -1,24 +1,31 @@
-import { useCallback } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useDropzone } from 'react-dropzone';
 import { BsFileEarmarkArrowUp, BsFileEarmarkDiff } from 'react-icons/bs';
 
 import { Button } from '@clab/design-system';
 
 interface UploaderProps {
-  label?: string;
   accept: string;
+  isSuccess?: boolean;
+  label?: string;
   maxFiles?: number;
   multiple?: boolean;
   onFileAccepted: (file: File | null) => void;
 }
 
+interface FileWithPreview extends File {
+  preview: string;
+}
+
 const Uploader = ({
-  label,
   accept,
+  isSuccess = false,
+  label,
   maxFiles = 1,
   multiple = false,
   onFileAccepted,
 }: UploaderProps) => {
+  const [files, setFiles] = useState<FileWithPreview[]>([]);
   /**
    * 파일이 인식되었을 때 실행되는 콜백 함수입니다.
    */
@@ -27,6 +34,13 @@ const Uploader = ({
       const file = acceptedFiles[0];
       if (file) {
         onFileAccepted(file);
+        setFiles(
+          acceptedFiles.map((file) =>
+            Object.assign(file, {
+              preview: URL.createObjectURL(file),
+            }),
+          ),
+        );
       }
     },
     [onFileAccepted],
@@ -38,10 +52,7 @@ const Uploader = ({
     onFileAccepted(null);
   }, [onFileAccepted]);
 
-  /**
-   * Dropzone 라이브러리를 위한 설정값입니다.
-   */
-  const { getRootProps, getInputProps, isDragActive, acceptedFiles } =
+  const { getRootProps, getInputProps, isDragActive, acceptedFiles, inputRef } =
     useDropzone({
       onDrop,
       onFileDialogCancel,
@@ -49,6 +60,18 @@ const Uploader = ({
       multiple: multiple,
       accept: { [accept]: [] },
     });
+  /**
+   * 선택한 파일을 초기화합니다.
+   * isSuccess가 변경될 경우 실행됩니다.
+   */
+  useEffect(() => {
+    if (isSuccess && inputRef.current) {
+      acceptedFiles.length = 0;
+      acceptedFiles.splice(0, acceptedFiles.length);
+      inputRef.current.value = '';
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [inputRef, isSuccess]);
 
   return (
     <div className="flex flex-col">
@@ -60,17 +83,32 @@ const Uploader = ({
         <input {...getInputProps()} />
         <div className="flex flex-col items-center justify-center gap-2 break-keep px-4 text-center text-sm">
           {acceptedFiles.length ? (
-            <ul className="leading-loose">
-              {acceptedFiles.map((file, index) => (
-                <li key={index}>
-                  {file.name} - {file.size} bytes
-                </li>
+            <>
+              {files.map((file) => (
+                <div
+                  key={file.name}
+                  className="flex flex-col items-center gap-1"
+                >
+                  <img
+                    className="size-20 rounded-lg object-cover"
+                    src={file.preview}
+                    onLoad={() => {
+                      URL.revokeObjectURL(file.preview);
+                    }}
+                  />
+                  <div>
+                    <p>{file.name}</p>
+                    <p>{file.size} bytes</p>
+                  </div>
+                </div>
               ))}
-              <li>
-                총 {acceptedFiles.length}개의 파일이 첨부됐어요,&nbsp;
-                <u>클릭하면 다시 업로드</u> 할 수 있어요.
-              </li>
-            </ul>
+              <ul className="leading-loose">
+                <li>
+                  총 {acceptedFiles.length}개의 파일이 첨부됐어요,&nbsp;
+                  <u>클릭하면 다시 업로드</u> 할 수 있어요.
+                </li>
+              </ul>
+            </>
           ) : isDragActive ? (
             <>
               <BsFileEarmarkArrowUp size={46} />
@@ -79,7 +117,7 @@ const Uploader = ({
           ) : (
             <>
               <BsFileEarmarkDiff size={46} />
-              <p>파일을 여기로 끌어다 놓아주세요.</p>
+              <p>여기로 끌어다 놓아주세요.</p>
               <p>또는</p>
               <Button type="button" size="sm">
                 파일 선택하기

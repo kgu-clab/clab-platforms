@@ -12,21 +12,26 @@ export const useMembershipFeeMutation = () => {
   const queryClient = useQueryClient();
   const toast = useToast();
 
-  const membershipFeeMutation = useMutation({
+  const mutation = useMutation({
     mutationFn: postMembershipFee,
     onSuccess: ({ success }) => {
-      if (!success) {
+      if (success) {
+        toast({ state: 'success', message: '신청이 완료되었습니다.' });
+        queryClient.invalidateQueries({
+          queryKey: [QUERY_KEY.MEMBERSHIP_FEE],
+        });
+      } else {
         return toast({ state: 'error', message: ERROR_MESSAGE.DEFAULT });
       }
-      toast({ state: 'success', message: '신청이 완료되었습니다.' });
-      queryClient.invalidateQueries({
-        queryKey: [QUERY_KEY.MEMBERSHIP_FEE],
-      });
+    },
+    onError: () => {
+      toast({ state: 'error', message: ERROR_MESSAGE.NETWORK });
     },
   });
 
   return {
-    membershipFeeMutate: membershipFeeMutation.mutate,
-    isPending: membershipFeeMutation.isPending,
+    membershipFeeMutate: mutation.mutate,
+    isPending: mutation.isPending,
+    isSuccess: mutation.isSuccess,
   };
 };
