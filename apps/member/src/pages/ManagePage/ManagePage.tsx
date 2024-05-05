@@ -8,7 +8,15 @@ import ManageCalendarSection from '@components/manage/ManageCalendarSection/Mana
 import ManageLibrarySection from '@components/manage/ManageLibrarySection/ManageLibrarySection';
 import SupportHistorySection from '@components/support/SupportHistorySection/SupportHistorySection';
 
+import { useMyProfile } from '@hooks/queries';
+
 const ManagePage = () => {
+  const { data } = useMyProfile();
+
+  if (data.roleLevel! < 2) {
+    throw new Error('접근 권한이 없습니다.');
+  }
+
   return (
     <Content>
       <Header title="관리" />
