@@ -1,50 +1,50 @@
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { FcAbout } from 'react-icons/fc';
 
 import Panel from '@components/common/Panel/Panel';
 
+import { MODAL_TITLE } from '@constants/modal';
 import useModal from '@hooks/common/useModal';
+import { useMyNotifications } from '@hooks/queries';
 
-import type { NotificationItem } from '@type/notification';
+const AlarmPanel = () => {
+  const { refetch, data } = useMyNotifications(0, 5);
 
-interface AlarmPanelProps {
-  data: NotificationItem[];
-  totalLength: number;
-}
-
-const AlarmPanel = ({ data, totalLength }: AlarmPanelProps) => {
   const [open, setOpen] = useState(true);
   const { openModal } = useModal();
 
-  const handleOpenClick = useCallback(() => {
-    setOpen((prev) => !prev);
-  }, []);
+  const handleOpenClick = useCallback(() => setOpen((prev) => !prev), []);
 
-  const onClickAlarm = useCallback(
+  const handleAlarmClick = useCallback(
     (content: string) => {
       openModal({
-        title: '알림',
+        title: MODAL_TITLE.ALARM,
         content,
       });
     },
     [openModal],
   );
 
+  useEffect(() => {
+    // 알림 패널이 열릴 때마다 알림을 새로고침합니다.
+    refetch();
+  }, [open, refetch]);
+
   return (
     <Panel>
       <Panel.Header
         icon={<FcAbout />}
         label="알림"
-        description={`총 알림 ${totalLength}`}
+        description={new Date().toLocaleTimeString()}
         isOpen={open}
         onClick={handleOpenClick}
       />
       <Panel.Body isOpen={open} className="flex flex-col text-sm">
-        {data.length > 0 ? (
-          data.slice(0, 5).map(({ id, content }) => (
+        {data.items.length > 0 ? (
+          data.items.map(({ id, content }) => (
             <p
               key={id}
-              onClick={() => onClickAlarm(content)}
+              onClick={() => handleAlarmClick(content)}
               className="cursor-pointer truncate rounded-md leading-relaxed transition hover:translate-x-1.5 hover:font-semibold"
             >
               {content}
