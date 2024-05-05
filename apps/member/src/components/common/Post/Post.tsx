@@ -1,5 +1,5 @@
 /* eslint-disable react/display-name */
-import { MODE } from '@constants/environment';
+import { SERVICE_NAME } from '@constants/environment';
 import { formattedDate } from '@utils/date';
 import { cn, toDecodeHTMLEntities } from '@utils/string';
 
@@ -27,8 +27,8 @@ const Post = ({ className, children }: Props) => {
 
 const PostHead = ({
   title,
-  src = '',
-  writer = 'C-Lab',
+  src,
+  writer = SERVICE_NAME,
   roleLevel = 1,
   createdAt,
 }: PostHeaderProps) => {
@@ -43,7 +43,7 @@ const PostHead = ({
             <p>{formattedDate(createdAt)}</p>
           </div>
         </div>
-        {MODE !== 'production' && <Share />}
+        <Share />
       </div>
       <hr />
     </div>
@@ -53,7 +53,7 @@ const PostHead = ({
 const PostBody = ({ className, children }: Props) => {
   return (
     <div className={cn('whitespace-pre-wrap break-words', className)}>
-      {toDecodeHTMLEntities(children as string)}
+      {typeof children === 'string' ? toDecodeHTMLEntities(children) : children}
     </div>
   );
 };
