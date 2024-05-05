@@ -5,7 +5,7 @@ import { Button } from '@clab/design-system';
 import Post from '@components/common/Post/Post';
 import Textarea from '@components/common/Textarea/Textarea';
 
-import useBoardModifyMutation from '@hooks/queries/useBoardModifyMutation';
+import { useBoardModifyMutation } from '@hooks/queries';
 import { formatMemberName } from '@utils/string';
 
 import type {
@@ -13,6 +13,7 @@ import type {
   CommunityPostDetailItem,
 } from '@type/community';
 
+import CommunityDeleteButton from '../CommunityDeleteButton/CommunityDeleteButton';
 import CommunityReportButton from '../CommunityReportButton/CommunityReportButton';
 
 interface CommunityBoardPostProps {
@@ -74,12 +75,15 @@ const CommunityBoardPost = ({ type, data }: CommunityBoardPostProps) => {
         <Post.Body className="min-h-60">{data.content}</Post.Body>
       )}
       <Post.Footer>
-        {isEditMode ? (
+        {data.isOwner ? (
+          <CommunityDeleteButton id={data.id} />
+        ) : (
+          <CommunityReportButton id={data.id} />
+        )}
+        {isEditMode && (
           <Button size="sm" color="red" onClick={() => setIsEditMode(false)}>
             취소
           </Button>
-        ) : (
-          !data.isOwner && <CommunityReportButton id={data.id} />
         )}
         {data.isOwner && (
           <Button size="sm" onClick={handleSaveClick}>

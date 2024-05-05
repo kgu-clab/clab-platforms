@@ -37,3 +37,5 @@ export * from './useUserInfoMutation';
 export * from './useActivityGroupMemberMy';
 export * from './book-loan-record';
 export * from './book';
+export * from './book-loan-record';
+export * from './comment';

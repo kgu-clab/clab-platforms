@@ -1,25 +1,26 @@
 import { END_POINT } from '@constants/api';
 import { createCommonPagination, createPath } from '@utils/api';
 
-import { BaseResponse, PaginationType } from '@type/api';
-import type {
-  CommentItem,
-  CommentListItem,
-  CommentWriteItem,
-} from '@type/comment';
+import type { BaseResponse, ResponsePagination } from '@type/api';
+import type { CommentItem, CommentListItem } from '@type/comment';
 
 import { server } from './server';
 
-interface commentWriteArgs {
+interface CommentWriteRequestData {
+  content: string;
+  wantAnonymous: boolean;
+}
+
+export interface PostCommentWriteParams {
   parentId?: number;
   boardId: string;
-  body: CommentWriteItem;
+  body: CommentWriteRequestData;
 }
 /**
  * 나의 댓글 조회
  */
 export const getMyComments = async (page: number, size: number) => {
-  const { data } = await server.get<PaginationType<CommentItem>>({
+  const { data } = await server.get<ResponsePagination<CommentItem>>({
     url: createCommonPagination(END_POINT.MY_COMMENTS, {
       page,
       size,
@@ -37,7 +38,7 @@ export const getCommentList = async (
   size: number,
 ) => {
   const params = { id, page, size };
-  const { data } = await server.get<PaginationType<CommentListItem>>({
+  const { data } = await server.get<ResponsePagination<CommentListItem>>({
     url: createCommonPagination(END_POINT.COMMENTS(id), params),
   });
 
@@ -50,8 +51,11 @@ export const postCommentWrite = async ({
   parentId,
   boardId,
   body,
-}: commentWriteArgs) => {
-  const { data } = await server.post<CommentWriteItem, BaseResponse>({
+}: PostCommentWriteParams) => {
+  const { data } = await server.post<
+    CommentWriteRequestData,
+    BaseResponse<number>
+  >({
     url: createPath(
       END_POINT.COMMENTS(boardId),
       parentId && `?parentId=${parentId}`,
@@ -60,4 +64,12 @@ export const postCommentWrite = async ({
   });
 
   return data;
+};
+/**
+ * 댓글 삭제
+ */
+export const deleteComment = (id: number) => {
+  return server.del<CommentWriteRequestData, BaseResponse<number>>({
+    url: END_POINT.COMMENTS(id),
+  });
 };

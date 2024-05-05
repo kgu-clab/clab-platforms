@@ -14,21 +14,10 @@ export interface CommentItem {
   createdAt: string;
 }
 
-export interface CommentListItem {
-  id: number;
+export interface CommentListItem extends CommentItem {
   writerId: string | null;
-  writerName: string;
-  writerImageUrl: string;
   writerRoleLevel: RoleLevel;
-  content: string;
   children: Array<CommentListItem>;
-  likes: number;
-  hasLikeByMe: boolean;
   isOwner: boolean;
-  createdAt: string;
-}
-
-export interface CommentWriteItem {
-  content: string;
-  wantAnonymous: boolean;
+  isDeleted: boolean;
 }
