@@ -5,13 +5,13 @@ import { getMyHire } from '@api/hire';
 import { getNews } from '@api/news';
 import { QUERY_KEY } from '@constants/key';
 
-import type { Pagination, PaginationPramsType } from '@type/api';
+import type { Pagination, WithPaginationParams } from '@type/api';
 import type { CommunityCategoryType } from '@type/community';
 import type { HireItem } from '@type/hire';
 import type { NewsItem } from '@type/news';
 import type { PostItem } from '@type/post';
 
-interface UseBoardsListParams extends PaginationPramsType {
+interface UseBoardsListParams extends WithPaginationParams {
   category: CommunityCategoryType;
 }
 
@@ -19,6 +19,7 @@ type QueryOptions = {
   queryKey: string;
   queryFn: () => Promise<Pagination<PostItem | NewsItem | HireItem>>;
 };
+
 /**
  * 커뮤니티 게시글를 카테고리별로 조회합니다.
  */

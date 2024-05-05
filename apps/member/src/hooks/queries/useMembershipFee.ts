@@ -3,13 +3,14 @@ import { useSuspenseQuery } from '@tanstack/react-query';
 import { getMembershipFee } from '@api/membershipFee';
 import { QUERY_KEY } from '@constants/key';
 
-import { PaginationPramsType } from '@type/api';
+import { WithPaginationParams } from '@type/api';
 
-interface UseMembershipFeeParamsType extends PaginationPramsType {
+interface UseMembershipFeeParams extends WithPaginationParams {
   memberId?: string;
   memberName?: string;
   category?: string;
 }
+
 /**
  * 회비 정보를 조회합니다.
  */
@@ -19,7 +20,7 @@ export const useMembershipFee = ({
   category,
   page = 0,
   size = 20,
-}: UseMembershipFeeParamsType = {}) => {
+}: UseMembershipFeeParams = {}) => {
   return useSuspenseQuery({
     queryKey: [QUERY_KEY.MEMBERSHIP_FEE, size, page],
     queryFn: () =>

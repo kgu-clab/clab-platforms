@@ -4,7 +4,7 @@ import { createCommonPagination } from '@utils/api';
 import type {
   BaseResponse,
   PaginationType,
-  WithPaginationPrams,
+  WithPaginationParams,
 } from '@type/api';
 import type {
   MemberInfo,
@@ -15,12 +15,12 @@ import type {
 import { server } from './server';
 import { postUploadedFileProfileImage } from './uploadedFile';
 
-export interface GetMembersPrams extends WithPaginationPrams {
+export interface GetMembersParams extends WithPaginationParams {
   id?: string;
   name?: string;
 }
 
-export interface PatchUserInfoPrams {
+export interface PatchUserInfoParams {
   id: string;
   body: MemberProfileRequestType;
   multipartFile: FormData | null;
@@ -28,7 +28,12 @@ export interface PatchUserInfoPrams {
 /**
  * 멤버 정보 조회
  */
-export const getMembers = async ({ id, name, page, size }: GetMembersPrams) => {
+export const getMembers = async ({
+  id,
+  name,
+  page,
+  size,
+}: GetMembersParams) => {
   const { data } = await server.get<PaginationType<MemberInfo>>({
     url: createCommonPagination(END_POINT.MEMBERS, {
       id,
@@ -57,7 +62,7 @@ export const patchUserInfo = async ({
   id,
   body,
   multipartFile,
-}: PatchUserInfoPrams) => {
+}: PatchUserInfoParams) => {
   if (multipartFile) {
     const data = await postUploadedFileProfileImage(multipartFile);
     body['imageUrl'] = data.fileUrl;

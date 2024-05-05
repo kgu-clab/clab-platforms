@@ -3,9 +3,9 @@ import { useSuspenseQuery } from '@tanstack/react-query';
 import { getBoards } from '@api/board';
 import { QUERY_KEY } from '@constants/key';
 
-import type { PaginationPramsType } from '@type/api';
+import type { WithPaginationParams } from '@type/api';
 
-interface UseBoardsParams extends PaginationPramsType {}
+interface UseBoardsParams extends WithPaginationParams {}
 
 /**
  * 커뮤니티 게시글 목록을 조회합니다.

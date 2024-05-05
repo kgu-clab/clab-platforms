@@ -4,8 +4,8 @@ import { toKoreaISOString } from '@utils/date';
 
 import type {
   BaseResponse,
-  PaginationPramsType,
   PaginationType,
+  WithPaginationParams,
 } from '@type/api';
 import type {
   ScheduleCollect,
@@ -15,7 +15,7 @@ import type {
 
 import { server } from './server';
 
-interface GetScheduleParams extends PaginationPramsType {
+interface GetScheduleParams extends WithPaginationParams {
   startDate: string;
   endDate: string;
   page: number;
