@@ -74,11 +74,12 @@ const CommunityBoardPost = ({ type, data }: CommunityBoardPostProps) => {
         <Post.Body className="min-h-60">{data.content}</Post.Body>
       )}
       <Post.Footer>
-        <CommunityReportButton id={data.id} />
-        {isEditMode && (
+        {isEditMode ? (
           <Button size="sm" color="red" onClick={() => setIsEditMode(false)}>
             취소
           </Button>
+        ) : (
+          !data.isOwner && <CommunityReportButton id={data.id} />
         )}
         {data.isOwner && (
           <Button size="sm" onClick={handleSaveClick}>
