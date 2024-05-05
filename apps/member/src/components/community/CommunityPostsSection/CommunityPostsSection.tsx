@@ -11,7 +11,7 @@ import { TABLE_HEAD } from '@constants/head';
 import { COMMUNITY_MESSAGE } from '@constants/message';
 import { PATH_FINDER } from '@constants/path';
 import { usePagination } from '@hooks/common/usePagination';
-import { useBoardsList } from '@hooks/queries';
+import { useCategoryBoards } from '@hooks/queries';
 import { toYYMMDD } from '@utils/date';
 import { cn, toDecodeHTMLEntities } from '@utils/string';
 
@@ -32,7 +32,7 @@ const CommunityPostsSection = ({
 }: Props) => {
   const navigate = useNavigate();
   const { page, size, handlePageChange } = usePagination(defaultSize);
-  const { data } = useBoardsList({ category: type, page, size });
+  const { data } = useCategoryBoards({ category: type, page, size });
 
   const handleBoardClick = useCallback(
     (id: number) => {

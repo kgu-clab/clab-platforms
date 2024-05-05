@@ -59,21 +59,19 @@ export const getBoardsList = async (
 /**
  * 커뮤니티 게시글 작성
  */
-export const postBoardsWrite = async (body: CommunityWriteItem) => {
-  const { data } = await server.post<CommunityWriteItem, BaseResponse<number>>({
+export const postBoardsWrite = (body: CommunityWriteItem) => {
+  return server.post<CommunityWriteItem, BaseResponse<CommunityCategoryType>>({
     url: END_POINT.BOARDS,
     body: {
       ...body,
       category: body.category.toUpperCase(),
     },
   });
-
-  return data;
 };
 /**
  * 커뮤니티 게시글 상세 조회
  */
-export const getBoardsDetail = (id: string) => {
+export const getBoardsDetail = (id: number) => {
   return server.get<BaseResponse<CommunityPostDetailItem>>({
     url: END_POINT.BOARDERS_ITEM(id),
   });
@@ -81,24 +79,20 @@ export const getBoardsDetail = (id: string) => {
 /**
  * 커뮤니티 게시글 수정
  */
-export const patchBoards = async ({ id, body }: PatchBoardsParams) => {
-  const { data } = await server.patch<CommunityWriteItem, BaseResponse>({
+export const patchBoards = ({ id, body }: PatchBoardsParams) => {
+  return server.patch<CommunityWriteItem, BaseResponse<CommunityCategoryType>>({
     url: END_POINT.BOARDERS_ITEM(id),
     body: {
       ...body,
       category: body.category.toUpperCase(),
     },
   });
-
-  return data;
 };
 /**
  * 커뮤니티 게시글 삭제
  */
-export const deleteBoards = async (id: number) => {
-  const { data } = await server.del<never, BaseResponse<number>>({
+export const deleteBoards = (id: number) => {
+  return server.del<never, BaseResponse<CommunityCategoryType>>({
     url: END_POINT.BOARDERS_ITEM(id),
   });
-
-  return data;
 };

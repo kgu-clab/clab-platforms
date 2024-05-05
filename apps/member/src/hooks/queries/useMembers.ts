@@ -1,7 +1,14 @@
 import { useSuspenseQuery } from '@tanstack/react-query';
 
-import { type GetMembersPrams, getMembers } from '@api/member';
+import { getMembers } from '@api/member';
 import { QUERY_KEY } from '@constants/key';
+
+import type { WithPaginationParams } from '@type/api';
+
+interface UseMembersParams extends WithPaginationParams {
+  id: string;
+  name?: string;
+}
 
 /**
  * 멤버의 정보를 조회합니다.
@@ -11,7 +18,7 @@ export const useMembers = ({
   name,
   page = 0,
   size = 20,
-}: GetMembersPrams) => {
+}: UseMembersParams) => {
   return useSuspenseQuery({
     queryKey: [QUERY_KEY.MEMBERS, { id, name, page, size }],
     queryFn: () =>

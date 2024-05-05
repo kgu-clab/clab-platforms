@@ -17,22 +17,22 @@ type PostsType = BaseResponse<CommunityPostDetailItem | NewsItem | HireItem>;
 /**
  * 카테고리에 따른 게시글을 가져옵니다.
  */
-export const usePosts = (category: CommunityCategoryType, id: string) => {
+export const usePosts = (category: CommunityCategoryType, id: number) => {
   const queryOptions = {
     notice: {
-      queryKey: QUERY_KEY.BORDER_NOTICE,
+      queryKey: QUERY_KEY.BOARDS,
       queryFn: () => getBoardsDetail(id),
     },
     free: {
-      queryKey: QUERY_KEY.BORDER_FREE,
+      queryKey: QUERY_KEY.BOARDS,
       queryFn: () => getBoardsDetail(id),
     },
     qna: {
-      queryKey: QUERY_KEY.BORDER_QNA,
+      queryKey: QUERY_KEY.BOARDS,
       queryFn: () => getBoardsDetail(id),
     },
     graduated: {
-      queryKey: QUERY_KEY.BORDER_GRADUATED,
+      queryKey: QUERY_KEY.BOARDS,
       queryFn: () => getBoardsDetail(id),
     },
     organization: {

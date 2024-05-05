@@ -11,7 +11,7 @@ import type { HireItem } from '@type/hire';
 import type { NewsItem } from '@type/news';
 import type { PostItem } from '@type/post';
 
-interface UseBoardsListParams extends WithPaginationParams {
+interface UseCategoryBoardsParams extends WithPaginationParams {
   category: CommunityCategoryType;
 }
 
@@ -21,28 +21,28 @@ type QueryOptions = {
 };
 
 /**
- * 커뮤니티 게시글를 카테고리별로 조회합니다.
+ * 커뮤니티 게시글을 카테고리별로 조회합니다.
  */
-export const useBoardsList = ({
+export const useCategoryBoards = ({
   category,
   page = 0,
   size = 6,
-}: UseBoardsListParams) => {
+}: UseCategoryBoardsParams) => {
   const queryOptions: QueryOptions = {
     notice: {
-      queryKey: QUERY_KEY.BORDER_NOTICE,
+      queryKey: QUERY_KEY.BOARDS,
       queryFn: () => getBoardsList('notice', page, size),
     },
     free: {
-      queryKey: QUERY_KEY.BORDER_FREE,
+      queryKey: QUERY_KEY.BOARDS,
       queryFn: () => getBoardsList('free', page, size),
     },
     qna: {
-      queryKey: QUERY_KEY.BORDER_QNA,
+      queryKey: QUERY_KEY.BOARDS,
       queryFn: () => getBoardsList('qna', page, size),
     },
     graduated: {
-      queryKey: QUERY_KEY.BORDER_GRADUATED,
+      queryKey: QUERY_KEY.BOARDS,
       queryFn: () => getBoardsList('graduated', page, size),
     },
     organization: {
@@ -60,7 +60,7 @@ export const useBoardsList = ({
   }[category];
 
   return useSuspenseQuery({
-    queryKey: [queryOptions.queryKey, category, page],
+    queryKey: [queryOptions.queryKey, category, { page, size }],
     queryFn: queryOptions.queryFn,
   });
 };

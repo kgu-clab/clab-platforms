@@ -25,7 +25,7 @@ const CommunityPostPage = () => {
     throw new Error(ERROR_MESSAGE.NOT_FOUND);
   }
 
-  const { data: response } = usePosts(type, id);
+  const { data: response } = usePosts(type, +id);
 
   if (response.errorMessage) {
     throw new Error(API_ERROR_MESSAGE[response.errorMessage]);

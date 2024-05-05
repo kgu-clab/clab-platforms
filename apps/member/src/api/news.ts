@@ -17,7 +17,7 @@ export const getNews = async (page: number, size: number) => {
 };
 
 // 뉴스 상세 조회
-export const getNewsPost = (id: string) => {
+export const getNewsPost = (id: number) => {
   return server.get<BaseResponse<NewsItem>>({
     url: END_POINT.NEWS(id),
   });

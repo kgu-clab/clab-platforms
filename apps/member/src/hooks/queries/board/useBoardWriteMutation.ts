@@ -4,38 +4,44 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 import { postBoardsWrite } from '@api/board';
 import { QUERY_KEY } from '@constants/key';
+import { API_ERROR_MESSAGE, ERROR_MESSAGE } from '@constants/message';
 import { PATH } from '@constants/path';
 import useToast from '@hooks/common/useToast';
 
+/**
+ * 게시글을 작성합니다.
+ */
 export const useBoardWriteMutation = () => {
   const queryClient = useQueryClient();
   const toast = useToast();
   const navigate = useNavigate();
 
-  const boardWriteMutation = useMutation({
+  const mutation = useMutation({
     mutationFn: postBoardsWrite,
-    onSuccess: (res) => {
-      if (!res) {
-        toast({
-          state: 'error',
-          message: '글 작성에 실패했습니다.',
-        });
-      } else {
+    onSuccess: ({ success, data: category, errorMessage }) => {
+      if (success) {
         queryClient.invalidateQueries({
-          queryKey: [
-            QUERY_KEY.BORDER_FREE,
-            QUERY_KEY.BORDER_QNA,
-            QUERY_KEY.BORDER_GRADUATED,
-          ],
+          queryKey: [QUERY_KEY.BOARDS, category],
         });
         toast({
           state: 'success',
-          message: '글이 성공적으로 등록되었습니다.',
+          message: '게시글이 작성되었어요.',
+        });
+      } else if (errorMessage) {
+        toast({
+          state: 'error',
+          message: API_ERROR_MESSAGE[errorMessage],
         });
       }
       navigate(PATH.COMMUNITY);
     },
+    onError: () => {
+      toast({
+        state: 'error',
+        message: ERROR_MESSAGE.NETWORK,
+      });
+    },
   });
 
-  return { boardWriteMutate: boardWriteMutation.mutate };
+  return { boardWriteMutate: mutation.mutate };
 };

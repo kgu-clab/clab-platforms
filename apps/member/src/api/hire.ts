@@ -1,7 +1,7 @@
 import { END_POINT } from '@constants/api';
 import { createCommonPagination } from '@utils/api';
 
-import { BaseResponse, PaginationType } from '@type/api';
+import type { BaseResponse, ResponsePagination } from '@type/api';
 import type { HireItem } from '@type/hire';
 
 import { server } from './server';
@@ -9,7 +9,7 @@ import { server } from './server';
 // 채용 공고 조회
 export const getMyHire = async (page: number, size: number) => {
   const params = { page, size };
-  const { data } = await server.get<PaginationType<HireItem>>({
+  const { data } = await server.get<ResponsePagination<HireItem>>({
     url: createCommonPagination(END_POINT.MY_HIRE, params),
   });
 
@@ -17,7 +17,7 @@ export const getMyHire = async (page: number, size: number) => {
 };
 
 // 채용 공고 상세 조회
-export const getHirePost = (id: string) => {
+export const getHirePost = (id: number) => {
   return server.get<BaseResponse<HireItem>>({
     url: END_POINT.HIRE(id),
   });

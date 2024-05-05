@@ -1,10 +1,10 @@
 import { PATH } from '@constants/path';
-import { useBoardsList, useHire, useNews } from '@hooks/queries';
+import { useCategoryBoards, useHire, useNews } from '@hooks/queries';
 
 import { BoardSectionItem } from '../BoardSection';
 
 const NoticeBoard = () => {
-  const { data } = useBoardsList({ category: 'notice' });
+  const { data } = useCategoryBoards({ category: 'notice' });
 
   return (
     <BoardSectionItem
@@ -17,7 +17,7 @@ const NoticeBoard = () => {
 NoticeBoard.displayName = 'NoticeBoard';
 
 const FreeBoard = () => {
-  const { data } = useBoardsList({ category: 'free' });
+  const { data } = useCategoryBoards({ category: 'free' });
 
   return (
     <BoardSectionItem title="자유" to={PATH.COMMUNITY_FREE} data={data.items} />
@@ -26,7 +26,7 @@ const FreeBoard = () => {
 FreeBoard.displayName = 'NoticeBoard';
 
 const QnABoard = () => {
-  const { data } = useBoardsList({ category: 'qna' });
+  const { data } = useCategoryBoards({ category: 'qna' });
 
   return (
     <BoardSectionItem title="QnA" to={PATH.COMMUNITY_QNA} data={data.items} />
@@ -35,7 +35,7 @@ const QnABoard = () => {
 QnABoard.displayName = 'QnABoard';
 
 const GraduatedBoard = () => {
-  const { data } = useBoardsList({ category: 'graduated' });
+  const { data } = useCategoryBoards({ category: 'graduated' });
 
   return (
     <BoardSectionItem
