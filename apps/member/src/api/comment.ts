@@ -13,7 +13,7 @@ interface CommentWriteRequestData {
 
 export interface PostCommentWriteParams {
   parentId?: number;
-  boardId: string;
+  boardId: number;
   body: CommentWriteRequestData;
 }
 /**
@@ -32,7 +32,7 @@ export const getMyComments = async (page: number, size: number) => {
 /**
  * 댓글 목록 조회
  */
-export const getComments = async (id: string, page: number, size: number) => {
+export const getComments = async (id: number, page: number, size: number) => {
   const params = { id, page, size };
   const { data } = await server.get<ResponsePagination<CommentListItem>>({
     url: createCommonPagination(END_POINT.COMMENTS(id), params),

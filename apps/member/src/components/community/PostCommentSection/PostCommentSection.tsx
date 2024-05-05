@@ -7,7 +7,7 @@ import Section from '@components/common/Section/Section';
 import { useComments } from '@hooks/queries';
 
 interface PostCommentSectionProps {
-  id: string;
+  id: number;
 }
 
 const PostCommentSection = ({ id }: PostCommentSectionProps) => {

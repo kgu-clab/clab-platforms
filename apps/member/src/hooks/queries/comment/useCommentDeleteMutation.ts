@@ -14,10 +14,10 @@ export const useCommentDeleteMutation = () => {
 
   const mutation = useMutation({
     mutationFn: deleteComment,
-    onSuccess: ({ success, data, errorMessage }) => {
+    onSuccess: ({ success, data: id, errorMessage }) => {
       if (success) {
         queryClient.invalidateQueries({
-          queryKey: [QUERY_KEY.COMMENTS, data],
+          queryKey: [QUERY_KEY.COMMENTS, id],
         });
         toast({
           state: 'success',

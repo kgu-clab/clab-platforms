@@ -8,7 +8,7 @@ import { cn } from '@utils/string';
 import Textarea from '../Textarea/Textarea';
 
 interface CommentInputProps {
-  id: string;
+  id: number;
   value: string;
   onChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
   parentId?: number;

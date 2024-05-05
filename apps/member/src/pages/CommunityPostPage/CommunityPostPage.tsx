@@ -60,7 +60,7 @@ const CommunityPostPage = () => {
       <Suspense>
         <Section>{renderPost}</Section>
       </Suspense>
-      <Suspense>{isBoardPost && <PostCommentSection id={id} />}</Suspense>
+      <Suspense>{isBoardPost && <PostCommentSection id={+id} />}</Suspense>
       <Suspense>
         <CommunityPostsSection
           type={type}
