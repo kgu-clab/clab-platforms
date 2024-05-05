@@ -8,6 +8,7 @@ import MembershipInfoModal from '@components/membership/MembershipInfoModal/Memb
 import MembershipStatusBadge from '@components/membership/MembershipStatusBadge/MembershipStatusBadge';
 
 import { TABLE_HEAD } from '@constants/head';
+import { MODAL_TITLE } from '@constants/modal';
 import useModal from '@hooks/common/useModal';
 import { usePagination } from '@hooks/common/usePagination';
 import { useMembershipFee, useMyProfile } from '@hooks/queries';
@@ -15,22 +16,21 @@ import { useMembershipFeeModifyMutation } from '@hooks/queries/useMembershipFeeM
 import { formattedDate } from '@utils/date';
 import { formatMemberName } from '@utils/string';
 
-import type {
-  MembershipFeeType,
-  MembershipStatusType,
-} from '@type/membershipFee';
+import type { MembershipFeeType } from '@type/membershipFee';
 
-interface SupportHistorySectionProps {
+interface Props {
   title?: string;
   size?: number;
   withPagination?: boolean;
+  hasPermission?: boolean;
 }
 
 const SupportHistorySection = ({
   title,
   size: defaultSize,
   withPagination,
-}: SupportHistorySectionProps) => {
+  hasPermission = false,
+}: Props) => {
   const { openModal } = useModal();
   const { page, size, handlePageChange } = usePagination(defaultSize);
 
@@ -46,29 +46,45 @@ const SupportHistorySection = ({
    */
   const handleButtonClick = useCallback(
     (membership: MembershipFeeType) => {
-      const status: MembershipStatusType[] = ['PENDING', 'REJECTED']; // 해당 상태일 경우 승인 처리가 가능합니다.
-      const isCantApproveStatus = status.includes(membership.status);
-      const accept =
-        myProfile.roleLevel! >= 3
+      const isAdminLevel = myProfile.roleLevel! >= 3;
+
+      openModal({
+        title: MODAL_TITLE.SUPPORT_HISTORY,
+        content: (
+          <MembershipInfoModal
+            data={membership}
+            hasPermission={hasPermission}
+          />
+        ),
+        accept: isAdminLevel
           ? {
-              text: isCantApproveStatus ? '승인' : '반려',
+              text: '승인',
               onClick: () => {
                 membershipFeeModifyMutate({
                   id: membership.id,
                   body: {
-                    status: isCantApproveStatus ? 'APPROVED' : 'REJECTED',
+                    status: 'APPROVED',
                   },
                 });
               },
             }
-          : undefined;
-      openModal({
-        title: '회비 상세 내역',
-        content: <MembershipInfoModal data={membership} />,
-        accept,
+          : undefined,
+        cancel: isAdminLevel
+          ? {
+              text: '반려',
+              onClick: () => {
+                membershipFeeModifyMutate({
+                  id: membership.id,
+                  body: {
+                    status: 'REJECTED',
+                  },
+                });
+              },
+            }
+          : undefined,
       });
     },
-    [membershipFeeModifyMutate, myProfile.roleLevel, openModal],
+    [hasPermission, membershipFeeModifyMutate, myProfile.roleLevel, openModal],
   );
 
   return (

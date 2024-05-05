@@ -13,7 +13,7 @@ const ManagePage = () => {
     <Content>
       <Header title="관리" />
       <Suspense>
-        <SupportHistorySection title="회비" withPagination />
+        <SupportHistorySection title="회비" withPagination hasPermission />
       </Suspense>
       <Suspense>
         <ManageLibrarySection />
