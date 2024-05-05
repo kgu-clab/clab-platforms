@@ -1,3 +1,4 @@
+import { SERVICE_NAME } from '@constants/environment';
 import { ClassValue, clsx } from 'clsx';
 import * as entities from 'entities';
 import { twMerge } from 'tailwind-merge';
@@ -112,9 +113,10 @@ export function bookReviewParser(links: string[]) {
  * 멤버 이름을 출력합니다.
  * @param name 이름
  * @param id 학번
- * @returns 양식대로 변경된 멤버 이름
+ * @returns 양식대로 변경된 멤버 이름, 이름이 없을 경우 서비스 이름을 반환합니다.
  */
-export function formatMemberName(name: string, id?: string | null) {
+export function formatMemberName(name?: string | null, id?: string | null) {
+  if (!name) return SERVICE_NAME;
   const studentId = id?.slice(2, 4);
   return id ? `${name} (${studentId})` : name;
 }
