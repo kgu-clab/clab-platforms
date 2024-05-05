@@ -155,20 +155,29 @@ export function isDateValid(
 }
 /**
  * 시작 날짜와 종료 날짜 사이의 맞춤 시간 기간 내 진행 상황을 백분율로 계산합니다.
- * 14일 기간을 넘어서는 작업이나 기간 연장에 유용합니다.
  *
- * @param {string} startDate - 작업 또는 이벤트의 시작 날짜.
- * @param {string} endDate - 작업 또는 이벤트의 종료 날짜.
+ * @param {string} startDate - 시작 날짜.
+ * @param {string} endDate - 종료 날짜.
  * @returns {number} 지정된 기간 내 진행 상황을 나타내는 백분율 (0-100).
  */
 export function checkExtendProgress(
   startDate: string,
   endDate: string,
 ): number {
-  const end = dayjs(endDate);
   const start = dayjs(startDate);
-  const gap = end.diff(start, 'd'); // 총 기간 (일 단위)
-  return (end.diff(now(), 'd') * 100) % gap;
+  const end = dayjs(endDate);
+
+  const totalDays = end.diff(start, 'day'); // 총 기간 (일 단위)
+  const elapsedDays = now().diff(start, 'day'); // 시작부터 지금까지의 일수
+
+  // 시작 날짜가 종료 날짜 이후인 경우 진행률을 0으로 설정
+  if (elapsedDays < 0) return 0;
+  // 현재 날짜가 종료 날짜를 넘은 경우 진행률을 100으로 설정
+  if (now().isAfter(end)) return 100;
+
+  // 진행률 계산
+  const progressPercentage = (elapsedDays / totalDays) * 100;
+  return Math.min(progressPercentage, 100); // 100을 초과하지 않도록 처리
 }
 /**
  * 기본 14일 유예 기간을 포함한 지정된 마감 날짜까지 남은 일 수를 계산합니다.
