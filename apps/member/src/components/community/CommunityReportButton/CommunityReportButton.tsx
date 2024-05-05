@@ -1,5 +1,6 @@
 import { Button } from '@clab/design-system';
 
+import { MODAL_ACCEPT, MODAL_CONTENT, MODAL_TITLE } from '@constants/modal';
 import useModal from '@hooks/common/useModal';
 import { useAccusesMutation } from '@hooks/queries';
 
@@ -13,11 +14,10 @@ const CommunityReportButton = ({ id }: CommunityReportButtonProps) => {
 
   const handleAccusesClick = () => {
     openModal({
-      title: '🚨 신고하기',
-      content:
-        '게시글에 신고가 누적되어 일정 수에 도달하면 운영진이 내용을 재검토합니다.\n정말 해당 게시글을 신고하시겠습니까?\n\n신고는 각 사용자당 한 번만 가능합니다. 중복은 인정되지 않습니다.',
+      title: MODAL_TITLE.REPORT,
+      content: MODAL_CONTENT.REPORT,
       accept: {
-        text: '신고하기',
+        text: MODAL_ACCEPT.REPORT,
         onClick: () => {
           accusesMutate({
             targetType: 'BOARD',
@@ -31,7 +31,7 @@ const CommunityReportButton = ({ id }: CommunityReportButtonProps) => {
 
   return (
     <Button onClick={handleAccusesClick} size="sm" color="red">
-      신고하기
+      신고
     </Button>
   );
 };
