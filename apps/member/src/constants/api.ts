@@ -88,12 +88,3 @@ export const HTTP_STATUS_CODE = {
   INTERNAL_SERVER_ERROR: 500,
   CLAB_AUTH_SUCCESS: 1200,
 } as const;
-/**
- * 에러 발생에 대한 사용자에게 안내할 메세지를 정의합니다.
- * Server팀과 협의하여 정의합니다.
- */
-export const HTTP_ERROR_MESSAGE = {
-  BOOKALREADYAPPLIEDFORLOANEXCEPTION: '이미 대여 신청한 도서이에요.',
-  BOOKALREADYBORROWEDEXCEPTION: '해당 도서는 대여 상태에요.',
-  OVERDUEEXCEPTION: '도서 대여 연장은 최대 2회까지 가능해요.',
-} as const;

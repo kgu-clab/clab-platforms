@@ -73,12 +73,10 @@ export const postBoardsWrite = async (body: CommunityWriteItem) => {
 /**
  * 커뮤니티 게시글 상세 조회
  */
-export const getBoardsDetail = async (id: string) => {
-  const { data } = await server.get<BaseResponse<CommunityPostDetailItem>>({
+export const getBoardsDetail = (id: string) => {
+  return server.get<BaseResponse<CommunityPostDetailItem>>({
     url: END_POINT.BOARDERS_ITEM(id),
   });
-
-  return data;
 };
 /**
  * 커뮤니티 게시글 수정
