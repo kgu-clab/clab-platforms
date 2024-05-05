@@ -1,3 +1,4 @@
+import { SERVICE_NAME } from '@constants/environment';
 import { ClassValue, clsx } from 'clsx';
 import * as entities from 'entities';
 import { twMerge } from 'tailwind-merge';
@@ -9,7 +10,6 @@ import type { SchedulePriority } from '@type/schedule';
 export const cn = (...inputs: ClassValue[]): string => {
   return twMerge(clsx(inputs));
 };
-
 /**
  * 주어진 숫자를 한국식 통화 형식으로 포맷합니다.
  * @param amount 포맷할 숫자
@@ -91,25 +91,32 @@ export function toBookstore(value: BookstoreKorean): Bookstore {
  * @returns 온라인 서점 별로 링크를 생성한 객체
  */
 export function bookReviewParser(links: string[]) {
-  return links.reduce(
-    (acc, link) => {
-      const key = link.includes('kyobobook')
-        ? 'kyobobook'
-        : link.includes('yes24')
-          ? 'yes24'
-          : link.includes('aladin')
-            ? 'aladin'
-            : undefined;
-      if (!key) return acc;
-      return {
-        ...acc,
-        [key]: link,
-      };
-    },
-    {
-      kyobobook: undefined,
-      yes24: undefined,
-      aladin: undefined,
-    },
-  );
+  const bookstoreMap: Record<string, string | undefined> = {
+    kyobobook: undefined,
+    yes24: undefined,
+    aladin: undefined,
+  };
+
+  for (const link of links) {
+    if (link.includes('kyobobook')) {
+      bookstoreMap.kyobobook = link;
+    } else if (link.includes('yes24')) {
+      bookstoreMap.yes24 = link;
+    } else if (link.includes('aladin')) {
+      bookstoreMap.aladin = link;
+    }
+  }
+
+  return bookstoreMap;
+}
+/**
+ * 멤버 이름을 출력합니다.
+ * @param name 이름
+ * @param id 학번
+ * @returns 양식대로 변경된 멤버 이름, 이름이 없을 경우 서비스 이름을 반환합니다.
+ */
+export function formatMemberName(name?: string | null, id?: string | null) {
+  if (!name) return SERVICE_NAME;
+  const studentId = id?.slice(2, 4);
+  return id ? `${name} (${studentId})` : name;
 }

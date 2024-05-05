@@ -25,3 +25,13 @@ export const MY_MESSAGE = {
   NO_MEMBERSHIP: '회비 신청 내역이 없어요.',
   NO_ACTIVITY: '활동 내역이 없어요.',
 } as const;
+/**
+ * 에러 발생에 대한 사용자에게 안내할 메세지를 정의합니다.
+ * Server 팀과 협의하여 정의합니다.
+ */
+export const API_ERROR_MESSAGE = {
+  BOOKALREADYAPPLIEDFORLOANEXCEPTION: '이미 대여 신청한 도서이에요.',
+  BOOKALREADYBORROWEDEXCEPTION: '해당 도서는 대여 상태에요.',
+  OVERDUEEXCEPTION: '도서 대여 연장은 최대 2회까지 가능해요.',
+  NOTFOUNDEXCEPTION: '요청하신 정보를 찾을 수 없어요.',
+} as const;

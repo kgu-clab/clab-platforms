@@ -2,11 +2,9 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 
 import { Input } from '@clab/design-system';
 
-import Image from '@components/common/Image/Image';
+import Avatar from '@components/common/Avatar/Avatar';
 
-import { createImageUrl } from '@utils/api';
-import { getProfileRingStyle } from '@utils/style';
-import classNames from 'classnames';
+import { cn } from '@utils/string';
 
 import type { MemberProfileType } from '@type/member';
 
@@ -57,21 +55,12 @@ const MyProfileImage = ({ isEdit, data, onChange }: MyProfileImageProps) => {
 
   return (
     <div className="flex flex-col items-center text-center">
-      <label
-        htmlFor="imageUrl"
-        className={classNames(
-          'rounded-full ring ring-offset-1',
-          getProfileRingStyle(data.roleLevel),
-        )}
-      >
-        <Image
-          width="w-32"
-          height="h-32"
-          src={createImageUrl(image)}
-          alt={data.name}
-          className={classNames('rounded-full bg-white object-cover', {
-            'cursor-pointer': isEdit,
-          })}
+      <label htmlFor="imageUrl">
+        <Avatar
+          src={image}
+          size="lg"
+          roleLevel={data.roleLevel}
+          className={cn({ 'cursor-pointer': isEdit })}
         />
       </label>
       <Input

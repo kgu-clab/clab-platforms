@@ -3,9 +3,9 @@ import { useSuspenseQuery } from '@tanstack/react-query';
 import { getBookLoanRecordOverdue } from '@api/book';
 import { QUERY_KEY } from '@constants/key';
 
-import { WithPaginationPrams } from '@type/api';
+import type { WithPaginationParams } from '@type/api';
 
-interface UseBookLoanRecordOverduePrams extends WithPaginationPrams {}
+interface UseBookLoanRecordOverduePrams extends WithPaginationParams {}
 
 /**
  * 도서 연체자를 조회합니다.

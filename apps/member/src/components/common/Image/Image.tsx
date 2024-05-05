@@ -1,4 +1,9 @@
-import { ComponentPropsWithRef, SyntheticEvent, useState } from 'react';
+import {
+  ComponentPropsWithRef,
+  SyntheticEvent,
+  useCallback,
+  useState,
+} from 'react';
 
 import { NOT_FOUND_IMG } from '@constants/path';
 import { cn } from '@utils/string';
@@ -25,10 +30,14 @@ const Image = ({
   const _width = width ?? 'w-full';
   const _height = height ?? 'h-full';
 
-  const handleError = (e: SyntheticEvent<HTMLImageElement>) => {
+  const handleLoad = useCallback(() => {
+    setStatus('loaded');
+  }, []);
+
+  const handleError = useCallback((e: SyntheticEvent<HTMLImageElement>) => {
     e.currentTarget.src = NOT_FOUND_IMG;
     setStatus('error');
-  };
+  }, []);
 
   return (
     <div
@@ -48,7 +57,7 @@ const Image = ({
           className,
         )}
         src={src ?? NOT_FOUND_IMG}
-        onLoad={() => setStatus('loaded')}
+        onLoad={handleLoad}
         onError={handleError}
         loading="lazy"
         {...rest}

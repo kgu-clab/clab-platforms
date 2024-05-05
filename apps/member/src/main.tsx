@@ -11,7 +11,7 @@ import ToastContainer from '@components/common/Toast/ToastContainer.tsx';
 import * as ChannelService from '@channel.io/channel-web-sdk-loader';
 import { CHANNEL_TALK_TOKEN } from '@constants/environment.ts';
 import { queryClient } from '@hooks/queries';
-import '@styles/global.css';
+import '@styles/globals.css';
 
 import App from './App.tsx';
 

@@ -13,6 +13,7 @@ import { usePagination } from '@hooks/common/usePagination';
 import { useMembershipFee, useMyProfile } from '@hooks/queries';
 import { useMembershipFeeModifyMutation } from '@hooks/queries/useMembershipFeeModifyMutation';
 import { formattedDate } from '@utils/date';
+import { formatMemberName } from '@utils/string';
 
 import type {
   MembershipFeeType,
@@ -47,21 +48,24 @@ const SupportHistorySection = ({
     (membership: MembershipFeeType) => {
       const status: MembershipStatusType[] = ['PENDING', 'REJECTED']; // 해당 상태일 경우 승인 처리가 가능합니다.
       const isCantApproveStatus = status.includes(membership.status);
-      const accept = myProfile.roleLevel >= 3 && {
-        text: isCantApproveStatus ? '승인' : '반려',
-        onClick: () => {
-          membershipFeeModifyMutate({
-            id: membership.id,
-            body: {
-              status: isCantApproveStatus ? 'APPROVED' : 'REJECTED',
-            },
-          });
-        },
-      };
+      const accept =
+        myProfile.roleLevel! >= 3
+          ? {
+              text: isCantApproveStatus ? '승인' : '반려',
+              onClick: () => {
+                membershipFeeModifyMutate({
+                  id: membership.id,
+                  body: {
+                    status: isCantApproveStatus ? 'APPROVED' : 'REJECTED',
+                  },
+                });
+              },
+            }
+          : undefined;
       openModal({
         title: '회비 상세 내역',
         content: <MembershipInfoModal data={membership} />,
-        accept: accept || undefined,
+        accept,
       });
     },
     [membershipFeeModifyMutate, myProfile.roleLevel, openModal],
@@ -86,7 +90,7 @@ const SupportHistorySection = ({
               </Table.Cell>
               <Table.Cell> {membership.category}</Table.Cell>
               <Table.Cell>
-                {membership.memberName} ({membership.memberId})
+                {formatMemberName(membership.memberName, membership.memberId)}
               </Table.Cell>
               <Table.Cell>{formattedDate(membership.createdAt)}</Table.Cell>
             </Table.Row>

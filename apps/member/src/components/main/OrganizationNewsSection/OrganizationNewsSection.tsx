@@ -4,10 +4,10 @@ import Section from '@components/common/Section/Section';
 
 import { COMMUNITY_MESSAGE } from '@constants/message';
 import { PATH_FINDER } from '@constants/path';
-import { useBoardsList } from '@hooks/queries';
+import { useCategoryBoards } from '@hooks/queries';
 
 const OrganizationNewsSection = () => {
-  const { data } = useBoardsList({ category: 'organization' });
+  const { data } = useCategoryBoards({ category: 'organization' });
 
   return (
     <Section>

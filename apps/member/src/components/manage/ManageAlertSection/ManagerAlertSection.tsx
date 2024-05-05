@@ -13,7 +13,7 @@ import { TABLE_HEAD, TABLE_HEAD_ACTION } from '@constants/head';
 import { PATH_FINDER } from '@constants/path';
 import useModal from '@hooks/common/useModal';
 import { usePagination } from '@hooks/common/usePagination';
-import { useBoardDeleteMutation, useBoardsList } from '@hooks/queries';
+import { useBoardDeleteMutation, useCategoryBoards } from '@hooks/queries';
 import { categoryToTitle } from '@utils/community';
 import { toYYMMDD } from '@utils/date';
 import { toDecodeHTMLEntities } from '@utils/string';
@@ -30,7 +30,7 @@ const ManagerAlertSection = ({ category }: ManagerAlertSectionProps) => {
   const navigate = useNavigate();
   const { openModal } = useModal();
   const { boardDeleteMutate } = useBoardDeleteMutation();
-  const { data } = useBoardsList({ category: category });
+  const { data } = useCategoryBoards({ category: category });
 
   const [mode, setMode] = useState<Mode>('view');
   const { page, size, handlePageChange } = usePagination();

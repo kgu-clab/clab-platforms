@@ -1,4 +1,10 @@
 /**
+ * 계정의 권한 레벨
+ * 익명일 경우 null
+ */
+export type RoleLevel = 1 | 2 | 3 | null;
+
+/**
  * 멤버 정보
  */
 export interface MemberInfo {
@@ -23,7 +29,7 @@ export interface MemberInfo {
  * 멤버 프로필 정보
  */
 export interface MemberProfileType extends MemberInfo {
-  roleLevel: number;
+  roleLevel: RoleLevel;
   password?: string;
 }
 /**

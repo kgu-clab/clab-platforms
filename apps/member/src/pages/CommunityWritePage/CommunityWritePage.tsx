@@ -8,23 +8,29 @@ import Section from '@components/common/Section/Section';
 import Select from '@components/common/Select/Select';
 import Textarea from '@components/common/Textarea/Textarea';
 
+import { ERROR_MESSAGE } from '@constants/message';
+import { PATH, PATH_NAME } from '@constants/path';
 import {
   SELECT_DEFAULT_OPTION,
   SELECT_OPTIONS_COMMUNITY_TYPE,
 } from '@constants/select';
 import useToast from '@hooks/common/useToast';
-import { useBoardWriteMutation } from '@hooks/queries/useBoardWriteMutation';
+import { useBoardWriteMutation } from '@hooks/queries';
+
+import type { CommunityWriteItem } from '@type/community';
 
 const CommunityWritePage = () => {
   const toast = useToast();
   const { boardWriteMutate } = useBoardWriteMutation();
 
-  const [postInfo, setPostInfo] = useState({
+  const [postInfo, setPostInfo] = useState<CommunityWriteItem>({
     category: SELECT_DEFAULT_OPTION,
     title: '',
     content: '',
     wantAnonymous: false,
   });
+
+  const { category, title, content, wantAnonymous } = postInfo;
 
   const handleContentChange = useCallback(
     (
@@ -47,23 +53,19 @@ const CommunityWritePage = () => {
   );
 
   const handleSubmitClick = useCallback(() => {
-    if (
-      !postInfo.title ||
-      !postInfo.content ||
-      postInfo.category === SELECT_DEFAULT_OPTION
-    ) {
+    if (!title || !content || category === SELECT_DEFAULT_OPTION) {
       return toast({
         state: 'error',
-        message: '모든 항목을 입력해주세요.',
+        message: ERROR_MESSAGE.NO_DATA,
       });
     }
 
     boardWriteMutate(postInfo);
-  }, [boardWriteMutate, postInfo, toast]);
+  }, [boardWriteMutate, category, content, postInfo, title, toast]);
 
   return (
     <Content>
-      <Header title={['커뮤니티', '글쓰기']} />
+      <Header title={[PATH_NAME.COMMUNITY, '글쓰기']} path={[PATH.COMMUNITY]} />
       <Section className="space-y-2">
         <div className="flex gap-2">
           <Select
@@ -78,7 +80,7 @@ const CommunityWritePage = () => {
             placeholder="제목을 입력해주세요"
             className="grow"
             maxLength={100}
-            value={postInfo.title}
+            value={title}
             onChange={handleContentChange}
           />
         </div>
@@ -87,17 +89,19 @@ const CommunityWritePage = () => {
           className="min-h-96 w-full"
           maxLength={2000}
           placeholder="내용을 입력해주세요."
-          value={postInfo.content}
+          value={content}
           onChange={handleContentChange}
         />
         <Checkbox
           id="wantAnonymous"
           name="wantAnonymous"
           label="익명"
-          checked={postInfo.wantAnonymous}
+          checked={wantAnonymous}
           onChange={handleCheckboxChange}
         />
-        <Button onClick={handleSubmitClick}>등록</Button>
+        <Button className="w-full" onClick={handleSubmitClick}>
+          등록
+        </Button>
       </Section>
     </Content>
   );

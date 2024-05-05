@@ -5,9 +5,9 @@ import { QUERY_KEY } from '@constants/key';
 import { DATE_FORMAT } from '@constants/state';
 import dayjs from 'dayjs';
 
-import type { WithPaginationPrams } from '@type/api';
+import type { WithPaginationParams } from '@type/api';
 
-interface UseMainSchedulePrams extends WithPaginationPrams {
+interface UseMainSchedulePrams extends WithPaginationParams {
   startDate?: string;
   endDate?: string;
 }

@@ -1,11 +1,8 @@
-import Image from '@components/common/Image/Image';
+import Avatar from '@components/common/Avatar/Avatar';
 import Panel from '@components/common/Panel/Panel';
 
-import { createImageUrl } from '@utils/api';
 import { calculateDDay } from '@utils/date';
 import { getRandomInt } from '@utils/math';
-import { getProfileRingStyle } from '@utils/style';
-import classNames from 'classnames';
 
 import type { MemberProfileType } from '@type/member';
 
@@ -18,35 +15,25 @@ const tips = [
   '학교 주변 맛집을 추천해주세요!',
 ];
 
-interface ProfilePanelProps {
-  data: MemberProfileType;
-}
+interface ProfilePanelProps extends MemberProfileType {}
 
-const ProfilePanel = ({ data }: ProfilePanelProps) => {
+const ProfilePanel = ({
+  imageUrl,
+  name,
+  roleLevel,
+  createdAt,
+}: ProfilePanelProps) => {
   return (
     <Panel>
       <Panel.Body>
         <div className="flex gap-4">
           <div className="p-1">
-            <div
-              className={classNames(
-                'rounded-full ring ring-offset-1',
-                getProfileRingStyle(data.roleLevel),
-              )}
-            >
-              <Image
-                width="w-10"
-                height="h-10"
-                src={createImageUrl(data.imageUrl)}
-                alt="프로필사진"
-                className="rounded-full object-cover"
-              />
-            </div>
+            <Avatar src={imageUrl} roleLevel={roleLevel} />
           </div>
           <div className="flex flex-col justify-between">
-            <p className="text-lg font-bold">반가워요! {data.name}님</p>
+            <p className="text-lg font-bold">반가워요! {name}님</p>
             <p className="text-sm font-semibold">
-              C-Lab과 함께한 지 {calculateDDay(data.createdAt)}일 ❤️
+              C-Lab과 함께한 지 {calculateDDay(createdAt)}일 ❤️
             </p>
           </div>
         </div>

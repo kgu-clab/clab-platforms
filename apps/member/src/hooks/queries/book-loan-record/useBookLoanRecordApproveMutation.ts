@@ -1,8 +1,8 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 import { patchBookLoanRecordApprove } from '@api/book';
-import { HTTP_ERROR_MESSAGE } from '@constants/api';
 import { QUERY_KEY } from '@constants/key';
+import { API_ERROR_MESSAGE } from '@constants/message';
 import useToast from '@hooks/common/useToast';
 
 /**
@@ -27,7 +27,7 @@ export function useBookLoanRecordApproveMutation() {
           message: '해당 도서 대여를 승인했어요.',
         });
       } else if (errorMessage) {
-        toast({ state: 'error', message: HTTP_ERROR_MESSAGE[errorMessage] });
+        toast({ state: 'error', message: API_ERROR_MESSAGE[errorMessage] });
       }
     },
   });

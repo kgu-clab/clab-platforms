@@ -3,9 +3,9 @@ import { createCommonPagination } from '@utils/api';
 
 import type {
   BaseResponse,
-  PaginationPramsType,
-  PaginationType,
+  ResponsePagination,
   WithFilePrams,
+  WithPaginationParams,
 } from '@type/api';
 import type {
   MembershipFeePatchBody,
@@ -16,17 +16,17 @@ import type {
 import { server } from './server';
 import { postUploadedFileMembershipFee } from './uploadedFile';
 
-interface GetMembershipFeeParamsType extends PaginationPramsType {
+interface GetMembershipFeeParams extends WithPaginationParams {
   memberId?: string;
   memberName?: string;
   category?: string;
 }
 
-export interface PostMembershipFeePramsType
+export interface PostMembershipFeeParams
   extends MembershipFeeRequestType,
     WithFilePrams {}
 
-export interface PathMembershipFeePrams {
+export interface PathMembershipFeeParams {
   id: number;
   body: MembershipFeePatchBody;
 }
@@ -39,8 +39,8 @@ export const getMembershipFee = async ({
   category,
   page,
   size,
-}: GetMembershipFeeParamsType) => {
-  const { data } = await server.get<PaginationType<MembershipFeeType>>({
+}: GetMembershipFeeParams) => {
+  const { data } = await server.get<ResponsePagination<MembershipFeeType>>({
     url: createCommonPagination(END_POINT.MEMBERSHIP_FEE, {
       memberId,
       memberName,
@@ -58,7 +58,7 @@ export const getMembershipFee = async ({
 export const postMembershipFee = async ({
   multipartFile,
   ...body
-}: PostMembershipFeePramsType) => {
+}: PostMembershipFeeParams) => {
   if (multipartFile) {
     const data = await postUploadedFileMembershipFee({
       storagePeriod: 365,
@@ -78,7 +78,7 @@ export const postMembershipFee = async ({
 export const pathMembershipFee = async ({
   id,
   body,
-}: PathMembershipFeePrams) => {
+}: PathMembershipFeeParams) => {
   const { data } = await server.patch<
     MembershipFeePatchBody,
     BaseResponse<number>

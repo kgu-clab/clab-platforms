@@ -5,14 +5,15 @@ import { Button } from '@clab/design-system';
 import Post from '@components/common/Post/Post';
 import Textarea from '@components/common/Textarea/Textarea';
 
-import useBoardModifyMutation from '@hooks/queries/useBoardModifyMutation';
-import { toDecodeHTMLEntities } from '@utils/string';
+import { useBoardModifyMutation } from '@hooks/queries';
+import { formatMemberName } from '@utils/string';
 
 import type {
   CommunityCategoryType,
   CommunityPostDetailItem,
 } from '@type/community';
 
+import CommunityDeleteButton from '../CommunityDeleteButton/CommunityDeleteButton';
 import CommunityReportButton from '../CommunityReportButton/CommunityReportButton';
 
 interface CommunityBoardPostProps {
@@ -23,7 +24,7 @@ interface CommunityBoardPostProps {
 const CommunityBoardPost = ({ type, data }: CommunityBoardPostProps) => {
   const { boardModifyMutate } = useBoardModifyMutation();
 
-  const [contents, setContents] = useState<string>(data.content);
+  const [contents, setContents] = useState(data.content);
   const [isEditMode, setIsEditMode] = useState(false);
 
   /**
@@ -56,9 +57,9 @@ const CommunityBoardPost = ({ type, data }: CommunityBoardPostProps) => {
   return (
     <Post>
       <Post.Head
-        title={toDecodeHTMLEntities(data.title)}
+        title={data.title}
         src={data.writerImageUrl}
-        writer={`${data.writerName} ${data.writerId ? `(${data.writerId})` : ''}`}
+        writer={formatMemberName(data.writerName, data.writerId)}
         roleLevel={data.writerRoleLevel}
         createdAt={data.createdAt}
       />
@@ -71,12 +72,14 @@ const CommunityBoardPost = ({ type, data }: CommunityBoardPostProps) => {
           onChange={handleContentsChange}
         />
       ) : (
-        <Post.Body className="min-h-60">
-          {toDecodeHTMLEntities(data.content)}
-        </Post.Body>
+        <Post.Body className="min-h-60">{data.content}</Post.Body>
       )}
       <Post.Footer>
-        <CommunityReportButton id={data.id} />
+        {data.isOwner ? (
+          <CommunityDeleteButton id={data.id} />
+        ) : (
+          <CommunityReportButton id={data.id} />
+        )}
         {isEditMode && (
           <Button size="sm" color="red" onClick={() => setIsEditMode(false)}>
             취소

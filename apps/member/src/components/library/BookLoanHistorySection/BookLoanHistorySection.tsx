@@ -5,6 +5,7 @@ import Section from '@components/common/Section/Section';
 import { TABLE_HEAD } from '@constants/head';
 import { useBookLoanRecordConditions } from '@hooks/queries';
 import { formattedDate } from '@utils/date';
+import { formatMemberName } from '@utils/string';
 
 import BookLoanConditionStatusBadge from '../BookLoanConditionStatusBadge/BookLoanConditionStatusBadge';
 
@@ -23,7 +24,9 @@ const BookLoanHistorySection = ({ id }: BookLoanHistorySectionProps) => {
           {data.items.map(
             ({ borrowerName, borrowerId, dueDate, borrowedAt, returnedAt }) => (
               <Table.Row key={`book-loan-history-${borrowerId}-${borrowedAt}`}>
-                <Table.Cell>{`${borrowerName} (${borrowerId})`}</Table.Cell>
+                <Table.Cell>
+                  {formatMemberName(borrowerName, borrowerId)}
+                </Table.Cell>
                 <Table.Cell>{formattedDate(borrowedAt)}</Table.Cell>
                 <Table.Cell>
                   {returnedAt

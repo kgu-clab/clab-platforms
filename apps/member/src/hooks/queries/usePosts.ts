@@ -5,6 +5,7 @@ import { getHirePost } from '@api/hire';
 import { getNewsPost } from '@api/news';
 import { QUERY_KEY } from '@constants/key';
 
+import type { BaseResponse } from '@type/api';
 import type {
   CommunityCategoryType,
   CommunityPostDetailItem,
@@ -12,26 +13,26 @@ import type {
 import type { HireItem } from '@type/hire';
 import type { NewsItem } from '@type/news';
 
-type PostsType = CommunityPostDetailItem | NewsItem | HireItem;
+type PostsType = BaseResponse<CommunityPostDetailItem | NewsItem | HireItem>;
 /**
  * 카테고리에 따른 게시글을 가져옵니다.
  */
-export const usePosts = (category: CommunityCategoryType, id: string) => {
+export const usePosts = (category: CommunityCategoryType, id: number) => {
   const queryOptions = {
     notice: {
-      queryKey: QUERY_KEY.BORDER_NOTICE,
+      queryKey: QUERY_KEY.BOARDS,
       queryFn: () => getBoardsDetail(id),
     },
     free: {
-      queryKey: QUERY_KEY.BORDER_FREE,
+      queryKey: QUERY_KEY.BOARDS,
       queryFn: () => getBoardsDetail(id),
     },
     qna: {
-      queryKey: QUERY_KEY.BORDER_QNA,
+      queryKey: QUERY_KEY.BOARDS,
       queryFn: () => getBoardsDetail(id),
     },
     graduated: {
-      queryKey: QUERY_KEY.BORDER_GRADUATED,
+      queryKey: QUERY_KEY.BOARDS,
       queryFn: () => getBoardsDetail(id),
     },
     organization: {
@@ -48,7 +49,7 @@ export const usePosts = (category: CommunityCategoryType, id: string) => {
     },
   }[category];
 
-  return useSuspenseQuery<PostsType, Error, PostsType, string[]>({
+  return useSuspenseQuery<PostsType>({
     queryKey: [queryOptions.queryKey, category, id],
     queryFn: queryOptions.queryFn,
   });

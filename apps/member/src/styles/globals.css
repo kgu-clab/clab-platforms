@@ -63,3 +63,7 @@ a,
 img {
   -webkit-user-drag: none;
 }
+
+b {
+  font-weight: 600;
+}

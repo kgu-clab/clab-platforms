@@ -1,81 +1,75 @@
 /* eslint-disable react/display-name */
-import { MODE } from '@constants/environment';
-import { createImageUrl } from '@utils/api';
+import { SERVICE_NAME } from '@constants/environment';
 import { formattedDate } from '@utils/date';
-import { cn } from '@utils/string';
-import { getProfileRingStyle } from '@utils/style';
+import { cn, toDecodeHTMLEntities } from '@utils/string';
 
 import { StrictPropsWithChildren } from '@type/component';
+import type { RoleLevel } from '@type/member';
 
-import Image from '../Image/Image';
+import Avatar from '../Avatar/Avatar';
 import Share from '../Share/Share';
+
+interface Props extends StrictPropsWithChildren {
+  className?: string;
+}
 
 interface PostHeaderProps {
   title: string;
   createdAt: string;
   src?: string | null;
   writer?: string;
-  roleLevel?: number | null;
-}
-
-interface Props extends StrictPropsWithChildren {
-  className?: string;
+  roleLevel?: RoleLevel;
 }
 
 const Post = ({ className, children }: Props) => {
   return <div className={cn('flex flex-col gap-4', className)}>{children}</div>;
 };
 
-Post.Head = ({
+const PostHead = ({
   title,
-  src = '',
-  writer = 'C-Lab',
+  src,
+  writer = SERVICE_NAME,
   roleLevel = 1,
   createdAt,
 }: PostHeaderProps) => {
   return (
     <div className="space-y-4">
-      <h2 className="text-lg font-semibold">{title}</h2>
+      <h2 className="text-lg font-semibold">{toDecodeHTMLEntities(title)}</h2>
       <div className="flex items-center justify-between">
         <div className="flex gap-3">
-          <div
-            className={cn(
-              'rounded-full ring ring-offset-1',
-              getProfileRingStyle(roleLevel),
-            )}
-          >
-            <Image
-              className="rounded-full"
-              width="w-10"
-              height="w-10"
-              src={createImageUrl(src)}
-              alt="작성자 프로필사진"
-            />
-          </div>
+          <Avatar src={src} roleLevel={roleLevel} />
           <div className="text-sm">
             <p className="font-semibold">{writer}</p>
             <p>{formattedDate(createdAt)}</p>
           </div>
         </div>
-        {MODE !== 'production' && <Share />}
+        <Share />
       </div>
       <hr />
     </div>
   );
 };
 
-Post.Body = ({ className, children }: Props) => {
+const PostBody = ({ className, children }: Props) => {
   return (
     <div className={cn('whitespace-pre-wrap break-words', className)}>
-      {children}
+      {typeof children === 'string' ? toDecodeHTMLEntities(children) : children}
     </div>
   );
 };
 
-Post.Footer = ({ className, children }: Props) => {
+const PostFooter = ({ className, children }: Props) => {
   return (
     <div className={cn('flex justify-end gap-2', className)}>{children}</div>
   );
 };
+
+PostHead.displayName = 'PostHead';
+PostBody.displayName = 'PostBody';
+PostFooter.displayName = 'PostFooter';
+
+Post.Head = PostHead;
+Post.Body = PostBody;
+Post.Footer = PostFooter;
 
 export default Post;

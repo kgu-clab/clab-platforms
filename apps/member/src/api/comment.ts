@@ -1,25 +1,26 @@
 import { END_POINT } from '@constants/api';
 import { createCommonPagination, createPath } from '@utils/api';
 
-import { BaseResponse, PaginationType } from '@type/api';
-import type {
-  CommentItem,
-  CommentListItem,
-  CommentWriteItem,
-} from '@type/comment';
+import type { BaseResponse, ResponsePagination } from '@type/api';
+import type { CommentItem, CommentListItem } from '@type/comment';
 
 import { server } from './server';
 
-interface commentWriteArgs {
+interface CommentWriteRequestData {
+  content: string;
+  wantAnonymous: boolean;
+}
+
+export interface PostCommentWriteParams {
   parentId?: number;
-  boardId: string;
-  body: CommentWriteItem;
+  boardId: number;
+  body: CommentWriteRequestData;
 }
 /**
  * 나의 댓글 조회
  */
 export const getMyComments = async (page: number, size: number) => {
-  const { data } = await server.get<PaginationType<CommentItem>>({
+  const { data } = await server.get<ResponsePagination<CommentItem>>({
     url: createCommonPagination(END_POINT.MY_COMMENTS, {
       page,
       size,
@@ -31,13 +32,9 @@ export const getMyComments = async (page: number, size: number) => {
 /**
  * 댓글 목록 조회
  */
-export const getCommentList = async (
-  id: string,
-  page: number,
-  size: number,
-) => {
+export const getComments = async (id: number, page: number, size: number) => {
   const params = { id, page, size };
-  const { data } = await server.get<PaginationType<CommentListItem>>({
+  const { data } = await server.get<ResponsePagination<CommentListItem>>({
     url: createCommonPagination(END_POINT.COMMENTS(id), params),
   });
 
@@ -46,18 +43,24 @@ export const getCommentList = async (
 /**
  * 댓글 작성
  */
-export const postCommentWrite = async ({
+export const postCommentWrite = ({
   parentId,
   boardId,
   body,
-}: commentWriteArgs) => {
-  const { data } = await server.post<CommentWriteItem, BaseResponse>({
+}: PostCommentWriteParams) => {
+  return server.post<CommentWriteRequestData, BaseResponse<number>>({
     url: createPath(
       END_POINT.COMMENTS(boardId),
       parentId && `?parentId=${parentId}`,
     ),
     body,
   });
-
-  return data;
+};
+/**
+ * 댓글 삭제
+ */
+export const deleteComment = (id: number) => {
+  return server.del<CommentWriteRequestData, BaseResponse<number>>({
+    url: END_POINT.COMMENTS(id),
+  });
 };

@@ -2,13 +2,13 @@ import { useState } from 'react';
 
 import { Button, Checkbox } from '@clab/design-system';
 
-import { useCommentWriteMutation } from '@hooks/queries/useCommentWriteMutation';
+import { useCommentWriteMutation } from '@hooks/queries';
 import { cn } from '@utils/string';
 
 import Textarea from '../Textarea/Textarea';
 
 interface CommentInputProps {
-  id: string;
+  id: number;
   value: string;
   onChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
   parentId?: number;
