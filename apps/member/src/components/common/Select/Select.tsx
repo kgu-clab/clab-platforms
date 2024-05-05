@@ -1,21 +1,21 @@
 import { ComponentPropsWithRef, forwardRef } from 'react';
 
-import classNames from 'classnames';
+import { cn } from '@utils/string';
 
 interface SelectOptions {
   name: string | number;
   value: string | number;
 }
 
-interface SelectProps extends ComponentPropsWithRef<'select'> {
+interface Props extends ComponentPropsWithRef<'select'> {
   label?: string;
   options: readonly SelectOptions[];
 }
 
-const Select = forwardRef<HTMLSelectElement, SelectProps>(
+const Select = forwardRef<HTMLSelectElement, Props>(
   ({ options = [], label, className, id, ...rest }, ref) => {
     return (
-      <div className={classNames('flex flex-col', className)}>
+      <div className={cn('flex flex-col', className)}>
         {label && (
           <label htmlFor={id} className="mb-1 ml-1 text-xs">
             {label}
@@ -24,7 +24,7 @@ const Select = forwardRef<HTMLSelectElement, SelectProps>(
         <select
           ref={ref}
           id={id}
-          className="w-full grow rounded-md border p-2 disabled:bg-gray-50"
+          className="w-full appearance-none rounded-md border p-2 disabled:bg-gray-50"
           {...rest}
         >
           <option disabled value={'none'}>

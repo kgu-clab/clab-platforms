@@ -9,17 +9,11 @@ import {
   useBookLoanExtendMutation,
   useBookLoanRecordConditions,
   useBookLoanReturnMutation,
+  useMyProfile,
 } from '@hooks/queries';
 import { checkDueDate, checkExtendProgress } from '@utils/date';
 
-import { BookItem } from '@type/book';
-
-interface BookPanelProps {
-  memberId: string;
-  data: BookItem[];
-}
-
-type BookPanelActionType = '반납하기' | '연장하기';
+type Action = '반납하기' | '연장하기';
 
 const ActionButton = ({
   children,
@@ -36,28 +30,30 @@ const ActionButton = ({
   </button>
 );
 
-const BookPanel = ({ memberId, data }: BookPanelProps) => {
+const BookPanel = () => {
   const { openModal } = useModal();
 
-  const { data: myLoanBookData } = useBookLoanRecordConditions({
-    borrowerId: memberId,
+  const { data: myProfile } = useMyProfile();
+  const { data } = useBookLoanRecordConditions({
+    borrowerId: myProfile.id,
   });
   const { bookReturnMutate } = useBookLoanReturnMutation();
   const { bookExtendMutate } = useBookLoanExtendMutation();
 
-  const selectOptions = data.map(({ title, id }) => ({
-    name: title,
-    value: id,
+  const myBookLoan =
+    data.items?.filter((book) => book.status === 'APPROVED') || [];
+  const hasBookLoan = myBookLoan.length > 0;
+
+  const selectOptions = myBookLoan.map(({ bookId, bookTitle }) => ({
+    name: bookTitle,
+    value: bookId,
   }));
 
-  const myLoanSelectData =
-    myLoanBookData.items?.filter((id) => id.returnedAt === null) || [];
-
-  const onClickBookButton = (title: BookPanelActionType) => {
+  const handleActionClick = (action: Action) => {
     let selectedBookId = selectOptions[0].value; // 기본값으로 첫 번째 책 선택
 
     openModal({
-      title,
+      title: action,
       content: (
         <Select
           className="w-full"
@@ -66,19 +62,19 @@ const BookPanel = ({ memberId, data }: BookPanelProps) => {
         />
       ),
       accept: {
-        text: title,
+        text: action,
         onClick: () => {
-          if (title === '반납하기') {
+          if (action === '반납하기') {
             // 반납하기
             bookReturnMutate({
               bookId: selectedBookId,
-              borrowerId: memberId,
+              borrowerId: myProfile.id,
             });
           } else {
             // 연장하기
             bookExtendMutate({
               bookId: selectedBookId,
-              borrowerId: memberId,
+              borrowerId: myProfile.id,
             });
           }
         },
@@ -92,32 +88,24 @@ const BookPanel = ({ memberId, data }: BookPanelProps) => {
         icon={<FcBookmark />}
         label="도서"
         description={
-          data.length > 0 ? `${data.length}권 대여중` : '빌린 도서가 없어요.'
+          hasBookLoan ? `${myBookLoan.length}권 대여중` : '빌린 도서가 없어요.'
         }
       />
       <Panel.Body className="space-y-4 text-sm">
-        {data.length > 0 ? (
-          data.map(({ id, title }) => {
-            const loanData = myLoanSelectData.find(
-              (book) => book.bookId === id,
-            );
-            if (!loanData) return null;
-
+        {hasBookLoan ? (
+          myBookLoan.map(({ bookId, bookTitle, borrowedAt, dueDate }) => {
             return (
-              <ul key={id}>
+              <ul key={bookId}>
                 <li className="font-semibold">
                   <div className="mb-2 flex items-baseline justify-between">
-                    <span className="mr-2 truncate">{title}</span>
+                    <span className="mr-2 truncate">{bookTitle}</span>
                     <span className="w-fit text-nowrap text-xs">
                       D-
-                      {checkDueDate(loanData.borrowedAt!, loanData.dueDate!)}
+                      {checkDueDate(borrowedAt!, dueDate!)}
                     </span>
                   </div>
                   <ProgressBar
-                    value={checkExtendProgress(
-                      loanData.borrowedAt!,
-                      loanData.dueDate!,
-                    )}
+                    value={checkExtendProgress(borrowedAt!, dueDate!)}
                   />
                 </li>
               </ul>
@@ -129,12 +117,12 @@ const BookPanel = ({ memberId, data }: BookPanelProps) => {
           </p>
         )}
       </Panel.Body>
-      {data.length > 0 && (
+      {hasBookLoan && (
         <Panel.Action>
-          <ActionButton onClick={() => onClickBookButton('연장하기')}>
+          <ActionButton onClick={() => handleActionClick('연장하기')}>
             연장하기
           </ActionButton>
-          <ActionButton onClick={() => onClickBookButton('반납하기')}>
+          <ActionButton onClick={() => handleActionClick('반납하기')}>
             반납하기
           </ActionButton>
         </Panel.Action>

@@ -10,10 +10,9 @@ import type { SupportRequestDataType } from '@type/support';
 import SupportRequestForm from '../SupportRequestForm/SupportRequestForm';
 
 const SupportRequestSection = () => {
-  const { membershipFeeMutate, isPending } = useMembershipFeeMutation();
-  /**
-   * 사용 신청서를 제출합니다.
-   */
+  const { membershipFeeMutate, isPending, isSuccess } =
+    useMembershipFeeMutation();
+
   const handleRequestSubmit = async (data: SupportRequestDataType) => {
     membershipFeeMutate({
       ...data,
@@ -31,6 +30,7 @@ const SupportRequestSection = () => {
       <Section.Body>
         <SupportRequestForm
           isPending={isPending}
+          isSuccess={isSuccess}
           onSubmit={handleRequestSubmit}
         />
       </Section.Body>

@@ -4,18 +4,19 @@ import Image from '@components/common/Image/Image';
 
 import { createImageUrl } from '@utils/api';
 import { formattedDate } from '@utils/date';
-import { formatWon } from '@utils/string';
+import { formatMemberName, formatWon } from '@utils/string';
 
 import type { MembershipFeeType } from '@type/membershipFee';
 
 import MembershipCategoryBadge from '../MembershipCategoryBadge/MembershipCategoryBadge';
 import MembershipStatusBadge from '../MembershipStatusBadge/MembershipStatusBadge';
 
-interface MembershipInfoModalProps {
+interface Props {
   data: MembershipFeeType;
+  hasPermission?: boolean;
 }
 
-const MembershipInfoModal = ({ data }: MembershipInfoModalProps) => {
+const MembershipInfoModal = ({ data, hasPermission = false }: Props) => {
   const {
     imageUrl,
     category,
@@ -28,13 +29,19 @@ const MembershipInfoModal = ({ data }: MembershipInfoModalProps) => {
     createdAt,
   } = data;
 
+  const handleImageClick = () => {
+    window.open(createImageUrl(imageUrl), '_blank');
+  };
+
   return (
     <div className="space-y-2">
-      <div className="scrollbar-hide max-h-[480px] overflow-auto rounded-lg border">
-        <Image src={createImageUrl(imageUrl)} alt="증빙자료" />
+      <div className="scrollbar-hide max-h-[480px] cursor-pointer overflow-auto rounded-lg border">
+        <Image
+          src={createImageUrl(imageUrl)}
+          alt="증빙자료"
+          onClick={handleImageClick}
+        />
       </div>
-
-      <div className="space-x-2"></div>
       <DetailsList>
         <DetailsList.Item label="상태">
           <MembershipStatusBadge status={status} />
@@ -43,12 +50,16 @@ const MembershipInfoModal = ({ data }: MembershipInfoModalProps) => {
           <MembershipCategoryBadge category={category} />
         </DetailsList.Item>
         <DetailsList.Item label="내용">{content}</DetailsList.Item>
-        {account && <DetailsList.Item label="계좌">{account}</DetailsList.Item>}
+        {hasPermission && account && (
+          <DetailsList.Item label="계좌">{account}</DetailsList.Item>
+        )}
         <DetailsList.Item label="금액">
           {`₩${formatWon(amount)}`}
         </DetailsList.Item>
         <DetailsList.Item label="요청자">
-          {`${memberName} (${memberId})`}
+          {hasPermission
+            ? `${memberName} (${memberId})`
+            : formatMemberName(memberName, memberId)}
         </DetailsList.Item>
         <DetailsList.Item label="신청일">
           {formattedDate(createdAt)}

@@ -3,13 +3,12 @@ import { FcTimeline } from 'react-icons/fc';
 
 import Panel from '@components/common/Panel/Panel';
 
-import { ScheduleItem } from '@type/schedule';
+import { useMyActivity } from '@hooks/queries';
 
-interface ActivityPanelProps {
-  data: ScheduleItem[];
-}
+const ActivityPanel = () => {
+  const { data } = useMyActivity();
+  const hasActivities = data.items.length > 0;
 
-const ActivityPanel = ({ data }: ActivityPanelProps) => {
   const [open, setOpen] = useState(true);
 
   const handleOpenClick = useCallback(() => {
@@ -22,19 +21,19 @@ const ActivityPanel = ({ data }: ActivityPanelProps) => {
         icon={<FcTimeline />}
         label="활동"
         description={
-          data.length === 0
-            ? '참여하고 있는 활동이 없어요.'
-            : `${data.length}개의 활동이 있어요.`
+          hasActivities
+            ? `${data.items.length}개의 활동이 있어요.`
+            : '참여하고 있는 활동이 없어요.'
         }
         isOpen={open}
         onClick={handleOpenClick}
       />
       {
         <Panel.Body isOpen={open}>
-          {data.length ? (
+          {hasActivities ? (
             <div className="space-y-4 text-sm">
               <ul className="list-inside list-disc rounded-md bg-gray-100 p-2 text-gray-500">
-                {data.map(({ id, activityName }) => (
+                {data.items.map(({ id, activityName }) => (
                   <li key={id} className="font-semibold">
                     {activityName}
                   </li>

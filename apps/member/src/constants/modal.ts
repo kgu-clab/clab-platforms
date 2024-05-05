@@ -1,6 +1,8 @@
 export const MODAL_TITLE = {
+  ALARM: '🔔 알림',
   REPORT: '🚨 신고하기',
   DELETE: '🗑️ 삭제하기',
+  SUPPORT_HISTORY: '📃 회비 상세 내역',
 } as const;
 
 export const MODAL_CONTENT = {

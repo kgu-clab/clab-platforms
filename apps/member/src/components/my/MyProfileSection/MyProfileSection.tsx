@@ -26,12 +26,9 @@ const MyProfileSection = ({ data }: MyProfileSectionProps) => {
   const { openModal } = useModal();
   const { userInfoMutate, isPending } = useUserInfoMutation();
 
-  const [isEdit, setIsEdit] = useState<boolean>(false);
+  const [isEdit, setIsEdit] = useState(false);
   const [inputs, setInputs] = useState<MemberProfileType>(data);
-  /**
-   * 수정 버튼 클릭 시
-   * - 수정모드일 경우 저장
-   */
+
   const handleIsEditClick = () => {
     setIsEdit((prev) => {
       const isModified = !isObjectsEqual(inputs, data);
@@ -51,9 +48,7 @@ const MyProfileSection = ({ data }: MyProfileSectionProps) => {
       return !prev;
     });
   };
-  /**
-   * 입력값이 변경될 때마다 상태를 업데이트합니다.
-   */
+
   const handleInputsChange = useCallback(
     (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
       const { name, value } = e.target;
@@ -61,9 +56,7 @@ const MyProfileSection = ({ data }: MyProfileSectionProps) => {
     },
     [],
   );
-  /**
-   * 비밀번호 변경 모달을 엽니다.
-   */
+
   const handleChangePasswordClick = useCallback(() => {
     openModal({
       title: '비밀번호 변경',
@@ -86,6 +79,7 @@ const MyProfileSection = ({ data }: MyProfileSectionProps) => {
             color={isEdit ? 'orange' : 'white'}
             size="sm"
             onClick={handleIsEditClick}
+            disabled={isPending}
           >
             {isPending ? <Loading /> : isEdit ? '저장' : '수정'}
           </Button>

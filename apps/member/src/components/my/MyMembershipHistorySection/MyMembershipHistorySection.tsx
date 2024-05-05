@@ -5,6 +5,7 @@ import MembershipInfoModal from '@components/membership/MembershipInfoModal/Memb
 import MembershipStatusBadge from '@components/membership/MembershipStatusBadge/MembershipStatusBadge';
 
 import { MY_MESSAGE } from '@constants/message';
+import { MODAL_TITLE } from '@constants/modal';
 import useModal from '@hooks/common/useModal';
 import { toYYMMDD } from '@utils/date';
 
@@ -18,13 +19,11 @@ const TITLE = '회비 신청 내역';
 
 const MyMembershipHistorySection = ({ data }: MyMembershipFeeProps) => {
   const { openModal } = useModal();
-  /**
-   * 회비 상세 내역을 모달을 통해서 보여줍니다.
-   */
+
   const handleButtonClick = (membership: MembershipFeeType) => {
     openModal({
-      title: TITLE,
-      content: <MembershipInfoModal data={membership} />,
+      title: MODAL_TITLE.SUPPORT_HISTORY,
+      content: <MembershipInfoModal data={membership} hasPermission />,
     });
   };
 

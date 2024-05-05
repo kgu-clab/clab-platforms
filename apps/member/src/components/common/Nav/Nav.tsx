@@ -7,11 +7,14 @@ import { Menubar, MenubarItem } from '@clab/design-system';
 import { MODE } from '@constants/environment';
 import { PATH } from '@constants/path';
 import useModal from '@hooks/common/useModal';
+import { useMyProfile } from '@hooks/queries';
 
 const Nav = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const { openModal } = useModal();
+
+  const { data } = useMyProfile();
 
   const pathName = location.pathname;
 
@@ -49,12 +52,14 @@ const Nav = () => {
             >
               일정
             </MenubarItem>
-            <MenubarItem
-              selected={pathName.startsWith(PATH.ACTIVITY)}
-              onClick={() => handleMenubarItemClick(PATH.ACTIVITY)}
-            >
-              활동
-            </MenubarItem>
+            {MODE !== 'production' && (
+              <MenubarItem
+                selected={pathName.startsWith(PATH.ACTIVITY)}
+                onClick={() => handleMenubarItemClick(PATH.ACTIVITY)}
+              >
+                활동
+              </MenubarItem>
+            )}
             <MenubarItem
               selected={pathName.startsWith(PATH.COMMUNITY)}
               onClick={() => handleMenubarItemClick(PATH.COMMUNITY)}
@@ -73,7 +78,7 @@ const Nav = () => {
             >
               회비
             </MenubarItem>
-            {MODE !== 'production' && (
+            {data.roleLevel! >= 2 && (
               <MenubarItem
                 selected={pathName.startsWith(PATH.MANAGE)}
                 onClick={() => handleMenubarItemClick(PATH.MANAGE)}

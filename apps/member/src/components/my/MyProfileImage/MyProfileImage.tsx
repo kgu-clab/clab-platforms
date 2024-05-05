@@ -16,22 +16,16 @@ interface MyProfileImageProps {
 
 const MyProfileImage = ({ isEdit, data, onChange }: MyProfileImageProps) => {
   const imageInputRef = useRef<HTMLInputElement>(null);
-  const [image, setImage] = useState<string | null>(data.imageUrl);
-  /**
-   * 사진 변경 버튼 클릭 이벤트
-   */
+  const [image, setImage] = useState<string>(data.imageUrl ?? '');
+
   const handleChangeButtonClick = useCallback(() => {
     imageInputRef.current?.click();
   }, []);
-  /**
-   * 삭제 버튼 클릭 이벤트
-   */
+
   const onClickRemoveProfileImage = useCallback(() => {
-    setImage(null);
+    setImage(''); // 값이 없을 경우 기본 이미지로 변경
   }, []);
-  /**
-   * 프로필 이미지 변경 이벤트
-   */
+
   const handleProfileImageChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
       const reader = new FileReader();
@@ -46,9 +40,7 @@ const MyProfileImage = ({ isEdit, data, onChange }: MyProfileImageProps) => {
     },
     [],
   );
-  /**
-   * 이미지 변경 시 상위 상태 업데이트
-   */
+
   useEffect(() => {
     onChange((prev) => ({ ...prev, imageUrl: image }));
   }, [onChange, image]);
@@ -71,6 +63,7 @@ const MyProfileImage = ({ isEdit, data, onChange }: MyProfileImageProps) => {
         className="hidden"
         onChange={handleProfileImageChange}
         disabled={!isEdit}
+        accept="image/png, image/jpeg, image/jpg"
       />
       <div className="mt-4">
         {isEdit && (

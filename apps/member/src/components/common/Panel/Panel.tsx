@@ -1,5 +1,5 @@
 /* eslint-disable react/display-name */
-import classNames from 'classnames';
+import { cn } from '@utils/string';
 
 import DropdownButton from '../DropdownButton/DropdownButton';
 
@@ -30,13 +30,13 @@ interface PanelActionProps {
 
 const Panel = ({ className, children }: PanelProps) => {
   return (
-    <div className={classNames('w-full rounded-lg border bg-white', className)}>
+    <div className={cn('w-full rounded-lg border bg-white', className)}>
       {children}
     </div>
   );
 };
 
-Panel.Header = ({
+const PanelHeader = ({
   icon,
   label,
   description,
@@ -45,11 +45,11 @@ Panel.Header = ({
 }: PanelHeaderProps) => {
   return (
     <div className="m-4 flex items-center justify-between">
-      <div className="flex items-center gap-2 text-xl font-bold text-black">
+      <div className="flex items-center gap-2 font-semibold text-black">
         <span className="rounded-md bg-gray-100 p-1">{icon}</span>
-        <span className="grow text-nowrap">{label}</span>
+        <span className="text-nowrap text-xl">{label}</span>
         {description && (
-          <span className="truncate border-l pl-2 text-sm text-gray-500">
+          <span className="truncate border-l pl-2 text-xs text-gray-500">
             {description}
           </span>
         )}
@@ -61,11 +61,11 @@ Panel.Header = ({
   );
 };
 
-Panel.Body = ({ isOpen = true, children, className }: PanelBodyProps) => {
+const PanelBody = ({ isOpen = true, children, className }: PanelBodyProps) => {
   const openStyle = isOpen ? 'opacity-100 m-4' : 'max-h-0 opacity-0';
   return (
     <div
-      className={classNames(
+      className={cn(
         'overflow-hidden transition duration-500 ease-in-out',
         openStyle,
         className,
@@ -76,10 +76,10 @@ Panel.Body = ({ isOpen = true, children, className }: PanelBodyProps) => {
   );
 };
 
-Panel.Action = ({ children, className }: PanelActionProps) => {
+const PanelAction = ({ children, className }: PanelActionProps) => {
   return (
     <div
-      className={classNames(
+      className={cn(
         'grid grid-cols-2 divide-x border-t text-center text-sm font-semibold text-gray-500',
         className,
       )}
@@ -88,5 +88,13 @@ Panel.Action = ({ children, className }: PanelActionProps) => {
     </div>
   );
 };
+
+PanelHeader.displayName = 'PanelHeader';
+PanelBody.displayName = 'PanelBody';
+PanelAction.displayName = 'PanelAction';
+
+Panel.Header = PanelHeader;
+Panel.Body = PanelBody;
+Panel.Action = PanelAction;
 
 export default Panel;
