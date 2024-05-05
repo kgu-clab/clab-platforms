@@ -4,6 +4,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 import { postBoardsWrite } from '@api/board';
 import { QUERY_KEY } from '@constants/key';
+import { PATH } from '@constants/path';
 import useToast from '@hooks/common/useToast';
 
 export const useBoardWriteMutation = () => {
@@ -32,8 +33,7 @@ export const useBoardWriteMutation = () => {
           message: '글이 성공적으로 등록되었습니다.',
         });
       }
-
-      navigate(-1);
+      navigate(PATH.COMMUNITY);
     },
   });
 
