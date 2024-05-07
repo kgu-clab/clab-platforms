@@ -1,28 +1,29 @@
 import React, { ComponentPropsWithRef } from 'react';
 
-import { twMerge } from 'tailwind-merge';
+import { cn } from '../utils';
+import type { MenubarGapVariant } from './Menubar.types';
 
-import { menubarStyleGap } from './Menubar.style';
-
-interface MenubarProps extends ComponentPropsWithRef<'ul'> {
-  gap?: 'sm' | 'md' | 'lg' | 'xl';
+interface Props extends ComponentPropsWithRef<'ul'> {
+  gap?: MenubarGapVariant;
 }
 
-interface MenubarItemProps extends ComponentPropsWithRef<'li'> {
+interface ItemProps extends ComponentPropsWithRef<'li'> {
   selected?: boolean;
 }
 
-const Menubar = ({
-  gap = 'md',
-  className,
-  children,
-  ...rest
-}: MenubarProps) => {
+const menubarGapVariant = {
+  sm: 'gap-2',
+  md: 'gap-4',
+  lg: 'gap-8',
+  xl: 'gap-10',
+} as const;
+
+const Menubar = ({ gap = 'md', className, children, ...rest }: Props) => {
   return (
     <ul
-      className={twMerge(
+      className={cn(
         'flex font-semibold text-gray-400',
-        menubarStyleGap[gap],
+        menubarGapVariant[gap],
         className,
       )}
       {...rest}
@@ -31,19 +32,13 @@ const Menubar = ({
     </ul>
   );
 };
-Menubar.displayName = 'Menubar';
 
-const MenubarItem = ({
-  selected,
-  className,
-  children,
-  ...rest
-}: MenubarItemProps) => {
+const MenubarItem = ({ selected, className, children, ...rest }: ItemProps) => {
   return (
     <li
-      className={twMerge(
+      className={cn(
         'cursor-pointer transition-colors hover:text-black',
-        selected && 'text-black underline underline-offset-4',
+        { 'text-black underline underline-offset-4': selected },
         className,
       )}
       {...rest}
@@ -52,6 +47,10 @@ const MenubarItem = ({
     </li>
   );
 };
+
+Menubar.displayName = 'Menubar';
 MenubarItem.displayName = 'MenubarItem';
 
-export { Menubar, MenubarItem };
+Menubar.Item = MenubarItem;
+
+export default Menubar;

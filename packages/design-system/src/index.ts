@@ -1,3 +1,5 @@
+import './globals.css';
+
 /**
  * layout
  */

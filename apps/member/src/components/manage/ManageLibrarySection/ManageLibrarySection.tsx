@@ -1,6 +1,6 @@
 import { useCallback, useState } from 'react';
 
-import { Menubar, MenubarItem, Table } from '@clab/design-system';
+import { Menubar, Table } from '@clab/design-system';
 
 import ActionButton from '@components/common/ActionButton/ActionButton';
 import Pagination from '@components/common/Pagination/Pagination';
@@ -130,18 +130,18 @@ const ManageLibrarySection = () => {
         description="대여자와 연체자를 확인할 수 있어요"
       >
         <Menubar>
-          <MenubarItem
+          <Menubar.Item
             selected={mode === 'condition'}
             onClick={() => handleMenubarItemClick('condition')}
           >
             대여
-          </MenubarItem>
-          <MenubarItem
+          </Menubar.Item>
+          <Menubar.Item
             selected={mode === 'overdue'}
             onClick={() => handleMenubarItemClick('overdue')}
           >
             연체
-          </MenubarItem>
+          </Menubar.Item>
         </Menubar>
       </Section.Header>
       <Section.Body>

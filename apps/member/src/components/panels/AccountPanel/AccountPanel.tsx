@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { FcBusiness } from 'react-icons/fc';
 
-import { Button, type ButtonColorType, Input } from '@clab/design-system';
+import { Button, type ButtonColorVariant, Input } from '@clab/design-system';
 
 import Panel from '@components/common/Panel/Panel';
 import Select from '@components/common/Select/Select';
@@ -19,7 +19,7 @@ import dayjs from 'dayjs';
 
 interface AccountButtonProps {
   label: string;
-  buttonColor: ButtonColorType;
+  buttonColor: ButtonColorVariant;
   onClick?: () => void;
   children?: React.ReactNode;
 }

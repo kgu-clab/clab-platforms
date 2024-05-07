@@ -59,9 +59,9 @@ const CommentInput = ({
       />
       <div className="flex flex-col justify-between text-nowrap">
         <Checkbox
-          label="익명"
+          id="wantAnonymous"
           name="wantAnonymous"
-          type="checkbox"
+          label="익명"
           checked={anonymous}
           onChange={handleAnonymousToggle}
         />

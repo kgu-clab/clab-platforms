@@ -1,1 +1,1 @@
-export { Menubar, MenubarItem } from './Menubar';
+export { default as Menubar } from './Menubar';

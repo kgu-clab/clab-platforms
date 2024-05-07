@@ -2,7 +2,7 @@ import { useCallback } from 'react';
 import { FiGrid, FiSearch, FiUser } from 'react-icons/fi';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 
-import { Menubar, MenubarItem } from '@clab/design-system';
+import { Menubar } from '@clab/design-system';
 
 import { MODE } from '@constants/environment';
 import { PATH } from '@constants/path';
@@ -40,51 +40,51 @@ const Nav = () => {
             <h1 className="font-bold">멤버스</h1>
           </Link>
           <Menubar gap="xl" className="text-sm">
-            <MenubarItem
+            <Menubar.Item
               selected={pathName === PATH.MAIN}
               onClick={() => handleMenubarItemClick(PATH.MAIN)}
             >
               홈
-            </MenubarItem>
-            <MenubarItem
+            </Menubar.Item>
+            <Menubar.Item
               selected={pathName.startsWith(PATH.CALENDER)}
               onClick={() => handleMenubarItemClick(PATH.CALENDER)}
             >
               일정
-            </MenubarItem>
+            </Menubar.Item>
             {MODE !== 'production' && (
-              <MenubarItem
+              <Menubar.Item
                 selected={pathName.startsWith(PATH.ACTIVITY)}
                 onClick={() => handleMenubarItemClick(PATH.ACTIVITY)}
               >
                 활동
-              </MenubarItem>
+              </Menubar.Item>
             )}
-            <MenubarItem
+            <Menubar.Item
               selected={pathName.startsWith(PATH.COMMUNITY)}
               onClick={() => handleMenubarItemClick(PATH.COMMUNITY)}
             >
               커뮤니티
-            </MenubarItem>
-            <MenubarItem
+            </Menubar.Item>
+            <Menubar.Item
               selected={pathName.startsWith(PATH.LIBRARY)}
               onClick={() => handleMenubarItemClick(PATH.LIBRARY)}
             >
               도서관
-            </MenubarItem>
-            <MenubarItem
+            </Menubar.Item>
+            <Menubar.Item
               selected={pathName.startsWith(PATH.SUPPORT)}
               onClick={() => handleMenubarItemClick(PATH.SUPPORT)}
             >
               회비
-            </MenubarItem>
+            </Menubar.Item>
             {data.roleLevel! >= 2 && (
-              <MenubarItem
+              <Menubar.Item
                 selected={pathName.startsWith(PATH.MANAGE)}
                 onClick={() => handleMenubarItemClick(PATH.MANAGE)}
               >
                 관리
-              </MenubarItem>
+              </Menubar.Item>
             )}
           </Menubar>
         </div>
