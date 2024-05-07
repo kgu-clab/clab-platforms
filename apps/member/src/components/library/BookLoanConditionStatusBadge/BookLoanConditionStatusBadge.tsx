@@ -1,4 +1,4 @@
-import { Badge, BadgeColorType } from '@clab/design-system';
+import { Badge, type BadgeColorVariant } from '@clab/design-system';
 
 import { BOOK_STATE } from '@constants/state';
 
@@ -16,7 +16,7 @@ const BookLoanConditionStatusBadge = ({
     : !returnedAt
       ? BOOK_STATE.BORROWED
       : BOOK_STATE.RETURN;
-  const color: BadgeColorType = !borrowedAt
+  const color: BadgeColorVariant = !borrowedAt
     ? 'red'
     : !returnedAt
       ? 'yellow'
