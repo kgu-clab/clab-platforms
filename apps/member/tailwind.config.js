@@ -4,10 +4,7 @@ const path = require('path');
 
 /** @type {import('tailwindcss').Config} */
 export default {
-  content: [
-    './src/**/*.{ts,tsx}',
-    path.join(path.dirname(require.resolve('@clab/design-system')), '**/*.js'),
-  ],
+  content: ['./src/**/*.{ts,tsx}'],
   theme: {
     extend: {
       container: {
