@@ -4,8 +4,22 @@ import terser from '@rollup/plugin-terser';
 import typescript from '@rollup/plugin-typescript';
 import dts from 'rollup-plugin-dts';
 import peerDepsExternal from 'rollup-plugin-peer-deps-external';
+import postcss from 'rollup-plugin-postcss';
 
 import packageJson from './package.json';
+
+function createPostCSS() {
+  return postcss({
+    config: {
+      path: './postcss.config.js',
+    },
+    extensions: ['.css'],
+    minimize: true,
+    inject: {
+      insertAt: 'top',
+    },
+  });
+}
 
 const config = [
   {
@@ -18,23 +32,24 @@ const config = [
       },
       {
         file: packageJson.module,
-        format: 'es',
+        format: 'esm',
         sourcemap: true,
       },
     ],
     plugins: [
+      createPostCSS(),
       peerDepsExternal(),
       resolve(),
       commonjs(),
-      typescript({ tsconfig: './tsconfig.json' }),
       terser(),
+      typescript(),
     ],
     external: ['react', 'react-dom'],
   },
   {
     input: 'src/index.ts',
     output: [{ file: 'dist/index.d.ts', format: 'es' }],
-    plugins: [dts.default()],
+    plugins: [createPostCSS(), dts.default()],
   },
 ];
 
