@@ -1,7 +1,7 @@
 import { useCallback, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { Menubar, MenubarItem, Table } from '@clab/design-system';
+import { Menubar, Table } from '@clab/design-system';
 
 import ActionButton from '@components/common/ActionButton/ActionButton';
 import Pagination from '@components/common/Pagination/Pagination';
@@ -102,18 +102,18 @@ const ManagerAlertSection = ({ category }: ManagerAlertSectionProps) => {
         description={`${title}을 추가하거나 삭제할 수 있어요`}
       >
         <Menubar>
-          <MenubarItem
+          <Menubar.Item
             selected={mode === 'view'}
             onClick={() => handleMenubarItemClick('view')}
           >
             보기
-          </MenubarItem>
-          <MenubarItem
+          </Menubar.Item>
+          <Menubar.Item
             selected={mode === 'add'}
             onClick={() => handleMenubarItemClick('add')}
           >
             추가
-          </MenubarItem>
+          </Menubar.Item>
         </Menubar>
       </Section.Header>
       <Section.Body>

@@ -1,7 +1,7 @@
 import { useCallback, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { Menubar, MenubarItem, Table } from '@clab/design-system';
+import { Menubar, Table } from '@clab/design-system';
 
 import AddScheduleForm from '@components/calendar/AddScheduleForm/AddScheduleForm';
 import ActionButton from '@components/common/ActionButton/ActionButton';
@@ -89,18 +89,18 @@ const ManageCalendarSection = () => {
         description="일정을 추가하거나 삭제할 수 있어요"
       >
         <Menubar>
-          <MenubarItem
+          <Menubar.Item
             selected={mode === 'view'}
             onClick={() => handleMenubarItemClick('view')}
           >
             보기
-          </MenubarItem>
-          <MenubarItem
+          </Menubar.Item>
+          <Menubar.Item
             selected={mode === 'add'}
             onClick={() => handleMenubarItemClick('add')}
           >
             추가
-          </MenubarItem>
+          </Menubar.Item>
         </Menubar>
       </Section.Header>
       <Section.Body>
