@@ -10,6 +10,7 @@
   ],
   "scripts": {
     "clean": "rimraf dist",
+    "type": "tsc --noEmit",
     "build": "pnpm clean && rollup -c --bundleConfigAsCjs"
   },
   "devDependencies": {
