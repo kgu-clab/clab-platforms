@@ -1,22 +1,31 @@
 import React, { ComponentPropsWithRef, forwardRef } from 'react';
 
-import { twMerge } from 'tailwind-merge';
+import { cn } from '../utils';
 
-interface InputProps extends ComponentPropsWithRef<'input'> {
-  id: string;
+interface Props extends ComponentPropsWithRef<'input'> {
   label?: string;
+  labelClassName?: string;
+  inputClassName?: string;
 }
 
-const Input = forwardRef<HTMLInputElement, InputProps>(
-  ({ label, id, className, ...rest }, ref) => {
+const Input = forwardRef<HTMLInputElement, Props>(
+  ({ label, id, className, inputClassName, labelClassName, ...rest }, ref) => {
     return (
-      <div className={twMerge('flex flex-col', className)}>
+      <div className={cn('flex flex-col', className)}>
         {label && (
-          <label htmlFor={id} className="mb-1 ml-1 text-xs">
+          <label
+            htmlFor={id}
+            className={cn('mb-1 ml-1 text-xs', labelClassName)}
+          >
             {label}
           </label>
         )}
-        <input ref={ref} id={id} className="rounded-lg border p-2" {...rest} />
+        <input
+          ref={ref}
+          id={id}
+          className={cn('rounded-lg border p-2', inputClassName)}
+          {...rest}
+        />
       </div>
     );
   },

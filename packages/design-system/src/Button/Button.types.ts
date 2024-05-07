@@ -1,2 +1,10 @@
-export type ButtonColorType = 'white' | 'orange' | 'green' | 'red' | 'blue';
-export type ButtonSizeType = 'sm' | 'md' | 'lg';
+import type {
+  DesignSystemColorVariant,
+  DesignSystemSizeVariant,
+} from '../types';
+
+export type ButtonColorVariant = DesignSystemColorVariant<
+  'white' | 'orange',
+  'yellow'
+>;
+export type ButtonSizeVariant = DesignSystemSizeVariant;

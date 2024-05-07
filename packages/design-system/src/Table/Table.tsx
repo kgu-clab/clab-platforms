@@ -1,13 +1,19 @@
-import React from 'react';
+import React, { ComponentPropsWithRef } from 'react';
 
-import { twMerge } from 'tailwind-merge';
+import { cn } from '../utils';
 
-import { CellProps, RowProps, TableProps } from './Table.types';
+export interface TableProps extends ComponentPropsWithRef<'table'> {
+  head?: readonly string[];
+}
+
+export interface RowProps extends ComponentPropsWithRef<'tr'> {}
+
+export interface CellProps extends ComponentPropsWithRef<'td'> {}
 
 const Table = ({ head, className, children, ...rest }: TableProps) => {
   return (
     <table
-      className={twMerge('w-full table-auto border-collapse', className)}
+      className={cn('w-full table-auto border-collapse', className)}
       {...rest}
     >
       {head && (
@@ -15,7 +21,7 @@ const Table = ({ head, className, children, ...rest }: TableProps) => {
           <tr className="bg-gray-100 text-center">
             {head.map((item) => (
               <th
-                key={item}
+                key={`table-head-${item}`}
                 className="text-nowrap p-2 first:rounded-l-lg last:rounded-r-lg"
               >
                 {item}
@@ -24,7 +30,6 @@ const Table = ({ head, className, children, ...rest }: TableProps) => {
           </tr>
         </thead>
       )}
-
       <tbody className="divide-y text-sm">{children}</tbody>
     </table>
   );
@@ -33,7 +38,7 @@ const Table = ({ head, className, children, ...rest }: TableProps) => {
 const Row = ({ className, onClick, children, ...rest }: RowProps) => {
   return (
     <tr
-      className={twMerge(
+      className={cn(
         'w-full text-center transition-colors hover:bg-gray-50',
         onClick && 'cursor-pointer',
         className,
@@ -49,7 +54,7 @@ const Row = ({ className, onClick, children, ...rest }: RowProps) => {
 const Cell = ({ className, children, ...rest }: CellProps) => {
   return (
     <td
-      className={twMerge('p-2 first:rounded-l-lg last:rounded-r-lg', className)}
+      className={cn('p-2 first:rounded-l-lg last:rounded-r-lg', className)}
       {...rest}
     >
       {children}

@@ -1,18 +1,22 @@
-import React, { forwardRef } from 'react';
+import React, { ComponentPropsWithRef, forwardRef } from 'react';
 
-import { twMerge } from 'tailwind-merge';
+import { cn } from '../utils';
 
-import { CheckboxProps } from './Checkbox.types';
+export interface Props extends ComponentPropsWithRef<'input'> {
+  id: string;
+  label: string;
+  checkboxClassName?: string;
+}
 
-const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
-  ({ id, label, className, ...rest }, ref) => {
+const Checkbox = forwardRef<HTMLInputElement, Props>(
+  ({ id, label, className, checkboxClassName, ...rest }, ref) => {
     return (
-      <div className={twMerge('flex items-center gap-2', className)}>
+      <div className={cn('flex items-center gap-2', className)}>
         <input
           ref={ref}
           id={id}
           type="checkbox"
-          className="accent-clab-main"
+          className={cn('accent-clab-main', checkboxClassName)}
           {...rest}
         />
         <label htmlFor={id}>{label}</label>
