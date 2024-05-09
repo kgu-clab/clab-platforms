@@ -13,6 +13,7 @@
     "dev": "pnpm -r run dev",
     "build": "pnpm -r run build",
     "type": "pnpm -r run type",
+    "test": "pnpm -r run test",
     "lint": "eslint .",
     "format": "prettier --write .",
     "dev:auth": "pnpm --filter auth dev",

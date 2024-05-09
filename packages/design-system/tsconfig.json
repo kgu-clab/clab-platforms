@@ -1,6 +1,7 @@
 {
   "extends": "@clab/config/tsconfig.package.json",
   "compilerOptions": {
+    "types": ["vitest/globals"],
     "declaration": false,
     "declarationDir": null,
     "declarationMap": false
