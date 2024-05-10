@@ -2,6 +2,12 @@ import React from 'react';
 
 import type { Meta, StoryObj } from '@storybook/react';
 
+import {
+  DESIGN_SYSTEM_COLOR_VARIANT,
+  DESIGN_SYSTEM_COLOR_VARIANT_SUMMARY,
+  DESIGN_SYSTEM_SIZE_VARIANT,
+  DESIGN_SYSTEM_SIZE_VARIANT_SUMMARY,
+} from '../constants';
 import Button from './Button';
 
 const meta = {
@@ -14,26 +20,24 @@ const meta = {
   },
   argTypes: {
     color: {
-      description: '버튼의 색상을 지정합니다.',
+      description: '버튼의 색상을 설정합니다.',
       control: 'select',
-      options: ['white', 'orange', 'green', 'red', 'blue'],
+      options: DESIGN_SYSTEM_COLOR_VARIANT,
       table: {
-        defaultValue: { summary: 'white' },
+        defaultValue: { summary: DESIGN_SYSTEM_COLOR_VARIANT[0] },
         type: {
-          summary: '"white" | "orange" | "green" | "red" | "blue"',
+          summary: DESIGN_SYSTEM_COLOR_VARIANT_SUMMARY,
         },
       },
     },
     size: {
-      description: '버튼의 크기를 지정합니다.',
-      control: {
-        type: 'select',
-      },
-      options: ['sm', 'md', 'lg'],
+      description: '버튼의 크기를 설정합니다.',
+      control: 'select',
+      options: DESIGN_SYSTEM_SIZE_VARIANT,
       table: {
-        defaultValue: { summary: 'md' },
+        defaultValue: { summary: DESIGN_SYSTEM_SIZE_VARIANT[0] },
         type: {
-          summary: '"sm" | "md" | "lg"',
+          summary: DESIGN_SYSTEM_SIZE_VARIANT_SUMMARY,
         },
       },
     },
@@ -75,17 +79,23 @@ export const Disabled: Story = {
 export const Colors: Story = {
   render: (args) => (
     <div className="space-x-2">
-      <Button {...args} color="white">
-        White
+      <Button {...args} color="primary">
+        Primary
+      </Button>
+      <Button {...args} color="secondary">
+        Secondary
+      </Button>
+      <Button {...args} color="red">
+        Red
       </Button>
       <Button {...args} color="orange">
         Orange
       </Button>
+      <Button {...args} color="yellow">
+        Yellow
+      </Button>
       <Button {...args} color="green">
         Green
-      </Button>
-      <Button {...args} color="red">
-        Red
       </Button>
       <Button {...args} color="blue">
         Blue

@@ -2,6 +2,10 @@ import React from 'react';
 
 import type { Meta, StoryObj } from '@storybook/react';
 
+import {
+  DESIGN_SYSTEM_COLOR_VARIANT,
+  DESIGN_SYSTEM_COLOR_VARIANT_SUMMARY,
+} from '../constants';
 import Badge from './Badge.tsx';
 
 const meta = {
@@ -14,13 +18,13 @@ const meta = {
   },
   argTypes: {
     color: {
-      description: '뱃지의 색상을 지정합니다.',
+      description: '뱃지의 색상을 설정합니다.',
       control: 'select',
-      options: ['primary', 'blue', 'green', 'red', 'yellow'],
+      options: DESIGN_SYSTEM_COLOR_VARIANT,
       table: {
-        defaultValue: { summary: 'blue' },
+        defaultValue: { summary: DESIGN_SYSTEM_COLOR_VARIANT[0] },
         type: {
-          summary: '"primary" | "blue" | "green" | "red" | "yellow"',
+          summary: DESIGN_SYSTEM_COLOR_VARIANT_SUMMARY,
         },
       },
     },
@@ -34,11 +38,11 @@ type Story = StoryObj<typeof meta>;
  */
 export const Default: Story = {
   args: {
-    children: 'Default Badge',
+    children: 'Badge',
   },
 };
 /**
- * 뱃지의 색상을 지정할 수 있습니다.
+ * 뱃지의 색상을 설정할 수 있습니다.
  */
 export const Colors: Story = {
   render: (args) => (
@@ -46,17 +50,23 @@ export const Colors: Story = {
       <Badge {...args} color="primary">
         Primary
       </Badge>
-      <Badge {...args} color="blue">
-        Blue
-      </Badge>
-      <Badge {...args} color="green">
-        Green
+      <Badge {...args} color="secondary">
+        Secondary
       </Badge>
       <Badge {...args} color="red">
         Red
       </Badge>
+      <Badge {...args} color="orange">
+        Orange
+      </Badge>
       <Badge {...args} color="yellow">
         Yellow
+      </Badge>
+      <Badge {...args} color="green">
+        Green
+      </Badge>
+      <Badge {...args} color="blue">
+        Blue
       </Badge>
     </div>
   ),
