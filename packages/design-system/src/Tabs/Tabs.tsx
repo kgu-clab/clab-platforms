@@ -1,4 +1,4 @@
-import React, { ComponentPropsWithRef, useCallback, useState } from 'react';
+import React, { ButtonHTMLAttributes, useCallback, useState } from 'react';
 
 import { cn } from '../utils';
 import type { TabsOptions } from './Tabs.types';
@@ -9,7 +9,8 @@ export interface TabsProps {
   onChange?: (value: string) => void;
 }
 
-export interface TabsOptionProps extends ComponentPropsWithRef<'button'> {}
+export interface TabsOptionProps
+  extends ButtonHTMLAttributes<HTMLButtonElement> {}
 
 const Tabs = ({ options, value, onChange }: TabsProps) => {
   const [selected, setSelected] = useState(value ?? options[0].value);
@@ -25,7 +26,7 @@ const Tabs = ({ options, value, onChange }: TabsProps) => {
   return (
     <div className="flex w-full items-center divide-x rounded-lg border">
       {options.map((option) => (
-        <Option
+        <TabsOption
           key={`tab-${option.value}`}
           className={cn({
             'bg-gray-50 font-semibold': selected === option.value,
@@ -34,13 +35,13 @@ const Tabs = ({ options, value, onChange }: TabsProps) => {
         >
           <span className="w-fit rounded bg-gray-100 p-1">{option.icon}</span>
           <span>{option.value}</span>
-        </Option>
+        </TabsOption>
       ))}
     </div>
   );
 };
 
-const Option = ({ className, children, ...rest }: TabsOptionProps) => {
+const TabsOption = ({ className, children, ...rest }: TabsOptionProps) => {
   return (
     <button
       type="button"
@@ -56,6 +57,6 @@ const Option = ({ className, children, ...rest }: TabsOptionProps) => {
 };
 
 Tabs.displayName = 'Tabs';
-Option.displayName = 'TabsOption';
+TabsOption.displayName = 'TabsOption';
 
 export default Tabs;

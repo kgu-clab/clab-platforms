@@ -1,4 +1,4 @@
-import React, { ComponentPropsWithRef, forwardRef } from 'react';
+import React, { type HTMLAttributes, forwardRef } from 'react';
 
 import { type VariantProps } from 'class-variance-authority';
 
@@ -7,7 +7,7 @@ import { badgeVariants } from './Badge.styles';
 import type { BadgeColorVariant } from './Badge.types';
 
 interface BadgeProps
-  extends ComponentPropsWithRef<'span'>,
+  extends HTMLAttributes<HTMLSpanElement>,
     VariantProps<typeof badgeVariants> {
   color?: BadgeColorVariant;
 }

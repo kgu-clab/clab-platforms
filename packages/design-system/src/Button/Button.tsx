@@ -1,4 +1,4 @@
-import React, { ComponentPropsWithRef, forwardRef } from 'react';
+import React, { type ButtonHTMLAttributes, forwardRef } from 'react';
 
 import { type VariantProps } from 'class-variance-authority';
 
@@ -7,18 +7,20 @@ import { buttonVariants } from './Button.styles';
 import type { ButtonColorVariant, ButtonSizeVariant } from './Button.types';
 
 interface ButtonProps
-  extends ComponentPropsWithRef<'button'>,
+  extends ButtonHTMLAttributes<HTMLButtonElement>,
     VariantProps<typeof buttonVariants> {
   color?: ButtonColorVariant;
   size?: ButtonSizeVariant;
+  disabled?: boolean;
 }
 
 const Button = forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, children, color, size, ...rest }, ref) => {
+  ({ color, size, disabled, className, children, ...rest }, ref) => {
     return (
       <button
         ref={ref}
-        className={cn(buttonVariants({ color, size }), className)}
+        className={cn(buttonVariants({ color, size, disabled }), className)}
+        disabled={disabled}
         {...rest}
       >
         {children}
