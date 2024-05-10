@@ -1,14 +1,14 @@
-import React, { ComponentPropsWithRef } from 'react';
+import React, { type HTMLAttributes, type TableHTMLAttributes } from 'react';
 
 import { cn } from '../utils';
 
-export interface TableProps extends ComponentPropsWithRef<'table'> {
+export interface TableProps extends TableHTMLAttributes<HTMLTableElement> {
   head?: readonly string[];
 }
 
-export interface RowProps extends ComponentPropsWithRef<'tr'> {}
+export interface RowProps extends HTMLAttributes<HTMLTableRowElement> {}
 
-export interface CellProps extends ComponentPropsWithRef<'td'> {}
+export interface CellProps extends HTMLAttributes<HTMLTableCellElement> {}
 
 const Table = ({ head, className, children, ...rest }: TableProps) => {
   return (

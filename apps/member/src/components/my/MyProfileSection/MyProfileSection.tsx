@@ -76,7 +76,7 @@ const MyProfileSection = ({ data }: MyProfileSectionProps) => {
             </Button>
           )}
           <Button
-            color={isEdit ? 'orange' : 'white'}
+            color={isEdit ? 'orange' : 'primary'}
             size="sm"
             onClick={handleIsEditClick}
             disabled={isPending}

@@ -1,48 +1,39 @@
-import React, { ComponentPropsWithRef } from 'react';
+import React, { type HTMLAttributes } from 'react';
+
+import { type VariantProps } from 'class-variance-authority';
 
 import { cn } from '../utils';
+import { menubarItemVariants, menubarVariants } from './Menubar.styles';
 import type { MenubarGapVariant } from './Menubar.types';
 
-interface Props extends ComponentPropsWithRef<'ul'> {
+interface MenubarProps
+  extends HTMLAttributes<HTMLUListElement>,
+    VariantProps<typeof menubarVariants> {
   gap?: MenubarGapVariant;
 }
 
-interface ItemProps extends ComponentPropsWithRef<'li'> {
+interface MenubarItemProps
+  extends HTMLAttributes<HTMLLIElement>,
+    VariantProps<typeof menubarItemVariants> {
   selected?: boolean;
 }
 
-const menubarGapVariant = {
-  sm: 'gap-2',
-  md: 'gap-4',
-  lg: 'gap-8',
-  xl: 'gap-10',
-} as const;
-
-const Menubar = ({ gap = 'md', className, children, ...rest }: Props) => {
+const Menubar = ({ gap, className, children, ...rest }: MenubarProps) => {
   return (
-    <ul
-      className={cn(
-        'flex font-semibold text-gray-400',
-        menubarGapVariant[gap],
-        className,
-      )}
-      {...rest}
-    >
+    <ul className={cn(menubarVariants({ gap }), className)} {...rest}>
       {children}
     </ul>
   );
 };
 
-const MenubarItem = ({ selected, className, children, ...rest }: ItemProps) => {
+const MenubarItem = ({
+  selected,
+  className,
+  children,
+  ...rest
+}: MenubarItemProps) => {
   return (
-    <li
-      className={cn(
-        'cursor-pointer transition-colors hover:text-black',
-        { 'text-black underline underline-offset-4': selected },
-        className,
-      )}
-      {...rest}
-    >
+    <li className={cn(menubarItemVariants({ selected }), className)} {...rest}>
       {children}
     </li>
   );

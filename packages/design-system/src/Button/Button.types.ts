@@ -3,8 +3,5 @@ import type {
   DesignSystemSizeVariant,
 } from '../types';
 
-export type ButtonColorVariant = DesignSystemColorVariant<
-  'white' | 'orange',
-  'yellow'
->;
+export type ButtonColorVariant = DesignSystemColorVariant;
 export type ButtonSizeVariant = DesignSystemSizeVariant;

@@ -48,7 +48,7 @@ const CommunityPostsSection = ({
         <Table head={TABLE_HEAD.COMMUNITY_DETAIL}>
           {data.totalItems === 0 ? (
             <Table.Row>
-              <Table.Cell colSpan={4}>
+              <Table.Cell className="col-span-full">
                 {COMMUNITY_MESSAGE.NO_ARTICLE}
               </Table.Cell>
             </Table.Row>

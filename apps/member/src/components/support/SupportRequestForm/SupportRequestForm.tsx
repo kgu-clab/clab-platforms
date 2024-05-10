@@ -151,8 +151,9 @@ const SupportRequestForm = ({
         </ul>
         <Button
           type="submit"
-          color={validation ? 'green' : 'white'}
+          color={validation ? 'green' : 'primary'}
           className="w-full"
+          disabled={isPending || !validation}
         >
           {isPending ? (
             <Loading className="mx-auto" />

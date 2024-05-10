@@ -1,17 +1,22 @@
-import React, { ComponentPropsWithRef } from 'react';
+import React, { type HTMLAttributes } from 'react';
 
 import { cn } from '../utils';
 
-export interface Props extends ComponentPropsWithRef<'ul'> {
+export interface DetailsListProps extends HTMLAttributes<HTMLUListElement> {
   label?: string;
 }
 
-export interface ItemProps extends ComponentPropsWithRef<'li'> {
+export interface DetailsListItemProps extends HTMLAttributes<HTMLLIElement> {
   label: string;
   labelClassName?: string;
 }
 
-const DetailsList = ({ label, className, children, ...rest }: Props) => {
+const DetailsList = ({
+  label,
+  className,
+  children,
+  ...rest
+}: DetailsListProps) => {
   return (
     <ul
       className={cn(
@@ -31,7 +36,7 @@ const DetailsListItem = ({
   className,
   labelClassName,
   children,
-}: ItemProps) => {
+}: DetailsListItemProps) => {
   return (
     <li className={cn('flex items-center justify-between gap-4', className)}>
       <span className={labelClassName}>{label}</span>
