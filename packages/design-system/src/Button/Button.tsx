@@ -1,40 +1,24 @@
-import React, { ComponentPropsWithRef, ReactNode, forwardRef } from 'react';
+import React, { ComponentPropsWithRef, forwardRef } from 'react';
+
+import { type VariantProps } from 'class-variance-authority';
 
 import { cn } from '../utils';
+import { buttonVariants } from './Button.styles';
 import type { ButtonColorVariant, ButtonSizeVariant } from './Button.types';
 
-interface Props extends ComponentPropsWithRef<'button'> {
-  className?: string;
-  children: ReactNode;
+interface ButtonProps
+  extends ComponentPropsWithRef<'button'>,
+    VariantProps<typeof buttonVariants> {
   color?: ButtonColorVariant;
   size?: ButtonSizeVariant;
 }
 
-const colorVariant = {
-  white: 'hover:bg-gray-200 text-gray-600 border-gray-600',
-  orange: 'hover:bg-orange-200 text-orange-600 border-orange-600',
-  green: 'hover:bg-green-200 text-green-600 border-green-600',
-  red: 'hover:bg-red-200 text-red-600 border-red-600',
-  blue: 'hover:bg-blue-200 text-blue-600 border-blue-600',
-} as const;
-
-const sizeVariant = {
-  sm: 'px-2 py-1',
-  md: 'p-2',
-  lg: 'px-4 py-2',
-} as const;
-
-const Button = forwardRef<HTMLButtonElement, Props>(
-  ({ className, children, color = 'white', size = 'md', ...rest }, ref) => {
+const Button = forwardRef<HTMLButtonElement, ButtonProps>(
+  ({ className, children, color, size, ...rest }, ref) => {
     return (
       <button
         ref={ref}
-        className={cn(
-          'rounded-lg border text-sm font-semibold transition-colors',
-          colorVariant[color],
-          sizeVariant[size],
-          className,
-        )}
+        className={cn(buttonVariants({ color, size }), className)}
         {...rest}
       >
         {children}

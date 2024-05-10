@@ -27,6 +27,7 @@
     "@types/react-dom": "^18.2.17",
     "@types/rollup-plugin-peer-deps-external": "^2",
     "autoprefixer": "^10.4.17",
+    "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.0",
     "jsdom": "^24.0.0",
     "postcss": "^8.4.33",
