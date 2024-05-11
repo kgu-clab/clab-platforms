@@ -1,54 +1,76 @@
 import React from 'react';
 
-import { fireEvent, render, screen } from '@testing-library/react';
+import { fireEvent, getByTestId, render, screen } from '@testing-library/react';
 
 import Button from './Button';
+import { buttonVariants } from './Button.styles';
 
 describe('Button', () => {
-  it('renders without crashing', () => {
+  it('should render without crashing', () => {
     render(<Button>Click me</Button>);
+
     expect(
       screen.getByRole('button', { name: /click me/i }),
     ).toBeInTheDocument();
   });
 
-  it('applies color and size variants', () => {
+  it('should apply color and size variants correctly', () => {
     const { rerender } = render(
       <Button color="blue" size="lg">
         Blue Large
       </Button>,
     );
 
-    const button = screen.getByRole('button');
-    expect(button).toHaveClass(
-      'hover:bg-blue-200 text-blue-600 border-blue-600 px-4 py-2',
-    );
+    let button = screen.getByRole('button');
+    expect(button).toHaveClass(buttonVariants({ color: 'blue', size: 'lg' }));
 
     rerender(
       <Button color="red" size="sm">
         Red Small
       </Button>,
     );
-    expect(button).toHaveClass(
-      'hover:bg-red-200 text-red-600 border-red-600 px-2 py-1',
-    );
+
+    button = screen.getByRole('button');
+    expect(button).toHaveClass(buttonVariants({ color: 'red', size: 'sm' }));
   });
 
-  it('handles click events', () => {
+  it('should apply disabled state correctly', () => {
+    render(<Button disabled>Disabled</Button>);
+
+    const button = screen.getByRole('button');
+    expect(button).toHaveClass(buttonVariants({ disabled: true }));
+    expect(button).toBeDisabled();
+  });
+
+  it('should apply loading state correctly', () => {
+    const { container } = render(<Button loading>Loading</Button>);
+
+    const button = screen.getByRole('button');
+    expect(button).toHaveClass(buttonVariants({ loading: true }));
+    const loadingIcon = getByTestId(container, 'loading-icon');
+    expect(loadingIcon).toBeInTheDocument();
+    expect(button).toBeDisabled();
+  });
+
+  it('should handle click events', () => {
     const handleClick = vi.fn();
     render(<Button onClick={handleClick}>Click me</Button>);
+
     fireEvent.click(screen.getByRole('button', { name: /click me/i }));
     expect(handleClick).toHaveBeenCalledTimes(1);
   });
 
-  it('forwards ref to button element', () => {
+  it('should forward a ref to the button element', () => {
     const ref = React.createRef<HTMLButtonElement>();
     render(<Button ref={ref}>Click me</Button>);
+
     expect(ref.current).toBeInstanceOf(HTMLButtonElement);
+    expect(ref.current?.tagName).toBe('BUTTON');
   });
 
-  it('accepts extra classNames', () => {
+  it('should accept extra classNames', () => {
     render(<Button className="extra-class">Click me</Button>);
+
     expect(screen.getByRole('button', { name: /click me/i })).toHaveClass(
       'extra-class',
     );

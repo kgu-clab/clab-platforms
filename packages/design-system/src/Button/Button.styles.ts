@@ -21,13 +21,17 @@ export const buttonVariants = cva(
         lg: 'px-4 py-2',
       },
       disabled: {
-        true: 'cursor-not-allowed opacity-50',
+        true: 'cursor-not-allowed opacity-80',
+      },
+      loading: {
+        true: 'relative cursor-wait',
       },
     },
     defaultVariants: {
       color: 'primary',
       size: 'md',
       disabled: false,
+      loading: false,
     },
   },
 );

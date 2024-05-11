@@ -51,6 +51,16 @@ const meta = {
         },
       },
     },
+    loading: {
+      description: '로딩 상태를 설정합니다.',
+      control: 'boolean',
+      table: {
+        defaultValue: { summary: 'false' },
+        type: {
+          summary: 'boolean',
+        },
+      },
+    },
   },
 } satisfies Meta<typeof Button>;
 
@@ -71,6 +81,15 @@ export const Disabled: Story = {
   args: {
     children: 'Button',
     disabled: true,
+  },
+};
+/**
+ * 로딩 상태 버튼입니다.
+ */
+export const Loading: Story = {
+  args: {
+    children: 'Button',
+    loading: true,
   },
 };
 /**
