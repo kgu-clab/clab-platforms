@@ -11,7 +11,7 @@ export default function Home() {
       <div className="flex w-full flex-col items-center gap-6 rounded-xl p-10 md:max-w-md md:border md:bg-white">
         <div className="flex flex-col items-center">
           <Image
-            src="/logo.png"
+            src="/logo.webp"
             alt="C-Lab"
             width={80}
             height={80}
