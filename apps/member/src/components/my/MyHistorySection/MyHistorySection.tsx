@@ -1,5 +1,3 @@
-import { useCallback } from 'react';
-
 import EmptyBox from '@components/common/EmptyBox/EmptyBox';
 import ListButton from '@components/common/ListButton/ListButton';
 import Section from '@components/common/Section/Section';
@@ -25,15 +23,12 @@ interface MyHistorySectionProps {
 const MyHistorySection = ({ title, data }: MyHistorySectionProps) => {
   const { openModal } = useModal();
 
-  const handleAlarmClick = useCallback(
-    (content: string) => {
-      openModal({
-        title: '알림',
-        content: content,
-      });
-    },
-    [openModal],
-  );
+  const handleAlarmClick = (content: string) => {
+    openModal({
+      title: '알림',
+      content: content,
+    });
+  };
 
   return (
     <Section>
@@ -47,10 +42,10 @@ const MyHistorySection = ({ title, data }: MyHistorySectionProps) => {
              * 나의 댓글
              */
             if ('boardId' in item) {
-              const { boardId, boardCategory, content, createdAt } = item;
+              const { id, boardId, boardCategory, content, createdAt } = item;
               return (
                 <ListButton
-                  key={index}
+                  key={`my-comment-${id}`}
                   to={PATH_FINDER.COMMUNITY_POST(boardCategory, boardId)}
                 >
                   <p className="grow truncate pr-4">{content}</p>
@@ -64,7 +59,10 @@ const MyHistorySection = ({ title, data }: MyHistorySectionProps) => {
             if ('bookId' in item) {
               const { bookId, bookTitle, borrowedAt, returnedAt } = item;
               return (
-                <ListButton key={index} to={PATH_FINDER.BOOK_DETAIL(bookId)}>
+                <ListButton
+                  key={`my-book-${bookId}-${index}`}
+                  to={PATH_FINDER.BOOK_DETAIL(bookId)}
+                >
                   <p className="grow space-x-2 truncate pr-4">
                     <BookLoanConditionStatusBadge
                       borrowedAt={borrowedAt}
@@ -72,9 +70,9 @@ const MyHistorySection = ({ title, data }: MyHistorySectionProps) => {
                     />
                     <span>{bookTitle}</span>
                   </p>
-                  {returnedAt && (
+                  {borrowedAt && (
                     <p className="text-clab-main-light">
-                      {toYYMMDD(returnedAt)}
+                      {toYYMMDD(borrowedAt)}
                     </p>
                   )}
                 </ListButton>
@@ -84,10 +82,10 @@ const MyHistorySection = ({ title, data }: MyHistorySectionProps) => {
              * 지난 알림
              */
             if ('content' in item) {
-              const { content, createdAt } = item as CommentItem;
+              const { id, content, createdAt } = item as CommentItem;
               return (
                 <ListButton
-                  key={index}
+                  key={`my-alarm-${id}`}
                   onClick={() => handleAlarmClick(content)}
                 >
                   <p className="grow truncate pr-4">{content}</p>

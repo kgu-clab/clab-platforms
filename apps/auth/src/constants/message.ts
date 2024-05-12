@@ -1,5 +1,5 @@
 export const SUCCESS_MESSAGE = {
-  AUTH: '2차 인증에 성공했어요',
+  AUTH: '로그인에 성공했어요',
 } as const;
 
 export const ERROR_MESSAGE = {

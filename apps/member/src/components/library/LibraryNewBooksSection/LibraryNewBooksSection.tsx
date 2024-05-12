@@ -25,6 +25,7 @@ const LibraryNewBooksSection = () => {
             <Image
               src={imageUrl}
               alt={title}
+              height="h-[310px]"
               className="rounded-lg object-cover transition-transform group-hover:scale-105"
             />
             <div className="pointer-events-none absolute inset-0 rounded-lg bg-gradient-to-t from-black/60 via-black/30 opacity-0 group-hover:opacity-100" />

@@ -1,4 +1,3 @@
-import { useCallback } from 'react';
 import { FiGrid, FiSearch, FiUser } from 'react-icons/fi';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 
@@ -9,6 +8,8 @@ import { PATH } from '@constants/path';
 import useModal from '@hooks/common/useModal';
 import { useMyProfile } from '@hooks/queries';
 
+import Sidebar from '../Sidebar/Sidebar';
+
 const Nav = () => {
   const location = useLocation();
   const navigate = useNavigate();
@@ -18,28 +19,23 @@ const Nav = () => {
 
   const pathName = location.pathname;
 
-  const handleMenubarItemClick = useCallback(
-    (path: string) => {
-      navigate(path);
-    },
-    [navigate],
-  );
+  const handleMenubarItemClick = (path: string) => navigate(path);
 
-  const handleNotReadyClick = useCallback(() => {
+  const handleNotReadyClick = () => {
     return openModal({
       content: '해당 기능은 준비중입니다.',
     });
-  }, [openModal]);
+  };
 
   return (
     <nav className="fixed left-0 top-0 z-30 w-full border-b bg-white">
-      <div className="container flex h-14 items-center justify-between">
+      <div className="container flex h-14 items-center justify-between bg-white">
         <div className="flex items-center gap-10 lg:gap-20">
           <Link className="flex items-center gap-2 text-xl" to={PATH.MAIN}>
             <img src="/favicon.ico" alt="c-lab" className="size-7" />
             <h1 className="font-bold">멤버스</h1>
           </Link>
-          <Menubar gap="xl" className="text-sm">
+          <Menubar gap="xl" className="hidden text-sm md:flex">
             <Menubar.Item
               selected={pathName === PATH.MAIN}
               onClick={() => handleMenubarItemClick(PATH.MAIN)}
@@ -102,6 +98,7 @@ const Nav = () => {
           <Link to={PATH.MY}>
             <FiUser size={20} />
           </Link>
+          <Sidebar />
         </div>
       </div>
     </nav>

@@ -3,6 +3,7 @@ import Section from '@components/common/Section/Section';
 
 import { useBirthday } from '@hooks/queries';
 import { createImageUrl } from '@utils/api';
+import { formatMemberName } from '@utils/string';
 import dayjs from 'dayjs';
 
 interface BirthdayCardProps {
@@ -44,10 +45,7 @@ const BirthdayCard = ({ id, name, imageUrl, birth }: BirthdayCardProps) => {
         className="rounded-full object-cover ring ring-red-500 ring-offset-2"
       />
       <div className="text-center">
-        <div className="text-sm font-semibold">
-          <p>{name}</p>
-          <p>{id}</p>
-        </div>
+        <p className="text-sm font-semibold">{formatMemberName(name, id)}</p>
         <p className="text-clab-main-light text-sm font-medium">
           {dayjs(birth).format('MM월 DD일')}
         </p>

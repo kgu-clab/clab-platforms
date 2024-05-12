@@ -57,6 +57,7 @@ export const PATH_FINDER = {
  * 페이지의 이름입니다.
  */
 export const PATH_NAME = {
+  LIBRARY: '도서관',
   COMMUNITY: '커뮤니티',
 } as const;
 /**

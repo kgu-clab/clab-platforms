@@ -1,14 +1,14 @@
 import React, { type HTMLAttributes, forwardRef } from 'react';
 
-import { type VariantProps } from 'class-variance-authority';
-
 import { cn } from '../utils';
 import { gridVariants } from './Grid.styles';
-import { GridColVariant, GridGapVariant } from './Grid.types';
+import type {
+  GridColVariant,
+  GridGapVariant,
+  GridVariantProps,
+} from './Grid.types';
 
-interface GridProps
-  extends HTMLAttributes<HTMLDivElement>,
-    VariantProps<typeof gridVariants> {
+interface GridProps extends HTMLAttributes<HTMLDivElement>, GridVariantProps {
   col?: GridColVariant;
   gap?: GridGapVariant;
 }

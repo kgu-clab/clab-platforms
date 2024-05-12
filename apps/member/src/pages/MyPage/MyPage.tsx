@@ -35,7 +35,7 @@ const MyPage = () => {
     <Content>
       <MyProfileSection data={myProfile} />
       <MyHistorySection title="지난 알림" data={myNotificationsData.items} />
-      <Grid col={2} gap="md">
+      <Grid gap="md" className="md:grid-cols-2">
         <MyMembershipHistorySection data={myMembershipFee.items} />
         <MyHistorySection
           title="도서 대출 내역"
@@ -43,7 +43,7 @@ const MyPage = () => {
         />
       </Grid>
       <MyActivityGroupSection data={myActivityGroup.items} />
-      <Grid col={2} gap="md">
+      <Grid gap="md" className="md:grid-cols-2">
         <MyHistorySection title="나의 게시글" data={myBoardsData.items} />
         <MyHistorySection title="나의 댓글" data={myCommentsData.items} />
       </Grid>

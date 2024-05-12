@@ -48,11 +48,7 @@ const CommunityPostPage = () => {
   return (
     <Content>
       <Header
-        title={[
-          PATH_NAME.COMMUNITY,
-          categoryToTitle(type),
-          response.data.title,
-        ]}
+        title={[PATH_NAME.COMMUNITY, categoryToTitle(type)]}
         path={[PATH.COMMUNITY, PATH_FINDER.COMMUNITY_DETAIL(type)]}
       >
         {isBoardPost && <CommunityWriteButton />}

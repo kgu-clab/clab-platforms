@@ -1,5 +1,3 @@
-import { useCallback } from 'react';
-
 import { Badge, Button, DetailsList, Grid, Tabs } from '@clab/design-system';
 
 import Image from '@components/common/Image/Image';
@@ -51,15 +49,12 @@ const BookDetailSection = ({ data }: BookDetailSectionProps) => {
     reviewLinks,
   } = data;
 
-  const handleBorrowClick = useCallback(
-    (bookId: number) => {
-      bookBorrowMutate({
-        bookId: bookId,
-        borrowerId: myInfo.id,
-      });
-    },
-    [bookBorrowMutate, myInfo.id],
-  );
+  const handleBorrowClick = (bookId: number) => {
+    bookBorrowMutate({
+      bookId: bookId,
+      borrowerId: myInfo.id,
+    });
+  };
   /**
    * 온라인 서점에서 책의 정보를 검색하는 함수입니다.
    * 서버에 저장된 온라인 서점 URL이 존재할 경우 해당 URL로 이동합니다.
@@ -78,8 +73,8 @@ const BookDetailSection = ({ data }: BookDetailSectionProps) => {
         <Image
           src={createImageUrl(imageUrl)}
           alt={title}
-          width="w-[420px]"
-          height="h-[520px]"
+          width="max-w-[420px] w-full"
+          height="max-h-[520px] h-full"
           className="object-cover p-4 drop-shadow-lg"
         />
         <div className="flex flex-col justify-between gap-4">

@@ -88,7 +88,7 @@ const MyProfileSection = ({ data }: MyProfileSectionProps) => {
       </Section.Header>
       <Section.Body className="flex flex-col gap-4">
         <MyProfileImage isEdit={isEdit} data={data} onChange={setInputs} />
-        <Grid col={2} gap="md">
+        <Grid gap="md" col="2">
           <Select
             label="분야"
             options={SELECT_OPTIONS.MY_FIELD}

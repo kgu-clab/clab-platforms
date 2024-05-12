@@ -1,4 +1,4 @@
-import { ChangeEvent, useCallback, useState } from 'react';
+import { ChangeEvent, useState } from 'react';
 
 import { Button, Checkbox, Input } from '@clab/design-system';
 
@@ -32,27 +32,19 @@ const CommunityWritePage = () => {
 
   const { category, title, content, wantAnonymous } = postInfo;
 
-  const handleContentChange = useCallback(
-    (
-      e: ChangeEvent<
-        HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
-      >,
-    ) =>
-      setPostInfo((prev) => {
-        return { ...prev, [e.target.name]: e.target.value };
-      }),
-    [],
-  );
+  const handleContentChange = (
+    e: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>,
+  ) =>
+    setPostInfo((prev) => {
+      return { ...prev, [e.target.name]: e.target.value };
+    });
 
-  const handleCheckboxChange = useCallback(
-    (e: ChangeEvent<HTMLInputElement>) =>
-      setPostInfo((prev) => {
-        return { ...prev, [e.target.name]: e.target.checked };
-      }),
-    [],
-  );
+  const handleCheckboxChange = (e: ChangeEvent<HTMLInputElement>) =>
+    setPostInfo((prev) => {
+      return { ...prev, [e.target.name]: e.target.checked };
+    });
 
-  const handleSubmitClick = useCallback(() => {
+  const handleSubmitClick = () => {
     if (!title || !content || category === SELECT_DEFAULT_OPTION) {
       return toast({
         state: 'error',
@@ -61,7 +53,7 @@ const CommunityWritePage = () => {
     }
 
     boardWriteMutate(postInfo);
-  }, [boardWriteMutate, category, content, postInfo, title, toast]);
+  };
 
   return (
     <Content>
@@ -87,7 +79,7 @@ const CommunityWritePage = () => {
         <Textarea
           name="content"
           className="min-h-96 w-full"
-          maxLength={2000}
+          maxLength={5000}
           placeholder="내용을 입력해주세요."
           value={content}
           onChange={handleContentChange}

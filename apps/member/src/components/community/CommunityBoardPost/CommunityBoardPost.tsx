@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react';
+import { useState } from 'react';
 
 import { Button } from '@clab/design-system';
 
@@ -31,10 +31,8 @@ const CommunityBoardPost = ({ type, data }: CommunityBoardPostProps) => {
    * 게시글 내용 변경 이벤트
    * 현재는 게시글 내용만 수정이 가능하도록 구현되어 있습니다.
    */
-  const handleContentsChange = useCallback(
-    (e: React.ChangeEvent<HTMLTextAreaElement>) => setContents(e.target.value),
-    [],
-  );
+  const handleContentsChange = (e: React.ChangeEvent<HTMLTextAreaElement>) =>
+    setContents(e.target.value);
 
   const handleSaveClick = () => {
     setIsEditMode((prev) => {
@@ -66,7 +64,7 @@ const CommunityBoardPost = ({ type, data }: CommunityBoardPostProps) => {
       {isEditMode ? (
         <Textarea
           className="min-h-96 w-full"
-          maxLength={2000}
+          maxLength={5000}
           value={contents}
           placeholder={data.content}
           onChange={handleContentsChange}
