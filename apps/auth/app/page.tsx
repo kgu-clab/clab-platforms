@@ -1,7 +1,9 @@
-import Information from '@components/Information/Information';
-import LoginFrom from '@components/LoginFrom/LoginFrom';
+import { Suspense } from 'react';
+
+import LoginForm from '@components/LoginForm/LoginForm';
+import ServiceInformation from '@components/ServiceInformation/ServiceInformation';
 import Footer from '@components/common/Footer/Footer';
-import HelpLink from '@components/common/HelpLink/HelpLink';
+import HelpDesk from '@components/common/HelpDesk/HelpDesk';
 
 import Image from 'next/image';
 
@@ -11,7 +13,7 @@ export default function Home() {
       <div className="flex w-full flex-col items-center gap-6 rounded-xl p-10 md:max-w-md md:border md:bg-white">
         <div className="flex flex-col items-center">
           <Image
-            src="/logo.png"
+            src="/logo.webp"
             alt="C-Lab"
             width={80}
             height={80}
@@ -19,10 +21,14 @@ export default function Home() {
             priority
           />
           <h1 className="text-2xl font-semibold">로그인</h1>
-          <Information />
+          <Suspense>
+            <ServiceInformation />
+          </Suspense>
         </div>
-        <LoginFrom />
-        <HelpLink />
+        <Suspense>
+          <LoginForm />
+        </Suspense>
+        <HelpDesk />
       </div>
       <Footer />
     </main>
