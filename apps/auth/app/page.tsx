@@ -1,3 +1,5 @@
+import { Suspense } from 'react';
+
 import LoginForm from '@components/LoginForm/LoginForm';
 import ServiceInformation from '@components/ServiceInformation/ServiceInformation';
 import Footer from '@components/common/Footer/Footer';
@@ -19,9 +21,13 @@ export default function Home() {
             priority
           />
           <h1 className="text-2xl font-semibold">로그인</h1>
-          <ServiceInformation />
+          <Suspense>
+            <ServiceInformation />
+          </Suspense>
         </div>
-        <LoginForm />
+        <Suspense>
+          <LoginForm />
+        </Suspense>
         <HelpDesk />
       </div>
       <Footer />
