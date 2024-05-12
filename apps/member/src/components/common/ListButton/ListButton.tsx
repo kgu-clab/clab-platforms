@@ -1,7 +1,7 @@
-import { ComponentPropsWithRef, useCallback } from 'react';
+import { ComponentPropsWithRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import classNames from 'classnames';
+import { cn } from '@utils/string';
 
 interface ListButtonProps extends ComponentPropsWithRef<'button'> {
   to?: string;
@@ -16,15 +16,13 @@ const ListButton = ({
 }: ListButtonProps) => {
   const navigate = useNavigate();
 
-  const onClickLink = useCallback(() => {
-    to && navigate(to);
-  }, [navigate, to]);
+  const onClickLink = () => navigate(to!);
 
   return (
     <button
       onClick={to ? onClickLink : onClick}
-      className={classNames(
-        'flex w-full items-center rounded p-1 text-left transition hover:bg-gray-100 hover:font-medium',
+      className={cn(
+        'flex w-full items-center rounded p-1 text-left transition-colors hover:bg-gray-100',
         className,
       )}
       {...rest}
