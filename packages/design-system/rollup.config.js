@@ -42,7 +42,7 @@ const config = [
       resolve(),
       commonjs(),
       terser(),
-      typescript(),
+      typescript({ tsconfig: './tsconfig.json' }),
     ],
     external: ['react', 'react-dom'],
   },
