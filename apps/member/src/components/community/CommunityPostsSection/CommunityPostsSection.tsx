@@ -44,7 +44,7 @@ const CommunityPostsSection = ({
   return (
     <Section className="space-y-2">
       {title && <Section.Header title={title} />}
-      <Section.Body>
+      <Section.Body className="overflow-auto">
         <Table head={TABLE_HEAD.COMMUNITY_DETAIL}>
           {data.totalItems === 0 ? (
             <Table.Row>

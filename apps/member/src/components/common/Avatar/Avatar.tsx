@@ -41,6 +41,7 @@ const Avatar = ({ className, src, size = 'md', roleLevel }: AvatarProps) => {
       <Image
         src={createImageUrl(src)}
         alt="avatar"
+        width={sizeStyled}
         className="rounded-full object-cover"
       />
     </div>
