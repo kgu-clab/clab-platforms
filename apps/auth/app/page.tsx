@@ -1,7 +1,7 @@
-import Information from '@components/Information/Information';
-import LoginFrom from '@components/LoginFrom/LoginFrom';
+import LoginForm from '@components/LoginForm/LoginForm';
+import ServiceInformation from '@components/ServiceInformation/ServiceInformation';
 import Footer from '@components/common/Footer/Footer';
-import HelpLink from '@components/common/HelpLink/HelpLink';
+import HelpDesk from '@components/common/HelpDesk/HelpDesk';
 
 import Image from 'next/image';
 
@@ -19,10 +19,10 @@ export default function Home() {
             priority
           />
           <h1 className="text-2xl font-semibold">로그인</h1>
-          <Information />
+          <ServiceInformation />
         </div>
-        <LoginFrom />
-        <HelpLink />
+        <LoginForm />
+        <HelpDesk />
       </div>
       <Footer />
     </main>
