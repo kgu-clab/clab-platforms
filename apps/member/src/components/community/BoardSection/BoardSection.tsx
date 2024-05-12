@@ -1,3 +1,5 @@
+import { Grid } from '@clab/design-system';
+
 import ListButton from '@components/common/ListButton/ListButton';
 import MoreButton from '@components/common/MoreButton/MoreButton';
 import Section from '@components/common/Section/Section';
@@ -19,7 +21,11 @@ interface BoardSectionItemProps {
 }
 
 const BoardSection = ({ children }: StrictPropsWithChildren) => {
-  return <div className="grid gap-4 text-sm xl:grid-cols-2">{children}</div>;
+  return (
+    <Grid gap="md" className="text-sm md:grid-cols-2">
+      {children}
+    </Grid>
+  );
 };
 BoardSection.displayName = 'BoardSection';
 
@@ -39,7 +45,7 @@ const BoardSectionItem = ({ title, to, data }: BoardSectionItemProps) => {
         ) : (
           data.map(({ id, title, createdAt }) => (
             <ListButton key={id} to={createPath(to, id)}>
-              <p className="w-full truncate pr-4">
+              <p className="line-clamp-1 w-full pr-4">
                 {toDecodeHTMLEntities(title)}
               </p>
               <p className="text-clab-main-light">{toYYMMDD(createdAt)}</p>

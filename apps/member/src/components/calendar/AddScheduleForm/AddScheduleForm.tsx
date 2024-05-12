@@ -71,7 +71,7 @@ const AddScheduleForm = ({ onSubmit }: AddScheduleFormProps) => {
         value={detail}
         onChange={handleInputsChange}
       />
-      <Grid gap="md" col={2}>
+      <Grid gap="md" col="2">
         <Input
           label="시작일"
           type="datetime-local"
