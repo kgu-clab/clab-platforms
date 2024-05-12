@@ -1,23 +1,26 @@
 {
   "name": "auth",
-  "packageManager": "yarn@4.0.2",
   "private": true,
   "scripts": {
     "dev": "next dev --port 6001",
     "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
+    "start": "next start --port 6001",
+    "lint": "next lint",
+    "type": "tsc --noEmit"
   },
   "dependencies": {
     "@gwansikk/server-chain": "^0.5.2",
+    "@hookform/resolvers": "^3.3.4",
     "@tanstack/react-query": "^5.17.19",
     "classnames": "^2.5.1",
-    "next": "14.1.0",
+    "next": "14.2.3",
     "qrcode.react": "^3.1.0",
     "react": "^18",
     "react-dom": "^18",
+    "react-hook-form": "^7.51.4",
     "recoil": "^0.7.7",
-    "sharp": "^0.33.2"
+    "sharp": "^0.33.2",
+    "zod": "^3.23.8"
   },
   "devDependencies": {
     "@clab/config": "workspace:*",
