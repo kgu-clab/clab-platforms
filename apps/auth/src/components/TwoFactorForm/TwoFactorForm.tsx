@@ -13,7 +13,7 @@ interface TwoFactorFormProps {
 }
 
 const TwoFactorFormProps = ({ id, secretKey, code }: TwoFactorFormProps) => {
-  const [otpInput, setOTPInput] = useState<string[]>([]);
+  const [otpInput, setOTPInput] = useState<string[]>(['', '', '', '', '', '']);
   const { twoFactorLoginMutate } = useTwoFactorLoginMutation();
 
   useEffect(() => {
