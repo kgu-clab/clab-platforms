@@ -5,7 +5,7 @@ import {
   useSetRecoilState,
 } from 'recoil';
 
-import { ATOM_KEY } from '@constants/key';
+import { ATOM_KEY } from '@/src/constants/key';
 
 export const AUTH_ATOM_STATE = {
   LOGIN: 'login',
