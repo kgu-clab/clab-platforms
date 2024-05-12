@@ -4,12 +4,26 @@ import { cn } from '../utils';
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   label?: string;
+  message?: string;
   labelClassName?: string;
   inputClassName?: string;
+  messageClassName?: string;
 }
 
 const Input = forwardRef<HTMLInputElement, InputProps>(
-  ({ label, id, className, inputClassName, labelClassName, ...rest }, ref) => {
+  (
+    {
+      id,
+      label,
+      message,
+      className,
+      labelClassName,
+      inputClassName,
+      messageClassName,
+      ...rest
+    },
+    ref,
+  ) => {
     return (
       <div ref={ref} className={cn('flex flex-col', className)}>
         {label && (
@@ -23,9 +37,17 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
         <input
           ref={ref}
           id={id}
-          className={cn('rounded-lg border p-2', inputClassName)}
+          className={cn(
+            'outline-clab-primary rounded-lg border p-2',
+            inputClassName,
+          )}
           {...rest}
         />
+        {message && (
+          <span className={cn('ml-1 mt-1 text-xs', messageClassName)}>
+            {message}
+          </span>
+        )}
       </div>
     );
   },
