@@ -53,7 +53,7 @@ const CommentInput = ({
       <Textarea
         className="size-full resize-none border p-2"
         placeholder="댓글을 입력해주세요."
-        maxLength={200}
+        maxLength={1000}
         value={value}
         onChange={onChange}
       />
