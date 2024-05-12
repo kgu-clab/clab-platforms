@@ -1,18 +1,18 @@
 import type { ServerResponse } from '@/src/types/server';
-import { type RedirectCode } from '@utils/common';
+import { type ServiceCode } from '@utils/service';
 
 import { API_BASE_URL, END_POINTS } from '../constants/api';
 
 export interface PostLoginData {
   id: string;
   password: string;
-  code: RedirectCode;
+  code: ServiceCode;
 }
 
 export interface PostTwoFactorLoginData {
   memberId: string;
   totp: string;
-  code: RedirectCode;
+  code: ServiceCode;
 }
 /**
  * 멤버 로그인
