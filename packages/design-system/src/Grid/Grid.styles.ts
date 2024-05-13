@@ -1,6 +1,7 @@
-import { cva } from 'class-variance-authority';
+import { cva } from 'cva';
 
-export const gridVariants = cva('grid', {
+export const gridVariants = cva({
+  base: 'grid',
   variants: {
     col: {
       '1': 'grid-cols-1',

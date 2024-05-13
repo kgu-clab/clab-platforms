@@ -1,12 +1,10 @@
 import React from 'react';
 
-import { VariantProps } from 'class-variance-authority';
-
 import { cn } from '../utils';
 import { spinnerVariants } from './Spinner.styles';
-import type { SpinnerSizeVariant } from './Spinner.types';
+import type { SpinnerSizeVariant, SpinnerVariantProps } from './Spinner.types';
 
-interface SpinnerProps extends VariantProps<typeof spinnerVariants> {
+interface SpinnerProps extends SpinnerVariantProps {
   className?: string;
   size?: SpinnerSizeVariant;
 }

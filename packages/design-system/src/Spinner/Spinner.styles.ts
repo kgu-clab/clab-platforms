@@ -1,6 +1,7 @@
-import { cva } from 'class-variance-authority';
+import { cva } from 'cva';
 
-export const spinnerVariants = cva('m-auto animate-spin', {
+export const spinnerVariants = cva({
+  base: 'm-auto animate-spin',
   variants: {
     size: {
       sm: 'size-3',
