@@ -8,7 +8,7 @@ import postcss from 'rollup-plugin-postcss';
 
 import packageJson from './package.json';
 
-function createPostCSS() {
+function tailwindcss() {
   return postcss({
     config: {
       path: './postcss.config.js',
@@ -32,12 +32,12 @@ const config = [
       },
       {
         file: packageJson.module,
-        format: 'esm',
+        format: 'es',
         sourcemap: true,
       },
     ],
     plugins: [
-      createPostCSS(),
+      tailwindcss(),
       peerDepsExternal(),
       resolve(),
       commonjs(),
@@ -48,8 +48,8 @@ const config = [
   },
   {
     input: 'src/index.ts',
-    output: [{ file: 'dist/index.d.ts', format: 'es' }],
-    plugins: [createPostCSS(), dts.default()],
+    output: [{ file: packageJson.types, format: 'es' }],
+    plugins: [tailwindcss(), dts.default()],
   },
 ];
 
