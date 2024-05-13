@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { Menubar, Table } from '@clab/design-system';
@@ -10,11 +10,13 @@ import { Section } from '@components/common/Section';
 
 import { TABLE_HEAD } from '@constants/head';
 import { PATH } from '@constants/path';
+import { DATE_FORMAT } from '@constants/state';
 import useModal from '@hooks/common/useModal';
 import { usePagination } from '@hooks/common/usePagination';
 import { useSchedule, useScheduleDeleteMutation } from '@hooks/queries';
 import { formattedDate } from '@utils/date';
 import { toDecodeHTMLEntities, toPriorityText } from '@utils/string';
+import dayjs from 'dayjs';
 
 type Mode = 'view' | 'add';
 
@@ -25,31 +27,30 @@ const ManageCalendarSection = () => {
   const [mode, setMode] = useState<Mode>('view');
   const { page, size, handlePageChange } = usePagination();
 
-  const { data } = useSchedule();
+  const { data } = useSchedule({
+    // 오늘 기준으로 최근 1년 부터 ~ 이번달 까지
+    startDate: dayjs().add(-1, 'year').format(DATE_FORMAT.WITH_TIME),
+  });
   const { scheduleDeleteMutate } = useScheduleDeleteMutation();
 
-  const handleMenubarItemClick = useCallback((mode: Mode) => {
-    setMode(mode);
-  }, []);
+  const handleMenubarItemClick = (mode: Mode) => setMode(mode);
 
-  const handleTableRowClick = useCallback(() => {
-    navigate(PATH.CALENDER);
-  }, [navigate]);
+  const handleTableRowClick = () => navigate(PATH.CALENDER);
 
-  const handleDeleteButtonClick = useCallback(
-    (e: React.MouseEvent<HTMLButtonElement, MouseEvent>, id: number) => {
-      e.stopPropagation();
-      return openModal({
-        title: '스케줄 삭제',
-        content: `해당 스케줄을 정말 삭제하시겠습니까?\n삭제된 데이터는 복구할 수 없습니다.`,
-        accept: {
-          text: '삭제',
-          onClick: () => scheduleDeleteMutate(id),
-        },
-      });
-    },
-    [openModal, scheduleDeleteMutate],
-  );
+  const handleDeleteButtonClick = (
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+    id: number,
+  ) => {
+    e.stopPropagation();
+    return openModal({
+      title: '스케줄 삭제',
+      content: `해당 스케줄을 정말 삭제하시겠습니까?\n삭제된 데이터는 복구할 수 없습니다.`,
+      accept: {
+        text: '삭제',
+        onClick: () => scheduleDeleteMutate(id),
+      },
+    });
+  };
 
   const renderView = {
     view: (
