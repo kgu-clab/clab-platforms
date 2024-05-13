@@ -1,15 +1,17 @@
 import React, { type ButtonHTMLAttributes, forwardRef } from 'react';
 
-import { type VariantProps } from 'class-variance-authority';
-
 import { Spinner } from '../Spinner';
 import { cn } from '../utils';
 import { buttonVariants } from './Button.styles';
-import type { ButtonColorVariant, ButtonSizeVariant } from './Button.types';
+import type {
+  ButtonColorVariant,
+  ButtonSizeVariant,
+  ButtonVariantProps,
+} from './Button.types';
 
 interface ButtonProps
   extends ButtonHTMLAttributes<HTMLButtonElement>,
-    VariantProps<typeof buttonVariants> {
+    ButtonVariantProps {
   color?: ButtonColorVariant;
   size?: ButtonSizeVariant;
   disabled?: boolean;

@@ -1,20 +1,22 @@
 import React, { type HTMLAttributes } from 'react';
 
-import { type VariantProps } from 'class-variance-authority';
-
 import { cn } from '../utils';
 import { menubarItemVariants, menubarVariants } from './Menubar.styles';
-import type { MenubarGapVariant } from './Menubar.types';
+import type {
+  MenubarGapVariant,
+  MenubarItemVariantProps,
+  MenubarVariantProps,
+} from './Menubar.types';
 
 interface MenubarProps
   extends HTMLAttributes<HTMLUListElement>,
-    VariantProps<typeof menubarVariants> {
+    MenubarVariantProps {
   gap?: MenubarGapVariant;
 }
 
 interface MenubarItemProps
   extends HTMLAttributes<HTMLLIElement>,
-    VariantProps<typeof menubarItemVariants> {
+    MenubarItemVariantProps {
   selected?: boolean;
 }
 

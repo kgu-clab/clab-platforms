@@ -1,6 +1,7 @@
-import { cva } from 'class-variance-authority';
+import { cva } from 'cva';
 
-export const menubarVariants = cva('flex font-semibold text-gray-400', {
+export const menubarVariants = cva({
+  base: 'flex font-semibold text-gray-400',
   variants: {
     gap: {
       sm: 'gap-2',
@@ -14,16 +15,14 @@ export const menubarVariants = cva('flex font-semibold text-gray-400', {
   },
 });
 
-export const menubarItemVariants = cva(
-  'cursor-pointer transition-colors hover:text-black',
-  {
-    variants: {
-      selected: {
-        true: 'text-black underline underline-offset-4',
-      },
-    },
-    defaultVariants: {
-      selected: false,
+export const menubarItemVariants = cva({
+  base: 'cursor-pointer transition-colors hover:text-black',
+  variants: {
+    selected: {
+      true: 'text-black underline underline-offset-4',
     },
   },
-);
+  defaultVariants: {
+    selected: false,
+  },
+});
