@@ -9,6 +9,7 @@
     "type": "tsc --noEmit"
   },
   "dependencies": {
+    "@clab/design-system": "workspace:*",
     "@gwansikk/server-chain": "^0.5.2",
     "@hookform/resolvers": "^3.3.4",
     "@tanstack/react-query": "^5.17.19",
@@ -24,7 +25,6 @@
   },
   "devDependencies": {
     "@clab/config": "workspace:*",
-    "@clab/design-system": "workspace:*",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
