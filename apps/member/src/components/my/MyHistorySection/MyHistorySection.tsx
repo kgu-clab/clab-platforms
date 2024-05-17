@@ -8,15 +8,15 @@ import { PATH_FINDER } from '@constants/path';
 import useModal from '@hooks/common/useModal';
 import { toYYMMDD } from '@utils/date';
 
-import type { BoardItem } from '@type/board';
 import type { BookLoanRecordConditionType } from '@type/book';
 import { CommentItem } from '@type/comment';
+import type { IBoard } from '@type/community';
 import type { NotificationItem } from '@type/notification';
 
 interface MyHistorySectionProps {
   title: string;
   data: Array<
-    NotificationItem | BoardItem | CommentItem | BookLoanRecordConditionType
+    NotificationItem | IBoard | CommentItem | BookLoanRecordConditionType
   >;
 }
 
@@ -97,7 +97,7 @@ const MyHistorySection = ({ title, data }: MyHistorySectionProps) => {
              * 나의 게시글
              */
             if ('title' in item) {
-              const { id, category, title, createdAt } = item as BoardItem;
+              const { id, category, title, createdAt } = item as IBoard;
               return (
                 <ListButton
                   key={createdAt}

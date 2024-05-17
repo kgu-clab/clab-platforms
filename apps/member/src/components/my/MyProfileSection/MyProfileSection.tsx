@@ -1,13 +1,11 @@
-import { ChangeEvent, useCallback, useState } from 'react';
+import { useState } from 'react';
 
 import { Button, Grid, Input } from '@clab/design-system';
 
-import Loading from '@components/common/Loading/Loading';
 import LogoutButton from '@components/common/LogoutButton/LogoutButton';
 import Section from '@components/common/Section/Section';
 import Select from '@components/common/Select/Select';
 
-import { FORM_DATA_KEY } from '@constants/api';
 import { SELECT_OPTIONS } from '@constants/select';
 import useModal from '@hooks/common/useModal';
 import { useUserInfoMutation } from '@hooks/queries';
@@ -34,14 +32,12 @@ const MyProfileSection = ({ data }: MyProfileSectionProps) => {
       const isModified = !isObjectsEqual(inputs, data);
       if (prev && isModified) {
         // 편집모드이면서 수정된 내용이 있을 경우
-        const formData = new FormData();
         const file = document.getElementById('imageUrl') as HTMLInputElement;
-        if (file.files?.length) formData.append(FORM_DATA_KEY, file.files[0]);
         if (!isPending) {
           userInfoMutate({
             id: data.id,
             body: inputs,
-            multipartFile: file.files?.length ? formData : null,
+            file: file?.files?.[0],
           });
         }
       }
@@ -49,20 +45,20 @@ const MyProfileSection = ({ data }: MyProfileSectionProps) => {
     });
   };
 
-  const handleInputsChange = useCallback(
-    (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-      const { name, value } = e.target;
-      setInputs((prev) => ({ ...prev, [name]: value }));
-    },
-    [],
-  );
+  const handleInputsChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
+  ) => {
+    const { name, value } = e.target;
+    setInputs((prev) => ({ ...prev, [name]: value }));
+  };
 
-  const handleChangePasswordClick = useCallback(() => {
-    openModal({
+  const handleChangePasswordClick = () => {
+    // 비밀번호 변경 모달 열기
+    return openModal({
       title: '비밀번호 변경',
       custom: <ChangePasswordModal memberId={data.id} />,
     });
-  }, [openModal, data.id]);
+  };
 
   const { interests, contact, email, address, githubUrl } = inputs;
 
@@ -80,8 +76,9 @@ const MyProfileSection = ({ data }: MyProfileSectionProps) => {
             size="sm"
             onClick={handleIsEditClick}
             disabled={isPending}
+            loading={isPending}
           >
-            {isPending ? <Loading /> : isEdit ? '저장' : '수정'}
+            {isEdit ? '저장' : '수정'}
           </Button>
           {isEdit || <LogoutButton />}
         </div>

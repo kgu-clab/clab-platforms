@@ -60,3 +60,12 @@ export type TokenType = {
 export type WithFilePrams = {
   multipartFile: FormData;
 };
+/**
+ * 파일 응답 타입입니다.
+ */
+export interface ResponseFile {
+  fileUrl: string;
+  originalFileName: string;
+  storagePeriod: number;
+  createdAt: string;
+}

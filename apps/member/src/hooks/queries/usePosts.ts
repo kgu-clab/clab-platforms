@@ -8,12 +8,14 @@ import { QUERY_KEY } from '@constants/key';
 import type { BaseResponse } from '@type/api';
 import type {
   CommunityCategoryType,
+  CommunityHireBoard,
+  CommunityNewsBoard,
   CommunityPostDetailItem,
 } from '@type/community';
-import type { HireItem } from '@type/hire';
-import type { NewsItem } from '@type/news';
 
-type PostsType = BaseResponse<CommunityPostDetailItem | NewsItem | HireItem>;
+type PostsType = BaseResponse<
+  CommunityPostDetailItem | CommunityNewsBoard | CommunityHireBoard
+>;
 /**
  * 카테고리에 따른 게시글을 가져옵니다.
  */

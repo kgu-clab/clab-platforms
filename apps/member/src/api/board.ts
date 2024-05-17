@@ -2,12 +2,12 @@ import { END_POINT } from '@constants/api';
 import { createCommonPagination } from '@utils/api';
 
 import { BaseResponse, ResponsePagination } from '@type/api';
-import type { BoardItem } from '@type/board';
 import type {
   CommunityCategoryType,
   CommunityPostDetailItem,
   CommunityPostItem,
   CommunityWriteItem,
+  IBoard,
 } from '@type/community';
 
 import { server } from './server';
@@ -26,7 +26,7 @@ export interface PatchBoardsParams extends CommunityWriteItem {
  * 내가 작성한 커뮤니티 게시글 조회
  */
 export async function getMyBoards(page: number, size: number) {
-  const { data } = await server.get<ResponsePagination<BoardItem>>({
+  const { data } = await server.get<ResponsePagination<IBoard>>({
     url: createCommonPagination(END_POINT.MY_BOARDS, { page, size }),
   });
 
@@ -36,7 +36,7 @@ export async function getMyBoards(page: number, size: number) {
  * 커뮤니티 게시글 목록 조회
  */
 export async function getBoards(page: number, size: number) {
-  const { data } = await server.get<ResponsePagination<BoardItem>>({
+  const { data } = await server.get<ResponsePagination<IBoard>>({
     url: createCommonPagination(END_POINT.BOARDS, { page, size }),
   });
 

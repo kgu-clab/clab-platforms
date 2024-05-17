@@ -1,12 +1,12 @@
 import Linker from '@components/common/Linker/Linker';
 import Post from '@components/common/Post/Post';
 
-import type { NewsItem } from '@type/news';
+import type { CommunityNewsBoard } from '@type/community';
 
 import CommunityReportButton from '../CommunityReportButton/CommunityReportButton';
 
 interface CommunityNewsPostProps {
-  data: NewsItem;
+  data: CommunityNewsBoard;
 }
 
 const CommunityNewsPost = ({ data }: CommunityNewsPostProps) => {
