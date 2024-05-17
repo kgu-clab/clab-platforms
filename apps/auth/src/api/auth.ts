@@ -1,7 +1,7 @@
 import type { ServerResponse } from '@/src/types/server';
 import { type ServiceCode } from '@utils/service';
 
-import { API_BASE_URL, END_POINTS } from '../constants/api';
+import { END_POINTS, createURL } from '../constants/api';
 
 export interface PostLoginData {
   id: string;
@@ -18,8 +18,7 @@ export interface PostTwoFactorLoginData {
  * 멤버 로그인
  */
 export const postLogin = async (data: PostLoginData) => {
-  const url = API_BASE_URL + END_POINTS.LOGIN;
-  const response = await fetch(url, {
+  const response = await fetch(createURL(data.code, END_POINTS.LOGIN), {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -44,14 +43,16 @@ export const postLogin = async (data: PostLoginData) => {
  * TOTP 인증
  */
 export const postTwoFactorLogin = async (data: PostTwoFactorLoginData) => {
-  const url = API_BASE_URL + END_POINTS.TWO_FACTOR_LOGIN;
-  const response = await fetch(url, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
+  const response = await fetch(
+    createURL(data.code, END_POINTS.TWO_FACTOR_LOGIN),
+    {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
     },
-    body: JSON.stringify(data),
-  });
+  );
 
   if (!response.ok) {
     throw new Error('Network response was not ok');
