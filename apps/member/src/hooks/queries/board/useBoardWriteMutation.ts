@@ -43,5 +43,5 @@ export const useBoardWriteMutation = () => {
     },
   });
 
-  return { boardWriteMutate: mutation.mutate };
+  return { boardWriteMutate: mutation.mutate, isPending: mutation.isPending };
 };
