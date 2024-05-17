@@ -7,23 +7,23 @@ import { Section } from '@components/common/Section';
 import Uploader from '@components/common/Uploader/Uploader';
 import MainBanner from '@components/main/MainBanner/MainBanner';
 
-import { PostActivityPhotoPrams } from '@api/activity';
+import { PostActivityPhotoParams } from '@api/activity';
 import { ERROR_MESSAGE } from '@constants/message';
 import useToast from '@hooks/common/useToast';
 import { useActivityPhotoAddMutation } from '@hooks/queries/useActivityPhotoAddMutation';
 
-interface Inputs extends Pick<PostActivityPhotoPrams, 'date' | 'title'> {
-  file: File | null;
+interface InputsState extends Pick<PostActivityPhotoParams, 'date' | 'title'> {
+  file?: File;
 }
 
 const ManageBannerSection = () => {
   const toast = useToast();
   const { activityPhotoAddMutate } = useActivityPhotoAddMutation();
 
-  const [inputs, setInputs] = useState<Inputs>({
+  const [inputs, setInputs] = useState<InputsState>({
     title: '',
     date: '',
-    file: null,
+    file: undefined,
   });
 
   const { title, date, file } = inputs;
@@ -38,7 +38,7 @@ const ManageBannerSection = () => {
     [],
   );
 
-  const handleFileAccepted = useCallback((file: File | null) => {
+  const handleFileAccepted = useCallback((file?: File) => {
     setInputs((prev) => ({
       ...prev,
       file,

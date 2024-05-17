@@ -1,4 +1,4 @@
-import type { ProfileImageFileType } from './uploadFile';
+import type { ResponseFile } from './api';
 
 type MemberStatusType = 'ACCEPTED' | 'REJECTED' | 'WAITING';
 export type ActivityGroupBoardCategoryType =
@@ -28,7 +28,7 @@ export interface ActivityGroupDetailType {
 export interface ActivityPhotoItem {
   id: number;
   title: string;
-  files: ProfileImageFileType[];
+  files: Array<ResponseFile>;
   date: string;
   isPublic: boolean;
 }
@@ -63,6 +63,9 @@ export interface ActivityRequestType {
   createdAt?: string;
 }
 
+/**
+ * @deprecated `ResponseFile`으로 대체합니다.
+ */
 export interface AssignmentFileType {
   fileUrl: string;
   originalFileName: string;
@@ -75,7 +78,7 @@ export interface ActivityBoardType {
   parentId: number;
   category: ActivityGroupBoardCategoryType;
   content: string;
-  files: Array<AssignmentFileType>;
+  files: Array<ResponseFile>;
   title?: string;
   dueDateTime?: string;
   createdAt: string;
