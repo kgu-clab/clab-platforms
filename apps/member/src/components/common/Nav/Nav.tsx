@@ -3,7 +3,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 
 import { Menubar } from '@clab/design-system';
 
-import { MODE } from '@constants/environment';
+import { IS_DEVELOPMENT } from '@constants/environment';
 import { PATH } from '@constants/path';
 import useModal from '@hooks/common/useModal';
 import { useMyProfile } from '@hooks/queries';
@@ -33,7 +33,12 @@ const Nav = () => {
         <div className="flex items-center gap-10 lg:gap-20">
           <Link className="flex items-center gap-2 text-xl" to={PATH.MAIN}>
             <img src="/favicon.ico" alt="c-lab" className="size-7" />
-            <h1 className="font-bold">멤버스</h1>
+            <h1 className="font-bold">멤버스 </h1>
+            {IS_DEVELOPMENT && (
+              <span className="pb-2.5 text-xs font-semibold text-orange-500">
+                DEV
+              </span>
+            )}
           </Link>
           <Menubar gap="xl" className="hidden text-sm md:flex">
             <Menubar.Item
@@ -48,7 +53,7 @@ const Nav = () => {
             >
               일정
             </Menubar.Item>
-            {MODE !== 'production' && (
+            {IS_DEVELOPMENT && (
               <Menubar.Item
                 selected={pathName.startsWith(PATH.ACTIVITY)}
                 onClick={() => handleMenubarItemClick(PATH.ACTIVITY)}
@@ -85,7 +90,7 @@ const Nav = () => {
           </Menubar>
         </div>
         <div className="flex gap-5">
-          {MODE !== 'production' && (
+          {IS_DEVELOPMENT && (
             <>
               <button onClick={handleNotReadyClick}>
                 <FiSearch size={20} />
