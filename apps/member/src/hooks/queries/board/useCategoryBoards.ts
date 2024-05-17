@@ -6,10 +6,12 @@ import { getNews } from '@api/news';
 import { QUERY_KEY } from '@constants/key';
 
 import type { Pagination, WithPaginationParams } from '@type/api';
-import type { CommunityCategoryType } from '@type/community';
-import type { HireItem } from '@type/hire';
-import type { NewsItem } from '@type/news';
-import type { PostItem } from '@type/post';
+import type {
+  CommunityCategoryType,
+  CommunityHireBoard,
+  CommunityNewsBoard,
+  CommunityPostItem,
+} from '@type/community';
 
 interface UseCategoryBoardsParams extends WithPaginationParams {
   category: CommunityCategoryType;
@@ -17,7 +19,9 @@ interface UseCategoryBoardsParams extends WithPaginationParams {
 
 type QueryOptions = {
   queryKey: string;
-  queryFn: () => Promise<Pagination<PostItem | NewsItem | HireItem>>;
+  queryFn: () => Promise<
+    Pagination<CommunityPostItem | CommunityNewsBoard | CommunityHireBoard>
+  >;
 };
 
 /**

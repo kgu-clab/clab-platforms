@@ -60,11 +60,8 @@ export const postMembershipFee = async ({
   ...body
 }: PostMembershipFeeParams) => {
   if (multipartFile) {
-    const data = await postUploadedFileMembershipFee({
-      storagePeriod: 365,
-      multipartFile: multipartFile,
-    });
-    body['imageUrl'] = data[0].fileUrl;
+    const data = await postUploadedFileMembershipFee(multipartFile);
+    body.imageUrl = data[0].fileUrl;
   }
 
   return await server.post<MembershipFeeRequestType, BaseResponse<number>>({

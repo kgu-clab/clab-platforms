@@ -2,45 +2,19 @@ import { Button, DetailsList } from '@clab/design-system';
 
 import Post from '@components/common/Post/Post';
 
-import { toDecodeHTMLEntities } from '@utils/string';
+import {
+  toDecodeHTMLEntities,
+  toKoreaCareerLevel,
+  toKoreaEmploymentType,
+} from '@utils/string';
 
-import type { CareerLevel, EmploymentType, HireItem } from '@type/hire';
+import type { CommunityHireBoard } from '@type/community';
 
 import CommunityReportButton from '../CommunityReportButton/CommunityReportButton';
 
 interface CommunityHirePostProps {
-  data: HireItem;
+  data: CommunityHireBoard;
 }
-
-const toKoreaCareerLevel = (careerLevel: CareerLevel) => {
-  switch (careerLevel) {
-    case 'FRESHMAN':
-      return '신입';
-    case 'EXPERIENCED':
-      return '경력';
-    case 'NOT_SPECIFIED':
-      return '무관';
-    default:
-      return '-';
-  }
-};
-
-const toKoreaEmploymentType = (employmentType: EmploymentType | null) => {
-  switch (employmentType) {
-    case 'FULL_TIME':
-      return '정규직';
-    case 'CONTRACT':
-      return '계약직';
-    case 'INTERN':
-      return '인턴';
-    case 'ASSISTANT':
-      return '어시스턴트';
-    case 'PART_TIME':
-      return '파트타임';
-    default:
-      return '-';
-  }
-};
 
 const CommunityHirePost = ({ data }: CommunityHirePostProps) => {
   return (

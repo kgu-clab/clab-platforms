@@ -1,5 +1,3 @@
-import type { IDType } from '@type/api';
-
 export const SERVER_BASE_URL: string = import.meta.env.VITE_SERVER_BASE_URL;
 export const API_BASE_URL: string = import.meta.env.VITE_API_BASE_URL;
 
@@ -7,9 +5,12 @@ export const ACCESS_TOKEN_KEY = 'ACCESS_TOKEN';
 export const REFRESH_TOKEN_KEY = 'REFRESH_TOKEN';
 
 export const FORM_DATA_KEY = 'multipartFile';
-export const STORAGE_PERIOD = (period = 99999) => `?storagePeriod=${period}`;
+export const STORAGE_PERIOD = (year = 1) => `?storagePeriod=${365 * year}`;
 export const MAX_PAGINATION_SIZE = 99999;
 
+/**
+ * API 엔드포인트를 정의합니다.
+ */
 export const END_POINT = {
   LOGIN_REISSUE: '/v1/login/reissue',
   MEMBERS: '/v1/members',
@@ -18,11 +19,11 @@ export const END_POINT = {
   MY_BOARDS: '/v1/boards/my-boards',
   MY_NOTIFICATION: '/v1/notifications',
   MY_COMMENTS: '/v1/comments/my-comments',
-  MY_INFO_EDIT: (id: IDType) => `/v1/members/${id}`,
+  MY_INFO_EDIT: (id: string) => `/v1/members/${id}`,
   // -- 커뮤니티
   BOARDS: `/v1/boards`,
   BOARDS_LIST: `/v1/boards/category`,
-  BOARDERS_ITEM: (id: IDType) => `/v1/boards/${id}`,
+  BOARDERS_ITEM: (id: number) => `/v1/boards/${id}`,
   // -- 도서
   BOOK: `/v1/books`,
   BOOK_DETAIL: (id: number) => `/v1/books/${id}`,
@@ -50,17 +51,18 @@ export const END_POINT = {
   SHARED_ACCOUNT: `/v1/shared-accounts`,
   SHARED_ACCOUNT_STATUS: (usageId: number) =>
     `/v1/shared-accounts/usage/${usageId}`,
-  COMMENTS: (id: IDType) => `/v1/comments/${id}`,
-  HIRE: (id: IDType) => `/v1/job-postings/${id}`,
-  NEWS: (id: IDType) => `/v1/news/${id}`,
+  COMMENTS: (id: number) => `/v1/comments/${id}`,
+  HIRE: (id: number) => `/v1/job-postings/${id}`,
+  NEWS: (id: number) => `/v1/news/${id}`,
   // -- 파일 업로드
-  UPLOADEDFILE_ACTIVITY_ASSIGNMENT: (groupId: IDType, boardId: IDType) =>
+  UPLOADEDFILE_BOARD: '/v1/files/boards',
+  UPLOADEDFILE_ACTIVITY_ASSIGNMENT: (groupId: number, boardId: number) =>
     `/v1/files/assignment/${groupId}/${boardId}`,
   UPLOADEDFILE_MEMBERSHIP_FEE: '/v1/files/membership-fee',
   UPLOADEDFILE_PROFILES: '/v1/files/profiles',
   UPLOADEDFILE_ACTIVITY_PHOTO: '/v1/files/activity-photos',
   // -- 활동그룹 멤버
-  ACTIVITY_GROUP_MEMBER: (id: IDType) => `/v1/activity-group/member/${id}`,
+  ACTIVITY_GROUP_MEMBER: (id: number) => `/v1/activity-group/member/${id}`,
   ACTIVITY_GROUP_MEMBER_MY: `/v1/activity-group/member/my`,
   ACTIVITY_GROUP_MEMBER_STATUS: `/v1/activity-group/member/status`,
   ACTIVITY_GROUP_MEMBER_APPLY: `/v1/activity-group/member/apply`,
@@ -76,6 +78,9 @@ export const END_POINT = {
   ACTIVITY_GROUP_BOARDS_MY_ASSIGNMENT: `/v1/activity-group/boards/my-assignment`,
 } as const;
 
+/**
+ * HTTP 상태 코드를 정의합니다.
+ */
 export const HTTP_STATUS_CODE = {
   SUCCESS: 200,
   CREATED: 201,

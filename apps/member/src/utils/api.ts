@@ -27,23 +27,23 @@ export function createPath(
 /**
  * API 엔드포인트에 공통적인 페이징을 적용한 URL을 생성합니다.
  * @param {string} endpoint - 기본이 되는 API 엔드포인트 주소입니다.
- * @param {Record<string, string | number | boolean | undefined | null>} params - URL에 포함될 쿼리 파라미터들입니다.
+ * @param {Record<string, T>} params - URL에 포함될 쿼리 파라미터들입니다.
  * @returns {string} - 페이징이 적용된 전체 URL 문자열입니다.
  */
-export function createCommonPagination(
+export function createCommonPagination<T>(
   endpoint: string,
-  params: Record<string, string | number | boolean | undefined | null>,
+  params: Record<string, T>,
 ): string {
-  let url = `${endpoint}?`;
-  Object.keys(params).forEach((key, index) => {
-    const value = params[key];
-    if (value === null || value === undefined) return;
-    if (index !== 0) {
-      url += '&';
-    }
-    url += `${key}=${encodeURIComponent(value)}`;
-  });
-  return url;
+  const queryString = Object.entries(params)
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    .filter(([_, value]) => value !== undefined)
+    .map(
+      ([key, value]) =>
+        `${key}=${encodeURIComponent(value as string | number | boolean)}`,
+    )
+    .join('&');
+
+  return `${endpoint}?${queryString}`;
 }
 /**
  * 파일을 FormData로 변환하는 함수입니다.

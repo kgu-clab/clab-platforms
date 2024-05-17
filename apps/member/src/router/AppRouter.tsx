@@ -6,7 +6,6 @@ import ProtectAuth from '@components/router/ProtectAuth';
 
 import { PATH } from '@constants/path';
 import ErrorPage from '@pages/ErrorPage/ErrorPage';
-import ManagePage from '@pages/ManagePage/ManagePage';
 import MyPageSkeleton from '@pages/MyPage/MyPageSkeleton';
 
 import AppLayout from './AppLayout';
@@ -45,6 +44,7 @@ const SupportPage = lazy(() => import('@pages/SupportPage/SupportPage'));
 const LoginPage = lazy(() => import('@pages/LoginPage/LoginPage'));
 const AuthPage = lazy(() => import('@pages/AuthPage/AuthPage'));
 const BlogPage = lazy(() => import('@pages/BlogPage/BlogPage'));
+const ManagePage = lazy(() => import('@pages/ManagePage/ManagePage'));
 
 const AppRouter = () => {
   const router = createBrowserRouter([

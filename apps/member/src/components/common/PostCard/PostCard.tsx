@@ -1,4 +1,3 @@
-import { useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { createImageUrl } from '@utils/api';
@@ -16,13 +15,12 @@ interface PostCardProps {
 const PostCard = ({ to, title, subTitle, imageUrl }: PostCardProps) => {
   const navigate = useNavigate();
 
-  const handleClick = useCallback(() => navigate(to), [navigate, to]);
+  const handleClick = () => navigate(to);
 
   return (
-    <div
-      role="button"
+    <button
       onClick={handleClick}
-      className="flex cursor-pointer flex-col items-center space-y-2 rounded-lg p-2 transition hover:bg-gray-100"
+      className="group flex flex-col items-center space-y-2 rounded-lg p-2 transition hover:bg-gray-100"
     >
       <Image
         src={createImageUrl(imageUrl)}
@@ -33,9 +31,12 @@ const PostCard = ({ to, title, subTitle, imageUrl }: PostCardProps) => {
       />
       <div className="w-48">
         <p
-          className={cn('break-keep', {
-            'text-center': !subTitle,
-          })}
+          className={cn(
+            'break-keep font-semibold underline-offset-2 group-hover:underline',
+            {
+              'text-center': !subTitle,
+            },
+          )}
         >
           {title}
         </p>
@@ -43,7 +44,7 @@ const PostCard = ({ to, title, subTitle, imageUrl }: PostCardProps) => {
           <p className="text-clab-main-light truncate text-sm">{subTitle}</p>
         )}
       </div>
-    </div>
+    </button>
   );
 };
 

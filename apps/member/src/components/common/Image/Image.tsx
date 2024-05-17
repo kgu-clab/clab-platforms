@@ -1,14 +1,9 @@
-import {
-  ComponentPropsWithRef,
-  SyntheticEvent,
-  useCallback,
-  useState,
-} from 'react';
+import { SyntheticEvent, useCallback, useState } from 'react';
 
 import { NOT_FOUND_IMG } from '@constants/path';
 import { cn } from '@utils/string';
 
-interface ImageProps extends ComponentPropsWithRef<'img'> {
+interface ImageProps extends React.ImgHTMLAttributes<HTMLImageElement> {
   width?: string;
   height?: string;
   overflow?: boolean;

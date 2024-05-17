@@ -12,7 +12,7 @@ export const useBoardModifyMutation = () => {
   const queryClient = useQueryClient();
   const toast = useToast();
 
-  const boardModifyMutation = useMutation({
+  const mutation = useMutation({
     mutationFn: patchBoards,
     onSuccess: ({ success, data: category, errorMessage }, { id }) => {
       if (success) {
@@ -38,5 +38,5 @@ export const useBoardModifyMutation = () => {
     },
   });
 
-  return { boardModifyMutate: boardModifyMutation.mutate };
+  return { boardModifyMutate: mutation.mutate, isPending: mutation.isPending };
 };

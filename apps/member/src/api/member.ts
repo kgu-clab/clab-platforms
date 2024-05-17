@@ -3,7 +3,7 @@ import { createCommonPagination } from '@utils/api';
 
 import type {
   BaseResponse,
-  PaginationType,
+  ResponsePagination,
   WithPaginationParams,
 } from '@type/api';
 import type {
@@ -13,28 +13,23 @@ import type {
 } from '@type/member';
 
 import { server } from './server';
-import { postUploadedFileProfileImage } from './uploadedFile';
+import { postUploadedFileProfileImage, uploadFiles } from './uploadedFile';
 
 export interface GetMembersParams extends WithPaginationParams {
-  id?: string;
+  id?: string; // 학번
   name?: string;
 }
 
 export interface PatchUserInfoParams {
-  id: string;
+  id: string; // 학번
   body: MemberProfileRequestType;
-  multipartFile: FormData | null;
+  file?: File; // 프로필 이미지
 }
 /**
  * 멤버 정보 조회
  */
-export const getMembers = async ({
-  id,
-  name,
-  page,
-  size,
-}: GetMembersParams) => {
-  const { data } = await server.get<PaginationType<MemberInfo>>({
+export async function getMembers({ id, name, page, size }: GetMembersParams) {
+  const { data } = await server.get<ResponsePagination<MemberInfo>>({
     url: createCommonPagination(END_POINT.MEMBERS, {
       id,
       name,
@@ -44,28 +39,28 @@ export const getMembers = async ({
   });
 
   return data;
-};
+}
 /**
  * 내 프로필 조회
  */
-export const getMyProfile = async () => {
+export async function getMyProfile(): Promise<MemberProfileType> {
   const { data } = await server.get<BaseResponse<MemberProfileType>>({
     url: END_POINT.MY_PROFILE,
   });
 
   return data;
-};
+}
 /**
  * 멤버 정보 수정
  */
-export const patchUserInfo = async ({
+export async function patchUserInfo({
   id,
   body,
-  multipartFile,
-}: PatchUserInfoParams) => {
-  if (multipartFile) {
-    const data = await postUploadedFileProfileImage(multipartFile);
-    body['imageUrl'] = data.fileUrl;
+  file,
+}: PatchUserInfoParams): Promise<string> {
+  if (file) {
+    const data = await uploadFiles([file], postUploadedFileProfileImage);
+    body.imageUrl = data.fileUrl;
   }
 
   const { data } = await server.patch<
@@ -77,4 +72,4 @@ export const patchUserInfo = async ({
   });
 
   return data;
-};
+}

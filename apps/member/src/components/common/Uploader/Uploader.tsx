@@ -4,13 +4,15 @@ import { BsFileEarmarkArrowUp, BsFileEarmarkDiff } from 'react-icons/bs';
 
 import { Button } from '@clab/design-system';
 
+type Accept = 'image/*';
+
 interface UploaderProps {
-  accept: string;
+  accept: Accept;
+  onFileAccepted: (file?: File) => void;
   isSuccess?: boolean;
   label?: string;
   maxFiles?: number;
   multiple?: boolean;
-  onFileAccepted: (file: File | null) => void;
 }
 
 interface FileWithPreview extends File {
@@ -49,7 +51,7 @@ const Uploader = ({
    * 파일 선택 취소 시 실행되는 콜백 함수입니다.
    */
   const onFileDialogCancel = useCallback(() => {
-    onFileAccepted(null);
+    onFileAccepted();
   }, [onFileAccepted]);
 
   const { getRootProps, getInputProps, isDragActive, acceptedFiles, inputRef } =
@@ -82,32 +84,33 @@ const Uploader = ({
       >
         <input {...getInputProps()} />
         <div className="flex flex-col items-center justify-center gap-2 break-keep px-4 text-center text-sm">
-          {acceptedFiles.length ? (
+          {acceptedFiles.length > 0 ? (
             <>
-              {files.map((file) => (
-                <div
-                  key={file.name}
-                  className="flex flex-col items-center gap-1"
-                >
-                  <img
-                    className="size-20 rounded-lg object-cover"
-                    src={file.preview}
-                    onLoad={() => {
-                      URL.revokeObjectURL(file.preview);
-                    }}
-                  />
-                  <div>
-                    <p>{file.name}</p>
-                    <p>{file.size} bytes</p>
-                  </div>
-                </div>
-              ))}
-              <ul className="leading-loose">
-                <li>
-                  총 {acceptedFiles.length}개의 파일이 첨부됐어요,&nbsp;
-                  <u>클릭하면 다시 업로드</u> 할 수 있어요.
-                </li>
+              <ul>
+                {files.map((file) => (
+                  <li
+                    key={file.name}
+                    className="flex flex-col items-center gap-1"
+                  >
+                    <img
+                      className="size-20 rounded-lg border object-cover"
+                      alt={file.name}
+                      src={file.preview}
+                      onLoad={() => {
+                        URL.revokeObjectURL(file.preview);
+                      }}
+                    />
+                    <div>
+                      <p>{file.name}</p>
+                      <p>{file.size} bytes</p>
+                    </div>
+                  </li>
+                ))}
               </ul>
+              <p>
+                총 {acceptedFiles.length}개의 파일이 첨부됐어요,&nbsp;
+                <u>클릭하면 다시 업로드</u> 할 수 있어요.
+              </p>
             </>
           ) : isDragActive ? (
             <>

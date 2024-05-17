@@ -36,7 +36,7 @@ export const useSupportRequestForm = () => {
     }));
   }, []);
 
-  const handleFileAccepted = useCallback((file: File | null) => {
+  const handleFileAccepted = useCallback((file?: File) => {
     setFormData((prev) => ({
       ...prev,
       file,

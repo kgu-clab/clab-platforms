@@ -4,6 +4,7 @@ import * as entities from 'entities';
 import { twMerge } from 'tailwind-merge';
 
 import type { Bookstore, BookstoreKorean } from '@type/book';
+import type { CareerLevel, EmploymentType } from '@type/community';
 import type { MembershipStatusType } from '@type/membershipFee';
 import type { SchedulePriority } from '@type/schedule';
 
@@ -119,4 +120,34 @@ export function formatMemberName(name?: string | null, id?: string | null) {
   if (!name) return SERVICE_NAME;
   const studentId = id?.slice(2, 4);
   return id ? `${name} (${studentId})` : name;
+}
+
+export function toKoreaCareerLevel(careerLevel: CareerLevel) {
+  switch (careerLevel) {
+    case 'FRESHMAN':
+      return '신입';
+    case 'EXPERIENCED':
+      return '경력';
+    case 'NOT_SPECIFIED':
+      return '무관';
+    default:
+      return '-';
+  }
+}
+
+export function toKoreaEmploymentType(employmentType: EmploymentType | null) {
+  switch (employmentType) {
+    case 'FULL_TIME':
+      return '정규직';
+    case 'CONTRACT':
+      return '계약직';
+    case 'INTERN':
+      return '인턴';
+    case 'ASSISTANT':
+      return '어시스턴트';
+    case 'PART_TIME':
+      return '파트타임';
+    default:
+      return '-';
+  }
 }

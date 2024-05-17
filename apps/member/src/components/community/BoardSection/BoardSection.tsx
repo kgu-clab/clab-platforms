@@ -9,15 +9,17 @@ import { createPath } from '@utils/api';
 import { toYYMMDD } from '@utils/date';
 import { cn, toDecodeHTMLEntities } from '@utils/string';
 
-import type { CommunityPostItem } from '@type/community';
+import type {
+  CommunityHireBoard,
+  CommunityNewsBoard,
+  CommunityPostItem,
+} from '@type/community';
 import type { StrictPropsWithChildren } from '@type/component';
-import type { HireItem } from '@type/hire';
-import type { NewsItem } from '@type/news';
 
 interface BoardSectionItemProps {
   title: string;
   to: string;
-  data: Array<CommunityPostItem | HireItem | NewsItem>;
+  data: Array<CommunityPostItem | CommunityHireBoard | CommunityNewsBoard>;
 }
 
 const BoardSection = ({ children }: StrictPropsWithChildren) => {

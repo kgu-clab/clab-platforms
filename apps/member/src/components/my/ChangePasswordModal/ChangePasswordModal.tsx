@@ -54,7 +54,6 @@ const ChangePasswordModal = ({ memberId }: ChangePasswordModalProps) => {
     userInfoMutate({
       id: memberId,
       body: { password: password },
-      multipartFile: null,
     });
     closeModal();
   };
