@@ -31,7 +31,7 @@ const CommunityPostPage = () => {
     throw new Error(API_ERROR_MESSAGE[response.errorMessage]);
   }
 
-  const isBoardPost = 'writerRoleLevel' in response.data;
+  const isBoardPost = 'writerRoleLevel' in response.data; // 게시판 글인지 확인
 
   let renderPost: React.ReactNode = null;
   if ('articleUrl' in response.data) {
@@ -42,7 +42,7 @@ const CommunityPostPage = () => {
     renderPost = <CommunityHirePost data={response.data} />;
   } else {
     // 일반 게시판
-    renderPost = <CommunityBoardPost type={type} data={response.data} />;
+    renderPost = <CommunityBoardPost data={response.data} />;
   }
 
   return (

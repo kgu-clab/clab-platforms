@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { Menubar, Table } from '@clab/design-system';
@@ -6,7 +6,7 @@ import { Menubar, Table } from '@clab/design-system';
 import ActionButton from '@components/common/ActionButton/ActionButton';
 import Pagination from '@components/common/Pagination/Pagination';
 import { Section } from '@components/common/Section';
-import AddBoardForm from '@components/community/AddBoardForm/AddBoardForm';
+import CommunityBoardForm from '@components/community/CommunityBoardForm/CommunityBoardForm';
 
 import { SERVICE_NAME } from '@constants/environment';
 import { TABLE_HEAD, TABLE_HEAD_ACTION } from '@constants/head';
@@ -24,7 +24,7 @@ interface ManagerAlertSectionProps {
   category: CommunityCategoryType;
 }
 
-type Mode = 'view' | 'add';
+type ModeState = 'view' | 'add';
 
 const ManagerAlertSection = ({ category }: ManagerAlertSectionProps) => {
   const navigate = useNavigate();
@@ -32,36 +32,31 @@ const ManagerAlertSection = ({ category }: ManagerAlertSectionProps) => {
   const { boardDeleteMutate } = useBoardDeleteMutation();
   const { data } = useCategoryBoards({ category: category });
 
-  const [mode, setMode] = useState<Mode>('view');
+  const [mode, setMode] = useState<ModeState>('view');
   const { page, size, handlePageChange } = usePagination();
 
   const title = categoryToTitle(category);
 
-  const handleTableRowClick = useCallback(
-    (id: number) => {
-      navigate(PATH_FINDER.COMMUNITY_POST(category, id));
-    },
-    [category, navigate],
-  );
+  const handleTableRowClick = (id: number) => {
+    navigate(PATH_FINDER.COMMUNITY_POST(category, id));
+  };
 
-  const handleMenubarItemClick = useCallback((mode: Mode) => {
-    setMode(mode);
-  }, []);
+  const handleMenubarItemClick = (mode: ModeState) => setMode(mode);
 
-  const handleDeleteButtonClick = useCallback(
-    (e: React.MouseEvent<HTMLButtonElement, MouseEvent>, id: number) => {
-      e.stopPropagation();
-      return openModal({
-        title: `${title} 삭제`,
-        content: `해당 ${title}을 정말 삭제하시겠습니까?\n삭제된 데이터는 복구할 수 없습니다.`,
-        accept: {
-          text: '삭제',
-          onClick: () => boardDeleteMutate(id),
-        },
-      });
-    },
-    [boardDeleteMutate, openModal, title],
-  );
+  const handleDeleteButtonClick = (
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+    id: number,
+  ) => {
+    e.stopPropagation();
+    return openModal({
+      title: `${title} 삭제`,
+      content: `해당 ${title}을 정말 삭제하시겠습니까?\n삭제된 데이터는 복구할 수 없습니다.`,
+      accept: {
+        text: '삭제',
+        onClick: () => boardDeleteMutate(id),
+      },
+    });
+  };
 
   const renderView = {
     view: (
@@ -92,7 +87,7 @@ const ManagerAlertSection = ({ category }: ManagerAlertSectionProps) => {
         ))}
       </Table>
     ),
-    add: <AddBoardForm category={category} />,
+    add: <CommunityBoardForm category={category} />,
   }[mode];
 
   return (
