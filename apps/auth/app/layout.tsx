@@ -1,5 +1,4 @@
 import QueryClientProvider from '@components/common/QueryClientProvider/QueryClientProvider';
-import RecoilProvider from '@components/common/RecoilProvider/RecoilProvider';
 
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
@@ -21,9 +20,7 @@ export default function RootLayout({
   return (
     <html lang="ko">
       <body className={inter.className}>
-        <QueryClientProvider>
-          <RecoilProvider>{children}</RecoilProvider>
-        </QueryClientProvider>
+        <QueryClientProvider>{children}</QueryClientProvider>
       </body>
     </html>
   );
