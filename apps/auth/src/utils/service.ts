@@ -25,5 +25,5 @@ export function SERVICE(code: ServiceCode | null) {
  */
 export function REDIRECT_WITH_TOKEN(code: ServiceCode, token: Token) {
   const { url } = SERVICE(code) ?? {};
-  return `${url}/?a=${token.accessToken}&r=${token.refreshToken}`;
+  return `${url}/?a=${token.access}&r=${token.refresh}`;
 }

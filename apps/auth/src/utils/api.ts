@@ -1,11 +1,8 @@
-import type { XClabAuth } from '@type/server';
+import type { Token, XClabAuth } from '@type/server';
 
 type AuthHeaderResult = {
   secretKey: string | null;
-  token: {
-    access: string | null;
-    refresh: string | null;
-  };
+  token: Token;
 };
 
 /**
@@ -15,8 +12,8 @@ export function parserAuthHeader(header: string | null) {
   const result: AuthHeaderResult = {
     secretKey: null,
     token: {
-      access: null,
-      refresh: null,
+      access: '',
+      refresh: '',
     },
   };
 
@@ -28,9 +25,13 @@ export function parserAuthHeader(header: string | null) {
     'secretKey' in parsedAuthHeader ? parsedAuthHeader.secretKey : null;
   result.token = {
     access:
-      'accessToken' in parsedAuthHeader ? parsedAuthHeader.accessToken : null,
+      'accessToken' in parsedAuthHeader
+        ? (parsedAuthHeader.accessToken as string)
+        : '',
     refresh:
-      'refreshToken' in parsedAuthHeader ? parsedAuthHeader.refreshToken : null,
+      'refreshToken' in parsedAuthHeader
+        ? (parsedAuthHeader.refreshToken as string)
+        : '',
   };
 
   return result;

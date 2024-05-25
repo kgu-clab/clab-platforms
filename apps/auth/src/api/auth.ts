@@ -38,7 +38,7 @@ export const postLogin = async (data: PostLoginData) => {
 
   return {
     success: responseBody.success,
-    data: responseBody.data,
+    data: responseBody?.data ?? false,
     secretKey: secretKey,
     token: token,
   };
@@ -69,7 +69,7 @@ export const postTwoFactorLogin = async (data: PostTwoFactorLoginData) => {
 
   return {
     success: responseBody.success,
-    data: responseBody.data,
+    data: responseBody?.data ?? false,
     secretKey: secretKey,
     token: token,
   };
