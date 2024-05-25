@@ -34,11 +34,11 @@ const LoginForm = ({ data, onLogin, onTwoFactor }: LoginFormProps) => {
     loginMutate(
       { id, password, code: data.code },
       {
-        onSuccess: ({ data: isUseTwoFactor, secretKey }) => {
+        onSuccess: ({ data: isUseTwoFactor, secretKey, token }) => {
           if (isUseTwoFactor) {
             onTwoFactor({ code: data.code, id, secretKey });
           } else {
-            onLogin({ code: data.code, id, secretKey });
+            onLogin({ code: data.code, id, secretKey, token });
           }
         },
         onError: () => reset(),

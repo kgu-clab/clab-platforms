@@ -9,6 +9,7 @@ interface LoginSuccessProps {
 
 const LoginSuccess = ({ data }: LoginSuccessProps) => {
   useEffect(() => {
+    // 로그인 성공 후 연결된 서비스로 이동
     window.location.href = REDIRECT_WITH_TOKEN(data.code, data.token!);
   }, [data.code, data.token]);
 
