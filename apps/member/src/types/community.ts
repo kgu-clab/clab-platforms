@@ -34,7 +34,7 @@ export type EmploymentType =
   | 'ASSISTANT'
   | 'PART_TIME';
 
-export interface IBoard {
+export interface Board {
   id: number;
   category: CommunityCategoryType;
   title: string;
