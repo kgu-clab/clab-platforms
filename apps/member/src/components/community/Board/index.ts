@@ -4,3 +4,4 @@ export { QnABoard } from './Board.tsx';
 export { GraduatedBoard } from './Board.tsx';
 export { NewsBoard } from './Board.tsx';
 export { HireBoard } from './Board.tsx';
+export { default as BoardSkeleton } from './BoardSkeleton.tsx';

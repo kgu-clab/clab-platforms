@@ -7,6 +7,7 @@ import { IS_DEVELOPMENT } from '@constants/environment';
 import { PATH } from '@constants/path';
 import useModal from '@hooks/common/useModal';
 import { useMyProfile } from '@hooks/queries';
+import { cn } from '@utils/string';
 
 import Sidebar from '../Sidebar/Sidebar';
 
@@ -28,7 +29,11 @@ const Nav = () => {
   };
 
   return (
-    <nav className="fixed left-0 top-0 z-30 w-full border-b bg-white">
+    <nav
+      className={cn('fixed left-0 top-0 z-30 w-full border-b bg-white', {
+        'border-b-orange-300': IS_DEVELOPMENT,
+      })}
+    >
       <div className="container flex h-14 items-center justify-between bg-white">
         <div className="flex items-center gap-10 lg:gap-20">
           <Link className="flex items-center gap-2 text-xl" to={PATH.MAIN}>

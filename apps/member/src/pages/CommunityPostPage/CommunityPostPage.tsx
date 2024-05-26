@@ -14,7 +14,7 @@ import PostCommentSection from '@components/community/PostCommentSection/PostCom
 import { API_ERROR_MESSAGE, ERROR_MESSAGE } from '@constants/message';
 import { PATH, PATH_FINDER, PATH_NAME } from '@constants/path';
 import { usePosts } from '@hooks/queries/usePosts';
-import { categoryToTitle, isCommunityCategoryType } from '@utils/community';
+import { getCategoryTitle, isCommunityCategoryType } from '@utils/community';
 
 import type { CommunityCategoryType } from '@type/community';
 
@@ -48,7 +48,7 @@ const CommunityPostPage = () => {
   return (
     <Content>
       <Header
-        title={[PATH_NAME.COMMUNITY, categoryToTitle(type)]}
+        title={[PATH_NAME.COMMUNITY, getCategoryTitle(type)]}
         path={[PATH.COMMUNITY, PATH_FINDER.COMMUNITY_DETAIL(type)]}
       >
         {isBoardPost && <CommunityWriteButton />}

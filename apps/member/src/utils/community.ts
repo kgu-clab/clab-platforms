@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import type {
   CommunityCategoryKorType,
   CommunityCategoryType,
@@ -13,6 +12,19 @@ const COMMUNITY_CATEGORY: CommunityCategoryType[] = [
   'hire',
   'organization',
 ] as const;
+
+const CATEGORY_MAP: Record<
+  CommunityCategoryType,
+  { title: CommunityCategoryKorType; emoji: string }
+> = {
+  notice: { title: '공지사항', emoji: '📢' },
+  free: { title: '자유', emoji: '📝' },
+  qna: { title: 'QnA', emoji: '🤔' },
+  graduated: { title: '졸업생', emoji: '🎓' },
+  news: { title: 'IT 뉴스', emoji: '📰' },
+  hire: { title: '채용 정보', emoji: '👔' },
+  organization: { title: '소식', emoji: '🎉' },
+};
 /**
  * 주어진 커뮤니티 카테고리에 해당하는 한국어 제목을 반환합니다.
  *
@@ -20,53 +32,26 @@ const COMMUNITY_CATEGORY: CommunityCategoryType[] = [
  * @returns {CommunityCategoryKorType} 커뮤니티 카테고리에 해당하는 한국어 제목
  * @throws {Error} 유효하지 않은 카테고리일 경우 에러 발생
  */
-export function categoryToTitle(
+export function getCategoryTitle(
   category: CommunityCategoryType,
 ): CommunityCategoryKorType {
-  const categoryMap: Record<CommunityCategoryType, CommunityCategoryKorType> = {
-    notice: '공지사항',
-    free: '자유',
-    qna: 'QnA',
-    graduated: '졸업생',
-    news: 'IT 뉴스',
-    hire: '채용 정보',
-    organization: '소식',
-  };
-
-  if (category in categoryMap) {
-    return categoryMap[category];
+  if (category in CATEGORY_MAP) {
+    return CATEGORY_MAP[category].title;
   }
-
-  throw new Error(`Invalid category: ${category}`);
+  throw new Error(`Invalid category title: ${category}`);
 }
 /**
- * 주어진 한국어 제목에 해당하는 커뮤니티 카테고리를 반환합니다.
+ * 주어진 커뮤니티 카테고리에 해당하는 이모지를 반환합니다.
  *
- * @param {CommunityCategoryKorType} title - 커뮤니티 카테고리 한국어 제목
- * @returns {CommunityCategoryType} 한국어 제목에 해당하는 커뮤니티 카테고리 (영문)
- * @throws {Error} 유효하지 않은 제목일 경우 에러 발생
+ * @param {CommunityCategoryType} category - 커뮤니티 카테고리 (영문)
+ * @returns {string} 커뮤니티 카테고리에 해당하는 이모지
+ * @throws {Error} 유효하지 않은 카테고리일 경우 에러 발생
  */
-export function titleToCategory(
-  title: CommunityCategoryKorType,
-): CommunityCategoryType {
-  const categoryKorMap: Record<
-    CommunityCategoryKorType,
-    CommunityCategoryType
-  > = {
-    공지사항: 'notice',
-    자유: 'free',
-    QnA: 'qna',
-    졸업생: 'graduated',
-    'IT 뉴스': 'news',
-    '채용 정보': 'hire',
-    소식: 'organization',
-  };
-
-  if (title in categoryKorMap) {
-    return categoryKorMap[title];
+export function getCategoryEmoji(category: CommunityCategoryType): string {
+  if (category in CATEGORY_MAP) {
+    return CATEGORY_MAP[category].emoji;
   }
-
-  throw new Error(`Invalid title: ${title}`);
+  throw new Error(`Invalid category emoji: ${category}`);
 }
 /**
  * 주어진 문자열이 유효한 커뮤니티 카테고리 타입인지 확인합니다.

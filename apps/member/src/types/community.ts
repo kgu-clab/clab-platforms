@@ -34,7 +34,7 @@ export type EmploymentType =
   | 'ASSISTANT'
   | 'PART_TIME';
 
-export interface IBoard {
+export interface Board {
   id: number;
   category: CommunityCategoryType;
   title: string;
@@ -42,12 +42,14 @@ export interface IBoard {
   content: string;
   commentCount: number;
   writerName: string;
+  imageUrl: string | null;
   createdAt: string;
 }
 
 export interface CommunityPostItem {
   id: number;
   title: string;
+  commentCount: number;
   writerId: string | null; // 익명일 경우 null
   writerName: string;
   createdAt: string;

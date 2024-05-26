@@ -3,6 +3,7 @@ import { Suspense } from 'react';
 import Content from '@components/common/Content/Content';
 import Header from '@components/common/Header/Header';
 import {
+  BoardSkeleton,
   FreeBoard,
   GraduatedBoard,
   HireBoard,
@@ -11,7 +12,10 @@ import {
   QnABoard,
 } from '@components/community/Board';
 import { BoardSection } from '@components/community/BoardSection';
-import { CommunityBoardCollectSection } from '@components/community/CommunityBoardCollectSection';
+import {
+  CommunityBoardCollectSection,
+  CommunityBoardCollectSectionSkeleton,
+} from '@components/community/CommunityBoardCollectSection';
 import CommunityWriteButton from '@components/community/CommunityWriteButton/CommunityWriteButton';
 
 import { PATH_NAME } from '@constants/path';
@@ -23,26 +27,26 @@ const CommunityPage = () => {
         <CommunityWriteButton />
       </Header>
       <BoardSection>
-        <Suspense>
+        <Suspense fallback={<BoardSkeleton />}>
           <NoticeBoard />
         </Suspense>
-        <Suspense>
+        <Suspense fallback={<BoardSkeleton />}>
           <FreeBoard />
         </Suspense>
-        <Suspense>
+        <Suspense fallback={<BoardSkeleton />}>
           <QnABoard />
         </Suspense>
-        <Suspense>
+        <Suspense fallback={<BoardSkeleton />}>
           <GraduatedBoard />
         </Suspense>
-        <Suspense>
+        <Suspense fallback={<BoardSkeleton />}>
           <NewsBoard />
         </Suspense>
-        <Suspense>
+        <Suspense fallback={<BoardSkeleton />}>
           <HireBoard />
         </Suspense>
       </BoardSection>
-      <Suspense>
+      <Suspense fallback={<CommunityBoardCollectSectionSkeleton />}>
         <CommunityBoardCollectSection />
       </Suspense>
     </Content>
