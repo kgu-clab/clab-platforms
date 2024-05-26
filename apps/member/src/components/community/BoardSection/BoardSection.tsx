@@ -1,5 +1,6 @@
 import { Grid } from '@clab/design-system';
 
+import CommentCounter from '@components/common/CommentCounter/CommentCounter';
 import ListButton from '@components/common/ListButton/ListButton';
 import MoreButton from '@components/common/MoreButton/MoreButton';
 import Section from '@components/common/Section/Section';
@@ -45,10 +46,11 @@ const BoardSectionItem = ({ title, to, data }: BoardSectionItemProps) => {
         {data.length === 0 ? (
           <p className="text-gray-500">{COMMUNITY_MESSAGE.NO_ARTICLE}</p>
         ) : (
-          data.map(({ id, title, createdAt }) => (
+          data.map(({ id, title, commentCount, createdAt }) => (
             <ListButton key={id} to={createPath(to, id)}>
               <p className="line-clamp-1 w-full pr-4">
                 {toDecodeHTMLEntities(title)}
+                <CommentCounter>{commentCount}</CommentCounter>
               </p>
               <p className="text-clab-main-light">{toYYMMDD(createdAt)}</p>
             </ListButton>

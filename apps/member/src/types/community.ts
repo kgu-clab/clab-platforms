@@ -42,12 +42,14 @@ export interface Board {
   content: string;
   commentCount: number;
   writerName: string;
+  imageUrl: string | null;
   createdAt: string;
 }
 
 export interface CommunityPostItem {
   id: number;
   title: string;
+  commentCount: number;
   writerId: string | null; // 익명일 경우 null
   writerName: string;
   createdAt: string;
