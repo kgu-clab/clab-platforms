@@ -13,6 +13,7 @@ export const QUERY_KEY = {
   MY_BOOK: 'MyBook',
   MEMBERS: 'Members',
   BOARDS: 'Boards',
+  BOARDS_COLLECTION: 'BoardsCollection',
   ORGANIZATION: 'Organization',
   BOOK: 'Book',
   BOOK_DETAIL: 'BookDetail',
