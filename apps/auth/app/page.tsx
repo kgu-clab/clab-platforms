@@ -1,36 +1,26 @@
-import { Suspense } from 'react';
+'use client';
 
-import LoginForm from '@components/LoginForm/LoginForm';
-import ServiceInformation from '@components/ServiceInformation/ServiceInformation';
-import Footer from '@components/common/Footer/Footer';
+import { Button } from '@clab/design-system';
+
 import HelpDesk from '@components/common/HelpDesk/HelpDesk';
 
 import Image from 'next/image';
 
-export default function Home() {
+export default function LandingPage() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center gap-2 bg-gray-50">
-      <div className="flex w-full flex-col items-center gap-6 rounded-xl p-10 md:max-w-md md:border md:bg-white">
-        <div className="flex flex-col items-center">
-          <Image
-            src="/logo.webp"
-            alt="C-Lab"
-            width={80}
-            height={80}
-            className="mb-6"
-            priority
-          />
-          <h1 className="text-2xl font-semibold">로그인</h1>
-          <Suspense>
-            <ServiceInformation />
-          </Suspense>
-        </div>
-        <Suspense>
-          <LoginForm />
-        </Suspense>
-        <HelpDesk />
+    <main className="flex min-h-screen flex-col items-center justify-center gap-4">
+      <Image src="/logo.webp" alt="C-Lab" width={120} height={120} priority />
+      <div className="text-center">
+        <h1 className="text-4xl font-semibold">C-Lab OAuth</h1>
+        <h2 className="text-xl font-normal text-gray-500">
+          동아리원을 위한 OAuth2.0 로그인 시스템
+        </h2>
       </div>
-      <Footer />
+      <div className="space-x-4">
+        <Button>체험하기</Button>
+        <Button color="blue">시작하기</Button>
+      </div>
+      <HelpDesk />
     </main>
   );
 }

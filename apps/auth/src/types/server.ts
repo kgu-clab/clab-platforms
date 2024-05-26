@@ -1,6 +1,6 @@
 export type Token = {
-  accessToken: string;
-  refreshToken: string;
+  access: string;
+  refresh: string;
 };
 
 export type SecretKey = {

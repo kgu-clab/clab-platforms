@@ -1,4 +1,5 @@
 import type { ServerResponse } from '@/src/types/server';
+import { parserAuthHeader } from '@utils/api';
 import { type ServiceCode } from '@utils/service';
 
 import { END_POINTS, createURL } from '../constants/api';
@@ -30,13 +31,16 @@ export const postLogin = async (data: PostLoginData) => {
     throw new Error('Network response was not ok');
   }
 
-  const authHeader = response.headers.get('X-Clab-Auth');
+  const responseAuthHeader = response.headers.get('X-Clab-Auth');
   const responseBody = (await response.json()) as ServerResponse;
 
+  const { secretKey, token } = parserAuthHeader(responseAuthHeader);
+
   return {
-    authHeader: authHeader,
     success: responseBody.success,
-    data: responseBody.data,
+    data: responseBody?.data ?? false,
+    secretKey: secretKey,
+    token: token,
   };
 };
 /**
@@ -58,12 +62,15 @@ export const postTwoFactorLogin = async (data: PostTwoFactorLoginData) => {
     throw new Error('Network response was not ok');
   }
 
-  const authHeader = response.headers.get('X-Clab-Auth');
+  const responseAuthHeader = response.headers.get('X-Clab-Auth');
   const responseBody = (await response.json()) as ServerResponse;
 
+  const { secretKey, token } = parserAuthHeader(responseAuthHeader);
+
   return {
-    authHeader: authHeader,
     success: responseBody.success,
-    data: responseBody.data,
+    data: responseBody?.data ?? false,
+    secretKey: secretKey,
+    token: token,
   };
 };

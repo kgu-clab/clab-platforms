@@ -1,17 +1,17 @@
-'use client';
-
 import { useService } from '@hooks/useService';
+import { type ServiceCode } from '@utils/service';
 import Link from 'next/link';
+import { notFound } from 'next/navigation';
 
-const ServiceInformation = () => {
-  const service = useService();
+interface Props {
+  code: ServiceCode;
+}
 
-  if (!service) {
-    return (
-      <p className="text-center font-semibold text-red-500">
-        해당 서비스를 찾을 수 없어요.
-      </p>
-    );
+const ServiceInformation = ({ code }: Props) => {
+  const service = useService(code);
+
+  if (!service?.name) {
+    return notFound();
   }
 
   return (

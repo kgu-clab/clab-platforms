@@ -2,17 +2,17 @@ import { useEffect, useState } from 'react';
 
 import { OTPInput } from '@clab/design-system';
 
+import { type AuthData } from '@/app/[code]/page';
 import { useTwoFactorLoginMutation } from '@/src/hooks/queries/useTwoFactorLoginMutation';
-import { type ServiceCode } from '@utils/service';
 import QRCode from 'qrcode.react';
 
 interface TwoFactorFormProps {
-  id: string;
-  secretKey: string;
-  code: ServiceCode;
+  data: AuthData;
+  onSuccess: (data: AuthData) => void;
+  onFail: () => void;
 }
 
-const TwoFactorFormProps = ({ id, secretKey, code }: TwoFactorFormProps) => {
+const TwoFactorForm = ({ data, onSuccess, onFail }: TwoFactorFormProps) => {
   const [otpInput, setOTPInput] = useState<string[]>(['', '', '', '', '', '']);
   const { twoFactorLoginMutate } = useTwoFactorLoginMutation();
 
@@ -20,24 +20,44 @@ const TwoFactorFormProps = ({ id, secretKey, code }: TwoFactorFormProps) => {
     const otpCode = otpInput.join('');
 
     if (otpCode.length === 6) {
-      twoFactorLoginMutate({
-        memberId: id,
-        totp: otpCode,
-        code: code,
-      });
+      twoFactorLoginMutate(
+        {
+          memberId: data.id!,
+          totp: otpCode,
+          code: data.code,
+        },
+        {
+          onSuccess: ({ success, token }) => {
+            if (success) {
+              onSuccess({ ...data, token });
+            } else {
+              onFail();
+            }
+          },
+          onError: () => onFail(),
+        },
+      );
     }
-  }, [code, id, otpInput, twoFactorLoginMutate]);
+  }, [
+    data,
+    data.code,
+    data.id,
+    onFail,
+    onSuccess,
+    otpInput,
+    twoFactorLoginMutate,
+  ]);
 
   return (
     <div className="flex flex-col items-center gap-2">
-      {id && secretKey && (
+      {data.id && data.secretKey && (
         <div className="my-2 flex flex-col items-center gap-2">
           <p className="text-center font-semibold">
             클라이언트에 <u>아래의 QR코드</u>를 등록해주세요.
           </p>
           <QRCode
             className="rounded-lg border-4 p-2"
-            value={`otpauth://totp/c-lab:${id}?secret=${secretKey}&issuer=C-Lab Auth`}
+            value={`otpauth://totp/c-lab:${data.id}?secret=${data.secretKey}&issuer=C-Lab Auth`}
             size={200}
           />
         </div>
@@ -48,4 +68,4 @@ const TwoFactorFormProps = ({ id, secretKey, code }: TwoFactorFormProps) => {
   );
 };
 
-export default TwoFactorFormProps;
+export default TwoFactorForm;

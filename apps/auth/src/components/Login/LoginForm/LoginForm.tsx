@@ -1,27 +1,25 @@
-'use client';
-
-import { useEffect } from 'react';
 import { type SubmitHandler, useForm } from 'react-hook-form';
 
 import { Button, Input } from '@clab/design-system';
 
+import { type AuthData } from '@/app/[code]/page';
 import { useLoginMutation } from '@/src/hooks/queries/useLoginMutation';
-import { AUTH_ATOM_STATE, useGetAuthStore } from '@/src/store/auth';
 import { type PostLoginData } from '@api/auth';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useService } from '@hooks/useService';
 import { z } from 'zod';
 
-import TwoFactorForm from '../TwoFactorForm/TwoFactorForm';
+interface LoginFormProps {
+  data: AuthData;
+  onLogin: (data: AuthData) => void;
+  onTwoFactor: (data: AuthData) => void;
+}
 
 const schema = z.object({
   id: z.string().length(9, { message: '아이디 입력이 올바르지 않아요.' }),
   password: z.string().min(1, '비밀번호를 입력해주세요.'),
 });
 
-const LoginForm = () => {
-  const service = useService();
-  const auth = useGetAuthStore();
+const LoginForm = ({ data, onLogin, onTwoFactor }: LoginFormProps) => {
   const {
     register,
     formState: { errors },
@@ -32,22 +30,20 @@ const LoginForm = () => {
   });
   const { loginMutate, isPending } = useLoginMutation();
 
-  useEffect(() => {
-    reset();
-  }, [auth.step, reset]);
-
-  if (!service) {
-    return null;
-  }
-
-  if (auth.step !== AUTH_ATOM_STATE.LOGIN) {
-    // 2차 인증이 필요한 인원은 2차 인증 페이지로 이동
-    const { id, secretKey } = auth;
-    return <TwoFactorForm id={id} secretKey={secretKey} code={service.code} />;
-  }
-
   const handleFormSubmit: SubmitHandler<PostLoginData> = ({ id, password }) => {
-    loginMutate({ id, password, code: service.code });
+    loginMutate(
+      { id, password, code: data.code },
+      {
+        onSuccess: ({ data: isUseTwoFactor, secretKey, token }) => {
+          if (isUseTwoFactor) {
+            onTwoFactor({ code: data.code, id, secretKey });
+          } else {
+            onLogin({ code: data.code, id, secretKey, token });
+          }
+        },
+        onError: () => reset(),
+      },
+    );
   };
 
   return (
