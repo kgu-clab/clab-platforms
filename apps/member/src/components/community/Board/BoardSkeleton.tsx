@@ -6,12 +6,7 @@ const BoardSkeleton = () => {
     <Section>
       <Skeleton width="100" height="24" />
       <Section.Body className="space-y-2">
-        <Skeleton height="20" />
-        <Skeleton height="20" />
-        <Skeleton height="20" />
-        <Skeleton height="20" />
-        <Skeleton height="20" />
-        <Skeleton height="20" />
+        <Skeleton height="20" repeat={6} />
       </Section.Body>
     </Section>
   );

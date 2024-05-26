@@ -5,16 +5,24 @@ interface SkeletonProps {
   width?: string;
   height?: string;
   className?: string;
+  repeat?: number;
 }
 
-const Skeleton = ({ size, width, height, className }: SkeletonProps) => {
+const Skeleton = ({
+  size,
+  width,
+  height,
+  className,
+  repeat = 1,
+}: SkeletonProps) => {
   if (size) {
     width = size;
     height = size;
   }
 
-  return (
+  return Array.from({ length: repeat }).map((_, index) => (
     <div
+      key={index}
       style={{
         width: `${width}px`,
         height: `${height}px`,
@@ -24,8 +32,8 @@ const Skeleton = ({ size, width, height, className }: SkeletonProps) => {
         { 'w-full': !width, 'h-full': !height },
         className,
       )}
-    ></div>
-  );
+    />
+  ));
 };
 
 export default Skeleton;
