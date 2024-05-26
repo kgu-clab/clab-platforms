@@ -8,7 +8,7 @@ import CommunityWriteButton from '@components/community/CommunityWriteButton/Com
 
 import { ERROR_MESSAGE } from '@constants/message';
 import { PATH, PATH_NAME } from '@constants/path';
-import { categoryToTitle, isCommunityCategoryType } from '@utils/community';
+import { getCategoryTitle, isCommunityCategoryType } from '@utils/community';
 
 import type { CommunityCategoryType } from '@type/community';
 
@@ -22,7 +22,7 @@ const CommunityDetailPage = () => {
   return (
     <Content>
       <Header
-        title={[PATH_NAME.COMMUNITY, categoryToTitle(type)]}
+        title={[PATH_NAME.COMMUNITY, getCategoryTitle(type)]}
         path={[PATH.COMMUNITY]}
       >
         <CommunityWriteButton />

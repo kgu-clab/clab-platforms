@@ -14,7 +14,7 @@ import { PATH_FINDER } from '@constants/path';
 import useModal from '@hooks/common/useModal';
 import { usePagination } from '@hooks/common/usePagination';
 import { useBoardDeleteMutation, useCategoryBoards } from '@hooks/queries';
-import { categoryToTitle } from '@utils/community';
+import { getCategoryTitle } from '@utils/community';
 import { toYYMMDD } from '@utils/date';
 import { toDecodeHTMLEntities } from '@utils/string';
 
@@ -35,7 +35,7 @@ const ManagerAlertSection = ({ category }: ManagerAlertSectionProps) => {
   const [mode, setMode] = useState<ModeState>('view');
   const { page, size, handlePageChange } = usePagination();
 
-  const title = categoryToTitle(category);
+  const title = getCategoryTitle(category);
 
   const handleTableRowClick = (id: number) => {
     navigate(PATH_FINDER.COMMUNITY_POST(category, id));
