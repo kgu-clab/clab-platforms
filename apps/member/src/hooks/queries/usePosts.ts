@@ -3,7 +3,7 @@ import { useSuspenseQuery } from '@tanstack/react-query';
 import { getBoardsDetail } from '@api/board';
 import { getHirePost } from '@api/hire';
 import { getNewsPost } from '@api/news';
-import { QUERY_KEY } from '@constants/key';
+import { BOARD_QUERY_KEY, QUERY_KEY } from '@constants/key';
 
 import type { BaseResponse } from '@type/api';
 import type {
@@ -22,19 +22,19 @@ type PostsType = BaseResponse<
 export const usePosts = (category: CommunityCategoryType, id: number) => {
   const queryOptions = {
     notice: {
-      queryKey: QUERY_KEY.BOARDS,
+      queryKey: BOARD_QUERY_KEY.DETAIL(id),
       queryFn: () => getBoardsDetail(id),
     },
     free: {
-      queryKey: QUERY_KEY.BOARDS,
+      queryKey: BOARD_QUERY_KEY.DETAIL(id),
       queryFn: () => getBoardsDetail(id),
     },
     qna: {
-      queryKey: QUERY_KEY.BOARDS,
+      queryKey: BOARD_QUERY_KEY.DETAIL(id),
       queryFn: () => getBoardsDetail(id),
     },
     graduated: {
-      queryKey: QUERY_KEY.BOARDS,
+      queryKey: BOARD_QUERY_KEY.DETAIL(id),
       queryFn: () => getBoardsDetail(id),
     },
     organization: {
@@ -52,7 +52,7 @@ export const usePosts = (category: CommunityCategoryType, id: number) => {
   }[category];
 
   return useSuspenseQuery<PostsType>({
-    queryKey: [queryOptions.queryKey, category, id],
     queryFn: queryOptions.queryFn,
+    queryKey: BOARD_QUERY_KEY.LIST(id),
   });
 };

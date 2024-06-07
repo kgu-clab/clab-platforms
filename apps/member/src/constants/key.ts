@@ -1,3 +1,6 @@
+import { WithPaginationParams } from '@type/api';
+import type { CommunityCategoryType } from '@type/community';
+
 export const ATOM_KEY = {
   IS_LOGGED_IN: 'isLoggedInState',
   MODAL: 'modalState',
@@ -10,16 +13,8 @@ export const QUERY_KEY = {
   MY_NOTIFICATIONS: 'MyNotifications',
   MY_COMMENTS: 'MyComments',
   MY_ACTIVITY: 'MyActivity',
-  MY_BOOK: 'MyBook',
   MEMBERS: 'Members',
-  BOARDS: 'Boards',
-  BOARDS_COLLECTION: 'BoardsCollection',
   ORGANIZATION: 'Organization',
-  BOOK: 'Book',
-  BOOK_DETAIL: 'BookDetail',
-  BOOK_LOAN_RECORD: 'BookLoanRecord',
-  BOOK_LOAN_RECORD_CONDITIONS: 'BookLoanRecordConditions',
-  BOOK_LOAN_RECORD_OVERDUE: 'BookLoanRecordOverdue',
   NEWS: 'News',
   BLOG: 'Blog',
   HIRE: 'Hire',
@@ -49,6 +44,26 @@ export const MY_BOOK_QUERY_KEY = {
     ...MY_BOOK_QUERY_KEY.BOOKS(),
     memberId,
     pagination,
+  ],
+} as const;
+/**
+ * 게시판 관련 쿼리 키
+ */
+export const BOARD_QUERY_KEY = {
+  ALL: ['Board'],
+  LISTS: () => [...BOARD_QUERY_KEY.ALL, 'lists'],
+  DETAILS: () => [...BOARD_QUERY_KEY.ALL, 'detail'],
+  COLLECTIONS: () => [...BOARD_QUERY_KEY.ALL, 'collection'],
+  CATEGORIES: () => [...BOARD_QUERY_KEY.ALL, 'category'],
+  LIST: (id: number) => [...BOARD_QUERY_KEY.LISTS(), id],
+  DETAIL: (id: number) => [...BOARD_QUERY_KEY.DETAILS(), id],
+  COLLECTION: (pagination: WithPaginationParams) => [
+    ...BOARD_QUERY_KEY.COLLECTIONS(),
+    pagination,
+  ],
+  CATEGORY: (category: CommunityCategoryType) => [
+    ...BOARD_QUERY_KEY.CATEGORIES(),
+    category,
   ],
 } as const;
 /**

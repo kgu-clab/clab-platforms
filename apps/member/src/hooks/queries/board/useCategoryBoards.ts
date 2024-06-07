@@ -3,7 +3,7 @@ import { useSuspenseQuery } from '@tanstack/react-query';
 import { getBoardsList } from '@api/board';
 import { getMyHire } from '@api/hire';
 import { getNews } from '@api/news';
-import { QUERY_KEY } from '@constants/key';
+import { BOARD_QUERY_KEY, QUERY_KEY } from '@constants/key';
 
 import type { Pagination, WithPaginationParams } from '@type/api';
 import type {
@@ -18,7 +18,7 @@ interface UseCategoryBoardsParams extends WithPaginationParams {
 }
 
 type QueryOptions = {
-  queryKey: string;
+  queryKey: string | string[];
   queryFn: () => Promise<
     Pagination<CommunityPostItem | CommunityNewsBoard | CommunityHireBoard>
   >;
@@ -34,23 +34,23 @@ export const useCategoryBoards = ({
 }: UseCategoryBoardsParams) => {
   const queryOptions: QueryOptions = {
     notice: {
-      queryKey: QUERY_KEY.BOARDS,
+      queryKey: BOARD_QUERY_KEY.CATEGORY('notice'),
       queryFn: () => getBoardsList('notice', page, size),
     },
     free: {
-      queryKey: QUERY_KEY.BOARDS,
+      queryKey: BOARD_QUERY_KEY.CATEGORY('free'),
       queryFn: () => getBoardsList('free', page, size),
     },
     qna: {
-      queryKey: QUERY_KEY.BOARDS,
+      queryKey: BOARD_QUERY_KEY.CATEGORY('qna'),
       queryFn: () => getBoardsList('qna', page, size),
     },
     graduated: {
-      queryKey: QUERY_KEY.BOARDS,
+      queryKey: BOARD_QUERY_KEY.CATEGORY('graduated'),
       queryFn: () => getBoardsList('graduated', page, size),
     },
     organization: {
-      queryKey: QUERY_KEY.ORGANIZATION,
+      queryKey: BOARD_QUERY_KEY.CATEGORY('organization'),
       queryFn: () => getBoardsList('organization', page, size),
     },
     news: {
@@ -64,7 +64,7 @@ export const useCategoryBoards = ({
   }[category];
 
   return useSuspenseQuery({
-    queryKey: [queryOptions.queryKey, category, { page, size }],
+    queryKey: [queryOptions.queryKey, { page, size }],
     queryFn: queryOptions.queryFn,
   });
 };

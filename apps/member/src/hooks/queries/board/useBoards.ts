@@ -6,7 +6,7 @@ import {
 } from '@tanstack/react-query';
 
 import { getBoards } from '@api/board';
-import { QUERY_KEY } from '@constants/key';
+import { BOARD_QUERY_KEY } from '@constants/key';
 
 import { WithPaginationParams } from '@type/api';
 
@@ -20,13 +20,15 @@ export const useBoards = ({ size = 6 }: WithPaginationParams = {}) => {
 
   useEffect(() => {
     return () => {
-      queryClient.removeQueries({ queryKey: [QUERY_KEY.BOARDS_COLLECTION] });
+      queryClient.removeQueries({
+        queryKey: [BOARD_QUERY_KEY.COLLECTIONS],
+      });
     };
   }, [queryClient]);
 
   return useSuspenseInfiniteQuery({
     initialPageParam: 0,
-    queryKey: [QUERY_KEY.BOARDS_COLLECTION],
+    queryKey: [BOARD_QUERY_KEY.COLLECTION({ size })],
     queryFn: ({ pageParam }) => getBoards(pageParam, size),
     select: (data) => data.pages.flatMap((page) => page.items),
     getNextPageParam: (lastPage) => {
