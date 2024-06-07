@@ -1,7 +1,7 @@
 import { useSuspenseQuery } from '@tanstack/react-query';
 
 import { getBookLoanRecordConditions } from '@api/book';
-import { QUERY_KEY } from '@constants/key';
+import { BOOK_LOAN_RECORD_QUERY_KEY } from '@constants/key';
 
 import type { WithPaginationParams } from '@type/api';
 
@@ -21,6 +21,12 @@ export function useBookLoanRecordConditions({
   page = 0,
   size = 20,
 }: UseBookLoanRecordConditionsPrams) {
+  const queryKey = bookId
+    ? BOOK_LOAN_RECORD_QUERY_KEY.BOOK(bookId)
+    : borrowerId
+      ? BOOK_LOAN_RECORD_QUERY_KEY.BORROWER(borrowerId)
+      : BOOK_LOAN_RECORD_QUERY_KEY.ALL;
+
   return useSuspenseQuery({
     queryFn: () =>
       getBookLoanRecordConditions({
@@ -30,6 +36,6 @@ export function useBookLoanRecordConditions({
         page,
         size,
       }),
-    queryKey: [QUERY_KEY.BOOK_LOAN_RECORD_CONDITIONS, bookId ?? borrowerId],
+    queryKey: queryKey,
   });
 }

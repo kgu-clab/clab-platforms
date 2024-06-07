@@ -1,7 +1,7 @@
 import { useSuspenseQuery } from '@tanstack/react-query';
 
 import { getBookLoanRecordOverdue } from '@api/book';
-import { QUERY_KEY } from '@constants/key';
+import { BOOK_LOAN_RECORD_QUERY_KEY } from '@constants/key';
 
 import type { WithPaginationParams } from '@type/api';
 
@@ -20,6 +20,6 @@ export function useBookLoanRecordOverdue({
         page,
         size,
       }),
-    queryKey: [QUERY_KEY.BOOK_LOAN_RECORD_OVERDUE, { page, size }],
+    queryKey: BOOK_LOAN_RECORD_QUERY_KEY.OVERDUE({ page, size }),
   });
 }

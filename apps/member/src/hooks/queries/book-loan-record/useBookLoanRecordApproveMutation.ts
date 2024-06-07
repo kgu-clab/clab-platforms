@@ -1,7 +1,7 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 import { patchBookLoanRecordApprove } from '@api/book';
-import { QUERY_KEY } from '@constants/key';
+import { BOOK_LOAN_RECORD_QUERY_KEY, MY_BOOK_QUERY_KEY } from '@constants/key';
 import { API_ERROR_MESSAGE } from '@constants/message';
 import useToast from '@hooks/common/useToast';
 
@@ -17,10 +17,10 @@ export function useBookLoanRecordApproveMutation() {
     onSuccess: ({ success, errorMessage }) => {
       if (success) {
         queryClient.invalidateQueries({
-          queryKey: [QUERY_KEY.MY_BOOK],
+          queryKey: MY_BOOK_QUERY_KEY.BOOKS(),
         });
         queryClient.invalidateQueries({
-          queryKey: [QUERY_KEY.BOOK_LOAN_RECORD_CONDITIONS],
+          queryKey: BOOK_LOAN_RECORD_QUERY_KEY.BORROWERS(),
         });
         toast({
           state: 'success',

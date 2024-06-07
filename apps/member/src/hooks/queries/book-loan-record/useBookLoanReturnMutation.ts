@@ -1,7 +1,11 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 import { postReturnBook } from '@api/book';
-import { QUERY_KEY } from '@constants/key';
+import {
+  BOOK_LOAN_RECORD_QUERY_KEY,
+  BOOK_QUERY_KEY,
+  MY_BOOK_QUERY_KEY,
+} from '@constants/key';
 import { ERROR_MESSAGE } from '@constants/message';
 import useToast from '@hooks/common/useToast';
 
@@ -14,22 +18,19 @@ export function useBookLoanReturnMutation() {
 
   const bookReturnMutation = useMutation({
     mutationFn: postReturnBook,
-    onSuccess: (data, variables) => {
+    onSuccess: (data, { bookId, borrowerId }) => {
       if (data) {
         queryClient.invalidateQueries({
-          queryKey: [QUERY_KEY.BOOK],
+          queryKey: BOOK_QUERY_KEY.DETAIL(bookId),
         });
         queryClient.invalidateQueries({
-          queryKey: [QUERY_KEY.BOOK_DETAIL, variables.bookId],
+          queryKey: BOOK_LOAN_RECORD_QUERY_KEY.BOOK(bookId),
         });
         queryClient.invalidateQueries({
-          queryKey: [QUERY_KEY.BOOK_LOAN_RECORD_CONDITIONS],
+          queryKey: BOOK_LOAN_RECORD_QUERY_KEY.BORROWER(borrowerId),
         });
         queryClient.invalidateQueries({
-          queryKey: [QUERY_KEY.BOOK_LOAN_RECORD, variables.borrowerId],
-        });
-        queryClient.invalidateQueries({
-          queryKey: [QUERY_KEY.MY_BOOK, variables.borrowerId],
+          queryKey: MY_BOOK_QUERY_KEY.BOOKS(),
         });
         toast({
           state: 'success',

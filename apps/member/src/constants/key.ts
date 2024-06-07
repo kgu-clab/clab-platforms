@@ -38,3 +38,47 @@ export const QUERY_KEY = {
   ACTIVITY_GROUP_APPLY: 'ActivityGroupApply',
   ACTIVITY_BOARDS_MY_ASSIGNMENT: 'ActivityBoardsMyAssignment',
 } as const;
+
+/**
+ * 내가 대여한 도서 목록의 쿼리 키
+ */
+export const MY_BOOK_QUERY_KEY = {
+  ALL: ['MyBook'],
+  BOOKS: () => [...MY_BOOK_QUERY_KEY.ALL, 'books'],
+  BOOK: (memberId: string, pagination: WithPaginationParams) => [
+    ...MY_BOOK_QUERY_KEY.BOOKS(),
+    memberId,
+    pagination,
+  ],
+} as const;
+/**
+ * 도서 관련 쿼리 키
+ */
+export const BOOK_QUERY_KEY = {
+  ALL: ['Book'],
+  LISTS: () => [...BOOK_QUERY_KEY.ALL, 'lists'],
+  DETAILS: () => [...BOOK_QUERY_KEY.ALL, 'detail'],
+  LIST: (pagination: WithPaginationParams) => [
+    ...BOOK_QUERY_KEY.LISTS(),
+    pagination,
+  ],
+  DETAIL: (id: number) => [...BOOK_QUERY_KEY.DETAILS(), id],
+} as const;
+/**
+ * 도서 대출 기록 관련 쿼리 키
+ */
+export const BOOK_LOAN_RECORD_QUERY_KEY = {
+  ALL: ['BookLoanRecord'],
+  BOOKS: () => [...BOOK_LOAN_RECORD_QUERY_KEY.ALL, 'books'],
+  BORROWERS: () => [...BOOK_LOAN_RECORD_QUERY_KEY.ALL, 'borrowers'],
+  OVERDUE_PAGE: () => [...BOOK_LOAN_RECORD_QUERY_KEY.ALL, 'overdue'],
+  BOOK: (bookId?: number) => [...BOOK_LOAN_RECORD_QUERY_KEY.BOOKS(), bookId],
+  BORROWER: (borrowerId: string) => [
+    ...BOOK_LOAN_RECORD_QUERY_KEY.BORROWERS(),
+    borrowerId,
+  ],
+  OVERDUE: (pagination: WithPaginationParams) => [
+    ...BOOK_LOAN_RECORD_QUERY_KEY.OVERDUE_PAGE(),
+    pagination,
+  ],
+} as const;
