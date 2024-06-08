@@ -8,7 +8,6 @@ export const ATOM_KEY = {
 } as const;
 
 export const QUERY_KEY = {
-  MY_PROFILE: 'MyProfile',
   MY_BOARDS: 'MyBoards',
   MY_NOTIFICATIONS: 'MyNotifications',
   MY_COMMENTS: 'MyComments',
@@ -32,6 +31,16 @@ export const QUERY_KEY = {
   ACTIVITY_GROUP_MY: 'ActivityGroupMy',
   ACTIVITY_GROUP_APPLY: 'ActivityGroupApply',
   ACTIVITY_BOARDS_MY_ASSIGNMENT: 'ActivityBoardsMyAssignment',
+} as const;
+
+/**
+ * 회원 정보 관련 쿼리 키
+ */
+export const MEMBER_QUERY_KEY = {
+  ALL: ['Profile'],
+  MY: () => [...MEMBER_QUERY_KEY.ALL, 'my'],
+  MEMBERS: () => [...MEMBER_QUERY_KEY.ALL, 'members'],
+  MEMBER: (memberId: string) => [...MEMBER_QUERY_KEY.MEMBERS(), memberId],
 } as const;
 
 /**
