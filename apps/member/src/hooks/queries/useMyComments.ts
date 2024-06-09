@@ -1,11 +1,21 @@
 import { useSuspenseQuery } from '@tanstack/react-query';
 
 import { getMyComments } from '@api/comment';
-import { QUERY_KEY } from '@constants/key';
+import { MEMBER_QUERY_KEY } from '@constants/key';
+import { getTime } from '@utils/date';
 
-export const useMyComments = (page = 0, size = 20) => {
+import { WithPaginationParams } from '@type/api';
+
+/**
+ * 내가 작성한 댓글 목록을 가져옵니다.
+ */
+export const useMyComments = ({
+  page = 0,
+  size = 10,
+}: WithPaginationParams = {}) => {
   return useSuspenseQuery({
-    queryKey: [QUERY_KEY.MY_COMMENTS, page, size],
     queryFn: () => getMyComments(page, size),
+    queryKey: MEMBER_QUERY_KEY.COMMENTS(),
+    staleTime: getTime(0, 10, 0),
   });
 };

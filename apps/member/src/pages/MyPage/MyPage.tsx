@@ -18,9 +18,9 @@ import { useMyProfile } from '@hooks/queries/useMyProfile';
 
 const MyPage = () => {
   const { data: myProfile } = useMyProfile();
-  const { data: myNotificationsData } = useMyNotifications(0, 10);
-  const { data: myBoardsData } = useMyBoards(0, 10);
-  const { data: myCommentsData } = useMyComments(0, 10);
+  const { data: myNotificationsData } = useMyNotifications();
+  const { data: myBoardsData } = useMyBoards();
+  const { data: myCommentsData } = useMyComments();
   const { data: myMembershipFee } = useMembershipFee({
     memberId: myProfile.id,
     size: 10,

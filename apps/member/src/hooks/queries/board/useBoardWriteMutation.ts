@@ -4,7 +4,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 import { postBoardsWrite } from '@api/board';
 import { BOARD_QUERY_KEY } from '@constants/key';
-import { API_ERROR_MESSAGE, ERROR_MESSAGE } from '@constants/message';
+import { API_ERROR_MESSAGE } from '@constants/message';
 import { PATH } from '@constants/path';
 import useToast from '@hooks/common/useToast';
 
@@ -23,6 +23,9 @@ export const useBoardWriteMutation = () => {
         queryClient.invalidateQueries({
           queryKey: BOARD_QUERY_KEY.CATEGORY(category),
         });
+        queryClient.invalidateQueries({
+          queryKey: BOARD_QUERY_KEY.MY(),
+        });
         toast({
           state: 'success',
           message: '게시글이 작성되었어요.',
@@ -34,12 +37,6 @@ export const useBoardWriteMutation = () => {
         });
       }
       navigate(PATH.COMMUNITY);
-    },
-    onError: () => {
-      toast({
-        state: 'error',
-        message: ERROR_MESSAGE.NETWORK,
-      });
     },
   });
 

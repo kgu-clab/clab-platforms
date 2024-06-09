@@ -1,16 +1,21 @@
 import { useSuspenseQuery } from '@tanstack/react-query';
 
 import { getMyNotifications } from '@api/notification';
-import { QUERY_KEY } from '@constants/key';
-import { toMilliseconds } from '@utils/api';
+import { NOTIFICATION_QUERY_KEY } from '@constants/key';
+import { getTime } from '@utils/date';
+
+import type { WithPaginationParams } from '@type/api';
 
 /**
  * 나의 알림을 조회합니다.
  */
-export const useMyNotifications = (page = 0, size = 20) => {
+export const useMyNotifications = ({
+  page = 0,
+  size = 10,
+}: WithPaginationParams = {}) => {
   return useSuspenseQuery({
     queryFn: () => getMyNotifications(page, size),
-    queryKey: [QUERY_KEY.MY_NOTIFICATIONS, { page, size }],
-    refetchInterval: toMilliseconds(3),
+    queryKey: NOTIFICATION_QUERY_KEY.NOTIFICATIONS(),
+    refetchInterval: getTime(0, 1, 0),
   });
 };

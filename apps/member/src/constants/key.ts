@@ -8,11 +8,6 @@ export const ATOM_KEY = {
 } as const;
 
 export const QUERY_KEY = {
-  MY_BOARDS: 'MyBoards',
-  MY_NOTIFICATIONS: 'MyNotifications',
-  MY_COMMENTS: 'MyComments',
-  MY_ACTIVITY: 'MyActivity',
-  MEMBERS: 'Members',
   ORGANIZATION: 'Organization',
   NEWS: 'News',
   BLOG: 'Blog',
@@ -39,8 +34,21 @@ export const QUERY_KEY = {
 export const MEMBER_QUERY_KEY = {
   ALL: ['Profile'],
   MY: () => [...MEMBER_QUERY_KEY.ALL, 'my'],
+  COMMENTS: () => [...MEMBER_QUERY_KEY.ALL, 'comments'],
   MEMBERS: () => [...MEMBER_QUERY_KEY.ALL, 'members'],
   MEMBER: (memberId: string) => [...MEMBER_QUERY_KEY.MEMBERS(), memberId],
+} as const;
+
+/**
+ * 알림 관련 쿼리 키
+ */
+export const NOTIFICATION_QUERY_KEY = {
+  ALL: ['Notification'],
+  NOTIFICATIONS: () => [...NOTIFICATION_QUERY_KEY.ALL, 'notifications'],
+  NOTIFICATION: (notificationId: string) => [
+    ...NOTIFICATION_QUERY_KEY.NOTIFICATIONS(),
+    notificationId,
+  ],
 } as const;
 
 /**
@@ -55,11 +63,21 @@ export const MY_BOOK_QUERY_KEY = {
     pagination,
   ],
 } as const;
+
+/**
+ * 활동 관련 쿼리 키
+ */
+export const ACTIVITY_QUERY_KEY = {
+  ALL: ['Activity'],
+  MY: () => [...ACTIVITY_QUERY_KEY.ALL, 'my'],
+} as const;
+
 /**
  * 게시판 관련 쿼리 키
  */
 export const BOARD_QUERY_KEY = {
   ALL: ['Board'],
+  MY: () => [...BOARD_QUERY_KEY.ALL, 'my'],
   LISTS: () => [...BOARD_QUERY_KEY.ALL, 'lists'],
   DETAILS: () => [...BOARD_QUERY_KEY.ALL, 'detail'],
   COLLECTIONS: () => [...BOARD_QUERY_KEY.ALL, 'collection'],
@@ -75,6 +93,7 @@ export const BOARD_QUERY_KEY = {
     category,
   ],
 } as const;
+
 /**
  * 도서 관련 쿼리 키
  */
@@ -88,6 +107,7 @@ export const BOOK_QUERY_KEY = {
   ],
   DETAIL: (id: number) => [...BOOK_QUERY_KEY.DETAILS(), id],
 } as const;
+
 /**
  * 도서 대출 기록 관련 쿼리 키
  */
