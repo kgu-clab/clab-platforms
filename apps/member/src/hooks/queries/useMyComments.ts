@@ -2,7 +2,6 @@ import { useSuspenseQuery } from '@tanstack/react-query';
 
 import { getMyComments } from '@api/comment';
 import { MEMBER_QUERY_KEY } from '@constants/key';
-import { getTime } from '@utils/date';
 
 import { WithPaginationParams } from '@type/api';
 
@@ -14,8 +13,7 @@ export const useMyComments = ({
   size = 10,
 }: WithPaginationParams = {}) => {
   return useSuspenseQuery({
-    queryFn: () => getMyComments(page, size),
     queryKey: MEMBER_QUERY_KEY.COMMENTS(),
-    staleTime: getTime(0, 10, 0),
+    queryFn: () => getMyComments(page, size),
   });
 };

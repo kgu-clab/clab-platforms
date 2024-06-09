@@ -2,7 +2,6 @@ import { useSuspenseQuery } from '@tanstack/react-query';
 
 import { getMembers } from '@api/member';
 import { MEMBER_QUERY_KEY } from '@constants/key';
-import { getTime } from '@utils/date';
 
 import type { WithPaginationParams } from '@type/api';
 
@@ -21,6 +20,7 @@ export const useMembers = ({
   size = 20,
 }: UseMembersParams) => {
   return useSuspenseQuery({
+    queryKey: MEMBER_QUERY_KEY.MEMBER(id),
     queryFn: () =>
       getMembers({
         id,
@@ -28,7 +28,5 @@ export const useMembers = ({
         page,
         size,
       }),
-    queryKey: MEMBER_QUERY_KEY.MEMBER(id),
-    staleTime: getTime(0, 10, 0),
   });
 };

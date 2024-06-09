@@ -2,7 +2,7 @@ import { useSuspenseQuery } from '@tanstack/react-query';
 
 import { getMyActivities } from '@api/activity';
 import { ACTIVITY_QUERY_KEY } from '@constants/key';
-import { getTime, now } from '@utils/date';
+import { now } from '@utils/date';
 
 import type { WithPaginationParams } from '@type/api';
 
@@ -21,8 +21,7 @@ export const useMyActivity = ({
   size = 20,
 }: UseMyActivityParams = {}) => {
   return useSuspenseQuery({
-    queryFn: () => getMyActivities(startDate, endDate, page, size),
     queryKey: ACTIVITY_QUERY_KEY.MY(),
-    staleTime: getTime(0, 10, 0),
+    queryFn: () => getMyActivities(startDate, endDate, page, size),
   });
 };
