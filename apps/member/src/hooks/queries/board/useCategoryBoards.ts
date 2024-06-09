@@ -64,7 +64,7 @@ export const useCategoryBoards = ({
   }[category];
 
   return useSuspenseQuery({
-    queryKey: [queryOptions.queryKey, { page, size }],
+    queryKey: [...queryOptions.queryKey, { page, size }],
     queryFn: queryOptions.queryFn,
   });
 };
