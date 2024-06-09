@@ -1,7 +1,8 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 import { pathMembershipFee } from '@api/membershipFee';
-import { QUERY_KEY } from '@constants/key';
+import { MEMBERSHIP_FEE_QUERY_KEY } from '@constants/key';
+import { ERROR_MESSAGE } from '@constants/message';
 import useToast from '@hooks/common/useToast';
 
 /**
@@ -13,11 +14,11 @@ export const useMembershipFeeModifyMutation = () => {
 
   const membershipFeeModifyMutation = useMutation({
     mutationFn: pathMembershipFee,
-    onSuccess: (_, variables) => {
+    onSuccess: (_, { body }) => {
       queryClient.invalidateQueries({
-        queryKey: [QUERY_KEY.MEMBERSHIP_FEE],
+        queryKey: MEMBERSHIP_FEE_QUERY_KEY.ALL,
       });
-      switch (variables.body.status) {
+      switch (body.status) {
         case 'APPROVED':
           toast({
             state: 'success',
@@ -31,6 +32,10 @@ export const useMembershipFeeModifyMutation = () => {
           });
           break;
         default:
+          toast({
+            state: 'error',
+            message: ERROR_MESSAGE.DEFAULT,
+          });
           break;
       }
     },

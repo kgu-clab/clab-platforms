@@ -1,7 +1,7 @@
 import { useSuspenseQuery } from '@tanstack/react-query';
 
 import { getMembershipFee } from '@api/membershipFee';
-import { QUERY_KEY } from '@constants/key';
+import { MEMBERSHIP_FEE_QUERY_KEY } from '@constants/key';
 
 import { WithPaginationParams } from '@type/api';
 
@@ -22,7 +22,7 @@ export const useMembershipFee = ({
   size = 20,
 }: UseMembershipFeeParams = {}) => {
   return useSuspenseQuery({
-    queryKey: [QUERY_KEY.MEMBERSHIP_FEE, size, page],
+    queryKey: MEMBERSHIP_FEE_QUERY_KEY.PAGE({ page, size }),
     queryFn: () =>
       getMembershipFee({
         memberId,

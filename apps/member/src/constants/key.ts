@@ -17,10 +17,6 @@ export const QUERY_KEY = {
   SCHEDULE_COLLECT: 'ScheduleCollect',
   MAIN_ACTIVITY_PHOTO: 'MainActivityPhoto',
   COMMENTS: 'Comments',
-  MEMBERSHIP_FEE: 'MembershipFee',
-  UPLOADEDFILE: 'UploadedFile',
-  SHARED_ACCOUNT: 'SharedAccount',
-  SHARED_ACCOUNT_USAGE: 'SharedAccountUsage',
   ACTIVITY: 'Activity',
   ACTIVITY_BOARDS: 'ActivityBoards',
   ACTIVITY_GROUP_MY: 'ActivityGroupMy',
@@ -60,6 +56,18 @@ export const MY_BOOK_QUERY_KEY = {
   BOOK: (memberId: string, pagination: WithPaginationParams) => [
     ...MY_BOOK_QUERY_KEY.BOOKS(),
     memberId,
+    pagination,
+  ],
+} as const;
+
+/**
+ * 회비 관련 쿼리 키
+ */
+export const MEMBERSHIP_FEE_QUERY_KEY = {
+  ALL: ['MembershipFee'],
+  PAGES: () => [...MEMBERSHIP_FEE_QUERY_KEY.ALL, 'pages'],
+  PAGE: (pagination: WithPaginationParams) => [
+    ...MEMBERSHIP_FEE_QUERY_KEY.PAGES(),
     pagination,
   ],
 } as const;
