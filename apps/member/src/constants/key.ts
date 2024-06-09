@@ -16,7 +16,7 @@ export const QUERY_KEY = {
   SCHEDULE: 'Schedule',
   SCHEDULE_COLLECT: 'ScheduleCollect',
   MAIN_ACTIVITY_PHOTO: 'MainActivityPhoto',
-  COMMENTS: 'Comments',
+  // 활동
   ACTIVITY: 'Activity',
   ACTIVITY_BOARDS: 'ActivityBoards',
   ACTIVITY_GROUP_MY: 'ActivityGroupMy',
@@ -100,6 +100,15 @@ export const BOARD_QUERY_KEY = {
     ...BOARD_QUERY_KEY.CATEGORIES(),
     category,
   ],
+} as const;
+
+/**
+ * 댓글 관련 쿼리 키
+ */
+export const COMMENT_QUERY_KEY = {
+  ALL: ['Comment'],
+  DETAILS: () => [...COMMENT_QUERY_KEY.ALL, 'detail'],
+  DETAIL: (id: number) => [...COMMENT_QUERY_KEY.DETAILS(), id],
 } as const;
 
 /**
