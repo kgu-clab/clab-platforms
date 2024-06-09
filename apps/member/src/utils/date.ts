@@ -207,6 +207,6 @@ export function toKoreaISOString(date: string): string {
  * @param seconds 초 (기본값: 0)
  * @returns 변환된 밀리초 값
  */
-export function getTime(hours = 0, minutes = 0, seconds = 0): number {
+export function getTime({ hours = 0, minutes = 0, seconds = 0 }): number {
   return ((hours * 60 + minutes) * 60 + seconds) * 1000;
 }

@@ -14,8 +14,10 @@ export const useMyNotifications = ({
   size = 10,
 }: WithPaginationParams = {}) => {
   return useSuspenseQuery({
-    queryFn: () => getMyNotifications(page, size),
     queryKey: NOTIFICATION_QUERY_KEY.NOTIFICATIONS(),
-    refetchInterval: getTime(0, 1, 0),
+    queryFn: () => getMyNotifications(page, size),
+    refetchInterval: getTime({
+      minutes: 3,
+    }),
   });
 };
