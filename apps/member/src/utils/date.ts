@@ -191,7 +191,6 @@ export function checkDueDate(borrowedAt: string, dueDate: string): number {
   const endDate = dayjs(dueDate);
   return endDate.diff(startDate, 'd');
 }
-
 /**
  * 주어진 날짜를 한국 시간대로 변환하여 ISO 문자열로 반환합니다.
  *
@@ -200,4 +199,14 @@ export function checkDueDate(borrowedAt: string, dueDate: string): number {
  */
 export function toKoreaISOString(date: string): string {
   return dayjs(date).format('YYYY-MM-DDTHH:mm:ss') + 'Z';
+}
+/**
+ * 주어진 시간, 분, 초를 밀리초로 변환하는 함수입니다.
+ * @param hours 시간 (기본값: 0)
+ * @param minutes 분 (기본값: 0)
+ * @param seconds 초 (기본값: 0)
+ * @returns 변환된 밀리초 값
+ */
+export function getTime(hours = 0, minutes = 0, seconds = 0): number {
+  return ((hours * 60 + minutes) * 60 + seconds) * 1000;
 }
