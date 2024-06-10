@@ -1,4 +1,5 @@
-import { WithPaginationParams } from '@type/api';
+import type { ActivityGroupStatusType } from '@type/activity';
+import type { WithPaginationParams } from '@type/api';
 import type { CommunityCategoryType } from '@type/community';
 
 export const ATOM_KEY = {
@@ -13,12 +14,6 @@ export const QUERY_KEY = {
   BLOG: 'Blog',
   HIRE: 'Hire',
   BIRTHDAY: 'Birthday',
-  ACTIVITY: 'Activity',
-  ACTIVITY_PHOTO: 'ActivityPhoto',
-  ACTIVITY_BOARDS: 'ActivityBoards',
-  ACTIVITY_GROUP_MY: 'ActivityGroupMy',
-  ACTIVITY_GROUP_APPLY: 'ActivityGroupApply',
-  ACTIVITY_BOARDS_MY_ASSIGNMENT: 'ActivityBoardsMyAssignment',
 } as const;
 
 /**
@@ -88,6 +83,20 @@ export const MEMBERSHIP_FEE_QUERY_KEY = {
 export const ACTIVITY_QUERY_KEY = {
   ALL: ['Activity'],
   MY: () => [...ACTIVITY_QUERY_KEY.ALL, 'my'],
+  MY_ASSIGNMENTS: () => [...ACTIVITY_QUERY_KEY.ALL, 'myAssignment'],
+  PHOTOS: () => [...ACTIVITY_QUERY_KEY.ALL, 'photo'],
+  DETAILS: () => [...ACTIVITY_QUERY_KEY.ALL, 'detail'],
+  STATUSES: () => [...BOARD_QUERY_KEY.ALL, 'status'],
+  APPLICATIONS: () => [...BOOK_QUERY_KEY.ALL, 'application'],
+  BOARDS: () => [...ACTIVITY_QUERY_KEY.ALL, 'board'],
+  MY_ASSIGNMENT: (id: number) => [...ACTIVITY_QUERY_KEY.MY_ASSIGNMENTS(), id],
+  DETAIL: (id: number) => [...ACTIVITY_QUERY_KEY.DETAILS(), id],
+  STATUS: (status: ActivityGroupStatusType) => [
+    ...ACTIVITY_QUERY_KEY.STATUSES(),
+    status,
+  ],
+  APPLICATION: (id: number) => [...ACTIVITY_QUERY_KEY.APPLICATIONS(), id],
+  BOARD: (id: number) => [...ACTIVITY_QUERY_KEY.BOARDS(), id],
 } as const;
 
 /**

@@ -14,14 +14,14 @@ interface UseMyActivityParams extends WithPaginationParams {
 /**
  * 내 활동을 조회합니다. (최근 6개월)
  */
-export const useMyActivity = ({
+export function useMyActivity({
   startDate = now().format('YYYY-MM-DD'),
   endDate = now().add(6, 'month').format('YYYY-MM-DD'),
   page = 0,
   size = 20,
-}: UseMyActivityParams = {}) => {
+}: UseMyActivityParams = {}) {
   return useSuspenseQuery({
     queryKey: ACTIVITY_QUERY_KEY.MY(),
     queryFn: () => getMyActivities(startDate, endDate, page, size),
   });
-};
+}

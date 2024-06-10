@@ -1,13 +1,13 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 import { postActivityPhoto } from '@api/activity';
-import { QUERY_KEY } from '@constants/key';
+import { ACTIVITY_QUERY_KEY } from '@constants/key';
 import useToast from '@hooks/common/useToast';
 
 /**
  * 활동 사진을 추가합니다.
  */
-export const useActivityPhotoAddMutation = () => {
+export function useActivityPhotoAddMutation() {
   const queryClient = useQueryClient();
   const toast = useToast();
 
@@ -20,15 +20,16 @@ export const useActivityPhotoAddMutation = () => {
           message: '활동 사진 추가를 실패했어요.',
         });
       }
+
+      queryClient.invalidateQueries({
+        queryKey: ACTIVITY_QUERY_KEY.PHOTOS(),
+      });
       toast({
         state: 'success',
         message: '새로운 활동 사진으로 교체됐어요.',
-      });
-      queryClient.invalidateQueries({
-        queryKey: [QUERY_KEY.MAIN_ACTIVITY_PHOTO],
       });
     },
   });
 
   return { activityPhotoAddMutate: activityPhotoAddMutation.mutate };
-};
+}
