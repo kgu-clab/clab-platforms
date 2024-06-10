@@ -10,13 +10,11 @@ import { Section } from '@components/common/Section';
 
 import { TABLE_HEAD } from '@constants/head';
 import { PATH } from '@constants/path';
-import { DATE_FORMAT } from '@constants/state';
 import useModal from '@hooks/common/useModal';
 import { usePagination } from '@hooks/common/usePagination';
 import { useSchedule, useScheduleDeleteMutation } from '@hooks/queries';
-import { formattedDate } from '@utils/date';
+import { formattedDate, now } from '@utils/date';
 import { toDecodeHTMLEntities, toPriorityText } from '@utils/string';
-import dayjs from 'dayjs';
 
 type Mode = 'view' | 'add';
 
@@ -29,7 +27,7 @@ const ManageCalendarSection = () => {
 
   const { data } = useSchedule({
     // 오늘 기준으로 최근 1년 부터 ~ 이번달 까지
-    startDate: dayjs().add(-1, 'year').format(DATE_FORMAT.WITH_TIME),
+    startDate: now().add(-1, 'year').toString(),
   });
   const { scheduleDeleteMutate } = useScheduleDeleteMutation();
 

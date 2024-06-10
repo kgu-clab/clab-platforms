@@ -1,4 +1,4 @@
-import { startTransition, useCallback, useState } from 'react';
+import { startTransition, useState } from 'react';
 
 import ArrowButton from '@components/common/ArrowButton/ArrowButton';
 import Section from '@components/common/Section/Section';
@@ -14,11 +14,11 @@ const today = now();
 const CalendarSection = () => {
   const [date, setDate] = useState(today);
   const { data } = useSchedule({
-    startDate: date.startOf('month').format('YYYY-MM-DD'),
-    endDate: date.endOf('month').format('YYYY-MM-DD'),
+    startDate: date.startOf('month').toString(),
+    endDate: date.endOf('month').toString(),
   });
 
-  const handleDateClick = useCallback((action: 'prev' | 'next' | 'today') => {
+  const handleDateClick = (action: 'prev' | 'next' | 'today') => {
     startTransition(() => {
       setDate((current) => {
         switch (action) {
@@ -31,7 +31,7 @@ const CalendarSection = () => {
         }
       });
     });
-  }, []);
+  };
 
   const events = transformEvents(data.items);
   const startDay = date.startOf('month').startOf('week'); // 현재 월의 첫 날짜의 주의 시작일
