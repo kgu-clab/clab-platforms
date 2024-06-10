@@ -25,6 +25,7 @@ export interface GetBookLoanRecordConditionsParams
   borrowerId?: string;
   isReturned?: boolean;
 }
+
 /**
  * 도서 목록 조회
  */
@@ -35,6 +36,7 @@ export async function getBooks(page: number, size: number) {
 
   return data;
 }
+
 /**
  * 도서 상세 조회
  */
@@ -45,16 +47,7 @@ export async function getBookDetail(id: number) {
 
   return data;
 }
-/**
- * 나의 대출내역 조회
- */
-export async function getMyBooks(id: string, page: number, size: number) {
-  const { data } = await server.get<ResponsePagination<BookItem>>({
-    url: createCommonPagination(END_POINT.BOOK, { page, size }),
-  });
 
-  return data.items.filter((book) => book.borrowerId === id);
-}
 /**
  * 도서 대출
  */
@@ -64,6 +57,7 @@ export async function postBorrowBook(body: BookLoanRequestParams) {
     body,
   });
 }
+
 /**
  * 도서 반납
  */
@@ -78,6 +72,7 @@ export async function postReturnBook(body: BookLoanRequestParams) {
 
   return data;
 }
+
 /**
  * 도서 연장
  */
@@ -87,6 +82,7 @@ export function postExtendBook(body: BookLoanRequestParams) {
     body,
   });
 }
+
 /**
  * 도서 대출 내역 조회
  */
@@ -111,6 +107,7 @@ export async function getBookLoanRecordConditions({
 
   return data;
 }
+
 /**
  * 도서 연체자 조회
  */
@@ -129,6 +126,7 @@ export async function getBookLoanRecordOverdue({
 
   return data;
 }
+
 /**
  * 도서 대출 승인
  */
