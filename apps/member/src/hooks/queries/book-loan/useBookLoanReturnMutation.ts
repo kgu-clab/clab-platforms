@@ -1,11 +1,7 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 import { postReturnBook } from '@api/book';
-import {
-  BOOK_LOAN_RECORD_QUERY_KEY,
-  BOOK_QUERY_KEY,
-  MY_BOOK_QUERY_KEY,
-} from '@constants/key';
+import { BOOK_LOAN_RECORD_QUERY_KEY, BOOK_QUERY_KEY } from '@constants/key';
 import { ERROR_MESSAGE } from '@constants/message';
 import useToast from '@hooks/common/useToast';
 
@@ -16,7 +12,7 @@ export function useBookLoanReturnMutation() {
   const queryClient = useQueryClient();
   const toast = useToast();
 
-  const bookReturnMutation = useMutation({
+  const mutation = useMutation({
     mutationFn: postReturnBook,
     onSuccess: (data, { bookId, borrowerId }) => {
       if (data) {
@@ -30,8 +26,9 @@ export function useBookLoanReturnMutation() {
           queryKey: BOOK_LOAN_RECORD_QUERY_KEY.BORROWER(borrowerId),
         });
         queryClient.invalidateQueries({
-          queryKey: MY_BOOK_QUERY_KEY.BOOKS(),
+          queryKey: BOOK_LOAN_RECORD_QUERY_KEY.RECORDS_PAGE(),
         });
+
         toast({
           state: 'success',
           message: '도서 대여가 반납되었어요.',
@@ -45,5 +42,5 @@ export function useBookLoanReturnMutation() {
     },
   });
 
-  return { bookReturnMutate: bookReturnMutation.mutate };
+  return { bookReturnMutate: mutation.mutate };
 }

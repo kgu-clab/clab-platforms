@@ -2,7 +2,7 @@ export * from './activity';
 export * from './blog';
 export * from './board';
 export * from './book';
-export * from './book-loan-record';
+export * from './book-loan';
 export * from './comment';
 export * from './my';
 export * from './schedule';
