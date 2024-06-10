@@ -1,5 +1,6 @@
+export * from './useBoardByCategory';
 export * from './useBoardDeleteMutation';
+export * from './useBoardDetail';
 export * from './useBoardModifyMutation';
 export * from './useBoards';
-export * from './useBoardByCategory';
 export * from './useBoardWriteMutation';

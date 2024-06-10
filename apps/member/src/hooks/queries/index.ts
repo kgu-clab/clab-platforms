@@ -20,5 +20,4 @@ export * from './useMyComments';
 export * from './useMyNotifications';
 export * from './useMyProfile';
 export * from './useNews';
-export * from './usePosts';
 export * from './useUserInfoMutation';

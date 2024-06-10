@@ -13,7 +13,7 @@ import PostCommentSection from '@components/community/PostCommentSection/PostCom
 
 import { API_ERROR_MESSAGE, ERROR_MESSAGE } from '@constants/message';
 import { PATH, PATH_FINDER, PATH_NAME } from '@constants/path';
-import { usePosts } from '@hooks/queries/usePosts';
+import { useBoardDetail } from '@hooks/queries';
 import { getCategoryTitle, isCommunityCategoryType } from '@utils/community';
 
 import type { CommunityCategoryType } from '@type/community';
@@ -25,7 +25,7 @@ const CommunityPostPage = () => {
     throw new Error(ERROR_MESSAGE.NOT_FOUND);
   }
 
-  const { data: response } = usePosts(type, +id);
+  const { data: response } = useBoardDetail(type, +id);
 
   if (response.errorMessage) {
     throw new Error(API_ERROR_MESSAGE[response.errorMessage]);
