@@ -21,7 +21,7 @@ export const useBoardWriteMutation = () => {
     onSuccess: ({ success, data: category, errorMessage }) => {
       if (success) {
         queryClient.invalidateQueries({
-          queryKey: BOARD_QUERY_KEY.CATEGORY(category),
+          queryKey: BOARD_QUERY_KEY.CATEGORY_PAGES(category),
         });
         queryClient.invalidateQueries({
           queryKey: BOARD_QUERY_KEY.MY(),

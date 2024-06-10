@@ -17,50 +17,26 @@ interface Params extends WithPaginationParams {
   category: CommunityCategoryType;
 }
 
-type QueryOptions = {
-  queryKey: string | string[];
-  queryFn: () => Promise<
-    Pagination<CommunityPostItem | CommunityNewsBoard | CommunityHireBoard>
-  >;
-};
+type queryFn = () => Promise<
+  Pagination<CommunityPostItem | CommunityNewsBoard | CommunityHireBoard>
+>;
 
 /**
  * 커뮤니티 게시글을 카테고리별로 조회합니다.
  */
 export function useBoardByCategory({ category, page = 0, size = 6 }: Params) {
-  const queryOptions: QueryOptions = {
-    notice: {
-      queryKey: BOARD_QUERY_KEY.CATEGORY('notice'),
-      queryFn: () => getBoardsList('notice', page, size),
-    },
-    free: {
-      queryKey: BOARD_QUERY_KEY.CATEGORY('free'),
-      queryFn: () => getBoardsList('free', page, size),
-    },
-    qna: {
-      queryKey: BOARD_QUERY_KEY.CATEGORY('qna'),
-      queryFn: () => getBoardsList('qna', page, size),
-    },
-    graduated: {
-      queryKey: BOARD_QUERY_KEY.CATEGORY('graduated'),
-      queryFn: () => getBoardsList('graduated', page, size),
-    },
-    organization: {
-      queryKey: BOARD_QUERY_KEY.CATEGORY('organization'),
-      queryFn: () => getBoardsList('organization', page, size),
-    },
-    news: {
-      queryKey: BOARD_QUERY_KEY.CATEGORY('news'),
-      queryFn: () => getNews(page, size),
-    },
-    hire: {
-      queryKey: BOARD_QUERY_KEY.CATEGORY('hire'),
-      queryFn: () => getMyHire(page, size),
-    },
+  const queryFn: queryFn = {
+    notice: () => getBoardsList('notice', page, size),
+    free: () => getBoardsList('free', page, size),
+    qna: () => getBoardsList('qna', page, size),
+    graduated: () => getBoardsList('graduated', page, size),
+    organization: () => getBoardsList('organization', page, size),
+    news: () => getNews(page, size),
+    hire: () => getMyHire(page, size),
   }[category];
 
   return useSuspenseQuery({
-    queryKey: [...queryOptions.queryKey, { page, size }],
-    queryFn: queryOptions.queryFn,
+    queryKey: BOARD_QUERY_KEY.CATEGORY_PAGE(category, { page, size }),
+    queryFn: queryFn,
   });
 }

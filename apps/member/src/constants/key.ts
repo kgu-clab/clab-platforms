@@ -2,6 +2,9 @@ import type { ActivityGroupStatusType } from '@type/activity';
 import type { WithPaginationParams } from '@type/api';
 import type { CommunityCategoryType } from '@type/community';
 
+/**
+ * 전역 상태 관리 키
+ */
 export const ATOM_KEY = {
   IS_LOGGED_IN: 'isLoggedInState',
   MODAL: 'modalState',
@@ -24,24 +27,7 @@ export const MEMBER_QUERY_KEY = {
  */
 export const NOTIFICATION_QUERY_KEY = {
   ALL: ['Notification'],
-  NOTIFICATIONS: () => [...NOTIFICATION_QUERY_KEY.ALL, 'notifications'],
-  NOTIFICATION: (notificationId: string) => [
-    ...NOTIFICATION_QUERY_KEY.NOTIFICATIONS(),
-    notificationId,
-  ],
-} as const;
-
-/**
- * 내가 대여한 도서 목록의 쿼리 키
- */
-export const MY_BOOK_QUERY_KEY = {
-  ALL: ['MyBook'],
-  BOOKS: () => [...MY_BOOK_QUERY_KEY.ALL, 'books'],
-  BOOK: (memberId: string, pagination: WithPaginationParams) => [
-    ...MY_BOOK_QUERY_KEY.BOOKS(),
-    memberId,
-    pagination,
-  ],
+  MY: () => [...NOTIFICATION_QUERY_KEY.ALL, 'my'],
 } as const;
 
 /**
@@ -50,9 +36,9 @@ export const MY_BOOK_QUERY_KEY = {
 export const SCHEDULE_QUERY_KEY = {
   ALL: ['Schedule'],
   MY: () => [...SCHEDULE_QUERY_KEY.ALL, 'my'],
-  MONTHS: () => [...SCHEDULE_QUERY_KEY.ALL, 'month'],
-  COLLECTS: () => [...SCHEDULE_QUERY_KEY.ALL, 'collect'],
-  ACTIVITIES: () => [...SCHEDULE_QUERY_KEY.MY(), 'activity'],
+  MONTHS: () => [...SCHEDULE_QUERY_KEY.ALL, 'months'],
+  COLLECTS: () => [...SCHEDULE_QUERY_KEY.ALL, 'collects'],
+  ACTIVITIES: () => [...SCHEDULE_QUERY_KEY.MY(), 'activities'],
   MONTH: (startDate: string, endDate: string) => [
     ...SCHEDULE_QUERY_KEY.MONTHS(),
     { startDate, endDate },
@@ -77,12 +63,12 @@ export const MEMBERSHIP_FEE_QUERY_KEY = {
 export const ACTIVITY_QUERY_KEY = {
   ALL: ['Activity'],
   MY: () => [...ACTIVITY_QUERY_KEY.ALL, 'my'],
-  MY_ASSIGNMENTS: () => [...ACTIVITY_QUERY_KEY.ALL, 'myAssignment'],
-  PHOTOS: () => [...ACTIVITY_QUERY_KEY.ALL, 'photo'],
-  DETAILS: () => [...ACTIVITY_QUERY_KEY.ALL, 'detail'],
-  STATUSES: () => [...BOARD_QUERY_KEY.ALL, 'status'],
-  APPLICATIONS: () => [...BOOK_QUERY_KEY.ALL, 'application'],
-  BOARDS: () => [...ACTIVITY_QUERY_KEY.ALL, 'board'],
+  MY_ASSIGNMENTS: () => [...ACTIVITY_QUERY_KEY.MY(), 'assignment'],
+  PHOTOS: () => [...ACTIVITY_QUERY_KEY.ALL, 'photos'],
+  DETAILS: () => [...ACTIVITY_QUERY_KEY.ALL, 'details'],
+  STATUSES: () => [...BOARD_QUERY_KEY.ALL, 'statuses'],
+  APPLICATIONS: () => [...BOOK_QUERY_KEY.ALL, 'applications'],
+  BOARDS: () => [...ACTIVITY_QUERY_KEY.ALL, 'boards'],
   MY_ASSIGNMENT: (id: number) => [...ACTIVITY_QUERY_KEY.MY_ASSIGNMENTS(), id],
   DETAIL: (id: number) => [...ACTIVITY_QUERY_KEY.DETAILS(), id],
   STATUS: (status: ActivityGroupStatusType) => [
@@ -99,20 +85,26 @@ export const ACTIVITY_QUERY_KEY = {
 export const BOARD_QUERY_KEY = {
   ALL: ['Board'],
   MY: () => [...BOARD_QUERY_KEY.ALL, 'my'],
-  LISTS: () => [...BOARD_QUERY_KEY.ALL, 'lists'],
-  DETAILS: () => [...BOARD_QUERY_KEY.ALL, 'detail'],
-  COLLECTIONS: () => [...BOARD_QUERY_KEY.ALL, 'collection'],
-  CATEGORIES: () => [...BOARD_QUERY_KEY.ALL, 'category'],
-  LIST: (id: number) => [...BOARD_QUERY_KEY.LISTS(), id],
+  DETAILS: () => [...BOARD_QUERY_KEY.ALL, 'details'],
+  COLLECTIONS: () => [...BOARD_QUERY_KEY.ALL, 'collections'],
+  CATEGORIES: () => [...BOARD_QUERY_KEY.ALL, 'categories'],
+  CATEGORY: (category: CommunityCategoryType) => [
+    ...BOARD_QUERY_KEY.CATEGORIES(),
+    category,
+  ],
+  CATEGORY_PAGES: (category: CommunityCategoryType) => [
+    ...BOARD_QUERY_KEY.CATEGORY(category),
+    'pages',
+  ],
   DETAIL: (id: number) => [...BOARD_QUERY_KEY.DETAILS(), id],
   COLLECTION: (pagination: WithPaginationParams) => [
     ...BOARD_QUERY_KEY.COLLECTIONS(),
     pagination,
   ],
-  CATEGORY: (category: CommunityCategoryType) => [
-    ...BOARD_QUERY_KEY.CATEGORIES(),
-    category,
-  ],
+  CATEGORY_PAGE: (
+    category: CommunityCategoryType,
+    pagination: WithPaginationParams,
+  ) => [...BOARD_QUERY_KEY.CATEGORY_PAGES(category), pagination],
 } as const;
 
 /**
@@ -120,7 +112,7 @@ export const BOARD_QUERY_KEY = {
  */
 export const COMMENT_QUERY_KEY = {
   ALL: ['Comment'],
-  DETAILS: () => [...COMMENT_QUERY_KEY.ALL, 'detail'],
+  DETAILS: () => [...COMMENT_QUERY_KEY.ALL, 'details'],
   DETAIL: (id: number) => [...COMMENT_QUERY_KEY.DETAILS(), id],
 } as const;
 
@@ -129,10 +121,10 @@ export const COMMENT_QUERY_KEY = {
  */
 export const BOOK_QUERY_KEY = {
   ALL: ['Book'],
-  LISTS: () => [...BOOK_QUERY_KEY.ALL, 'lists'],
-  DETAILS: () => [...BOOK_QUERY_KEY.ALL, 'detail'],
-  LIST: (pagination: WithPaginationParams) => [
-    ...BOOK_QUERY_KEY.LISTS(),
+  PAGES: () => [...BOOK_QUERY_KEY.ALL, 'pages'],
+  DETAILS: () => [...BOOK_QUERY_KEY.ALL, 'details'],
+  PAGE: (pagination: WithPaginationParams) => [
+    ...BOOK_QUERY_KEY.PAGES(),
     pagination,
   ],
   DETAIL: (id: number) => [...BOOK_QUERY_KEY.DETAILS(), id],
@@ -145,7 +137,8 @@ export const BOOK_LOAN_RECORD_QUERY_KEY = {
   ALL: ['BookLoanRecord'],
   BOOKS: () => [...BOOK_LOAN_RECORD_QUERY_KEY.ALL, 'books'],
   BORROWERS: () => [...BOOK_LOAN_RECORD_QUERY_KEY.ALL, 'borrowers'],
-  OVERDUE_PAGE: () => [...BOOK_LOAN_RECORD_QUERY_KEY.ALL, 'overdue'],
+  RECORDS_PAGE: () => [...BOOK_LOAN_RECORD_QUERY_KEY.ALL, 'records', 'pages'],
+  OVERDUE_PAGE: () => [...BOOK_LOAN_RECORD_QUERY_KEY.ALL, 'overdue', 'pages'],
   BOOK: (bookId?: number) => [...BOOK_LOAN_RECORD_QUERY_KEY.BOOKS(), bookId],
   BORROWER: (borrowerId: string) => [
     ...BOOK_LOAN_RECORD_QUERY_KEY.BORROWERS(),
@@ -153,6 +146,10 @@ export const BOOK_LOAN_RECORD_QUERY_KEY = {
   ],
   OVERDUE: (pagination: WithPaginationParams) => [
     ...BOOK_LOAN_RECORD_QUERY_KEY.OVERDUE_PAGE(),
+    pagination,
+  ],
+  RECORD: (pagination: WithPaginationParams) => [
+    ...BOOK_LOAN_RECORD_QUERY_KEY.RECORDS_PAGE(),
     pagination,
   ],
 } as const;
@@ -172,7 +169,7 @@ export const BIRTHDAY_QUERY_KEY = {
 export const BLOG_QUERY_KEY = {
   ALL: ['Blog'],
   PAGES: () => [...BLOG_QUERY_KEY.ALL, 'pages'],
-  DETAILS: () => [...BLOG_QUERY_KEY.ALL, 'detail'],
+  DETAILS: () => [...BLOG_QUERY_KEY.ALL, 'details'],
   PAGE: (pagination: WithPaginationParams) => [
     ...BLOG_QUERY_KEY.PAGES(),
     pagination,
@@ -186,7 +183,7 @@ export const BLOG_QUERY_KEY = {
 export const NEWS_QUERY_KEY = {
   ALL: ['News'],
   PAGES: () => [...NEWS_QUERY_KEY.ALL, 'pages'],
-  DETAILS: () => [...NEWS_QUERY_KEY.ALL, 'detail'],
+  DETAILS: () => [...NEWS_QUERY_KEY.ALL, 'details'],
   PAGE: (pagination: WithPaginationParams) => [
     ...NEWS_QUERY_KEY.PAGES(),
     pagination,
@@ -200,7 +197,7 @@ export const NEWS_QUERY_KEY = {
 export const HIRE_QUERY_KEY = {
   ALL: ['Hire'],
   PAGES: () => [...HIRE_QUERY_KEY.ALL, 'pages'],
-  DETAILS: () => [...HIRE_QUERY_KEY.ALL, 'detail'],
+  DETAILS: () => [...HIRE_QUERY_KEY.ALL, 'details'],
   PAGE: (pagination: WithPaginationParams) => [
     ...HIRE_QUERY_KEY.PAGES(),
     pagination,
@@ -214,7 +211,7 @@ export const HIRE_QUERY_KEY = {
 export const ORGANIZATION_QUERY_KEY = {
   ALL: ['Organization'],
   PAGES: () => [...ORGANIZATION_QUERY_KEY.ALL, 'pages'],
-  DETAILS: () => [...ORGANIZATION_QUERY_KEY.ALL, 'detail'],
+  DETAILS: () => [...ORGANIZATION_QUERY_KEY.ALL, 'details'],
   PAGE: (pagination: WithPaginationParams) => [
     ...ORGANIZATION_QUERY_KEY.PAGES(),
     pagination,

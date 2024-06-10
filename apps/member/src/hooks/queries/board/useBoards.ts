@@ -13,7 +13,7 @@ import { WithPaginationParams } from '@type/api';
 export function useBoards({ size = 6 }: WithPaginationParams = {}) {
   return useSuspenseInfiniteQuery({
     initialPageParam: 0,
-    queryKey: [BOARD_QUERY_KEY.COLLECTION({ size })],
+    queryKey: BOARD_QUERY_KEY.COLLECTION({ size }),
     queryFn: ({ pageParam }) => getBoards(pageParam, size),
     select: (data) => data.pages.flatMap((page) => page.items),
     getNextPageParam: (lastPage) => {

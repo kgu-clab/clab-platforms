@@ -9,6 +9,6 @@ import { BOOK_QUERY_KEY } from '@constants/key';
 export const useBooks = (page = 0, size = 6) => {
   return useSuspenseQuery({
     queryFn: () => getBooks(page, size),
-    queryKey: BOOK_QUERY_KEY.LIST({ page, size }),
+    queryKey: BOOK_QUERY_KEY.PAGE({ page, size }),
   });
 };

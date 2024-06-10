@@ -14,7 +14,7 @@ export function useMyNotifications({
   size = 10,
 }: WithPaginationParams = {}) {
   return useSuspenseQuery({
-    queryKey: NOTIFICATION_QUERY_KEY.NOTIFICATIONS(),
+    queryKey: NOTIFICATION_QUERY_KEY.MY(),
     queryFn: () => getMyNotifications(page, size),
     refetchInterval: getTime({
       minutes: 3,
