@@ -11,7 +11,6 @@ export const ATOM_KEY = {
 export const QUERY_KEY = {
   ORGANIZATION: 'Organization',
   NEWS: 'News',
-  BLOG: 'Blog',
   HIRE: 'Hire',
   BIRTHDAY: 'Birthday',
 } as const;
@@ -99,6 +98,21 @@ export const ACTIVITY_QUERY_KEY = {
   ],
   APPLICATION: (id: number) => [...ACTIVITY_QUERY_KEY.APPLICATIONS(), id],
   BOARD: (id: number) => [...ACTIVITY_QUERY_KEY.BOARDS(), id],
+} as const;
+
+/**
+ * 블로그 관련 쿼리 키
+ */
+
+export const BLOG_QUERY_KEY = {
+  ALL: ['Blog'],
+  PAGES: () => [...BLOG_QUERY_KEY.ALL, 'pages'],
+  DETAILS: () => [...BLOG_QUERY_KEY.ALL, 'detail'],
+  PAGE: (pagination: WithPaginationParams) => [
+    ...BLOG_QUERY_KEY.PAGES(),
+    pagination,
+  ],
+  DETAIL: (id: number) => [...BLOG_QUERY_KEY.DETAILS(), id],
 } as const;
 
 /**
