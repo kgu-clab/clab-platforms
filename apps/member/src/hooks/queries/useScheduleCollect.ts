@@ -1,14 +1,16 @@
 import { useSuspenseQuery } from '@tanstack/react-query';
 
 import { getScheduleCollect } from '@api/schedule';
-import { QUERY_KEY } from '@constants/key';
+import { SCHEDULE_QUERY_KEY } from '@constants/key';
+import { getTime } from '@utils/date';
 
 /**
  * 일정 모아보기를 조회합니다.
  */
-export const useScheduleCollect = () => {
+export function useScheduleCollect() {
   return useSuspenseQuery({
-    queryKey: [QUERY_KEY.SCHEDULE_COLLECT],
+    queryKey: SCHEDULE_QUERY_KEY.COLLECTS(),
     queryFn: getScheduleCollect,
+    staleTime: getTime({ hours: 1 }),
   });
-};
+}

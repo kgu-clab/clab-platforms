@@ -13,11 +13,8 @@ export const QUERY_KEY = {
   BLOG: 'Blog',
   HIRE: 'Hire',
   BIRTHDAY: 'Birthday',
-  SCHEDULE: 'Schedule',
-  SCHEDULE_COLLECT: 'ScheduleCollect',
-  MAIN_ACTIVITY_PHOTO: 'MainActivityPhoto',
-  // 활동
   ACTIVITY: 'Activity',
+  ACTIVITY_PHOTO: 'ActivityPhoto',
   ACTIVITY_BOARDS: 'ActivityBoards',
   ACTIVITY_GROUP_MY: 'ActivityGroupMy',
   ACTIVITY_GROUP_APPLY: 'ActivityGroupApply',
@@ -57,6 +54,19 @@ export const MY_BOOK_QUERY_KEY = {
     ...MY_BOOK_QUERY_KEY.BOOKS(),
     memberId,
     pagination,
+  ],
+} as const;
+
+/**
+ * 일정 관련 쿼리 키
+ */
+export const SCHEDULE_QUERY_KEY = {
+  ALL: ['Schedule'],
+  MONTHS: () => [...SCHEDULE_QUERY_KEY.ALL, 'month'],
+  COLLECTS: () => [...SCHEDULE_QUERY_KEY.ALL, 'collect'],
+  MONTH: (startDate: string, endDate: string) => [
+    ...SCHEDULE_QUERY_KEY.MONTHS(),
+    { startDate, endDate },
   ],
 } as const;
 
