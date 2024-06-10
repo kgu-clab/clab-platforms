@@ -179,3 +179,17 @@ export const BLOG_QUERY_KEY = {
   ],
   DETAIL: (id: number) => [...BLOG_QUERY_KEY.DETAILS(), id],
 } as const;
+
+/**
+ * 뉴스 관련 쿼리 키
+ */
+export const NEWS_QUERY_KEY = {
+  ALL: ['News'],
+  PAGES: () => [...NEWS_QUERY_KEY.ALL, 'pages'],
+  DETAILS: () => [...NEWS_QUERY_KEY.ALL, 'detail'],
+  PAGE: (pagination: WithPaginationParams) => [
+    ...NEWS_QUERY_KEY.PAGES(),
+    pagination,
+  ],
+  DETAIL: (id: number) => [...NEWS_QUERY_KEY.DETAILS(), id],
+} as const;
