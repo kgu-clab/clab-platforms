@@ -57,8 +57,10 @@ export const MY_BOOK_QUERY_KEY = {
  */
 export const SCHEDULE_QUERY_KEY = {
   ALL: ['Schedule'],
+  MY: () => [...SCHEDULE_QUERY_KEY.ALL, 'my'],
   MONTHS: () => [...SCHEDULE_QUERY_KEY.ALL, 'month'],
   COLLECTS: () => [...SCHEDULE_QUERY_KEY.ALL, 'collect'],
+  ACTIVITIES: () => [...SCHEDULE_QUERY_KEY.MY(), 'activity'],
   MONTH: (startDate: string, endDate: string) => [
     ...SCHEDULE_QUERY_KEY.MONTHS(),
     { startDate, endDate },

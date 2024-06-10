@@ -11,7 +11,7 @@ export * from './useBlogDetail';
 export * from './useHire';
 export * from './useMembershipFee';
 export * from './useMembershipFeeMutation';
-export * from './useMyActivity';
+export * from './useMyActivitySchedule';
 export * from './useMyBoards';
 export * from './useMyBookLoan';
 export * from './useMyComments';
