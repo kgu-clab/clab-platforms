@@ -8,12 +8,12 @@ import { WithPaginationParams } from '@type/api';
 /**
  * 본인이 작성한 게시글 목록을 가져옵니다.
  */
-export const useMyBoards = ({
+export function useMyBoards({
   page = 0,
   size = 10,
-}: WithPaginationParams = {}) => {
+}: WithPaginationParams = {}) {
   return useSuspenseQuery({
     queryKey: BOARD_QUERY_KEY.MY(),
     queryFn: () => getMyBoards(page, size),
   });
-};
+}

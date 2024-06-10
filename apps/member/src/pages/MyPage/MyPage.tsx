@@ -13,8 +13,8 @@ import {
   useMyBoards,
   useMyComments,
   useMyNotifications,
+  useMyProfile,
 } from '@hooks/queries';
-import { useMyProfile } from '@hooks/queries/useMyProfile';
 
 const MyPage = () => {
   const { data: myProfile } = useMyProfile();

@@ -9,10 +9,10 @@ import type { WithPaginationParams } from '@type/api';
 /**
  * 나의 알림을 조회합니다.
  */
-export const useMyNotifications = ({
+export function useMyNotifications({
   page = 0,
   size = 10,
-}: WithPaginationParams = {}) => {
+}: WithPaginationParams = {}) {
   return useSuspenseQuery({
     queryKey: NOTIFICATION_QUERY_KEY.NOTIFICATIONS(),
     queryFn: () => getMyNotifications(page, size),
@@ -20,4 +20,4 @@ export const useMyNotifications = ({
       minutes: 3,
     }),
   });
-};
+}
