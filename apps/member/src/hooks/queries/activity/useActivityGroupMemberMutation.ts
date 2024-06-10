@@ -6,13 +6,13 @@ import useToast from '@hooks/common/useToast';
 /**
  * 활동을 신청합니다.
  */
-export const useActivityGroupMemberApplyMutation = () => {
+export function useActivityGroupMemberMutation() {
   const toast = useToast();
 
-  const activityGroupMemberMutation = useMutation({
+  const mutation = useMutation({
     mutationFn: postActivityGroupMemberApply,
-    onSuccess: (res) => {
-      if (!res) {
+    onSuccess: (data) => {
+      if (!data) {
         toast({
           state: 'error',
           message: '신청에 실패했습니다.',
@@ -26,5 +26,5 @@ export const useActivityGroupMemberApplyMutation = () => {
     },
   });
 
-  return { activityGroupMemberMutate: activityGroupMemberMutation.mutate };
-};
+  return { activityGroupMemberMutate: mutation.mutate };
+}

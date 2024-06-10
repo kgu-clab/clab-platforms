@@ -13,7 +13,7 @@ import { GROUP_MESSAGE } from '@constants/message';
 import { PATH_FINDER } from '@constants/path';
 import useModal from '@hooks/common/useModal';
 import { useMyProfile } from '@hooks/queries';
-import { useActivityGroup } from '@hooks/queries/useActivityGroup';
+import { useActivityGroup } from '@hooks/queries/activity/useActivityGroup';
 
 const GroupDetailPage = () => {
   const { id } = useParams();
@@ -29,7 +29,7 @@ const GroupDetailPage = () => {
     (member) => member.memberId === myProfile.id,
   );
 
-  const handleOpenModal = () => {
+  const handleApplicationClick = () => {
     openModal({
       title: '참여자 목록',
       content: (
@@ -49,7 +49,7 @@ const GroupDetailPage = () => {
   return (
     <Content>
       <Header title={['활동', data.name]}>
-        <Button size="sm" onClick={handleOpenModal}>
+        <Button size="sm" onClick={handleApplicationClick}>
           참여자 목록
         </Button>
         {data.isOwner && (

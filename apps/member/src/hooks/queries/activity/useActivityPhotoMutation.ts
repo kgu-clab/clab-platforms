@@ -7,11 +7,11 @@ import useToast from '@hooks/common/useToast';
 /**
  * 활동 사진을 추가합니다.
  */
-export function useActivityPhotoAddMutation() {
+export function useActivityPhotoMutation() {
   const queryClient = useQueryClient();
   const toast = useToast();
 
-  const activityPhotoAddMutation = useMutation({
+  const mutation = useMutation({
     mutationFn: postActivityPhoto,
     onSuccess: (data) => {
       if (!data) {
@@ -31,5 +31,5 @@ export function useActivityPhotoAddMutation() {
     },
   });
 
-  return { activityPhotoAddMutate: activityPhotoAddMutation.mutate };
+  return { activityPhotoMutate: mutation.mutate };
 }

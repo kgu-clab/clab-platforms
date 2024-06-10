@@ -7,9 +7,9 @@ import MyMembershipHistorySection from '@components/my/MyMembershipHistorySectio
 import MyProfileSection from '@components/my/MyProfileSection/MyProfileSection';
 
 import {
-  useActivityGroupMemberMy,
   useBookLoanRecordConditions,
   useMembershipFee,
+  useMyActivityGroupMember,
   useMyBoards,
   useMyComments,
   useMyNotifications,
@@ -29,7 +29,7 @@ const MyPage = () => {
     borrowerId: myProfile.id,
     size: 10,
   });
-  const { data: myActivityGroup } = useActivityGroupMemberMy(0, 10);
+  const { data: myActivityGroup } = useMyActivityGroupMember();
 
   return (
     <Content>

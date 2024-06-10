@@ -1,4 +1,4 @@
-import { ChangeEvent, useCallback, useState } from 'react';
+import { useState } from 'react';
 
 import { Button } from '@clab/design-system';
 
@@ -9,30 +9,33 @@ import Section from '@components/common/Section/Section';
 import Select from '@components/common/Select/Select';
 import Textarea from '@components/common/Textarea/Textarea';
 
+import { BOARD_CONTENT_MAX_LENGTH } from '@constants/state';
 import useToast from '@hooks/common/useToast';
-import { useActivityGroupMemberApplyMutation } from '@hooks/queries/useActivityGroupMemberApplyMutation';
-import { useActivityGroupMemberByStatus } from '@hooks/queries/useActivityGroupMemberByStatus';
+import {
+  useActivityGroupMember,
+  useActivityGroupMemberMutation,
+} from '@hooks/queries';
 
 const GroupApplyPage = () => {
-  const { data: groupData } = useActivityGroupMemberByStatus();
-  const { activityGroupMemberMutate } = useActivityGroupMemberApplyMutation();
+  const { data: groupData } = useActivityGroupMember();
+  const { activityGroupMemberMutate } = useActivityGroupMemberMutation();
   const toast = useToast();
 
-  const [groupID, setGroupID] = useState<number>(0);
-  const [reason, setReason] = useState<string>('');
+  const [groupID, setGroupID] = useState(0);
+  const [reason, setReason] = useState('');
 
   const options = groupData.items.map((item) => ({
     name: item.name,
     value: item.id,
   }));
 
-  const handleReason = useCallback((e: ChangeEvent<HTMLTextAreaElement>) => {
-    setReason(e.target.value);
-  }, []);
-
-  const handleGroupID = useCallback((e: ChangeEvent<HTMLSelectElement>) => {
+  const handleGroupIDChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setGroupID(Number(e.target.value));
-  }, []);
+  };
+
+  const handleReasonChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setReason(e.target.value);
+  };
 
   const onClickApply = () => {
     if (groupID === 0 || reason.length === 0) {
@@ -63,7 +66,7 @@ const GroupApplyPage = () => {
             className="w-full"
             options={options}
             value={groupID}
-            onChange={handleGroupID}
+            onChange={handleGroupIDChange}
           />
         </div>
         <div>
@@ -73,10 +76,10 @@ const GroupApplyPage = () => {
           <Textarea
             id="reason"
             placeholder="지원동기를 입력해주세요."
-            maxLength={1000}
+            maxLength={BOARD_CONTENT_MAX_LENGTH}
             className="scrollbar-hide h-80 w-full resize-none"
             value={reason}
-            onChange={handleReason}
+            onChange={handleReasonChange}
           />
         </div>
         <Button className="w-full" onClick={onClickApply}>
