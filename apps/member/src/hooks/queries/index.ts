@@ -1,4 +1,5 @@
 export * from './activity';
+export * from './blog';
 export * from './board';
 export * from './book';
 export * from './book-loan-record';
@@ -7,8 +8,8 @@ export * from './schedule';
 export * from './queryClient';
 export * from './useAccusesMutation';
 export * from './useBirthday';
-export * from './useBlog';
-export * from './useBlogDetail';
+export * from './blog/useBlog';
+export * from './blog/useBlogDetail';
 export * from './useHire';
 export * from './useMembershipFee';
 export * from './useMembershipFeeMutation';
