@@ -8,13 +8,6 @@ export const ATOM_KEY = {
   TOAST: 'toastState',
 } as const;
 
-export const QUERY_KEY = {
-  ORGANIZATION: 'Organization',
-  NEWS: 'News',
-  HIRE: 'Hire',
-  BIRTHDAY: 'Birthday',
-} as const;
-
 /**
  * 회원 정보 관련 쿼리 키
  */
@@ -101,21 +94,6 @@ export const ACTIVITY_QUERY_KEY = {
 } as const;
 
 /**
- * 블로그 관련 쿼리 키
- */
-
-export const BLOG_QUERY_KEY = {
-  ALL: ['Blog'],
-  PAGES: () => [...BLOG_QUERY_KEY.ALL, 'pages'],
-  DETAILS: () => [...BLOG_QUERY_KEY.ALL, 'detail'],
-  PAGE: (pagination: WithPaginationParams) => [
-    ...BLOG_QUERY_KEY.PAGES(),
-    pagination,
-  ],
-  DETAIL: (id: number) => [...BLOG_QUERY_KEY.DETAILS(), id],
-} as const;
-
-/**
  * 게시판 관련 쿼리 키
  */
 export const BOARD_QUERY_KEY = {
@@ -177,4 +155,27 @@ export const BOOK_LOAN_RECORD_QUERY_KEY = {
     ...BOOK_LOAN_RECORD_QUERY_KEY.OVERDUE_PAGE(),
     pagination,
   ],
+} as const;
+
+/**
+ * 생일 관련 쿼리 키
+ */
+export const BIRTHDAY_QUERY_KEY = {
+  ALL: ['Birthday'],
+  MONTHS: () => [...BIRTHDAY_QUERY_KEY.ALL, 'months'],
+  MONTH: (month: number) => [...BIRTHDAY_QUERY_KEY.MONTHS(), month],
+} as const;
+
+/**
+ * 블로그 관련 쿼리 키
+ */
+export const BLOG_QUERY_KEY = {
+  ALL: ['Blog'],
+  PAGES: () => [...BLOG_QUERY_KEY.ALL, 'pages'],
+  DETAILS: () => [...BLOG_QUERY_KEY.ALL, 'detail'],
+  PAGE: (pagination: WithPaginationParams) => [
+    ...BLOG_QUERY_KEY.PAGES(),
+    pagination,
+  ],
+  DETAIL: (id: number) => [...BLOG_QUERY_KEY.DETAILS(), id],
 } as const;
