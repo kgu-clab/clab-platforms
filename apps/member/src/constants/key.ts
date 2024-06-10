@@ -207,3 +207,17 @@ export const HIRE_QUERY_KEY = {
   ],
   DETAIL: (id: number) => [...HIRE_QUERY_KEY.DETAILS(), id],
 } as const;
+
+/**
+ * 동아리 소식 관련 쿼리 키
+ */
+export const ORGANIZATION_QUERY_KEY = {
+  ALL: ['Organization'],
+  PAGES: () => [...ORGANIZATION_QUERY_KEY.ALL, 'pages'],
+  DETAILS: () => [...ORGANIZATION_QUERY_KEY.ALL, 'detail'],
+  PAGE: (pagination: WithPaginationParams) => [
+    ...ORGANIZATION_QUERY_KEY.PAGES(),
+    pagination,
+  ],
+  DETAIL: (id: number) => [...ORGANIZATION_QUERY_KEY.DETAILS(), id],
+} as const;
