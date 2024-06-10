@@ -193,3 +193,17 @@ export const NEWS_QUERY_KEY = {
   ],
   DETAIL: (id: number) => [...NEWS_QUERY_KEY.DETAILS(), id],
 } as const;
+
+/**
+ * 채용 관련 쿼리 키
+ */
+export const HIRE_QUERY_KEY = {
+  ALL: ['Hire'],
+  PAGES: () => [...HIRE_QUERY_KEY.ALL, 'pages'],
+  DETAILS: () => [...HIRE_QUERY_KEY.ALL, 'detail'],
+  PAGE: (pagination: WithPaginationParams) => [
+    ...HIRE_QUERY_KEY.PAGES(),
+    pagination,
+  ],
+  DETAIL: (id: number) => [...HIRE_QUERY_KEY.DETAILS(), id],
+} as const;
