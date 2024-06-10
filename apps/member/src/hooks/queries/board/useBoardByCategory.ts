@@ -3,7 +3,7 @@ import { useSuspenseQuery } from '@tanstack/react-query';
 import { getBoardsList } from '@api/board';
 import { getMyHire } from '@api/hire';
 import { getNews } from '@api/news';
-import { BOARD_QUERY_KEY, QUERY_KEY } from '@constants/key';
+import { BOARD_QUERY_KEY } from '@constants/key';
 
 import type { Pagination, WithPaginationParams } from '@type/api';
 import type {
@@ -13,7 +13,7 @@ import type {
   CommunityPostItem,
 } from '@type/community';
 
-interface UseCategoryBoardsParams extends WithPaginationParams {
+interface Params extends WithPaginationParams {
   category: CommunityCategoryType;
 }
 
@@ -27,11 +27,7 @@ type QueryOptions = {
 /**
  * 커뮤니티 게시글을 카테고리별로 조회합니다.
  */
-export const useCategoryBoards = ({
-  category,
-  page = 0,
-  size = 6,
-}: UseCategoryBoardsParams) => {
+export function useBoardByCategory({ category, page = 0, size = 6 }: Params) {
   const queryOptions: QueryOptions = {
     notice: {
       queryKey: BOARD_QUERY_KEY.CATEGORY('notice'),
@@ -54,11 +50,11 @@ export const useCategoryBoards = ({
       queryFn: () => getBoardsList('organization', page, size),
     },
     news: {
-      queryKey: QUERY_KEY.NEWS,
+      queryKey: BOARD_QUERY_KEY.CATEGORY('news'),
       queryFn: () => getNews(page, size),
     },
     hire: {
-      queryKey: QUERY_KEY.HIRE,
+      queryKey: BOARD_QUERY_KEY.CATEGORY('hire'),
       queryFn: () => getMyHire(page, size),
     },
   }[category];
@@ -67,4 +63,4 @@ export const useCategoryBoards = ({
     queryKey: [...queryOptions.queryKey, { page, size }],
     queryFn: queryOptions.queryFn,
   });
-};
+}
