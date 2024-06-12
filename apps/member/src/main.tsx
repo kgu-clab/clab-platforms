@@ -5,6 +5,8 @@ import { RecoilRoot } from 'recoil';
 
 import { QueryClientProvider } from '@tanstack/react-query';
 
+import '@clab/design-system/dist/index.css';
+
 import ModalContainer from '@components/common/Modal/ModalContainer.tsx';
 import ToastContainer from '@components/common/Toast/ToastContainer.tsx';
 

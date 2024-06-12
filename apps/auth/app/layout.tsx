@@ -1,3 +1,5 @@
+import '@clab/design-system/dist/index.css';
+
 import QueryClientProvider from '@components/common/QueryClientProvider/QueryClientProvider';
 
 import type { Metadata } from 'next';
