@@ -2,15 +2,13 @@ import { QueryCache, QueryClient } from '@tanstack/react-query';
 
 import { IS_DEVELOPMENT } from '@constants/environment';
 import { ERROR_MESSAGE } from '@constants/message';
-import { getTime } from '@utils/date';
+import { STALE_TIME } from '@constants/state';
 
 export const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
       retry: false,
-      staleTime: getTime({
-        minutes: 10,
-      }),
+      staleTime: STALE_TIME.DEFAULT,
     },
   },
   queryCache: new QueryCache({

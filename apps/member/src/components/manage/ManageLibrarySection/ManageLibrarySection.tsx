@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react';
+import { useState } from 'react';
 
 import { Menubar, Table } from '@clab/design-system';
 
@@ -28,6 +28,7 @@ const ManageLibrarySection = () => {
 
   const { bookLoanRecordApproveMutate } = useBookLoanRecordApproveMutation();
   const { data: bookLoanRecordCondition } = useBookLoanRecordConditions({
+    hasPermission: true,
     isReturned: false,
     page,
     size,
@@ -37,24 +38,20 @@ const ManageLibrarySection = () => {
     size,
   });
 
-  const handleMenubarItemClick = useCallback((mode: Mode) => setMode(mode), []);
+  const handleMenubarItemClick = (mode: Mode) => {
+    setMode(mode);
+  };
 
-  const handleApproveButtonClick = useCallback(
-    (id: number) => {
-      bookLoanRecordApproveMutate(id);
-    },
-    [bookLoanRecordApproveMutate],
-  );
+  const handleApproveButtonClick = (id: number) => {
+    bookLoanRecordApproveMutate(id);
+  };
 
-  const handleContactButtonClick = useCallback(
-    (id: string) => {
-      return openModal({
-        title: '멤버 정보',
-        content: <MemberInfoModal id={id} />,
-      });
-    },
-    [openModal],
-  );
+  const handleContactButtonClick = (id: string) => {
+    return openModal({
+      title: '멤버 정보',
+      content: <MemberInfoModal id={id} />,
+    });
+  };
 
   const renderMode = {
     condition: (

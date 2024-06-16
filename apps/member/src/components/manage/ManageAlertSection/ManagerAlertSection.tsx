@@ -30,7 +30,10 @@ const ManagerAlertSection = ({ category }: ManagerAlertSectionProps) => {
   const navigate = useNavigate();
   const { openModal } = useModal();
   const { boardDeleteMutate } = useBoardDeleteMutation();
-  const { data } = useBoardByCategory({ category: category });
+  const { data } = useBoardByCategory({
+    hasPermission: true,
+    category: category,
+  });
 
   const [mode, setMode] = useState<ModeState>('view');
   const { page, size, handlePageChange } = usePagination();

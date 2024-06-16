@@ -2,6 +2,7 @@ import { useSuspenseQuery } from '@tanstack/react-query';
 
 import { getActivityPhoto } from '@api/activity';
 import { ACTIVITY_QUERY_KEY } from '@constants/key';
+import { STALE_TIME } from '@constants/state';
 
 import type { WithPaginationParams } from '@type/api';
 
@@ -15,5 +16,6 @@ export function useActivityPhoto({
   return useSuspenseQuery({
     queryKey: ACTIVITY_QUERY_KEY.PHOTOS(),
     queryFn: () => getActivityPhoto(page, size),
+    staleTime: STALE_TIME.LONG,
   });
 }

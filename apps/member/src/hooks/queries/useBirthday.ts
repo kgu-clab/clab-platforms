@@ -2,6 +2,7 @@ import { useSuspenseQuery } from '@tanstack/react-query';
 
 import { getBirthday } from '@api/birthday';
 import { BIRTHDAY_QUERY_KEY } from '@constants/key';
+import { STALE_TIME } from '@constants/state';
 import { now } from '@utils/date';
 
 import { WithPaginationParams } from '@type/api';
@@ -21,5 +22,6 @@ export function useBirthday({
   return useSuspenseQuery({
     queryKey: BIRTHDAY_QUERY_KEY.MONTH(month),
     queryFn: () => getBirthday(month, page, size),
+    staleTime: STALE_TIME.LONG,
   });
 }

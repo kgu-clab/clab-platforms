@@ -16,8 +16,6 @@ export function useMyNotifications({
   return useSuspenseQuery({
     queryKey: NOTIFICATION_QUERY_KEY.MY(),
     queryFn: () => getMyNotifications(page, size),
-    refetchInterval: getTime({
-      minutes: 3,
-    }),
+    refetchInterval: getTime({ minutes: 3 }),
   });
 }

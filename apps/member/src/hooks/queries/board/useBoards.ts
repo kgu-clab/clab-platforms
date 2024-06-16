@@ -2,6 +2,7 @@ import { useSuspenseInfiniteQuery } from '@tanstack/react-query';
 
 import { getBoards } from '@api/board';
 import { BOARD_QUERY_KEY } from '@constants/key';
+import { STALE_TIME } from '@constants/state';
 
 import { WithPaginationParams } from '@type/api';
 
@@ -19,6 +20,7 @@ export function useBoards({ size = 6 }: WithPaginationParams = {}) {
     getNextPageParam: (lastPage) => {
       return lastPage.hasNext ? lastPage.currentPage + 1 : null;
     },
+    staleTime: STALE_TIME.SHORT,
     gcTime: 0,
   });
 }

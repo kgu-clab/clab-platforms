@@ -2,13 +2,12 @@ import { useSuspenseQuery } from '@tanstack/react-query';
 
 import { getSchedule } from '@api/schedule';
 import { SCHEDULE_QUERY_KEY } from '@constants/key';
-import { DATE_FORMAT } from '@constants/state';
-import { getTime } from '@utils/date';
+import { DATE_FORMAT, STALE_TIME } from '@constants/state';
 import dayjs from 'dayjs';
 
-import type { WithPaginationParams } from '@type/api';
+import type { WithPaginationParams, WithPermissionParams } from '@type/api';
 
-interface UseMainSchedulePrams extends WithPaginationParams {
+interface Params extends WithPaginationParams, WithPermissionParams {
   startDate?: string;
   endDate?: string;
 }
@@ -21,7 +20,8 @@ export function useSchedule({
   endDate = dayjs().endOf('month').toString(),
   page = 0,
   size = 200,
-}: UseMainSchedulePrams = {}) {
+  hasPermission,
+}: Params = {}) {
   const formattedStartDate = dayjs(startDate).format(DATE_FORMAT.WITH_TIME);
   const formattedEndDate = dayjs(endDate).format(DATE_FORMAT.WITH_TIME);
 
@@ -34,7 +34,6 @@ export function useSchedule({
         page,
         size,
       }),
-    staleTime: getTime({ hours: 1 }),
-    gcTime: getTime({ hours: 2 }),
+    staleTime: hasPermission ? STALE_TIME.ALWAYS : STALE_TIME.LONG,
   });
 }

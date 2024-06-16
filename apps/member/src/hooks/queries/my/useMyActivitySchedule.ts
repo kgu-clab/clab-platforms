@@ -2,6 +2,7 @@ import { useSuspenseQuery } from '@tanstack/react-query';
 
 import { getMyActivitySchedule } from '@api/schedule';
 import { SCHEDULE_QUERY_KEY } from '@constants/key';
+import { STALE_TIME } from '@constants/state';
 import { now } from '@utils/date';
 
 import type { WithPaginationParams } from '@type/api';
@@ -23,5 +24,6 @@ export function useMyActivitySchedule({
   return useSuspenseQuery({
     queryKey: SCHEDULE_QUERY_KEY.ACTIVITIES(),
     queryFn: () => getMyActivitySchedule(startDate, endDate, page, size),
+    staleTime: STALE_TIME.LONG,
   });
 }

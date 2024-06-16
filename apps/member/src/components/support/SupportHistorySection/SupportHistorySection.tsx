@@ -37,6 +37,7 @@ const SupportHistorySection = ({
   const { data: myProfile } = useMyProfile();
   const { membershipFeeModifyMutate } = useMembershipFeeModifyMutation();
   const { data } = useMembershipFee({
+    hasPermission,
     page,
     size,
   });
