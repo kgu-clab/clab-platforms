@@ -14,7 +14,7 @@ const ActivityPanel = () => {
     setOpen((prev) => !prev);
   };
 
-  const hasActivities = data.items.length > 0;
+  const hasActivities = data.totalItems > 0;
 
   return (
     <Panel>

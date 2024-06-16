@@ -3,13 +3,12 @@ import { FcAlarmClock, FcCalendar, FcLeave, FcOvertime } from 'react-icons/fc';
 import Section from '@components/common/Section/Section';
 import StatusCard from '@components/common/StatusCard/StatusCard';
 
-import { useSchedule } from '@hooks/queries';
-import { useScheduleCollect } from '@hooks/queries';
+import { useSchedule, useScheduleCollect } from '@hooks/queries';
 import { calculateDDay, findClosestEvent, transformEvents } from '@utils/date';
 
 const CalendarStatusSection = () => {
-  const { data: yearData } = useScheduleCollect();
   const { data: monthData } = useSchedule();
+  const { data: yearData } = useScheduleCollect();
 
   const closestEvent = findClosestEvent(transformEvents(monthData.items));
   const closestDDay = closestEvent?.startDate
