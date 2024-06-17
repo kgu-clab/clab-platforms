@@ -1,3 +1,34 @@
+import { getTime } from '@utils/date';
+
+/**
+ * API Call Stale Time
+ */
+export const STALE_TIME = {
+  /**
+   * 최신의 데이터가 필요하지 않는 경우 사용합니다.
+   * 사용자 이벤트에 영향이 없는 데이터
+   */
+  LONG: getTime({ hours: 1 }),
+  /**
+   * 데이터가 자주 변경되는 경우 사용합니다.
+   * 사용자 이벤트에 영향이 없지만 최신 데이터가 필요한 경우
+   */
+  MEDIUM: getTime({ minutes: 30 }),
+  /**
+   * 최신의 데이터가 필요한 경우 사용합니다.
+   * 사용자 이벤트에 영향이 있는 데이터
+   */
+  SHORT: getTime({ minutes: 1 }),
+  /**
+   * 항상 최신 데이터를 요청합니다.
+   */
+  ALWAYS: 0,
+  /**
+   * 데이터 요청 기본 시간
+   */
+  DEFAULT: getTime({ minutes: 3 }),
+} as const;
+
 /**
  * 북 대여 상태를 정의합니다.
  */

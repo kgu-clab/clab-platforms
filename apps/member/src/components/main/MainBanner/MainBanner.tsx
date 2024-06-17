@@ -6,7 +6,7 @@ import { createImageUrl } from '@utils/api';
 const MainBanner = () => {
   const { data } = useActivityPhoto();
 
-  if (data.items.length === 0) {
+  if (data.totalItems === 0) {
     return null;
   }
 

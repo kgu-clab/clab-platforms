@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useState } from 'react';
 import { FcAbout } from 'react-icons/fc';
 
 import Panel from '@components/common/Panel/Panel';
@@ -8,27 +8,19 @@ import useModal from '@hooks/common/useModal';
 import { useMyNotifications } from '@hooks/queries';
 
 const AlarmPanel = () => {
-  const { refetch, data } = useMyNotifications(0, 5);
+  const { data } = useMyNotifications({ size: 5 });
 
   const [open, setOpen] = useState(true);
   const { openModal } = useModal();
 
-  const handleOpenClick = useCallback(() => setOpen((prev) => !prev), []);
+  const handleOpenClick = () => setOpen((prev) => !prev);
 
-  const handleAlarmClick = useCallback(
-    (content: string) => {
-      openModal({
-        title: MODAL_TITLE.ALARM,
-        content,
-      });
-    },
-    [openModal],
-  );
-
-  useEffect(() => {
-    // 알림 패널이 열릴 때마다 알림을 새로고침합니다.
-    refetch();
-  }, [open, refetch]);
+  const handleAlarmClick = (content: string) => {
+    openModal({
+      title: MODAL_TITLE.ALARM,
+      content,
+    });
+  };
 
   return (
     <Panel>

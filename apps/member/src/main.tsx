@@ -4,6 +4,7 @@ import ReactDOM from 'react-dom/client';
 import { RecoilRoot } from 'recoil';
 
 import { QueryClientProvider } from '@tanstack/react-query';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 
 import '@clab/design-system/dist/index.css';
 
@@ -11,7 +12,7 @@ import ModalContainer from '@components/common/Modal/ModalContainer.tsx';
 import ToastContainer from '@components/common/Toast/ToastContainer.tsx';
 
 import * as ChannelService from '@channel.io/channel-web-sdk-loader';
-import { CHANNEL_TALK_TOKEN } from '@constants/environment.ts';
+import { CHANNEL_TALK_TOKEN, IS_DEVELOPMENT } from '@constants/environment.ts';
 import { queryClient } from '@hooks/queries';
 import '@styles/globals.css';
 
@@ -30,6 +31,12 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
         <ToastContainer />
         <ModalContainer />
       </RecoilRoot>
+      {IS_DEVELOPMENT && (
+        <ReactQueryDevtools
+          initialIsOpen={false}
+          buttonPosition="bottom-left"
+        />
+      )}
     </QueryClientProvider>
   </StrictMode>,
 );

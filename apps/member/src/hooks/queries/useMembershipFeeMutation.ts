@@ -1,7 +1,7 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 import { postMembershipFee } from '@api/membershipFee';
-import { QUERY_KEY } from '@constants/key';
+import { MEMBERSHIP_FEE_QUERY_KEY } from '@constants/key';
 import { ERROR_MESSAGE } from '@constants/message';
 import useToast from '@hooks/common/useToast';
 
@@ -18,7 +18,7 @@ export const useMembershipFeeMutation = () => {
       if (success) {
         toast({ state: 'success', message: '신청이 완료되었습니다.' });
         queryClient.invalidateQueries({
-          queryKey: [QUERY_KEY.MEMBERSHIP_FEE],
+          queryKey: MEMBERSHIP_FEE_QUERY_KEY.ALL,
         });
       } else {
         return toast({ state: 'error', message: ERROR_MESSAGE.DEFAULT });

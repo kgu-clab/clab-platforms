@@ -15,7 +15,6 @@ import type {
   SubmitBoardType,
 } from '@type/activity';
 import type { BaseResponse, ResponsePagination } from '@type/api';
-import type { ScheduleItem } from '@type/schedule';
 
 import { server } from './server';
 import {
@@ -57,26 +56,6 @@ export interface PostActivityPhotoParams {
 }
 
 /**
- * 나의 활동 일정 조회
- */
-export async function getMyActivities(
-  startDate: string,
-  endDate: string,
-  page: number,
-  size: number,
-) {
-  const { data } = await server.get<ResponsePagination<ScheduleItem>>({
-    url: createCommonPagination(END_POINT.MY_ACTIVITY, {
-      startDate,
-      endDate,
-      page,
-      size,
-    }),
-  });
-
-  return data;
-}
-/**
  * 활동 사진 조회
  */
 export async function getActivityPhoto(page: number, size: number) {
@@ -86,6 +65,7 @@ export async function getActivityPhoto(page: number, size: number) {
 
   return data;
 }
+
 /**
  * 활동 상태별 조회
  */
@@ -104,6 +84,7 @@ export async function getActivityGroupByStatus(
 
   return data;
 }
+
 /**
  * 활동 상세 조회
  */
@@ -120,6 +101,7 @@ export async function getActivityGroupDetail(id: number) {
 
   return data;
 }
+
 /**
  * 활동 신청
  */
@@ -138,6 +120,7 @@ export async function postActivityGroupMemberApply({
 
   return data;
 }
+
 /**
  * 상태별 활동 멤버 조회
  */
@@ -158,6 +141,7 @@ export async function getActivityGroupApplyByStatus(
 
   return data;
 }
+
 /**
  * 나의 활동 목록 조회
  */
@@ -173,6 +157,7 @@ export async function getActivityGroupMemberMy(page: number, size: number) {
 
   return data;
 }
+
 /**
  * 활동 신청 상태
  */
@@ -191,6 +176,7 @@ export async function patchActivityGroupMemberApply({
 
   return data;
 }
+
 /**
  * 게시판 단일 조회
  */
@@ -203,10 +189,11 @@ export async function getActivityBoard(activityGroupBoardId: number) {
 
   return data;
 }
+
 /**
  * 나의 과제 제출 게시판 조회
  */
-export async function getActivityBoardsMyAssignment(parentId: number) {
+export async function getActivityBoardMyAssignment(parentId: number) {
   const { data } = await server.get<BaseResponse<ActivityBoardType[]>>({
     url: createCommonPagination(END_POINT.ACTIVITY_GROUP_BOARDS_MY_ASSIGNMENT, {
       parentId,
@@ -215,6 +202,7 @@ export async function getActivityBoardsMyAssignment(parentId: number) {
 
   return data;
 }
+
 /**
  * 활동 그룹 게시판 생성
  */
@@ -257,6 +245,7 @@ export async function postActivityBoard({
 
   return data;
 }
+
 /**
  * 활동 그룹 게시판 수정
  */
@@ -295,6 +284,7 @@ export async function patchActivityBoard({
 
   return data;
 }
+
 /**
  * 활동 사진 등록
  */

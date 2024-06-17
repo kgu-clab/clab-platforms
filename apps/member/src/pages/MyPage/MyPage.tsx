@@ -7,20 +7,20 @@ import MyMembershipHistorySection from '@components/my/MyMembershipHistorySectio
 import MyProfileSection from '@components/my/MyProfileSection/MyProfileSection';
 
 import {
-  useActivityGroupMemberMy,
   useBookLoanRecordConditions,
   useMembershipFee,
+  useMyActivityGroupMember,
   useMyBoards,
   useMyComments,
   useMyNotifications,
+  useMyProfile,
 } from '@hooks/queries';
-import { useMyProfile } from '@hooks/queries/useMyProfile';
 
 const MyPage = () => {
   const { data: myProfile } = useMyProfile();
-  const { data: myNotificationsData } = useMyNotifications(0, 10);
-  const { data: myBoardsData } = useMyBoards(0, 10);
-  const { data: myCommentsData } = useMyComments(0, 10);
+  const { data: myNotificationsData } = useMyNotifications();
+  const { data: myBoardsData } = useMyBoards();
+  const { data: myCommentsData } = useMyComments();
   const { data: myMembershipFee } = useMembershipFee({
     memberId: myProfile.id,
     size: 10,
@@ -29,7 +29,7 @@ const MyPage = () => {
     borrowerId: myProfile.id,
     size: 10,
   });
-  const { data: myActivityGroup } = useActivityGroupMemberMy(0, 10);
+  const { data: myActivityGroup } = useMyActivityGroupMember();
 
   return (
     <Content>

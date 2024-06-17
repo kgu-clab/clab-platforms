@@ -1,19 +1,20 @@
-import { useCallback, useState } from 'react';
+import { useState } from 'react';
 import { FcTimeline } from 'react-icons/fc';
 
 import Panel from '@components/common/Panel/Panel';
 
-import { useMyActivity } from '@hooks/queries';
+import { useMyActivitySchedule } from '@hooks/queries';
 
 const ActivityPanel = () => {
-  const { data } = useMyActivity();
-  const hasActivities = data.items.length > 0;
+  const { data } = useMyActivitySchedule();
 
   const [open, setOpen] = useState(true);
 
-  const handleOpenClick = useCallback(() => {
+  const handleOpenClick = () => {
     setOpen((prev) => !prev);
-  }, []);
+  };
+
+  const hasActivities = data.totalItems > 0;
 
   return (
     <Panel>

@@ -118,12 +118,3 @@ export function authorization(token: string | null): Record<string, string> {
 export function isBase64(url: string): boolean {
   return /;base64,/.test(url);
 }
-/**
- * 주어진 분(minutes)을 밀리초(milliseconds)로 변환합니다.
- *
- * @param minutes 밀리초로 변환할 분 단위 값입니다.
- * @returns 변환된 밀리초 값을 반환합니다.
- */
-export function toMilliseconds(minutes: number) {
-  return 1000 * 60 * minutes;
-}

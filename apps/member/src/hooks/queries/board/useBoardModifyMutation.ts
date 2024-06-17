@@ -1,7 +1,7 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 import { patchBoards } from '@api/board';
-import { QUERY_KEY } from '@constants/key';
+import { BOARD_QUERY_KEY } from '@constants/key';
 import { API_ERROR_MESSAGE, ERROR_MESSAGE } from '@constants/message';
 import useToast from '@hooks/common/useToast';
 
@@ -14,10 +14,10 @@ export const useBoardModifyMutation = () => {
 
   const mutation = useMutation({
     mutationFn: patchBoards,
-    onSuccess: ({ success, data: category, errorMessage }, { id }) => {
+    onSuccess: ({ success, errorMessage }, { id }) => {
       if (success) {
         queryClient.invalidateQueries({
-          queryKey: [QUERY_KEY.BOARDS, category, id],
+          queryKey: BOARD_QUERY_KEY.DETAIL(id),
         });
         toast({
           state: 'success',

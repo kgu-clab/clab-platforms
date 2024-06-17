@@ -1,10 +1,10 @@
 import { PATH } from '@constants/path';
-import { useCategoryBoards, useHire, useNews } from '@hooks/queries';
+import { useBoardByCategory, useHire, useNews } from '@hooks/queries';
 
 import { BoardSectionItem } from '../BoardSection';
 
 const NoticeBoard = () => {
-  const { data } = useCategoryBoards({ category: 'notice' });
+  const { data } = useBoardByCategory({ category: 'notice' });
 
   return (
     <BoardSectionItem
@@ -17,7 +17,7 @@ const NoticeBoard = () => {
 NoticeBoard.displayName = 'NoticeBoard';
 
 const FreeBoard = () => {
-  const { data } = useCategoryBoards({ category: 'free' });
+  const { data } = useBoardByCategory({ category: 'free' });
 
   return (
     <BoardSectionItem title="자유" to={PATH.COMMUNITY_FREE} data={data.items} />
@@ -26,7 +26,7 @@ const FreeBoard = () => {
 FreeBoard.displayName = 'NoticeBoard';
 
 const QnABoard = () => {
-  const { data } = useCategoryBoards({ category: 'qna' });
+  const { data } = useBoardByCategory({ category: 'qna' });
 
   return (
     <BoardSectionItem title="QnA" to={PATH.COMMUNITY_QNA} data={data.items} />
@@ -35,7 +35,7 @@ const QnABoard = () => {
 QnABoard.displayName = 'QnABoard';
 
 const GraduatedBoard = () => {
-  const { data } = useCategoryBoards({ category: 'graduated' });
+  const { data } = useBoardByCategory({ category: 'graduated' });
 
   return (
     <BoardSectionItem
