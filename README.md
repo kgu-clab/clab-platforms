@@ -1,4 +1,4 @@
-# clab.page &middot; [![MIT License](https://img.shields.io/badge/license-GPL--3.0-blue.svg)](https://github.com/kgu-c-lab/clab.page/blob/main/LICENSE) [![pnpm CI](https://github.com/KGU-C-Lab/clab.page/actions/workflows/pnpm-ci.yml/badge.svg)](https://github.com/KGU-C-Lab/clab.page/actions/workflows/pnpm-ci.yml)
+# clab.page &middot; [![MIT License](https://img.shields.io/badge/license-GPL--3.0-blue.svg)](https://github.com/kgu-c-lab/clab.page/blob/main/LICENSE) [![pnpm CI](https://github.com/KGU-C-Lab/clab.page/actions/workflows/pnpm-ci.yml/badge.svg)](https://github.com/KGU-C-Lab/clab.page/actions/workflows/pnpm-ci.yml) [![codecov](https://codecov.io/gh/KGU-C-Lab/clab.page/graph/badge.svg?token=Z5PFR6US6Z)](https://codecov.io/gh/KGU-C-Lab/clab.page)
 
 경기대학교 AI컴퓨터공학부 개발동아리 [C-Lab](https://www.clab.page/)의 공식 프론트엔드 시스템이에요.  
 지속적으로 늘어나는 프론트엔드 프로젝트를 유연하고 생산성 있게 관리하기 위해 [모노레포(Monorepo)](https://en.wikipedia.org/wiki/Monorepo) 환경으로 만들어졌어요.
@@ -45,7 +45,7 @@ Server, Infra, Back-end에 대한 정보는 다른 저장소에서 확인할 수
 
 ## Contributing
 
-동아리원이 아니더라도 누구나 기여할 수 있습니다. 해당 프로젝트에 기여하고 싶다면 아래 문서를 참고해주세요.  
+동아리원이 아니더라도 누구나 기여할 수 있습니다. 해당 프로젝트에 기여하고 싶다면 아래 문서를 참고해주세요.
 
 [CONTRIBUTING.md](CONTRIBUTING.md)
 
