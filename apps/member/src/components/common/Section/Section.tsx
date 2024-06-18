@@ -1,7 +1,7 @@
 /* eslint-disable react/display-name */
 import { type PropsWithChildren } from 'react';
 
-import { cn } from '@utils/string';
+import { cn } from '@clab/utils';
 
 import type { StrictPropsWithChildren } from '@type/component';
 

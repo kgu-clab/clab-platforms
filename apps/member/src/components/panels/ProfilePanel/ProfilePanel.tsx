@@ -1,9 +1,10 @@
+import { getRandomNumber } from '@clab/utils';
+
 import Avatar from '@components/common/Avatar/Avatar';
 import Panel from '@components/common/Panel/Panel';
 
 import { useMyProfile } from '@hooks/queries';
 import { calculateDDay } from '@utils/date';
-import { getRandomInt } from '@utils/math';
 
 const TIPS = [
   '오늘은 맛집 게시글을 작성하는건 어때요?',
@@ -33,7 +34,7 @@ const ProfilePanel = () => {
           </div>
         </div>
         <p className="mt-4 rounded-md bg-gray-100 py-1 text-center text-xs font-semibold">
-          &quot;{TIPS[getRandomInt(TIPS.length - 1)]}&quot;
+          &quot;{TIPS[getRandomNumber(TIPS.length - 1)]}&quot;
         </p>
       </Panel.Body>
     </Panel>

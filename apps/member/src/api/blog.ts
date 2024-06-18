@@ -1,7 +1,8 @@
-import { END_POINT } from '@constants/api';
-import { createCommonPagination } from '@utils/api';
+import { createPagination } from '@clab/utils';
 
-import { BaseResponse, PaginationType } from '@type/api';
+import { END_POINT } from '@constants/api';
+
+import type { BaseResponse, ResponsePagination } from '@type/api';
 import type { BlogPost } from '@type/blog';
 
 import { server } from './server';
@@ -11,8 +12,8 @@ import { server } from './server';
  */
 export const getBlog = async (page: number, size: number) => {
   const params = { page, size };
-  const { data } = await server.get<PaginationType<BlogPost>>({
-    url: createCommonPagination(END_POINT.BLOG, params),
+  const { data } = await server.get<ResponsePagination<BlogPost>>({
+    url: createPagination(END_POINT.BLOG, params),
   });
 
   return data;

@@ -1,6 +1,6 @@
 import React, { type HTMLAttributes } from 'react';
 
-import { cn } from '../utils';
+import { cn } from '@clab/utils';
 
 export interface DetailsListProps extends HTMLAttributes<HTMLUListElement> {
   label?: string;

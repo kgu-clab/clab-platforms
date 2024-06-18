@@ -1,6 +1,6 @@
 import React, { type InputHTMLAttributes, forwardRef } from 'react';
 
-import { cn } from '../utils';
+import { cn } from '@clab/utils';
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   label?: string;

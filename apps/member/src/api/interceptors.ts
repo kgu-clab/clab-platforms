@@ -1,9 +1,10 @@
+import { createURL } from '@clab/utils';
+
 import { API_BASE_URL, END_POINT, HTTP_STATUS_CODE } from '@constants/api';
 import { IS_PRODUCTION } from '@constants/environment';
 import type { FetchOptions, Interceptor } from '@gwansikk/server-chain';
 import {
   authorization,
-  createPath,
   getAccessToken,
   getRefreshToken,
   removeTokens,
@@ -58,7 +59,7 @@ export const tokenHandler: Interceptor<Response> = async (response, method) => {
   reissueLock = true;
   // 토큰 갱신 요청
   try {
-    const res = await fetch(createPath(API_BASE_URL, END_POINT.LOGIN_REISSUE), {
+    const res = await fetch(createURL(API_BASE_URL, END_POINT.LOGIN_REISSUE), {
       method: 'POST',
       headers: {
         ...authorization(preRefreshToken),

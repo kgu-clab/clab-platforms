@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 
 import { Button, Table } from '@clab/design-system';
+import { cn } from '@clab/utils';
 
 import File from '@components/common/File/File';
 import Section from '@components/common/Section/Section';
@@ -13,7 +14,6 @@ import {
   useMyProfile,
 } from '@hooks/queries';
 import { formattedDate, isDateValid } from '@utils/date';
-import { cn } from '@utils/string';
 
 import type { ActivityBoardType } from '@type/activity';
 import type { ResponseFile } from '@type/api';
@@ -40,7 +40,7 @@ const AssignmentUploadSection = ({
   const [uploadedFile, setUploadedFile] = useState<ResponseFile | null>(
     myAssignment?.files?.[0] || null,
   );
-  const [description, setDescription] = useState(myAssignment?.content || '');
+  const [description, setDescription] = useState(myAssignment?.content ?? '');
 
   const handleDescriptionChange = (
     e: React.ChangeEvent<HTMLTextAreaElement>,

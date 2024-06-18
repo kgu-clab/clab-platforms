@@ -2,6 +2,7 @@ import { useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { Table } from '@clab/design-system';
+import { cn, toDecodeHTMLEntities } from '@clab/utils';
 
 import CommentCounter from '@components/common/CommentCounter/CommentCounter';
 import Pagination from '@components/common/Pagination/Pagination';
@@ -14,7 +15,6 @@ import { PATH_FINDER } from '@constants/path';
 import { usePagination } from '@hooks/common/usePagination';
 import { useBoardByCategory } from '@hooks/queries';
 import { toYYMMDD } from '@utils/date';
-import { cn, toDecodeHTMLEntities } from '@utils/string';
 
 import type { CommunityCategoryType } from '@type/community';
 

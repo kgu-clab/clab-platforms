@@ -1,12 +1,13 @@
 /* eslint-disable react/display-name */
 import { useState } from 'react';
 
+import { cn } from '@clab/utils';
+
 import DropdownButton from '@components/common/DropdownButton/DropdownButton';
 import Section from '@components/common/Section/Section';
 
 import useModal from '@hooks/common/useModal';
 import { formattedDate } from '@utils/date';
-import classNames from 'classnames';
 import dayjs from 'dayjs';
 
 import type { ActivityBoardType } from '@type/activity';
@@ -59,7 +60,7 @@ const ActivityNoticeSection = ({ data }: ActivityNoticeSectionProps) => {
         )}
       </div>
       <div
-        className={classNames(
+        className={cn(
           'overflow-hidden transition duration-500 ease-in-out',
           open ? 'opacity-100' : 'max-h-0 opacity-0',
         )}
@@ -86,7 +87,7 @@ ActivityNoticeSection.Item = ({
 }: ActivityNoticeSectionItemProps) => {
   return (
     <div
-      className={classNames(
+      className={cn(
         'w-full rounded-lg p-2 transition-colors duration-300 ease-in-out hover:bg-gray-100',
         className,
       )}

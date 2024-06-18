@@ -1,6 +1,6 @@
 import { ComponentPropsWithRef } from 'react';
 
-import { cn } from '@utils/string';
+import { cn } from '@clab/utils';
 
 interface ActionButtonProps extends ComponentPropsWithRef<'button'> {
   color?: 'black' | 'red' | 'blue' | 'orange';

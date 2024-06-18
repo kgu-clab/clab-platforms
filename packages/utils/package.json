@@ -1,0 +1,12 @@
+{
+  "name": "@clab/utils",
+  "version": "0.1.0",
+  "private": true,
+  "main": "index.ts",
+  "scripts": {},
+  "dependencies": {
+    "clsx": "^2.1.0",
+    "entities": "^4.5.0",
+    "tailwind-merge": "^2.3.0"
+  }
+}

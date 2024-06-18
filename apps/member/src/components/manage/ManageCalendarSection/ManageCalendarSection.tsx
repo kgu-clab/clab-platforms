@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { Menubar, Table } from '@clab/design-system';
+import { toDecodeHTMLEntities } from '@clab/utils';
 
 import AddScheduleForm from '@components/calendar/AddScheduleForm/AddScheduleForm';
 import ActionButton from '@components/common/ActionButton/ActionButton';
@@ -14,7 +15,7 @@ import useModal from '@hooks/common/useModal';
 import { usePagination } from '@hooks/common/usePagination';
 import { useSchedule, useScheduleDeleteMutation } from '@hooks/queries';
 import { formattedDate, now } from '@utils/date';
-import { toDecodeHTMLEntities, toPriorityText } from '@utils/string';
+import { toPriorityText } from '@utils/string';
 
 type Mode = 'view' | 'add';
 

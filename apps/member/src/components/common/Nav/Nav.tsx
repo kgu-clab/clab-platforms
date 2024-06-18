@@ -2,12 +2,12 @@ import { FiGrid, FiSearch, FiUser } from 'react-icons/fi';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 
 import { Menubar } from '@clab/design-system';
+import { cn } from '@clab/utils';
 
 import { IS_DEVELOPMENT } from '@constants/environment';
 import { PATH } from '@constants/path';
 import useModal from '@hooks/common/useModal';
 import { useMyProfile } from '@hooks/queries';
-import { cn } from '@utils/string';
 
 import Sidebar from '../Sidebar/Sidebar';
 

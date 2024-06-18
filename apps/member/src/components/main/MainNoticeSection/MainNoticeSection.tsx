@@ -1,5 +1,7 @@
 import { useState } from 'react';
 
+import { cn } from '@clab/utils';
+
 import DropdownButton from '@components/common/DropdownButton/DropdownButton';
 import Notice from '@components/common/Notice/Notice';
 import Section from '@components/common/Section/Section';
@@ -7,7 +9,6 @@ import Section from '@components/common/Section/Section';
 import { DATE_FORMAT } from '@constants/state';
 import { useSchedule } from '@hooks/queries';
 import { now } from '@utils/date';
-import classNames from 'classnames';
 
 const MainNoticeSection = () => {
   const { data } = useSchedule({
@@ -42,7 +43,7 @@ const MainNoticeSection = () => {
         )}
       </div>
       <div
-        className={classNames(
+        className={cn(
           'overflow-hidden transition duration-500 ease-in-out',
           open ? 'opacity-100' : 'max-h-0 opacity-0',
         )}

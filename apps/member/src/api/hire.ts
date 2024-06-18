@@ -1,5 +1,6 @@
+import { createPagination } from '@clab/utils';
+
 import { END_POINT } from '@constants/api';
-import { createCommonPagination } from '@utils/api';
 
 import type { BaseResponse, ResponsePagination } from '@type/api';
 import type { CommunityHireBoard } from '@type/community';
@@ -10,7 +11,7 @@ import { server } from './server';
 export const getMyHire = async (page: number, size: number) => {
   const params = { page, size };
   const { data } = await server.get<ResponsePagination<CommunityHireBoard>>({
-    url: createCommonPagination(END_POINT.MY_HIRE, params),
+    url: createPagination(END_POINT.MY_HIRE, params),
   });
 
   return data;
