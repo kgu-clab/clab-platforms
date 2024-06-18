@@ -2,9 +2,9 @@ import { ClassValue, clsx } from 'clsx';
 import * as entities from 'entities';
 import { twMerge } from 'tailwind-merge';
 
-export const cn = (...inputs: ClassValue[]): string => {
+export function cn(...inputs: ClassValue[]): string {
   return twMerge(clsx(inputs));
-};
+}
 
 /**
  * 여러 개의 경로를 안전하게 연결하여 전체 경로를 생성합니다.

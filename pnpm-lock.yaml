@@ -456,6 +456,22 @@ importers:
       tailwind-merge:
         specifier: ^2.3.0
         version: 2.3.0
+    devDependencies:
+      '@clab/config':
+        specifier: workspace:*
+        version: link:../config
+      '@vitest/coverage-v8':
+        specifier: ^1.6.0
+        version: 1.6.0(vitest@1.6.0(@types/node@20.14.5)(jsdom@24.1.0))
+      typescript:
+        specifier: ^5.4.5
+        version: 5.4.5
+      vite:
+        specifier: ^5.3.1
+        version: 5.3.1(@types/node@20.14.5)
+      vitest:
+        specifier: ^1.6.0
+        version: 1.6.0(@types/node@20.14.5)(jsdom@24.1.0)
 
 packages:
 
