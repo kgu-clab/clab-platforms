@@ -12,6 +12,7 @@
     "clean": "rimraf dist",
     "type": "tsc --noEmit",
     "test": "vitest",
+    "coverage": "vitest --coverage",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
     "build": "tsup"
@@ -33,6 +34,7 @@
     "@types/react": "^18.2.43",
     "@types/react-dom": "^18.2.17",
     "@vitejs/plugin-react": "^4.2.1",
+    "@vitest/coverage-v8": "^1.6.0",
     "autoprefixer": "^10.4.17",
     "clsx": "^2.1.0",
     "cva": "1.0.0-beta.1",
