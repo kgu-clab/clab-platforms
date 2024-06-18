@@ -1,4 +1,4 @@
-name: Codecov
+name: Codecov CI
 
 on:
   push:
@@ -32,13 +32,9 @@ jobs:
         run: pnpm install
 
       - name: Run tests and generate coverage
-        run: pnpm test -- --coverage
+        run: pnpm coverage
 
       - name: Upload coverage reports to Codecov
         uses: codecov/codecov-action@v4.0.1
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
-          files: ./coverage/**/*.json
-          flags: unittests
-          name: codecov-umbrella
-          fail_ci_if_error: true
