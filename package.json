@@ -1,6 +1,7 @@
 {
   "name": "clab.page",
   "private": true,
+  "packageManager": "pnpm@9.4.0",
   "workspaces": [
     "apps/*",
     "packages/*"
@@ -34,6 +35,7 @@
     "**/*": "prettier --write --ignore-unknown"
   },
   "devDependencies": {
+    "@changesets/cli": "^2.27.5",
     "@commitlint/cli": "^19.0.3",
     "@commitlint/config-conventional": "^19.0.3",
     "@trivago/prettier-plugin-sort-imports": "^4.3.0",

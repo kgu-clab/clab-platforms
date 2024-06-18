@@ -6,7 +6,7 @@ import Linker from '@components/common/Linker/Linker';
 import ScrollToTop from '@components/common/ScrollToTop/ScrollToTop';
 import ProtectAuth from '@components/router/ProtectAuth';
 
-import { MODE } from '@constants/environment';
+import { IS_DEVELOPMENT } from '@constants/environment';
 import { PATH } from '@constants/path';
 
 const ErrorPage = () => {
@@ -27,7 +27,7 @@ const ErrorPage = () => {
     <ProtectAuth protect>
       <ScrollToTop>
         <section>
-          {MODE === 'development' && (
+          {IS_DEVELOPMENT && (
             <div className="fixed left-0 top-0 w-full border-t-4 border-red-500 bg-gray-100 p-4 text-sm">
               <p className="font-semibold">Development Error Message:</p>
               <p>{errorMessage}</p>
