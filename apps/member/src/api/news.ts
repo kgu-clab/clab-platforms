@@ -1,5 +1,6 @@
+import { createPagination } from '@clab/utils';
+
 import { END_POINT } from '@constants/api';
-import { createCommonPagination } from '@utils/api';
 
 import { BaseResponse, ResponsePagination } from '@type/api';
 import type { CommunityNewsBoard } from '@type/community';
@@ -10,7 +11,7 @@ import { server } from './server';
 export const getNews = async (page: number, size: number) => {
   const params = { page, size };
   const { data } = await server.get<ResponsePagination<CommunityNewsBoard>>({
-    url: createCommonPagination(END_POINT.MY_NEWS, params),
+    url: createPagination(END_POINT.MY_NEWS, params),
   });
 
   return data;

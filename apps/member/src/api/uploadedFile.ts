@@ -1,5 +1,6 @@
+import { createURL } from '@clab/utils';
+
 import { END_POINT, FORM_DATA_KEY, STORAGE_PERIOD } from '@constants/api';
-import { createPath } from '@utils/api';
 
 import type { BaseResponse, ResponseFile } from '@type/api';
 
@@ -33,7 +34,7 @@ export async function uploadFiles<T>(
  */
 export async function postUploadedFileBoard(multipartFile: FormData) {
   const { data } = await server.post<FormData, BaseResponse<ResponseFile[]>>({
-    url: createPath(END_POINT.UPLOADEDFILE_BOARD, STORAGE_PERIOD(3)), // 게시글 파일은 3년간 보관
+    url: createURL(END_POINT.UPLOADEDFILE_BOARD, STORAGE_PERIOD(3)), // 게시글 파일은 3년간 보관
     body: multipartFile,
   });
 
@@ -43,7 +44,7 @@ export async function postUploadedFileBoard(multipartFile: FormData) {
  * 회비 증빙 사진 업로드
  */
 export async function postUploadedFileMembershipFee(multipartFile: FormData) {
-  const url = createPath(
+  const url = createURL(
     END_POINT.UPLOADEDFILE_MEMBERSHIP_FEE,
     STORAGE_PERIOD(5), // 회비 증빙 사진은 5년간 보관
   );
@@ -62,7 +63,7 @@ export async function postUploadedFileAssignment({
   groupBoardId,
   files,
 }: PostUploadedFileAssignmentParams) {
-  const url = createPath(
+  const url = createURL(
     END_POINT.UPLOADEDFILE_ACTIVITY_ASSIGNMENT(groupId, groupBoardId),
     STORAGE_PERIOD(3), // 활동 과제 파일은 3년간 보관
   );
@@ -78,7 +79,7 @@ export async function postUploadedFileAssignment({
  */
 export async function postUploadedFileProfileImage(multipartFile: FormData) {
   const { data } = await server.post<FormData, BaseResponse<ResponseFile>>({
-    url: createPath(END_POINT.UPLOADEDFILE_PROFILES, STORAGE_PERIOD(6)), // 프로필 사진은 6년간 보관
+    url: createURL(END_POINT.UPLOADEDFILE_PROFILES, STORAGE_PERIOD(6)), // 프로필 사진은 6년간 보관
     body: multipartFile,
   });
 
@@ -89,7 +90,7 @@ export async function postUploadedFileProfileImage(multipartFile: FormData) {
  */
 export async function postFilesActivityPhotos(multipartFile: FormData) {
   const { data } = await server.post<FormData, BaseResponse<ResponseFile[]>>({
-    url: createPath(END_POINT.UPLOADEDFILE_ACTIVITY_PHOTO, STORAGE_PERIOD(10)), // 함께하는 활동 사진은 10년간 보관
+    url: createURL(END_POINT.UPLOADEDFILE_ACTIVITY_PHOTO, STORAGE_PERIOD(10)), // 함께하는 활동 사진은 10년간 보관
     body: multipartFile,
   });
 

@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { FcAnswers, FcMultipleDevices, FcTemplate } from 'react-icons/fc';
 
 import { Button, Checkbox, Input, Tabs } from '@clab/design-system';
+import { formatComma } from '@clab/utils';
 
 import Linker from '@components/common/Linker/Linker';
 import Loading from '@components/common/Loading/Loading';
@@ -10,7 +11,6 @@ import Uploader from '@components/common/Uploader/Uploader';
 import { SELECT_DEFAULT_OPTION } from '@constants/select';
 import useToast from '@hooks/common/useToast';
 import { useSupportRequestForm } from '@hooks/useSupportRequestForm';
-import { formatComma } from '@utils/math';
 
 import type { SupportRequestDataType } from '@type/support';
 

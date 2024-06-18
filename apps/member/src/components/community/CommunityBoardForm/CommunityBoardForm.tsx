@@ -1,6 +1,7 @@
 import { useState } from 'react';
 
 import { Button, Checkbox, Input } from '@clab/design-system';
+import { cn, toDecodeHTMLEntities } from '@clab/utils';
 
 import Select from '@components/common/Select/Select';
 import Textarea from '@components/common/Textarea/Textarea';
@@ -17,7 +18,6 @@ import {
 } from '@constants/state';
 import useToast from '@hooks/common/useToast';
 import { useBoardModifyMutation, useBoardWriteMutation } from '@hooks/queries';
-import { cn, toDecodeHTMLEntities } from '@utils/string';
 
 import type {
   CommunityCategoryType,

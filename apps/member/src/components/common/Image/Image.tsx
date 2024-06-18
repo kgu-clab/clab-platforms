@@ -1,7 +1,8 @@
 import { SyntheticEvent, useCallback, useState } from 'react';
 
+import { cn } from '@clab/utils';
+
 import { NOT_FOUND_IMG } from '@constants/path';
-import { cn } from '@utils/string';
 
 interface ImageProps extends React.ImgHTMLAttributes<HTMLImageElement> {
   width?: string;

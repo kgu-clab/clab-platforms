@@ -1,0 +1,24 @@
+{
+  "name": "@clab/utils",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "main": "index.ts",
+  "scripts": {
+    "type": "tsc --noEmit",
+    "test": "vitest",
+    "coverage": "vitest --coverage"
+  },
+  "dependencies": {
+    "clsx": "^2.1.0",
+    "entities": "^4.5.0",
+    "tailwind-merge": "^2.3.0"
+  },
+  "devDependencies": {
+    "@clab/config": "workspace:*",
+    "@vitest/coverage-v8": "^1.6.0",
+    "typescript": "^5.4.5",
+    "vite": "^5.3.1",
+    "vitest": "^1.6.0"
+  }
+}

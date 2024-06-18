@@ -1,10 +1,11 @@
 import { DetailsList } from '@clab/design-system';
+import { formatWon } from '@clab/utils';
 
 import Image from '@components/common/Image/Image';
 
 import { createImageUrl } from '@utils/api';
 import { formattedDate } from '@utils/date';
-import { formatMemberName, formatWon } from '@utils/string';
+import { formatMemberName } from '@utils/string';
 
 import type { MembershipFeeType } from '@type/membershipFee';
 

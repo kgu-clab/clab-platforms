@@ -1,9 +1,9 @@
 import { useState } from 'react';
 
 import { Button, Checkbox } from '@clab/design-system';
+import { cn } from '@clab/utils';
 
 import { useCommentCreateMutation } from '@hooks/queries';
-import { cn } from '@utils/string';
 
 import Textarea from '../Textarea/Textarea';
 

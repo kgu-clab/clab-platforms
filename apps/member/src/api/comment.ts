@@ -1,5 +1,6 @@
+import { createPagination, createURL } from '@clab/utils';
+
 import { END_POINT } from '@constants/api';
-import { createCommonPagination, createPath } from '@utils/api';
 
 import type { BaseResponse, ResponsePagination } from '@type/api';
 import type { CommentItem, CommentListItem } from '@type/comment';
@@ -21,7 +22,7 @@ export interface PostCommentWriteParams {
  */
 export const getMyComments = async (page: number, size: number) => {
   const { data } = await server.get<ResponsePagination<CommentItem>>({
-    url: createCommonPagination(END_POINT.MY_COMMENTS, {
+    url: createPagination(END_POINT.MY_COMMENTS, {
       page,
       size,
     }),
@@ -35,7 +36,7 @@ export const getMyComments = async (page: number, size: number) => {
 export const getComments = async (id: number, page: number, size: number) => {
   const params = { id, page, size };
   const { data } = await server.get<ResponsePagination<CommentListItem>>({
-    url: createCommonPagination(END_POINT.COMMENTS(id), params),
+    url: createPagination(END_POINT.COMMENTS(id), params),
   });
 
   return data;
@@ -49,7 +50,7 @@ export const postCommentWrite = ({
   body,
 }: PostCommentWriteParams) => {
   return server.post<CommentWriteRequestData, BaseResponse<number>>({
-    url: createPath(
+    url: createURL(
       END_POINT.COMMENTS(boardId),
       parentId && `?parentId=${parentId}`,
     ),

@@ -1,6 +1,7 @@
 import React, { type HTMLAttributes } from 'react';
 
-import { cn } from '../utils';
+import { cn } from '@clab/utils';
+
 import { menubarItemVariants, menubarVariants } from './Menubar.styles';
 import type {
   MenubarGapVariant,

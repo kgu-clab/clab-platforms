@@ -1,4 +1,5 @@
-import { cn } from '@utils/component';
+import { cn } from '@clab/utils';
+
 import type { Metadata } from 'next';
 import { Noto_Sans_KR } from 'next/font/google';
 

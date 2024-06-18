@@ -1,11 +1,12 @@
 import { startTransition, useState } from 'react';
 
+import { cn } from '@clab/utils';
+
 import ArrowButton from '@components/common/ArrowButton/ArrowButton';
 import Section from '@components/common/Section/Section';
 
 import { useSchedule } from '@hooks/queries';
 import { now, transformEvents } from '@utils/date';
-import { cn } from '@utils/string';
 
 import CalendarSchedule from '../CalendarSchedule/CalendarSchedule';
 

@@ -1,5 +1,6 @@
+import { cn } from '@clab/utils';
+
 import { createImageUrl } from '@utils/api';
-import { cn } from '@utils/string';
 
 import type { VariantSize } from '@type/component';
 import type { RoleLevel } from '@type/member';

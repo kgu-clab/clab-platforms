@@ -1,7 +1,8 @@
 /* eslint-disable react/display-name */
+import { cn, toDecodeHTMLEntities } from '@clab/utils';
+
 import { SERVICE_NAME } from '@constants/environment';
 import { formattedDate } from '@utils/date';
-import { cn, toDecodeHTMLEntities } from '@utils/string';
 
 import { StrictPropsWithChildren } from '@type/component';
 import type { RoleLevel } from '@type/member';

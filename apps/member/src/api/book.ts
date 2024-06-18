@@ -1,5 +1,6 @@
+import { createPagination, createURL } from '@clab/utils';
+
 import { END_POINT } from '@constants/api';
-import { createCommonPagination, createPath } from '@utils/api';
 
 import type {
   BaseResponse,
@@ -31,7 +32,7 @@ export interface GetBookLoanRecordConditionsParams
  */
 export async function getBooks(page: number, size: number) {
   const { data } = await server.get<ResponsePagination<BookItem>>({
-    url: createCommonPagination(END_POINT.BOOK, { page, size }),
+    url: createPagination(END_POINT.BOOK, { page, size }),
   });
 
   return data;
@@ -96,7 +97,7 @@ export async function getBookLoanRecordConditions({
   const { data } = await server.get<
     ResponsePagination<BookLoanRecordConditionType>
   >({
-    url: createCommonPagination(END_POINT.BOOK_LOAN_CONDITIONS, {
+    url: createPagination(END_POINT.BOOK_LOAN_CONDITIONS, {
       bookId,
       borrowerId,
       isReturned,
@@ -118,7 +119,7 @@ export async function getBookLoanRecordOverdue({
   const { data } = await server.get<
     ResponsePagination<BookLoanRecordOverDueResponse>
   >({
-    url: createCommonPagination(END_POINT.BOOK_LOAN_OVERDUE, {
+    url: createPagination(END_POINT.BOOK_LOAN_OVERDUE, {
       page,
       size,
     }),
@@ -132,6 +133,6 @@ export async function getBookLoanRecordOverdue({
  */
 export function patchBookLoanRecordApprove(id: number) {
   return server.patch<null, BaseResponse<number>>({
-    url: createPath(END_POINT.BOOK_LOAN_RECORD_APPROVE, id),
+    url: createURL(END_POINT.BOOK_LOAN_RECORD_APPROVE, id),
   });
 }
