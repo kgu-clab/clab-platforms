@@ -10,7 +10,7 @@
 
 ## Features
 
-해당 모노레포에 포함된 모든 프로젝트는 다음과 같은 특징을 가지고 있어요.
+> 해당 모노레포에 포함된 모든 프로젝트는 다음과 같은 특징을 가지고 있어요.
 
 - 지속적이고 원활한 인수인계를 위해 간단한 코드라도 `주석`을 작성해요.
 - 최신 기술만을 고집하지 않고 문제 해결에 필요한 `최적의 기술을 선정`하여 사용해요.
@@ -22,7 +22,7 @@
 
 ![clab-page-apps](https://github.com/KGU-C-Lab/clab.page/assets/39869096/53aa46ab-4a45-4dab-a9c4-45ea72b48d76)
 
-시스템에 더 자세히 알고 싶다면 시스템 `README.md`를 살펴봐주세요.
+> 시스템에 더 자세히 알고 싶다면 시스템 `README.md`를 살펴봐주세요.
 
 - [auth](/apps/auth/README.md): 동아리 계정을 OAuth 프로토콜을 기반으로 서비스에 편리하게 연결할 수 있는 통합 인증 시스템이에요.
 - [land](/apps/land/README.md): 동아리에 대한 소개, 활동, 블로그 등 다양한 정보를 공유하는 랜딩페이지 시스템이에요.
@@ -37,9 +37,38 @@
 - [hooks](/packages/hooks/README.md): 공통적으로 사용하는 React Hooks 라이브러리에요.
 - [icon](/packages/icon/README.md): 공통적으로 사용하는 아이콘팩이에요.
 
+## Previews
+
+<table>
+  <tr>
+    <td width="50%">🔐 Auth</td>
+    <td width="50%">🌟 Land</td>
+  </tr>
+  <tr>
+    <td width="50%" style="padding: 0;">
+      <img width="518" alt="image" src="https://github.com/KGU-C-Lab/clab.page/assets/39869096/5370ff52-f190-4151-990c-96681a211425">
+    </td>
+    <td width="50%" style="padding: 0;">
+      <img width="1494" alt="image" src="https://github.com/KGU-C-Lab/clab.page/assets/39869096/1a983b65-caee-4ae0-9bcd-d3e9174fdeb9">
+    </td>
+  </tr>
+  <tr>
+    <td width="50%">👥 Member</td>
+    <td width="50%">⏰ Time</td>
+  </tr>
+  <tr>
+    <td width="50%" style="padding: 0;">
+      <img width="1488" alt="image" src="https://github.com/KGU-C-Lab/clab.page/assets/39869096/0555fda3-05b3-4637-bb4f-76936454c89d">
+    </td>
+    <td width="50%" style="padding: 0;">
+      <img width="1263" alt="image" src="https://github.com/KGU-C-Lab/clab.page/assets/39869096/62d7af18-8f6e-4e0f-aac6-2d5199842c9c"> 
+    </td>
+  </tr>
+</table>
+
 ## Server
 
-Server, Infra, Back-end에 대한 정보는 다른 저장소에서 확인할 수 있어요.
+> Server, Infra, Back-end에 대한 정보는 다른 저장소에서 확인할 수 있어요.
 
 - [clab-server](https://github.com/KGU-C-Lab/clab-server): 경기대학교 AI컴퓨터공학부 개발동아리 C-Lab의 공식 백엔드 시스템이에요.
 
