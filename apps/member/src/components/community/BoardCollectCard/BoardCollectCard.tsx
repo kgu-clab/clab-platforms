@@ -1,13 +1,15 @@
 import { LiaCommentSolid } from 'react-icons/lia';
 import { Link } from 'react-router-dom';
 
+import { toDecodeHTMLEntities } from '@clab/utils';
+
 import Image from '@components/common/Image/Image';
 
 import { PATH_FINDER } from '@constants/path';
 import { createImageUrl } from '@utils/api';
 import { getCategoryEmoji } from '@utils/community';
 import { formattedDate } from '@utils/date';
-import { formatMemberName, toDecodeHTMLEntities } from '@utils/string';
+import { formatMemberName } from '@utils/string';
 
 import type { Board } from '@type/community';
 
