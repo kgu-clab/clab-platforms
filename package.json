@@ -19,10 +19,12 @@
     "dev:land": "pnpm --filter land dev",
     "dev:member": "pnpm --filter member dev",
     "dev:time": "pnpm --filter time dev",
+    "dev:status": "pnpm --filter status dev",
     "build:auth": "pnpm --filter auth build",
     "build:land": "pnpm --filter land build",
     "build:member": "pnpm --filter member build",
     "build:time": "pnpm --filter time build",
+    "build:status": "pnpm --filter status build",
     "build:design-system": "pnpm --filter @clab/design-system build",
     "type:member": "pnpm --filter member type"
   },
