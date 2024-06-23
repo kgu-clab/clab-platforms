@@ -1,8 +1,9 @@
 import { useCallback } from 'react';
 
+import { cn } from '@clab/utils';
+
 import useModal from '@hooks/common/useModal';
 import { formattedDatePeriod, now } from '@utils/date';
-import { cn } from '@utils/string';
 import dayjs from 'dayjs';
 
 import type { ScheduleItem } from '@type/schedule';

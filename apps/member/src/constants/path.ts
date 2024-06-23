@@ -1,4 +1,4 @@
-import { createPath } from '@utils/api';
+import { createURL } from '@clab/utils';
 
 import type { IDType } from '@type/api';
 import type { CommunityCategoryType } from '@type/community';
@@ -41,17 +41,17 @@ export const PATH = {
  * 페이지의 URL을 생성하는 함수입니다.
  */
 export const PATH_FINDER = {
-  BLOG_POST: (id: IDType) => createPath(PATH.BLOG, id),
+  BLOG_POST: (id: IDType) => createURL(PATH.BLOG, id),
   COMMUNITY_DETAIL: (type: CommunityCategoryType) =>
-    createPath(PATH.COMMUNITY, type),
+    createURL(PATH.COMMUNITY, type),
   COMMUNITY_POST: (sort: CommunityCategoryType, id: IDType) =>
-    createPath(PATH.COMMUNITY, sort, id),
-  LIBRARY_DETAIL: (id: IDType) => createPath(PATH.LIBRARY, id),
-  ACTIVITY_DETAIL: (id: IDType) => createPath(PATH.ACTIVITY, id),
-  ACTIVITY_CONFIG: (id: IDType) => createPath(PATH.ACTIVITY, id, 'config'),
+    createURL(PATH.COMMUNITY, sort, id),
+  LIBRARY_DETAIL: (id: IDType) => createURL(PATH.LIBRARY, id),
+  ACTIVITY_DETAIL: (id: IDType) => createURL(PATH.ACTIVITY, id),
+  ACTIVITY_CONFIG: (id: IDType) => createURL(PATH.ACTIVITY, id, 'config'),
   ACTIVITY_ASSIGNMENT: (groupId: IDType, id: IDType) =>
-    createPath(PATH.ACTIVITY, groupId, id),
-  BOOK_DETAIL: (id: number) => createPath(PATH.LIBRARY, id),
+    createURL(PATH.ACTIVITY, groupId, id),
+  BOOK_DETAIL: (id: number) => createURL(PATH.LIBRARY, id),
 } as const;
 /**
  * 페이지의 이름입니다.

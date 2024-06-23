@@ -1,9 +1,9 @@
 import { useState } from 'react';
 
 import { Button, Checkbox } from '@clab/design-system';
+import { cn } from '@clab/utils';
 
-import { useCommentWriteMutation } from '@hooks/queries';
-import { cn } from '@utils/string';
+import { useCommentCreateMutation } from '@hooks/queries';
 
 import Textarea from '../Textarea/Textarea';
 
@@ -22,7 +22,7 @@ const CommentInput = ({
   parentId,
   className,
 }: CommentInputProps) => {
-  const { commentWriteInfo } = useCommentWriteMutation();
+  const { commentWriteInfo } = useCommentCreateMutation();
 
   const [anonymous, setAnonymous] = useState(false);
 
@@ -31,18 +31,12 @@ const CommentInput = ({
   };
 
   const handleSubmit = () => {
-    if (parentId) {
-      commentWriteInfo({
-        parentId: parentId,
-        boardId: id,
-        body: { content: value, wantAnonymous: anonymous },
-      });
-    } else {
-      commentWriteInfo({
-        boardId: id,
-        body: { content: value, wantAnonymous: anonymous },
-      });
-    }
+    commentWriteInfo({
+      parentId,
+      boardId: id,
+      body: { content: value, wantAnonymous: anonymous },
+    });
+
     onChange({
       target: { value: '' },
     } as React.ChangeEvent<HTMLTextAreaElement>);

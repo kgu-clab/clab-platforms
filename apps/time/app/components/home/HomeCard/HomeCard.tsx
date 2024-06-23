@@ -2,7 +2,8 @@
 
 import { ComponentPropsWithoutRef, forwardRef } from 'react';
 
-import { cn } from '@utils/component';
+import { cn } from '@clab/utils';
+
 import { useRouter } from 'next/navigation';
 
 import { StrictPropsWithChildren } from '@type/common';
@@ -32,7 +33,6 @@ const HomeCard = forwardRef<HTMLButtonElement, HomeCardProps>(
     );
   },
 );
-HomeCard.displayName = 'HomeCard';
 
 const HomeCardHeader = forwardRef<HTMLHeadingElement, StrictPropsWithChildren>(
   ({ children }, ref) => {
@@ -43,7 +43,6 @@ const HomeCardHeader = forwardRef<HTMLHeadingElement, StrictPropsWithChildren>(
     );
   },
 );
-HomeCardHeader.displayName = 'HomeCardHeader';
 
 const HomeCardDescription = forwardRef<
   HTMLParagraphElement,
@@ -55,7 +54,6 @@ const HomeCardDescription = forwardRef<
     </p>
   );
 });
-HomeCardDescription.displayName = 'HomeCardDescription';
 
 const HomeCardIcon = forwardRef<HTMLDivElement, StrictPropsWithChildren>(
   ({ children }, ref) => {
@@ -69,6 +67,10 @@ const HomeCardIcon = forwardRef<HTMLDivElement, StrictPropsWithChildren>(
     );
   },
 );
+
+HomeCard.displayName = 'HomeCard';
+HomeCardHeader.displayName = 'HomeCardHeader';
+HomeCardDescription.displayName = 'HomeCardDescription';
 HomeCardIcon.displayName = 'HomeCardIcon';
 
 export { HomeCard, HomeCardHeader, HomeCardDescription, HomeCardIcon };

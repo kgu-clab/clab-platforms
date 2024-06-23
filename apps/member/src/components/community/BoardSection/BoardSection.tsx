@@ -1,4 +1,5 @@
 import { Grid } from '@clab/design-system';
+import { cn, createURL, toDecodeHTMLEntities } from '@clab/utils';
 
 import CommentCounter from '@components/common/CommentCounter/CommentCounter';
 import ListButton from '@components/common/ListButton/ListButton';
@@ -6,9 +7,7 @@ import MoreButton from '@components/common/MoreButton/MoreButton';
 import Section from '@components/common/Section/Section';
 
 import { COMMUNITY_MESSAGE } from '@constants/message';
-import { createPath } from '@utils/api';
 import { toYYMMDD } from '@utils/date';
-import { cn, toDecodeHTMLEntities } from '@utils/string';
 
 import type {
   CommunityHireBoard,
@@ -47,7 +46,7 @@ const BoardSectionItem = ({ title, to, data }: BoardSectionItemProps) => {
           <p className="text-gray-500">{COMMUNITY_MESSAGE.NO_ARTICLE}</p>
         ) : (
           data.map(({ id, title, commentCount, createdAt }) => (
-            <ListButton key={id} to={createPath(to, id)}>
+            <ListButton key={id} to={createURL(to, id)}>
               <p className="line-clamp-1 w-full pr-4">
                 {toDecodeHTMLEntities(title)}
                 <CommentCounter>{commentCount}</CommentCounter>

@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 import { deleteBoards } from '@api/board';
-import { QUERY_KEY } from '@constants/key';
+import { BOARD_QUERY_KEY } from '@constants/key';
 import { API_ERROR_MESSAGE, ERROR_MESSAGE } from '@constants/message';
 import { PATH } from '@constants/path';
 import useToast from '@hooks/common/useToast';
@@ -18,10 +18,10 @@ export const useBoardDeleteMutation = () => {
 
   const boardDeleteMutation = useMutation({
     mutationFn: deleteBoards,
-    onSuccess: ({ success, data: category, errorMessage }) => {
+    onSuccess: ({ success, errorMessage }, id) => {
       if (success) {
         queryClient.invalidateQueries({
-          queryKey: [QUERY_KEY.BOARDS, category],
+          queryKey: BOARD_QUERY_KEY.DETAIL(id),
         });
         toast({
           state: 'success',

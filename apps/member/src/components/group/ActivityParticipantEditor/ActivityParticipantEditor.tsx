@@ -4,18 +4,21 @@ import Section from '@components/common/Section/Section';
 
 import { TABLE_HEAD } from '@constants/head';
 import useModal from '@hooks/common/useModal';
-import { useActivityGroupAdminAcceptMutation } from '@hooks/queries/useActivityGroupAdminAcceptMutation';
-import { useActivityGroupAdminApplyByStatus } from '@hooks/queries/useActivityGroupAdminApplyByStatus';
+import {
+  useActivityGroupApplication,
+  useActivityGroupApplicationMutation,
+} from '@hooks/queries';
 
-interface ActivityParticipantEditorProps {
+interface Props {
   groupId: number;
 }
 
-const ActivityParticipantEditor = ({
-  groupId,
-}: ActivityParticipantEditorProps) => {
-  const { data: applyMemberList } = useActivityGroupAdminApplyByStatus(groupId);
-  const { activityMemberAcceptMutate } = useActivityGroupAdminAcceptMutation();
+const ActivityParticipantEditor = ({ groupId }: Props) => {
+  const { data: applyMemberList } = useActivityGroupApplication({
+    activityGroupId: groupId,
+  });
+  const { activityGroupApplicationMutate } =
+    useActivityGroupApplicationMutation();
 
   const { openModal } = useModal();
 
@@ -26,16 +29,16 @@ const ActivityParticipantEditor = ({
     });
   };
 
-  const handleAccept = (applierId: string) => {
-    activityMemberAcceptMutate({
+  const handleAcceptClick = (applierId: string) => {
+    activityGroupApplicationMutate({
       activityGroupId: groupId,
       memberId: applierId,
       status: 'ACCEPTED',
     });
   };
 
-  const handleReject = (applierId: string) => {
-    activityMemberAcceptMutate({
+  const handleRejectClick = (applierId: string) => {
+    activityGroupApplicationMutate({
       activityGroupId: groupId,
       memberId: applierId,
       status: 'REJECTED',
@@ -72,14 +75,14 @@ const ActivityParticipantEditor = ({
                   <Button
                     size="sm"
                     color="green"
-                    onClick={() => handleAccept(memberId)}
+                    onClick={() => handleAcceptClick(memberId)}
                   >
                     수락
                   </Button>
                   <Button
                     size="sm"
                     color="red"
-                    onClick={() => handleReject(memberId)}
+                    onClick={() => handleRejectClick(memberId)}
                   >
                     거절
                   </Button>

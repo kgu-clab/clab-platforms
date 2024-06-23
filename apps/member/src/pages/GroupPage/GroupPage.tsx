@@ -8,11 +8,11 @@ import Section from '@components/common/Section/Section';
 import GroupCard from '@components/group/GroupCard/GroupCard';
 
 import { PATH } from '@constants/path';
-import { useActivityGroupMemberByStatus } from '@hooks/queries/useActivityGroupMemberByStatus';
+import { useActivityGroupMember } from '@hooks/queries';
 
 const GroupPage = () => {
   const navigate = useNavigate();
-  const { data } = useActivityGroupMemberByStatus();
+  const { data } = useActivityGroupMember();
 
   return (
     <Content>

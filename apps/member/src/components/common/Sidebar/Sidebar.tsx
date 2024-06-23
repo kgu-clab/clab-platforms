@@ -3,9 +3,9 @@ import { VscClose, VscMenu } from 'react-icons/vsc';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 import { Menubar } from '@clab/design-system';
+import { cn } from '@clab/utils';
 
 import { PATH } from '@constants/path';
-import { cn } from '@utils/string';
 
 const Sidebar = () => {
   const location = useLocation();

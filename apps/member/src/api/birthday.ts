@@ -1,7 +1,8 @@
-import { END_POINT } from '@constants/api';
-import { createCommonPagination } from '@utils/api';
+import { createPagination } from '@clab/utils';
 
-import { PaginationType } from '@type/api';
+import { END_POINT } from '@constants/api';
+
+import type { ResponsePagination } from '@type/api';
 import type { MemberInfo } from '@type/member';
 
 import { server } from './server';
@@ -13,8 +14,8 @@ export const getBirthday = async (
   size: number,
 ) => {
   const params = { month, page, size };
-  const { data } = await server.get<PaginationType<MemberInfo>>({
-    url: createCommonPagination(END_POINT.MY_BIRTHDAY, params),
+  const { data } = await server.get<ResponsePagination<MemberInfo>>({
+    url: createPagination(END_POINT.MY_BIRTHDAY, params),
   });
 
   return data;

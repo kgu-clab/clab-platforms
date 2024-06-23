@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { cn } from '@utils/component';
+import { cn } from '@clab/utils';
 
 import Footer from '../Footer';
 import Nav from '../Nav';

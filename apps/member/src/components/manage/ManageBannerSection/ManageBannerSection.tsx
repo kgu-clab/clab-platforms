@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react';
+import { useState } from 'react';
 
 import { Button, Input } from '@clab/design-system';
 
@@ -10,7 +10,7 @@ import MainBanner from '@components/main/MainBanner/MainBanner';
 import { PostActivityPhotoParams } from '@api/activity';
 import { ERROR_MESSAGE } from '@constants/message';
 import useToast from '@hooks/common/useToast';
-import { useActivityPhotoAddMutation } from '@hooks/queries/useActivityPhotoAddMutation';
+import { useActivityPhotoMutation } from '@hooks/queries';
 
 interface InputsState extends Pick<PostActivityPhotoParams, 'date' | 'title'> {
   file?: File;
@@ -18,7 +18,7 @@ interface InputsState extends Pick<PostActivityPhotoParams, 'date' | 'title'> {
 
 const ManageBannerSection = () => {
   const toast = useToast();
-  const { activityPhotoAddMutate } = useActivityPhotoAddMutation();
+  const { activityPhotoMutate } = useActivityPhotoMutation();
 
   const [inputs, setInputs] = useState<InputsState>({
     title: '',
@@ -28,22 +28,19 @@ const ManageBannerSection = () => {
 
   const { title, date, file } = inputs;
 
-  const handleInputChange = useCallback(
-    (e: React.ChangeEvent<HTMLInputElement>) => {
-      setInputs((prev) => ({
-        ...prev,
-        [e.target.name]: e.target.value,
-      }));
-    },
-    [],
-  );
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setInputs((prev) => ({
+      ...prev,
+      [e.target.name]: e.target.value,
+    }));
+  };
 
-  const handleFileAccepted = useCallback((file?: File) => {
+  const handleFileAccepted = (file?: File) => {
     setInputs((prev) => ({
       ...prev,
       file,
     }));
-  }, []);
+  };
 
   const handleOnSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -53,7 +50,7 @@ const ManageBannerSection = () => {
         message: ERROR_MESSAGE.NO_DATA,
       });
     }
-    activityPhotoAddMutate({
+    activityPhotoMutate({
       title: title,
       date: date,
       file: file,

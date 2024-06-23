@@ -1,11 +1,15 @@
 import { useSuspenseQuery } from '@tanstack/react-query';
 
 import { getNews } from '@api/news';
-import { QUERY_KEY } from '@constants/key';
+import { NEWS_QUERY_KEY } from '@constants/key';
+import { STALE_TIME } from '@constants/state';
 
-export const useNews = (page = 0, size = 6) => {
+import type { WithPaginationParams } from '@type/api';
+
+export function useNews({ page = 0, size = 6 }: WithPaginationParams = {}) {
   return useSuspenseQuery({
-    queryKey: [QUERY_KEY.NEWS, page, size],
+    queryKey: NEWS_QUERY_KEY.PAGE({ page, size }),
     queryFn: () => getNews(page, size),
+    staleTime: STALE_TIME.LONG,
   });
-};
+}

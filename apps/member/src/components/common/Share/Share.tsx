@@ -1,9 +1,8 @@
 import { FaFacebook } from 'react-icons/fa';
-import { FaXTwitter } from 'react-icons/fa6';
-import { FaLink } from 'react-icons/fa6';
+import { FaLink, FaXTwitter } from 'react-icons/fa6';
 import { MdEmail } from 'react-icons/md';
 
-import classNames from 'classnames';
+import { cn } from '@clab/utils';
 
 interface ShareProps extends React.HTMLAttributes<HTMLDivElement> {}
 
@@ -22,7 +21,7 @@ const Share = ({ className }: ShareProps) => {
   };
 
   return (
-    <div className={classNames('text-clab-main-light flex gap-4', className)}>
+    <div className={cn('text-clab-main-light flex gap-4', className)}>
       <a
         href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(currentUrl)}`}
         target="_blank"

@@ -1,7 +1,7 @@
 import { PropsWithChildren } from 'react';
 import { Link } from 'react-router-dom';
 
-import classNames from 'classnames';
+import { cn } from '@clab/utils';
 
 interface LinkerProps extends PropsWithChildren {
   to: string | Partial<Location>;
@@ -14,7 +14,7 @@ const Linker = ({ to, target, className, children }: LinkerProps) => {
     <Link
       to={to}
       target={target}
-      className={classNames(
+      className={cn(
         "font-medium text-black/60 underline-offset-2 after:content-['_↗'] hover:text-black hover:underline",
         className,
       )}

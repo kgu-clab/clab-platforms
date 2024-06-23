@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react';
 import { FcApproval, FcCancel, FcHighPriority } from 'react-icons/fc';
 
+import { cn } from '@clab/utils';
+
 import { useSetToastStore } from '@store/toast';
-import classNames from 'classnames';
 
 import type { ToastStateType } from '@type/toast';
 
@@ -47,7 +48,7 @@ const Toast = ({ id, state, message }: ToastProps) => {
     <div
       role="alert"
       aria-live="polite"
-      className={classNames(
+      className={cn(
         'flex cursor-pointer items-center gap-2 rounded-lg bg-gray-900/50 px-4 py-3 backdrop-blur-sm transition-all duration-300 ease-in-out',
         animation ? 'translate-x-0 opacity-100' : 'translate-x-6 opacity-0',
       )}

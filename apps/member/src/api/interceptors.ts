@@ -1,9 +1,10 @@
+import { createURL } from '@clab/utils';
+
 import { API_BASE_URL, END_POINT, HTTP_STATUS_CODE } from '@constants/api';
-import { MODE } from '@constants/environment';
+import { IS_PRODUCTION } from '@constants/environment';
 import type { FetchOptions, Interceptor } from '@gwansikk/server-chain';
 import {
   authorization,
-  createPath,
   getAccessToken,
   getRefreshToken,
   removeTokens,
@@ -36,10 +37,7 @@ const retryRequest = async (
 export const tokenHandler: Interceptor<Response> = async (response, method) => {
   const { status } = response;
   // 프로덕션 환경에서 서버 에러가 발생한 경우 토큰을 삭제하고 페이지를 새로고침
-  if (
-    MODE === 'production' &&
-    status === HTTP_STATUS_CODE.INTERNAL_SERVER_ERROR
-  ) {
+  if (IS_PRODUCTION && status === HTTP_STATUS_CODE.INTERNAL_SERVER_ERROR) {
     removeTokens();
     window.location.reload();
     return response;
@@ -61,7 +59,7 @@ export const tokenHandler: Interceptor<Response> = async (response, method) => {
   reissueLock = true;
   // 토큰 갱신 요청
   try {
-    const res = await fetch(createPath(API_BASE_URL, END_POINT.LOGIN_REISSUE), {
+    const res = await fetch(createURL(API_BASE_URL, END_POINT.LOGIN_REISSUE), {
       method: 'POST',
       headers: {
         ...authorization(preRefreshToken),

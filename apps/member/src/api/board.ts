@@ -1,5 +1,6 @@
+import { createPagination } from '@clab/utils';
+
 import { END_POINT } from '@constants/api';
-import { createCommonPagination } from '@utils/api';
 
 import { BaseResponse, ResponsePagination } from '@type/api';
 import type {
@@ -27,7 +28,7 @@ export interface PatchBoardsParams extends CommunityWriteItem {
  */
 export async function getMyBoards(page: number, size: number) {
   const { data } = await server.get<ResponsePagination<Board>>({
-    url: createCommonPagination(END_POINT.MY_BOARDS, { page, size }),
+    url: createPagination(END_POINT.MY_BOARDS, { page, size }),
   });
 
   return data;
@@ -37,7 +38,7 @@ export async function getMyBoards(page: number, size: number) {
  */
 export async function getBoards(page: number, size: number) {
   const { data } = await server.get<ResponsePagination<Board>>({
-    url: createCommonPagination(END_POINT.BOARDS, { page, size }),
+    url: createPagination(END_POINT.BOARDS, { page, size }),
   });
 
   return data;
@@ -51,7 +52,7 @@ export async function getBoardsList(
   size: number,
 ) {
   const { data } = await server.get<ResponsePagination<CommunityPostItem>>({
-    url: createCommonPagination(END_POINT.BOARDS_LIST, {
+    url: createPagination(END_POINT.BOARDS_LIST, {
       category: category.toUpperCase(), // 백엔드 Enum 타입에 맞춰 대문자로 변경
       page,
       size,

@@ -1,10 +1,9 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 
 import { Input } from '@clab/design-system';
+import { cn } from '@clab/utils';
 
 import Avatar from '@components/common/Avatar/Avatar';
-
-import { cn } from '@utils/string';
 
 import type { MemberProfileType } from '@type/member';
 

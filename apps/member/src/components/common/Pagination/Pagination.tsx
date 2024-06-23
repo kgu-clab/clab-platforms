@@ -1,10 +1,10 @@
-import { cn } from '@utils/string';
+import { cn } from '@clab/utils';
 
 import type { PaginationOnChange } from '@type/component';
 
 import ArrowButton from '../ArrowButton/ArrowButton';
 
-interface PaginationProps {
+interface Props {
   page: number;
   postLimit: number;
   totalItems: number;
@@ -18,7 +18,7 @@ const Pagination = ({
   totalItems,
   onChange,
   className,
-}: PaginationProps) => {
+}: Props) => {
   const totalPages = Math.ceil(totalItems / postLimit);
 
   const startPage = Math.max(1, page - 1);

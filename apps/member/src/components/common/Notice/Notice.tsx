@@ -1,10 +1,11 @@
 import { useCallback } from 'react';
 
+import { cn } from '@clab/utils';
+
 import useModal from '@hooks/common/useModal';
 import { calculateDDay, formattedDate } from '@utils/date';
-import { cn } from '@utils/string';
 
-interface NoticeProps {
+interface Props {
   title: string;
   content: string;
   date: string;
@@ -18,7 +19,7 @@ const Notice = ({
   date,
   showDDay = false,
   className,
-}: NoticeProps) => {
+}: Props) => {
   const { openModal } = useModal();
 
   const handleNoticeClick = useCallback(() => {

@@ -2,11 +2,12 @@ import { LiaCertificateSolid } from 'react-icons/lia';
 import { MdOutlineDateRange } from 'react-icons/md';
 import { useNavigate } from 'react-router-dom';
 
+import { cn } from '@clab/utils';
+
 import Image from '@components/common/Image/Image';
 
 import { PATH_FINDER } from '@constants/path';
 import { getDateSemester } from '@utils/date';
-import classNames from 'classnames';
 
 import type { ActivityGroupItem } from '@type/activity';
 
@@ -32,7 +33,7 @@ const colors = {
 const InfoCard = ({ title, value, color }: InfoCardProps) => {
   return (
     <div
-      className={classNames(
+      className={cn(
         'flex flex-col items-center rounded px-4 py-2 text-center',
         colors[color],
       )}
