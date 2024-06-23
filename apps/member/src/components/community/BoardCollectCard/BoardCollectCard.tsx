@@ -7,7 +7,7 @@ import { PATH_FINDER } from '@constants/path';
 import { createImageUrl } from '@utils/api';
 import { getCategoryEmoji } from '@utils/community';
 import { formattedDate } from '@utils/date';
-import { formatMemberName } from '@utils/string';
+import { formatMemberName, toDecodeHTMLEntities } from '@utils/string';
 
 import type { Board } from '@type/community';
 
@@ -35,7 +35,9 @@ const BoardCollectCard = ({
         </div>
         <div className="grid w-full">
           <p className="truncate font-semibold">{title}</p>
-          <p className="truncate text-gray-500">{content}</p>
+          <p className="truncate text-gray-500">
+            {toDecodeHTMLEntities(content)}
+          </p>
         </div>
         <div className="flex justify-between gap-2">
           <p className="flex w-12 items-center gap-1">
