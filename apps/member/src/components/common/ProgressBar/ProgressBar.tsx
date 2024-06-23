@@ -1,4 +1,4 @@
-import classNames from 'classnames';
+import { cn } from '@clab/utils';
 
 interface ProgressBarProps {
   className?: string;
@@ -11,7 +11,7 @@ const ProgressBar = ({ className, value }: ProgressBarProps) => {
     <div className="h-2 w-full rounded-full bg-gray-200">
       <div
         style={{ width: valuePercent }}
-        className={classNames('h-2 rounded-full bg-black', className)}
+        className={cn('h-2 rounded-full bg-black', className)}
       ></div>
     </div>
   );

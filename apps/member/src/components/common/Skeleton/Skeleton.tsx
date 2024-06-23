@@ -1,4 +1,4 @@
-import { cn } from '@utils/string';
+import { cn } from '@clab/utils';
 
 interface SkeletonProps {
   size?: string;

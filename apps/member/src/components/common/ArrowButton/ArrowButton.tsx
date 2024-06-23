@@ -1,7 +1,7 @@
 import { ComponentPropsWithRef, forwardRef } from 'react';
 import { MdOutlineNavigateNext } from 'react-icons/md';
 
-import { cn } from '@utils/string';
+import { cn } from '@clab/utils';
 
 interface ArrowButtonProps extends ComponentPropsWithRef<'button'> {
   direction?: 'prev' | 'next';

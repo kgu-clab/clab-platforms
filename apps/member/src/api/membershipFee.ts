@@ -1,5 +1,6 @@
+import { createPagination } from '@clab/utils';
+
 import { END_POINT } from '@constants/api';
-import { createCommonPagination } from '@utils/api';
 
 import type {
   BaseResponse,
@@ -41,7 +42,7 @@ export const getMembershipFee = async ({
   size,
 }: GetMembershipFeeParams) => {
   const { data } = await server.get<ResponsePagination<MembershipFeeType>>({
-    url: createCommonPagination(END_POINT.MEMBERSHIP_FEE, {
+    url: createPagination(END_POINT.MEMBERSHIP_FEE, {
       memberId,
       memberName,
       category,

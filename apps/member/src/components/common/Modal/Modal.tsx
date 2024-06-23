@@ -1,8 +1,9 @@
 /* eslint-disable react/display-name */
 import { PropsWithChildren } from 'react';
 
+import { cn } from '@clab/utils';
+
 import useModal from '@hooks/common/useModal';
-import classNames from 'classnames';
 
 interface ModalProps extends PropsWithChildren {
   className?: string;
@@ -38,20 +39,20 @@ const Modal = ({ children }: PropsWithChildren) => {
   );
 };
 
-Modal.Header = ({ className, children }: ModalProps) => {
+const Header = ({ className, children }: ModalProps) => {
   return (
     <header>
-      <h3 className={classNames('text-xl font-semibold leading-6', className)}>
+      <h3 className={cn('text-xl font-semibold leading-6', className)}>
         {children}
       </h3>
     </header>
   );
 };
 
-Modal.Body = ({ className, children }: ModalProps) => {
+const Body = ({ className, children }: ModalProps) => {
   return (
     <main
-      className={classNames(
+      className={cn(
         'min-h-20 whitespace-pre-wrap break-keep text-sm text-gray-500',
         className,
       )}
@@ -61,20 +62,17 @@ Modal.Body = ({ className, children }: ModalProps) => {
   );
 };
 
-Modal.Footer = ({ className, children }: ModalProps) => {
+const Footer = ({ className, children }: ModalProps) => {
   return (
     <footer
-      className={classNames(
-        'flex justify-end gap-2 text-sm font-semibold',
-        className,
-      )}
+      className={cn('flex justify-end gap-2 text-sm font-semibold', className)}
     >
       {children}
     </footer>
   );
 };
 
-Modal.Button = ({ color, onClick, className, children }: ModalButtonProps) => {
+const Button = ({ color, onClick, className, children }: ModalButtonProps) => {
   const colorStyle = {
     red: 'border-red-300 bg-red-100 text-red-500 hover:bg-red-200',
     sky: 'border-sky-300 bg-sky-100 text-sky-500 hover:bg-sky-200',
@@ -86,7 +84,7 @@ Modal.Button = ({ color, onClick, className, children }: ModalButtonProps) => {
   return (
     <button
       type="button"
-      className={classNames(
+      className={cn(
         'w-full rounded-lg border py-1 transition-colors',
         colorStyle[color],
         className,
@@ -97,5 +95,15 @@ Modal.Button = ({ color, onClick, className, children }: ModalButtonProps) => {
     </button>
   );
 };
+
+Header.displayName = 'Modal.Header';
+Body.displayName = 'Modal.Body';
+Footer.displayName = 'Modal.Footer';
+Button.displayName = 'Modal.Button';
+
+Modal.Header = Header;
+Modal.Body = Body;
+Modal.Footer = Footer;
+Modal.Button = Button;
 
 export default Modal;

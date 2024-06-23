@@ -1,24 +1,10 @@
 import { SERVICE_NAME } from '@constants/environment';
-import { ClassValue, clsx } from 'clsx';
-import * as entities from 'entities';
-import { twMerge } from 'tailwind-merge';
 
 import type { Bookstore, BookstoreKorean } from '@type/book';
 import type { CareerLevel, EmploymentType } from '@type/community';
 import type { MembershipStatusType } from '@type/membershipFee';
 import type { SchedulePriority } from '@type/schedule';
 
-export const cn = (...inputs: ClassValue[]): string => {
-  return twMerge(clsx(inputs));
-};
-/**
- * 주어진 숫자를 한국식 통화 형식으로 포맷합니다.
- * @param amount 포맷할 숫자
- * @returns 포맷된 숫자 문자열
- */
-export function formatWon(amount: number): string {
-  return amount.toLocaleString('ko-KR');
-}
 /**
  * 멤버십 상태를 텍스트로 변환하는 함수입니다.
  * @param status - 멤버십 상태 타입
@@ -39,16 +25,7 @@ export function toMembershipStatusText(status: MembershipStatusType): string {
       throw new Error(`Unknown Membership status: ${status}`);
   }
 }
-/**
- * 주어진 문자열에서 HTML 엔티티를 디코딩합니다.
- *
- * @param string 디코딩할 문자열
- * @returns 디코딩된 문자열
- */
-export function toDecodeHTMLEntities(string?: string) {
-  if (!string) return '';
-  return entities.decodeHTML(string);
-}
+
 /**
  * 중요도를 텍스트로 변환하는 함수입니다.
  *
@@ -68,6 +45,7 @@ export function toPriorityText(priority: SchedulePriority) {
       throw new Error(`Unknown priority: ${priority}`);
   }
 }
+
 /**
  * BookStoreKorean 값을 BookStore 값(영문)으로 변환합니다.
  * @param value 변환할 BookStore 값입니다.
@@ -86,6 +64,7 @@ export function toBookstore(value: BookstoreKorean): Bookstore {
       throw new Error(`Unknown BookStore value: ${value}`);
   }
 }
+
 /**
  * 주어진 리뷰 정보를 파싱하여 온라인 서점 별로 링크를 생성합니다.
  * @param links 링크 배열
@@ -110,6 +89,7 @@ export function bookReviewParser(links: string[]) {
 
   return bookstoreMap;
 }
+
 /**
  * 멤버 이름을 출력합니다.
  * @param name 이름

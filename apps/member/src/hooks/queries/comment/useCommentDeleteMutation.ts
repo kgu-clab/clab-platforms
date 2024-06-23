@@ -1,8 +1,8 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 import { deleteComment } from '@api/comment';
-import { QUERY_KEY } from '@constants/key';
-import { API_ERROR_MESSAGE, ERROR_MESSAGE } from '@constants/message';
+import { COMMENT_QUERY_KEY } from '@constants/key';
+import { API_ERROR_MESSAGE } from '@constants/message';
 import useToast from '@hooks/common/useToast';
 
 /**
@@ -14,10 +14,10 @@ export const useCommentDeleteMutation = () => {
 
   const mutation = useMutation({
     mutationFn: deleteComment,
-    onSuccess: ({ success, data: id, errorMessage }) => {
+    onSuccess: ({ success, data: boardId, errorMessage }) => {
       if (success) {
         queryClient.invalidateQueries({
-          queryKey: [QUERY_KEY.COMMENTS, id],
+          queryKey: COMMENT_QUERY_KEY.DETAIL(boardId),
         });
         toast({
           state: 'success',
@@ -29,12 +29,6 @@ export const useCommentDeleteMutation = () => {
           message: API_ERROR_MESSAGE[errorMessage],
         });
       }
-    },
-    onError: () => {
-      toast({
-        state: 'error',
-        message: ERROR_MESSAGE.NETWORK,
-      });
     },
   });
 

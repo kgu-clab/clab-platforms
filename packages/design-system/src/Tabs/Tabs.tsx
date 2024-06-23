@@ -1,6 +1,7 @@
 import React, { ButtonHTMLAttributes, useCallback, useState } from 'react';
 
-import { cn } from '../utils';
+import { cn } from '@clab/utils';
+
 import type { TabsOptions } from './Tabs.types';
 
 export interface TabsProps {

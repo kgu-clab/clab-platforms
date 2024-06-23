@@ -1,6 +1,7 @@
-import { ChangeEvent, useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import { Button, Table } from '@clab/design-system';
+import { cn } from '@clab/utils';
 
 import File from '@components/common/File/File';
 import Section from '@components/common/Section/Section';
@@ -8,16 +9,16 @@ import Textarea from '@components/common/Textarea/Textarea';
 
 import { FORM_DATA_KEY } from '@constants/api';
 import {
-  useActivityGroupBoardModifyMutation,
   useActivityGroupBoardMutation,
+  useActivityGroupBoardPatchMutation,
   useMyProfile,
 } from '@hooks/queries';
 import { formattedDate, isDateValid } from '@utils/date';
-import classNames from 'classnames';
 
-import type { ActivityBoardType, AssignmentFileType } from '@type/activity';
+import type { ActivityBoardType } from '@type/activity';
+import type { ResponseFile } from '@type/api';
 
-interface AssignmentUploadSectionProps {
+interface Props {
   activityGroupId: number;
   assignmentId: number;
   dueDateTime?: string;
@@ -29,21 +30,21 @@ const AssignmentUploadSection = ({
   assignmentId,
   dueDateTime,
   myAssignment,
-}: AssignmentUploadSectionProps) => {
+}: Props) => {
   const { data: myProfile } = useMyProfile();
   const { activityGroupBoardMutate } = useActivityGroupBoardMutation();
-  const { activityGroupBoardModifyMutate } =
-    useActivityGroupBoardModifyMutation();
+  const { activityGroupBoardPatchMutate } =
+    useActivityGroupBoardPatchMutation();
 
   const uploaderRef = useRef<HTMLInputElement>(null);
-  const [uploadedFile, setUploadedFile] = useState<AssignmentFileType | null>(
+  const [uploadedFile, setUploadedFile] = useState<ResponseFile | null>(
     myAssignment?.files?.[0] || null,
   );
-  const [description, setDescription] = useState<string>(
-    myAssignment?.content || '',
-  );
+  const [description, setDescription] = useState(myAssignment?.content ?? '');
 
-  const handleDescriptionChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
+  const handleDescriptionChange = (
+    e: React.ChangeEvent<HTMLTextAreaElement>,
+  ) => {
     setDescription(e.target.value);
   };
 
@@ -61,7 +62,7 @@ const AssignmentUploadSection = ({
 
     if (myAssignment?.content || myAssignment?.files?.length) {
       // 기존에 제출한 내용이나 파일이 있는 경우 수정으로 처리합니다.
-      activityGroupBoardModifyMutate({
+      activityGroupBoardPatchMutate({
         activityGroupBoardId: myAssignment.id,
         groupId: activityGroupId,
         groupBoardId: assignmentId,
@@ -107,7 +108,7 @@ const AssignmentUploadSection = ({
         <Table.Row>
           <Table.Cell>제출 일시</Table.Cell>
           <Table.Cell
-            className={classNames({
+            className={cn({
               'text-red-500': !isDateValid(
                 dueDateTime,
                 uploadedFile?.createdAt,
@@ -131,7 +132,7 @@ const AssignmentUploadSection = ({
               ref={uploaderRef}
               id="uploader"
               type="file"
-              className={classNames(uploadedFile && 'hidden')}
+              className={cn(uploadedFile && 'hidden')}
             />
           </Table.Cell>
         </Table.Row>

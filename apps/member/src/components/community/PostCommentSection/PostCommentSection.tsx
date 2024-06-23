@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react';
+import { useState } from 'react';
 
 import Comment from '@components/common/Comment/Comment';
 import CommentInput from '@components/common/CommentInput/CommentInput';
@@ -11,18 +11,15 @@ interface PostCommentSectionProps {
 }
 
 const PostCommentSection = ({ id }: PostCommentSectionProps) => {
-  const { data } = useComments(id);
+  const { data } = useComments({ id });
 
-  const [comment, setComment] = useState<string>('');
+  const [comment, setComment] = useState('');
   const [reComment, setReComment] = useState<string[]>([]);
   const [checkReComment, setCheckReComment] = useState<boolean[]>([false]);
 
-  const handleCommentChange = useCallback(
-    (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-      setComment(e.target.value);
-    },
-    [],
-  );
+  const handleCommentChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setComment(e.target.value);
+  };
 
   const handleReplyClick = (commentIndex: number) => {
     setCheckReComment((prevCheckReComment) => {
@@ -32,16 +29,13 @@ const PostCommentSection = ({ id }: PostCommentSectionProps) => {
     });
   };
 
-  const handleReCommentChange = useCallback(
-    (commentIndex: number, value: string) => {
-      setReComment((prevReInput) => {
-        const updatedReInput = [...prevReInput];
-        updatedReInput[commentIndex] = value;
-        return updatedReInput;
-      });
-    },
-    [],
-  );
+  const handleReCommentChange = (commentIndex: number, value: string) => {
+    setReComment((prevReInput) => {
+      const updatedReInput = [...prevReInput];
+      updatedReInput[commentIndex] = value;
+      return updatedReInput;
+    });
+  };
 
   return (
     <Section>

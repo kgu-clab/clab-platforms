@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
 
-import { cn } from '../utils';
+import { cn } from '@clab/utils';
 
 interface OTPInputProps {
   type?: 'text' | 'number' | 'password';

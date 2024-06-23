@@ -1,12 +1,12 @@
-import { cn } from '@utils/string';
+import { cn } from '@clab/utils';
 
 import { StrictPropsWithChildren } from '@type/component';
 
-interface EmptyBoxProps extends StrictPropsWithChildren {
+interface Props extends StrictPropsWithChildren {
   className?: string;
 }
 
-const EmptyBox = ({ className, children }: EmptyBoxProps) => {
+const EmptyBox = ({ className, children }: Props) => {
   return (
     <p className={cn('h-w-full text-center text-gray-500', className)}>
       {children}

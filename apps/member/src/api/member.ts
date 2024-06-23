@@ -1,5 +1,6 @@
+import { createPagination } from '@clab/utils';
+
 import { END_POINT } from '@constants/api';
-import { createCommonPagination } from '@utils/api';
 
 import type {
   BaseResponse,
@@ -30,7 +31,7 @@ export interface PatchUserInfoParams {
  */
 export async function getMembers({ id, name, page, size }: GetMembersParams) {
   const { data } = await server.get<ResponsePagination<MemberInfo>>({
-    url: createCommonPagination(END_POINT.MEMBERS, {
+    url: createPagination(END_POINT.MEMBERS, {
       id,
       name,
       page,

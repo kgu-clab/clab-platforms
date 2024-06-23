@@ -1,10 +1,12 @@
 import { useCallback } from 'react';
 
+import { cn, toDecodeHTMLEntities } from '@clab/utils';
+
 import { MODAL_ACCEPT, MODAL_CONTENT, MODAL_TITLE } from '@constants/modal';
 import useModal from '@hooks/common/useModal';
 import { useAccusesMutation, useCommentDeleteMutation } from '@hooks/queries';
 import { formattedDate } from '@utils/date';
-import { cn, formatMemberName, toDecodeHTMLEntities } from '@utils/string';
+import { formatMemberName } from '@utils/string';
 
 import type { CommentListItem } from '@type/comment';
 

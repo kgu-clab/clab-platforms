@@ -1,6 +1,6 @@
 import { ComponentPropsWithRef, forwardRef } from 'react';
 
-import { cn } from '@utils/string';
+import { cn } from '@clab/utils';
 
 interface SelectOptions {
   name: string | number;

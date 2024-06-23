@@ -6,19 +6,20 @@ import Section from '@components/common/Section/Section';
 import AssignmentUploadSection from '@components/group/AssignmentUploadSection/AssignmentUploadSection';
 
 import { GROUP_MESSAGE } from '@constants/message';
-import { useActivityGroupBoard } from '@hooks/queries/useActivityGroupBoard';
-import { useActivityGroupBoardsMyAssignment } from '@hooks/queries/useActivityGroupBoardsMyAssignment';
+import { useActivityGroupBoardMyAssignment } from '@hooks/queries';
+import { useActivityGroupBoard } from '@hooks/queries/activity/useActivityGroupBoard';
 
 const GroupAssignmentPage = () => {
   const { id, assignmentId } = useParams();
   const { state } = useLocation();
 
-  if (!id || !assignmentId || !state?.name)
+  if (!id || !assignmentId || !state?.name) {
     throw new Error(GROUP_MESSAGE.NO_ACTIVITY);
+  }
 
   const { data: board } = useActivityGroupBoard(+assignmentId);
   const { data: myAssignment } =
-    useActivityGroupBoardsMyAssignment(+assignmentId);
+    useActivityGroupBoardMyAssignment(+assignmentId);
 
   const feedback = myAssignment?.[0].feedbacks?.[0];
 

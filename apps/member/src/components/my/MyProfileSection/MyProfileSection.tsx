@@ -1,6 +1,7 @@
 import { useState } from 'react';
 
 import { Button, Grid, Input } from '@clab/design-system';
+import { isObjectsEqual } from '@clab/utils';
 
 import LogoutButton from '@components/common/LogoutButton/LogoutButton';
 import Section from '@components/common/Section/Section';
@@ -9,7 +10,6 @@ import Select from '@components/common/Select/Select';
 import { SELECT_OPTIONS } from '@constants/select';
 import useModal from '@hooks/common/useModal';
 import { useUserInfoMutation } from '@hooks/queries';
-import { isObjectsEqual } from '@utils/common';
 
 import type { MemberProfileType } from '@type/member';
 

@@ -3,7 +3,7 @@ import { Button } from '@clab/design-system';
 import Footer from '@components/common/Footer/Footer';
 import LoginButton from '@components/common/LoginButton/LoginButton';
 
-import { MODE } from '@constants/environment';
+import { IS_PRODUCTION } from '@constants/environment';
 
 const LoginPage = () => {
   return (
@@ -14,7 +14,7 @@ const LoginPage = () => {
           <p className="text-gray-500">동아리 회원만 이용할 수 있습니다.</p>
         </div>
         <LoginButton />
-        {MODE !== 'production' && (
+        {IS_PRODUCTION && (
           <>
             <div className="flex w-full max-w-xs items-center gap-4">
               <hr className="grow" />

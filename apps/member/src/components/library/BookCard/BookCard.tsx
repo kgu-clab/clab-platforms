@@ -1,10 +1,11 @@
 import { useNavigate } from 'react-router-dom';
 
+import { cn } from '@clab/utils';
+
 import Image from '@components/common/Image/Image';
 
 import { PATH_FINDER } from '@constants/path';
 import { BOOK_STATE } from '@constants/state';
-import { cn } from '@utils/string';
 
 import type { BookItem } from '@type/book';
 

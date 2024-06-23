@@ -1,11 +1,11 @@
-import { ChangeEvent, useCallback, useState } from 'react';
+import { useState } from 'react';
 
 import { Button, Grid, Input } from '@clab/design-system';
 
 import Textarea from '@components/common/Textarea/Textarea';
 
 import useToast from '@hooks/common/useToast';
-import { useScheduleAddMutation } from '@hooks/queries';
+import { useScheduleMutation } from '@hooks/queries';
 
 interface AddScheduleFormProps {
   onSubmit: () => void;
@@ -20,19 +20,18 @@ const AddScheduleForm = ({ onSubmit }: AddScheduleFormProps) => {
     endDateTime: '',
   });
 
-  const { scheduleAddMutate } = useScheduleAddMutation();
+  const { scheduleMutate } = useScheduleMutation();
 
   const { title, detail, startDateTime, endDateTime } = inputs;
 
-  const handleInputsChange = useCallback(
-    (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-      setInputs((prev) => ({
-        ...prev,
-        [e.target.name]: e.target.value,
-      }));
-    },
-    [],
-  );
+  const handleInputsChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) => {
+    setInputs((prev) => ({
+      ...prev,
+      [e.target.name]: e.target.value,
+    }));
+  };
 
   const handleSubmitClick = () => {
     if (!title || !detail || !startDateTime || !endDateTime) {
@@ -41,7 +40,7 @@ const AddScheduleForm = ({ onSubmit }: AddScheduleFormProps) => {
         message: '모든 항목을 입력해주세요.',
       });
     }
-    scheduleAddMutate({
+    scheduleMutate({
       scheduleType: 'ALL',
       title,
       detail,

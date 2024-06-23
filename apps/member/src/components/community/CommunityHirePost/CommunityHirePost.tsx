@@ -1,12 +1,9 @@
 import { Button, DetailsList } from '@clab/design-system';
+import { toDecodeHTMLEntities } from '@clab/utils';
 
 import Post from '@components/common/Post/Post';
 
-import {
-  toDecodeHTMLEntities,
-  toKoreaCareerLevel,
-  toKoreaEmploymentType,
-} from '@utils/string';
+import { toKoreaCareerLevel, toKoreaEmploymentType } from '@utils/string';
 
 import type { CommunityHireBoard } from '@type/community';
 

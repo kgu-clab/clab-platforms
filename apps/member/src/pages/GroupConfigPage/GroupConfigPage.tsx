@@ -8,7 +8,7 @@ import ActivityPostEditor from '@components/group/ActivityPostEditor/ActivityPos
 import ActivityProfileEditor from '@components/group/ActivityProfileEditor/ActivityProfileEditor';
 
 import { GROUP_MESSAGE } from '@constants/message';
-import { useActivityGroup } from '@hooks/queries/useActivityGroup';
+import { useActivityGroup } from '@hooks/queries/activity/useActivityGroup';
 
 const GroupConfigPage = () => {
   const { id } = useParams();

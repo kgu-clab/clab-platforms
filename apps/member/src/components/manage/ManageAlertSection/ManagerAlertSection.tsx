@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { Menubar, Table } from '@clab/design-system';
+import { toDecodeHTMLEntities } from '@clab/utils';
 
 import ActionButton from '@components/common/ActionButton/ActionButton';
 import Pagination from '@components/common/Pagination/Pagination';
@@ -13,10 +14,9 @@ import { TABLE_HEAD, TABLE_HEAD_ACTION } from '@constants/head';
 import { PATH_FINDER } from '@constants/path';
 import useModal from '@hooks/common/useModal';
 import { usePagination } from '@hooks/common/usePagination';
-import { useBoardDeleteMutation, useCategoryBoards } from '@hooks/queries';
+import { useBoardByCategory, useBoardDeleteMutation } from '@hooks/queries';
 import { getCategoryTitle } from '@utils/community';
 import { toYYMMDD } from '@utils/date';
-import { toDecodeHTMLEntities } from '@utils/string';
 
 import type { CommunityCategoryType } from '@type/community';
 
@@ -30,7 +30,10 @@ const ManagerAlertSection = ({ category }: ManagerAlertSectionProps) => {
   const navigate = useNavigate();
   const { openModal } = useModal();
   const { boardDeleteMutate } = useBoardDeleteMutation();
-  const { data } = useCategoryBoards({ category: category });
+  const { data } = useBoardByCategory({
+    hasPermission: true,
+    category: category,
+  });
 
   const [mode, setMode] = useState<ModeState>('view');
   const { page, size, handlePageChange } = usePagination();
