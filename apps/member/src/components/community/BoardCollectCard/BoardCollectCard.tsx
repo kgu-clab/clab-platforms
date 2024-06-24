@@ -1,6 +1,8 @@
 import { LiaCommentSolid } from 'react-icons/lia';
 import { Link } from 'react-router-dom';
 
+import { toDecodeHTMLEntities } from '@clab/utils';
+
 import Image from '@components/common/Image/Image';
 
 import { PATH_FINDER } from '@constants/path';
@@ -35,7 +37,9 @@ const BoardCollectCard = ({
         </div>
         <div className="grid w-full">
           <p className="truncate font-semibold">{title}</p>
-          <p className="truncate text-gray-500">{content}</p>
+          <p className="truncate text-gray-500">
+            {toDecodeHTMLEntities(content)}
+          </p>
         </div>
         <div className="flex justify-between gap-2">
           <p className="flex w-12 items-center gap-1">

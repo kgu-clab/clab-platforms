@@ -15,6 +15,7 @@ module.exports = {
         'land',
         'member',
         'time',
+        'status',
         'config',
         'design-system',
         'hooks',
