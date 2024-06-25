@@ -1,16 +1,12 @@
-import { SERVICE_LIST, SERVICE_STATUS_LIST, ServiceList } from '@/src/shared';
+import { SERVICE_LIST } from '@/src/shared';
 import Title from '@/src/shared/ui/Title';
 
 import ServiceStatusItem from './ServiceStatusItem';
 
-interface CurrentStatusProps {
-  status: boolean;
-}
-
 function StatusBanner({ status }: { status: boolean }) {
   return (
     <div
-      className={`w-full rounded-md ${status ? 'bg-green-600' : 'bg-red-500'} px-8 py-4 text-lg text-white`}
+      className={`w-full rounded-md ${status ? 'bg-green-500' : 'bg-red-500'} px-8 py-4 text-lg font-semibold text-white`}
     >
       {status
         ? '현재 서비스가 정상적으로 운영되고 있습니다.'
@@ -19,7 +15,15 @@ function StatusBanner({ status }: { status: boolean }) {
   );
 }
 
-export default function CurrentStatus({ status }: CurrentStatusProps) {
+export default async function CurrentStatus() {
+  const status = await fetch(
+    process.env.NODE_ENV !== 'production'
+      ? process.env.DEVELOP_SERVER_URL ?? ''
+      : process.env.PRODUCTION_SERVER_URL ?? '',
+  )
+    .then((res) => res.status === 404)
+    .catch(() => false);
+
   return (
     <div className="flex w-full flex-col gap-y-10">
       <StatusBanner status={status} />
@@ -34,7 +38,7 @@ export default function CurrentStatus({ status }: CurrentStatusProps) {
           <ServiceStatusItem
             serviceName={serviceName}
             serviceURL={serviceURL}
-            status={SERVICE_STATUS_LIST[serviceName as ServiceList]}
+            status={status}
           />
         ))}
       </ul>
