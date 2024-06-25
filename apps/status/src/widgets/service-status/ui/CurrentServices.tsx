@@ -1,3 +1,5 @@
+import { cn } from '@clab/utils';
+
 import { SERVICE_LIST } from '@/src/shared';
 import Title from '@/src/shared/ui/Title';
 
@@ -6,7 +8,10 @@ import ServiceStatusItem from './ServiceStatusItem';
 function StatusBanner({ status }: { status: boolean }) {
   return (
     <div
-      className={`w-full rounded-md ${status ? 'bg-green-500' : 'bg-red-500'} px-8 py-4 text-lg font-semibold text-white`}
+      className={cn(
+        'w-full rounded-md px-8 py-4 text-lg font-semibold text-white',
+        status ? 'bg-green-500' : 'bg-red-500',
+      )}
     >
       {status
         ? '현재 서비스가 정상적으로 운영되고 있습니다.'

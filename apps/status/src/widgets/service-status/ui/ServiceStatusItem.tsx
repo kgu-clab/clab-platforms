@@ -1,3 +1,5 @@
+import { cn } from '@clab/utils';
+
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -10,7 +12,10 @@ interface StatusItemProps {
 function StatusTag({ status }: { status: boolean }) {
   return (
     <div
-      className={`w-fit rounded-md ${status ? 'bg-green-500' : 'bg-red-500'} px-2 py-1 text-center text-sm font-medium text-white`}
+      className={cn(
+        'w-fit rounded-md px-2 py-1 text-center text-sm font-medium text-white',
+        status ? 'bg-green-500' : 'bg-red-500',
+      )}
     >
       {status ? '서비스 중' : '서비스 일시 중단'}
     </div>
