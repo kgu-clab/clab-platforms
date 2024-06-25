@@ -10,7 +10,7 @@ interface StatusItemProps {
 function StatusTag({ status }: { status: boolean }) {
   return (
     <div
-      className={`w-fit rounded-md ${status ? 'bg-green-600' : 'bg-red-500'} px-2 py-1 text-center text-sm text-white`}
+      className={`w-fit rounded-md ${status ? 'bg-green-500' : 'bg-red-500'} px-2 py-1 text-center text-sm font-medium text-white`}
     >
       {status ? '서비스 중' : '서비스 일시 중단'}
     </div>
@@ -18,9 +18,9 @@ function StatusTag({ status }: { status: boolean }) {
 }
 
 export default function StatusItem({
+  status,
   serviceName,
   serviceURL,
-  status,
 }: StatusItemProps) {
   return (
     <li className="flex flex-col items-center overflow-hidden rounded-lg border shadow-xl transition-all hover:scale-105">
@@ -30,7 +30,7 @@ export default function StatusItem({
             className="h-40"
             width={200}
             height={200}
-            src="/image/logo.webp"
+            src="/image/logo_secondary.webp"
             alt="C-LAB 로고"
           />
         </div>

@@ -2,14 +2,14 @@
 
 import Lottie from 'react-lottie-player';
 
-import inspectionLottieJson from '@/public/lottie/inspection.json';
+import check from '@/public/lottie/working.json';
 
-export default function InspectionLottie() {
+export default function IntroduceLottie() {
   return (
     <Lottie
       className="hidden w-[400px] shrink-0 md:block"
       loop
-      animationData={inspectionLottieJson}
+      animationData={check}
       play
     />
   );
