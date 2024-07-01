@@ -1,8 +1,8 @@
 import { useCallback, useEffect, useState } from 'react';
 import { useDropzone } from 'react-dropzone';
-import { BsFileEarmarkArrowUp, BsFileEarmarkDiff } from 'react-icons/bs';
 
 import { Button } from '@clab/design-system';
+import { FileEarmarkArrowUpOutline, FileEarmarkDiffOutline } from '@clab/icon';
 
 type Accept = 'image/*';
 
@@ -114,12 +114,12 @@ const Uploader = ({
             </>
           ) : isDragActive ? (
             <>
-              <BsFileEarmarkArrowUp size={46} />
+              <FileEarmarkArrowUpOutline width={46} height={46} />
               <p>파일이 인식됐어요, 지금 놓으시면 돼요!</p>
             </>
           ) : (
             <>
-              <BsFileEarmarkDiff size={46} />
+              <FileEarmarkDiffOutline width={46} height={46} />
               <p>여기로 끌어다 놓아주세요.</p>
               <p>또는</p>
               <Button type="button" size="sm">

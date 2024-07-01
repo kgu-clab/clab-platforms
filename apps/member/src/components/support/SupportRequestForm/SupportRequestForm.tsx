@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
-import { FcAnswers, FcMultipleDevices, FcTemplate } from 'react-icons/fc';
 
 import { Button, Checkbox, Input, Tabs } from '@clab/design-system';
+import { AnswersColor, MultipleDevicesColor, TemplateColor } from '@clab/icon';
 import { formatComma } from '@clab/utils';
 
 import Linker from '@components/common/Linker/Linker';
@@ -16,15 +16,15 @@ import type { SupportRequestDataType } from '@type/support';
 
 const TABS_OPTIONS = [
   {
-    icon: <FcTemplate size={32} />,
+    icon: <TemplateColor width={32} height={32} />,
     value: '도서',
   },
   {
-    icon: <FcMultipleDevices size={32} />,
+    icon: <MultipleDevicesColor width={32} height={32} />,
     value: '물품',
   },
   {
-    icon: <FcAnswers size={32} />,
+    icon: <AnswersColor width={32} height={32} />,
     value: '기타',
   },
 ] as const;

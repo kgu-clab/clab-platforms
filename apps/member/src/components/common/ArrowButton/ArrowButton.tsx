@@ -1,6 +1,6 @@
 import { ComponentPropsWithRef, forwardRef } from 'react';
-import { MdOutlineNavigateNext } from 'react-icons/md';
 
+import { ChevronRightOutline } from '@clab/icon';
 import { cn } from '@clab/utils';
 
 interface ArrowButtonProps extends ComponentPropsWithRef<'button'> {
@@ -15,8 +15,9 @@ const ArrowButton = forwardRef<HTMLButtonElement, ArrowButtonProps>(
         className={cn('rounded border px-0.5 text-gray-500', className)}
         {...rest}
       >
-        <MdOutlineNavigateNext
-          size={20}
+        <ChevronRightOutline
+          width={20}
+          height={20}
           className={direction === 'prev' ? 'rotate-180' : 'rotate-0'}
         />
       </button>

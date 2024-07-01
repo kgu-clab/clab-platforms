@@ -1,8 +1,8 @@
 import { useEffect, useRef, useState } from 'react';
-import { VscClose, VscMenu } from 'react-icons/vsc';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 import { Menubar } from '@clab/design-system';
+import { CloseOutline, MenuOutline } from '@clab/icon';
 import { cn } from '@clab/utils';
 
 import { PATH } from '@constants/path';
@@ -38,7 +38,11 @@ const Sidebar = () => {
   return (
     <>
       <button className="md:hidden" onClick={() => setIsOpen((prev) => !prev)}>
-        {isOpen ? <VscClose size={20} /> : <VscMenu size={20} />}
+        {isOpen ? (
+          <CloseOutline width={20} height={20} />
+        ) : (
+          <MenuOutline width={20} height={20} />
+        )}
       </button>
       <div
         ref={sidebarRef}

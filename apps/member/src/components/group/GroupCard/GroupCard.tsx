@@ -1,7 +1,6 @@
-import { LiaCertificateSolid } from 'react-icons/lia';
-import { MdOutlineDateRange } from 'react-icons/md';
 import { useNavigate } from 'react-router-dom';
 
+import { CertificateSolidOutline, DateRangeOutline } from '@clab/icon';
 import { cn } from '@clab/utils';
 
 import Image from '@components/common/Image/Image';
@@ -101,10 +100,10 @@ const GroupCard = ({
             <InfoRow label="팀장">{`${leaderName}(${leaderId})`}</InfoRow>
             <InfoRow label="정보">
               <div className="flex items-center text-sm text-gray-500">
-                <LiaCertificateSolid className="mr-1" />
+                <CertificateSolidOutline className="mr-1" />
                 <span>{category}</span>
                 <span className="px-1">•</span>
-                <MdOutlineDateRange className="mr-1" />
+                <DateRangeOutline className="mr-1" />
                 <span>{getDateSemester(createdAt)}</span>
               </div>
             </InfoRow>

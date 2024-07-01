@@ -1,6 +1,6 @@
-import { LiaCommentSolid } from 'react-icons/lia';
 import { Link } from 'react-router-dom';
 
+import { CommentSolidOutline } from '@clab/icon';
 import { toDecodeHTMLEntities } from '@clab/utils';
 
 import Image from '@components/common/Image/Image';
@@ -43,7 +43,7 @@ const BoardCollectCard = ({
         </div>
         <div className="flex justify-between gap-2">
           <p className="flex w-12 items-center gap-1">
-            <LiaCommentSolid />
+            <CommentSolidOutline />
             {commentCount}
           </p>
           <div className="hidden w-32 md:block">

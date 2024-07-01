@@ -13,6 +13,7 @@
   "dependencies": {
     "@channel.io/channel-web-sdk-loader": "^1.1.7",
     "@clab/design-system": "workspace:*",
+    "@clab/icon": "workspace:^",
     "@clab/utils": "workspace:*",
     "@gwansikk/server-chain": "^0.5.2",
     "@sentry/react": "^8.9.2",
