@@ -1,0 +1,32 @@
+{
+  "name": "@clab/icon",
+  "version": "1.0.0",
+  "main": "index.ts",
+  "scripts": {
+    "generate": "pnpm svgo:color && pnpm svgo:outline && pnpm svgo:solid && pnpm svgr:color && pnpm svgr:outline && pnpm svgr:solid",
+    "update": "pnpm svgo:color && pnpm svgo:outline && pnpm svgo:solid && pnpm update:color && pnpm update:outline && pnpm update:solid",
+    "export": "ts-node script/generateExports.ts",
+    "svgo:color": "svgo -f src/color/svg --config=svgo.color.mjs",
+    "svgo:outline": "svgo -f src/outline/svg --config=svgo.outline.mjs",
+    "svgo:solid": "svgo -f src/solid/svg --config=svgo.solid.mjs",
+    "svgr:color": "npx @svgr/cli --no-index --no-prettier --typescript --out-dir src/color/react src/color/svg && prettier --write src/color/react",
+    "svgr:outline": "npx @svgr/cli --no-index --no-prettier --typescript --out-dir src/outline/react src/outline/svg && prettier --write src/outline/react",
+    "svgr:solid": "npx @svgr/cli --no-index --no-prettier --typescript --out-dir src/solid/react src/solid/svg && prettier --write src/solid/react",
+    "update:color": "pnpm svgr:color --ignore-existing",
+    "update:outline": "pnpm svgr:outline --ignore-existing",
+    "update:solid": "pnpm svgr:solid --ignore-existing"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@svgr/cli": "^8.1.0",
+    "@types/react": "^18.3.3",
+    "@types/react-dom": "^18.3.0",
+    "react": "^18.3.1"
+  },
+  "peerDependencies": {
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  }
+}
