@@ -5,7 +5,7 @@
   "scripts": {
     "generate": "pnpm svgo:color && pnpm svgo:outline && pnpm svgo:solid && pnpm svgr:color && pnpm svgr:outline && pnpm svgr:solid && pnpm export",
     "update": "pnpm svgo:color && pnpm svgo:outline && pnpm svgo:solid && pnpm update:color && pnpm update:outline && pnpm update:solid && pnpm export",
-    "export": "ts-node script/generateExports.ts",
+    "export": "eslint --fix . && ts-node script/generateExports.ts",
     "svgo:color": "svgo -f src/color/svg --config=svgo.color.mjs",
     "svgo:outline": "svgo -f src/outline/svg --config=svgo.outline.mjs",
     "svgo:solid": "svgo -f src/solid/svg --config=svgo.solid.mjs",
