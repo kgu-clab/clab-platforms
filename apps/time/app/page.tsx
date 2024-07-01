@@ -26,7 +26,7 @@ const buttons = [
     to: PATH.TIMETABLE,
     title: '시간표',
     description: '강의 시간표를 조합하고 관리할 수 있어요',
-    icon: <ComboChartColor width={32} height={32} />,
+    icon: <ComboChartColor width={48} height={48} />,
   },
   {
     row: false,
@@ -34,7 +34,7 @@ const buttons = [
     to: PATH.GRADE,
     title: '학점',
     description: '학점을 계산하고 관리할 수 있어요',
-    icon: <CalculatorColor width={64} height={64} />,
+    icon: <CalculatorColor width={48} height={48} />,
   },
   {
     row: false,
@@ -42,7 +42,7 @@ const buttons = [
     to: PATH.LIBRARY,
     title: '도서관',
     description: '도서관 좌석 현황을 확인할 수 있어요',
-    icon: <ReadingColor width={64} height={64} />,
+    icon: <ReadingColor width={48} height={48} />,
   },
   {
     row: false,
@@ -50,7 +50,7 @@ const buttons = [
     to: PATH.LOST,
     title: '분실물',
     description: '분실물을 등록하고 찾을 수 있어요',
-    icon: <MultipleDevicesColor width={64} height={64} />,
+    icon: <MultipleDevicesColor width={48} height={48} />,
   },
   {
     row: true,
@@ -59,7 +59,7 @@ const buttons = [
     title: '졸업요건진단',
     description:
       'Kutis에서 2017년까지 제공되던 졸업요건 진단 기능을 경기타임팀에서 개발 중이에요, 많은 기대 부탁드려요',
-    icon: <GraduationCapColor width={64} height={64} />,
+    icon: <GraduationCapColor width={48} height={48} />,
   },
   {
     row: false,
@@ -67,7 +67,7 @@ const buttons = [
     to: PATH.FESTIVAL,
     title: '축제',
     description: '학교 축제 정보를 제공해 드려요, 축제 시즌 때 만나요',
-    icon: <LandscapeColor width={64} height={64} />,
+    icon: <LandscapeColor width={48} height={48} />,
   },
   {
     row: false,
@@ -75,7 +75,7 @@ const buttons = [
     to: PATH.FOOD,
     title: '학식',
     description: '감성코어, 기숙사 학식 정보를 제공해 드려요',
-    icon: <ViewDetailsColor width={64} height={64} />,
+    icon: <ViewDetailsColor width={48} height={48} />,
   },
 ] as const;
 
@@ -106,7 +106,7 @@ export default function Home() {
       </div>
       <HomeCard to={PATH.GUIDE}>
         <div className="flex items-center gap-4">
-          <DownloadColor width={32} height={32} />
+          <DownloadColor width={48} height={48} />
           <div>
             <p className="font-semibold">애플리케이션 설치 가이드</p>
             <p className="text-sm text-gray-500">
