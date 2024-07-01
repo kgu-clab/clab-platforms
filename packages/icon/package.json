@@ -9,14 +9,15 @@
     "svgo:color": "svgo -f src/color/svg --config=svgo.color.mjs",
     "svgo:outline": "svgo -f src/outline/svg --config=svgo.outline.mjs",
     "svgo:solid": "svgo -f src/solid/svg --config=svgo.solid.mjs",
-    "svgr:color": "npx @svgr/cli --no-index --no-prettier --typescript --template svgr.template.js --out-dir src/color/react src/color/svg",
-    "svgr:outline": "npx @svgr/cli --no-index --no-prettier --typescript --template svgr.template.js --out-dir src/outline/react src/outline/svg",
-    "svgr:solid": "npx @svgr/cli --no-index --no-prettier --typescript --template svgr.template.js --out-dir src/solid/react src/solid/svg",
+    "svgr:color": "svgr --no-index --no-prettier --typescript --template svgr.template.js --out-dir src/color/react src/color/svg",
+    "svgr:outline": "svgr --no-index --no-prettier --typescript --template svgr.template.js --out-dir src/outline/react src/outline/svg",
+    "svgr:solid": "svgr --no-index --no-prettier --typescript --template svgr.template.js --out-dir src/solid/react src/solid/svg",
     "update:color": "pnpm svgr:color --ignore-existing",
     "update:outline": "pnpm svgr:outline --ignore-existing",
     "update:solid": "pnpm svgr:solid --ignore-existing"
   },
   "devDependencies": {
+    "@clab/config": "workspace:^",
     "@svgr/cli": "^8.1.0",
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
