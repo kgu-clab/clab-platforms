@@ -1,4 +1,9 @@
-import { FcAlarmClock, FcCalendar, FcLeave, FcOvertime } from 'react-icons/fc';
+import {
+  AlarmClockColor,
+  CalendarColor,
+  LeaveColor,
+  OvertimeColor,
+} from '@clab/icon';
 
 import Section from '@components/common/Section/Section';
 import StatusCard from '@components/common/StatusCard/StatusCard';
@@ -23,22 +28,22 @@ const CalendarStatusSection = () => {
       />
       <Section.Body className="grid grid-cols-2 gap-4 break-keep md:grid-cols-4">
         <StatusCard
-          icon={<FcCalendar size={32} />}
+          icon={<CalendarColor width={32} height={32} />}
           label={`${yearData.totalScheduleCount}회`}
           description="이번 연도 동아리의 모든 일정 횟수에요."
         />
         <StatusCard
-          icon={<FcLeave size={32} />}
+          icon={<LeaveColor width={32} height={32} />}
           label={`${yearData.totalEventCount}회`}
           description="이번 연도 총회, MT 등 중요도가 높은 행사 횟수에요."
         />
         <StatusCard
-          icon={<FcOvertime size={32} />}
+          icon={<OvertimeColor width={32} height={32} />}
           label={`${monthData.totalItems}회`}
           description="이번 달 동아리 일정 횟수에요."
         />
         <StatusCard
-          icon={<FcAlarmClock size={32} />}
+          icon={<AlarmClockColor width={32} height={32} />}
           label={closestDDay}
           description="가장 가까운 일정까지 남은 일수에요."
         />

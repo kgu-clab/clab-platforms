@@ -1,5 +1,6 @@
 import React from 'react';
-import { FiUser } from 'react-icons/fi';
+
+import { UserOutline } from '@clab/icon';
 
 import { PATH } from '@constants/path';
 import Image from 'next/image';
@@ -28,7 +29,7 @@ const links = [
 
 const actions = [
   <button key={PATH.MY}>
-    <FiUser size={20} />
+    <UserOutline width={20} height={20} />
   </button>,
 ] as const;
 
@@ -37,7 +38,13 @@ const Nav = () => {
     <nav className="fixed top-0 w-full border-b bg-white">
       <div className="container flex h-14 items-center justify-between text-nowrap">
         <div className="flex items-center gap-2 sm:w-1/5">
-          <Image src="/favicon.ico" alt="c-lab" className="size-8" />
+          <Image
+            src="/favicon.ico"
+            alt="c-lab"
+            width={200}
+            height={200}
+            className="size-8"
+          />
           <h1 className="text-xl font-semibold">경기타임</h1>
         </div>
         <ul className="hidden w-3/5 items-center justify-center gap-4 text-sm sm:flex">

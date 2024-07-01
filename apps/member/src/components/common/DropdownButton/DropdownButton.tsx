@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import { FiChevronDown } from 'react-icons/fi';
 
+import { ChevronDownOutline } from '@clab/icon';
 import { cn } from '@clab/utils';
 
 interface DropdownButtonProps {
@@ -23,7 +23,7 @@ const DropdownButton = ({
 
   return (
     <button className={cn(className)} onClick={handelClick}>
-      <FiChevronDown
+      <ChevronDownOutline
         className={cn(
           'h-5 w-5 cursor-pointer rounded-full transition hover:bg-gray-100',
           { 'rotate-180': open },

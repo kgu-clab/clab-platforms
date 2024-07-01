@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
-import { FcApproval, FcCancel, FcHighPriority } from 'react-icons/fc';
 
+import { ApprovalColor, CancelColor, HighPriorityColor } from '@clab/icon';
 import { cn } from '@clab/utils';
 
 import { useSetToastStore } from '@store/toast';
@@ -14,9 +14,9 @@ interface ToastProps {
 }
 
 const stateIcon = {
-  success: <FcApproval />,
-  error: <FcCancel />,
-  warning: <FcHighPriority />,
+  success: <ApprovalColor />,
+  error: <CancelColor />,
+  warning: <HighPriorityColor />,
 } as const;
 
 const Toast = ({ id, state, message }: ToastProps) => {

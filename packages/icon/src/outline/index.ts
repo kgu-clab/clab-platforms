@@ -1,0 +1,15 @@
+export { default as CertificateSolidOutline } from './react/CertificateSolid';
+export { default as ChevronDownOutline } from './react/ChevronDown';
+export { default as ChevronRightOutline } from './react/ChevronRight';
+export { default as CloseOutline } from './react/Close';
+export { default as CommentSolidOutline } from './react/CommentSolid';
+export { default as DateRangeOutline } from './react/DateRange';
+export { default as FileEarmarkArrowUpOutline } from './react/FileEarmarkArrowUp';
+export { default as FileEarmarkDiffOutline } from './react/FileEarmarkDiff';
+export { default as GridOutline } from './react/Grid';
+export { default as LoaderOutline } from './react/Loader';
+export { default as MenuOutline } from './react/Menu';
+export { default as RegularFileAltOutline } from './react/RegularFileAlt';
+export { default as SearchOutline } from './react/Search';
+export { default as StudentOutline } from './react/Student';
+export { default as UserOutline } from './react/User';

@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import { FcAbout } from 'react-icons/fc';
+
+import { AboutColor } from '@clab/icon';
 
 import Panel from '@components/common/Panel/Panel';
 
@@ -25,7 +26,7 @@ const AlarmPanel = () => {
   return (
     <Panel>
       <Panel.Header
-        icon={<FcAbout />}
+        icon={<AboutColor />}
         label="알림"
         description={new Date().toLocaleTimeString()}
         isOpen={open}

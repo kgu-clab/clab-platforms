@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import { FcTimeline } from 'react-icons/fc';
+
+import { TimelineColor } from '@clab/icon';
 
 import Panel from '@components/common/Panel/Panel';
 
@@ -19,7 +20,7 @@ const ActivityPanel = () => {
   return (
     <Panel>
       <Panel.Header
-        icon={<FcTimeline />}
+        icon={<TimelineColor />}
         label="활동"
         description={
           hasActivities
