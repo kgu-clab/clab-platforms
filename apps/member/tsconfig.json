@@ -15,8 +15,7 @@
       "@type/*": ["./src/types/*"],
       "@utils/*": ["./src/utils/*"],
       "@/*": ["./src/*"]
-    },
-    "noUnusedLocals": false
+    }
   },
   "include": ["src", "member.config.ts"],
   "references": [{ "path": "./tsconfig.node.json" }]
