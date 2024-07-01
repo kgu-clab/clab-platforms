@@ -8,7 +8,7 @@
   ],
   "scripts": {
     "preinstall": "npx only-allow pnpm",
-    "postinstall": "husky install && pnpm build:design-system",
+    "postinstall": "husky install && pnpm build:design-system && pnpm -F @clab/icon generate",
     "lint-staged": "lint-staged",
     "dev": "pnpm -r run dev",
     "build": "pnpm -r run build",
