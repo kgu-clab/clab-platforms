@@ -14,18 +14,18 @@
 
 - 지속가능한 개발과 원활한 인수인계를 위해 간단한 코드라도 `주석`을 작성해요.
 - 최신 기술만을 고집하지 않고 문제 해결에 필요한 `최적의 기술을 선정`하여 사용해요.
-- 모든 디자인은 `Mobile First Design` 원칙에 따라 제작되었어요.
 - 일관된 사용자 경험을 제공하기 위해 자체 개발한 `Design System`을 사용하고 있어요.
 
 ## Apps
 
-![clab-page-apps](https://github.com/KGU-C-Lab/clab.page/assets/39869096/53aa46ab-4a45-4dab-a9c4-45ea72b48d76)
+![monorepo](https://github.com/KGU-C-Lab/clab.page/assets/39869096/fd7756f7-7dde-47fa-8a43-e4fc9b33ecbf)
 
-> 프로젝트 구성도에요. 시스템에 더 자세히 알고 싶다면 시스템 `README.md`를 살펴봐주세요.
+> 모노레포 구성도에요. 시스템에 더 자세히 알고 싶다면 시스템 `README.md`를 살펴봐주세요.
 
 - auth: 구성원 계정을 OAuth 프로토콜을 기반으로 서비스에 편리하게 연결할 수 있는 통합 인증 시스템이에요.
 - land: 모임에 대한 소개, 활동, 블로그 등 다양한 정보를 공유하는 랜딩페이지 시스템이에요.
-- [member](https://github.com/KGU-C-Lab/clab.page/blob/main/apps/member/README.md): 구성원의 활동과 커뮤니케이션을 지원하는 인터널(Internal) 그룹웨어 시스템이에요.
+- [member](https://github.com/KGU-C-Lab/clab.page/blob/main/apps/member/README.md): 구성원의 활동과 커뮤니케이션을 지원하는 인터널(Internal) 플랫폼이에요.
+- status: 서비스하는 모든 시스템의 상태를 모니터링하고 관리하는 시스템이에요.
 - time: 학교의 공지사항이나 축제 정보와 시간표, 학점 관리 등 학교 생활에 필요한 것을 관리하는 플랫폼 시스템이에요.
 
 ## Packages
