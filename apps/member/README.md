@@ -30,18 +30,6 @@ C-Lab의 공식 인터널 플랫폼이에요. 동아리의 모든 활동은 이�
 
 회비 관리 기능을 통해 회비를 체계적으로 관리할 수 있어요. 회비 승인 및 결제를 통해 회비를 더욱 쉽게 관리할 수 있으며, 회비 사용 내역은 투명하게 공개되어 확인할 수 있어요.
 
-## Tech Stack
-
-| 구분             | 스킬                                                                                                                                                                                                                  |
-| ---------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Core             | ![TypeScript](https://img.shields.io/badge/TypeScript-3178C6.svg?style=flat-square&logo=TypeScript&logoColor=white) ![React](https://img.shields.io/badge/React-61DAFB?style=flat-square&logo=React&logoColor=black)  |
-| State Management | ![Recoil](https://img.shields.io/badge/Recoil-3578E5?style=flat-square&logo=recoil&logoColor=white)                                                                                                                   |
-| Data Fetching    | ![React Query](https://img.shields.io/badge/React_Query-FF4154?style=flat-square&logo=ReactQuery&logoColor=white)                                                                                                     |
-| Styling          | ![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-06B6D4?style=flat-square&logo=TailwindCSS&logoColor=white)                                                                                                  |
-| Package Manager  | ![pnpm](https://img.shields.io/badge/pnpm-F69220?style=flat-square&logo=pnpm&logoColor=white)                                                                                                                         |
-| Test             | ![vitest](https://img.shields.io/badge/vitest-6E9F18.svg?style=flat-square&logo=vitest&logoColor=white)                                                                                                               |
-| CI&CD            | ![GitHub](https://img.shields.io/badge/Github-%23121011.svg?style=flat-square&logo=github&logoColor=white) ![Jenkins](https://img.shields.io/badge/Jenkins-D24939.svg?style=flat-square&logo=Jenkins&logoColor=white) |
-
 ## Preview
 
 <table>
