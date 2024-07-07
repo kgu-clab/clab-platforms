@@ -36,13 +36,13 @@ export const END_POINT = {
   // -- 블로그
   BLOG: `/v1/blogs`,
   BLOG_DETAIL: (id: number) => `/v1/blogs/${id}`,
-  ACCUSES: '/v1/accuses',
+  ACCUSES: '/v1/accusations',
   MY_NEWS: `/v1/news`,
   MY_HIRE: `/v1/job-postings`,
   MY_BIRTHDAY: `/v1/members/birthday`,
-  MY_ACTIVITY: `/v1/schedule/activity`,
-  MAIN_SCHEDULE: `/v1/schedule`,
-  SCHEDULE_COLLECT: `/v1/schedule/collect`,
+  MY_ACTIVITY: `/v1/schedules/activity`,
+  MAIN_SCHEDULE: `/v1/schedules`,
+  SCHEDULE_COLLECT: `/v1/schedules/collect`,
   MAIN_ACTIVITY_PHOTO: `/v1/activity-photos`,
   // -- 회비
   MEMBERSHIP_FEE: `/v1/membership-fees`,
