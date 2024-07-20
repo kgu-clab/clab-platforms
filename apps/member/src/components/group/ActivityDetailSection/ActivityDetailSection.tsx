@@ -1,6 +1,8 @@
-import { LiaCertificateSolid } from 'react-icons/lia';
-import { MdOutlineDateRange } from 'react-icons/md';
-import { PiStudent } from 'react-icons/pi';
+import {
+  CertificateSolidOutline,
+  DateRangeOutline,
+  StudentOutline,
+} from '@clab/icon';
 
 import Image from '@components/common/Image/Image';
 import Section from '@components/common/Section/Section';
@@ -27,13 +29,13 @@ const ActivityDetailSection = ({ data }: ActivityDetailSectionProps) => {
         <h1 className="text-xl font-bold">{data.name}</h1>
         <p className="my-1 text-sm">{data.content}</p>
         <div className="flex items-center gap-1 text-sm text-gray-500">
-          <LiaCertificateSolid />
+          <CertificateSolidOutline />
           <span>{data.category}</span>
           <span>•</span>
-          <MdOutlineDateRange />
+          <DateRangeOutline />
           <span>{getDateSemester(data.createdAt)}</span>
           <span>•</span>
-          <PiStudent />
+          <StudentOutline />
           <span>{data.subject}</span>
         </div>
       </Section>

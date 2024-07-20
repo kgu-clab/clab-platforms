@@ -1,5 +1,4 @@
-import { LuLoader2 } from 'react-icons/lu';
-
+import { LoaderOutline } from '@clab/icon';
 import { cn } from '@clab/utils';
 
 interface LoadingProps {
@@ -8,7 +7,13 @@ interface LoadingProps {
 }
 
 const Loading = ({ size = 18, className }: LoadingProps) => {
-  return <LuLoader2 size={size} className={cn('animate-spin', className)} />;
+  return (
+    <LoaderOutline
+      width={size}
+      height={size}
+      className={cn('animate-spin', className)}
+    />
+  );
 };
 
 export default Loading;

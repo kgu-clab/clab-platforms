@@ -1,5 +1,6 @@
-import { FaRegFileAlt } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
+
+import { RegularFileAltOutline } from '@clab/icon';
 
 import { PATH_FINDER } from '@constants/path';
 import useToast from '@hooks/common/useToast';
@@ -56,8 +57,9 @@ const WeeklyActivityCard = ({
               onClick={() => onClick(assignmentId, [title, assignmentTitle])}
               className="flex cursor-pointer items-center"
             >
-              <FaRegFileAlt
-                size={25}
+              <RegularFileAltOutline
+                width={25}
+                height={25}
                 className="flex items-center justify-center p-1 text-red-500"
               />
               <span>{assignmentTitle}</span>

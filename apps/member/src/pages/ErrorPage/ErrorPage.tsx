@@ -1,5 +1,6 @@
-import { FcHighPriority } from 'react-icons/fc';
 import { isRouteErrorResponse, useRouteError } from 'react-router-dom';
+
+import { HighPriorityColor } from '@clab/icon';
 
 import Footer from '@components/common/Footer/Footer';
 import Linker from '@components/common/Linker/Linker';
@@ -34,7 +35,7 @@ const ErrorPage = () => {
             </div>
           )}
           <div className="section flex min-h-screen flex-col items-center justify-center gap-4">
-            <FcHighPriority size={128} />
+            <HighPriorityColor width={128} height={128} />
             <div className="text-clab-main text-center font-semibold">
               {errorStatus && <h2 className="text-4xl">{errorStatus}</h2>}
               <h1 className="text-3xl">

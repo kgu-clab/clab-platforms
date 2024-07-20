@@ -12,30 +12,28 @@
 
 > 해당 모노레포에 포함된 모든 프로젝트는 다음과 같은 특징을 가지고 있어요.
 
-- 지속적이고 원활한 인수인계를 위해 간단한 코드라도 `주석`을 작성해요.
+- 지속가능한 개발과 원활한 인수인계를 위해 간단한 코드라도 `주석`을 작성해요.
 - 최신 기술만을 고집하지 않고 문제 해결에 필요한 `최적의 기술을 선정`하여 사용해요.
-- 모든 시스템은 도입과 사용이 편리하도록 `설정(Config)`과 `API`를 제공해요.
-- 모든 디자인은 `Mobile First Design` 원칙에 따라 제작되었어요.
-- 일관된 사용자 경험을 제공하기 위해 자체 개발한 `design-system`을 사용하고 있어요.
+- 일관된 사용자 경험을 제공하기 위해 자체 개발한 `Design System`을 사용하고 있어요.
 
 ## Apps
 
-![clab-page-apps](https://github.com/KGU-C-Lab/clab.page/assets/39869096/53aa46ab-4a45-4dab-a9c4-45ea72b48d76)
+![monorepo](https://github.com/KGU-C-Lab/clab.page/assets/39869096/fd7756f7-7dde-47fa-8a43-e4fc9b33ecbf)
 
-> 시스템에 더 자세히 알고 싶다면 시스템 `README.md`를 살펴봐주세요.
+> 모노레포 구성도에요. 시스템에 더 자세히 알고 싶다면 시스템 `README.md`를 살펴봐주세요.
 
-- [auth](/apps/auth/README.md): 동아리 계정을 OAuth 프로토콜을 기반으로 서비스에 편리하게 연결할 수 있는 통합 인증 시스템이에요.
-- [land](/apps/land/README.md): 동아리에 대한 소개, 활동, 블로그 등 다양한 정보를 공유하는 랜딩페이지 시스템이에요.
-- [member](/apps/member/README.md): 동아리원의 활동과 커뮤니케이션을 지원하는 그룹웨어 시스템이에요.
-- [time](/apps/time/README.md): 학교의 공지사항이나 축제 정보와 시간표, 학점 관리 등 학교 생활에 필요한 것을 관리하는 플랫폼 시스템이에요.
+- auth: 구성원 계정을 OAuth 프로토콜을 기반으로 서비스에 편리하게 연결할 수 있는 통합 인증 시스템이에요.
+- land: 모임에 대한 소개, 활동, 블로그 등 다양한 정보를 공유하는 랜딩페이지 시스템이에요.
+- [member](https://github.com/KGU-C-Lab/clab.page/blob/main/apps/member/README.md): 구성원의 활동과 커뮤니케이션을 지원하는 인터널(Internal) 플랫폼이에요.
+- status: 서비스하는 모든 시스템의 상태를 모니터링하고 관리하는 시스템이에요.
+- time: 학교의 공지사항이나 축제 정보와 시간표, 학점 관리 등 학교 생활에 필요한 것을 관리하는 플랫폼 시스템이에요.
 
 ## Packages
 
-- [config](/packages/config/README.md): 프로젝트 설정 파일의 일관성을 유지하기 위한 라이브러리에요.
-- [design-system](/packages/design-system/README.md): 일관성 있는 UI&UX를 위한 디자인 시스템이에요.
-- [utils](/packages/utils/README.md): 공통적으로 사용하는 유틸리티 라이브러리에요.
-- [hooks](/packages/hooks/README.md): 공통적으로 사용하는 React Hooks 라이브러리에요.
-- [icon](/packages/icon/README.md): 공통적으로 사용하는 아이콘팩이에요.
+- config: 프로젝트 설정 파일의 일관성을 유지하기 위한 라이브러리에요.
+- [design-system](https://github.com/KGU-C-Lab/clab.page/blob/main/packages/design-system/README.md): 일관성 있는 UI&UX를 위한 디자인 시스템이에요.
+- utils: 공통적으로 사용하는 유틸리티 라이브러리에요.
+- icon: 공통적으로 사용하는 아이콘팩이에요.
 
 ## Previews
 
@@ -46,10 +44,10 @@
   </tr>
   <tr>
     <td width="50%" style="padding: 0;">
-      <img width="518" alt="image" src="https://github.com/KGU-C-Lab/clab.page/assets/39869096/5370ff52-f190-4151-990c-96681a211425">
+      <img width="518" alt="image" src="https://github.com/KGU-C-Lab/clab.page/assets/39869096/7a6b171f-a4d8-43f3-88b7-4c7bbc37280e">
     </td>
     <td width="50%" style="padding: 0;">
-      <img width="1494" alt="image" src="https://github.com/KGU-C-Lab/clab.page/assets/39869096/1a983b65-caee-4ae0-9bcd-d3e9174fdeb9">
+      <img width="1494" alt="image" src="https://github.com/KGU-C-Lab/clab.page/assets/39869096/8f7db319-8f0c-454e-82cb-decdd30785d7">
     </td>
   </tr>
   <tr>
@@ -58,7 +56,7 @@
   </tr>
   <tr>
     <td width="50%" style="padding: 0;">
-      <img width="1488" alt="image" src="https://github.com/KGU-C-Lab/clab.page/assets/39869096/0555fda3-05b3-4637-bb4f-76936454c89d">
+      <img width="1488" alt="image" src="https://github.com/KGU-C-Lab/clab.page/assets/39869096/d4e5b561-74a2-4bdc-b306-48aba58e3c5a">
     </td>
     <td width="50%" style="padding: 0;">
       <img width="1263" alt="image" src="https://github.com/KGU-C-Lab/clab.page/assets/39869096/62d7af18-8f6e-4e0f-aac6-2d5199842c9c"> 
@@ -76,7 +74,7 @@
 
 동아리원이 아니더라도 누구나 기여할 수 있습니다. 해당 프로젝트에 기여하고 싶다면 아래 문서를 참고해주세요.
 
-[CONTRIBUTING.md](CONTRIBUTING.md)
+[CONTRIBUTING.md](https://github.com/KGU-C-Lab/clab.page/blob/main/CONTRIBUTING.md)
 
 ## FAQs
 
@@ -97,7 +95,7 @@
 
 ## License
 
-C-Lab의 모든 공개 프로젝트는 [GNU General Public License v3.0](https://www.gnu.org/licenses/gpl-3.0.html)의 라이선스를 따라요.  
+C-Lab의 모든 공개 프로젝트는 [GNU General Public License v3.0](https://github.com/KGU-C-Lab/clab.page/blob/main/LICENSE)의 라이선스를 따라요.  
 자세한 사항은 `LICENSE`를 참고해주세요.
 
 **© Kyonggi University C-Lab**

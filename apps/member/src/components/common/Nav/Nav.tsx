@@ -1,7 +1,7 @@
-import { FiGrid, FiSearch, FiUser } from 'react-icons/fi';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 
 import { Menubar } from '@clab/design-system';
+import { GridOutline, SearchOutline, UserOutline } from '@clab/icon';
 import { cn } from '@clab/utils';
 
 import { IS_DEVELOPMENT } from '@constants/environment';
@@ -98,15 +98,15 @@ const Nav = () => {
           {IS_DEVELOPMENT && (
             <>
               <button onClick={handleNotReadyClick}>
-                <FiSearch size={20} />
+                <SearchOutline width={20} height={20} />
               </button>
               <button onClick={handleNotReadyClick}>
-                <FiGrid size={20} />
+                <GridOutline width={20} height={20} />
               </button>
             </>
           )}
           <Link to={PATH.MY}>
-            <FiUser size={20} />
+            <UserOutline width={20} height={20} />
           </Link>
           <Sidebar />
         </div>

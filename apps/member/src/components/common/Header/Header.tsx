@@ -1,6 +1,7 @@
 import React from 'react';
-import { GrNext } from 'react-icons/gr';
 import { Link } from 'react-router-dom';
+
+import { ChevronRightOutline } from '@clab/icon';
 
 interface HeaderProps {
   title: string | string[];
@@ -24,7 +25,7 @@ const Header = ({ title, path, children }: HeaderProps) => {
               {name}
             </Link>
             {index !== titles.length - 1 && (
-              <GrNext className="text-gray-500" />
+              <ChevronRightOutline className="text-gray-500" />
             )}
           </React.Fragment>
         ))}

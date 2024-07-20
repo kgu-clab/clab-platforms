@@ -1,7 +1,4 @@
-import { FaFacebook } from 'react-icons/fa';
-import { FaLink, FaXTwitter } from 'react-icons/fa6';
-import { MdEmail } from 'react-icons/md';
-
+import { FacebookSolid, LinkSolid, MailSolid, XTwitterSolid } from '@clab/icon';
 import { cn } from '@clab/utils';
 
 interface ShareProps extends React.HTMLAttributes<HTMLDivElement> {}
@@ -27,24 +24,33 @@ const Share = ({ className }: ShareProps) => {
         target="_blank"
         rel="noopener noreferrer"
       >
-        <FaFacebook size={20} className="hover:text-clab-main" />
+        <FacebookSolid
+          width={20}
+          height={20}
+          className="hover:text-clab-main"
+        />
       </a>
       <a
         href={`https://twitter.com/intent/tweet?url=${encodeURIComponent(currentUrl)}`}
         target="_blank"
         rel="noopener noreferrer"
       >
-        <FaXTwitter size={20} className="hover:text-clab-main" />
+        <XTwitterSolid
+          width={20}
+          height={20}
+          className="hover:text-clab-main"
+        />
       </a>
       <a
         href={`mailto:?body=${currentUrl}`}
         target="_blank"
         rel="noopener noreferrer"
       >
-        <MdEmail size={20} className="hover:text-clab-main" />
+        <MailSolid width={20} height={20} className="hover:text-clab-main" />
       </a>
-      <FaLink
-        size={20}
+      <LinkSolid
+        width={20}
+        height={20}
         className="hover:text-clab-main cursor-pointer"
         onClick={handleClipboardClick}
       />

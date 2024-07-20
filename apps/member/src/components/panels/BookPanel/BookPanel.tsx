@@ -1,4 +1,4 @@
-import { FcBookmark } from 'react-icons/fc';
+import { BookmarkColor } from '@clab/icon';
 
 import Panel from '@components/common/Panel/Panel';
 import ProgressBar from '@components/common/ProgressBar/ProgressBar';
@@ -85,7 +85,7 @@ const BookPanel = () => {
   return (
     <Panel>
       <Panel.Header
-        icon={<FcBookmark />}
+        icon={<BookmarkColor />}
         label="도서"
         description={
           hasBookLoan ? `${myBookLoan.length}권 대여중` : '빌린 도서가 없어요.'

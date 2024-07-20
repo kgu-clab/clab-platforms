@@ -4,7 +4,7 @@
   "packageManager": "pnpm@9.4.0",
   "scripts": {
     "preinstall": "npx only-allow pnpm",
-    "postinstall": "husky install",
+    "postinstall": "husky install && pnpm -F @clab/icon generate",
     "lint-staged": "lint-staged",
     "dev": "turbo run dev",
     "build": "turbo run build",
