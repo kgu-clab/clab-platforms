@@ -1,7 +1,7 @@
 {
-  "name": "land",
-  "packageManager": "yarn@4.0.2",
+  "name": "@clab/land",
   "private": true,
+  "packageManager": "pnpm@9.4.0",
   "scripts": {
     "dev": "next dev",
     "build": "next build",

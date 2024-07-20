@@ -2,33 +2,17 @@
   "name": "clab.page",
   "private": true,
   "packageManager": "pnpm@9.4.0",
-  "workspaces": [
-    "apps/*",
-    "packages/*"
-  ],
   "scripts": {
     "preinstall": "npx only-allow pnpm",
-    "postinstall": "husky install && pnpm build:design-system",
+    "postinstall": "husky install",
     "lint-staged": "lint-staged",
-    "dev": "pnpm -r run dev",
-    "build": "pnpm -r run build",
-    "type": "pnpm -r run type",
-    "test": "pnpm -r run test",
-    "coverage": "pnpm -r run coverage",
+    "dev": "turbo run dev",
+    "build": "turbo run build",
+    "type": "turbo run type",
+    "test": "turbo run test",
+    "coverage": "turbo run coverage",
     "lint": "eslint .",
-    "format": "prettier --write .",
-    "dev:auth": "pnpm --filter auth dev",
-    "dev:land": "pnpm --filter land dev",
-    "dev:member": "pnpm --filter member dev",
-    "dev:time": "pnpm --filter time dev",
-    "dev:status": "pnpm --filter status dev",
-    "build:auth": "pnpm --filter auth build",
-    "build:land": "pnpm --filter land build",
-    "build:member": "pnpm --filter member build",
-    "build:time": "pnpm --filter time build",
-    "build:status": "pnpm --filter status build",
-    "build:design-system": "pnpm --filter @clab/design-system build",
-    "type:member": "pnpm --filter member type"
+    "format": "prettier --write ."
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": [
@@ -54,6 +38,7 @@
     "lint-staged": "^15.2.0",
     "prettier": "^3.2.5",
     "prettier-plugin-tailwindcss": "^0.5.13",
+    "turbo": "^2.0.9",
     "typescript": "^5.3.3"
   }
 }

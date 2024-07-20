@@ -1,7 +1,7 @@
 {
-  "name": "time",
-  "version": "0.1.0",
+  "name": "@clab/time",
   "private": true,
+  "packageManager": "pnpm@9.4.0",
   "scripts": {
     "dev": "next dev --port 6004",
     "build": "next build",
