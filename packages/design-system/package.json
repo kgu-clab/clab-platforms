@@ -11,7 +11,7 @@
   "scripts": {
     "clean": "rimraf dist",
     "type": "tsc --noEmit",
-    "test": "vitest",
+    "test": "vitest run --coverage --typecheck",
     "coverage": "vitest --coverage",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
