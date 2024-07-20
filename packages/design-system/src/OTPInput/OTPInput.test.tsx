@@ -5,13 +5,13 @@ import { fireEvent, render, screen } from '@testing-library/react';
 import OTPInput from './OTPInput';
 
 describe('OTPInput', () => {
-  it('renders correctly with default props', () => {
+  it('기본 속성으로 올바르게 렌더링되어야 합니다.', () => {
     render(<OTPInput />);
     const inputs = screen.getAllByRole('textbox');
     expect(inputs).toHaveLength(6);
   });
 
-  it('moves focus on value entry', () => {
+  it('값 입력 시 포커스가 이동해야 합니다.', () => {
     const handleChange = vi.fn();
     render(<OTPInput onChange={handleChange} />);
     const inputs = screen.getAllByRole('textbox');
@@ -19,7 +19,7 @@ describe('OTPInput', () => {
     expect(document.activeElement).toBe(inputs[1]);
   });
 
-  it('handles paste correctly', () => {
+  it('붙여넣기를 올바르게 처리해야 합니다.', () => {
     const handleChange = vi.fn();
     render(<OTPInput onChange={handleChange} />);
     const inputs = screen.getAllByRole('textbox');

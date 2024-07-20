@@ -6,7 +6,7 @@ import Button from './Button';
 import { buttonVariants } from './Button.styles';
 
 describe('Button', () => {
-  it('should render without crashing', () => {
+  it('컴포넌트가 크래시 없이 렌더링되어야 합니다.', () => {
     render(<Button>Click me</Button>);
 
     expect(
@@ -14,7 +14,7 @@ describe('Button', () => {
     ).toBeInTheDocument();
   });
 
-  it('should apply color and size variants correctly', () => {
+  it('컴포넌트에 색상과 크기 변형이 올바르게 적용되어야 합니다.', () => {
     const { rerender } = render(
       <Button color="blue" size="lg">
         Blue Large
@@ -34,7 +34,7 @@ describe('Button', () => {
     expect(button).toHaveClass(buttonVariants({ color: 'red', size: 'sm' }));
   });
 
-  it('should apply disabled state correctly', () => {
+  it('컴포넌트에 비활성화 상태가 올바르게 적용되어야 합니다.', () => {
     render(<Button disabled>Disabled</Button>);
 
     const button = screen.getByRole('button');
@@ -42,7 +42,7 @@ describe('Button', () => {
     expect(button).toBeDisabled();
   });
 
-  it('should apply loading state correctly', () => {
+  it('컴포넌트에 로딩 상태가 올바르게 적용되어야 합니다.', () => {
     const { container } = render(<Button loading>Loading</Button>);
 
     const button = screen.getByRole('button');
@@ -52,7 +52,7 @@ describe('Button', () => {
     expect(button).toBeDisabled();
   });
 
-  it('should handle click events', () => {
+  it('클릭 이벤트가 올바르게 처리되어야 합니다.', () => {
     const handleClick = vi.fn();
     render(<Button onClick={handleClick}>Click me</Button>);
 
@@ -60,7 +60,7 @@ describe('Button', () => {
     expect(handleClick).toHaveBeenCalledTimes(1);
   });
 
-  it('should forward a ref to the button element', () => {
+  it('ref가 버튼 엘리먼트로 올바르게 전달되어야 합니다.', () => {
     const ref = React.createRef<HTMLButtonElement>();
     render(<Button ref={ref}>Click me</Button>);
 
@@ -68,7 +68,7 @@ describe('Button', () => {
     expect(ref.current?.tagName).toBe('BUTTON');
   });
 
-  it('should accept extra classNames', () => {
+  it('추가적인 클래스명이 올바르게 적용되어야 합니다.', () => {
     render(<Button className="extra-class">Click me</Button>);
 
     expect(screen.getByRole('button', { name: /click me/i })).toHaveClass(
