@@ -3,16 +3,17 @@
   "private": true,
   "scripts": {
     "preinstall": "npx only-allow pnpm",
-    "postinstall": "husky install && pnpm icon:generate",
+    "postinstall": "husky install && build:design-system && pnpm icon:generate",
     "lint-staged": "lint-staged",
-    "icon:generate": "pnpm -F @clab/icon generate",
     "dev": "turbo run dev",
     "build": "turbo run build",
     "type": "turbo run type",
     "test": "turbo run test",
     "coverage": "turbo run coverage",
     "lint": "turbo run lint",
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "build:design-system": "pnpm -F @clab/design-system build",
+    "icon:generate": "pnpm -F @clab/icon generate"
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": [
