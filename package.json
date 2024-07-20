@@ -3,7 +3,7 @@
   "private": true,
   "scripts": {
     "preinstall": "npx only-allow pnpm",
-    "postinstall": "husky install && build:design-system && pnpm icon:generate",
+    "postinstall": "husky install && pnpm build:design-system && pnpm icon:generate",
     "lint-staged": "lint-staged",
     "dev": "turbo run dev",
     "build": "turbo run build",
