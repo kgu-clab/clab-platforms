@@ -21,6 +21,8 @@ module.exports = {
         'hooks',
         'icon',
         'utils',
+        'ci',
+        'github',
       ],
     ],
   },
