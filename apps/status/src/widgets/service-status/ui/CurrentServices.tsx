@@ -5,7 +5,7 @@ import Title from '@/src/shared/ui/Title';
 
 import ServiceStatusItem from './ServiceStatusItem';
 
-function StatusBanner({ status }: { status: boolean }) {
+function StatusBanner({ status }: Readonly<{ status: boolean }>) {
   return (
     <div
       className={cn(
@@ -21,17 +21,9 @@ function StatusBanner({ status }: { status: boolean }) {
 }
 
 export default async function CurrentStatus() {
-  const status = await fetch(
-    process.env.NODE_ENV !== 'production'
-      ? process.env.DEVELOP_SERVER_URL ?? ''
-      : process.env.PRODUCTION_SERVER_URL ?? '',
-  )
-    .then((res) => res.status === 404)
-    .catch(() => false);
-
   return (
     <div className="flex w-full flex-col gap-y-10">
-      <StatusBanner status={status} />
+      <StatusBanner status={false} />
       <div className="w-full">
         <Title text="서비스 목록" />
         <div className="mt-5 text-right text-sm text-gray-400">
@@ -44,7 +36,7 @@ export default async function CurrentStatus() {
             key={serviceName}
             serviceName={serviceName}
             serviceURL={serviceURL}
-            status={status}
+            status={false}
           />
         ))}
       </ul>

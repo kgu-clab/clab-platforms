@@ -1,8 +1,9 @@
 'use client';
 
-import Lottie from 'react-lottie-player';
-
 import check from '@/public/lottie/working.json';
+import dynamic from 'next/dynamic';
+
+const Lottie = dynamic(() => import('react-lottie-player'), { ssr: false });
 
 export default function IntroduceLottie() {
   return (
