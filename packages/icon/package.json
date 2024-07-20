@@ -1,6 +1,6 @@
 {
   "name": "@clab/icon",
-  "version": "1.0.0",
+  "private": true,
   "main": "src/index.ts",
   "scripts": {
     "generate": "pnpm svgo:color && pnpm svgo:outline && pnpm svgo:solid && pnpm svgr:color && pnpm svgr:outline && pnpm svgr:solid && pnpm export",

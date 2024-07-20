@@ -59,6 +59,9 @@ importers:
       prettier-plugin-tailwindcss:
         specifier: ^0.5.13
         version: 0.5.13(@trivago/prettier-plugin-sort-imports@4.3.0(prettier@3.2.5))(prettier@3.2.5)
+      turbo:
+        specifier: ^2.0.9
+        version: 2.0.9
       typescript:
         specifier: ^5.3.3
         version: 5.4.5
@@ -206,11 +209,11 @@ importers:
         specifier: ^2.18.0
         version: 2.19.0
       '@tanstack/react-query':
-        specifier: ^5.18.1
-        version: 5.29.2(react@18.2.0)
+        specifier: ^5.45.1
+        version: 5.51.9(react@18.2.0)
       '@tanstack/react-query-devtools':
         specifier: ^5.40.1
-        version: 5.45.1(@tanstack/react-query@5.29.2(react@18.2.0))(react@18.2.0)
+        version: 5.45.1(@tanstack/react-query@5.51.9(react@18.2.0))(react@18.2.0)
       dayjs:
         specifier: ^1.11.10
         version: 1.11.10
@@ -293,6 +296,9 @@ importers:
 
   apps/status:
     dependencies:
+      '@clab/utils':
+        specifier: workspace:^
+        version: link:../../packages/utils
       next:
         specifier: 14.2.4
         version: 14.2.4(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
@@ -309,9 +315,6 @@ importers:
       '@clab/config':
         specifier: workspace:^
         version: link:../../packages/config
-      '@clab/utils':
-        specifier: workspace:^
-        version: link:../../packages/utils
       '@types/node':
         specifier: ^20
         version: 20.12.7
@@ -321,6 +324,12 @@ importers:
       '@types/react-dom':
         specifier: ^18
         version: 18.2.25
+      eslint:
+        specifier: ^8
+        version: 8.57.0
+      eslint-config-next:
+        specifier: 14.1.4
+        version: 14.1.4(eslint@8.57.0)(typescript@5.4.5)
       postcss:
         specifier: ^8
         version: 8.4.38
@@ -2632,6 +2641,9 @@ packages:
   '@tanstack/query-core@5.29.0':
     resolution: {integrity: sha512-WgPTRs58hm9CMzEr5jpISe8HXa3qKQ8CxewdYZeVnA54JrPY9B1CZiwsCoLpLkf0dGRZq+LcX5OiJb0bEsOFww==}
 
+  '@tanstack/query-core@5.51.9':
+    resolution: {integrity: sha512-HsAwaY5J19MD18ykZDS3aVVh+bAt0i7m6uQlFC2b77DLV9djo+xEN7MWQAQQTR8IM+7r/zbozTQ7P0xr0bHuew==}
+
   '@tanstack/query-devtools@5.37.1':
     resolution: {integrity: sha512-XcG4IIHIv0YQKrexTqo2zogQWR1Sz672tX2KsfE9kzB+9zhx44vRKH5si4WDILE1PIWQpStFs/NnrDQrBAUQpg==}
 
@@ -2643,6 +2655,11 @@ packages:
 
   '@tanstack/react-query@5.29.2':
     resolution: {integrity: sha512-nyuWILR4u7H5moLGSiifLh8kIqQDLNOHGuSz0rcp+J75fNc8aQLyr5+I2JCHU3n+nJrTTW1ssgAD8HiKD7IFBQ==}
+    peerDependencies:
+      react: ^18.0.0
+
+  '@tanstack/react-query@5.51.9':
+    resolution: {integrity: sha512-F8j6i42wfKvFrRcxfOyFyYME+bPfNthAGOSkjdv4UwZZXJjnBnBs/yRQGT0bD23LVCTuBzlIfZ0GKSIyclZ9rQ==}
     peerDependencies:
       react: ^18.0.0
 
@@ -2999,6 +3016,11 @@ packages:
 
   acorn@8.11.3:
     resolution: {integrity: sha512-Y9rRfJG5jcKOE0CLisYbojUjIrIEE7AGMzA/Sm4BslANhbS+cDMpgBdcPT91oJ7OuJ9hYJBx59RjbhxVnrF8Xg==}
+    engines: {node: '>=0.4.0'}
+    hasBin: true
+
+  acorn@8.12.1:
+    resolution: {integrity: sha512-tcpGyI9zbizT9JbV6oYE477V6mTlXvvi0T0G3SNIYE2apm/G5huBa1+K89VGeovbg+jycCrfhl3ADxErOuO6Jg==}
     engines: {node: '>=0.4.0'}
     hasBin: true
 
@@ -6594,6 +6616,40 @@ packages:
     engines: {node: '>=8.0.0'}
     hasBin: true
 
+  turbo-darwin-64@2.0.9:
+    resolution: {integrity: sha512-owlGsOaExuVGBUfrnJwjkL1BWlvefjSKczEAcpLx4BI7Oh6ttakOi+JyomkPkFlYElRpjbvlR2gP8WIn6M/+xQ==}
+    cpu: [x64]
+    os: [darwin]
+
+  turbo-darwin-arm64@2.0.9:
+    resolution: {integrity: sha512-XAXkKkePth5ZPPE/9G9tTnPQx0C8UTkGWmNGYkpmGgRr8NedW+HrPsi9N0HcjzzIH9A4TpNYvtiV+WcwdaEjKA==}
+    cpu: [arm64]
+    os: [darwin]
+
+  turbo-linux-64@2.0.9:
+    resolution: {integrity: sha512-l9wSgEjrCFM1aG16zItBsZ206ZlhSSx1owB8Cgskfv0XyIXRGHRkluihiaxkp+UeU5WoEfz4EN5toc+ICA0q0w==}
+    cpu: [x64]
+    os: [linux]
+
+  turbo-linux-arm64@2.0.9:
+    resolution: {integrity: sha512-gRnjxXRne18B27SwxXMqL3fJu7jw/8kBrOBTBNRSmZZiG1Uu3nbnP7b4lgrA/bCku6C0Wligwqurvtpq6+nFHA==}
+    cpu: [arm64]
+    os: [linux]
+
+  turbo-windows-64@2.0.9:
+    resolution: {integrity: sha512-ZVo0apxUvaRq4Vm1qhsfqKKhtRgReYlBVf9MQvVU1O9AoyydEQvLDO1ryqpXDZWpcHoFxHAQc9msjAMtE5K2lA==}
+    cpu: [x64]
+    os: [win32]
+
+  turbo-windows-arm64@2.0.9:
+    resolution: {integrity: sha512-sGRz7c5Pey6y7y9OKi8ypbWNuIRPF9y8xcMqL56OZifSUSo+X2EOsOleR9MKxQXVaqHPGOUKWsE6y8hxBi9pag==}
+    cpu: [arm64]
+    os: [win32]
+
+  turbo@2.0.9:
+    resolution: {integrity: sha512-QaLaUL1CqblSKKPgLrFW3lZWkWG4pGBQNW+q1ScJB5v1D/nFWtsrD/yZljW/bdawg90ihi4/ftQJ3h6fz1FamA==}
+    hasBin: true
+
   tween-functions@1.2.0:
     resolution: {integrity: sha512-PZBtLYcCLtEcjL14Fzb1gSxPBeL7nWvGhO5ZFPGqziCcr8uvHp0NDmdjBchp6KHL+tExcg0m3NISmKxhU394dA==}
 
@@ -9574,17 +9630,24 @@ snapshots:
 
   '@tanstack/query-core@5.29.0': {}
 
+  '@tanstack/query-core@5.51.9': {}
+
   '@tanstack/query-devtools@5.37.1': {}
 
-  '@tanstack/react-query-devtools@5.45.1(@tanstack/react-query@5.29.2(react@18.2.0))(react@18.2.0)':
+  '@tanstack/react-query-devtools@5.45.1(@tanstack/react-query@5.51.9(react@18.2.0))(react@18.2.0)':
     dependencies:
       '@tanstack/query-devtools': 5.37.1
-      '@tanstack/react-query': 5.29.2(react@18.2.0)
+      '@tanstack/react-query': 5.51.9(react@18.2.0)
       react: 18.2.0
 
   '@tanstack/react-query@5.29.2(react@18.2.0)':
     dependencies:
       '@tanstack/query-core': 5.29.0
+      react: 18.2.0
+
+  '@tanstack/react-query@5.51.9(react@18.2.0)':
+    dependencies:
+      '@tanstack/query-core': 5.51.9
       react: 18.2.0
 
   '@testing-library/dom@10.1.0':
@@ -10016,6 +10079,9 @@ snapshots:
   acorn@7.4.1: {}
 
   acorn@8.11.3: {}
+
+  acorn@8.12.1:
+    optional: true
 
   address@1.2.2: {}
 
@@ -13920,7 +13986,7 @@ snapshots:
   terser@5.31.0:
     dependencies:
       '@jridgewell/source-map': 0.3.6
-      acorn: 8.11.3
+      acorn: 8.12.1
       commander: 2.20.3
       source-map-support: 0.5.21
     optional: true
@@ -14068,6 +14134,33 @@ snapshots:
       strip-ansi: 6.0.1
       wcwidth: 1.0.1
       yargs: 17.7.2
+
+  turbo-darwin-64@2.0.9:
+    optional: true
+
+  turbo-darwin-arm64@2.0.9:
+    optional: true
+
+  turbo-linux-64@2.0.9:
+    optional: true
+
+  turbo-linux-arm64@2.0.9:
+    optional: true
+
+  turbo-windows-64@2.0.9:
+    optional: true
+
+  turbo-windows-arm64@2.0.9:
+    optional: true
+
+  turbo@2.0.9:
+    optionalDependencies:
+      turbo-darwin-64: 2.0.9
+      turbo-darwin-arm64: 2.0.9
+      turbo-linux-64: 2.0.9
+      turbo-linux-arm64: 2.0.9
+      turbo-windows-64: 2.0.9
+      turbo-windows-arm64: 2.0.9
 
   tween-functions@1.2.0: {}
 

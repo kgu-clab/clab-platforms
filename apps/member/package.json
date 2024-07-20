@@ -1,12 +1,11 @@
 {
-  "name": "member",
-  "private": true,
-  "version": "0.0.0",
+  "name": "@clab/member",
   "type": "module",
+  "private": true,
   "scripts": {
-    "dev": "vite --port 6002 --mode development",
-    "build": "tsc && vite build --mode production",
-    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
+    "dev": "vite --port 6002",
+    "build": "tsc && vite build",
+    "lint": "eslint . --ext ts,tsx",
     "type": "tsc --noEmit",
     "preview": "vite preview"
   },
@@ -18,7 +17,7 @@
     "@gwansikk/server-chain": "^0.5.2",
     "@sentry/react": "^8.9.2",
     "@sentry/vite-plugin": "^2.18.0",
-    "@tanstack/react-query": "^5.18.1",
+    "@tanstack/react-query": "^5.45.1",
     "@tanstack/react-query-devtools": "^5.40.1",
     "dayjs": "^1.11.10",
     "framer-motion": "^10.18.0",
@@ -48,5 +47,6 @@
     "tailwindcss": "^3.4.1",
     "typescript": "^5.2.2",
     "vite": "^5.0.8"
-  }
+  },
+  "packageManager": "pnpm@9.4.0"
 }
