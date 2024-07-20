@@ -10,6 +10,7 @@ export default defineConfig({
     setupFiles: ['./vitest.setup.ts'],
     coverage: {
       include: ['src/**/*.{ts,tsx}'],
+      provider: 'istanbul',
       exclude: [
         '**/index.ts',
         '**/constants.ts',
