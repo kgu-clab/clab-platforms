@@ -5,7 +5,7 @@
   "main": "src/index.ts",
   "scripts": {
     "type": "tsc --noEmit",
-    "test": "vitest",
+    "test": "vitest run --coverage --typecheck",
     "coverage": "vitest --coverage"
   },
   "dependencies": {
