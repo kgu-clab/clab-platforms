@@ -11,7 +11,7 @@
   "scripts": {
     "clean": "rimraf dist",
     "type": "tsc --noEmit",
-    "test": "vitest",
+    "test": "vitest run --coverage --typecheck",
     "coverage": "vitest --coverage",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
@@ -35,7 +35,7 @@
     "@types/react": "^18.2.43",
     "@types/react-dom": "^18.2.17",
     "@vitejs/plugin-react": "^4.2.1",
-    "@vitest/coverage-v8": "^1.6.0",
+    "@vitest/coverage-istanbul": "^2.0.3",
     "autoprefixer": "^10.4.17",
     "cva": "1.0.0-beta.1",
     "jsdom": "^24.0.0",
@@ -47,7 +47,7 @@
     "tsup": "^8.1.0",
     "typescript": "^5.3.3",
     "vite": "^5.2.8",
-    "vitest": "^1.6.0"
+    "vitest": "^2.0.3"
   },
   "peerDependencies": {
     "react": "^18.2.0",
