@@ -1,7 +1,6 @@
 {
   "name": "@clab/member",
   "private": true,
-  "packageManager": "pnpm@9.4.0",
   "type": "module",
   "scripts": {
     "dev": "vite --port 6002",
@@ -48,5 +47,6 @@
     "tailwindcss": "^3.4.1",
     "typescript": "^5.2.2",
     "vite": "^5.0.8"
-  }
+  },
+  "packageManager": "pnpm@9.4.0"
 }

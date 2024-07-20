@@ -1,9 +1,8 @@
 {
   "name": "@clab/utils",
-  "version": "0.1.0",
   "private": true,
   "type": "module",
-  "main": "index.ts",
+  "main": "src/index.ts",
   "scripts": {
     "type": "tsc --noEmit",
     "test": "vitest",
