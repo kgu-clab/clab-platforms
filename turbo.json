@@ -19,6 +19,9 @@
     },
     "coverage": {
       "dependsOn": ["^coverage"]
+    },
+    "lint": {
+      "dependsOn": ["^lint"]
     }
   }
 }

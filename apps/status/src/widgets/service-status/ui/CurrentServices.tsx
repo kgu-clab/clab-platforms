@@ -41,6 +41,7 @@ export default async function CurrentStatus() {
       <ul className="grid w-full grid-cols-1 gap-8 md:grid-cols-2">
         {Object.entries(SERVICE_LIST).map(([serviceName, serviceURL]) => (
           <ServiceStatusItem
+            key={serviceName}
             serviceName={serviceName}
             serviceURL={serviceURL}
             status={status}

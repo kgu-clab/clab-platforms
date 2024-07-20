@@ -11,7 +11,7 @@
     "type": "turbo run type",
     "test": "turbo run test",
     "coverage": "turbo run coverage",
-    "lint": "eslint .",
+    "lint": "turbo run lint",
     "format": "prettier --write ."
   },
   "lint-staged": {

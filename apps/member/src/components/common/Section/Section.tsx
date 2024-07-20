@@ -1,4 +1,3 @@
-/* eslint-disable react/display-name */
 import { type PropsWithChildren } from 'react';
 
 import { cn } from '@clab/utils';
