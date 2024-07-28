@@ -27,6 +27,7 @@ export const PATH = {
   ACTIVITY_DETAIL: `/activity/:id`,
   ACTIVITY_CONFIG: '/activity/:id/config',
   ACTIVITY_ASSIGNMENT: '/activity/:id/:assignmentId',
+  ACTIVITY_CREATE: '/activity/create',
   BLOG: '/blog',
   BLOG_DETAIL: '/blog/:id',
   LIBRARY: '/library',
