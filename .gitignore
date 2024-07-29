@@ -52,3 +52,4 @@ RELEASE.md
 .jest-cache
 .verdaccio-cache
 .turbo
+src_checksums.txt

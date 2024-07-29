@@ -3,7 +3,7 @@
   "private": true,
   "scripts": {
     "preinstall": "npx only-allow pnpm",
-    "postinstall": "husky install && pnpm build:design-system && pnpm icon:generate",
+    "postinstall": "husky install && pnpm build:design-system && pnpm build:icon",
     "lint-staged": "lint-staged",
     "dev": "turbo run dev",
     "build": "turbo run build",
@@ -12,8 +12,19 @@
     "coverage": "turbo run coverage",
     "lint": "turbo run lint",
     "format": "prettier --write .",
-    "build:design-system": "pnpm -F @clab/design-system build",
-    "icon:generate": "pnpm -F @clab/icon generate"
+    "dev:auth": "pnpm --filter auth dev",
+    "dev:land": "pnpm --filter land dev",
+    "dev:member": "pnpm --filter member dev",
+    "dev:time": "pnpm --filter time dev",
+    "dev:status": "pnpm --filter status dev",
+    "build:auth": "pnpm --filter auth build",
+    "build:land": "pnpm --filter land build",
+    "build:member": "pnpm --filter member build",
+    "build:time": "pnpm --filter time build",
+    "build:status": "pnpm --filter status build",
+    "build:design-system": "pnpm --filter @clab/design-system build",
+    "build:icon": "pnpm --filter @clab/icon build",
+    "type:member": "pnpm --filter member type"
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": [
