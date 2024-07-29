@@ -1,4 +1,3 @@
-/* eslint-disable react/display-name */
 import { cn } from '@clab/utils';
 
 import DropdownButton from '../DropdownButton/DropdownButton';

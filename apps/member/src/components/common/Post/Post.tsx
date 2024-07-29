@@ -1,4 +1,3 @@
-/* eslint-disable react/display-name */
 import { cn, toDecodeHTMLEntities } from '@clab/utils';
 
 import { SERVICE_NAME } from '@constants/environment';

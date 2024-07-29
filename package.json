@@ -1,21 +1,16 @@
 {
   "name": "clab.page",
   "private": true,
-  "packageManager": "pnpm@9.4.0",
-  "workspaces": [
-    "apps/*",
-    "packages/*"
-  ],
   "scripts": {
     "preinstall": "npx only-allow pnpm",
     "postinstall": "husky install && pnpm build:design-system && pnpm build:icon",
     "lint-staged": "lint-staged",
-    "dev": "pnpm -r run dev",
-    "build": "pnpm -r run build",
-    "type": "pnpm -r run type",
-    "test": "pnpm -r run test",
-    "coverage": "pnpm -r run coverage",
-    "lint": "eslint .",
+    "dev": "turbo run dev",
+    "build": "turbo run build",
+    "type": "turbo run type",
+    "test": "turbo run test",
+    "coverage": "turbo run coverage",
+    "lint": "turbo run lint",
     "format": "prettier --write .",
     "dev:auth": "pnpm --filter auth dev",
     "dev:land": "pnpm --filter land dev",
@@ -55,6 +50,8 @@
     "lint-staged": "^15.2.0",
     "prettier": "^3.2.5",
     "prettier-plugin-tailwindcss": "^0.5.13",
+    "turbo": "^2.0.9",
     "typescript": "^5.3.3"
-  }
+  },
+  "packageManager": "pnpm@9.4.0"
 }
