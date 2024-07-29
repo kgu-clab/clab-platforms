@@ -8,7 +8,7 @@
   ],
   "scripts": {
     "preinstall": "npx only-allow pnpm",
-    "postinstall": "husky install && pnpm build:design-system && pnpm -F @clab/icon generate",
+    "postinstall": "husky install && pnpm build:design-system && pnpm build:icon",
     "lint-staged": "lint-staged",
     "dev": "pnpm -r run dev",
     "build": "pnpm -r run build",
@@ -28,6 +28,7 @@
     "build:time": "pnpm --filter time build",
     "build:status": "pnpm --filter status build",
     "build:design-system": "pnpm --filter @clab/design-system build",
+    "build:icon": "pnpm --filter @clab/icon build",
     "type:member": "pnpm --filter member type"
   },
   "lint-staged": {
