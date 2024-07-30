@@ -1,3 +1,5 @@
+#!/bin/bash
+
 BASE_DIR="src"
 SUB_DIRS=("color" "outline" "solid")
 SUB_SUB_DIRS=("svg" "react")

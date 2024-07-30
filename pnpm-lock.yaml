@@ -396,6 +396,9 @@ importers:
 
   packages/design-system:
     dependencies:
+      '@clab/icon':
+        specifier: workspace:^
+        version: link:../icon
       react:
         specifier: ^18.2.0
         version: 18.2.0
