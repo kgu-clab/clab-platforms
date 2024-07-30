@@ -2,8 +2,7 @@ import React from 'react';
 
 import { cn } from '@clab/utils';
 
-import Footer from '../Footer';
-import Nav from '../Nav';
+import { Footer, Nav } from '@/widgets/menu';
 
 interface PageProps {
   nav?: boolean;

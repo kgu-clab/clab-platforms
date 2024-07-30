@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { PATH } from '@constants/path';
+import { PATH } from '@/shared/constants';
 import Link from 'next/link';
 
 const links = [

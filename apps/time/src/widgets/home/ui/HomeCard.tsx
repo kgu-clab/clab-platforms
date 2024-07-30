@@ -4,9 +4,8 @@ import { ComponentPropsWithoutRef, forwardRef } from 'react';
 
 import { cn } from '@clab/utils';
 
+import { StrictPropsWithChildren } from '@/shared/types';
 import { useRouter } from 'next/navigation';
-
-import { StrictPropsWithChildren } from '@type/common';
 
 interface HomeCardProps extends ComponentPropsWithoutRef<'button'> {
   to: string;

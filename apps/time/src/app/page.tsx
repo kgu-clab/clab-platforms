@@ -9,15 +9,14 @@ import {
   ViewDetailsColor,
 } from '@clab/icon';
 
-import PageLayout from '@components/common/PageLayout';
+import PageLayout from '@/app/PageLayout';
+import { PATH } from '@/shared/constants';
 import {
   HomeCard,
   HomeCardDescription,
   HomeCardHeader,
   HomeCardIcon,
-} from '@components/home/HomeCard';
-
-import { PATH } from '@constants/path';
+} from '@/widgets/home';
 
 const buttons = [
   {

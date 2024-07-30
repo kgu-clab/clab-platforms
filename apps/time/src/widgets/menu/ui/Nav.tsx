@@ -2,7 +2,7 @@ import React from 'react';
 
 import { UserOutline } from '@clab/icon';
 
-import { PATH } from '@constants/path';
+import { PATH } from '@/shared/constants';
 import Image from 'next/image';
 import Link from 'next/link';
 
