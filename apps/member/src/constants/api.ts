@@ -68,6 +68,7 @@ export const END_POINT = {
   ACTIVITY_GROUP_MEMBER_APPLY: `/v1/activity-group/member/apply`,
   ACTIVITY_GROUP_MEMBER_MEMBERS: `/v1/activity-group/member/members`,
   // -- 활동그룹 관리
+  ACTIVITY_GROUP_ADMIN: `/v1/activity-group/admin`,
   ACTIVITY_GROUP_ADMIN_MEMBERS: `/v1/activity-group/admin/members`,
   ACTIVITY_GROUP_ADMIN_ACCEPT: `/v1/activity-group/admin/accept`,
   // -- 활동그룹 게시판

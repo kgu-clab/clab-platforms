@@ -304,3 +304,41 @@ export async function postActivityPhoto(body: PostActivityPhotoParams) {
 
   return data;
 }
+/**
+ * 키워드 사진 검색
+ */
+export async function getSearchImage(keyword: string) {
+  const accessKey = UNSPLASH_ACCESS_KEY;
+
+  if (!accessKey) {
+    throw new Error('no access key');
+  }
+
+  const url = new URL('https://api.unsplash.com/search/photos');
+  url.searchParams.append('query', keyword);
+
+  const response = await fetch(url.href, {
+    headers: {
+      Authorization: `Client-ID ${accessKey}`,
+    },
+  });
+
+  if (!response.ok) {
+    throw new Error(`Error fetching images: ${response.statusText}`);
+  }
+  const data = await response.json();
+
+  return data;
+}
+
+/**
+ * 활동 생성
+ */
+export async function postActivityGroup(body: PostActivityGroupParams) {
+  const { data } = await server.post<ActivityGroupItem, BaseResponse<number>>({
+    url: createURL(END_POINT.ACTIVITY_GROUP_ADMIN),
+    body,
+  });
+
+  return data;
+}
