@@ -1,2 +1,2 @@
 export * from './period';
-export * from './grade';
+export { default as GRADE } from './grade';
