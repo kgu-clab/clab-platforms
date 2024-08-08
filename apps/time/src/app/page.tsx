@@ -80,7 +80,7 @@ const buttons = [
 
 export default function Home() {
   return (
-    <PageLayout nav footer className="space-y-4">
+    <PageLayout nav footer className="max-w-xl space-y-4">
       <div className="text-center text-xl font-semibold">
         <h2 className="inline-block bg-gradient-to-r from-sky-600 via-indigo-500 to-purple-500 bg-clip-text font-bold text-transparent">
           OPEN-BETA
