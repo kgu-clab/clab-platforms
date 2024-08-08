@@ -55,7 +55,7 @@ export default function useTimeTableParams(): {
       setDayStatus((currentDayStatus as DayStatus) ?? 'day');
       router.push(`/timetable?${searchParamsAction.getParams()}`);
     }
-  }, [searchParams, setDayStatus, router, dayStatus]);
+  }, [searchParams, searchParamsAction, setDayStatus, router, dayStatus]);
 
   return { dayStatus, searchParams, searchParamsAction };
 }
