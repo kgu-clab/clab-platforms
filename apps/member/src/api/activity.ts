@@ -57,6 +57,11 @@ export interface PostActivityPhotoParams {
   file: File;
 }
 
+export interface PatchActivityGroupParams {
+  activityGroupId: number;
+  activityGroupStatus: ActivityGroupStatusType;
+}
+
 /**
  * 활동 사진 조회
  */
@@ -338,6 +343,36 @@ export async function postActivityGroup(body: PostActivityGroupParams) {
   const { data } = await server.post<ActivityGroupItem, BaseResponse<number>>({
     url: createURL(END_POINT.ACTIVITY_GROUP_ADMIN),
     body,
+  });
+
+  return data;
+}
+
+/**
+ * 활동 삭제
+ */
+export async function deleteActivityGroup(activityGroupId: number) {
+  const { data } = await server.del<never, BaseResponse<number>>({
+    url: createURL(END_POINT.ACTIVITY_GROUP_ADMIN_DETAIL(activityGroupId)),
+  });
+
+  return data;
+}
+
+/**
+ * 활동 상태 변경
+ */
+export async function patchActivityGroup({
+  activityGroupId,
+  activityGroupStatus,
+}: PatchActivityGroupParams) {
+  const { data } = await server.patch<never, BaseResponse<number>>({
+    url: createPagination(
+      END_POINT.ACTIVITY_GROUP_ADMIN_MANAGE(activityGroupId),
+      {
+        activityGroupStatus,
+      },
+    ),
   });
 
   return data;

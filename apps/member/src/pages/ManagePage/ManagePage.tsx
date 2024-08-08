@@ -2,6 +2,7 @@ import { Suspense } from 'react';
 
 import Content from '@components/common/Content/Content';
 import Header from '@components/common/Header/Header';
+import ManageActivitySection from '@components/manage/ManageActivitySection/ManageActivitySection';
 import ManagerAlertSection from '@components/manage/ManageAlertSection/ManagerAlertSection';
 import ManageBannerSection from '@components/manage/ManageBannerSection/ManageBannerSection';
 import ManageCalendarSection from '@components/manage/ManageCalendarSection/ManageCalendarSection';
@@ -34,6 +35,9 @@ const ManagePage = () => {
       </Suspense>
       <Suspense>
         <ManageCalendarSection />
+      </Suspense>
+      <Suspense>
+        <ManageActivitySection />
       </Suspense>
       <Suspense>
         <ManageBannerSection />

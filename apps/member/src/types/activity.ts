@@ -23,6 +23,8 @@ export interface ActivityGroupDetailType {
   activityGroupBoards: ActivityBoardType[];
   createdAt: string;
   isOwner: boolean;
+  githubUrl: string;
+  techStack: string;
 }
 
 export interface ActivityPhotoItem {
