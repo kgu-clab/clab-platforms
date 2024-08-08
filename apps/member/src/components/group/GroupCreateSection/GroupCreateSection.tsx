@@ -190,7 +190,7 @@ const GroupCreateSection = () => {
               photoList.slice(0, 6)?.map((photoItem) => (
                 <Image
                   onClick={() => handleClickImage(photoItem.urls['full'])}
-                  height="max-h-[300px]"
+                  height="max-h-[200px]"
                   overflow
                   key={photoItem.id}
                   src={photoItem.urls['full']}

@@ -1,6 +1,7 @@
-import { createPagination } from '@clab/utils';
+import { createPagination, createURL } from '@clab/utils';
 
 import { END_POINT } from '@constants/api';
+import { UNSPLASH_ACCESS_KEY } from '@constants/environment';
 import { createFormData } from '@utils/api';
 import { groupBoardParser } from '@utils/group';
 
@@ -8,6 +9,8 @@ import type {
   ActivityApplyMemberType,
   ActivityBoardType,
   ActivityGroupBoardParserType,
+  ActivityGroupCategoryType,
+  ActivityGroupCreateItem,
   ActivityGroupItem,
   ActivityGroupMemberMyType,
   ActivityGroupStatusType,
@@ -55,6 +58,19 @@ export interface PostActivityPhotoParams {
   title: string;
   date: string;
   file: File;
+}
+
+export interface PostActivityGroupParams {
+  category: ActivityGroupCategoryType;
+  subject: string;
+  name: string;
+  content: string;
+  imageUrl?: string;
+  curriculum?: string;
+  startDate?: string;
+  endDate?: string;
+  techStack?: string;
+  githubUrl?: string;
 }
 
 export interface PatchActivityGroupParams {
@@ -340,7 +356,10 @@ export async function getSearchImage(keyword: string) {
  * 활동 생성
  */
 export async function postActivityGroup(body: PostActivityGroupParams) {
-  const { data } = await server.post<ActivityGroupItem, BaseResponse<number>>({
+  const { data } = await server.post<
+    ActivityGroupCreateItem,
+    BaseResponse<number>
+  >({
     url: createURL(END_POINT.ACTIVITY_GROUP_ADMIN),
     body,
   });

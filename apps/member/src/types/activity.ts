@@ -46,23 +46,31 @@ export interface ActivityApplyMemberType extends ActivityGroupMemberType {
   applyReason: string;
 }
 
-export interface ActivityGroupItem {
-  id?: number;
-  name: string;
-  content: string;
+export interface ActivityGroupCreateItem {
   category: ActivityGroupCategoryType;
   subject: string;
+  name: string;
+  content: string;
   imageUrl?: string;
-  leaderId?: string;
-  leaderName?: string;
-  participantCount?: number;
-  weeklyActivityCount?: number;
-  createdAt?: string;
   curriculum?: string;
   startDate?: string;
   endDate?: string;
   techStack?: string;
   githubUrl?: string;
+}
+
+export interface ActivityGroupItem {
+  id: number;
+  name: string;
+  content: string;
+  category: ActivityGroupCategoryType;
+  subject: string;
+  imageUrl: string;
+  leaderId: string;
+  leaderName: string;
+  participantCount: number;
+  weeklyActivityCount: number;
+  createdAt: string;
 }
 
 export interface ActivityRequestType {
