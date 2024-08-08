@@ -22,7 +22,7 @@ const links = [
   <Link key={PATH.LOST} href={PATH.LOST}>
     분실물
   </Link>,
-  <Link key={PATH.LOST} href={PATH.LOST}>
+  <Link key={PATH.FOOD} href={PATH.FOOD}>
     학식
   </Link>,
 ] as const;
