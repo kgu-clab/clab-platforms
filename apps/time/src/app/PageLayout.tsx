@@ -20,9 +20,7 @@ const Page = ({
   return (
     <>
       {nav && <Nav />}
-      <main className={cn('m-auto mt-14 max-w-xl p-4', className)}>
-        {children}
-      </main>
+      <div className={cn('m-auto mt-14 p-4', className)}>{children}</div>
       {footer && <Footer />}
     </>
   );
