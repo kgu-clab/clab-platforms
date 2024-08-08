@@ -28,15 +28,11 @@ const Footer = () => {
           </Link>
         ))}
       </ul>
-      <div className="mt-2 text-xs font-medium text-gray-400">
+      <div className="mt-2 space-y-1 text-xs font-medium text-gray-400">
         <p className="space-x-1">
           <span>Developed By</span>
           <a href="https://github.com/KGU-C-Lab" target="_blank">
             C-Lab CoreTeam
-          </a>
-          <span>X</span>
-          <a href="https://jinhy.uk" target="_blank">
-            방진혁
           </a>
         </p>
         <p>© C-Lab. All rights reserved.</p>
