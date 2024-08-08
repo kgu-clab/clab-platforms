@@ -2,7 +2,7 @@
 
 import { useEffect, useMemo, useState } from 'react';
 
-import { useClientSearchParams } from '@/shared/lib';
+import { useClientSearchParams } from '@/shared/hooks';
 import { DayStatus } from '@/widgets/time-table';
 import { useRouter } from 'next/navigation';
 
@@ -55,7 +55,7 @@ export default function useTimeTableParams(): {
       setDayStatus((currentDayStatus as DayStatus) ?? 'day');
       router.push(`/timetable?${searchParamsAction.getParams()}`);
     }
-  }, [searchParams, setDayStatus, router]);
+  }, [searchParams, setDayStatus, router, dayStatus]);
 
   return { dayStatus, searchParams, searchParamsAction };
 }
