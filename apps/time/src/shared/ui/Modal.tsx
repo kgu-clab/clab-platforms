@@ -17,7 +17,6 @@ import { useOutsideClick } from '@/shared/hooks';
 
 interface ModalProps extends PropsWithChildren {
   title: string;
-  visible: boolean;
   close: () => void;
 }
 
@@ -119,7 +118,10 @@ function ModalDropdown({ title, value, children }: ModalDropdownProps) {
               {value}
             </div>
             <ChevronDownOutline
-              className={cn('transition-all', open ? 'rotate-0' : 'rotate-180')}
+              className={cn(
+                'mr-2 transition-all',
+                open ? 'rotate-0' : 'rotate-180',
+              )}
             />
           </div>
           {open && (
@@ -141,21 +143,19 @@ function ModalDropdownItem({
   const { action } = useContext(ModalDropdownContext);
 
   return (
-    <div>
-      <button
-        className={cn(
-          'w-full rounded-sm p-2 text-start transition-colors hover:bg-gray-100',
-          selected ? 'text-blue-400' : 'text-black',
-        )}
-        type="button"
-        onClick={() => {
-          onClick();
-          action.closeAction();
-        }}
-      >
-        {children}
-      </button>
-    </div>
+    <button
+      className={cn(
+        'w-full rounded-sm p-2 text-start transition-colors hover:bg-gray-100',
+        selected ? 'text-blue-400' : 'text-black',
+      )}
+      type="button"
+      onClick={() => {
+        onClick();
+        action.closeAction();
+      }}
+    >
+      {children}
+    </button>
   );
 }
 
