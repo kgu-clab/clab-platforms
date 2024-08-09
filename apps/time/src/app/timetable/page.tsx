@@ -1,10 +1,10 @@
 import PageLayout from '@/app/PageLayout';
-import { TimeTableLayout } from '@/widgets/time-table';
+import { TimeTableContainer } from '@/widgets/time-table';
 
 export default function TimeTablePage() {
   return (
     <PageLayout nav footer className="container w-full space-y-4">
-      <TimeTableLayout />
+      <TimeTableContainer />
     </PageLayout>
   );
 }
