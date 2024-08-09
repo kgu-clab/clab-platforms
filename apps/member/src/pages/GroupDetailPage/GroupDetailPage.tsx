@@ -29,12 +29,16 @@ const GroupDetailPage = () => {
     (member) => member.memberId === myProfile.id,
   );
 
+  const acceptedParticipant = data.groupMembers.filter(
+    (member) => member.status === 'ACCEPTED',
+  );
+
   const handleApplicationClick = () => {
     openModal({
       title: '참여자 목록',
       content: (
         <Table head={TABLE_HEAD.ACTIVITY_GROUP_PARTICIPANTS} className="w-full">
-          {data.groupMembers.map(({ memberId, memberName }, index) => (
+          {acceptedParticipant.map(({ memberId, memberName }, index) => (
             <Table.Row key={index}>
               <td>{index + 1}</td>
               <td>{memberId}</td>

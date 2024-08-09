@@ -13,7 +13,7 @@ import {
   useActivityGroupBoardPatchMutation,
   useMyProfile,
 } from '@hooks/queries';
-import { formattedDate, isDateValid } from '@utils/date';
+import { formattedDate, isDateValid, toKoreaISOString } from '@utils/date';
 
 import type { ActivityBoardType } from '@type/activity';
 import type { ResponseFile } from '@type/api';
@@ -48,14 +48,13 @@ const AssignmentUploadSection = ({
     setDescription(e.target.value);
   };
 
-  const onClickDeleteFile = () => {
+  const handleDeleteFileClick = () => {
     setUploadedFile(null);
   };
 
-  const onClickSubmit = () => {
+  const handleSubmitButtonClick = () => {
     const formData = new FormData();
     const file = uploaderRef.current?.files?.[0];
-
     if (file) {
       formData.append(FORM_DATA_KEY, file);
     }
@@ -116,7 +115,7 @@ const AssignmentUploadSection = ({
             })}
           >
             {uploadedFile
-              ? formattedDate(uploadedFile.createdAt)
+              ? formattedDate(toKoreaISOString(uploadedFile.createdAt))
               : '아직 제출하지 않았습니다.'}
           </Table.Cell>
         </Table.Row>
@@ -150,13 +149,17 @@ const AssignmentUploadSection = ({
       </Table>
       <div className="mt-2 flex gap-4">
         {uploadedFile && (
-          <Button className="w-full" color="orange" onClick={onClickDeleteFile}>
+          <Button
+            className="w-full"
+            color="orange"
+            onClick={handleDeleteFileClick}
+          >
             첨부파일 변경하기
           </Button>
         )}
         <Button
           className="w-full"
-          onClick={onClickSubmit}
+          onClick={handleSubmitButtonClick}
           disabled={description.length === 0}
         >
           제출하기

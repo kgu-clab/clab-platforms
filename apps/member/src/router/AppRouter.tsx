@@ -34,6 +34,9 @@ const GroupAssignmentPage = lazy(
 const GroupConfigPage = lazy(
   () => import('@pages/GroupConfigPage/GroupConfigPage'),
 );
+const GroupCreatePage = lazy(
+  () => import('@pages/GroupCreatePage/GroupCreatePage'),
+);
 const LibraryPage = lazy(() => import('@pages/LibraryPage/LibraryPage'));
 const LibraryDetailPage = lazy(
   () => import('@pages/LibraryDetailPage/LibraryDetailPage'),
@@ -138,6 +141,14 @@ const AppRouter = () => {
           element: (
             <Suspense>
               <GroupAssignmentPage />
+            </Suspense>
+          ),
+        },
+        {
+          path: PATH.ACTIVITY_CREATE,
+          element: (
+            <Suspense>
+              <GroupCreatePage />
             </Suspense>
           ),
         },

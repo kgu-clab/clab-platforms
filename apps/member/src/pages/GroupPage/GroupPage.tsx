@@ -20,7 +20,11 @@ const GroupPage = () => {
         <Button size="sm" onClick={() => navigate(PATH.ACTIVITY_APPLY)}>
           활동신청
         </Button>
-        <Button size="sm" color="blue">
+        <Button
+          size="sm"
+          color="blue"
+          onClick={() => navigate(PATH.ACTIVITY_CREATE)}
+        >
           새로운 그룹 만들기
         </Button>
       </Header>

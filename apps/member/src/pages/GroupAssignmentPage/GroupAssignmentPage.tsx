@@ -8,6 +8,7 @@ import AssignmentUploadSection from '@components/group/AssignmentUploadSection/A
 import { GROUP_MESSAGE } from '@constants/message';
 import { useActivityGroupBoardMyAssignment } from '@hooks/queries';
 import { useActivityGroupBoard } from '@hooks/queries/activity/useActivityGroupBoard';
+import { toKoreaISOString } from '@utils/date';
 
 const GroupAssignmentPage = () => {
   const { id, assignmentId } = useParams();
@@ -33,7 +34,7 @@ const GroupAssignmentPage = () => {
       <AssignmentUploadSection
         activityGroupId={+id}
         assignmentId={+assignmentId}
-        dueDateTime={board?.dueDateTime}
+        dueDateTime={toKoreaISOString(board?.dueDateTime ?? '')}
         myAssignment={myAssignment?.[0]}
       />
       <Section>

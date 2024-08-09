@@ -3,13 +3,14 @@ import { ComponentPropsWithRef } from 'react';
 import { cn } from '@clab/utils';
 
 interface ActionButtonProps extends ComponentPropsWithRef<'button'> {
-  color?: 'black' | 'red' | 'blue' | 'orange';
+  color?: 'black' | 'red' | 'blue' | 'orange' | 'green';
 }
 
 const colorStyled = {
   black: 'text-black',
   red: 'text-red-500',
   blue: 'text-blue-500',
+  green: 'text-green-500',
   orange: 'text-orange-500',
 } as const;
 
