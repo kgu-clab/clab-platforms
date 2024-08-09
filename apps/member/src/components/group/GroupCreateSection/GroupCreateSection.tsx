@@ -11,6 +11,7 @@ import Select from '@components/common/Select/Select';
 import Textarea from '@components/common/Textarea/Textarea';
 
 import { getSearchImage } from '@api/activity';
+import { SELECT_ACTIVITY_GROUP_CATEGORY_TYPE } from '@constants/select';
 import {
   BOARD_CONTENT_MAX_LENGTH,
   BOARD_TITLE_MAX_LENGTH,
@@ -42,18 +43,12 @@ interface InputsType {
   techStack?: string;
   githubUrl?: string;
 }
-
-const options = [
-  {
-    name: 'STUDY',
-    value: 'STUDY',
-  },
-  {
-    name: 'PROJECT',
-    value: 'PROJECT',
-  },
-];
-
+const CategoryOptions = Object.entries(SELECT_ACTIVITY_GROUP_CATEGORY_TYPE).map(
+  ([key, value]) => ({
+    name: key,
+    value,
+  }),
+);
 const GroupCreateSection = () => {
   const toast = useToast();
   const { activityGroupMutate } = useActivityGroupMutation();
@@ -133,7 +128,7 @@ const GroupCreateSection = () => {
               id="category"
               name="category"
               className="w-full"
-              options={options}
+              options={CategoryOptions}
               value={category}
               onChange={onChange}
             />

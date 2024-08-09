@@ -46,3 +46,8 @@ export const SELECT_OPTIONS_COMMUNITY_TYPE: Options<
     value: 'qna',
   },
 ] as const;
+
+export const SELECT_ACTIVITY_GROUP_CATEGORY_TYPE = {
+  STUDY: 'STUDY',
+  PROJECT: 'PROJECT',
+} as const;

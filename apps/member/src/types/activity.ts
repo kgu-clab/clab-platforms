@@ -1,3 +1,5 @@
+import { SELECT_ACTIVITY_GROUP_CATEGORY_TYPE } from '@constants/select';
+
 import type { ResponseFile } from './api';
 
 type MemberStatusType = 'ACCEPTED' | 'REJECTED' | 'WAITING';
@@ -7,8 +9,9 @@ export type ActivityGroupBoardCategoryType =
   | 'FEEDBACK'
   | 'ASSIGNMENT'
   | 'SUBMIT';
-export type ActivityGroupCategoryType = 'STUDY' | 'PROJECT';
 export type ActivityGroupStatusType = 'WAITING' | 'PROGRESSING' | 'END';
+export type ActivityGroupCategoryType =
+  (typeof SELECT_ACTIVITY_GROUP_CATEGORY_TYPE)[keyof typeof SELECT_ACTIVITY_GROUP_CATEGORY_TYPE];
 
 export interface ActivityGroupDetailType {
   id: number;
@@ -97,7 +100,9 @@ export interface ActivityBoardType {
   title?: string;
   dueDateTime?: string;
   createdAt: string;
+  updatedAt?: string;
   feedbacks?: Array<ActivityBoardType>;
+  children?: Array<ActivityBoardType>;
 }
 
 export interface SubmitBoardType {
