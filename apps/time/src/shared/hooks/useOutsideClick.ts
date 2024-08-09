@@ -15,7 +15,7 @@ export default function useOutsideClick({ callback }: UseOutsideClickParams) {
     };
     window.addEventListener('mousedown', handleClick);
     return () => window.removeEventListener('mousedown', handleClick);
-  }, [targetRef]);
+  }, [targetRef, callback]);
 
   return targetRef;
 }

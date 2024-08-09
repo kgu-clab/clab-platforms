@@ -13,11 +13,11 @@ export default function useModalAction({ key }: UseModalParams) {
 
   const open = useCallback(() => {
     setModalAtom({ key, visible: true });
-  }, [key]);
+  }, [key, setModalAtom]);
 
   const close = useCallback(() => {
     setModalAtom({ key, visible: false });
-  }, [key]);
+  }, [key, setModalAtom]);
 
   return { open, close };
 }
