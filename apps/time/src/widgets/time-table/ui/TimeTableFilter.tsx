@@ -1,11 +1,14 @@
 'use client';
 
-import { ReactNode, useContext } from 'react';
+import { ReactNode, useCallback, useContext } from 'react';
 
 import { cn } from '@clab/utils';
 
 import { DAY_STATUS, DayStatus } from '@/widgets/time-table';
-import { TimeTableContext } from '@/widgets/time-table/ui/TimeTableLayout';
+import {
+  TimeTableActionContext,
+  TimeTableStateContext,
+} from '@/widgets/time-table/ui/TimeTableLayout';
 
 interface TimeTableFilterItemProps {
   children: ReactNode;
@@ -33,22 +36,26 @@ function TimeTableFilterItem({
 }
 
 export default function TimeTableFilter() {
-  const { state, action } = useContext(TimeTableContext);
+  const { dayStatus } = useContext(TimeTableStateContext);
+  const { searchParamsAction } = useContext(TimeTableActionContext);
 
-  const onClickHandler = (dayStatus: DayStatus) => {
-    action.searchParamsAction.set('classType', dayStatus);
-  };
+  const onClickHandler = useCallback(
+    (status: DayStatus) => {
+      searchParamsAction.set('classType', status);
+    },
+    [searchParamsAction],
+  );
 
   return (
     <div className="flex gap-4 rounded-full border border-gray-300 bg-white p-1">
       <TimeTableFilterItem
-        selected={state.dayStatus === 'day'}
+        selected={dayStatus === 'day'}
         onClick={() => onClickHandler('day')}
       >
         {DAY_STATUS.day}
       </TimeTableFilterItem>
       <TimeTableFilterItem
-        selected={state.dayStatus === 'night'}
+        selected={dayStatus === 'night'}
         onClick={() => onClickHandler('night')}
       >
         {DAY_STATUS.night}

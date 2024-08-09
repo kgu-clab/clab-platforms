@@ -5,12 +5,14 @@ import {
   SetStateAction,
   useCallback,
   useContext,
+  useEffect,
   useState,
 } from 'react';
 
 import { CloseOutline } from '@clab/icon';
 
-import { DAY_VALUE_ARRAY } from '@/shared/constants';
+import { DAY_VALUE_ARRAY, MODAL_KEY } from '@/shared/constants';
+import { useModalAction, useModalState } from '@/shared/hooks';
 import { DayKor } from '@/shared/types';
 import { Modal } from '@/shared/ui';
 import {
@@ -23,7 +25,7 @@ import {
   NIGHT_PERIOD_ARRAY,
   NightPeriod,
 } from '@/widgets/time-table';
-import { TimeTableContext } from '@/widgets/time-table/ui/TimeTableLayout';
+import { TimeTableStateContext } from '@/widgets/time-table/ui/TimeTableLayout';
 
 interface TimeTableModalFilterProps<T> {
   title: string;
@@ -104,12 +106,19 @@ function TimeTableModalPeriodDropdown({
 }
 
 export default function TimeTableModal() {
-  const { state, action } = useContext(TimeTableContext);
+  const { dayStatus, day, period } = useContext(TimeTableStateContext);
+  const { close } = useModalAction({ key: MODAL_KEY.timeTable });
+  const visible = useModalState({ key: MODAL_KEY.timeTable });
   const [selectedGrade, setSelectedGrade] = useState<Grade | ''>('');
-  const [selectedDay, setSelectedDay] = useState<DayKor>(state.day as DayKor);
+  const [selectedDay, setSelectedDay] = useState<DayKor>(day as DayKor);
   const [selectedPeriod, setSelectedPeriod] = useState<
     DayPeriod[] | NightPeriod[]
-  >([state.period] as DayPeriod[] | NightPeriod[]);
+  >([period]);
+
+  useEffect(() => {
+    setSelectedDay(day as DayKor);
+    setSelectedPeriod([period]);
+  }, [day, period]);
 
   const filterItemHandler = useCallback(
     <T,>(targetValue: T, targetAction: Dispatch<SetStateAction<T>>) => {
@@ -136,33 +145,35 @@ export default function TimeTableModal() {
   );
 
   return (
-    <Modal
-      title="강의 검색"
-      visible={state.modalVisible}
-      close={action.modalCloseAction}
-    >
-      <Modal.Content>
-        <Modal.Item title="구분" value={DAY_STATUS[state.dayStatus]} />
-        <TimeTableModalFilter
-          title="학년 선택"
-          list={[...GRADE] as Grade[]}
-          origin={selectedGrade}
-          filterItemHandler={(grade) =>
-            filterItemHandler(grade, setSelectedGrade)
-          }
-        />
-        <TimeTableModalFilter
-          title="요일 선택"
-          list={DAY_VALUE_ARRAY}
-          origin={selectedDay}
-          filterItemHandler={(day) => filterItemHandler(day, setSelectedDay)}
-        />
-        <TimeTableModalPeriodDropdown
-          selectedPeriod={selectedPeriod}
-          dayStatus={state.dayStatus}
-          dropdownItemHandler={periodDropdownItemHandler}
-        />
-      </Modal.Content>
-    </Modal>
+    <>
+      {visible && (
+        <Modal title="강의 검색" close={close}>
+          <Modal.Content>
+            <Modal.Item title="구분" value={DAY_STATUS[dayStatus]} />
+            <TimeTableModalFilter
+              title="학년 선택"
+              list={[...GRADE] as Grade[]}
+              origin={selectedGrade}
+              filterItemHandler={(grade) =>
+                filterItemHandler(grade, setSelectedGrade)
+              }
+            />
+            <TimeTableModalFilter
+              title="요일 선택"
+              list={DAY_VALUE_ARRAY}
+              origin={selectedDay}
+              filterItemHandler={(day) =>
+                filterItemHandler(day, setSelectedDay)
+              }
+            />
+            <TimeTableModalPeriodDropdown
+              selectedPeriod={selectedPeriod}
+              dayStatus={dayStatus}
+              dropdownItemHandler={periodDropdownItemHandler}
+            />
+          </Modal.Content>
+        </Modal>
+      )}
+    </>
   );
 }
