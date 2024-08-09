@@ -1,5 +1,6 @@
 import { cn } from '@clab/utils';
 
+import { Providers } from '@/shared/utils';
 import type { Metadata } from 'next';
 import { Noto_Sans_KR } from 'next/font/google';
 
@@ -25,7 +26,7 @@ export default function RootLayout({
       <body
         className={cn(inter.className, 'flex min-h-screen flex-col bg-gray-50')}
       >
-        {children}
+        <Providers>{children}</Providers>
       </body>
     </html>
   );
