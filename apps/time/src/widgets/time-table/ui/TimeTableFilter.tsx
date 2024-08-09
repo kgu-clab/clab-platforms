@@ -38,7 +38,7 @@ function TimeTableFilterItem({
 export default function TimeTableFilter() {
   const { dayStatus, searchParamsAction } = useTimeTableParams();
 
-  const onClickHandler = useCallback(
+  const handleFilterItemClick = useCallback(
     (status: DayStatus) => {
       searchParamsAction.set('classType', status);
     },
@@ -49,13 +49,13 @@ export default function TimeTableFilter() {
     <div className="flex gap-4 rounded-full border border-gray-300 bg-white p-1">
       <TimeTableFilterItem
         selected={dayStatus === 'day'}
-        onClick={() => onClickHandler('day')}
+        onClick={() => handleFilterItemClick('day')}
       >
         {DAY_STATUS.day}
       </TimeTableFilterItem>
       <TimeTableFilterItem
         selected={dayStatus === 'night'}
-        onClick={() => onClickHandler('night')}
+        onClick={() => handleFilterItemClick('night')}
       >
         {DAY_STATUS.night}
       </TimeTableFilterItem>

@@ -20,7 +20,7 @@ export default function TimeTableLayout() {
     DayPeriod | NightPeriod
   >();
 
-  const buttonHandler = useCallback(
+  const handleTimeTableButton = useCallback(
     ({ period, idx }: { period: DayPeriod | NightPeriod; idx: number }) => {
       setSelectedDay(DAY_VALUE_ARRAY[idx]);
       setSelectedPeriod(period);
@@ -31,7 +31,10 @@ export default function TimeTableLayout() {
   return (
     <div className="flex flex-col items-center justify-center gap-y-8 p-4">
       <TimeTableHeader />
-      <TimeTable dayStatus={dayStatus} buttonHandler={buttonHandler} />
+      <TimeTable
+        dayStatus={dayStatus}
+        handleTimeTableButton={handleTimeTableButton}
+      />
       <TimeTableModal
         dayStatus={dayStatus}
         day={selectedDay!}

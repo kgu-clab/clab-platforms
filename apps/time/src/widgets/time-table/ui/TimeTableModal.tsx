@@ -29,7 +29,7 @@ interface TimeTableModalFilterProps<T> {
   title: string;
   list: T[];
   origin: T;
-  filterItemHandler: (listVal: T) => void;
+  handleFilterItem: (listVal: T) => void;
   parseFunc?: () => boolean;
 }
 
@@ -49,7 +49,7 @@ function TimeTableModalFilter<T extends string>({
   title,
   list,
   origin,
-  filterItemHandler,
+  handleFilterItem,
   parseFunc,
 }: TimeTableModalFilterProps<T>) {
   return (
@@ -58,7 +58,7 @@ function TimeTableModalFilter<T extends string>({
         <Modal.FilterItem
           key={listVal}
           selected={!parseFunc ? origin === listVal : parseFunc()}
-          onClick={() => filterItemHandler(listVal)}
+          onClick={() => handleFilterItem(listVal)}
         >
           {listVal}
         </Modal.FilterItem>
@@ -115,7 +115,7 @@ export default function TimeTableModal({
   period,
 }: TimeTableModalProps) {
   const { close } = useModalAction({ key: MODAL_KEY.timeTable });
-  const visible = useModalState({ key: MODAL_KEY.timeTable });
+  const visible = useModalState({ key: MODAL_KEY.timeTable }).visible;
   const [selectedGrade, setSelectedGrade] = useState<Grade | ''>('');
   const [selectedDay, setSelectedDay] = useState<DayKor>(day);
   const [selectedPeriod, setSelectedPeriod] = useState<
@@ -128,14 +128,14 @@ export default function TimeTableModal({
     setSelectedPeriod([period]);
   }, [day, period]);
 
-  const filterItemHandler = useCallback(
+  const handleFilterItem = useCallback(
     <T,>(targetValue: T, targetAction: Dispatch<SetStateAction<T>>) => {
       targetAction(targetValue);
     },
     [],
   );
 
-  const periodDropdownItemHandler = useCallback(
+  const handlePeriodDropdownItem = useCallback(
     (value: DayPeriod | NightPeriod) => {
       setSelectedPeriod((prev) => {
         const periodSet = new Set(prev);
@@ -162,22 +162,20 @@ export default function TimeTableModal({
               title="학년 선택"
               list={[...GRADE] as Grade[]}
               origin={selectedGrade}
-              filterItemHandler={(grade) =>
-                filterItemHandler(grade, setSelectedGrade)
+              handleFilterItem={(grade) =>
+                handleFilterItem(grade, setSelectedGrade)
               }
             />
             <TimeTableModalFilter
               title="요일 선택"
               list={DAY_VALUE_ARRAY}
               origin={selectedDay}
-              filterItemHandler={(day) =>
-                filterItemHandler(day, setSelectedDay)
-              }
+              handleFilterItem={(day) => handleFilterItem(day, setSelectedDay)}
             />
             <TimeTableModalPeriodDropdown
               selectedPeriod={selectedPeriod}
               dayStatus={dayStatus}
-              dropdownItemHandler={periodDropdownItemHandler}
+              dropdownItemHandler={handlePeriodDropdownItem}
             />
           </Modal.Content>
         </Modal>

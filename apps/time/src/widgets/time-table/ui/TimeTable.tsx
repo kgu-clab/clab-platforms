@@ -17,7 +17,7 @@ import {
 
 interface TimeTableProps {
   dayStatus: DayStatus;
-  buttonHandler: ({
+  handleTimeTableButton: ({
     period,
     idx,
   }: {
@@ -53,7 +53,7 @@ function TimeTableItem({
   );
 }
 
-function TimeTable({ dayStatus, buttonHandler }: TimeTableProps) {
+function TimeTable({ dayStatus, handleTimeTableButton }: TimeTableProps) {
   const selectedSchedule =
     dayStatus === 'day' ? DAY_PERIOD_ARRAY : NIGHT_PERIOD_ARRAY;
   const { open } = useModalAction({ key: MODAL_KEY.timeTable });
@@ -94,7 +94,7 @@ function TimeTable({ dayStatus, buttonHandler }: TimeTableProps) {
                     type="button"
                     className="size-full"
                     onClick={() => {
-                      buttonHandler({
+                      handleTimeTableButton({
                         period: period as DayPeriod | NightPeriod,
                         idx,
                       });
