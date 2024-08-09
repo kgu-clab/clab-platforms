@@ -2,11 +2,11 @@
 
 import { useSearchParams } from 'next/navigation';
 
-function useClientSearchParams() {
+function useEditableSearchParams() {
   const currentSearchParams = useSearchParams();
   const searchParams = new URLSearchParams(currentSearchParams);
 
   return searchParams;
 }
 
-export default useClientSearchParams;
+export default useEditableSearchParams;

@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 
-import { useClientSearchParams } from '@/shared/hooks';
+import { useEditableSearchParams } from '@/shared/hooks';
 import type { DayStatus } from '@/widgets/time-table';
 import { useRouter } from 'next/navigation';
 
@@ -20,7 +20,7 @@ export default function useTimeTableParams(): {
   searchParamsAction: SearchParamsActionType;
 } {
   const [dayStatus, setDayStatus] = useState<DayStatus>('day');
-  const searchParams = useClientSearchParams();
+  const searchParams = useEditableSearchParams();
   const router = useRouter();
 
   const searchParamsAction = {
