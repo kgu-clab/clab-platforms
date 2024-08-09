@@ -45,7 +45,7 @@ const ManageActivitySection = () => {
       <Table head={TABLE_HEAD.ACTIVITY_GROUP_DETAIL}>
         {groupData.items.map(
           ({ leaderName, leaderId, name, subject, id }, index) => (
-            <Table.Row key={index}>
+            <Table.Row key={id}>
               <Table.Cell>{index + 1}</Table.Cell>
               <Table.Cell>{name}</Table.Cell>
               <Table.Cell>{subject}</Table.Cell>
@@ -79,7 +79,7 @@ const ManageActivitySection = () => {
       <Table head={TABLE_HEAD.ACTIVITY_GROUP_DETAIL}>
         {groupData.items.map(
           ({ leaderName, leaderId, name, subject, id }, index) => (
-            <Table.Row key={index}>
+            <Table.Row key={id}>
               <Table.Cell>{index + 1}</Table.Cell>
               <Table.Cell>{name}</Table.Cell>
               <Table.Cell>{subject}</Table.Cell>
@@ -107,7 +107,7 @@ const ManageActivitySection = () => {
       <Table head={TABLE_HEAD.ACTIVITY_GROUP_DETAIL}>
         {groupData.items.map(
           ({ leaderName, leaderId, name, subject, id }, index) => (
-            <Table.Row key={index}>
+            <Table.Row key={id}>
               <Table.Cell>{index + 1}</Table.Cell>
               <Table.Cell>{name}</Table.Cell>
               <Table.Cell>{subject}</Table.Cell>
