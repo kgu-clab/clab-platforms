@@ -1,12 +1,12 @@
-# clab.page &middot; [![MIT License](https://img.shields.io/badge/license-GPL--3.0-blue.svg)](https://github.com/kgu-c-lab/clab.page/blob/main/LICENSE) [![pnpm CI](https://github.com/KGU-C-Lab/clab.page/actions/workflows/pnpm-ci.yml/badge.svg)](https://github.com/KGU-C-Lab/clab.page/actions/workflows/pnpm-ci.yml) [![codecov](https://codecov.io/gh/KGU-C-Lab/clab.page/graph/badge.svg?token=Z5PFR6US6Z)](https://codecov.io/gh/KGU-C-Lab/clab.page)
+# clab-platforms &middot; [![MIT License](https://img.shields.io/badge/license-GPL--3.0-blue.svg)](https://github.com/kgu-c-lab/clab.page/blob/main/LICENSE) [![pnpm CI](https://github.com/KGU-C-Lab/clab.page/actions/workflows/pnpm-ci.yml/badge.svg)](https://github.com/KGU-C-Lab/clab.page/actions/workflows/pnpm-ci.yml) [![codecov](https://codecov.io/gh/KGU-C-Lab/clab.page/graph/badge.svg?token=Z5PFR6US6Z)](https://codecov.io/gh/KGU-C-Lab/clab.page)
 
 경기대학교 AI컴퓨터공학부 개발동아리 [C-Lab](https://www.clab.page/)의 공식 프론트엔드 시스템이에요.  
-지속적으로 늘어나는 프론트엔드 프로젝트를 유연하고 생산성 있게 관리하기 위해 [모노레포(Monorepo)](https://en.wikipedia.org/wiki/Monorepo) 환경으로 만들어졌어요.
+지속적으로 늘어나는 프론트엔드 프로젝트를 유연하고 효율적으로 관리하기 위해 [모노레포(Monorepo)](https://en.wikipedia.org/wiki/Monorepo) 환경으로 만들어졌어요.
 
-해당 프로젝트는 단순히 C-Lab 동아리 내에서 사용할 목적으로 시작되었지만, 그 목표와 비전은 훨씬 더 넓고 깊은 의미를 지니고 있어요.  
-**동아리나 다양한 모임이 활동하는 과정에서 마주할 수 있는 여러 문제점을 해소**하고자 해요. `소통의 어려움`, `참여도 문제`, `자료 공유 및 관리`, `활동 계획의 비효율성` 그리고 `기록과 회고` 등 모임에서 발생되는 불편한 문제를 해결하고자 하며 **궁극적으로 모든 구성원들이 자연스럽게 연결되어 몰입하고 열정과 역량을 마음껏 펼칠 수 있는 커뮤니티**를 만드는거예요.
+해당 프로젝트는 단순히 동아리 내에서 사용할 목적으로 시작되었지만, 그 목표와 가능성은 훨씬 더 넓고 깊은 의미를 지니고 있어요.  
+**동아리나 다양한 모임이 활동하는 과정에서 마주할 수 있는 여러 문제점을 해소**하고자 해요. `소통의 어려움`, `참여도 문제`, `자료 공유 및 관리`, `활동 계획의 비효율성` 등 모임에서 발생하는 불편한 문제를 해결하고자 하며 **궁극적으로 모든 구성원이 자연스럽게 연결되어 몰입하고 열정과 역량을 마음껏 펼칠 수 있는 커뮤니티**를 만드는 거예요.
 
-모든 구성원이 편하고 자연스럽게 연결되는 경험을 할 수 있도록 기획해요. 동아리를 넘어 대학이라는 큰 커뮤니티를 통합하고자 끊임없이 도전하고 있어요. 해당 프로젝트 시스템이 대학교의 `Best Practice`가 되어 구성원이 자연스럽게 연결되고, 시너지를 발휘하며 구성원들이 만족하고 즐길 수 있는 시스템을 구축하는 것을 지향하고 있어요.
+모든 구성원이 편리하고 자연스럽게 연결되는 경험을 할 수 있도록 기획해요. 동아리를 넘어 대학이라는 큰 커뮤니티를 통합하고자 끊임없이 도전하고 있어요. 해당 프로젝트 시스템이 대학교의 `Best Practice`가 되어 구성원이 자연스럽게 연결되고, 시너지를 발휘하며 구성원들이 만족하고 사용할 수 있는 시스템을 구축하는 것을 지향하고 있어요.
 
 ## Features
 
@@ -31,50 +31,25 @@
 ## Packages
 
 - config: 프로젝트 설정 파일의 일관성을 유지하기 위한 라이브러리에요.
-- [design-system](https://github.com/KGU-C-Lab/clab.page/blob/main/packages/design-system/README.md): 일관성 있는 UI&UX를 위한 디자인 시스템이에요.
+- [design-system (CDS)](https://github.com/KGU-C-Lab/clab.page/blob/main/packages/design-system/README.md): 일관성 있는 UI&UX를 위한 디자인 시스템이에요.
 - utils: 공통적으로 사용하는 유틸리티 라이브러리에요.
 - icon: 공통적으로 사용하는 아이콘팩이에요.
-
-## Previews
-
-<table>
-  <tr>
-    <td width="50%">🔐 Auth</td>
-    <td width="50%">🌟 Land</td>
-  </tr>
-  <tr>
-    <td width="50%" style="padding: 0;">
-      <img width="518" alt="image" src="https://github.com/KGU-C-Lab/clab.page/assets/39869096/7a6b171f-a4d8-43f3-88b7-4c7bbc37280e">
-    </td>
-    <td width="50%" style="padding: 0;">
-      <img width="1494" alt="image" src="https://github.com/KGU-C-Lab/clab.page/assets/39869096/8f7db319-8f0c-454e-82cb-decdd30785d7">
-    </td>
-  </tr>
-  <tr>
-    <td width="50%">👥 Member</td>
-    <td width="50%">⏰ Time</td>
-  </tr>
-  <tr>
-    <td width="50%" style="padding: 0;">
-      <img width="1488" alt="image" src="https://github.com/KGU-C-Lab/clab.page/assets/39869096/d4e5b561-74a2-4bdc-b306-48aba58e3c5a">
-    </td>
-    <td width="50%" style="padding: 0;">
-      <img width="1263" alt="image" src="https://github.com/KGU-C-Lab/clab.page/assets/39869096/62d7af18-8f6e-4e0f-aac6-2d5199842c9c"> 
-    </td>
-  </tr>
-</table>
 
 ## Server
 
 > Server, Infra, Back-end에 대한 정보는 다른 저장소에서 확인할 수 있어요.
 
-- [clab-server](https://github.com/KGU-C-Lab/clab-server): 경기대학교 AI컴퓨터공학부 개발동아리 C-Lab의 공식 백엔드 시스템이에요.
+- [clab-platforms-server](https://github.com/KGU-C-Lab/clab-platforms-server): 경기대학교 AI컴퓨터공학부 개발동아리 C-Lab의 공식 백엔드 시스템이에요.
 
 ## Contributing
 
 동아리원이 아니더라도 누구나 기여할 수 있습니다. 해당 프로젝트에 기여하고 싶다면 아래 문서를 참고해주세요.
 
 [CONTRIBUTING.md](https://github.com/KGU-C-Lab/clab.page/blob/main/CONTRIBUTING.md)
+
+### Contributors
+
+[![contributors](https://contrib.rocks/image?repo=KGU-C-Lab/clab-platforms)](https://github.com/KGU-C-Lab/clab-platforms/contributors)
 
 ## FAQs
 
@@ -98,4 +73,4 @@
 C-Lab의 모든 공개 프로젝트는 [GNU General Public License v3.0](https://github.com/KGU-C-Lab/clab.page/blob/main/LICENSE)의 라이선스를 따라요.  
 자세한 사항은 `LICENSE`를 참고해주세요.
 
-**© Kyonggi University C-Lab**
+GPL-3.0 © Kyonggi University C-Lab
