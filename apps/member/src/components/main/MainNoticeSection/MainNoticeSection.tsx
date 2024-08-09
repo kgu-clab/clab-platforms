@@ -31,7 +31,7 @@ const MainNoticeSection = () => {
         <Notice
           title={closestNotice.title}
           content={closestNotice.detail}
-          date={closestNotice.startDate}
+          date={closestNotice.startDateTime}
           showDDay
         />
         {data.items.length > 1 && (
@@ -50,12 +50,12 @@ const MainNoticeSection = () => {
       >
         <hr className="my-4" />
         <div className="flex flex-col gap-4">
-          {data.items.slice(1).map(({ id, title, detail, startDate }) => (
+          {data.items.slice(1).map(({ id, title, detail, startDateTime }) => (
             <Notice
               key={id}
               title={title}
               content={detail}
-              date={startDate}
+              date={startDateTime}
               showDDay
             />
           ))}
