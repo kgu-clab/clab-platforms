@@ -48,11 +48,11 @@ const AssignmentUploadSection = ({
     setDescription(e.target.value);
   };
 
-  const onClickDeleteFile = () => {
+  const handleDeleteFileClick = () => {
     setUploadedFile(null);
   };
 
-  const onClickSubmit = () => {
+  const handleSubmitButtonClick = () => {
     const formData = new FormData();
     const file = uploaderRef.current?.files?.[0];
     if (file) {
@@ -149,13 +149,17 @@ const AssignmentUploadSection = ({
       </Table>
       <div className="mt-2 flex gap-4">
         {uploadedFile && (
-          <Button className="w-full" color="orange" onClick={onClickDeleteFile}>
+          <Button
+            className="w-full"
+            color="orange"
+            onClick={handleDeleteFileClick}
+          >
             첨부파일 변경하기
           </Button>
         )}
         <Button
           className="w-full"
-          onClick={onClickSubmit}
+          onClick={handleSubmitButtonClick}
           disabled={description.length === 0}
         >
           제출하기

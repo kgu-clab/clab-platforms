@@ -37,7 +37,7 @@ const GroupApplyPage = () => {
     setReason(e.target.value);
   };
 
-  const onClickApply = () => {
+  const handleApplyButtonClick = () => {
     if (groupID === 0 || reason.length === 0) {
       return toast({
         state: 'error',
@@ -87,7 +87,7 @@ const GroupApplyPage = () => {
             onChange={handleReasonChange}
           />
         </div>
-        <Button className="w-full" onClick={onClickApply}>
+        <Button className="w-full" onClick={handleApplyButtonClick}>
           신청하기
         </Button>
       </Section>
