@@ -1,7 +1,7 @@
 import { useCallback } from 'react';
 
 import { updateModalAtom } from '@/shared/atoms/modal';
-import { ModalKey } from '@/shared/types';
+import type { ModalKey } from '@/shared/types';
 import { useSetAtom } from 'jotai';
 
 interface UseModalParams {

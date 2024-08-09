@@ -12,17 +12,17 @@ import { CloseOutline } from '@clab/icon';
 
 import { DAY_VALUE_ARRAY, MODAL_KEY } from '@/shared/constants';
 import { useModalAction, useModalState } from '@/shared/hooks';
-import { DayKor } from '@/shared/types';
+import type { DayKor } from '@/shared/types';
 import { Modal } from '@/shared/ui';
 import {
   DAY_PERIOD_ARRAY,
   DAY_STATUS,
-  DayPeriod,
-  DayStatus,
+  type DayPeriod,
+  type DayStatus,
   GRADE,
-  Grade,
+  type Grade,
   NIGHT_PERIOD_ARRAY,
-  NightPeriod,
+  type NightPeriod,
 } from '@/widgets/time-table';
 
 interface TimeTableModalFilterProps<T> {

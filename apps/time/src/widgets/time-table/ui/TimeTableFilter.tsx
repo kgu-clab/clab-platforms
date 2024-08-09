@@ -1,12 +1,12 @@
 'use client';
 
-import { ReactNode, useCallback } from 'react';
+import { type ReactNode, useCallback } from 'react';
 
 import { cn } from '@clab/utils';
 
 import {
   DAY_STATUS,
-  DayStatus,
+  type DayStatus,
   useTimeTableParams,
 } from '@/widgets/time-table';
 

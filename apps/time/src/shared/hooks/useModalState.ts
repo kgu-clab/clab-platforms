@@ -1,5 +1,5 @@
 import { modalAtom } from '@/shared/atoms/modal';
-import { ModalKey } from '@/shared/types';
+import type { ModalKey } from '@/shared/types';
 import { useAtomValue } from 'jotai';
 
 interface UseModalStateParams {

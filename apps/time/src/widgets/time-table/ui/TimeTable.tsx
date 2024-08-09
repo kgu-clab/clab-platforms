@@ -8,10 +8,10 @@ import { DAY_VALUE_ARRAY, MODAL_KEY } from '@/shared/constants';
 import { useModalAction } from '@/shared/hooks';
 import {
   DAY_PERIOD_ARRAY,
-  DayPeriod,
-  DayStatus,
+  type DayPeriod,
+  type DayStatus,
   NIGHT_PERIOD_ARRAY,
-  NightPeriod,
+  type NightPeriod,
   getFormattedTime,
 } from '@/widgets/time-table';
 

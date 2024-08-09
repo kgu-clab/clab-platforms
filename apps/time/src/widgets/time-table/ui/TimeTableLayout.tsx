@@ -3,10 +3,10 @@
 import { useCallback, useState } from 'react';
 
 import { DAY_VALUE_ARRAY } from '@/shared/constants';
-import { DayKor } from '@/shared/types';
+import type { DayKor } from '@/shared/types';
 import {
-  DayPeriod,
-  NightPeriod,
+  type DayPeriod,
+  type NightPeriod,
   TimeTable,
   TimeTableHeader,
   TimeTableModal,
