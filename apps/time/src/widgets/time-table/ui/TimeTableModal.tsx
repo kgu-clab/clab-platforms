@@ -4,7 +4,6 @@ import {
   Dispatch,
   SetStateAction,
   useCallback,
-  useContext,
   useEffect,
   useState,
 } from 'react';
@@ -25,7 +24,6 @@ import {
   NIGHT_PERIOD_ARRAY,
   NightPeriod,
 } from '@/widgets/time-table';
-import { TimeTableStateContext } from '@/widgets/time-table/ui/TimeTableLayout';
 
 interface TimeTableModalFilterProps<T> {
   title: string;
@@ -39,6 +37,12 @@ interface TimeTableModalPeriodDropdownProps {
   dayStatus: DayStatus;
   selectedPeriod: DayPeriod[];
   dropdownItemHandler: (period: DayPeriod) => void;
+}
+
+interface TimeTableModalProps {
+  dayStatus: DayStatus;
+  day: DayKor;
+  period: DayPeriod | NightPeriod;
 }
 
 function TimeTableModalFilter<T extends string>({
@@ -105,17 +109,21 @@ function TimeTableModalPeriodDropdown({
   );
 }
 
-export default function TimeTableModal() {
-  const { dayStatus, day, period } = useContext(TimeTableStateContext);
+export default function TimeTableModal({
+  dayStatus,
+  day,
+  period,
+}: TimeTableModalProps) {
   const { close } = useModalAction({ key: MODAL_KEY.timeTable });
   const visible = useModalState({ key: MODAL_KEY.timeTable });
   const [selectedGrade, setSelectedGrade] = useState<Grade | ''>('');
-  const [selectedDay, setSelectedDay] = useState<DayKor>(day as DayKor);
+  const [selectedDay, setSelectedDay] = useState<DayKor>(day);
   const [selectedPeriod, setSelectedPeriod] = useState<
     DayPeriod[] | NightPeriod[]
   >([period]);
 
   useEffect(() => {
+    setSelectedGrade('');
     setSelectedDay(day as DayKor);
     setSelectedPeriod([period]);
   }, [day, period]);

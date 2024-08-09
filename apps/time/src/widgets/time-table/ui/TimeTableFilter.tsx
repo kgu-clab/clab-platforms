@@ -1,14 +1,14 @@
 'use client';
 
-import { ReactNode, useCallback, useContext } from 'react';
+import { ReactNode, useCallback } from 'react';
 
 import { cn } from '@clab/utils';
 
-import { DAY_STATUS, DayStatus } from '@/widgets/time-table';
 import {
-  TimeTableActionContext,
-  TimeTableStateContext,
-} from '@/widgets/time-table/ui/TimeTableLayout';
+  DAY_STATUS,
+  DayStatus,
+  useTimeTableParams,
+} from '@/widgets/time-table';
 
 interface TimeTableFilterItemProps {
   children: ReactNode;
@@ -36,8 +36,7 @@ function TimeTableFilterItem({
 }
 
 export default function TimeTableFilter() {
-  const { dayStatus } = useContext(TimeTableStateContext);
-  const { searchParamsAction } = useContext(TimeTableActionContext);
+  const { dayStatus, searchParamsAction } = useTimeTableParams();
 
   const onClickHandler = useCallback(
     (status: DayStatus) => {

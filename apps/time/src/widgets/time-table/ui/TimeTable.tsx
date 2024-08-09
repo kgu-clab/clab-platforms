@@ -1,6 +1,6 @@
 'use client';
 
-import { ReactNode, useContext } from 'react';
+import { ReactNode, memo } from 'react';
 
 import { cn } from '@clab/utils';
 
@@ -9,14 +9,22 @@ import { useModalAction } from '@/shared/hooks';
 import {
   DAY_PERIOD_ARRAY,
   DayPeriod,
+  DayStatus,
   NIGHT_PERIOD_ARRAY,
   NightPeriod,
   getFormattedTime,
 } from '@/widgets/time-table';
-import {
-  TimeTableActionContext,
-  TimeTableStateContext,
-} from '@/widgets/time-table/ui/TimeTableLayout';
+
+interface TimeTableProps {
+  dayStatus: DayStatus;
+  buttonHandler: ({
+    period,
+    idx,
+  }: {
+    period: DayPeriod | NightPeriod;
+    idx: number;
+  }) => void;
+}
 
 interface TimeTableItemProps {
   rowHeader?: boolean;
@@ -45,9 +53,7 @@ function TimeTableItem({
   );
 }
 
-export default function TimeTable() {
-  const { dayStatus } = useContext(TimeTableStateContext);
-  const { buttonClickAction } = useContext(TimeTableActionContext);
+function TimeTable({ dayStatus, buttonHandler }: TimeTableProps) {
   const selectedSchedule =
     dayStatus === 'day' ? DAY_PERIOD_ARRAY : NIGHT_PERIOD_ARRAY;
   const { open } = useModalAction({ key: MODAL_KEY.timeTable });
@@ -88,7 +94,7 @@ export default function TimeTable() {
                     type="button"
                     className="size-full"
                     onClick={() => {
-                      buttonClickAction({
+                      buttonHandler({
                         period: period as DayPeriod | NightPeriod,
                         idx,
                       });
@@ -104,6 +110,8 @@ export default function TimeTable() {
     </table>
   );
 }
+
+export default memo(TimeTable);
 
 TimeTable.displayName = 'TimeTable';
 TimeTableItem.displayName = 'TimeTableItem';
