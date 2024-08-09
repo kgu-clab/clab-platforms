@@ -192,11 +192,7 @@ export default function Modal({ title, close, children }: ModalProps) {
   }, [close]);
 
   return (
-    <div
-      className={cn(
-        'fixed top-0 z-40 flex h-dvh w-dvw flex-col items-center justify-center bg-gray-800 bg-opacity-60 transition-colors',
-      )}
-    >
+    <div className="fixed top-0 z-40 flex h-dvh w-dvw flex-col items-center justify-center bg-gray-800/60 transition-colors">
       <div
         ref={modalRef}
         className="h-fit w-3/4 space-y-4 rounded-xl bg-white p-6"
