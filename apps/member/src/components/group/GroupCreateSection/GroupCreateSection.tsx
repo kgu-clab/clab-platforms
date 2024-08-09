@@ -43,19 +43,20 @@ interface InputsType {
   githubUrl?: string;
 }
 
+const options = [
+  {
+    name: 'STUDY',
+    value: 'STUDY',
+  },
+  {
+    name: 'PROJECT',
+    value: 'PROJECT',
+  },
+];
+
 const GroupCreateSection = () => {
   const toast = useToast();
   const { activityGroupMutate } = useActivityGroupMutation();
-  const options = [
-    {
-      name: 'STUDY',
-      value: 'STUDY',
-    },
-    {
-      name: 'PROJECT',
-      value: 'PROJECT',
-    },
-  ];
   const [photoList, setPhotoList] = useState<PhotoType[]>([]);
   const [photoKeyword, setPhotoKeyword] = useState('');
   const [inputs, setInputs] = useState<InputsType>({
@@ -93,7 +94,7 @@ const GroupCreateSection = () => {
     }));
   };
 
-  const onClickApply = () => {
+  const handleApplyButtonClick = () => {
     if (subject.length === 0 || name.length === 0 || content.length === 0) {
       return toast({
         state: 'error',
@@ -103,7 +104,7 @@ const GroupCreateSection = () => {
     activityGroupMutate(inputs);
   };
 
-  const handleSearchImage = async () => {
+  const handleSearchClick = async () => {
     if (!photoKeyword)
       return toast({
         state: 'error',
@@ -113,7 +114,7 @@ const GroupCreateSection = () => {
     setPhotoList(images.results);
   };
 
-  const handleClickImage = (selectedImage: string) => {
+  const handleImageClick = (selectedImage: string) => {
     setInputs((prev) => ({
       ...prev,
       imageUrl: selectedImage,
@@ -182,14 +183,14 @@ const GroupCreateSection = () => {
               width={20}
               height={20}
               className="m-auto hover:cursor-pointer"
-              onClick={() => handleSearchImage()}
+              onClick={() => handleSearchClick()}
             />
           </div>
           <Grid gap="sm" col="2">
             {photoList &&
               photoList.slice(0, 6)?.map((photoItem) => (
                 <Image
-                  onClick={() => handleClickImage(photoItem.urls['full'])}
+                  onClick={() => handleImageClick(photoItem.urls['full'])}
                   height="max-h-[200px]"
                   overflow
                   key={photoItem.id}
@@ -272,7 +273,7 @@ const GroupCreateSection = () => {
             onChange={onChange}
           />
         </div>
-        <Button className="w-full" onClick={onClickApply}>
+        <Button className="w-full" onClick={handleApplyButtonClick}>
           새로운 그룹 추가하기
         </Button>
       </Section.Body>
