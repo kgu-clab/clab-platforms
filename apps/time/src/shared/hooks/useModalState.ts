@@ -7,5 +7,5 @@ interface UseModalStateParams {
 }
 
 export default function useModalState({ key }: UseModalStateParams) {
-  return useAtomValue(modalAtom)[key].visible;
+  return useAtomValue(modalAtom)[key];
 }
