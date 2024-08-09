@@ -1,6 +1,7 @@
-import { createPagination } from '@clab/utils';
+import { createPagination, createURL } from '@clab/utils';
 
 import { END_POINT } from '@constants/api';
+import { UNSPLASH_ACCESS_KEY } from '@constants/environment';
 import { createFormData } from '@utils/api';
 import { groupBoardParser } from '@utils/group';
 
@@ -8,6 +9,8 @@ import type {
   ActivityApplyMemberType,
   ActivityBoardType,
   ActivityGroupBoardParserType,
+  ActivityGroupCategoryType,
+  ActivityGroupCreateItem,
   ActivityGroupItem,
   ActivityGroupMemberMyType,
   ActivityGroupStatusType,
@@ -55,6 +58,24 @@ export interface PostActivityPhotoParams {
   title: string;
   date: string;
   file: File;
+}
+
+export interface PostActivityGroupParams {
+  category: ActivityGroupCategoryType;
+  subject: string;
+  name: string;
+  content: string;
+  imageUrl?: string;
+  curriculum?: string;
+  startDate?: string;
+  endDate?: string;
+  techStack?: string;
+  githubUrl?: string;
+}
+
+export interface PatchActivityGroupParams {
+  activityGroupId: number;
+  activityGroupStatus: ActivityGroupStatusType;
 }
 
 /**
@@ -300,6 +321,77 @@ export async function postActivityPhoto(body: PostActivityPhotoParams) {
       ...body,
       fileUrlList: [fileUrl],
     },
+  });
+
+  return data;
+}
+/**
+ * 키워드 사진 검색
+ */
+export async function getSearchImage(keyword: string) {
+  const accessKey = UNSPLASH_ACCESS_KEY;
+
+  if (!accessKey) {
+    throw new Error('no access key');
+  }
+
+  const url = new URL('https://api.unsplash.com/search/photos');
+  url.searchParams.append('query', keyword);
+
+  const response = await fetch(url.href, {
+    headers: {
+      Authorization: `Client-ID ${accessKey}`,
+    },
+  });
+
+  if (!response.ok) {
+    throw new Error(`Error fetching images: ${response.statusText}`);
+  }
+  const data = await response.json();
+
+  return data;
+}
+
+/**
+ * 활동 생성
+ */
+export async function postActivityGroup(body: PostActivityGroupParams) {
+  const { data } = await server.post<
+    ActivityGroupCreateItem,
+    BaseResponse<number>
+  >({
+    url: createURL(END_POINT.ACTIVITY_GROUP_ADMIN),
+    body,
+  });
+
+  return data;
+}
+
+/**
+ * 활동 삭제
+ */
+export async function deleteActivityGroup(activityGroupId: number) {
+  const { data } = await server.del<never, BaseResponse<number>>({
+    url: createURL(END_POINT.ACTIVITY_GROUP_ADMIN_DETAIL(activityGroupId)),
+  });
+
+  return data;
+}
+
+/**
+ * 활동 상태 변경
+ */
+export async function patchActivityGroup({
+  activityGroupId,
+  activityGroupStatus,
+}: PatchActivityGroupParams) {
+  const { data } = await server.patch<never, BaseResponse<number>>({
+    url: createPagination(
+      END_POINT.ACTIVITY_GROUP_ADMIN_MANAGE(activityGroupId),
+      {
+        activityGroupStatus,
+      },
+    ),
   });
 
   return data;

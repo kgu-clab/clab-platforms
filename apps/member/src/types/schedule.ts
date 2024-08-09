@@ -6,8 +6,8 @@ export interface ScheduleItem {
   title: string;
   detail: string;
   activityName: string | null;
-  startDate: string;
-  endDate: string;
+  startDateTime: string;
+  endDateTime: string;
   priority: SchedulePriority;
 }
 

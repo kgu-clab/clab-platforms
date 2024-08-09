@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { Button } from '@clab/design-system';
 
@@ -30,14 +30,14 @@ const GroupApplyPage = () => {
   }));
 
   const handleGroupIDChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setGroupID(Number(e.target.value));
+    setGroupID(+e.target.value);
   };
 
   const handleReasonChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setReason(e.target.value);
   };
 
-  const onClickApply = () => {
+  const handleApplyButtonClick = () => {
     if (groupID === 0 || reason.length === 0) {
       return toast({
         state: 'error',
@@ -52,6 +52,11 @@ const GroupApplyPage = () => {
       },
     });
   };
+
+  useEffect(() => {
+    if (groupData.items.length === 1 && groupData.items[0].id)
+      setGroupID(groupData.items[0].id);
+  }, [groupData.items]);
 
   return (
     <Content>
@@ -82,7 +87,7 @@ const GroupApplyPage = () => {
             onChange={handleReasonChange}
           />
         </div>
-        <Button className="w-full" onClick={onClickApply}>
+        <Button className="w-full" onClick={handleApplyButtonClick}>
           신청하기
         </Button>
       </Section>

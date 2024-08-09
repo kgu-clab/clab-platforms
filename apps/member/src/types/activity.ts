@@ -23,6 +23,8 @@ export interface ActivityGroupDetailType {
   activityGroupBoards: ActivityBoardType[];
   createdAt: string;
   isOwner: boolean;
+  githubUrl: string;
+  techStack: string;
 }
 
 export interface ActivityPhotoItem {
@@ -42,6 +44,19 @@ export interface ActivityGroupMemberType {
 
 export interface ActivityApplyMemberType extends ActivityGroupMemberType {
   applyReason: string;
+}
+
+export interface ActivityGroupCreateItem {
+  category: ActivityGroupCategoryType;
+  subject: string;
+  name: string;
+  content: string;
+  imageUrl?: string;
+  curriculum?: string;
+  startDate?: string;
+  endDate?: string;
+  techStack?: string;
+  githubUrl?: string;
 }
 
 export interface ActivityGroupItem {

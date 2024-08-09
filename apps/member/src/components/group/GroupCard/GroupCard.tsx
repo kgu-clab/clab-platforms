@@ -1,5 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 
+import { Grid } from '@clab/design-system';
 import { CertificateSolidOutline, DateRangeOutline } from '@clab/icon';
 import { cn } from '@clab/utils';
 
@@ -37,7 +38,7 @@ const InfoCard = ({ title, value, color }: InfoCardProps) => {
         colors[color],
       )}
     >
-      <b className='break-keep" text-nowrap'>{value}</b>
+      <b className="text-nowrap break-keep">{value}</b>
       <p className="text-xs font-semibold">{title}</p>
     </div>
   );
@@ -68,21 +69,24 @@ const GroupCard = ({
   const navigate = useNavigate();
 
   return (
-    <div
-      className="flex h-[227px] cursor-pointer rounded-lg border transition-colors hover:bg-gray-50"
+    <Grid
+      col="3"
+      gap="sm"
+      className="h-[227px] cursor-pointer rounded-lg border transition-colors hover:bg-gray-50"
       onClick={() => navigate(PATH_FINDER.ACTIVITY_DETAIL(id))}
     >
       <Image
         src={imageUrl}
-        width="w-1/3"
         alt={name}
+        height="min-h-fit h-full"
         className="rounded-l-lg border-r object-cover"
       />
-      <div className="flex w-2/3 flex-col gap-2 divide-y p-4">
+      <div className="col-span-2 flex flex-col gap-2 divide-y p-4">
         <div className="h-full">
           <p className="text-lg font-bold">{name}</p>
           <p className="text-sm text-gray-600">{content}</p>
         </div>
+
         <div className="grid pt-4 text-sm md:grid-cols-2 md:divide-x">
           <div className="hidden pr-4 md:block">
             <b>내용</b>
@@ -110,7 +114,7 @@ const GroupCard = ({
           </div>
         </div>
       </div>
-    </div>
+    </Grid>
   );
 };
 

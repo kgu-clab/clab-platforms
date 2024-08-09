@@ -80,8 +80,8 @@ export const transformEvents = (
 ): Record<string, ScheduleItem[]> => {
   return events.reduce(
     (acc, current) => {
-      const startDate = new Date(current.startDate.split('T')[0]); // 시작 날짜 객체 생성
-      const endDate = new Date(current.endDate.split('T')[0]); // 종료 날짜 객체 생성
+      const startDate = new Date(current.startDateTime.split('T')[0]); // 시작 날짜 객체 생성
+      const endDate = new Date(current.endDateTime.split('T')[0]); // 종료 날짜 객체 생성
 
       for (
         let date = new Date(startDate);
