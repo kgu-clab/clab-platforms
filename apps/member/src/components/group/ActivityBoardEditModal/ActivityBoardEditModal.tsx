@@ -1,24 +1,38 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 
-import { Input } from '@clab/design-system';
+import { Button, Input } from '@clab/design-system';
+import { cn } from '@clab/utils';
 
 import Modal from '@components/common/Modal/Modal';
 import Textarea from '@components/common/Textarea/Textarea';
 
+import { FORM_DATA_KEY } from '@constants/api';
 import useModal from '@hooks/common/useModal';
 import useToast from '@hooks/common/useToast';
 import { useActivityGroupBoardPatchMutation } from '@hooks/queries/activity/useActivityGroupBoardMutation';
 
 import type { ActivityBoardType } from '@type/activity';
+import { ResponseFile } from '@type/api';
 
 interface Props {
   prevData: ActivityBoardType;
+  groupId: number;
+}
+interface FileUploaderProps {
+  uploadedFile: ResponseFile | null;
+  uploaderRef: React.RefObject<HTMLInputElement>;
+  handleDeleteFileClick: () => void;
 }
 
-const ActivityBoardEditModal = ({ prevData }: Props) => {
+const ActivityBoardEditModal = ({ prevData, groupId }: Props) => {
   const { closeModal } = useModal();
   const toast = useToast();
-  const [detail, setDetail] = useState<ActivityBoardType>(prevData);
+  const [board, setBoard] = useState<ActivityBoardType>(prevData);
+
+  const uploaderRef = useRef<HTMLInputElement>(null);
+  const [uploadedFile, setUploadedFile] = useState<ResponseFile | null>(
+    prevData?.files?.[0] || null,
+  );
   const { activityGroupBoardPatchMutate } =
     useActivityGroupBoardPatchMutation();
 
@@ -26,23 +40,37 @@ const ActivityBoardEditModal = ({ prevData }: Props) => {
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
     const { name, value } = e.target;
-    setDetail((prev) => ({ ...prev, [name]: value }));
+    setBoard((prev) => ({ ...prev, [name]: value }));
+  };
+  const handleDeleteFileClick = () => {
+    setUploadedFile(null);
   };
   const handleEditButtonClick = () => {
-    if (!detail.title || !detail.content) {
+    if (!board.title || !board.content) {
       return toast({
         state: 'error',
         message: '제목과 내용을 입력해주세요.',
       });
     }
+
+    const formData = new FormData();
+    const file = uploaderRef.current?.files?.[0];
+    if (file) {
+      formData.append(FORM_DATA_KEY, file);
+    }
+
     activityGroupBoardPatchMutate({
       activityGroupBoardId: prevData.id,
+      groupId: groupId,
+      groupBoardId: prevData.parentId,
       body: {
-        category: detail.category,
-        title: detail.title,
-        content: detail.content,
+        title: board.title,
+        content: board.content,
+        dueDateTime: board.dueDateTime,
       },
+      files: file ? formData : undefined,
     });
+    closeModal();
   };
 
   return (
@@ -52,17 +80,34 @@ const ActivityBoardEditModal = ({ prevData }: Props) => {
         <Input
           name="title"
           id="title"
-          value={detail.title}
+          value={board.title}
           onChange={handleBoardChange}
-          placeholder={detail.title}
+          placeholder={board.title}
         />
         <Textarea
           name="content"
           id="content"
-          value={detail.content}
+          value={board.content}
           onChange={handleBoardChange}
-          placeholder={detail.content}
+          placeholder={board.content}
         />
+        {prevData.category === 'ASSIGNMENT' && (
+          <>
+            <FileUploader
+              uploadedFile={uploadedFile}
+              uploaderRef={uploaderRef}
+              handleDeleteFileClick={handleDeleteFileClick}
+            />
+            <Input
+              label="종료 일시"
+              type="datetime-local"
+              id="dueDateTime"
+              name="dueDateTime"
+              value={board.dueDateTime}
+              onChange={handleBoardChange}
+            />
+          </>
+        )}
       </Modal.Body>
       <Modal.Footer>
         <Modal.Button color="orange" onClick={handleEditButtonClick}>
@@ -73,6 +118,38 @@ const ActivityBoardEditModal = ({ prevData }: Props) => {
         </Modal.Button>
       </Modal.Footer>
     </Modal>
+  );
+};
+
+const FileUploader = ({
+  uploadedFile,
+  uploaderRef,
+  handleDeleteFileClick,
+}: FileUploaderProps) => {
+  return (
+    <>
+      {uploadedFile && (
+        <div className="space-y-2">
+          <a
+            href={uploadedFile.fileUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:underline"
+          >
+            {uploadedFile.originalFileName}
+          </a>
+          <Button className="w-full" onClick={handleDeleteFileClick}>
+            첨부파일 변경하기
+          </Button>
+        </div>
+      )}
+      <input
+        ref={uploaderRef}
+        id="uploader"
+        type="file"
+        className={cn(uploadedFile && 'hidden')}
+      />
+    </>
   );
 };
 
