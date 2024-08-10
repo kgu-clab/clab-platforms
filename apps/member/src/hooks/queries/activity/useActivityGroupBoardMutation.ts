@@ -1,6 +1,10 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
-import { patchActivityBoard, postActivityBoard } from '@api/activity';
+import {
+  deleteActivityGroupBoards,
+  patchActivityBoard,
+  postActivityBoard,
+} from '@api/activity';
 import { ACTIVITY_QUERY_KEY } from '@constants/key';
 import useToast from '@hooks/common/useToast';
 
@@ -57,5 +61,33 @@ export function useActivityGroupBoardPatchMutation() {
 
   return {
     activityGroupBoardPatchMutate: mutation.mutate,
+  };
+}
+
+/**
+ * 활동 그룹 게시글을 삭제합니다.
+ */
+export function useActivityGroupBoardDeleteMutation() {
+  const queryClient = useQueryClient();
+  const toast = useToast();
+
+  const mutation = useMutation({
+    mutationFn: deleteActivityGroupBoards,
+    onSuccess: (data) => {
+      if (data) {
+        toast({
+          state: 'success',
+          message: '게시글이 삭제됐어요.',
+        });
+      }
+
+      queryClient.invalidateQueries({
+        queryKey: ACTIVITY_QUERY_KEY.BOARD(data),
+      });
+    },
+  });
+
+  return {
+    activityGroupBoardDeleteMutate: mutation.mutate,
   };
 }

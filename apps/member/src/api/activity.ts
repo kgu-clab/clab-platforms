@@ -8,8 +8,8 @@ import { groupBoardParser } from '@utils/group';
 import type {
   ActivityApplyMemberType,
   ActivityBoardType,
+  ActivityGroupBoardCategoryType,
   ActivityGroupBoardParserType,
-  ActivityGroupCategoryType,
   ActivityGroupCreateItem,
   ActivityGroupItem,
   ActivityGroupMemberMyType,
@@ -48,8 +48,8 @@ export interface PostActivityBoardParams {
 
 export interface PatchActivityBoardParams {
   activityGroupBoardId: number;
-  groupId: number;
-  groupBoardId: number;
+  groupId?: number;
+  groupBoardId?: number;
   body: SubmitBoardType;
   files?: FormData;
 }
@@ -60,6 +60,12 @@ export interface PostActivityPhotoParams {
   file: File;
 }
 
+export interface GetActivityBoardByCategoryParams {
+  activityGroupId: number;
+  category: ActivityGroupBoardCategoryType;
+  page: number;
+  size: number;
+}
 export interface PostActivityGroupParams {
   category: ActivityGroupCategoryType;
   subject: string;
@@ -76,6 +82,11 @@ export interface PostActivityGroupParams {
 export interface PatchActivityGroupParams {
   activityGroupId: number;
   activityGroupStatus: ActivityGroupStatusType;
+}
+
+export interface PatchActivityGroupAdminParams {
+  activityGroupId: number;
+  body: ActivityGroupCreateItem;
 }
 
 /**
@@ -325,6 +336,28 @@ export async function postActivityPhoto(body: PostActivityPhotoParams) {
 
   return data;
 }
+
+/**
+ * 활동 내 카테고리 게시판 조회
+ */
+export async function getActivityBoardByCategory({
+  activityGroupId,
+  category,
+  page,
+  size,
+}: GetActivityBoardByCategoryParams) {
+  const { data } = await server.get<ResponsePagination<ActivityBoardType>>({
+    url: createPagination(END_POINT.ACTIVITY_GROUP_BOARD_BY_CATEGORY, {
+      activityGroupId,
+      category,
+      page,
+      size,
+    }),
+  });
+
+  return data;
+}
+
 /**
  * 키워드 사진 검색
  */
@@ -392,6 +425,37 @@ export async function patchActivityGroup({
         activityGroupStatus,
       },
     ),
+  });
+
+  return data;
+}
+
+/**
+ * 활동 수정
+ */
+export async function patchActivityGroupAdmin({
+  activityGroupId,
+  body,
+}: PatchActivityGroupAdminParams) {
+  const { data } = await server.patch<
+    ActivityGroupCreateItem,
+    BaseResponse<number>
+  >({
+    url: createURL(END_POINT.ACTIVITY_GROUP_ADMIN_DETAIL(activityGroupId)),
+    body,
+  });
+
+  return data;
+}
+
+/**
+ * 활동 게시판 삭제
+ */
+export async function deleteActivityGroupBoards(activityGroupBoardId: number) {
+  const { data } = await server.del<never, BaseResponse<number>>({
+    url: createPagination(END_POINT.ACTIVITY_GROUP_BOARDS, {
+      activityGroupBoardId,
+    }),
   });
 
   return data;
