@@ -11,8 +11,8 @@ import { useActivityGroupBoardMutation } from '@hooks/queries/activity/useActivi
 
 import type { ActivityBoardType } from '@type/activity';
 
+import ActivityConfigTableSection from '../ActivityConfigTableSection/ActivityConfigTableSection';
 import ActivityNoticeSection from '../ActivityNoticeSection/ActivityNoticeSection';
-import ActivityNoticeTableSection from '../ActivityNoticeTableSection.tsx/ActivityNoticeTableSection.tsx';
 
 interface Props {
   groupId: number;
@@ -81,7 +81,10 @@ const ActivityNoticeEditor = ({ groupId }: Props) => {
           <ActivityNoticeSection data={[notice, ...noticeData.items]} />
         </Section.Body>
       </Section>
-      <ActivityNoticeTableSection notice={noticeData.items} />
+      <ActivityConfigTableSection
+        tableList={noticeData.items}
+        groupId={groupId}
+      />
     </>
   );
 };
