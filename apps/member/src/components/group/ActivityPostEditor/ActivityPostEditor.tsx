@@ -167,7 +167,9 @@ const ActivityPostEditor = ({ groupId, data }: ActivityPostEditorProps) => {
                 activityGroupId={groupId}
               />
               <ActivityConfigTableSection
-                tableList={assignmentData.items}
+                tableList={assignmentData.items.filter(
+                  (item) => item.parentId === weeklyData.id,
+                )}
                 groupId={groupId}
               />
             </>
