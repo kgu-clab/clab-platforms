@@ -42,7 +42,7 @@ const WeeklyActivityCard = ({
 
   return (
     <div key={index + 1}>
-      <div className="flex items-center justify-between">
+      <div className="flex items-center justify-between pt-2">
         <div className="flex gap-2 font-semibold">
           <span>{index + 1}.</span>
           <span>{title}</span>
@@ -55,7 +55,7 @@ const WeeklyActivityCard = ({
             <div
               key={assignmentId}
               onClick={() => onClick(assignmentId, [title, assignmentTitle])}
-              className="flex cursor-pointer items-center"
+              className="flex cursor-pointer items-center rounded-lg transition-colors duration-300 ease-in-out hover:bg-gray-100"
             >
               <RegularFileAltOutline
                 width={25}
