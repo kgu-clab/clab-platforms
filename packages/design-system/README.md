@@ -1,4 +1,4 @@
-# @clab/design-system &middot; [![MIT License](https://img.shields.io/badge/license-GPL--3.0-blue.svg)](https://github.com/KGU-C-Lab/clab-platforms/blob/main/LICENSE) [![pnpm CI](https://github.com/KGU-C-Lab/clab-platforms/actions/workflows/pnpm-ci.yml/badge.svg)](https://github.com/KGU-C-Lab/clab-platforms/actions/workflows/pnpm-ci.yml) [![codecov](https://codecov.io/gh/KGU-C-Lab/clab.page/graph/badge.svg?token=Z5PFR6US6Z)](https://codecov.io/gh/KGU-C-Lab/clab.page)
+# @clab-platforms/design-system &middot; [![MIT License](https://img.shields.io/badge/license-GPL--3.0-blue.svg)](https://github.com/KGU-C-Lab/clab-platforms/blob/main/LICENSE) [![pnpm CI](https://github.com/KGU-C-Lab/clab-platforms/actions/workflows/pnpm-ci.yml/badge.svg)](https://github.com/KGU-C-Lab/clab-platforms/actions/workflows/pnpm-ci.yml) [![codecov](https://codecov.io/gh/KGU-C-Lab/clab.page/graph/badge.svg?token=Z5PFR6US6Z)](https://codecov.io/gh/KGU-C-Lab/clab.page)
 
 C-Lab Design System(CDS)은 동아리의 모든 프로젝트에 일관된 디자인을 적용하기 위해 개발된 통합 디자인 시스템이에요.  
 CDS는 동아리 내에서 사용할 목적으로 개발되었지만, 차기 버전은 지금의 모습보다 더욱 고도화하여 외부에서도 사용할 수 있도록 배포할 예정이에요.
@@ -75,9 +75,13 @@ CDS는 동아리 내에서 사용할 목적으로 개발되었지만, 차기 버
 
 [CONTRIBUTING.md](https://github.com/KGU-C-Lab/clab-platforms/blob/main/CONTRIBUTING.md)
 
+### Contributors
+
+[![contributors](https://contrib.rocks/image?repo=KGU-C-Lab/clab-platforms)](https://github.com/KGU-C-Lab/clab-platforms/contributors)
+
 ## License
 
 C-Lab의 모든 공개 프로젝트는 [GNU General Public License v3.0](https://github.com/KGU-C-Lab/clab-platforms/blob/main/LICENSE)의 라이선스를 따라요.  
 자세한 사항은 `LICENSE`를 참고해주세요.
 
-**© Kyonggi University C-Lab**
+GPL-3.0 © Kyonggi University C-Lab

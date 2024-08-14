@@ -1,4 +1,11 @@
 {
-  "name": "@clab/config",
-  "private": true
+  "name": "@clab-platforms/config",
+  "private": true,
+  "files": [
+    "clab.tailwind.preset.js",
+    "tsconfig.base.json",
+    "tsconfig.next.json",
+    "tsconfig.package.json",
+    "tsconfig.react.json"
+  ]
 }

@@ -1,6 +1,6 @@
 import { type SubmitHandler, useForm } from 'react-hook-form';
 
-import { Button, Input } from '@clab/design-system';
+import { Button, Input } from '@clab-platforms/design-system';
 
 import { type AuthData } from '@/app/[code]/page';
 import { useLoginMutation } from '@/src/hooks/queries/useLoginMutation';

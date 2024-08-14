@@ -1,6 +1,6 @@
 import { ComponentPropsWithRef, forwardRef } from 'react';
 
-import { cn } from '@clab/utils';
+import { cn } from '@clab-platforms/utils';
 
 interface TextareaProps extends ComponentPropsWithRef<'textarea'> {
   label?: string;

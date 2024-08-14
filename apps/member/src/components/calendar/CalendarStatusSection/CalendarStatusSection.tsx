@@ -3,7 +3,7 @@ import {
   CalendarColor,
   LeaveColor,
   OvertimeColor,
-} from '@clab/icon';
+} from '@clab-platforms/icon';
 
 import Section from '@components/common/Section/Section';
 import StatusCard from '@components/common/StatusCard/StatusCard';

@@ -1,4 +1,4 @@
-import { Grid } from '@clab/design-system';
+import { Grid } from '@clab-platforms/design-system';
 
 import Content from '@components/common/Content/Content';
 import MyActivityGroupSection from '@components/my/MyActivityGroupSection/MyActivityGroupSection';

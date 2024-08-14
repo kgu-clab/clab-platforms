@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import { TimelineColor } from '@clab/icon';
+import { TimelineColor } from '@clab-platforms/icon';
 
 import Panel from '@components/common/Panel/Panel';
 

@@ -1,8 +1,12 @@
 import { useEffect } from 'react';
 
-import { Button, Checkbox, Input, Tabs } from '@clab/design-system';
-import { AnswersColor, MultipleDevicesColor, TemplateColor } from '@clab/icon';
-import { formatComma } from '@clab/utils';
+import { Button, Checkbox, Input, Tabs } from '@clab-platforms/design-system';
+import {
+  AnswersColor,
+  MultipleDevicesColor,
+  TemplateColor,
+} from '@clab-platforms/icon';
+import { formatComma } from '@clab-platforms/utils';
 
 import Linker from '@components/common/Linker/Linker';
 import Loading from '@components/common/Loading/Loading';

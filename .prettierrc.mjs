@@ -1,0 +1,25 @@
+export default {
+  singleQuote: true,
+  semi: true,
+  useTabs: false,
+  tabWidth: 2,
+  trailingComma: 'all',
+  printWidth: 80,
+  importOrder: [
+    '^react(.*)',
+    '^recoil(.*)',
+    '^@tanstack/(.*)$',
+    '^@clab-platforms/(.*)$',
+    '^@components/(.*)$',
+    '<THIRD_PARTY_MODULES>',
+    '^@assets/(.*)$',
+    '^@type/(.*)$',
+    '^[./]',
+  ],
+  importOrderSeparation: true,
+  importOrderSortSpecifiers: true,
+  plugins: [
+    '@trivago/prettier-plugin-sort-imports',
+    'prettier-plugin-tailwindcss',
+  ],
+};

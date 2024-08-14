@@ -1,8 +1,8 @@
 import { useState } from 'react';
 
-import { Button, Grid, Input } from '@clab/design-system';
-import { SearchOutline } from '@clab/icon';
-import { cn } from '@clab/utils';
+import { Button, Grid, Input } from '@clab-platforms/design-system';
+import { SearchOutline } from '@clab-platforms/icon';
+import { cn } from '@clab-platforms/utils';
 
 import Image from '@components/common/Image/Image';
 import Label from '@components/common/Label/Label';

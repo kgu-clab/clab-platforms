@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 
-import { cn } from '@clab/utils';
+import { cn } from '@clab-platforms/utils';
 
 import { createImageUrl } from '@utils/api';
 

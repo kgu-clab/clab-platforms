@@ -1,6 +1,6 @@
 import { isRouteErrorResponse, useRouteError } from 'react-router-dom';
 
-import { HighPriorityColor } from '@clab/icon';
+import { HighPriorityColor } from '@clab-platforms/icon';
 
 import Footer from '@components/common/Footer/Footer';
 import Linker from '@components/common/Linker/Linker';

@@ -2,7 +2,7 @@
 
 import { type ReactNode, useCallback } from 'react';
 
-import { cn } from '@clab/utils';
+import { cn } from '@clab-platforms/utils';
 
 import {
   DAY_STATUS,

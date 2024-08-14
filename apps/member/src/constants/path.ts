@@ -1,4 +1,4 @@
-import { createURL } from '@clab/utils';
+import { createURL } from '@clab-platforms/utils';
 
 import type { IDType } from '@type/api';
 import type { CommunityCategoryType } from '@type/community';

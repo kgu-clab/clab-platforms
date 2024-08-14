@@ -1,5 +1,5 @@
 {
-  "extends": "@clab/config/tsconfig.react.json",
+  "extends": "@clab-platforms/config/tsconfig.react.json",
   "compilerOptions": {
     "paths": {
       "@api/*": ["./src/api/*"],

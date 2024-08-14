@@ -1,6 +1,6 @@
 import { PropsWithChildren } from 'react';
 
-import { cn } from '@clab/utils';
+import { cn } from '@clab-platforms/utils';
 
 import useModal from '@hooks/common/useModal';
 

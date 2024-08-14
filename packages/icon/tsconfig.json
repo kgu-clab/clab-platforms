@@ -1,5 +1,5 @@
 {
-  "extends": "@clab/config/tsconfig.package.json",
+  "extends": "@clab-platforms/config/tsconfig.package.json",
   "compilerOptions": {
     "jsx": "react-jsx"
   },

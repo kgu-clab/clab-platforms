@@ -1,12 +1,12 @@
-# Members &middot; [![MIT License](https://img.shields.io/badge/license-GPL--3.0-blue.svg)](https://github.com/KGU-C-Lab/clab-platforms/blob/main/LICENSE) [![pnpm CI](https://github.com/KGU-C-Lab/clab-platforms/actions/workflows/pnpm-ci.yml/badge.svg)](https://github.com/KGU-C-Lab/clab-platforms/actions/workflows/pnpm-ci.yml)
+# @clab-platforms/member &middot; [![MIT License](https://img.shields.io/badge/license-GPL--3.0-blue.svg)](https://github.com/KGU-C-Lab/clab-platforms/blob/main/LICENSE) [![pnpm CI](https://github.com/KGU-C-Lab/clab-platforms/actions/workflows/pnpm-ci.yml/badge.svg)](https://github.com/KGU-C-Lab/clab-platforms/actions/workflows/pnpm-ci.yml)
 
-멤버스(Member) 프로젝트는 구성원의 활동과 커뮤니케이션을 지원하는 인터널(Internal) 그룹웨어 시스템이에요.  
+멤버스(Members)는 구성원의 활동과 커뮤니케이션을 지원하는 인터널(Internal) 그룹웨어 시스템이에요.  
 모임에서 필요한 모든 기능을 제공하며, 구성원들이 손쉽게 활동을 관리하고 소통할 수 있도록 도와줘요. 활동, 일정, 커뮤니티, 도서관, 회비 등 다양한 기능을 제공하고 있어요.
 
 C-Lab의 공식 인터널 플랫폼이에요. 동아리의 모든 활동은 이곳에서 이루어져요.
 
-- DAU 60+명, 리텐션 99%의 인터널 그룹웨어 플랫폼이에요.
-- 매 학기 활동하는 구성원 약 50명과 졸업생 약 10명, 총 60명이 사용하고 있어요. 사용자는 지속적으로 늘고있어요.
+- [경기대학교 컴퓨터공학부 개발동아리 C-Lab](https://www.clab.page/)에서 공식적으로 서비스하여 사용하고 있어요.
+- **DAU 56+명**, **평균 참여 시간 3분**의 동아리 활동 플랫폼이에요. (Google Analytics 4)
 
 ## Features
 
@@ -77,9 +77,13 @@ C-Lab의 공식 인터널 플랫폼이에요. 동아리의 모든 활동은 이�
 
 [CONTRIBUTING.md](https://github.com/KGU-C-Lab/clab-platforms/blob/main/CONTRIBUTING.md)
 
+### Contributors
+
+[![contributors](https://contrib.rocks/image?repo=KGU-C-Lab/clab-platforms)](https://github.com/KGU-C-Lab/clab-platforms/contributors)
+
 ## License
 
 C-Lab의 모든 공개 프로젝트는 [GNU General Public License v3.0](https://github.com/KGU-C-Lab/clab-platforms/blob/main/LICENSE)의 라이선스를 따라요.  
 자세한 사항은 `LICENSE`를 참고해주세요.
 
-**© Kyonggi University C-Lab**
+GPL-3.0 © Kyonggi University C-Lab

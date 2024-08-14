@@ -1,5 +1,5 @@
-import { Grid } from '@clab/design-system';
-import { cn, createURL, toDecodeHTMLEntities } from '@clab/utils';
+import { Grid } from '@clab-platforms/design-system';
+import { cn, createURL, toDecodeHTMLEntities } from '@clab-platforms/utils';
 
 import CommentCounter from '@components/common/CommentCounter/CommentCounter';
 import ListButton from '@components/common/ListButton/ListButton';

@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import { cn } from '@clab/utils';
+import { cn } from '@clab-platforms/utils';
 
 import DropdownButton from '@components/common/DropdownButton/DropdownButton';
 import Notice from '@components/common/Notice/Notice';

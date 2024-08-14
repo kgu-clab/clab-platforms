@@ -1,6 +1,6 @@
 'use client';
 
-import { Button } from '@clab/design-system';
+import { Button } from '@clab-platforms/design-system';
 
 import HelpDesk from '@components/common/HelpDesk/HelpDesk';
 

@@ -1,7 +1,7 @@
 import { ComponentPropsWithRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { cn } from '@clab/utils';
+import { cn } from '@clab-platforms/utils';
 
 interface ListButtonProps extends ComponentPropsWithRef<'button'> {
   to?: string;

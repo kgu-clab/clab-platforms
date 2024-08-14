@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
-import { ChevronDownOutline } from '@clab/icon';
-import { cn } from '@clab/utils';
+import { ChevronDownOutline } from '@clab-platforms/icon';
+import { cn } from '@clab-platforms/utils';
 
 interface DropdownButtonProps {
   className?: string;

@@ -1,4 +1,4 @@
-import { BookmarkColor } from '@clab/icon';
+import { BookmarkColor } from '@clab-platforms/icon';
 
 import Panel from '@components/common/Panel/Panel';
 import ProgressBar from '@components/common/ProgressBar/ProgressBar';

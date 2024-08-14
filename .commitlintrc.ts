@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   extends: ['@commitlint/config-conventional'],
   rules: {
     'references-empty': [2, 'never'], // 이슈 참조가 포함되어야 합니다.

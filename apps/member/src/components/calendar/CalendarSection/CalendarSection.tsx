@@ -1,6 +1,6 @@
 import { startTransition, useState } from 'react';
 
-import { cn } from '@clab/utils';
+import { cn } from '@clab-platforms/utils';
 
 import ArrowButton from '@components/common/ArrowButton/ArrowButton';
 import Section from '@components/common/Section/Section';

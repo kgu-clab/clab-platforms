@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-import { OTPInput } from '@clab/design-system';
+import { OTPInput } from '@clab-platforms/design-system';
 
 import { type AuthData } from '@/app/[code]/page';
 import { useTwoFactorLoginMutation } from '@/src/hooks/queries/useTwoFactorLoginMutation';

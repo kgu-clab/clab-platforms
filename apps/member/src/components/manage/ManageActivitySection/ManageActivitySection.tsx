@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import { Menubar, Table } from '@clab/design-system';
+import { Menubar, Table } from '@clab-platforms/design-system';
 
 import ActionButton from '@components/common/ActionButton/ActionButton';
 import { Section } from '@components/common/Section';

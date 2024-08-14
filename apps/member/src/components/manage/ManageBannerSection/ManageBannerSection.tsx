@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import { Button, Input } from '@clab/design-system';
+import { Button, Input } from '@clab-platforms/design-system';
 
 import Hr from '@components/common/Hr/Hr';
 import { Section } from '@components/common/Section';

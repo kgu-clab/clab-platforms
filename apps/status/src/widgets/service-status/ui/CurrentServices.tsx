@@ -1,4 +1,4 @@
-import { cn } from '@clab/utils';
+import { cn } from '@clab-platforms/utils';
 
 import { SERVICE_LIST } from '@/src/shared';
 import Title from '@/src/shared/ui/Title';

@@ -1,4 +1,4 @@
-import { cn } from '@clab/utils';
+import { cn } from '@clab-platforms/utils';
 
 import { Providers } from '@/shared/utils';
 import type { Metadata } from 'next';
