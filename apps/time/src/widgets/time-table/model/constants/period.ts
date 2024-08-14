@@ -147,9 +147,12 @@ const DAY_STATUS = {
   night: '야간',
 } as const;
 
+const SPECIAL_PERIOD = ['이러닝', '교외수업', '사회봉사'] as const;
+
 export {
   DAY_PERIOD,
   NIGHT_PERIOD,
+  SPECIAL_PERIOD,
   DAY_PERIOD_ARRAY,
   NIGHT_PERIOD_ARRAY,
   DAY_STATUS,

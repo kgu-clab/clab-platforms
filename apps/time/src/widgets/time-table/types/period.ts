@@ -1,7 +1,7 @@
-import { DAY_PERIOD, NIGHT_PERIOD } from '@/widgets/time-table';
+import { DAY_PERIOD, NIGHT_PERIOD, SPECIAL_PERIOD } from '@/widgets/time-table';
 
-type DayPeriod = keyof typeof DAY_PERIOD;
+export type SpecialPeriod = (typeof SPECIAL_PERIOD)[number];
 
-type NightPeriod = keyof typeof NIGHT_PERIOD;
+export type DayPeriod = keyof typeof DAY_PERIOD | SpecialPeriod;
 
-export type { DayPeriod, NightPeriod };
+export type NightPeriod = keyof typeof NIGHT_PERIOD | SpecialPeriod;
