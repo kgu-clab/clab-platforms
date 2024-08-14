@@ -1,12 +1,20 @@
 import { useMutation } from '@tanstack/react-query';
 
 import { patchActivityGroupMemberApply } from '@api/activity';
+import useToast from '@hooks/common/useToast';
 
 export function useActivityGroupApplicationMutation() {
+  const toast = useToast();
+
   const mutation = useMutation({
     mutationFn: patchActivityGroupMemberApply,
-    onSuccess: () => {
-      // TODO: 멤버의 ID가 리턴된다.
+    onSuccess: (data) => {
+      if (data) {
+        toast({
+          state: 'success',
+          message: '참여자 상태가 변경되었습니다.',
+        });
+      }
     },
   });
 

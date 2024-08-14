@@ -71,20 +71,21 @@ const ActivityParticipantEditor = ({ groupId }: Props) => {
                   >
                     지원서
                   </Button>
-
-                  <Button
-                    size="sm"
-                    color="green"
-                    onClick={() => handleAcceptClick(memberId)}
-                  >
-                    수락
-                  </Button>
+                  {status !== 'ACCEPTED' && (
+                    <Button
+                      size="sm"
+                      color="green"
+                      onClick={() => handleAcceptClick(memberId)}
+                    >
+                      승인
+                    </Button>
+                  )}
                   <Button
                     size="sm"
                     color="red"
                     onClick={() => handleRejectClick(memberId)}
                   >
-                    거절
+                    삭제
                   </Button>
                 </Table.Cell>
               </Table.Row>

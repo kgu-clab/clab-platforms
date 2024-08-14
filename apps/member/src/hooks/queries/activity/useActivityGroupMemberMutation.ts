@@ -1,12 +1,14 @@
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 import { postActivityGroupMemberApply } from '@api/activity';
+import { ACTIVITY_QUERY_KEY } from '@constants/key';
 import useToast from '@hooks/common/useToast';
 
 /**
  * 활동을 신청합니다.
  */
 export function useActivityGroupMemberMutation() {
+  const queryClient = useQueryClient();
   const toast = useToast();
 
   const mutation = useMutation({
@@ -23,6 +25,9 @@ export function useActivityGroupMemberMutation() {
           message: '신청이 완료되었습니다.',
         });
       }
+      queryClient.invalidateQueries({
+        queryKey: ACTIVITY_QUERY_KEY.MEMBER(data),
+      });
     },
   });
 
