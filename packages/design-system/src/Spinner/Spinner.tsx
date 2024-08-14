@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { cn } from '@clab/utils';
+import { cn } from '@clab-platforms/utils';
 
 import { spinnerVariants } from './Spinner.styles';
 import type { SpinnerSizeVariant, SpinnerVariantProps } from './Spinner.types';

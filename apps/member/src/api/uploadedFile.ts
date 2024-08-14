@@ -1,4 +1,4 @@
-import { createURL } from '@clab/utils';
+import { createURL } from '@clab-platforms/utils';
 
 import { END_POINT, FORM_DATA_KEY, STORAGE_PERIOD } from '@constants/api';
 

@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 
-import { Button } from '@clab/design-system';
+import { Button } from '@clab-platforms/design-system';
 
 import { PATH } from '@constants/path';
 

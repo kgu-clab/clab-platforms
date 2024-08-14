@@ -8,7 +8,7 @@ import {
   useState,
 } from 'react';
 
-import { CloseOutline } from '@clab/icon';
+import { CloseOutline } from '@clab-platforms/icon';
 
 import { DAY_VALUE_ARRAY, MODAL_KEY } from '@/shared/constants';
 import { useModalAction, useModalState } from '@/shared/hooks';

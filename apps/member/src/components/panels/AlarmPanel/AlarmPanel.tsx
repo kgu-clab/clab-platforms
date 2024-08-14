@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import { AboutColor } from '@clab/icon';
+import { AboutColor } from '@clab-platforms/icon';
 
 import Panel from '@components/common/Panel/Panel';
 

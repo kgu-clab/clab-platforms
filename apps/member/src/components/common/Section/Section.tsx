@@ -1,6 +1,6 @@
 import { type PropsWithChildren } from 'react';
 
-import { cn } from '@clab/utils';
+import { cn } from '@clab-platforms/utils';
 
 import type { StrictPropsWithChildren } from '@type/component';
 

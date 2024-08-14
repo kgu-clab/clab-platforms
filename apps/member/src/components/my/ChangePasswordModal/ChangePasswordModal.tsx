@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
-import { Input } from '@clab/design-system';
-import { cn } from '@clab/utils';
+import { Input } from '@clab-platforms/design-system';
+import { cn } from '@clab-platforms/utils';
 
 import Modal from '@components/common/Modal/Modal';
 

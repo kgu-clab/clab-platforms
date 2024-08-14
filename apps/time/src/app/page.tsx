@@ -7,7 +7,7 @@ import {
   MultipleDevicesColor,
   ReadingColor,
   ViewDetailsColor,
-} from '@clab/icon';
+} from '@clab-platforms/icon';
 
 import PageLayout from '@/app/PageLayout';
 import { PATH } from '@/shared/constants';

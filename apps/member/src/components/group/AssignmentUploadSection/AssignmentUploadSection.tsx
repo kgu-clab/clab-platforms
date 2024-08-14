@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 
-import { Button, Table } from '@clab/design-system';
-import { cn } from '@clab/utils';
+import { Button, Table } from '@clab-platforms/design-system';
+import { cn } from '@clab-platforms/utils';
 
 import File from '@components/common/File/File';
 import Section from '@components/common/Section/Section';

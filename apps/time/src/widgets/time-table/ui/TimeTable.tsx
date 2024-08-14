@@ -2,7 +2,7 @@
 
 import { ReactNode, memo } from 'react';
 
-import { cn } from '@clab/utils';
+import { cn } from '@clab-platforms/utils';
 
 import { DAY_VALUE_ARRAY, MODAL_KEY } from '@/shared/constants';
 import { useModalAction } from '@/shared/hooks';

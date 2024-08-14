@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
-import { Button, Checkbox, Input } from '@clab/design-system';
-import { cn, toDecodeHTMLEntities } from '@clab/utils';
+import { Button, Checkbox, Input } from '@clab-platforms/design-system';
+import { cn, toDecodeHTMLEntities } from '@clab-platforms/utils';
 
 import Select from '@components/common/Select/Select';
 import Textarea from '@components/common/Textarea/Textarea';

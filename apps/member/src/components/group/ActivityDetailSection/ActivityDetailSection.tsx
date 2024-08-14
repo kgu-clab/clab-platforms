@@ -2,7 +2,7 @@ import {
   CertificateSolidOutline,
   DateRangeOutline,
   StudentOutline,
-} from '@clab/icon';
+} from '@clab-platforms/icon';
 
 import Image from '@components/common/Image/Image';
 import Section from '@components/common/Section/Section';

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { UserOutline } from '@clab/icon';
+import { UserOutline } from '@clab-platforms/icon';
 
 import { PATH } from '@/shared/constants';
 import Image from 'next/image';

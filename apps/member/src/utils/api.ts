@@ -1,4 +1,4 @@
-import { createURL } from '@clab/utils';
+import { createURL } from '@clab-platforms/utils';
 
 import {
   ACCESS_TOKEN_KEY,

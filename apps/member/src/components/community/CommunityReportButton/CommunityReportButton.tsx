@@ -1,4 +1,4 @@
-import { Button } from '@clab/design-system';
+import { Button } from '@clab-platforms/design-system';
 
 import { MODAL_ACCEPT, MODAL_CONTENT, MODAL_TITLE } from '@constants/modal';
 import useModal from '@hooks/common/useModal';

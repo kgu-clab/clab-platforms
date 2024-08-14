@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import { Button } from '@clab/design-system';
+import { Button } from '@clab-platforms/design-system';
 
 import Panel from '@components/common/Panel/Panel';
 

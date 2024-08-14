@@ -1,4 +1,4 @@
-import { Button } from '@clab/design-system';
+import { Button } from '@clab-platforms/design-system';
 
 import Footer from '@components/common/Footer/Footer';
 import LoginButton from '@components/common/LoginButton/LoginButton';

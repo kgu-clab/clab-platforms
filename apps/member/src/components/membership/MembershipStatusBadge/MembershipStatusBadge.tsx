@@ -1,4 +1,4 @@
-import { Badge } from '@clab/design-system';
+import { Badge } from '@clab-platforms/design-system';
 
 import { toMembershipStatusText } from '@utils/string';
 
