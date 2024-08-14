@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 
-import { CommentSolidOutline } from '@clab/icon';
-import { toDecodeHTMLEntities } from '@clab/utils';
+import { CommentSolidOutline } from '@clab-platforms/icon';
+import { toDecodeHTMLEntities } from '@clab-platforms/utils';
 
 import Image from '@components/common/Image/Image';
 

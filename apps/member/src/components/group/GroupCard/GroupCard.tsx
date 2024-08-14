@@ -1,8 +1,11 @@
 import { useNavigate } from 'react-router-dom';
 
-import { Grid } from '@clab/design-system';
-import { CertificateSolidOutline, DateRangeOutline } from '@clab/icon';
-import { cn } from '@clab/utils';
+import { Grid } from '@clab-platforms/design-system';
+import {
+  CertificateSolidOutline,
+  DateRangeOutline,
+} from '@clab-platforms/icon';
+import { cn } from '@clab-platforms/utils';
 
 import Image from '@components/common/Image/Image';
 

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { cn } from '@clab/utils';
+import { cn } from '@clab-platforms/utils';
 
 import { Footer, Nav } from '@/widgets/menu';
 

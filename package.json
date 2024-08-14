@@ -1,30 +1,19 @@
 {
-  "name": "clab.page",
+  "name": "clab-platforms",
   "private": true,
+  "packageManager": "pnpm@9.6.0",
+  "type": "module",
   "scripts": {
     "preinstall": "npx only-allow pnpm",
     "postinstall": "husky install && pnpm build:design-system && pnpm build:icon",
-    "lint-staged": "lint-staged",
     "dev": "turbo run dev",
     "build": "turbo run build",
     "type": "turbo run type",
     "test": "turbo run test",
     "coverage": "turbo run coverage",
     "lint": "turbo run lint",
-    "format": "prettier --write .",
-    "dev:auth": "pnpm --filter auth dev",
-    "dev:land": "pnpm --filter land dev",
-    "dev:member": "pnpm --filter member dev",
-    "dev:time": "pnpm --filter time dev",
-    "dev:status": "pnpm --filter status dev",
-    "build:auth": "pnpm --filter auth build",
-    "build:land": "pnpm --filter land build",
-    "build:member": "pnpm --filter member build",
-    "build:time": "pnpm --filter time build",
-    "build:status": "pnpm --filter status build",
-    "build:design-system": "pnpm --filter @clab/design-system build",
-    "build:icon": "pnpm --filter @clab/icon build",
-    "type:member": "pnpm --filter member type"
+    "build:design-system": "pnpm -F @clab-platforms/design-system build",
+    "build:icon": "pnpm -F @clab-platforms/icon build"
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": [
@@ -52,6 +41,5 @@
     "prettier-plugin-tailwindcss": "^0.5.13",
     "turbo": "^2.0.9",
     "typescript": "^5.3.3"
-  },
-  "packageManager": "pnpm@9.4.0"
+  }
 }

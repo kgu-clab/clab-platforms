@@ -1,6 +1,6 @@
 import { SyntheticEvent, useCallback, useState } from 'react';
 
-import { cn } from '@clab/utils';
+import { cn } from '@clab-platforms/utils';
 
 import { NOT_FOUND_IMG } from '@constants/path';
 

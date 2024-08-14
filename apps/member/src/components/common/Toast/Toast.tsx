@@ -1,7 +1,11 @@
 import { useEffect, useState } from 'react';
 
-import { ApprovalColor, CancelColor, HighPriorityColor } from '@clab/icon';
-import { cn } from '@clab/utils';
+import {
+  ApprovalColor,
+  CancelColor,
+  HighPriorityColor,
+} from '@clab-platforms/icon';
+import { cn } from '@clab-platforms/utils';
 
 import { useSetToastStore } from '@store/toast';
 

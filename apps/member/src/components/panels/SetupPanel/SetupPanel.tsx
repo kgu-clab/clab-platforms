@@ -1,4 +1,4 @@
-import { SettingsColor } from '@clab/icon';
+import { SettingsColor } from '@clab-platforms/icon';
 
 const SetupPanel = () => {
   return (

@@ -10,8 +10,8 @@ import {
   useState,
 } from 'react';
 
-import { Input } from '@clab/design-system';
-import { CloseOutline } from '@clab/icon';
+import { Input } from '@clab-platforms/design-system';
+import { CloseOutline } from '@clab-platforms/icon';
 
 import { DAY_VALUE_ARRAY, MODAL_KEY } from '@/shared/constants';
 import { useModalAction, useModalState } from '@/shared/hooks';

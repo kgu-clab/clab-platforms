@@ -1,4 +1,10 @@
-import { Badge, Button, DetailsList, Grid, Tabs } from '@clab/design-system';
+import {
+  Badge,
+  Button,
+  DetailsList,
+  Grid,
+  Tabs,
+} from '@clab-platforms/design-system';
 
 import Image from '@components/common/Image/Image';
 import Section from '@components/common/Section/Section';

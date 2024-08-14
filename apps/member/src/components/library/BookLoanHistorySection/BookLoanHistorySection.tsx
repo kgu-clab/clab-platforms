@@ -1,4 +1,4 @@
-import { Table } from '@clab/design-system';
+import { Table } from '@clab-platforms/design-system';
 
 import Section from '@components/common/Section/Section';
 

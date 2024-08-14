@@ -10,8 +10,8 @@ import {
   useState,
 } from 'react';
 
-import { ChevronDownOutline, CloseOutline } from '@clab/icon';
-import { cn } from '@clab/utils';
+import { ChevronDownOutline, CloseOutline } from '@clab-platforms/icon';
+import { cn } from '@clab-platforms/utils';
 
 import { useOutsideClick } from '@/shared/hooks';
 

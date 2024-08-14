@@ -1,7 +1,7 @@
 import { ComponentPropsWithRef, forwardRef } from 'react';
 
-import { ChevronRightOutline } from '@clab/icon';
-import { cn } from '@clab/utils';
+import { ChevronRightOutline } from '@clab-platforms/icon';
+import { cn } from '@clab-platforms/utils';
 
 interface ArrowButtonProps extends ComponentPropsWithRef<'button'> {
   direction?: 'prev' | 'next';

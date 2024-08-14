@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 
-import { Button } from '@clab/design-system';
+import { Button } from '@clab-platforms/design-system';
 
 import Content from '@components/common/Content/Content';
 import Header from '@components/common/Header/Header';

@@ -1,4 +1,4 @@
-import { createPagination, createURL } from '@clab/utils';
+import { createPagination, createURL } from '@clab-platforms/utils';
 
 import { END_POINT } from '@constants/api';
 

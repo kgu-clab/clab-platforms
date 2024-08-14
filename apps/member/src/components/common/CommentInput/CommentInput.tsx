@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
-import { Button, Checkbox } from '@clab/design-system';
-import { cn } from '@clab/utils';
+import { Button, Checkbox } from '@clab-platforms/design-system';
+import { cn } from '@clab-platforms/utils';
 
 import { useCommentCreateMutation } from '@hooks/queries';
 

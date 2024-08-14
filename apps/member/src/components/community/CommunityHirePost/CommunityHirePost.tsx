@@ -1,5 +1,5 @@
-import { Button, DetailsList } from '@clab/design-system';
-import { toDecodeHTMLEntities } from '@clab/utils';
+import { Button, DetailsList } from '@clab-platforms/design-system';
+import { toDecodeHTMLEntities } from '@clab-platforms/utils';
 
 import Post from '@components/common/Post/Post';
 

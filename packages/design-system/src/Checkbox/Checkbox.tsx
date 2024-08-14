@@ -1,6 +1,6 @@
 import React, { type InputHTMLAttributes, forwardRef } from 'react';
 
-import { cn } from '@clab/utils';
+import { cn } from '@clab-platforms/utils';
 
 export interface CheckboxProps extends InputHTMLAttributes<HTMLInputElement> {
   id: string;

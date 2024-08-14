@@ -1,4 +1,4 @@
-import { cn } from '@clab/utils';
+import { cn } from '@clab-platforms/utils';
 
 import Image from 'next/image';
 import Link from 'next/link';

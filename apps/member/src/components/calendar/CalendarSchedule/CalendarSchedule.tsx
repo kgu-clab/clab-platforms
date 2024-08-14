@@ -1,6 +1,6 @@
 import { useCallback } from 'react';
 
-import { cn } from '@clab/utils';
+import { cn } from '@clab-platforms/utils';
 
 import useModal from '@hooks/common/useModal';
 import { formattedDatePeriod, now } from '@utils/date';

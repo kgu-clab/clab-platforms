@@ -1,5 +1,5 @@
-import { LoaderOutline } from '@clab/icon';
-import { cn } from '@clab/utils';
+import { LoaderOutline } from '@clab-platforms/icon';
+import { cn } from '@clab-platforms/utils';
 
 interface LoadingProps {
   size?: number;

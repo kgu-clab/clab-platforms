@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { Menubar, Table } from '@clab/design-system';
-import { toDecodeHTMLEntities } from '@clab/utils';
+import { Menubar, Table } from '@clab-platforms/design-system';
+import { toDecodeHTMLEntities } from '@clab-platforms/utils';
 
 import ActionButton from '@components/common/ActionButton/ActionButton';
 import Pagination from '@components/common/Pagination/Pagination';

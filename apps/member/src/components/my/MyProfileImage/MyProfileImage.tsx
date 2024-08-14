@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 
-import { Input } from '@clab/design-system';
-import { cn } from '@clab/utils';
+import { Input } from '@clab-platforms/design-system';
+import { cn } from '@clab-platforms/utils';
 
 import Avatar from '@components/common/Avatar/Avatar';
 

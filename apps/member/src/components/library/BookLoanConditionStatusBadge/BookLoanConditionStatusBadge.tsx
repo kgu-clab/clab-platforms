@@ -1,4 +1,4 @@
-import { Badge, type BadgeColorVariant } from '@clab/design-system';
+import { Badge, type BadgeColorVariant } from '@clab-platforms/design-system';
 
 import { BOOK_STATE } from '@constants/state';
 

@@ -1,8 +1,11 @@
 import { useCallback, useEffect, useState } from 'react';
 import { useDropzone } from 'react-dropzone';
 
-import { Button } from '@clab/design-system';
-import { FileEarmarkArrowUpOutline, FileEarmarkDiffOutline } from '@clab/icon';
+import { Button } from '@clab-platforms/design-system';
+import {
+  FileEarmarkArrowUpOutline,
+  FileEarmarkDiffOutline,
+} from '@clab-platforms/icon';
 
 type Accept = 'image/*';
 

@@ -1,6 +1,6 @@
 import React, { type ButtonHTMLAttributes, forwardRef } from 'react';
 
-import { cn } from '@clab/utils';
+import { cn } from '@clab-platforms/utils';
 
 import { Spinner } from '../Spinner';
 import { buttonVariants } from './Button.styles';
