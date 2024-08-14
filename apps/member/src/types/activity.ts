@@ -101,6 +101,8 @@ export interface ActivityBoardType {
   dueDateTime?: string;
   createdAt: string;
   updatedAt?: string;
+  memberName?: string;
+  memberId?: string;
   feedbacks?: Array<ActivityBoardType>;
   children?: Array<ActivityBoardType>;
 }

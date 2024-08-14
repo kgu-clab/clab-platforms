@@ -13,6 +13,7 @@ import type {
   ActivityGroupCreateItem,
   ActivityGroupItem,
   ActivityGroupMemberMyType,
+  ActivityGroupMemberType,
   ActivityGroupStatusType,
   ActivityPhotoItem,
   ActivityPhotosBody,
@@ -66,17 +67,16 @@ export interface GetActivityBoardByCategoryParams {
   page: number;
   size: number;
 }
-export interface PostActivityGroupParams {
-  category: ActivityGroupCategoryType;
-  subject: string;
-  name: string;
-  content: string;
-  imageUrl?: string;
-  curriculum?: string;
-  startDate?: string;
-  endDate?: string;
-  techStack?: string;
-  githubUrl?: string;
+
+export interface GetActivityBoardByParentParams {
+  parentId: number;
+  page: number;
+  size: number;
+}
+export interface GetActivityGroupMemberParams {
+  activityGroupId: number;
+  page: number;
+  size: number;
 }
 
 export interface PatchActivityGroupParams {
@@ -359,6 +359,46 @@ export async function getActivityBoardByCategory({
 }
 
 /**
+ * 활동 그룹 게시판 계층 구조적 조회
+ */
+export async function getActivityBoardByParent({
+  parentId,
+  page,
+  size,
+}: GetActivityBoardByParentParams) {
+  const { data } = await server.get<ResponsePagination<ActivityBoardType>>({
+    url: createPagination(END_POINT.ACTIVITY_GROUP_BOARD_BY_PARENT, {
+      parentId,
+      page,
+      size,
+    }),
+  });
+
+  return data;
+}
+
+/**
+ * 활동 멤버 조회
+ */
+export async function getActivityGroupMember({
+  activityGroupId,
+  page,
+  size,
+}: GetActivityGroupMemberParams) {
+  const { data } = await server.get<
+    ResponsePagination<ActivityGroupMemberType>
+  >({
+    url: createPagination(END_POINT.ACTIVITY_GROUP_MEMBER_MEMBERS, {
+      activityGroupId,
+      page,
+      size,
+    }),
+  });
+
+  return data;
+}
+
+/**
  * 키워드 사진 검색
  */
 export async function getSearchImage(keyword: string) {
@@ -388,7 +428,7 @@ export async function getSearchImage(keyword: string) {
 /**
  * 활동 생성
  */
-export async function postActivityGroup(body: PostActivityGroupParams) {
+export async function postActivityGroup(body: ActivityGroupCreateItem) {
   const { data } = await server.post<
     ActivityGroupCreateItem,
     BaseResponse<number>

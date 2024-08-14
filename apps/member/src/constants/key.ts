@@ -69,6 +69,7 @@ export const ACTIVITY_QUERY_KEY = {
   STATUSES: () => [...BOARD_QUERY_KEY.ALL, 'statuses'],
   APPLICATIONS: () => [...BOOK_QUERY_KEY.ALL, 'applications'],
   BOARDS: () => [...ACTIVITY_QUERY_KEY.ALL, 'boards'],
+  MEMBERS: () => [...ACTIVITY_QUERY_KEY.ALL, 'members'],
   MY_ASSIGNMENT: (id: number) => [...ACTIVITY_QUERY_KEY.MY_ASSIGNMENTS(), id],
   DETAIL: (id: number) => [...ACTIVITY_QUERY_KEY.DETAILS(), id],
   STATUS: (status: ActivityGroupStatusType) => [
@@ -76,7 +77,12 @@ export const ACTIVITY_QUERY_KEY = {
     status,
   ],
   APPLICATION: (id: number) => [...ACTIVITY_QUERY_KEY.APPLICATIONS(), id],
-  BOARD: (id: number) => [...ACTIVITY_QUERY_KEY.BOARDS(), id],
+  BOARD: (id: number, category?: string) => [
+    ...ACTIVITY_QUERY_KEY.BOARDS(),
+    id,
+    category,
+  ],
+  MEMBER: (id: number) => [...ACTIVITY_QUERY_KEY.MEMBERS(), id],
 } as const;
 
 /**

@@ -26,7 +26,7 @@ export function useActivityGroupBoardMutation() {
       }
 
       queryClient.invalidateQueries({
-        queryKey: ACTIVITY_QUERY_KEY.MY_ASSIGNMENT(data.id),
+        queryKey: ACTIVITY_QUERY_KEY.BOARD(data.id),
       });
     },
   });
@@ -54,7 +54,7 @@ export function useActivityGroupBoardPatchMutation() {
       }
 
       queryClient.invalidateQueries({
-        queryKey: ACTIVITY_QUERY_KEY.MY_ASSIGNMENT(data.id),
+        queryKey: ACTIVITY_QUERY_KEY.BOARD(data.id),
       });
     },
   });

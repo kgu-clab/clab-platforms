@@ -3,6 +3,7 @@ import { useRef, useState } from 'react';
 import { Button, Input } from '@clab/design-system';
 import { cn } from '@clab/utils';
 
+import File from '@components/common/File/File';
 import Modal from '@components/common/Modal/Modal';
 import Textarea from '@components/common/Textarea/Textarea';
 
@@ -77,13 +78,15 @@ const ActivityBoardEditModal = ({ prevData, groupId }: Props) => {
     <Modal>
       <Modal.Header>수정하기</Modal.Header>
       <Modal.Body className="space-y-3">
-        <Input
-          name="title"
-          id="title"
-          value={board.title}
-          onChange={handleBoardChange}
-          placeholder={board.title}
-        />
+        {prevData.category !== 'FEEDBACK' && (
+          <Input
+            name="title"
+            id="title"
+            value={board.title}
+            onChange={handleBoardChange}
+            placeholder={board.title}
+          />
+        )}
         <Textarea
           name="content"
           id="content"
@@ -130,14 +133,9 @@ const FileUploader = ({
     <>
       {uploadedFile && (
         <div className="space-y-2">
-          <a
-            href={uploadedFile.fileUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hover:underline"
-          >
+          <File key={uploadedFile.fileUrl} href={uploadedFile.fileUrl}>
             {uploadedFile.originalFileName}
-          </a>
+          </File>
           <Button className="w-full" onClick={handleDeleteFileClick}>
             첨부파일 변경하기
           </Button>
