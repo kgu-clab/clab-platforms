@@ -1,9 +1,10 @@
 import { useRef, useState } from 'react';
 
+import { Button, Grid, Input } from '@clab-platforms/design-system';
+
 import { Section } from '@components/common/Section';
 import Textarea from '@components/common/Textarea/Textarea';
 
-import { Button, Grid, Input } from '@clab/design-system';
 import { FORM_DATA_KEY } from '@constants/api';
 import useToast from '@hooks/common/useToast';
 import { useActivityGroupBoardMutation, useMyProfile } from '@hooks/queries';
