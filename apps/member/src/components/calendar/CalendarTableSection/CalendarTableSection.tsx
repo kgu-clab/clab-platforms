@@ -1,6 +1,6 @@
 import { useCallback } from 'react';
 
-import { Table } from '@clab/design-system';
+import { Table } from '@clab-platforms/design-system';
 
 import { Section } from '@components/common/Section';
 
@@ -14,10 +14,10 @@ const CalendarTableSection = () => {
   const { data } = useSchedule();
 
   const handleScheduleClick = useCallback(
-    (detail: string, startDate: string, endDate: string) => {
+    (detail: string, startDateTime: string, endDateTime: string) => {
       openModal({
         title: '📆 일정',
-        content: `일시: ${formattedDatePeriod(startDate, endDate)}\n내용: ${detail}`,
+        content: `일시: ${formattedDatePeriod(startDateTime, endDateTime)}\n내용: ${detail}`,
       });
     },
     [openModal],
@@ -26,12 +26,14 @@ const CalendarTableSection = () => {
   return (
     <Section>
       <Table head={TABLE_HEAD.CALENDAR_TABLE} className="table-fixed">
-        {data.items.map(({ id, title, detail, startDate, endDate }) => (
+        {data.items.map(({ id, title, detail, startDateTime, endDateTime }) => (
           <Table.Row
             key={id}
-            onClick={() => handleScheduleClick(detail, startDate, endDate)}
+            onClick={() =>
+              handleScheduleClick(detail, startDateTime, endDateTime)
+            }
           >
-            <Table.Cell>{`${formattedDate(startDate)} ~ ${formattedDate(endDate)}`}</Table.Cell>
+            <Table.Cell>{`${formattedDate(startDateTime)} ~ ${formattedDate(endDateTime)}`}</Table.Cell>
             <Table.Cell>{title}</Table.Cell>
           </Table.Row>
         ))}

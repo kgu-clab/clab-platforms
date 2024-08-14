@@ -1,5 +1,10 @@
-import { FacebookSolid, LinkSolid, MailSolid, XTwitterSolid } from '@clab/icon';
-import { cn } from '@clab/utils';
+import {
+  FacebookSolid,
+  LinkSolid,
+  MailSolid,
+  XTwitterSolid,
+} from '@clab-platforms/icon';
+import { cn } from '@clab-platforms/utils';
 
 interface ShareProps extends React.HTMLAttributes<HTMLDivElement> {}
 

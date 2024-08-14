@@ -1,6 +1,6 @@
 {
-  "name": "@clab/design-system",
-  "version": "0.0.1",
+  "name": "@clab-platforms/design-system",
+  "version": "0.1.0",
   "description": "Design system for Kyonggi University C-Lab",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
@@ -15,12 +15,12 @@
     "coverage": "vitest --coverage",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "build": "tsup"
+    "build": "./build.bash"
   },
   "devDependencies": {
     "@chromatic-com/storybook": "^1.3.4",
-    "@clab/config": "workspace:*",
-    "@clab/utils": "workspace:*",
+    "@clab-platforms/config": "workspace:*",
+    "@clab-platforms/utils": "workspace:*",
     "@storybook/addon-essentials": "^8.0.10",
     "@storybook/addon-interactions": "^8.0.10",
     "@storybook/addon-links": "^8.0.10",
@@ -53,5 +53,7 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
-  "packageManager": "pnpm@9.4.0"
+  "dependencies": {
+    "@clab-platforms/icon": "workspace:*"
+  }
 }

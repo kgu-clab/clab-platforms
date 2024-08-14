@@ -1,4 +1,4 @@
-import { getRandomNumber } from '@clab/utils';
+import { getRandomNumber } from '@clab-platforms/utils';
 
 import Avatar from '@components/common/Avatar/Avatar';
 import Panel from '@components/common/Panel/Panel';

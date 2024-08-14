@@ -1,9 +1,9 @@
 import { useEffect, useRef, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
-import { Menubar } from '@clab/design-system';
-import { CloseOutline, MenuOutline } from '@clab/icon';
-import { cn } from '@clab/utils';
+import { Menubar } from '@clab-platforms/design-system';
+import { CloseOutline, MenuOutline } from '@clab-platforms/icon';
+import { cn } from '@clab-platforms/utils';
 
 import { PATH } from '@constants/path';
 

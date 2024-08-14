@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
-import { Button, Grid, Input } from '@clab/design-system';
-import { isObjectsEqual } from '@clab/utils';
+import { Button, Grid, Input } from '@clab-platforms/design-system';
+import { isObjectsEqual } from '@clab-platforms/utils';
 
 import LogoutButton from '@components/common/LogoutButton/LogoutButton';
 import Section from '@components/common/Section/Section';

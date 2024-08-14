@@ -1,4 +1,4 @@
-import { cn, toDecodeHTMLEntities } from '@clab/utils';
+import { cn, toDecodeHTMLEntities } from '@clab-platforms/utils';
 
 import { SERVICE_NAME } from '@constants/environment';
 import { formattedDate } from '@utils/date';

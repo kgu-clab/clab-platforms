@@ -1,4 +1,4 @@
-import { createURL } from '@clab/utils';
+import { createURL } from '@clab-platforms/utils';
 
 import { API_BASE_URL } from '@constants/api';
 

@@ -3,7 +3,7 @@ import {
   MoneyTransferColor,
   ReadingColor,
   SurveyColor,
-} from '@clab/icon';
+} from '@clab-platforms/icon';
 
 import Section from '@components/common/Section/Section';
 import {

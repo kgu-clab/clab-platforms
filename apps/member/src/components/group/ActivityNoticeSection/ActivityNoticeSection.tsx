@@ -1,7 +1,7 @@
 /* eslint-disable react/display-name */
 import { useState } from 'react';
 
-import { cn } from '@clab/utils';
+import { cn } from '@clab-platforms/utils';
 
 import DropdownButton from '@components/common/DropdownButton/DropdownButton';
 import Section from '@components/common/Section/Section';

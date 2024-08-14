@@ -1,10 +1,12 @@
 {
-  "name": "@clab/icon",
+  "name": "@clab-platforms/icon",
+  "version": "0.1.0",
   "private": true,
   "main": "src/index.ts",
   "scripts": {
+    "build": "./renew.bash",
     "generate": "pnpm svgo:color && pnpm svgo:outline && pnpm svgo:solid && pnpm svgr:color && pnpm svgr:outline && pnpm svgr:solid && pnpm export",
-    "update": "pnpm svgo:color && pnpm svgo:outline && pnpm svgo:solid && pnpm update:color && pnpm update:outline && pnpm update:solid && pnpm export",
+    "renew": "pnpm svgo:color && pnpm svgo:outline && pnpm svgo:solid && pnpm update:color && pnpm update:outline && pnpm update:solid && pnpm export",
     "export": "eslint --fix . && ts-node script/generateExports.ts",
     "svgo:color": "svgo -f src/color/svg --config=svgo.color.mjs",
     "svgo:outline": "svgo -f src/outline/svg --config=svgo.outline.mjs",
@@ -17,7 +19,7 @@
     "update:solid": "pnpm svgr:solid --ignore-existing"
   },
   "devDependencies": {
-    "@clab/config": "workspace:^",
+    "@clab-platforms/config": "workspace:*",
     "@svgr/cli": "^8.1.0",
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",

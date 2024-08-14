@@ -1,4 +1,4 @@
-import { createURL } from '@clab/utils';
+import { createURL } from '@clab-platforms/utils';
 
 import { API_BASE_URL, END_POINT, HTTP_STATUS_CODE } from '@constants/api';
 import { IS_PRODUCTION } from '@constants/environment';

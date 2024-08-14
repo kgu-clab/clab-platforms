@@ -1,15 +1,8 @@
 {
-  "extends": "@clab/config/tsconfig.next.json",
+  "extends": "@clab-platforms/config/tsconfig.next.json",
   "compilerOptions": {
     "paths": {
-      "@api/*": ["./app/api/*"],
-      "@components/*": ["./app/components/*"],
-      "@constants/*": ["./app/constants/*"],
-      "@hooks/*": ["./app/hooks/*"],
-      "@store/*": ["./app/store/*"],
-      "@type/*": ["./app/types/*"],
-      "@utils/*": ["./app/utils/*"],
-      "@/*": ["./*"]
+      "@/*": ["./src/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"]

@@ -1,4 +1,4 @@
-import { cn } from '@clab/utils';
+import { cn } from '@clab-platforms/utils';
 
 import type { PaginationOnChange } from '@type/component';
 

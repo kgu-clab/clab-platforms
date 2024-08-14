@@ -1,7 +1,7 @@
 import { PropsWithChildren } from 'react';
 import { Link } from 'react-router-dom';
 
-import { cn } from '@clab/utils';
+import { cn } from '@clab-platforms/utils';
 
 interface LinkerProps extends PropsWithChildren {
   to: string | Partial<Location>;

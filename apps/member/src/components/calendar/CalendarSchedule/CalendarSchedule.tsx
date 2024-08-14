@@ -1,6 +1,6 @@
 import { useCallback } from 'react';
 
-import { cn } from '@clab/utils';
+import { cn } from '@clab-platforms/utils';
 
 import useModal from '@hooks/common/useModal';
 import { formattedDatePeriod, now } from '@utils/date';
@@ -18,18 +18,18 @@ const CalendarSchedule = ({
   day,
   title,
   detail,
-  startDate,
-  endDate,
+  startDateTime,
+  endDateTime,
 }: CalendarScheduleProps) => {
   const { openModal } = useModal();
-  const isDateDiff = dayjs(startDate).diff(endDate, 'd');
+  const isDateDiff = dayjs(startDateTime).diff(endDateTime, 'd');
   const isBeforeToday = day.isBefore(today, 'day');
 
   const handleScheduleClick = useCallback(
-    (detail: string, startDate: string, endDate: string) => {
+    (detail: string, startDateTime: string, endDateTime: string) => {
       openModal({
         title: '📆 일정',
-        content: `일시: ${formattedDatePeriod(startDate, endDate)}\n내용: ${detail}`,
+        content: `일시: ${formattedDatePeriod(startDateTime, endDateTime)}\n내용: ${detail}`,
       });
     },
     [openModal],
@@ -42,21 +42,21 @@ const CalendarSchedule = ({
         isDateDiff === 0 ? 'rounded bg-blue-100' : 'bg-red-100',
         {
           'rounded-l bg-red-100':
-            isDateDiff !== 0 && day.isSame(startDate, 'date'),
+            isDateDiff !== 0 && day.isSame(startDateTime, 'date'),
         },
         {
           'bg-red-100':
             isDateDiff !== 0 &&
-            day.isAfter(startDate, 'date') &&
-            day.isBefore(endDate, 'date'),
+            day.isAfter(startDateTime, 'date') &&
+            day.isBefore(endDateTime, 'date'),
         },
         {
           'rounded-r bg-red-100':
-            isDateDiff !== 0 && day.isSame(endDate, 'date'),
+            isDateDiff !== 0 && day.isSame(endDateTime, 'date'),
         },
         { 'opacity-50': isBeforeToday },
       )}
-      onClick={() => handleScheduleClick(detail, startDate, endDate)}
+      onClick={() => handleScheduleClick(detail, startDateTime, endDateTime)}
     >
       {title}
     </button>

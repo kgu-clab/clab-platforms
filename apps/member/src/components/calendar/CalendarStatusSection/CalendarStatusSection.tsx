@@ -3,7 +3,7 @@ import {
   CalendarColor,
   LeaveColor,
   OvertimeColor,
-} from '@clab/icon';
+} from '@clab-platforms/icon';
 
 import Section from '@components/common/Section/Section';
 import StatusCard from '@components/common/StatusCard/StatusCard';
@@ -16,8 +16,8 @@ const CalendarStatusSection = () => {
   const { data: yearData } = useScheduleCollect();
 
   const closestEvent = findClosestEvent(transformEvents(monthData.items));
-  const closestDDay = closestEvent?.startDate
-    ? `D-${calculateDDay(closestEvent.startDate)}`
+  const closestDDay = closestEvent?.startDateTime
+    ? `D-${calculateDDay(closestEvent.startDateTime)}`
     : '이번 달에 남은 일정이 없어요';
 
   return (

@@ -11,7 +11,6 @@ export default {
           {
             width: '1em',
             height: '1em',
-            fill: 'currentColor',
             'aria-hidden': 'true',
             'data-slot': 'icon',
           },

@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 
-import { RegularFileAltOutline } from '@clab/icon';
+import { RegularFileAltOutline } from '@clab-platforms/icon';
 
 import { PATH_FINDER } from '@constants/path';
 import useToast from '@hooks/common/useToast';

@@ -1,6 +1,6 @@
 import React, { type HTMLAttributes, forwardRef } from 'react';
 
-import { cn } from '@clab/utils';
+import { cn } from '@clab-platforms/utils';
 
 import { gridVariants } from './Grid.styles';
 import type {

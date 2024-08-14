@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { Menubar, Table } from '@clab/design-system';
-import { toDecodeHTMLEntities } from '@clab/utils';
+import { Menubar, Table } from '@clab-platforms/design-system';
+import { toDecodeHTMLEntities } from '@clab-platforms/utils';
 
 import AddScheduleForm from '@components/calendar/AddScheduleForm/AddScheduleForm';
 import ActionButton from '@components/common/ActionButton/ActionButton';
@@ -54,29 +54,31 @@ const ManageCalendarSection = () => {
   const renderView = {
     view: (
       <Table head={TABLE_HEAD.CALENDAR_SCHEDULE}>
-        {data.items.map(({ id, title, startDate, endDate, priority }) => (
-          <Table.Row
-            key={id}
-            className="text-nowrap text-center"
-            onClick={handleTableRowClick}
-          >
-            <Table.Cell>{id}</Table.Cell>
-            <Table.Cell className="w-full truncate text-left">
-              {toDecodeHTMLEntities(title)}
-            </Table.Cell>
-            <Table.Cell>{formattedDate(startDate)}</Table.Cell>
-            <Table.Cell>{formattedDate(endDate)}</Table.Cell>
-            <Table.Cell>{toPriorityText(priority)}</Table.Cell>
-            <Table.Cell className="space-x-2">
-              <ActionButton
-                color="red"
-                onClick={(e) => handleDeleteButtonClick(e, id)}
-              >
-                삭제
-              </ActionButton>
-            </Table.Cell>
-          </Table.Row>
-        ))}
+        {data.items.map(
+          ({ id, title, startDateTime, endDateTime, priority }) => (
+            <Table.Row
+              key={id}
+              className="text-nowrap text-center"
+              onClick={handleTableRowClick}
+            >
+              <Table.Cell>{id}</Table.Cell>
+              <Table.Cell className="w-full truncate text-left">
+                {toDecodeHTMLEntities(title)}
+              </Table.Cell>
+              <Table.Cell>{formattedDate(startDateTime)}</Table.Cell>
+              <Table.Cell>{formattedDate(endDateTime)}</Table.Cell>
+              <Table.Cell>{toPriorityText(priority)}</Table.Cell>
+              <Table.Cell className="space-x-2">
+                <ActionButton
+                  color="red"
+                  onClick={(e) => handleDeleteButtonClick(e, id)}
+                >
+                  삭제
+                </ActionButton>
+              </Table.Cell>
+            </Table.Row>
+          ),
+        )}
       </Table>
     ),
     add: <AddScheduleForm onSubmit={() => handleMenubarItemClick('view')} />,

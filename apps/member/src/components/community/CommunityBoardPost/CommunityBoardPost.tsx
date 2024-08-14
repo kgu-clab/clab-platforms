@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import { Button } from '@clab/design-system';
+import { Button } from '@clab-platforms/design-system';
 
 import Image from '@components/common/Image/Image';
 import Post from '@components/common/Post/Post';

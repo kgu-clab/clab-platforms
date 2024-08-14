@@ -1,6 +1,6 @@
 import React, { type HTMLAttributes, type TableHTMLAttributes } from 'react';
 
-import { cn } from '@clab/utils';
+import { cn } from '@clab-platforms/utils';
 
 export interface TableProps extends TableHTMLAttributes<HTMLTableElement> {
   head?: readonly string[];

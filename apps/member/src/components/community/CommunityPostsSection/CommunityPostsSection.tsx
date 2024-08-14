@@ -1,8 +1,8 @@
 import { useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { Table } from '@clab/design-system';
-import { cn, toDecodeHTMLEntities } from '@clab/utils';
+import { Table } from '@clab-platforms/design-system';
+import { cn, toDecodeHTMLEntities } from '@clab-platforms/utils';
 
 import CommentCounter from '@components/common/CommentCounter/CommentCounter';
 import Pagination from '@components/common/Pagination/Pagination';

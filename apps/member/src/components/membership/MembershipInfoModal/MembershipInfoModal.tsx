@@ -1,5 +1,5 @@
-import { DetailsList } from '@clab/design-system';
-import { formatWon } from '@clab/utils';
+import { DetailsList } from '@clab-platforms/design-system';
+import { formatWon } from '@clab-platforms/utils';
 
 import Image from '@components/common/Image/Image';
 

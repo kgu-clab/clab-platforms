@@ -1,4 +1,4 @@
-import { DetailsList } from '@clab/design-system';
+import { DetailsList } from '@clab-platforms/design-system';
 
 import Image from '@components/common/Image/Image';
 

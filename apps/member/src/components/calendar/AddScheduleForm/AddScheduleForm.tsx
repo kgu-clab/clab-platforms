@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import { Button, Grid, Input } from '@clab/design-system';
+import { Button, Grid, Input } from '@clab-platforms/design-system';
 
 import Textarea from '@components/common/Textarea/Textarea';
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import { ChevronRightOutline } from '@clab/icon';
+import { ChevronRightOutline } from '@clab-platforms/icon';
 
 interface HeaderProps {
   title: string | string[];

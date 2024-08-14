@@ -1,6 +1,6 @@
 import { ComponentPropsWithRef } from 'react';
 
-import { Button } from '@clab/design-system';
+import { Button } from '@clab-platforms/design-system';
 
 import useModal from '@hooks/common/useModal';
 import { useSetIsLoggedInStore } from '@store/auth';

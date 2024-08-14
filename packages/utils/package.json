@@ -1,5 +1,5 @@
 {
-  "name": "@clab/utils",
+  "name": "@clab-platforms/utils",
   "private": true,
   "type": "module",
   "main": "src/index.ts",
@@ -14,7 +14,7 @@
     "tailwind-merge": "^2.3.0"
   },
   "devDependencies": {
-    "@clab/config": "workspace:*",
+    "@clab-platforms/config": "workspace:*",
     "@vitest/coverage-v8": "^1.6.0",
     "typescript": "^5.4.5",
     "vite": "^5.3.1",
