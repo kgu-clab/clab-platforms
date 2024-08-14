@@ -1,6 +1,6 @@
 import { useParams } from 'react-router-dom';
 
-import { Button, Table } from '@clab/design-system';
+import { Button, Table } from '@clab-platforms/design-system';
 
 import File from '@components/common/File/File';
 import { Section } from '@components/common/Section';
