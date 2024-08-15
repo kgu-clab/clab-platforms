@@ -1,19 +1,18 @@
 {
   "name": "clab-platforms",
   "private": true,
-  "packageManager": "pnpm@9.6.0",
+  "packageManager": "pnpm@9.7.1",
   "type": "module",
   "scripts": {
     "preinstall": "npx only-allow pnpm",
-    "postinstall": "husky install && pnpm build:design-system && pnpm build:icon",
+    "postinstall": "husky install",
     "dev": "turbo run dev",
+    "prebuild": "pnpm -F @clab-platforms/design-system build && pnpm -F @clab-platforms/icon build",
     "build": "turbo run build",
     "type": "turbo run type",
     "test": "turbo run test",
     "coverage": "turbo run coverage",
-    "lint": "turbo run lint",
-    "build:design-system": "pnpm -F @clab-platforms/design-system build",
-    "build:icon": "pnpm -F @clab-platforms/icon build"
+    "lint": "turbo run lint"
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": [
