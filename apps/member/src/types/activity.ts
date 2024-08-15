@@ -1,8 +1,9 @@
 import { SELECT_ACTIVITY_GROUP_CATEGORY_TYPE } from '@constants/select';
+import { ACTIVITY_MEMBER_STATE, ACTIVITY_STATE } from '@constants/state';
 
 import type { ResponseFile } from './api';
 
-type MemberStatusType = 'ACCEPTED' | 'REJECTED' | 'WAITING';
+type MemberStatusType = (typeof ACTIVITY_STATE)[keyof typeof ACTIVITY_STATE];
 export type ActivityGroupBoardCategoryType =
   | 'NOTICE'
   | 'WEEKLY_ACTIVITY'
@@ -12,6 +13,8 @@ export type ActivityGroupBoardCategoryType =
 export type ActivityGroupStatusType = 'WAITING' | 'PROGRESSING' | 'END';
 export type ActivityGroupCategoryType =
   (typeof SELECT_ACTIVITY_GROUP_CATEGORY_TYPE)[keyof typeof SELECT_ACTIVITY_GROUP_CATEGORY_TYPE];
+export type ActivityMemberRoleType =
+  (typeof ACTIVITY_MEMBER_STATE)[keyof typeof ACTIVITY_MEMBER_STATE];
 
 export interface ActivityGroupDetailType {
   id: number;
@@ -41,7 +44,7 @@ export interface ActivityPhotoItem {
 export interface ActivityGroupMemberType {
   memberId: string;
   memberName: string;
-  role: string;
+  role: ActivityMemberRoleType;
   status: MemberStatusType;
 }
 

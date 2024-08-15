@@ -56,3 +56,20 @@ export const BOARD_TITLE_MAX_LENGTH = 100;
  * 5000자
  */
 export const BOARD_CONTENT_MAX_LENGTH = 5000;
+
+/**
+ * 활동 그룹 멤버 상태를 정의합니다.
+ */
+export const ACTIVITY_MEMBER_STATE = {
+  LEADER: 'LEADER',
+  MEMBER: 'MEMBER',
+} as const;
+
+/**
+ * 활동 그룹 상태를 정의합니다.
+ */
+export const ACTIVITY_STATE = {
+  ACCEPTED: 'ACCEPTED',
+  REJECTED: 'REJECTED',
+  WAITING: 'WAITING',
+} as const;

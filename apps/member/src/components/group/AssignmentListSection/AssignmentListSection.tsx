@@ -7,6 +7,7 @@ import { Section } from '@components/common/Section';
 
 import { TABLE_HEAD } from '@constants/head';
 import { GROUP_MESSAGE } from '@constants/message';
+import { ACTIVITY_MEMBER_STATE, ACTIVITY_STATE } from '@constants/state';
 import useModal from '@hooks/common/useModal';
 import { useActivityGroupBoardByParent } from '@hooks/queries/activity/useActivityGroupBoardByParent';
 import { useActivityGroupMemberList } from '@hooks/queries/activity/useActivityGroupMemberList';
@@ -32,8 +33,8 @@ const AssignmentListSection = () => {
 
   const memberList = members?.items
     ? members.items
-        .filter((member) => member.status === 'ACCEPTED')
-        .filter((member) => member.role !== 'LEADER')
+        .filter((member) => member.status === ACTIVITY_STATE.ACCEPTED)
+        .filter((member) => member.role !== ACTIVITY_MEMBER_STATE.LEADER)
     : [];
   const assignedMemberList = assignmentList.items.map(
     (member) => member.memberName,
