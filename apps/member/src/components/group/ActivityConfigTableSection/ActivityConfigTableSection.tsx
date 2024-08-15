@@ -11,12 +11,15 @@ import { ActivityBoardType } from '@type/activity';
 
 import ActivityBoardEditModal from '../ActivityBoardEditModal/ActivityBoardEditModal';
 
-interface Props {
+interface ActivityConfigTableSectionProps {
   tableList: ActivityBoardType[];
   groupId: number;
 }
 
-const ActivityConfigTableSection = ({ tableList, groupId }: Props) => {
+const ActivityConfigTableSection = ({
+  tableList,
+  groupId,
+}: ActivityConfigTableSectionProps) => {
   const { openModal } = useModal();
   const { activityGroupBoardDeleteMutate } =
     useActivityGroupBoardDeleteMutation();

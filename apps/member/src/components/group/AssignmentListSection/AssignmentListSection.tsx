@@ -23,8 +23,12 @@ const AssignmentListSection = () => {
   if (!assignmentId || !id) {
     throw new Error(GROUP_MESSAGE.NO_ACTIVITY);
   }
-  const { data: assignmentList } = useActivityGroupBoardByParent(+assignmentId);
-  const { data: members } = useActivityGroupMemberList(+id);
+  const { data: assignmentList } = useActivityGroupBoardByParent({
+    parentId: +assignmentId,
+  });
+  const { data: members } = useActivityGroupMemberList({
+    activityGroupId: +id,
+  });
 
   const memberList = members?.items
     ? members.items

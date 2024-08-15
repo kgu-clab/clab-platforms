@@ -14,13 +14,17 @@ import {
 
 import type { ActivityBoardType } from '@type/activity';
 
-interface Props {
+interface AssignmentFeedbackModalProps {
   post: ActivityBoardType;
   groupId: number;
   assignmentId: number;
 }
 
-const AssignmentFeedbackModal = ({ post, groupId, assignmentId }: Props) => {
+const AssignmentFeedbackModal = ({
+  post,
+  groupId,
+  assignmentId,
+}: AssignmentFeedbackModalProps) => {
   const { closeModal } = useModal();
   const toast = useToast();
   const [feedback, setFeedback] = useState('');
@@ -39,7 +43,7 @@ const AssignmentFeedbackModal = ({ post, groupId, assignmentId }: Props) => {
         message: '내용을 입력해주세요.',
       });
     }
-    if (post.children?.[0])
+    if (post.children?.[0]) {
       activityGroupBoardPatchMutate({
         groupId: groupId,
         groupBoardId: assignmentId,
@@ -49,7 +53,7 @@ const AssignmentFeedbackModal = ({ post, groupId, assignmentId }: Props) => {
           content: feedback,
         },
       });
-    else
+    } else {
       activityGroupBoardMutate({
         parentId: post?.id,
         activityGroupId: groupId,
@@ -59,6 +63,7 @@ const AssignmentFeedbackModal = ({ post, groupId, assignmentId }: Props) => {
           content: feedback,
         },
       });
+    }
     closeModal();
   };
 

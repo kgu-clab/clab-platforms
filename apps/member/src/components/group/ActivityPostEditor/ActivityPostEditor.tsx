@@ -44,10 +44,10 @@ const ActivityPostEditor = ({ groupId, data }: ActivityPostEditorProps) => {
   const { activityGroupBoardMutate } = useActivityGroupBoardMutation();
   const { activityGroupBoardDeleteMutate } =
     useActivityGroupBoardDeleteMutation();
-  const { data: assignmentData } = useActivityGroupBoardByCategory(
-    groupId,
-    'ASSIGNMENT',
-  );
+  const { data: assignmentData } = useActivityGroupBoardByCategory({
+    activityGroupId: groupId,
+    category: 'ASSIGNMENT',
+  });
 
   const handlePostChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
@@ -74,12 +74,11 @@ const ActivityPostEditor = ({ groupId, data }: ActivityPostEditorProps) => {
   const handleDeleteWeeklyClick = (activityGroupBoardId: number) => {
     activityGroupBoardDeleteMutate(activityGroupBoardId);
   };
-  const handleEditWeeklyClick = (prevData: ActivityBoardType) => {
-    return openModal({
+  const handleEditWeeklyClick = (prevData: ActivityBoardType) =>
+    openModal({
       title: '수정하기',
       custom: <ActivityBoardEditModal groupId={groupId} prevData={prevData} />,
     });
-  };
   const handleAssignmentEditClick = (weekly: number) => {
     setEditAssignment((prev) =>
       prev.map((value, index) => (weekly === index ? !value : value)),

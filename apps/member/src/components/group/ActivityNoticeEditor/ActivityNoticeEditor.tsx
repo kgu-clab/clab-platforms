@@ -28,10 +28,10 @@ const ActivityNoticeEditor = ({ groupId }: Props) => {
     files: [],
     createdAt: new Date().toISOString(),
   });
-  const { data: noticeData } = useActivityGroupBoardByCategory(
-    groupId,
-    'NOTICE',
-  );
+  const { data: noticeData } = useActivityGroupBoardByCategory({
+    activityGroupId: groupId,
+    category: 'NOTICE',
+  });
   const { activityGroupBoardMutate } = useActivityGroupBoardMutation();
 
   const handleNoticeChange = (
