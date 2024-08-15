@@ -1,4 +1,9 @@
 #!/usr/bin/env sh
 . "$(dirname -- "$0")/_/husky.sh"
 
-pnpm commitlint --edit $1
+# CI 환경에서는 commitlint를 건너뛰도록 설정
+if [ "$CI" != "true" ]; then
+  pnpm commitlint --edit $1
+else
+  echo "Skipping commitlint in CI environment"
+fi
