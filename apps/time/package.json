@@ -1,6 +1,7 @@
 {
   "name": "@clab-platforms/time",
   "version": "0.1.0",
+  "private": true,
   "scripts": {
     "dev": "next dev --port 6004",
     "build": "next build",
