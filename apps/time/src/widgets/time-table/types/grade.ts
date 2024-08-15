@@ -1,4 +1,4 @@
-import GRADE from '@/widgets/time-table/model/constants/grade';
+import { GRADE } from '@/widgets/time-table';
 
 type Grade = (typeof GRADE)[number];
 

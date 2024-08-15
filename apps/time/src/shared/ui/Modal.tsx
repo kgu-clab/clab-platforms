@@ -37,11 +37,11 @@ interface ModalDropdownProps extends PropsWithChildren {
 interface ModalDropdownItemProps extends PropsWithChildren {
   onClick: () => void;
   selected: boolean;
+  closeOnClick?: boolean;
 }
 
-interface ModalItemProps {
+interface ModalItemProps extends PropsWithChildren {
   title: string;
-  value: string;
 }
 
 interface ModalDropdownContextType {
@@ -59,7 +59,7 @@ const ModalDropdownContext = createContext<ModalDropdownContextType>({
 function ModalFilter({ title, children }: ModalFilterProps) {
   return (
     <div className="flex items-center gap-x-4 py-1 text-sm">
-      <p className="w-20 break-keep">{title}</p>
+      <p className="w-20 shrink-0 break-keep">{title}</p>
       <ul className="flex divide-x divide-gray-400 overflow-hidden rounded-md border border-gray-400">
         {children}
       </ul>
@@ -92,7 +92,7 @@ function ModalDropdown({ title, value, children }: ModalDropdownProps) {
   const [open, setOpen] = useState<boolean>(false);
 
   const closeAction = useCallback(() => {
-    setOpen(false);
+    setOpen(() => false);
   }, [setOpen]);
 
   const dropdownRef = useOutsideClick({ callback: closeAction });
@@ -109,23 +109,16 @@ function ModalDropdown({ title, value, children }: ModalDropdownProps) {
       <div className="relative grow" onClick={() => setOpen((prev) => !prev)}>
         <ModalDropdownContext.Provider value={defaultModalDropdownContext}>
           <div className="flex items-center justify-between rounded-md border border-gray-400 p-1">
-            <div
-              className={cn(
-                'flex text-gray-500',
-                typeof value === 'string' && 'select-none',
-              )}
-            >
-              {value}
-            </div>
+            <div className={cn('flex text-gray-500')}>{value}</div>
             <ChevronDownOutline
               className={cn(
-                'mr-2 transition-all',
+                'mr-2 shrink-0 transition-all',
                 open ? 'rotate-0' : 'rotate-180',
               )}
             />
           </div>
           {open && (
-            <div className="absolute mt-4 h-60 w-full overflow-hidden overflow-y-scroll rounded-md border border-gray-400 bg-white p-2 drop-shadow-md">
+            <div className="absolute z-40 mt-4 max-h-60 min-h-fit w-full overflow-hidden overflow-y-scroll rounded-md border border-gray-400 bg-white p-2 drop-shadow-md">
               {children}
             </div>
           )}
@@ -139,6 +132,7 @@ function ModalDropdownItem({
   selected,
   onClick,
   children,
+  closeOnClick = false,
 }: ModalDropdownItemProps) {
   const { action } = useContext(ModalDropdownContext);
 
@@ -149,9 +143,12 @@ function ModalDropdownItem({
         selected ? 'text-blue-400' : 'text-black',
       )}
       type="button"
-      onClick={() => {
+      onClick={(event) => {
+        event.stopPropagation();
         onClick();
-        action.closeAction();
+        if (closeOnClick) {
+          action.closeAction();
+        }
       }}
     >
       {children}
@@ -159,17 +156,17 @@ function ModalDropdownItem({
   );
 }
 
-function ModalItem({ title, value }: ModalItemProps) {
+function ModalItem({ title, children }: ModalItemProps) {
   return (
     <div className="flex items-center gap-x-4 py-1 text-sm">
-      <p className="w-20 break-keep">{title}</p>
-      <p>{value}</p>
+      <p className="w-20 shrink-0 break-keep">{title}</p>
+      <div className="w-full">{children}</div>
     </div>
   );
 }
 
 function ModalContent({ children }: PropsWithChildren) {
-  return <div className="space-y-2">{children}</div>;
+  return <div className="flex flex-col gap-y-3">{children}</div>;
 }
 
 export default function Modal({ title, close, children }: ModalProps) {
@@ -195,7 +192,7 @@ export default function Modal({ title, close, children }: ModalProps) {
     <div className="fixed top-0 z-40 flex h-dvh w-dvw flex-col items-center justify-center bg-gray-800/60 transition-colors">
       <div
         ref={modalRef}
-        className="h-fit w-3/4 space-y-4 rounded-xl bg-white p-6"
+        className="container h-fit space-y-4 rounded-xl bg-white p-6"
       >
         <div className="flex w-full justify-between">
           <p className="font-bold">{title ?? ''}</p>
