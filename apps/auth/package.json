@@ -1,7 +1,6 @@
 {
   "name": "@clab-platforms/auth",
   "version": "0.1.0",
-  "private": true,
   "scripts": {
     "dev": "next dev --port 6001",
     "build": "next build",
