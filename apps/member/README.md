@@ -1,4 +1,4 @@
-# @clab-platforms/member &middot; [![MIT License](https://img.shields.io/badge/license-GPL--3.0-blue.svg)](https://github.com/KGU-C-Lab/clab-platforms/blob/main/LICENSE) [![pnpm CI](https://github.com/KGU-C-Lab/clab-platforms/actions/workflows/pnpm-ci.yml/badge.svg)](https://github.com/KGU-C-Lab/clab-platforms/actions/workflows/pnpm-ci.yml)
+# @clab-platforms/member &middot; [![Website](https://img.shields.io/website?url=https%3A%2F%2Fplay.clab.page&up_message=online&up_color=black&down_message=offline&down_color=black&label=in%20production&labelColor=black)](https://play.clab.page/) ![GitHub package.json version](https://img.shields.io/github/package-json/v/KGU-C-Lab/clab-platforms?filename=apps%2Fmember%2Fpackage.json&labelColor=black&color=black)
 
 멤버스(Members)는 구성원의 활동과 커뮤니케이션을 지원하는 인터널(Internal) 그룹웨어 시스템이에요.  
 모임에서 필요한 모든 기능을 제공하며, 구성원들이 손쉽게 활동을 관리하고 소통할 수 있도록 도와줘요. 활동, 일정, 커뮤니티, 도서관, 회비 등 다양한 기능을 제공하고 있어요.
