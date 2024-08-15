@@ -31,6 +31,9 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
+      - name: Skip Husky Hooks
+        run: echo "HUSKY_SKIP_HOOKS=1" >> $GITHUB_ENV
+
       - name: Create Release Pull Request
         uses: changesets/action@v1
         env:

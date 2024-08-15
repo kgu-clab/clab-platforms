@@ -4,7 +4,9 @@
 "@clab-platforms/member": patch
 "@clab-platforms/status": patch
 "@clab-platforms/time": patch
-"@clab-platforms/design-system": patch
+"@clab-platforms/config": patch
+"@clab-platforms/icon": patch
+"@clab-platforms/utils": patch
 ---
 
-chore: update .changeset/config.json to skip versions of private packages
+feat: setup changesets
