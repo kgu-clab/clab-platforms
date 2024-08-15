@@ -1,4 +1,4 @@
-# @clab-platforms/design-system &middot; [![MIT License](https://img.shields.io/badge/license-GPL--3.0-blue.svg)](https://github.com/KGU-C-Lab/clab-platforms/blob/main/LICENSE) [![pnpm CI](https://github.com/KGU-C-Lab/clab-platforms/actions/workflows/pnpm-ci.yml/badge.svg)](https://github.com/KGU-C-Lab/clab-platforms/actions/workflows/pnpm-ci.yml) [![codecov](https://codecov.io/gh/KGU-C-Lab/clab.page/graph/badge.svg?token=Z5PFR6US6Z)](https://codecov.io/gh/KGU-C-Lab/clab.page)
+# @clab-platforms/design-system &middot; ![WIP](https://img.shields.io/badge/work_in_progress-black) ![GitHub package.json version](https://img.shields.io/github/package-json/v/KGU-C-Lab/clab-platforms?filename=packages%2Fdesign-system%2Fpackage.json&labelColor=black&color=black)
 
 C-Lab Design System(CDS)은 동아리의 모든 프로젝트에 일관된 디자인을 적용하기 위해 개발된 통합 디자인 시스템이에요.  
 CDS는 동아리 내에서 사용할 목적으로 개발되었지만, 차기 버전은 지금의 모습보다 더욱 고도화하여 외부에서도 사용할 수 있도록 배포할 예정이에요.
