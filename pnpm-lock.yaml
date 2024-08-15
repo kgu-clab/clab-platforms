@@ -297,7 +297,7 @@ importers:
   apps/status:
     dependencies:
       '@clab-platforms/utils':
-        specifier: workspace:^
+        specifier: workspace:*
         version: link:../../packages/utils
       next:
         specifier: 14.2.4
@@ -313,7 +313,7 @@ importers:
         version: 2.0.0(react@18.2.0)
     devDependencies:
       '@clab-platforms/config':
-        specifier: workspace:^
+        specifier: workspace:*
         version: link:../../packages/config
       '@types/node':
         specifier: ^20

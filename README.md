@@ -1,6 +1,6 @@
-# clab-platforms &middot; [![MIT License](https://img.shields.io/badge/license-GPL--3.0-blue.svg)](https://github.com/KGU-C-Lab/clab-platforms/blob/main/LICENSE) [![pnpm CI](https://github.com/KGU-C-Lab/clab-platforms/actions/workflows/pnpm-ci.yml/badge.svg)](https://github.com/KGU-C-Lab/clab-platforms/actions/workflows/pnpm-ci.yml) [![codecov](https://codecov.io/gh/KGU-C-Lab/clab.page/graph/badge.svg?token=Z5PFR6US6Z)](https://codecov.io/gh/KGU-C-Lab/clab.page)
+# clab-platforms &middot; [![GitHub License](https://img.shields.io/github/license/KGU-C-Lab/clab-platforms)](https://github.com/KGU-C-Lab/clab-platforms/blob/main/LICENSE) [![pnpm CI](https://github.com/KGU-C-Lab/clab-platforms/actions/workflows/pnpm-ci.yml/badge.svg)](https://github.com/KGU-C-Lab/clab-platforms/actions/workflows/pnpm-ci.yml) [![codecov](https://codecov.io/gh/KGU-C-Lab/clab.page/graph/badge.svg?token=Z5PFR6US6Z)](https://codecov.io/gh/KGU-C-Lab/clab.page)
 
-경기대학교 AI컴퓨터공학부 개발동아리 [C-Lab](https://www.clab.page/)의 공식 프론트엔드 시스템이에요.  
+[경기대학교 AI컴퓨터공학부 개발동아리 C-Lab](https://www.clab.page/)의 공식 프론트엔드 시스템이에요.  
 지속적으로 늘어나는 프론트엔드 프로젝트를 유연하고 효율적으로 관리하기 위해 [모노레포(Monorepo)](https://en.wikipedia.org/wiki/Monorepo) 환경으로 만들어졌어요.
 
 해당 프로젝트는 단순히 동아리 내에서 사용할 목적으로 시작되었지만, 그 목표와 가능성은 훨씬 더 넓고 깊은 의미를 지니고 있어요.  
@@ -18,47 +18,35 @@
 
 ## Apps
 
-![monorepo](https://github.com/KGU-C-Lab/clab-platforms/assets/39869096/fd7756f7-7dde-47fa-8a43-e4fc9b33ecbf)
+![monorepo diagram](https://github.com/user-attachments/assets/fae92084-3945-47ee-b1a9-fffad4a09cd9)
 
-> @clab-platforms에 구성되어 있는 프로젝트의 모노레포 구성도예요. 더 자세히 알고 싶다면 해당 프로젝트의 `README.md`를 살펴봐주세요.
+> @clab-platforms의 프로젝트 구성도예요. 더 자세히 알고 싶다면 해당 프로젝트의 `README.md`를 살펴봐주세요.
 
-### auth &middot; ![WIP](https://img.shields.io/badge/work_in_progress-black)
+### auth &middot; [![Website](https://img.shields.io/website?url=https%3A%2F%2Fauth.clab.page&up_message=online&up_color=black&down_message=offline&down_color=black&label=in%20production&labelColor=black)](https://auth.clab.page/) ![GitHub package.json version](https://img.shields.io/github/package-json/v/KGU-C-Lab/clab-platforms?filename=apps%2Fauth%2Fpackage.json&labelColor=black&color=black)
 
-구성원 계정을 OAuth 프로토콜을 기반으로 서비스에 편리하게 연결할 수 있는 통합 인증 시스템이에요.
+구성원 계정을 OAuth 프로토콜을 기반으로 @clab-platforms 서비스를 편리하게 연결할 수 있는 통합 인증 시스템이에요.
 
-### land &middot; ![WIP](https://img.shields.io/badge/work_in_progress-black)
+### land &middot; [![Website](https://img.shields.io/website?url=https%3A%2F%2Fwww.clab.page&up_message=online&up_color=black&down_message=offline&down_color=black&label=in%20production&labelColor=black)](https://www.clab.page/) ![GitHub package.json version](https://img.shields.io/github/package-json/v/KGU-C-Lab/clab-platforms?filename=apps%2Fland%2Fpackage.json&labelColor=black&color=black)
 
 모임에 대한 소개, 활동, 블로그 등 다양한 정보를 공유하는 랜딩페이지 시스템이에요.
 
-### [member](https://github.com/KGU-C-Lab/clab-platforms/blob/main/apps/member) &middot; ![WIP](https://img.shields.io/badge/work_in_progress-black)
+### [member](https://github.com/KGU-C-Lab/clab-platforms/blob/main/apps/member) &middot; [![Website](https://img.shields.io/website?url=https%3A%2F%2Fplay.clab.page&up_message=online&up_color=black&down_message=offline&down_color=black&label=in%20production&labelColor=black)](https://play.clab.page/) ![GitHub package.json version](https://img.shields.io/github/package-json/v/KGU-C-Lab/clab-platforms?filename=apps%2Fmember%2Fpackage.json&labelColor=black&color=black)
 
-구성원의 활동과 커뮤니케이션을 지원하는 인터널(Internal) 플랫폼이에요.
+구성원의 활동과 커뮤니케이션을 지원하는 인터널(Internal) 그룹웨어 시스템이에요.
 
-### status &middot; ![WIP](https://img.shields.io/badge/work_in_progress-black)
+### status &middot; ![WIP](https://img.shields.io/badge/work_in_progress-black) ![GitHub package.json version](https://img.shields.io/github/package-json/v/KGU-C-Lab/clab-platforms?filename=apps%2Fstatus%2Fpackage.json&labelColor=black&color=black)
 
-서비스하는 모든 시스템의 상태를 모니터링하고 관리하는 시스템이에요.
+서비스 시스템의 상태를 모니터링하고 관리하는 시스템이에요.
 
-### time &middot; ![WIP](https://img.shields.io/badge/work_in_progress-black)
+### time &middot; ![WIP](https://img.shields.io/badge/work_in_progress-black) ![GitHub package.json version](https://img.shields.io/github/package-json/v/KGU-C-Lab/clab-platforms?filename=apps%2Ftime%2Fpackage.json&labelColor=black&color=black)
 
-학교 생활에 필요한 정보를 관리하는 플랫폼 시스템이에요.
+학교 생활에 필요한 정보를 제공하고 관리하는 플랫폼 시스템이에요.
 
 ## Packages
 
-### config
-
-프로젝트 설정 파일의 일관성을 유지하기 위한 패키지에요.
-
-### [design-system](https://github.com/KGU-C-Lab/clab-platforms/tree/main/packages/design-system) &middot; ![WIP](https://img.shields.io/badge/work_in_progress-black)
+### [design-system](https://github.com/KGU-C-Lab/clab-platforms/tree/main/packages/design-system) &middot; ![WIP](https://img.shields.io/badge/work_in_progress-black) ![GitHub package.json version](https://img.shields.io/github/package-json/v/KGU-C-Lab/clab-platforms?filename=packages%2Fdesign-system%2Fpackage.json&labelColor=black&color=black)
 
 일관성 있는 UI&UX를 위한 디자인 시스템이에요. @clab-platforms의 모든 프로젝트는 해당 디자인 시스템을 사용해요.
-
-### utils
-
-공통적으로 사용하는 유틸리티 패키지에요.
-
-### icon
-
-공통적으로 사용하는 아이콘 패키지에요.
 
 ## Server
 
@@ -82,7 +70,7 @@
 
 <details>
   <summary>해당 시스템을 참고하거나 자유롭게 사용해도 되나요?</summary>
-  네, 가능합니다! 이 프로젝트는 GNU 라이센스 하에 배포되어 있으며, 라이센스 조건에 따라 자유롭게 사용하실 수 있습니다.
+  네, 가능합니다! 이 프로젝트는 GNU 라이센스 하에 배포되어 있으며, 라이센스 조건에 따라 자유롭게 사용하실 수 있어요.
 </details>
 
 <details>

@@ -33,7 +33,7 @@ GitHub의 이슈는 버그와 개선 사항을 위한 곳입니다. 해당 프�
 
 이슈 등록 후 PR을 제출할 수 있어요. 모든 커밋 메시지와 풀 리퀘스트의 제목은 다음 형식을 따라야 해요.
 
-```
+```markdown
 <type>[optional package scope]: <description> (#<issue number>)
 
 [optional body]
