@@ -38,7 +38,7 @@ const ActivityPostEditor = ({ groupId, data }: ActivityPostEditorProps) => {
     content: '',
   });
   const [editAssignment, setEditAssignment] = useState<boolean[]>(
-    new Array(data.length).fill(false),
+    Array.from({ length: data.length }, () => false),
   );
 
   const { activityGroupBoardMutate } = useActivityGroupBoardMutation();
