@@ -8,7 +8,7 @@ import AssignmentListSection from '@components/group/AssignmentListSection/Assig
 import AssignmentUploadSection from '@components/group/AssignmentUploadSection/AssignmentUploadSection';
 
 import { GROUP_MESSAGE } from '@constants/message';
-import { ACTIVITY_MEMBER_STATE } from '@constants/state';
+import { ACTIVITY_MEMBER_ROLE } from '@constants/state';
 import {
   useActivityGroup,
   useActivityGroupBoardMyAssignment,
@@ -32,7 +32,7 @@ const GroupAssignmentPage = () => {
 
   const isLeader = groupDetail?.groupMembers.some(
     (member) =>
-      member.role === ACTIVITY_MEMBER_STATE.LEADER &&
+      member.role === ACTIVITY_MEMBER_ROLE.LEADER &&
       member.memberId === myProfile?.id,
   );
   const feedback = myAssignment?.[0];

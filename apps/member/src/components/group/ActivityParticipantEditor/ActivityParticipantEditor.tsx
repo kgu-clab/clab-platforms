@@ -3,22 +3,25 @@ import { Button, Table } from '@clab-platforms/design-system';
 import Section from '@components/common/Section/Section';
 
 import { TABLE_HEAD } from '@constants/head';
+import { ACTIVITY_MEMBER_STATE } from '@constants/state';
 import useModal from '@hooks/common/useModal';
 import {
   useActivityGroupApplication,
   useActivityGroupApplicationMutation,
 } from '@hooks/queries';
 
-interface Props {
+interface ActivityParticipantEditorProps {
   groupId: number;
 }
 
-const ActivityParticipantEditor = ({ groupId }: Props) => {
+const ActivityParticipantEditor = ({
+  groupId,
+}: ActivityParticipantEditorProps) => {
+  const { activityGroupApplicationMutate } =
+    useActivityGroupApplicationMutation();
   const { data: applyMemberList } = useActivityGroupApplication({
     activityGroupId: groupId,
   });
-  const { activityGroupApplicationMutate } =
-    useActivityGroupApplicationMutation();
 
   const { openModal } = useModal();
 
@@ -33,7 +36,7 @@ const ActivityParticipantEditor = ({ groupId }: Props) => {
     activityGroupApplicationMutate({
       activityGroupId: groupId,
       memberId: applierId,
-      status: 'ACCEPTED',
+      status: ACTIVITY_MEMBER_STATE.ACCEPTED,
     });
   };
 
@@ -41,14 +44,14 @@ const ActivityParticipantEditor = ({ groupId }: Props) => {
     activityGroupApplicationMutate({
       activityGroupId: groupId,
       memberId: applierId,
-      status: 'REJECTED',
+      status: ACTIVITY_MEMBER_STATE.REJECTED,
     });
   };
 
   return (
     <Section>
       <h1 className="pb-4 text-xl font-semibold">참여자 관리</h1>
-      {!applyMemberList.items ? (
+      {applyMemberList.items.length === 1 ? (
         <div className="w-full rounded-lg border border-red-200 bg-red-50 p-5 text-center">
           <p className="text-red-800">신청자가 없습니다.</p>
         </div>
@@ -71,7 +74,7 @@ const ActivityParticipantEditor = ({ groupId }: Props) => {
                   >
                     지원서
                   </Button>
-                  {status !== 'ACCEPTED' && (
+                  {status !== ACTIVITY_MEMBER_STATE.ACCEPTED && (
                     <Button
                       size="sm"
                       color="green"

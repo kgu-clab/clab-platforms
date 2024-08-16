@@ -1,20 +1,26 @@
 import { SELECT_ACTIVITY_GROUP_CATEGORY_TYPE } from '@constants/select';
-import { ACTIVITY_MEMBER_STATE, ACTIVITY_STATE } from '@constants/state';
+import {
+  ACTIVITY_MEMBER_ROLE,
+  ACTIVITY_MEMBER_STATE,
+  ACTIVITY_STATE,
+} from '@constants/state';
 
 import type { ResponseFile } from './api';
 
-type MemberStatusType = (typeof ACTIVITY_STATE)[keyof typeof ACTIVITY_STATE];
+type MemberStatusType =
+  (typeof ACTIVITY_MEMBER_STATE)[keyof typeof ACTIVITY_MEMBER_STATE];
 export type ActivityGroupBoardCategoryType =
   | 'NOTICE'
   | 'WEEKLY_ACTIVITY'
   | 'FEEDBACK'
   | 'ASSIGNMENT'
   | 'SUBMIT';
-export type ActivityGroupStatusType = 'WAITING' | 'PROGRESSING' | 'END';
 export type ActivityGroupCategoryType =
   (typeof SELECT_ACTIVITY_GROUP_CATEGORY_TYPE)[keyof typeof SELECT_ACTIVITY_GROUP_CATEGORY_TYPE];
 export type ActivityMemberRoleType =
-  (typeof ACTIVITY_MEMBER_STATE)[keyof typeof ACTIVITY_MEMBER_STATE];
+  (typeof ACTIVITY_MEMBER_ROLE)[keyof typeof ACTIVITY_MEMBER_ROLE];
+export type ActivityGroupStatusType =
+  (typeof ACTIVITY_STATE)[keyof typeof ACTIVITY_STATE];
 
 export interface ActivityGroupDetailType {
   id: number;
