@@ -33,7 +33,7 @@ const actions = [
   </button>,
 ] as const;
 
-const Nav = () => {
+export default function Nav() {
   return (
     <nav className="fixed top-0 w-full border-b bg-white">
       <div className="container flex h-14 items-center justify-between text-nowrap">
@@ -45,7 +45,9 @@ const Nav = () => {
             height={200}
             className="size-8"
           />
-          <h1 className="text-xl font-semibold">경기타임</h1>
+          <Link href="/">
+            <h1 className="select-none text-xl font-semibold">경기플러스</h1>
+          </Link>
         </div>
         <ul className="hidden w-3/5 items-center justify-center gap-4 text-sm sm:flex">
           {links.map((link) => link)}
@@ -56,6 +58,4 @@ const Nav = () => {
       </div>
     </nav>
   );
-};
-
-export default Nav;
+}
