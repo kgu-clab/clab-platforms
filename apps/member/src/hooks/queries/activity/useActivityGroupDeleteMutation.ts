@@ -1,12 +1,14 @@
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 import { deleteActivityGroup } from '@api/activity';
+import { ACTIVITY_QUERY_KEY } from '@constants/key';
 import useToast from '@hooks/common/useToast';
 
 /**
  * 활동을 삭제합니다.
  */
 export function useActivityGroupDeleteMutation() {
+  const queryClient = useQueryClient();
   const toast = useToast();
 
   const mutation = useMutation({
@@ -23,6 +25,10 @@ export function useActivityGroupDeleteMutation() {
           message: '활동 그룹 삭제에 성공했습니다.',
         });
       }
+
+      queryClient.invalidateQueries({
+        queryKey: ACTIVITY_QUERY_KEY.DETAIL(data),
+      });
     },
   });
 

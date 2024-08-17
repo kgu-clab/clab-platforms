@@ -54,7 +54,7 @@ const GroupApplyPage = () => {
   };
 
   useEffect(() => {
-    if (groupData.items.length === 1 && groupData.items[0].id)
+    if (groupData.items.length && groupData.items[0].id)
       setGroupID(groupData.items[0].id);
   }, [groupData.items]);
 
