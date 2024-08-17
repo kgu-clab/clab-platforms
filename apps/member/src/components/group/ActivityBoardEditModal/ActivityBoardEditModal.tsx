@@ -8,6 +8,7 @@ import Modal from '@components/common/Modal/Modal';
 import Textarea from '@components/common/Textarea/Textarea';
 
 import { FORM_DATA_KEY } from '@constants/api';
+import { ACTIVITY_BOARD_CATEGORY_STATE } from '@constants/state';
 import useModal from '@hooks/common/useModal';
 import useToast from '@hooks/common/useToast';
 import { useActivityGroupBoardPatchMutation } from '@hooks/queries/activity/useActivityGroupBoardMutation';
@@ -78,7 +79,7 @@ const ActivityBoardEditModal = ({ prevData, groupId }: Props) => {
     <Modal>
       <Modal.Header>수정하기</Modal.Header>
       <Modal.Body className="space-y-3">
-        {prevData.category !== 'FEEDBACK' && (
+        {prevData.category !== ACTIVITY_BOARD_CATEGORY_STATE.FEEDBACK && (
           <Input
             name="title"
             id="title"
@@ -94,7 +95,7 @@ const ActivityBoardEditModal = ({ prevData, groupId }: Props) => {
           onChange={handleBoardChange}
           placeholder={board.content}
         />
-        {prevData.category === 'ASSIGNMENT' && (
+        {prevData.category === ACTIVITY_BOARD_CATEGORY_STATE.ASSIGNMENT && (
           <>
             <FileUploader
               uploadedFile={uploadedFile}

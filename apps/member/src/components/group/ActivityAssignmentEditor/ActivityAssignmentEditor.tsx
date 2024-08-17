@@ -6,6 +6,7 @@ import { Section } from '@components/common/Section';
 import Textarea from '@components/common/Textarea/Textarea';
 
 import { FORM_DATA_KEY } from '@constants/api';
+import { ACTIVITY_BOARD_CATEGORY_STATE } from '@constants/state';
 import useToast from '@hooks/common/useToast';
 import { useActivityGroupBoardMutation, useMyProfile } from '@hooks/queries';
 
@@ -52,7 +53,7 @@ const ActivityAssignmentEditor = ({ parentId, activityGroupId }: Props) => {
       activityGroupId: activityGroupId,
       memberId: myProfile.id,
       body: {
-        category: 'ASSIGNMENT',
+        category: ACTIVITY_BOARD_CATEGORY_STATE.ASSIGNMENT,
         ...board,
       },
       files: file ? formData : undefined,

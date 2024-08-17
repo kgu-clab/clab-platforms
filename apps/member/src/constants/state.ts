@@ -83,3 +83,14 @@ export const ACTIVITY_STATE = {
   PROGRESSING: 'PROGRESSING',
   END: 'END',
 } as const;
+
+/**
+ * 게시판 카테고리를 정의합니다.
+ */
+export const ACTIVITY_BOARD_CATEGORY_STATE = {
+  NOTICE: 'NOTICE',
+  WEEKLY_ACTIVITY: 'WEEKLY_ACTIVITY',
+  FEEDBACK: 'FEEDBACK',
+  ASSIGNMENT: 'ASSIGNMENT',
+  SUBMIT: 'SUBMIT',
+} as const;
