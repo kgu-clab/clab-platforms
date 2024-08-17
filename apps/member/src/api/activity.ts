@@ -136,7 +136,12 @@ export async function getActivityGroupDetail(id: number) {
   data.activities = activities;
   data.assignments = assignments;
 
-  return data;
+  return {
+    ...data,
+    notices,
+    activities,
+    assignments,
+  };
 }
 
 /**

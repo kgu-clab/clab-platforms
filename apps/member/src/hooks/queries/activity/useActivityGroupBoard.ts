@@ -8,7 +8,7 @@ import { ACTIVITY_QUERY_KEY } from '@constants/key';
  */
 export function useActivityGroupBoard(id: number) {
   return useSuspenseQuery({
-    queryKey: ACTIVITY_QUERY_KEY.BOARD({ id: id }),
+    queryKey: ACTIVITY_QUERY_KEY.BOARD({ id }),
     queryFn: () => getActivityBoard(id),
   });
 }
