@@ -6,7 +6,7 @@ import Hr from '@components/common/Hr/Hr';
 import Section from '@components/common/Section/Section';
 import Textarea from '@components/common/Textarea/Textarea';
 
-import { useActivityGroupBoardByCategory } from '@hooks/queries/activity/useActivityGroupBoardByCategory';
+import useToast from '@hooks/common/useToast';
 import { useActivityGroupBoardMutation } from '@hooks/queries/activity/useActivityGroupBoardMutation';
 
 import type { ActivityBoardType } from '@type/activity';
@@ -14,23 +14,21 @@ import type { ActivityBoardType } from '@type/activity';
 import ActivityConfigTableSection from '../ActivityConfigTableSection/ActivityConfigTableSection';
 import ActivityNoticeSection from '../ActivityNoticeSection/ActivityNoticeSection';
 
-interface Props {
+interface ActivityNoticeEditorProps {
   groupId: number;
+  data: ActivityBoardType[];
 }
 
-const ActivityNoticeEditor = ({ groupId }: Props) => {
+const ActivityNoticeEditor = ({ groupId, data }: ActivityNoticeEditorProps) => {
+  const toast = useToast();
   const [notice, setNotice] = useState<ActivityBoardType>({
-    title: '제목을 입력해주세요.',
-    content: '내용을 입력해주세요.',
+    title: '',
+    content: '',
     id: -1,
     parentId: -1,
     category: 'NOTICE',
     files: [],
     createdAt: new Date().toISOString(),
-  });
-  const { data: noticeData } = useActivityGroupBoardByCategory({
-    activityGroupId: groupId,
-    category: 'NOTICE',
   });
   const { activityGroupBoardMutate } = useActivityGroupBoardMutation();
 
@@ -41,6 +39,11 @@ const ActivityNoticeEditor = ({ groupId }: Props) => {
     setNotice((prev) => ({ ...prev, [name]: value }));
   };
   const handleAddNoticeButtonClick = () => {
+    if (!notice.title || !notice.content)
+      return toast({
+        state: 'error',
+        message: '제목, 내용은 필수 입력 요소입니다.',
+      });
     activityGroupBoardMutate({
       activityGroupId: groupId,
       body: notice,
@@ -78,13 +81,10 @@ const ActivityNoticeEditor = ({ groupId }: Props) => {
             />
           </div>
           <Hr>미리보기</Hr>
-          <ActivityNoticeSection data={[notice, ...noticeData.items]} />
+          <ActivityNoticeSection data={[notice, ...data]} />
         </Section.Body>
       </Section>
-      <ActivityConfigTableSection
-        tableList={noticeData.items}
-        groupId={groupId}
-      />
+      <ActivityConfigTableSection tableList={data} groupId={groupId} />
     </>
   );
 };

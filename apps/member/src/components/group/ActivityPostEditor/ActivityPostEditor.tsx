@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { Button, Input } from '@clab-platforms/design-system';
 
@@ -8,17 +8,12 @@ import Textarea from '@components/common/Textarea/Textarea';
 
 import useModal from '@hooks/common/useModal';
 import useToast from '@hooks/common/useToast';
-import { useActivityGroupBoardByCategory } from '@hooks/queries/activity/useActivityGroupBoardByCategory';
 import {
   useActivityGroupBoardDeleteMutation,
   useActivityGroupBoardMutation,
 } from '@hooks/queries/activity/useActivityGroupBoardMutation';
 
-import type {
-  ActivityBoardType,
-  ActivityBoardWithAssignmentType,
-  SubmitBoardType,
-} from '@type/activity';
+import type { ActivityBoardType, SubmitBoardType } from '@type/activity';
 
 import ActivityAssignmentEditor from '../ActivityAssignmentEditor/ActivityAssignmentEditor';
 import ActivityBoardEditModal from '../ActivityBoardEditModal/ActivityBoardEditModal';
@@ -27,10 +22,15 @@ import WeeklyActivityCard from '../WeeklyActivityCard/WeeklyActivityCard';
 
 interface ActivityPostEditorProps {
   groupId: number;
-  data: ActivityBoardWithAssignmentType[];
+  activities: ActivityBoardType[];
+  assignments: ActivityBoardType[];
 }
 
-const ActivityPostEditor = ({ groupId, data }: ActivityPostEditorProps) => {
+const ActivityPostEditor = ({
+  groupId,
+  activities,
+  assignments,
+}: ActivityPostEditorProps) => {
   const toast = useToast();
   const { openModal } = useModal();
   const [post, setPost] = useState({
@@ -38,16 +38,16 @@ const ActivityPostEditor = ({ groupId, data }: ActivityPostEditorProps) => {
     content: '',
   });
   const [editAssignment, setEditAssignment] = useState<boolean[]>(
-    Array.from({ length: data.length }, () => false),
+    Array.from({ length: activities.length }, () => false),
   );
+
+  useEffect(() => {
+    setEditAssignment(Array.from({ length: activities.length }, () => false));
+  }, [activities]);
 
   const { activityGroupBoardMutate } = useActivityGroupBoardMutation();
   const { activityGroupBoardDeleteMutate } =
     useActivityGroupBoardDeleteMutation();
-  const { data: assignmentData } = useActivityGroupBoardByCategory({
-    activityGroupId: groupId,
-    category: 'ASSIGNMENT',
-  });
 
   const handlePostChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
@@ -56,11 +56,12 @@ const ActivityPostEditor = ({ groupId, data }: ActivityPostEditorProps) => {
     setPost((prev) => ({ ...prev, [name]: value }));
   };
   const handleAddWeeklyClick = () => {
-    if (!post.title || !post.content)
+    if (!post.title || !post.content) {
       return toast({
         state: 'error',
         message: '제목, 내용은 필수 입력 요소입니다.',
       });
+    }
 
     const activityBoardItem: SubmitBoardType = {
       category: 'WEEKLY_ACTIVITY',
@@ -117,7 +118,7 @@ const ActivityPostEditor = ({ groupId, data }: ActivityPostEditorProps) => {
           <Hr>미리보기</Hr>
           <Section>
             <WeeklyActivityCard
-              index={data.length}
+              index={activities.length}
               groupId={groupId}
               title={post.title}
               content={post.content}
@@ -126,7 +127,7 @@ const ActivityPostEditor = ({ groupId, data }: ActivityPostEditorProps) => {
           </Section>
         </Section.Body>
       </Section>
-      {data.map((weeklyData, index) => (
+      {activities.map((weeklyData, index) => (
         <div key={weeklyData.id}>
           <Section className="relative">
             <div className="absolute right-4 top-4 space-x-2">
@@ -166,7 +167,7 @@ const ActivityPostEditor = ({ groupId, data }: ActivityPostEditorProps) => {
                 activityGroupId={groupId}
               />
               <ActivityConfigTableSection
-                tableList={assignmentData.items.filter(
+                tableList={assignments.filter(
                   (item) => item.parentId === weeklyData.id,
                 )}
                 groupId={groupId}
