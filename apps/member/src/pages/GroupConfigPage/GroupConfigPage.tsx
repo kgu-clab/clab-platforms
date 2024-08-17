@@ -24,8 +24,12 @@ const GroupConfigPage = () => {
       <Header title={[data.name, '관리']} />
       <ActivityProfileEditor data={data} />
       <ActivityParticipantEditor groupId={+id} />
-      <ActivityNoticeEditor groupId={+id} />
-      <ActivityPostEditor groupId={+id} data={data.activities} />
+      <ActivityNoticeEditor groupId={+id} data={data.notices} />
+      <ActivityPostEditor
+        groupId={+id}
+        activities={data.activities}
+        assignments={data.assignments}
+      />
     </Content>
   );
 };

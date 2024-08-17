@@ -26,7 +26,7 @@ export function useActivityGroupMemberMutation() {
         });
       }
       queryClient.invalidateQueries({
-        queryKey: ACTIVITY_QUERY_KEY.MEMBER(data),
+        queryKey: ACTIVITY_QUERY_KEY.APPLICATION(data),
       });
     },
   });

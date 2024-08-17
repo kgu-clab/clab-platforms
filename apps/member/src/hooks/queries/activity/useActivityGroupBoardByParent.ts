@@ -18,7 +18,7 @@ export function useActivityGroupBoardByParent({
   size = 20,
 }: useActivityGroupBoardByParentProps) {
   return useSuspenseQuery({
-    queryKey: [...ACTIVITY_QUERY_KEY.BOARDS(), 'by-parent', parentId],
+    queryKey: [ACTIVITY_QUERY_KEY.BOARD({ id: parentId, parent: true })],
     queryFn: () => getActivityBoardByParent({ parentId, page, size }),
   });
 }

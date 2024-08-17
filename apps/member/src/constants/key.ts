@@ -1,4 +1,7 @@
-import type { ActivityGroupStatusType } from '@type/activity';
+import type {
+  ActivityGroupBoardCategoryType,
+  ActivityGroupStatusType,
+} from '@type/activity';
 import type { WithPaginationParams } from '@type/api';
 import type { CommunityCategoryType } from '@type/community';
 
@@ -60,6 +63,12 @@ export const MEMBERSHIP_FEE_QUERY_KEY = {
 /**
  * 활동 관련 쿼리 키
  */
+
+interface BoardParams {
+  id: number;
+  category?: ActivityGroupBoardCategoryType;
+  parent?: boolean;
+}
 export const ACTIVITY_QUERY_KEY = {
   ALL: ['Activity'],
   MY: () => [...ACTIVITY_QUERY_KEY.ALL, 'my'],
@@ -77,10 +86,11 @@ export const ACTIVITY_QUERY_KEY = {
     status,
   ],
   APPLICATION: (id: number) => [...ACTIVITY_QUERY_KEY.APPLICATIONS(), id],
-  BOARD: (id: number, category?: string) => [
+  BOARD: ({ id, category, parent = false }: BoardParams) => [
     ...ACTIVITY_QUERY_KEY.BOARDS(),
     id,
     category,
+    parent ? 'parent' : undefined,
   ],
   MEMBER: (id: number) => [...ACTIVITY_QUERY_KEY.MEMBERS(), id],
 } as const;

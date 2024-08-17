@@ -21,7 +21,10 @@ export function useActivityGroupBoardByCategory({
   size = 20,
 }: useActivityGroupBoardByCategoryProps) {
   return useSuspenseQuery({
-    queryKey: ACTIVITY_QUERY_KEY.BOARD(activityGroupId, category),
+    queryKey: ACTIVITY_QUERY_KEY.BOARD({
+      id: activityGroupId,
+      category: category,
+    }),
     queryFn: () =>
       getActivityBoardByCategory({ activityGroupId, category, page, size }),
   });

@@ -129,9 +129,12 @@ export async function getActivityGroupDetail(id: number) {
     },
   );
 
-  const { notices, activities } = groupBoardParser(data.activityGroupBoards); // 게시판 분류 파싱
+  const { notices, activities, assignments } = groupBoardParser(
+    data.activityGroupBoards,
+  ); // 게시판 분류 파싱
   data.notices = notices;
   data.activities = activities;
+  data.assignments = assignments;
 
   return data;
 }
@@ -156,7 +159,7 @@ export async function postActivityGroupMemberApply({
 }
 
 /**
- * 상태별 활동 멤버 조회
+ * 활동 신청자 및 지원서 조회
  */
 export async function getActivityGroupApplyByStatus(
   activityGroupId: number,
@@ -200,7 +203,7 @@ export async function patchActivityGroupMemberApply({
   memberId,
   status,
 }: PatchActivityGroupMemberApplyParams) {
-  const { data } = await server.patch<never, BaseResponse<string>>({
+  const { data } = await server.patch<never, BaseResponse<number>>({
     url: createPagination(END_POINT.ACTIVITY_GROUP_ADMIN_ACCEPT, {
       activityGroupId,
       memberId,
@@ -268,7 +271,7 @@ export async function postActivityBoard({
 
   const { data } = await server.post<
     SubmitBoardType,
-    BaseResponse<{ id: number; parentId: number }>
+    BaseResponse<{ id: number; groupId: number; parentId: number }>
   >({
     url: createPagination(END_POINT.ACTIVITY_GROUP_BOARD, params),
     body: {
@@ -305,7 +308,7 @@ export async function patchActivityBoard({
 
   const { data } = await server.patch<
     SubmitBoardType,
-    BaseResponse<{ id: number; parentId: number }>
+    BaseResponse<{ id: number; groupId: number; parentId: number }>
   >({
     url: createPagination(END_POINT.ACTIVITY_GROUP_BOARDS, {
       activityGroupBoardId,
@@ -458,7 +461,10 @@ export async function patchActivityGroup({
   activityGroupId,
   activityGroupStatus,
 }: PatchActivityGroupParams) {
-  const { data } = await server.patch<never, BaseResponse<number>>({
+  const { data } = await server.patch<
+    never,
+    BaseResponse<{ id: number; status: ActivityGroupStatusType }>
+  >({
     url: createPagination(
       END_POINT.ACTIVITY_GROUP_ADMIN_MANAGE(activityGroupId),
       {
@@ -492,7 +498,10 @@ export async function patchActivityGroupAdmin({
  * 활동 게시판 삭제
  */
 export async function deleteActivityGroupBoards(activityGroupBoardId: number) {
-  const { data } = await server.del<never, BaseResponse<number>>({
+  const { data } = await server.del<
+    never,
+    BaseResponse<{ id: number; groupId: number; parentId: number }>
+  >({
     url: createPagination(END_POINT.ACTIVITY_GROUP_BOARDS, {
       activityGroupBoardId,
     }),

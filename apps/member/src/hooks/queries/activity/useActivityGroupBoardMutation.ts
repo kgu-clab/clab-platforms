@@ -24,9 +24,14 @@ export function useActivityGroupBoardMutation() {
           message: '게시글이 작성되었습니다.',
         });
       }
+      const queryKeys = [
+        ACTIVITY_QUERY_KEY.BOARD({ id: data.id }),
+        ACTIVITY_QUERY_KEY.BOARD({ id: data.parentId, parent: true }),
+        ACTIVITY_QUERY_KEY.DETAIL(data.groupId),
+      ];
 
-      queryClient.invalidateQueries({
-        queryKey: ACTIVITY_QUERY_KEY.BOARD(data.id),
+      queryKeys.forEach((queryKey) => {
+        queryClient.invalidateQueries({ queryKey });
       });
     },
   });
@@ -53,8 +58,14 @@ export function useActivityGroupBoardPatchMutation() {
         });
       }
 
-      queryClient.invalidateQueries({
-        queryKey: ACTIVITY_QUERY_KEY.BOARD(data.id),
+      const queryKeys = [
+        ACTIVITY_QUERY_KEY.BOARD({ id: data.id }),
+        ACTIVITY_QUERY_KEY.BOARD({ id: data.parentId, parent: true }),
+        ACTIVITY_QUERY_KEY.DETAIL(data.groupId),
+      ];
+
+      queryKeys.forEach((queryKey) => {
+        queryClient.invalidateQueries({ queryKey });
       });
     },
   });
@@ -81,8 +92,14 @@ export function useActivityGroupBoardDeleteMutation() {
         });
       }
 
-      queryClient.invalidateQueries({
-        queryKey: ACTIVITY_QUERY_KEY.BOARD(data),
+      const queryKeys = [
+        ACTIVITY_QUERY_KEY.BOARD({ id: data.id }),
+        ACTIVITY_QUERY_KEY.BOARD({ id: data.parentId, parent: true }),
+        ACTIVITY_QUERY_KEY.DETAIL(data.groupId),
+      ];
+
+      queryKeys.forEach((queryKey) => {
+        queryClient.invalidateQueries({ queryKey });
       });
     },
   });
