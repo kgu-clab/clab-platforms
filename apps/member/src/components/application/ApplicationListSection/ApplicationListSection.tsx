@@ -11,11 +11,13 @@ import ApplicationInfoModal from '@components/modal/ApplicationInfoModal/Applica
 import { TABLE_HEAD } from '@constants/head';
 import useModal from '@hooks/common/useModal';
 import { usePagination } from '@hooks/common/usePagination';
-import { useApplicationAllMemberMutation } from '@hooks/queries/application/useApplicationAllMemberMutation';
-import { useApplicationConditions } from '@hooks/queries/application/useApplicationConditions';
-import { useApplicationMemberMutation } from '@hooks/queries/application/useApplicationMemberMutation';
-import { useApplicationNonePassMutation } from '@hooks/queries/application/useApplicationNonePassMutation';
-import { useApplicationPassMutation } from '@hooks/queries/application/useApplicationPassMutation';
+import {
+  useApplicationAllMemberMutation,
+  useApplicationConditions,
+  useApplicationMemberMutation,
+  useApplicationNonePassMutation,
+  useApplicationPassMutation,
+} from '@hooks/queries/application';
 
 import { ApplicationMemberType } from '@type/application';
 
