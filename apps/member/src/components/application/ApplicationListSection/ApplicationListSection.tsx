@@ -54,10 +54,10 @@ const ApplicationListSection = ({
     navigate('');
   }, [selectRecruitment]);
 
-  const handleRecruitment = (e: React.ChangeEvent<HTMLSelectElement>) => {
+  const handleRecruitmentChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setSelectRecruitment(+e.target.value);
   };
-  const handlePassButton = (recruitmentId: number, studentId: string) => {
+  const handlePassButtonClick = (recruitmentId: number, studentId: string) => {
     applicationPassMutate({ recruitmentId, studentId });
   };
   const handleNonePassButton = (recruitmentId: number, studentId: string) => {
@@ -90,7 +90,7 @@ const ApplicationListSection = ({
           <Select
             options={recruitmentList}
             label="모집 공고"
-            onChange={handleRecruitment}
+            onChange={handleRecruitmentChange}
             className="h-fit w-full"
           />
           <Button
@@ -125,7 +125,10 @@ const ApplicationListSection = ({
                   size="sm"
                   color="blue"
                   onClick={() =>
-                    handlePassButton(selectRecruitment, application.studentId)
+                    handlePassButtonClick(
+                      selectRecruitment,
+                      application.studentId,
+                    )
                   }
                 >
                   합격
