@@ -21,7 +21,7 @@ export interface GetLectureListParams {
   limit: number;
 }
 
-export interface GetLectureListReponseValue {
+export interface GetLectureListResponseValue {
   id: number;
   campus: string;
   category: string;
@@ -43,7 +43,7 @@ export interface GetLectureListReponseValue {
 export interface GetLectureListResponse {
   success: boolean;
   data: {
-    values: GetLectureListReponseValue[];
+    values: GetLectureListResponseValue[];
   };
   hasPrevious: boolean;
   hasNext: boolean;
