@@ -443,7 +443,7 @@ export default function TimeTableModal<
                 day: selectedDay,
                 time: selectedPeriod,
                 major: selectedMajor,
-                lectureName: debouncedSearchKeyword as string,
+                lectureName: debouncedSearchKeyword,
                 cursor: 0,
                 limit: 10,
               }}
