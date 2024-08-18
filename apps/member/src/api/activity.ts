@@ -8,11 +8,12 @@ import { groupBoardParser } from '@utils/group';
 import type {
   ActivityApplyMemberType,
   ActivityBoardType,
+  ActivityGroupBoardCategoryType,
   ActivityGroupBoardParserType,
-  ActivityGroupCategoryType,
   ActivityGroupCreateItem,
   ActivityGroupItem,
   ActivityGroupMemberMyType,
+  ActivityGroupMemberType,
   ActivityGroupStatusType,
   ActivityPhotoItem,
   ActivityPhotosBody,
@@ -48,8 +49,8 @@ export interface PostActivityBoardParams {
 
 export interface PatchActivityBoardParams {
   activityGroupBoardId: number;
-  groupId: number;
-  groupBoardId: number;
+  groupId?: number;
+  groupBoardId?: number;
   body: SubmitBoardType;
   files?: FormData;
 }
@@ -60,22 +61,32 @@ export interface PostActivityPhotoParams {
   file: File;
 }
 
-export interface PostActivityGroupParams {
-  category: ActivityGroupCategoryType;
-  subject: string;
-  name: string;
-  content: string;
-  imageUrl?: string;
-  curriculum?: string;
-  startDate?: string;
-  endDate?: string;
-  techStack?: string;
-  githubUrl?: string;
+export interface GetActivityBoardByCategoryParams {
+  activityGroupId: number;
+  category: ActivityGroupBoardCategoryType;
+  page: number;
+  size: number;
+}
+
+export interface GetActivityBoardByParentParams {
+  parentId: number;
+  page: number;
+  size: number;
+}
+export interface GetActivityGroupMemberParams {
+  activityGroupId: number;
+  page: number;
+  size: number;
 }
 
 export interface PatchActivityGroupParams {
   activityGroupId: number;
   activityGroupStatus: ActivityGroupStatusType;
+}
+
+export interface PatchActivityGroupAdminParams {
+  activityGroupId: number;
+  body: ActivityGroupCreateItem;
 }
 
 /**
@@ -118,11 +129,19 @@ export async function getActivityGroupDetail(id: number) {
     },
   );
 
-  const { notices, activities } = groupBoardParser(data.activityGroupBoards); // 게시판 분류 파싱
+  const { notices, activities, assignments } = groupBoardParser(
+    data.activityGroupBoards,
+  ); // 게시판 분류 파싱
   data.notices = notices;
   data.activities = activities;
+  data.assignments = assignments;
 
-  return data;
+  return {
+    ...data,
+    notices,
+    activities,
+    assignments,
+  };
 }
 
 /**
@@ -145,7 +164,7 @@ export async function postActivityGroupMemberApply({
 }
 
 /**
- * 상태별 활동 멤버 조회
+ * 활동 신청자 및 지원서 조회
  */
 export async function getActivityGroupApplyByStatus(
   activityGroupId: number,
@@ -189,7 +208,7 @@ export async function patchActivityGroupMemberApply({
   memberId,
   status,
 }: PatchActivityGroupMemberApplyParams) {
-  const { data } = await server.patch<never, BaseResponse<string>>({
+  const { data } = await server.patch<never, BaseResponse<number>>({
     url: createPagination(END_POINT.ACTIVITY_GROUP_ADMIN_ACCEPT, {
       activityGroupId,
       memberId,
@@ -257,7 +276,7 @@ export async function postActivityBoard({
 
   const { data } = await server.post<
     SubmitBoardType,
-    BaseResponse<{ id: number; parentId: number }>
+    BaseResponse<{ id: number; groupId: number; parentId: number }>
   >({
     url: createPagination(END_POINT.ACTIVITY_GROUP_BOARD, params),
     body: {
@@ -294,7 +313,7 @@ export async function patchActivityBoard({
 
   const { data } = await server.patch<
     SubmitBoardType,
-    BaseResponse<{ id: number; parentId: number }>
+    BaseResponse<{ id: number; groupId: number; parentId: number }>
   >({
     url: createPagination(END_POINT.ACTIVITY_GROUP_BOARDS, {
       activityGroupBoardId,
@@ -325,6 +344,68 @@ export async function postActivityPhoto(body: PostActivityPhotoParams) {
 
   return data;
 }
+
+/**
+ * 활동 내 카테고리 게시판 조회
+ */
+export async function getActivityBoardByCategory({
+  activityGroupId,
+  category,
+  page,
+  size,
+}: GetActivityBoardByCategoryParams) {
+  const { data } = await server.get<ResponsePagination<ActivityBoardType>>({
+    url: createPagination(END_POINT.ACTIVITY_GROUP_BOARD_BY_CATEGORY, {
+      activityGroupId,
+      category,
+      page,
+      size,
+    }),
+  });
+
+  return data;
+}
+
+/**
+ * 활동 그룹 게시판 계층 구조적 조회
+ */
+export async function getActivityBoardByParent({
+  parentId,
+  page,
+  size,
+}: GetActivityBoardByParentParams) {
+  const { data } = await server.get<ResponsePagination<ActivityBoardType>>({
+    url: createPagination(END_POINT.ACTIVITY_GROUP_BOARD_BY_PARENT, {
+      parentId,
+      page,
+      size,
+    }),
+  });
+
+  return data;
+}
+
+/**
+ * 활동 멤버 조회
+ */
+export async function getActivityGroupMember({
+  activityGroupId,
+  page,
+  size,
+}: GetActivityGroupMemberParams) {
+  const { data } = await server.get<
+    ResponsePagination<ActivityGroupMemberType>
+  >({
+    url: createPagination(END_POINT.ACTIVITY_GROUP_MEMBER_MEMBERS, {
+      activityGroupId,
+      page,
+      size,
+    }),
+  });
+
+  return data;
+}
+
 /**
  * 키워드 사진 검색
  */
@@ -355,7 +436,7 @@ export async function getSearchImage(keyword: string) {
 /**
  * 활동 생성
  */
-export async function postActivityGroup(body: PostActivityGroupParams) {
+export async function postActivityGroup(body: ActivityGroupCreateItem) {
   const { data } = await server.post<
     ActivityGroupCreateItem,
     BaseResponse<number>
@@ -385,13 +466,50 @@ export async function patchActivityGroup({
   activityGroupId,
   activityGroupStatus,
 }: PatchActivityGroupParams) {
-  const { data } = await server.patch<never, BaseResponse<number>>({
+  const { data } = await server.patch<
+    never,
+    BaseResponse<{ id: number; status: ActivityGroupStatusType }>
+  >({
     url: createPagination(
       END_POINT.ACTIVITY_GROUP_ADMIN_MANAGE(activityGroupId),
       {
         activityGroupStatus,
       },
     ),
+  });
+
+  return data;
+}
+
+/**
+ * 활동 수정
+ */
+export async function patchActivityGroupAdmin({
+  activityGroupId,
+  body,
+}: PatchActivityGroupAdminParams) {
+  const { data } = await server.patch<
+    ActivityGroupCreateItem,
+    BaseResponse<number>
+  >({
+    url: createURL(END_POINT.ACTIVITY_GROUP_ADMIN_DETAIL(activityGroupId)),
+    body,
+  });
+
+  return data;
+}
+
+/**
+ * 활동 게시판 삭제
+ */
+export async function deleteActivityGroupBoards(activityGroupBoardId: number) {
+  const { data } = await server.del<
+    never,
+    BaseResponse<{ id: number; groupId: number; parentId: number }>
+  >({
+    url: createPagination(END_POINT.ACTIVITY_GROUP_BOARDS, {
+      activityGroupBoardId,
+    }),
   });
 
   return data;

@@ -7,6 +7,7 @@ import { Section } from '@components/common/Section';
 import ActivityInfoModal from '@components/modal/ActivityInfoModal/ActivityInfoModal';
 
 import { TABLE_HEAD } from '@constants/head';
+import { ACTIVITY_STATE } from '@constants/state';
 import useModal from '@hooks/common/useModal';
 import { useActivityGroupMember } from '@hooks/queries';
 import { useActivityGroupDeleteMutation } from '@hooks/queries/activity/useActivityGroupDeleteMutation';
@@ -30,10 +31,13 @@ const ManageActivitySection = () => {
   const handleMenubarItemClick = (mode: ActivityGroupStatusType) => {
     setMode(mode);
   };
-  const handleApproveButtonClick = (id: number) => {
+  const handleApproveButtonClick = (
+    id: number,
+    status: ActivityGroupStatusType,
+  ) => {
     activityGroupStatusMutate({
       activityGroupId: id,
-      activityGroupStatus: 'PROGRESSING',
+      activityGroupStatus: status,
     });
   };
   const handleRejectButtonClick = (id: number) => {
@@ -59,7 +63,9 @@ const ManageActivitySection = () => {
                 </ActionButton>
                 <ActionButton
                   color="green"
-                  onClick={() => handleApproveButtonClick(id)}
+                  onClick={() =>
+                    handleApproveButtonClick(id, ACTIVITY_STATE.PROGRESSING)
+                  }
                 >
                   승인
                 </ActionButton>
@@ -96,6 +102,14 @@ const ManageActivitySection = () => {
                   onClick={() => handleRejectButtonClick(id)}
                 >
                   삭제
+                </ActionButton>
+                <ActionButton
+                  color="green"
+                  onClick={() =>
+                    handleApproveButtonClick(id, ACTIVITY_STATE.END)
+                  }
+                >
+                  종료
                 </ActionButton>
               </Table.Cell>
             </Table.Row>
@@ -141,20 +155,20 @@ const ManageActivitySection = () => {
       >
         <Menubar>
           <Menubar.Item
-            selected={mode === 'WAITING'}
-            onClick={() => handleMenubarItemClick('WAITING')}
+            selected={mode === ACTIVITY_STATE.WAITING}
+            onClick={() => handleMenubarItemClick(ACTIVITY_STATE.WAITING)}
           >
             신청
           </Menubar.Item>
           <Menubar.Item
-            selected={mode === 'PROGRESSING'}
-            onClick={() => handleMenubarItemClick('PROGRESSING')}
+            selected={mode === ACTIVITY_STATE.PROGRESSING}
+            onClick={() => handleMenubarItemClick(ACTIVITY_STATE.PROGRESSING)}
           >
             진행중
           </Menubar.Item>
           <Menubar.Item
-            selected={mode === 'END'}
-            onClick={() => handleMenubarItemClick('END')}
+            selected={mode === ACTIVITY_STATE.END}
+            onClick={() => handleMenubarItemClick(ACTIVITY_STATE.END)}
           >
             종료
           </Menubar.Item>

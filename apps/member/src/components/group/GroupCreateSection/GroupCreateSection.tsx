@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { PropsWithChildren, useState } from 'react';
 
 import { Button, Grid, Input } from '@clab-platforms/design-system';
 import { SearchOutline } from '@clab-platforms/icon';
@@ -11,6 +11,7 @@ import Select from '@components/common/Select/Select';
 import Textarea from '@components/common/Textarea/Textarea';
 
 import { getSearchImage } from '@api/activity';
+import { SELECT_ACTIVITY_GROUP_CATEGORY_TYPE } from '@constants/select';
 import {
   BOARD_CONTENT_MAX_LENGTH,
   BOARD_TITLE_MAX_LENGTH,
@@ -42,25 +43,43 @@ interface InputsType {
   techStack?: string;
   githubUrl?: string;
 }
+interface ComponentWithLabelProps extends PropsWithChildren {
+  title: string;
+  htmlFor: string;
+  required?: boolean;
+  className?: string;
+}
 
-const options = [
-  {
-    name: 'STUDY',
-    value: 'STUDY',
-  },
-  {
-    name: 'PROJECT',
-    value: 'PROJECT',
-  },
-];
+const ComponentWithLabel = ({
+  title,
+  htmlFor,
+  required = false,
+  className,
+  children,
+}: ComponentWithLabelProps) => {
+  return (
+    <div className={className}>
+      <Label htmlFor={htmlFor} required={required}>
+        {title}
+      </Label>
+      {children}
+    </div>
+  );
+};
 
+const CategoryOptions = Object.entries(SELECT_ACTIVITY_GROUP_CATEGORY_TYPE).map(
+  ([key, value]) => ({
+    name: key,
+    value,
+  }),
+);
 const GroupCreateSection = () => {
   const toast = useToast();
   const { activityGroupMutate } = useActivityGroupMutation();
   const [photoList, setPhotoList] = useState<PhotoType[]>([]);
   const [photoKeyword, setPhotoKeyword] = useState('');
   const [inputs, setInputs] = useState<InputsType>({
-    category: 'STUDY',
+    category: CategoryOptions[0].value,
     subject: '',
     name: '',
     content: '',
@@ -125,23 +144,17 @@ const GroupCreateSection = () => {
     <Section>
       <Section.Body className="space-y-4">
         <Grid gap="md" col="2">
-          <div>
-            <Label htmlFor="category" required>
-              카테고리
-            </Label>
+          <ComponentWithLabel title="카테고리" htmlFor="category" required>
             <Select
               id="category"
               name="category"
               className="w-full"
-              options={options}
+              options={CategoryOptions}
               value={category}
               onChange={onChange}
             />
-          </div>
-          <div>
-            <Label htmlFor="subject" required>
-              대상
-            </Label>
+          </ComponentWithLabel>
+          <ComponentWithLabel title="대상" htmlFor="subject" required>
             <Input
               id="subject"
               name="subject"
@@ -151,12 +164,9 @@ const GroupCreateSection = () => {
               value={subject}
               onChange={onChange}
             />
-          </div>
+          </ComponentWithLabel>
         </Grid>
-        <div>
-          <Label htmlFor="name" required>
-            활동명
-          </Label>
+        <ComponentWithLabel title="활동명" htmlFor="name" required>
           <Input
             id="name"
             name="name"
@@ -166,9 +176,12 @@ const GroupCreateSection = () => {
             value={name}
             onChange={onChange}
           />
-        </div>
-        <div className="flex flex-col">
-          <Label htmlFor="photoKeywords">이미지</Label>
+        </ComponentWithLabel>
+        <ComponentWithLabel
+          title="이미지"
+          htmlFor="photoKeywords"
+          className="flex flex-col"
+        >
           <div className="mb-2 flex gap-2">
             <Input
               id="photoKeyword"
@@ -204,11 +217,8 @@ const GroupCreateSection = () => {
                 />
               ))}
           </Grid>
-        </div>
-        <div>
-          <Label htmlFor="content" required>
-            내용
-          </Label>
+        </ComponentWithLabel>
+        <ComponentWithLabel title="내용" htmlFor="content" required>
           <Textarea
             id="content"
             name="content"
@@ -218,9 +228,8 @@ const GroupCreateSection = () => {
             value={content}
             onChange={onChange}
           />
-        </div>
-        <div>
-          <Label htmlFor="curriculum">커리큘럼</Label>
+        </ComponentWithLabel>
+        <ComponentWithLabel title="커리큘럼" htmlFor="curriculum">
           <Textarea
             id="curriculum"
             name="curriculum"
@@ -230,7 +239,7 @@ const GroupCreateSection = () => {
             value={curriculum}
             onChange={onChange}
           />
-        </div>
+        </ComponentWithLabel>
         <Grid gap="md" col="2">
           <Input
             label="시작일"
@@ -249,8 +258,7 @@ const GroupCreateSection = () => {
             onChange={onChange}
           />
         </Grid>
-        <div>
-          <Label htmlFor="techStack">기술 스택</Label>
+        <ComponentWithLabel title="기술 스택" htmlFor="techStack">
           <Input
             id="techStack"
             name="techStack"
@@ -260,9 +268,8 @@ const GroupCreateSection = () => {
             value={techStack}
             onChange={onChange}
           />
-        </div>
-        <div>
-          <Label htmlFor="githubUrl">GithubUrl</Label>
+        </ComponentWithLabel>
+        <ComponentWithLabel title="Github" htmlFor="githubUrl">
           <Input
             id="githubUrl"
             name="githubUrl"
@@ -272,7 +279,7 @@ const GroupCreateSection = () => {
             value={githubUrl}
             onChange={onChange}
           />
-        </div>
+        </ComponentWithLabel>
         <Button className="w-full" onClick={handleApplyButtonClick}>
           새로운 그룹 추가하기
         </Button>

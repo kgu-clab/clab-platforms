@@ -24,7 +24,7 @@ const WeeklyActivitySection = ({
       <div className="rounded-t-lg bg-sky-100 p-4">
         <h1 className="text-lg font-semibold">주차별 활동</h1>
       </div>
-      <div className="divide-y p-4">
+      <div className="space-y-4 divide-y p-4">
         {[...data].map((activity, index) => (
           <WeeklyActivityCard
             key={index}

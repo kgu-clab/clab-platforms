@@ -56,3 +56,41 @@ export const BOARD_TITLE_MAX_LENGTH = 100;
  * 5000자
  */
 export const BOARD_CONTENT_MAX_LENGTH = 5000;
+
+/**
+ * 활동 그룹 멤버 역할을 정의합니다.
+ */
+export const ACTIVITY_MEMBER_ROLE = {
+  LEADER: 'LEADER',
+  MEMBER: 'MEMBER',
+  NONE: 'NONE',
+} as const;
+
+/**
+ * 활동 그룹 멤버 상태를 정의합니다.
+ */
+export const ACTIVITY_MEMBER_STATE = {
+  ACCEPTED: 'ACCEPTED',
+  REJECTED: 'REJECTED',
+  WAITING: 'WAITING',
+} as const;
+
+/**
+ * 활동 그룹 상태를 정의합니다.
+ */
+export const ACTIVITY_STATE = {
+  WAITING: 'WAITING',
+  PROGRESSING: 'PROGRESSING',
+  END: 'END',
+} as const;
+
+/**
+ * 게시판 카테고리를 정의합니다.
+ */
+export const ACTIVITY_BOARD_CATEGORY_STATE = {
+  NOTICE: 'NOTICE',
+  WEEKLY_ACTIVITY: 'WEEKLY_ACTIVITY',
+  FEEDBACK: 'FEEDBACK',
+  ASSIGNMENT: 'ASSIGNMENT',
+  SUBMIT: 'SUBMIT',
+} as const;

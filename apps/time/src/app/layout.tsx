@@ -9,7 +9,7 @@ import './globals.css';
 const inter = Noto_Sans_KR({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: '경기타임',
+  title: '경기플러스',
   description: '경기대학교에 계신 모든 순간을 도와드릴게요.',
   icons: {
     icon: '/favicon.ico',
