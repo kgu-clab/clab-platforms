@@ -26,15 +26,15 @@ export interface GetLectureListResponseValue {
   campus: string;
   category: string;
   code: string;
-  credit: 0;
-  grade: 0;
+  credit: number;
+  grade: number;
   groupName: string;
   isExceeded: true;
   major: string;
   name: string;
   professor: string;
   room: string;
-  year: 0;
+  year: number;
   semester: string;
   time: string;
   type: LectureKey;
