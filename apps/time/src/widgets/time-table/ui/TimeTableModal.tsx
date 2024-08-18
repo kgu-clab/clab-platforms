@@ -14,27 +14,37 @@ import { Input } from '@clab-platforms/design-system';
 import { CloseOutline } from '@clab-platforms/icon';
 
 import { DAY_VALUE_ARRAY, MODAL_KEY } from '@/shared/constants';
-import { useModalAction, useModalState } from '@/shared/hooks';
+import {
+  useDebounce,
+  useModalAction,
+  useModalState,
+  useOutsideClick,
+} from '@/shared/hooks';
 import type { DayKor } from '@/shared/types';
 import { Modal } from '@/shared/ui';
 import {
+  DayCampus,
   DayPeriod,
   DayStatus,
   Grade,
   LectureKey,
+  NightCampus,
   NightPeriod,
   Region,
-  SPECIAL_PERIOD,
   SpecialPeriod,
 } from '@/widgets/time-table';
 import {
   DAY_PERIOD_ARRAY,
+  DAY_STATUS,
   GRADE,
   LECTURE,
   LECTURE_ARRAY,
   NIGHT_PERIOD_ARRAY,
   REGION,
   REGION_VALUE_ARRAY,
+  SPECIAL_PERIOD,
+  TimeTableLectureTable,
+  useMajorList,
 } from '@/widgets/time-table';
 
 interface TimeTableModalFilterProps<T> {
@@ -62,8 +72,13 @@ interface TimeTableModalDropdownButtonProps
   value: string;
 }
 
-interface TimeTableLectureTableProps {
-  lectureList: unknown[];
+interface TimeTableModalMajorInputProps {
+  selectedMajor: string[];
+  handleMajorInput: (major: string) => void;
+}
+
+interface TimeTableModalLectureSearchInputProps {
+  handleLectureSearchInput: (keyword: string) => void;
 }
 
 interface TimeTableModalProps<T> {
@@ -71,21 +86,6 @@ interface TimeTableModalProps<T> {
   day: DayKor;
   period: T;
 }
-
-const LECTURE_TABLE_ROW_HEADER = [
-  '과목코드',
-  '캠퍼스',
-  '카테고리',
-  '학점',
-  '학년',
-  '전공',
-  '수업명',
-  '담당교수',
-  '학기',
-  '시간',
-  '수업구분',
-  '초과여부',
-] as const;
 
 function TimeTableModalFilter<T extends string>({
   title,
@@ -119,14 +119,16 @@ const TimeTableModalPeriodDropdown = memo(function TimeTableModalPeriodDropdown<
   handlePeriodDropdownItem,
 }: TimeTableModalPeriodDropdownProps<T>) {
   const periodList =
-    dayStatus === 'day' ? DAY_PERIOD_ARRAY : NIGHT_PERIOD_ARRAY;
+    DAY_STATUS[dayStatus] === DAY_STATUS.day
+      ? DAY_PERIOD_ARRAY
+      : NIGHT_PERIOD_ARRAY;
   const selectedValue = (
     <>
       {selectedPeriod.length ? (
         <div className="flex max-w-full flex-wrap gap-1">
           {selectedPeriod.map((period) => (
             <TimeTableModalDropdownButton
-              key={period}
+              key={`dropdown-item-${period}`}
               onClick={(event) => {
                 event.stopPropagation();
                 handlePeriodDropdownItem(period);
@@ -223,45 +225,83 @@ const TimeTableModalDropdownButton = memo(
   },
 );
 
-const TimeTableModalInput = memo(function TimeTableModalInput() {
+const TimeTableModalMajorInput = memo(function TimeTableModalMajorInput({
+  selectedMajor,
+  handleMajorInput,
+}: TimeTableModalMajorInputProps) {
+  const [inputValue, setInputValue] = useState('');
+  const [open, setOpen] = useState<boolean>(false);
+  const debouncedValue = useDebounce({
+    value: inputValue,
+    delay: 1000,
+  }) as string;
+  const findMajorList = useMajorList({ major: debouncedValue });
+  const ref = useOutsideClick({ callback: () => setOpen(false) });
+
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setInputValue(event.currentTarget.value);
+  };
+
+  const selectedValue = (
+    <div className="flex max-w-full flex-wrap gap-1">
+      {...selectedMajor.map((major) => (
+        <TimeTableModalDropdownButton
+          key={major}
+          onClick={() => handleMajorInput(major)}
+          value={major}
+        />
+      ))}
+    </div>
+  );
+
   return (
-    <Modal.Item title="강의 찾기">
-      <Input inputClassName="border-gray-400 rounded-md py-1" />
+    <Modal.Item title="전공 선택">
+      <div className="relative" ref={ref}>
+        <div
+          className="flex w-full flex-wrap gap-y-1 rounded-md border border-gray-400 p-1 text-sm"
+          onClick={() => setOpen(true)}
+        >
+          {selectedMajor && selectedValue}
+          <div className="grow">
+            <input
+              className="w-full px-1 py-0.5 text-gray-600 focus:outline-0"
+              value={inputValue}
+              placeholder="전공을 입력해주세요"
+              onChange={(e) => handleInputChange(e)}
+            />
+          </div>
+        </div>
+        {findMajorList.length > 0 && open && (
+          <div className="absolute z-40 mt-4 max-h-60 min-h-fit w-full overflow-hidden overflow-y-scroll rounded-md border border-gray-400 bg-white p-2 drop-shadow-md">
+            {...findMajorList.map((major) => (
+              <Modal.DropdownItem
+                key={major}
+                onClick={() => handleMajorInput(major)}
+                selected={selectedMajor.includes(major)}
+              >
+                {major}
+              </Modal.DropdownItem>
+            ))}
+          </div>
+        )}
+      </div>
     </Modal.Item>
   );
 });
 
-const TimeTableLectureTable = memo(function TimeTableLectureTable({
-  lectureList,
-}: TimeTableLectureTableProps) {
+const TimeTableLectureSearchInput = memo(function TimeTableLectureSearchInput({
+  handleLectureSearchInput,
+}: TimeTableModalLectureSearchInputProps) {
   return (
-    <div className="mt-3">
-      <table className="w-full table-auto border-collapse border border-gray-400 text-sm">
-        <thead className="w-full border border-gray-400 text-center">
-          <tr className="divide-x divide-gray-400 border border-gray-400 bg-gray-100">
-            {LECTURE_TABLE_ROW_HEADER.map((header) => (
-              <td className="py-2" key={header}>
-                {header}
-              </td>
-            ))}
-          </tr>
-        </thead>
-        <tbody className="h-80 w-full">
-          <tr>
-            <td
-              className="text-center"
-              colSpan={LECTURE_TABLE_ROW_HEADER.length}
-            >
-              {lectureList.length ? (
-                <p>검색 결과가 없습니다.</p>
-              ) : (
-                <p>검색 결과가 없습니다.</p>
-              )}
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+    <Modal.Item title="강의 검색">
+      <Input
+        inputClassName="border-gray-400 px-1 px-1.5 rounded-md"
+        placeholder="강의명을 입력해주세요"
+        onChange={(event) =>
+          handleLectureSearchInput(event.currentTarget.value)
+        }
+      />
+    </Modal.Item>
   );
 });
 
@@ -282,6 +322,12 @@ export default function TimeTableModal<
   const [selectedLectureType, setSelectedLectureType] = useState<LectureKey[]>(
     [],
   );
+  const [selectedMajor, setSelectedMajor] = useState<string[]>([]);
+  const [searchKeyword, setSearchKeyword] = useState<string>('');
+  const debouncedSearchKeyword = useDebounce({
+    value: searchKeyword,
+    delay: 1000,
+  });
 
   useEffect(() => {
     setSelectedGrade([]);
@@ -289,6 +335,8 @@ export default function TimeTableModal<
     setSelectedDay([day]);
     setSelectedPeriod([period]);
     setSelectedLectureType([]);
+    setSelectedMajor([]);
+    setSearchKeyword('');
   }, [day, period]);
 
   const handleFilterItem = useCallback(
@@ -336,7 +384,7 @@ export default function TimeTableModal<
               title="구분"
               list={REGION_VALUE_ARRAY.map((str) => str)}
               origin={selectedRegion}
-              handleFilterItem={(region: Region) =>
+              handleFilterItem={(region) =>
                 handleFilterItem(region, selectedRegion, setSelectedRegion)
               }
             />
@@ -344,7 +392,7 @@ export default function TimeTableModal<
               title="학년 선택"
               list={[...GRADE] as Grade[]}
               origin={selectedGrade}
-              handleFilterItem={(grade: Grade) =>
+              handleFilterItem={(grade) =>
                 handleFilterItem(grade, selectedGrade, setSelectedGrade)
               }
             />
@@ -371,8 +419,33 @@ export default function TimeTableModal<
                 )
               }
             />
-            <TimeTableModalInput />
-            <TimeTableLectureTable lectureList={[]} />
+            <TimeTableModalMajorInput
+              selectedMajor={selectedMajor}
+              handleMajorInput={(major) =>
+                handleFilterItem(major, selectedMajor, setSelectedMajor)
+              }
+            />
+            <TimeTableLectureSearchInput
+              handleLectureSearchInput={(keyword) => setSearchKeyword(keyword)}
+            />
+            <TimeTableLectureTable
+              selectedValues={{
+                campus: selectedRegion.map(
+                  (region) =>
+                    `${region}${DAY_STATUS[dayStatus]}` as
+                      | DayCampus
+                      | NightCampus,
+                ),
+                type: selectedLectureType,
+                grade: selectedGrade,
+                day: selectedDay,
+                time: selectedPeriod,
+                major: selectedMajor,
+                lectureName: debouncedSearchKeyword as string,
+                cursor: 0,
+                limit: 10,
+              }}
+            />
           </Modal.Content>
         </Modal>
       )}
