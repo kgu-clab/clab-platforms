@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react';
 
-interface UseDebounceParams {
-  value: unknown;
+interface UseDebounceParams<T> {
+  value: T;
   delay: number;
 }
 
-export default function useDebounce({ value, delay }: UseDebounceParams) {
+export default function useDebounce<T>({ value, delay }: UseDebounceParams<T>) {
   const [debouncedValue, setDebouncedValue] = useState<unknown>(value);
 
   useEffect(() => {
