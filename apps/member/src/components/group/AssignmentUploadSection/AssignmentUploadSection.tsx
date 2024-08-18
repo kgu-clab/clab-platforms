@@ -8,12 +8,13 @@ import Section from '@components/common/Section/Section';
 import Textarea from '@components/common/Textarea/Textarea';
 
 import { FORM_DATA_KEY } from '@constants/api';
+import useToast from '@hooks/common/useToast';
 import {
   useActivityGroupBoardMutation,
   useActivityGroupBoardPatchMutation,
   useMyProfile,
 } from '@hooks/queries';
-import { formattedDate, isDateValid, toKoreaISOString } from '@utils/date';
+import { formattedDate, isDateValid } from '@utils/date';
 
 import type { ActivityBoardType } from '@type/activity';
 import type { ResponseFile } from '@type/api';
@@ -31,6 +32,7 @@ const AssignmentUploadSection = ({
   dueDateTime,
   myAssignment,
 }: Props) => {
+  const toast = useToast();
   const { data: myProfile } = useMyProfile();
   const { activityGroupBoardMutate } = useActivityGroupBoardMutation();
   const { activityGroupBoardPatchMutate } =
@@ -55,6 +57,13 @@ const AssignmentUploadSection = ({
   const handleSubmitButtonClick = () => {
     const formData = new FormData();
     const file = uploaderRef.current?.files?.[0];
+
+    if (!description || !file) {
+      return toast({
+        state: 'error',
+        message: '첨부파일과 설명을 입력해주세요.',
+      });
+    }
     if (file) {
       formData.append(FORM_DATA_KEY, file);
     }
@@ -115,7 +124,7 @@ const AssignmentUploadSection = ({
             })}
           >
             {uploadedFile
-              ? formattedDate(toKoreaISOString(uploadedFile.createdAt))
+              ? formattedDate(uploadedFile.createdAt)
               : '아직 제출하지 않았습니다.'}
           </Table.Cell>
         </Table.Row>
@@ -157,11 +166,7 @@ const AssignmentUploadSection = ({
             첨부파일 변경하기
           </Button>
         )}
-        <Button
-          className="w-full"
-          onClick={handleSubmitButtonClick}
-          disabled={description.length === 0}
-        >
+        <Button className="w-full" onClick={handleSubmitButtonClick}>
           제출하기
         </Button>
       </div>

@@ -11,6 +11,7 @@ import WeeklyActivitySection from '@components/group/WeeklyActivitySection/Weekl
 import { TABLE_HEAD } from '@constants/head';
 import { GROUP_MESSAGE } from '@constants/message';
 import { PATH_FINDER } from '@constants/path';
+import { ACTIVITY_MEMBER_STATE } from '@constants/state';
 import useModal from '@hooks/common/useModal';
 import { useMyProfile } from '@hooks/queries';
 import { useActivityGroup } from '@hooks/queries/activity/useActivityGroup';
@@ -30,7 +31,7 @@ const GroupDetailPage = () => {
   );
 
   const acceptedParticipant = data.groupMembers.filter(
-    (member) => member.status === 'ACCEPTED',
+    (member) => member.status === ACTIVITY_MEMBER_STATE.ACCEPTED,
   );
 
   const handleApplicationClick = () => {
