@@ -37,6 +37,7 @@ export const PATH = {
   MANAGE: '/manage',
   LOGIN: '/login',
   AUTH: '/auth',
+  APPLICATION: '/application',
 } as const;
 /**
  * 페이지의 URL을 생성하는 함수입니다.

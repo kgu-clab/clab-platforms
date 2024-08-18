@@ -48,6 +48,9 @@ const LoginPage = lazy(() => import('@pages/LoginPage/LoginPage'));
 const AuthPage = lazy(() => import('@pages/AuthPage/AuthPage'));
 const BlogPage = lazy(() => import('@pages/BlogPage/BlogPage'));
 const ManagePage = lazy(() => import('@pages/ManagePage/ManagePage'));
+const ApplicationPage = lazy(
+  () => import('@pages/ApplicationPage/ApplicationPage'),
+);
 
 const AppRouter = () => {
   const router = createBrowserRouter([
@@ -197,6 +200,14 @@ const AppRouter = () => {
           element: (
             <Suspense>
               <ManagePage />
+            </Suspense>
+          ),
+        },
+        {
+          path: PATH.APPLICATION,
+          element: (
+            <Suspense>
+              <ApplicationPage />
             </Suspense>
           ),
         },

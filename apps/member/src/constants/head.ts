@@ -15,6 +15,7 @@ export const TABLE_HEAD = {
   ],
   CALENDAR_SCHEDULE: ['번호', '제목', '시작일', '종료일', '중요도', '기능'],
   CALENDAR_TABLE: ['날짜', '일정'],
+  APPLY_TABLE: ['번호', '이름', '학번', '지원서', '상태', '합불 처리', '생성'],
 } as const;
 /**
  * 관리자 페이지에서 기능을 나타내는 상수
