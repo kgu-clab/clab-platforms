@@ -1,4 +1,4 @@
-const DAY_PERIOD = {
+export const DAY_PERIOD = {
   '1': {
     start: { hour: 9, minute: 0 },
     end: { hour: 9, minute: 50 },
@@ -91,7 +91,7 @@ const DAY_PERIOD = {
   },
 } as const;
 
-const NIGHT_PERIOD = {
+export const NIGHT_PERIOD = {
   '1': {
     start: { hour: 17, minute: 50 },
     end: { hour: 18, minute: 35 },
@@ -124,7 +124,7 @@ const NIGHT_PERIOD = {
   },
 } as const;
 
-const DAY_PERIOD_ARRAY = Object.entries(DAY_PERIOD).sort(
+export const DAY_PERIOD_ARRAY = Object.entries(DAY_PERIOD).sort(
   ([, periodA], [, periodB]) => {
     const timeA = periodA.start.hour * 60 + periodA.start.minute;
     const timeB = periodB.start.hour * 60 + periodB.start.minute;
@@ -133,7 +133,7 @@ const DAY_PERIOD_ARRAY = Object.entries(DAY_PERIOD).sort(
   },
 );
 
-const NIGHT_PERIOD_ARRAY = Object.entries(NIGHT_PERIOD).sort(
+export const NIGHT_PERIOD_ARRAY = Object.entries(NIGHT_PERIOD).sort(
   ([, periodA], [, periodB]) => {
     const timeA = periodA.start.hour * 60 + periodA.start.minute;
     const timeB = periodB.start.hour * 60 + periodB.start.minute;
@@ -142,18 +142,4 @@ const NIGHT_PERIOD_ARRAY = Object.entries(NIGHT_PERIOD).sort(
   },
 );
 
-const DAY_STATUS = {
-  day: '주간',
-  night: '야간',
-} as const;
-
-const SPECIAL_PERIOD = ['이러닝', '교외수업', '사회봉사'] as const;
-
-export {
-  DAY_PERIOD,
-  NIGHT_PERIOD,
-  SPECIAL_PERIOD,
-  DAY_PERIOD_ARRAY,
-  NIGHT_PERIOD_ARRAY,
-  DAY_STATUS,
-};
+export const SPECIAL_PERIOD = ['이러닝', '교외수업', '사회봉사'] as const;
