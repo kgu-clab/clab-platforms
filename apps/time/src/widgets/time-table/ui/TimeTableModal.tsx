@@ -74,11 +74,11 @@ interface TimeTableModalDropdownButtonProps
 
 interface TimeTableModalMajorInputProps {
   selectedMajor: string[];
-  handleMajorInput: (major: string) => void;
+  handleMajorInputChange: (major: string) => void;
 }
 
 interface TimeTableModalLectureSearchInputProps {
-  handleLectureSearchInput: (keyword: string) => void;
+  handleLectureSearchInputChange: (keyword: string) => void;
 }
 
 interface TimeTableModalProps<T> {
@@ -227,7 +227,7 @@ const TimeTableModalDropdownButton = memo(
 
 const TimeTableModalMajorInput = memo(function TimeTableModalMajorInput({
   selectedMajor,
-  handleMajorInput,
+  handleMajorInputChange,
 }: TimeTableModalMajorInputProps) {
   const [inputValue, setInputValue] = useState('');
   const [open, setOpen] = useState<boolean>(false);
@@ -247,7 +247,7 @@ const TimeTableModalMajorInput = memo(function TimeTableModalMajorInput({
       {...selectedMajor.map((major) => (
         <TimeTableModalDropdownButton
           key={major}
-          onClick={() => handleMajorInput(major)}
+          onClick={() => handleMajorInputChange(major)}
           value={major}
         />
       ))}
@@ -276,7 +276,7 @@ const TimeTableModalMajorInput = memo(function TimeTableModalMajorInput({
             {...findMajorList.map((major) => (
               <Modal.DropdownItem
                 key={major}
-                onClick={() => handleMajorInput(major)}
+                onClick={() => handleMajorInputChange(major)}
                 selected={selectedMajor.includes(major)}
               >
                 {major}
@@ -290,7 +290,7 @@ const TimeTableModalMajorInput = memo(function TimeTableModalMajorInput({
 });
 
 const TimeTableLectureSearchInput = memo(function TimeTableLectureSearchInput({
-  handleLectureSearchInput,
+  handleLectureSearchInputChange,
 }: TimeTableModalLectureSearchInputProps) {
   return (
     <Modal.Item title="강의 검색">
@@ -298,7 +298,7 @@ const TimeTableLectureSearchInput = memo(function TimeTableLectureSearchInput({
         inputClassName="border-gray-400 px-1 px-1.5 rounded-md"
         placeholder="강의명을 입력해주세요"
         onChange={(event) =>
-          handleLectureSearchInput(event.currentTarget.value)
+          handleLectureSearchInputChange(event.currentTarget.value)
         }
       />
     </Modal.Item>
@@ -421,12 +421,14 @@ export default function TimeTableModal<
             />
             <TimeTableModalMajorInput
               selectedMajor={selectedMajor}
-              handleMajorInput={(major) =>
+              handleMajorInputChange={(major) =>
                 handleFilterItem(major, selectedMajor, setSelectedMajor)
               }
             />
             <TimeTableLectureSearchInput
-              handleLectureSearchInput={(keyword) => setSearchKeyword(keyword)}
+              handleLectureSearchInputChange={(keyword) =>
+                setSearchKeyword(keyword)
+              }
             />
             <TimeTableLectureTable
               selectedValues={{
