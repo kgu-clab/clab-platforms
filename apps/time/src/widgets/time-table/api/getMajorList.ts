@@ -1,3 +1,4 @@
+import { getAPIURL } from '@/shared/utils';
 import { TIMETABLE_ENDPOINT } from '@/widgets/time-table';
 
 export interface GetMajorListParams {
@@ -12,9 +13,7 @@ export interface GetMajorListResponse {
 export async function getMajorList({
   major,
 }: GetMajorListParams): Promise<GetMajorListResponse> {
-  const apiURL = new URL(
-    `${process.env.NEXT_PUBLIC_SERVER_URL}/${TIMETABLE_ENDPOINT.getMajorList}`,
-  );
+  const apiURL = getAPIURL(TIMETABLE_ENDPOINT.majorList);
 
   apiURL.searchParams.set('major', major);
 

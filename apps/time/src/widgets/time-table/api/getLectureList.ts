@@ -1,4 +1,5 @@
 import { DayKor } from '@/shared/types';
+import { getAPIURL } from '@/shared/utils';
 import type {
   DayCampus,
   DayPeriod,
@@ -52,9 +53,7 @@ export interface GetLectureListResponse {
 export async function getLectureList({
   ...params
 }: GetLectureListParams): Promise<GetLectureListResponse> {
-  const apiURL = new URL(
-    `${process.env.NEXT_PUBLIC_SERVER_URL}/${TIMETABLE_ENDPOINT.getLectureList}`,
-  );
+  const apiURL = getAPIURL(TIMETABLE_ENDPOINT.lectureList);
 
   Object.entries(params).forEach(([key, value]) => {
     if (value) {
