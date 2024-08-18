@@ -58,14 +58,12 @@ const Nav = () => {
             >
               일정
             </Menubar.Item>
-            {IS_DEVELOPMENT && (
-              <Menubar.Item
-                selected={pathName.startsWith(PATH.ACTIVITY)}
-                onClick={() => handleMenubarItemClick(PATH.ACTIVITY)}
-              >
-                활동
-              </Menubar.Item>
-            )}
+            <Menubar.Item
+              selected={pathName.startsWith(PATH.ACTIVITY)}
+              onClick={() => handleMenubarItemClick(PATH.ACTIVITY)}
+            >
+              활동
+            </Menubar.Item>
             <Menubar.Item
               selected={pathName.startsWith(PATH.COMMUNITY)}
               onClick={() => handleMenubarItemClick(PATH.COMMUNITY)}
@@ -85,12 +83,20 @@ const Nav = () => {
               회비
             </Menubar.Item>
             {data.roleLevel! >= 2 && (
-              <Menubar.Item
-                selected={pathName.startsWith(PATH.MANAGE)}
-                onClick={() => handleMenubarItemClick(PATH.MANAGE)}
-              >
-                관리
-              </Menubar.Item>
+              <>
+                <Menubar.Item
+                  selected={pathName.startsWith(PATH.MANAGE)}
+                  onClick={() => handleMenubarItemClick(PATH.MANAGE)}
+                >
+                  관리
+                </Menubar.Item>
+                <Menubar.Item
+                  selected={pathName.startsWith(PATH.APPLICATION)}
+                  onClick={() => handleMenubarItemClick(PATH.APPLICATION)}
+                >
+                  지원
+                </Menubar.Item>
+              </>
             )}
           </Menubar>
         </div>
