@@ -53,7 +53,7 @@ export interface GetLectureListResponse {
 export async function getLectureList({
   ...params
 }: GetLectureListParams): Promise<GetLectureListResponse> {
-  const apiURL = getAPIURL(TIMETABLE_ENDPOINT.lectureList);
+  const apiURL = getAPIURL(TIMETABLE_ENDPOINT.LECTURE_LIST);
 
   Object.entries(params).forEach(([key, value]) => {
     if (value) {

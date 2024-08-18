@@ -1,6 +1,6 @@
 const TIMETABLE_ENDPOINT = {
-  lectureList: 'v1/lecture/retrieve',
-  majorList: 'v1/lecture/retrieve/major',
-};
+  LECTURE_LIST: 'v1/lecture/retrieve',
+  MAJOR_LIST: 'v1/lecture/retrieve/major',
+} as const;
 
 export default TIMETABLE_ENDPOINT;

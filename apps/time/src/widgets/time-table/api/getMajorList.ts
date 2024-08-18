@@ -13,7 +13,7 @@ export interface GetMajorListResponse {
 export async function getMajorList({
   major,
 }: GetMajorListParams): Promise<GetMajorListResponse> {
-  const apiURL = getAPIURL(TIMETABLE_ENDPOINT.majorList);
+  const apiURL = getAPIURL(TIMETABLE_ENDPOINT.MAJOR_LIST);
 
   apiURL.searchParams.set('major', major);
 
