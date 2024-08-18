@@ -234,3 +234,23 @@ export const ORGANIZATION_QUERY_KEY = {
   ],
   DETAIL: (id: number) => [...ORGANIZATION_QUERY_KEY.DETAILS(), id],
 } as const;
+
+/**
+ * 지원 관련 쿼리 키
+ */
+export const APPLICATION_QUERY_KEY = {
+  ALL: ['Application'],
+  PAGES: () => [...APPLICATION_QUERY_KEY.ALL, 'pages'],
+  RECRUITMENT_PAGE: (
+    recruitmentId: number,
+    pagination: WithPaginationParams,
+  ) => [...APPLICATION_QUERY_KEY.PAGES(), recruitmentId, pagination],
+} as const;
+
+/**
+ * 모집 공고 관련 쿼리 키
+ */
+export const RECRUITMENT_QUERY_KEY = {
+  ALL: ['Application'],
+  LIST: () => [...APPLICATION_QUERY_KEY.ALL, 'list'],
+} as const;

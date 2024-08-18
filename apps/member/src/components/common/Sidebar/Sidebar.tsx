@@ -6,6 +6,7 @@ import { CloseOutline, MenuOutline } from '@clab-platforms/icon';
 import { cn } from '@clab-platforms/utils';
 
 import { PATH } from '@constants/path';
+import { useMyProfile } from '@hooks/queries';
 
 const Sidebar = () => {
   const location = useLocation();
@@ -15,6 +16,8 @@ const Sidebar = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   const pathName = location.pathname;
+
+  const { data } = useMyProfile();
 
   const handleMenubarItemClick = (path: string) => {
     setIsOpen(false);
@@ -65,6 +68,12 @@ const Sidebar = () => {
             일정
           </Menubar.Item>
           <Menubar.Item
+            selected={pathName.startsWith(PATH.ACTIVITY)}
+            onClick={() => handleMenubarItemClick(PATH.ACTIVITY)}
+          >
+            활동
+          </Menubar.Item>
+          <Menubar.Item
             selected={pathName.startsWith(PATH.COMMUNITY)}
             onClick={() => handleMenubarItemClick(PATH.COMMUNITY)}
           >
@@ -82,6 +91,22 @@ const Sidebar = () => {
           >
             회비
           </Menubar.Item>
+          {data.roleLevel! >= 2 && (
+            <>
+              <Menubar.Item
+                selected={pathName.startsWith(PATH.MANAGE)}
+                onClick={() => handleMenubarItemClick(PATH.MANAGE)}
+              >
+                관리
+              </Menubar.Item>
+              <Menubar.Item
+                selected={pathName.startsWith(PATH.APPLICATION)}
+                onClick={() => handleMenubarItemClick(PATH.APPLICATION)}
+              >
+                지원
+              </Menubar.Item>
+            </>
+          )}
         </Menubar>
       </div>
     </>

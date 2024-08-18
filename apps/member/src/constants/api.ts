@@ -80,6 +80,18 @@ export const END_POINT = {
   ACTIVITY_GROUP_BOARD_BY_PARENT: `/v1/activity-group/boards/by-parent`,
   ACTIVITY_GROUP_BOARD_BY_CATEGORY: `/v1/activity-group/boards/by-category`,
   ACTIVITY_GROUP_BOARDS_MY_ASSIGNMENT: `/v1/activity-group/boards/my-assignment`,
+  // -- 지원자 조회
+  APPLICATION_CONDITION: `/v1/applications/conditions`,
+  APPLICATION_APPROVE: (recruitmentId: number, studentId: string) =>
+    `/v1/applications/approve/${recruitmentId}/${studentId}`,
+  APPLICATION_REJECT: (recruitmentId: number, studentId: string) =>
+    `/v1/applications/reject/${recruitmentId}/${studentId}`,
+  APPLICATION_MEMBER: (recruitmentId: number, studentId: string) =>
+    `/v1/applications/${recruitmentId}/${studentId}`,
+  APPLICATION_MEMBERS: (recruitmentId: number) =>
+    `/v1/applications/${recruitmentId}`,
+  // -- 모집 공고 조회
+  RECRUITMENT: `/v1/recruitments`,
 } as const;
 
 /**
