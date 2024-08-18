@@ -1,14 +1,12 @@
-import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useMutation } from '@tanstack/react-query';
 
 import { postApplicationMember } from '@api/application';
-import { MEMBER_QUERY_KEY } from '@constants/key';
 import useToast from '@hooks/common/useToast';
 
 /**
  * 합격자 멤버 단일 생성
  */
 export function useApplicationMemberMutation() {
-  const queryClient = useQueryClient();
   const toast = useToast();
 
   const mutation = useMutation({
@@ -23,9 +21,6 @@ export function useApplicationMemberMutation() {
       toast({
         state: 'success',
         message: '멤버 생성이 완료되었습니다.',
-      });
-      queryClient.invalidateQueries({
-        queryKey: MEMBER_QUERY_KEY.MEMBER(data),
       });
     },
   });
