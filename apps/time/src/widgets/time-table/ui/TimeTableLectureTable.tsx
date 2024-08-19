@@ -96,7 +96,7 @@ function TimeTableLectureContent({
 
   return (
     <>
-      <tbody className="w-full divide-y divide-gray-300">
+      <tbody className="size-full divide-y divide-gray-300">
         {data && (
           <>
             {data.length ? (
@@ -139,7 +139,7 @@ function TimeTableLectureContent({
 function TimeTableLectureTable({ selectedValues }: TimeTableLectureTableProps) {
   return (
     <div className="mt-3 h-96 w-full overflow-y-scroll">
-      <table className="w-full table-auto break-keep border border-gray-400 text-sm">
+      <table className="size-full table-auto break-keep border border-gray-400 text-sm">
         <thead className="sticky top-0 z-20 w-full border border-gray-400 text-center">
           <tr className="divide-x divide-gray-400 bg-gray-100">
             {LECTURE_TABLE_ROW_HEADER.map((header) => (
