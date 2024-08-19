@@ -1,4 +1,5 @@
 import type { Config } from 'tailwindcss';
+import defaultTheme from 'tailwindcss/defaultTheme';
 
 const config: Config = {
   content: ['./src/**/*.{js,ts,jsx,tsx,mdx}'],
@@ -7,6 +8,9 @@ const config: Config = {
       container: {
         center: true,
         padding: '2rem',
+      },
+      fontFamily: {
+        sans: ['"Pretendard"', ...defaultTheme.fontFamily.sans],
       },
     },
   },
