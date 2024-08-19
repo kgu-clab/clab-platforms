@@ -229,7 +229,7 @@ const TimeTableModalMajorInput = memo(function TimeTableModalMajorInput({
   selectedMajor,
   handleMajorInputChange,
 }: TimeTableModalMajorInputProps) {
-  const [inputValue, setInputValue] = useState('');
+  const [inputValue, setInputValue] = useState<string>('');
   const [open, setOpen] = useState<boolean>(false);
   const debouncedValue = useDebounce({
     value: inputValue,
@@ -247,7 +247,10 @@ const TimeTableModalMajorInput = memo(function TimeTableModalMajorInput({
       {...selectedMajor.map((major) => (
         <TimeTableModalDropdownButton
           key={major}
-          onClick={() => handleMajorInputChange(major)}
+          onClick={() => {
+            handleMajorInputChange(major);
+            setInputValue('');
+          }}
           value={major}
         />
       ))}
