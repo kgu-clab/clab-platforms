@@ -18,7 +18,7 @@ export interface GetLectureListParams {
   time: (DayPeriod | NightPeriod)[];
   major: string[];
   lectureName: string;
-  cursor: number;
+  cursor?: number;
   limit: number;
 }
 
@@ -45,9 +45,9 @@ export interface GetLectureListResponse {
   success: boolean;
   data: {
     values: GetLectureListResponseValue[];
+    hasPrevious: boolean;
+    hasNext: boolean;
   };
-  hasPrevious: boolean;
-  hasNext: boolean;
 }
 
 export async function getLectureList({

@@ -2,11 +2,9 @@ import { cn } from '@clab-platforms/utils';
 
 import { Providers } from '@/shared/utils';
 import type { Metadata } from 'next';
-import { Noto_Sans_KR } from 'next/font/google';
 
+import './font.css';
 import './globals.css';
-
-const inter = Noto_Sans_KR({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
   title: '경기플러스',
@@ -23,9 +21,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko">
-      <body
-        className={cn(inter.className, 'flex min-h-screen flex-col bg-gray-50')}
-      >
+      <body className={cn('flex min-h-screen flex-col bg-gray-50 font-sans')}>
         <Providers>{children}</Providers>
       </body>
     </html>

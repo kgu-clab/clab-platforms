@@ -1,4 +1,4 @@
-import { useSuspenseQuery } from '@tanstack/react-query';
+import { useInfiniteQuery } from '@tanstack/react-query';
 
 import {
   type GetLectureListParams,
@@ -7,8 +7,15 @@ import {
 } from '@/widgets/time-table';
 
 export default function useLectureList({ ...params }: GetLectureListParams) {
-  return useSuspenseQuery({
+  return useInfiniteQuery({
     queryKey: timeTableQueryKeys.getLectureList(params),
-    queryFn: () => getLectureList(params),
+    queryFn: ({ pageParam }) =>
+      getLectureList({ ...params, cursor: pageParam }),
+    initialPageParam: 0,
+    select: ({ pages = [] }) => pages.flatMap((page) => page.data.values),
+    getNextPageParam: (lastPage) =>
+      lastPage.data.hasNext
+        ? lastPage.data.values[params.limit - 1].id
+        : undefined,
   });
 }

@@ -1,10 +1,19 @@
+'use client';
+
 import { Suspense, memo } from 'react';
 
+import { MODAL_KEY } from '@/shared/constants';
+import {
+  useEditableSearchParams,
+  useInfiniteScroll,
+  useModalAction,
+} from '@/shared/hooks';
 import {
   type GetLectureListParams,
   type GetLectureListResponseValue,
   useLectureList,
 } from '@/widgets/time-table';
+import { useRouter } from 'next/navigation';
 
 interface TimeTableLectureTableProps {
   selectedValues: GetLectureListParams;
@@ -29,19 +38,39 @@ const LECTURE_TABLE_ROW_HEADER = [
 ] as const;
 
 function TimeTableLectureItem({ lecture }: TimeTableLectureTableItemProps) {
+  const searchParams = useEditableSearchParams();
+  const router = useRouter();
+  const { close } = useModalAction({ key: MODAL_KEY.timeTable });
+
+  const handleTimeTableLectureItem = (id: number) => {
+    const selectedId = searchParams.getAll('id');
+
+    if (!selectedId.includes(String(id))) {
+      searchParams.append('id', id.toString());
+      router.push(`/timetable?${searchParams.toString()}`);
+    }
+
+    close();
+  };
+
   return (
-    <tr className="divide-x divide-gray-300 text-center">
-      <td>{lecture.campus}</td>
-      <td>{lecture.category}</td>
-      <td>{lecture.code}</td>
-      <td>{lecture.credit}</td>
-      <td>{lecture.grade ?? '-'}</td>
-      <td>{lecture.major !== 'None' ? lecture.major : '-'}</td>
-      <td>{lecture.name}</td>
-      <td>{lecture.professor}</td>
-      <td>{lecture.semester}</td>
-      <td>{lecture.time}</td>
-      <td>{lecture.groupName}</td>
+    <tr
+      className="h-12 cursor-pointer divide-x divide-gray-300 text-[12px] transition-colors hover:bg-gray-50"
+      onClick={() => handleTimeTableLectureItem(lecture.id)}
+    >
+      <td className="shrink-0 whitespace-nowrap p-2">{lecture.campus}</td>
+      <td className="shrink-0 whitespace-nowrap p-2">{lecture.category}</td>
+      <td className="shrink-0 whitespace-nowrap p-2">{lecture.code}</td>
+      <td className="shrink-0 whitespace-nowrap p-2">{lecture.credit}</td>
+      <td className="shrink-0 whitespace-nowrap p-2">{lecture.grade ?? '-'}</td>
+      <td className="shrink-0 whitespace-nowrap p-2">
+        {lecture.major !== 'None' ? lecture.major : '-'}
+      </td>
+      <td className="shrink-0 whitespace-nowrap p-2">{lecture.name}</td>
+      <td className="shrink-0 whitespace-nowrap p-2">{lecture.professor}</td>
+      <td className="shrink-0 whitespace-nowrap p-2">{lecture.semester}</td>
+      <td className="shrink-0 whitespace-nowrap p-2">{lecture.time}</td>
+      <td className="shrink-0 whitespace-nowrap p-2">{lecture.groupName}</td>
     </tr>
   );
 }
@@ -49,7 +78,7 @@ function TimeTableLectureItem({ lecture }: TimeTableLectureTableItemProps) {
 function TimeTableLectureContent({
   selectedValues,
 }: TimeTableLectureTableProps) {
-  const { data } = useLectureList({
+  const { data, hasNextPage, fetchNextPage } = useLectureList({
     campus: selectedValues.campus,
     type: selectedValues.type,
     grade: selectedValues.grade,
@@ -57,46 +86,67 @@ function TimeTableLectureContent({
     time: selectedValues.time,
     major: selectedValues.major,
     lectureName: selectedValues.lectureName,
-    cursor: 0,
-    limit: 10,
+    limit: 12,
   });
-  const lectureList = data.data.values;
+  const scrollRef = useInfiniteScroll(() => {
+    if (hasNextPage) {
+      fetchNextPage();
+    }
+  });
 
   return (
-    <>
-      {lectureList.length ? (
+    <tbody className="size-full divide-y divide-gray-300">
+      {data && (
         <>
-          {...lectureList.map((lecture) => (
-            <TimeTableLectureItem
-              key={`lecture-${lecture.id}`}
-              lecture={lecture}
-            />
-          ))}
+          {data.length ? (
+            <>
+              {...data.map((lecture) => (
+                <TimeTableLectureItem
+                  key={`lecture-${lecture.id}`}
+                  lecture={lecture}
+                />
+              ))}
+            </>
+          ) : (
+            <tr className="h-full">
+              <td
+                colSpan={LECTURE_TABLE_ROW_HEADER.length}
+                className="h-full text-center"
+              >
+                검색 결과가 없습니다
+              </td>
+            </tr>
+          )}
         </>
-      ) : (
-        <tr>
-          <td colSpan={LECTURE_TABLE_ROW_HEADER.length} className="text-center">
-            검색 결과가 없습니다
-          </td>
+      )}
+      {hasNextPage && (
+        <tr className="block">
+          <td
+            ref={(node) => {
+              scrollRef.current = node;
+            }}
+            colSpan={LECTURE_TABLE_ROW_HEADER.length}
+            className="h-1"
+          />
         </tr>
       )}
-    </>
+    </tbody>
   );
 }
 
 function TimeTableLectureTable({ selectedValues }: TimeTableLectureTableProps) {
   return (
-    <table className="mt-3 w-full table-auto border-collapse border border-gray-400 text-sm">
-      <thead className="w-full border border-gray-400 text-center">
-        <tr className="divide-x divide-gray-400 border border-gray-400 bg-gray-100">
-          {LECTURE_TABLE_ROW_HEADER.map((header) => (
-            <td className="py-2" key={header}>
-              {header}
-            </td>
-          ))}
-        </tr>
-      </thead>
-      <tbody className="h-80 w-full divide-y divide-gray-300 overflow-y-scroll">
+    <div className="mt-3 h-96 w-full overflow-y-scroll">
+      <table className="size-full table-auto border-separate border-spacing-0 break-keep border-x border-b border-gray-400 text-sm">
+        <thead className="sticky top-0 z-20 w-full text-center">
+          <tr className="divide-x divide-gray-400 bg-gray-100">
+            {LECTURE_TABLE_ROW_HEADER.map((header) => (
+              <th className="border-y border-gray-400 py-2" key={header}>
+                {header}
+              </th>
+            ))}
+          </tr>
+        </thead>
         <Suspense
           fallback={
             <tr>
@@ -111,8 +161,8 @@ function TimeTableLectureTable({ selectedValues }: TimeTableLectureTableProps) {
         >
           <TimeTableLectureContent selectedValues={selectedValues} />
         </Suspense>
-      </tbody>
-    </table>
+      </table>
+    </div>
   );
 }
 
