@@ -1,6 +1,6 @@
 import type { Token } from '@type/server';
 
-export type ServiceCode = 'play' | 'members' | 'dev';
+export type ServiceCode = 'play' | 'members' | 'dev' | 'test';
 
 export interface ServiceMap {
   url: string;
@@ -11,6 +11,10 @@ const SERVICE_MAP: Record<ServiceCode, ServiceMap> = {
   dev: { url: 'http://localhost:6002/auth', name: '개발환경' },
   play: { url: 'https://play.clab.page/auth', name: '플레이' },
   members: { url: 'https://members.clab.page/auth', name: '멤버스' },
+  test: {
+    url: 'https://members.test.clab.page/auth',
+    name: '스테이징 멤버스',
+  },
 } as const;
 /**
  * 연결되는 서비스의 정보를 가져옵니다.
