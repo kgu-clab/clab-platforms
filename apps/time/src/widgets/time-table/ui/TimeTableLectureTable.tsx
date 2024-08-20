@@ -55,7 +55,7 @@ function TimeTableLectureItem({ lecture }: TimeTableLectureTableItemProps) {
 
   return (
     <tr
-      className="h-12 cursor-pointer divide-x divide-gray-300 text-[12px] transition-colors hover:bg-gray-100"
+      className="h-12 cursor-pointer divide-x divide-gray-300 text-[12px] transition-colors hover:bg-gray-50"
       onClick={() => handleTimeTableLectureItem(lecture.id)}
     >
       <td className="shrink-0 whitespace-nowrap p-2">{lecture.campus}</td>
@@ -95,55 +95,53 @@ function TimeTableLectureContent({
   });
 
   return (
-    <>
-      <tbody className="size-full divide-y divide-gray-300">
-        {data && (
-          <>
-            {data.length ? (
-              <>
-                {...data.map((lecture) => (
-                  <TimeTableLectureItem
-                    key={`lecture-${lecture.id}`}
-                    lecture={lecture}
-                  />
-                ))}
-              </>
-            ) : (
-              <tr className="h-full">
-                <td
-                  colSpan={LECTURE_TABLE_ROW_HEADER.length}
-                  className="h-full text-center"
-                >
-                  검색 결과가 없습니다
-                </td>
-              </tr>
-            )}
-          </>
-        )}
-        {hasNextPage && (
-          <tr className="block">
-            <td
-              ref={(node) => {
-                scrollRef.current = node;
-              }}
-              colSpan={LECTURE_TABLE_ROW_HEADER.length}
-              className="h-1"
-            />
-          </tr>
-        )}
-      </tbody>
-    </>
+    <tbody className="size-full divide-y divide-gray-300">
+      {data && (
+        <>
+          {data.length ? (
+            <>
+              {...data.map((lecture) => (
+                <TimeTableLectureItem
+                  key={`lecture-${lecture.id}`}
+                  lecture={lecture}
+                />
+              ))}
+            </>
+          ) : (
+            <tr className="h-full">
+              <td
+                colSpan={LECTURE_TABLE_ROW_HEADER.length}
+                className="h-full text-center"
+              >
+                검색 결과가 없습니다
+              </td>
+            </tr>
+          )}
+        </>
+      )}
+      {hasNextPage && (
+        <tr className="block">
+          <td
+            ref={(node) => {
+              scrollRef.current = node;
+            }}
+            colSpan={LECTURE_TABLE_ROW_HEADER.length}
+            className="h-1"
+          />
+        </tr>
+      )}
+    </tbody>
   );
 }
 
 function TimeTableLectureTable({ selectedValues }: TimeTableLectureTableProps) {
   return (
     <div className="mt-3 h-96 w-full overflow-y-scroll">
-      <table className="size-full table-auto break-keep border border-gray-400 text-sm">
-        <thead className="sticky top-0 z-20 w-full border border-gray-400 text-center">
+      <table className="size-full table-auto border-separate border-spacing-0 break-keep border-x border-b border-gray-400 text-sm">
+        <thead className="sticky top-0 z-20 w-full text-center">
           <tr className="divide-x divide-gray-400 bg-gray-100">
             {LECTURE_TABLE_ROW_HEADER.map((header) => (
-              <th className="border border-gray-400 py-2" key={header}>
+              <th className="border-y border-gray-400 py-2" key={header}>
                 {header}
               </th>
             ))}
