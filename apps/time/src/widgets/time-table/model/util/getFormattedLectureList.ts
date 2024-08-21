@@ -9,6 +9,7 @@ import {
   NIGHT_PERIOD,
   NIGHT_PERIOD_ARRAY,
   PERIOD_STATUS,
+  PeriodStatus,
   SPECIAL_PERIOD,
 } from '@/widgets/time-table';
 
@@ -24,7 +25,7 @@ interface GetFormattedLectureListParams {
 }
 
 interface LectureItem {
-  type: LectureItemStatus;
+  type: PeriodStatus;
   value?: GetLectureByParamsValue;
   head?: boolean;
 }
@@ -32,10 +33,6 @@ interface LectureItem {
 export interface BasicLectureGroup {
   [key: string]: LectureItem[];
 }
-
-const defaultLectureValue: LectureItem = {
-  type: PERIOD_STATUS.empty,
-};
 
 export function getLectureFillRange<T>({
   dayStatus,
@@ -80,6 +77,9 @@ export function getFormattedLectureList({
 }: GetFormattedLectureListParams) {
   const selectedPeriod = dayStatus === 'day' ? DAY_PERIOD : NIGHT_PERIOD;
   const dayLength = Object.keys(DAY).length;
+  const defaultLectureValue: LectureItem = {
+    type: PERIOD_STATUS.empty,
+  };
   const basicLectureGroup: BasicLectureGroup = Object.fromEntries(
     Object.keys(selectedPeriod).map((key) => [
       key,
