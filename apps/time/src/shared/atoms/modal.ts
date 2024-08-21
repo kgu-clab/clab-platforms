@@ -9,6 +9,7 @@ type ModalAtom = {
 
 export const modalAtom = atom<ModalAtom>({
   timeTable: { visible: false },
+  lectureRemove: { visible: false },
 });
 
 export const updateModalAtom = atom(
@@ -17,10 +18,13 @@ export const updateModalAtom = atom(
     const currentState = get(modalAtom);
     const newState = {
       ...currentState,
-      [update.key]: {
-        visible: update.visible,
-      },
     };
+
+    for (const state in newState) {
+      newState[state as ModalKey].visible =
+        state === update.key ? update.visible : false;
+    }
+
     set(modalAtom, newState);
   },
 );

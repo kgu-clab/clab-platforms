@@ -1,1 +1,4 @@
-export const MODAL_KEY = { timeTable: 'timeTable' } as const;
+export const MODAL_KEY = {
+  timeTable: 'timeTable',
+  lectureRemove: 'lectureRemove',
+} as const;
