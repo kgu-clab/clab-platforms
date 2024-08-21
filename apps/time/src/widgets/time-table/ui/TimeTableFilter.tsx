@@ -9,6 +9,7 @@ import {
   type DayStatus,
   useTimeTableParams,
 } from '@/widgets/time-table';
+import { useRouter } from 'next/navigation';
 
 interface TimeTableFilterItemProps {
   children: ReactNode;
@@ -37,10 +38,13 @@ function TimeTableFilterItem({
 
 export default function TimeTableFilter() {
   const { dayStatus, searchParamsAction } = useTimeTableParams();
+  const router = useRouter();
 
   const handleFilterItemClick = useCallback(
     (status: DayStatus) => {
+      searchParamsAction.remove('id');
       searchParamsAction.set('classType', status);
+      router.push(`/timetable?${searchParamsAction.getParams()}`);
     },
     [searchParamsAction],
   );
