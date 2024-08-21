@@ -1,3 +1,4 @@
+import '@clab-platforms/design-system/dist/index.css';
 import { cn } from '@clab-platforms/utils';
 
 import { Providers } from '@/shared/utils';
