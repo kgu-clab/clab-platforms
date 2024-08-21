@@ -13,11 +13,14 @@ import {
 import { ChevronDownOutline, CloseOutline } from '@clab-platforms/icon';
 import { cn } from '@clab-platforms/utils';
 
+import { MAX_SIZE_VALUE } from '@/shared/constants';
 import { useOutsideClick } from '@/shared/hooks';
+import { MaxSize } from '@/shared/types';
 
 interface ModalProps extends PropsWithChildren {
   title: string;
   close: () => void;
+  size?: MaxSize;
 }
 
 interface ModalFilterProps extends PropsWithChildren {
@@ -169,7 +172,7 @@ function ModalContent({ children }: PropsWithChildren) {
   return <div className="flex flex-col gap-y-3">{children}</div>;
 }
 
-export default function Modal({ title, close, children }: ModalProps) {
+export default function Modal({ title, close, size, children }: ModalProps) {
   const modalRef = useOutsideClick({ callback: close });
 
   useEffect(() => {
@@ -189,10 +192,13 @@ export default function Modal({ title, close, children }: ModalProps) {
   }, [close]);
 
   return (
-    <div className="fixed top-0 z-40 flex h-dvh w-dvw flex-col items-center justify-center bg-gray-800/60 transition-colors">
+    <div className="fixed left-0 top-0 z-40 flex h-dvh w-dvw flex-col items-center justify-center bg-gray-800/60 transition-colors">
       <div
         ref={modalRef}
-        className="container h-fit space-y-4 rounded-xl bg-white p-6"
+        className={cn(
+          'mx-auto h-fit w-full space-y-4 rounded-xl bg-white px-6 py-8',
+          !size ? 'container' : MAX_SIZE_VALUE[size],
+        )}
       >
         <div className="flex w-full justify-between">
           <p className="font-bold">{title ?? ''}</p>
