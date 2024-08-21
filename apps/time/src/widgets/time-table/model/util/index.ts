@@ -1,1 +1,2 @@
-export { default as getFormattedTime } from './getFormattedTime';
+export * from './getFormattedTime';
+export * from './getFormattedLectureList';

@@ -5,3 +5,5 @@ export { default as TimeTableHeader } from './TimeTableHeader';
 export { default as TimeTableModal } from './TimeTableModal';
 export { default as TimeTableContainer } from './TimeTableContainer';
 export { default as TimeTableLectureTable } from './TimeTableLectureTable';
+export { default as TimeTableLectureRemoveModal } from './TimeTableLectureRemoveModal';
+export { default as TimeTableUtilButtons } from './TimeTableUtilButtons';
