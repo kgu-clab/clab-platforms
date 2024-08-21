@@ -1,7 +1,18 @@
-import { DAY_PERIOD, NIGHT_PERIOD, SPECIAL_PERIOD } from '@/widgets/time-table';
+import {
+  DAY_PERIOD,
+  NIGHT_PERIOD,
+  PERIOD_STATUS,
+  SPECIAL_PERIOD,
+} from '@/widgets/time-table';
 
 export type SpecialPeriod = (typeof SPECIAL_PERIOD)[number];
 
-export type DayPeriod = keyof typeof DAY_PERIOD | SpecialPeriod;
+export type DayOnlyPeriod = keyof typeof DAY_PERIOD;
 
-export type NightPeriod = keyof typeof NIGHT_PERIOD | SpecialPeriod;
+export type DayPeriod = DayOnlyPeriod | SpecialPeriod;
+
+export type NightOnlyPeriod = keyof typeof NIGHT_PERIOD;
+
+export type NightPeriod = NightOnlyPeriod | SpecialPeriod;
+
+export type PeriodStatus = (typeof PERIOD_STATUS)[keyof typeof PERIOD_STATUS];
