@@ -85,6 +85,7 @@ interface TimeTableModalProps<T> {
   dayStatus: DayStatus;
   day: DayKor;
   period: T;
+  isAddableLecture: (time: string) => boolean;
 }
 
 function TimeTableModalFilter<T extends string>({
@@ -234,7 +235,7 @@ const TimeTableModalMajorInput = memo(function TimeTableModalMajorInput({
   const debouncedValue = useDebounce({
     value: inputValue,
     delay: 1000,
-  }) as string;
+  });
   const findMajorList = useMajorList({ major: debouncedValue });
   const ref = useOutsideClick({ callback: () => setOpen(false) });
 
@@ -247,10 +248,7 @@ const TimeTableModalMajorInput = memo(function TimeTableModalMajorInput({
       {...selectedMajor.map((major) => (
         <TimeTableModalDropdownButton
           key={major}
-          onClick={() => {
-            handleMajorInputChange(major);
-            setInputValue('');
-          }}
+          onClick={() => handleMajorInputChange(major)}
           value={major}
         />
       ))}
@@ -279,7 +277,10 @@ const TimeTableModalMajorInput = memo(function TimeTableModalMajorInput({
             {...findMajorList.map((major) => (
               <Modal.DropdownItem
                 key={major}
-                onClick={() => handleMajorInputChange(major)}
+                onClick={() => {
+                  handleMajorInputChange(major);
+                  setInputValue('');
+                }}
                 selected={selectedMajor.includes(major)}
               >
                 {major}
@@ -310,7 +311,7 @@ const TimeTableLectureSearchInput = memo(function TimeTableLectureSearchInput({
 
 export default function TimeTableModal<
   T extends DayPeriod | NightPeriod | SpecialPeriod,
->({ dayStatus, day, period }: TimeTableModalProps<T>) {
+>({ dayStatus, day, period, isAddableLecture }: TimeTableModalProps<T>) {
   const { close } = useModalAction({ key: MODAL_KEY.timeTable });
   const visible = useModalState({ key: MODAL_KEY.timeTable }).visible;
   const [selectedRegion, setSelectedRegion] = useState<Region[]>([
@@ -434,6 +435,7 @@ export default function TimeTableModal<
               }
             />
             <TimeTableLectureTable
+              isAddableLecture={isAddableLecture}
               selectedValues={{
                 campus: selectedRegion.map(
                   (region) =>
