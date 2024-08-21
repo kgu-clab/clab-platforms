@@ -6,7 +6,7 @@ import {
   timeTableQueryKeys,
 } from '@/widgets/time-table';
 
-export default function useLectureList({ ...params }: GetLectureListParams) {
+export function useLectureList({ ...params }: GetLectureListParams) {
   return useInfiniteQuery({
     queryKey: timeTableQueryKeys.getLectureList(params),
     queryFn: ({ pageParam }) =>

@@ -6,7 +6,7 @@ import {
   timeTableQueryKeys,
 } from '@/widgets/time-table';
 
-export default function useMajorList({ major }: GetMajorListParams) {
+export function useMajorList({ major }: GetMajorListParams) {
   const { data } = useQuery({
     queryKey: timeTableQueryKeys.getMajorList({ major }),
     queryFn: () => getMajorList({ major }),

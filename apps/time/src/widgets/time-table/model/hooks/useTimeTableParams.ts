@@ -8,13 +8,14 @@ import { useRouter } from 'next/navigation';
 
 export interface SearchParamsActionType {
   get: (key: string) => string | null;
+  getAll: (key: string) => string[];
   getParams: () => string;
   set: (key: string, value: string) => void;
   append: (key: string, value: string) => void;
   remove: (key: string) => void;
 }
 
-export default function useTimeTableParams(): {
+export function useTimeTableParams(): {
   dayStatus: DayStatus;
   searchParams: URLSearchParams;
   searchParamsAction: SearchParamsActionType;
@@ -27,20 +28,20 @@ export default function useTimeTableParams(): {
     get: (key: string) => {
       return searchParams.get(key);
     },
+    getAll: (key: string) => {
+      return searchParams.getAll(key);
+    },
     getParams: () => {
       return searchParams.toString();
     },
     set: (key: string, value: string) => {
       searchParams.set(key, value);
-      router.push(`/timetable?${searchParamsAction.getParams()}`);
     },
     append: (key: string, value: string) => {
       searchParams.append(key, value);
-      router.push(`/timetable?${searchParamsAction.getParams()}`);
     },
     remove: (key: string) => {
       searchParams.delete(key);
-      router.push(`/timetable?${searchParamsAction.getParams()}`);
     },
   };
 
