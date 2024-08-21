@@ -50,14 +50,18 @@ function TimeTableLectureItem({
   const handleTimeTableLectureItem = () => {
     if (specialPeriodSet.has(lecture.time)) {
       searchParamsAction.append('id', lecture.id.toString());
-      router.push(`/timetable?${searchParamsAction.getParams()}`);
+      router.push(`/timetable?${searchParamsAction.getParams()}`, {
+        scroll: false,
+      });
       close();
       return;
     }
 
     if (isAddableLecture(lecture.time)) {
       searchParamsAction.append('id', lecture.id.toString());
-      router.push(`/timetable?${searchParamsAction.getParams()}`);
+      router.push(`/timetable?${searchParamsAction.getParams()}`, {
+        scroll: false,
+      });
       close();
     } else {
       alert('선택된 시간에 이미 수강하는 강의가 존재합니다.');
