@@ -351,6 +351,9 @@ importers:
       '@clab-platforms/utils':
         specifier: workspace:*
         version: link:../../packages/utils
+      '@suspensive/react':
+        specifier: ^2.14.0
+        version: 2.14.0(react@18.2.0)
       '@tanstack/react-query':
         specifier: ^5.51.23
         version: 5.51.23(react@18.2.0)
@@ -2555,6 +2558,16 @@ packages:
 
   '@storybook/types@8.0.10':
     resolution: {integrity: sha512-S/hKS7+SqNnYIehwxdQ4M2nnlfGDdYWAXdtPCVJCmS+YF2amgAxeuisiHbUg7eypds6VL0Oxk/j2nPEHOHk9pg==}
+
+  '@suspensive/react@2.14.0':
+    resolution: {integrity: sha512-hiEzaOllPBQUJCOFXJ9mTSDeeTSTyEn50ANA2qMihtOQoqedvaaHsp2tFn61Y9lnBd5P2PGr3JoWxx63cUMSOA==}
+    peerDependencies:
+      react: ^18
+
+  '@suspensive/utils@2.14.0':
+    resolution: {integrity: sha512-drV6Gqn3N45pIPCUQ+RztLMudeH2XeZrlRpZYKlnXSM3e4zrKT7RD+01wbc7VdBqRVt/ACYy9j8UkgL1xAZhXg==}
+    peerDependencies:
+      react: ^18
 
   '@svgr/babel-plugin-add-jsx-attribute@8.0.0':
     resolution: {integrity: sha512-b9MIk7yhdS1pMCZM8VeNfUlSKVRhsHZNMl5O9SfaX0l0t5wjdgu4IDzGB8bpnGBBOjGST3rRFVsaaEtI4W6f7g==}
@@ -9677,6 +9690,15 @@ snapshots:
       '@storybook/channels': 8.0.10
       '@types/express': 4.17.21
       file-system-cache: 2.3.0
+
+  '@suspensive/react@2.14.0(react@18.2.0)':
+    dependencies:
+      '@suspensive/utils': 2.14.0(react@18.2.0)
+      react: 18.2.0
+
+  '@suspensive/utils@2.14.0(react@18.2.0)':
+    dependencies:
+      react: 18.2.0
 
   '@svgr/babel-plugin-add-jsx-attribute@8.0.0(@babel/core@7.24.4)':
     dependencies:

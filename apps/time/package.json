@@ -13,6 +13,7 @@
     "@clab-platforms/design-system": "workspace:*",
     "@clab-platforms/icon": "workspace:^",
     "@clab-platforms/utils": "workspace:*",
+    "@suspensive/react": "^2.14.0",
     "@tanstack/react-query": "^5.51.23",
     "@tanstack/react-query-devtools": "^5.40.1",
     "jotai": "^2.9.2",
