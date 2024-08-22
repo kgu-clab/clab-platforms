@@ -1,9 +1,10 @@
 import { cn } from '@clab-platforms/utils';
 
+import { ROLE_LEVEL } from '@constants/state';
 import { createImageUrl } from '@utils/api';
 
 import type { VariantSize } from '@type/component';
-import type { RoleLevel } from '@type/member';
+import type { RoleLevelType } from '@type/member';
 
 import Image from '../Image/Image';
 
@@ -13,7 +14,8 @@ const SIZE_STYLES = {
   lg: 'size-32',
 } as const;
 
-const RING_STYLES = {
+const RING_STYLES: Record<RoleLevelType, string> = {
+  0: '',
   1: 'ring-gray-500',
   2: 'ring-purple-500',
   3: 'ring-red-500',
@@ -23,12 +25,12 @@ interface AvatarProps {
   className?: string;
   src?: string | null;
   size?: Extract<VariantSize, 'sm' | 'md' | 'lg'>;
-  roleLevel: RoleLevel;
+  roleLevel: RoleLevelType;
 }
 
 const Avatar = ({ className, src, size = 'md', roleLevel }: AvatarProps) => {
   const sizeStyled = SIZE_STYLES[size];
-  const ringStyled = RING_STYLES[roleLevel ?? 1];
+  const ringStyled = RING_STYLES[roleLevel ?? ROLE_LEVEL.USER];
 
   return (
     <div
