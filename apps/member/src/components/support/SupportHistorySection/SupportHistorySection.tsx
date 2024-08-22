@@ -9,6 +9,7 @@ import MembershipStatusBadge from '@components/membership/MembershipStatusBadge/
 
 import { TABLE_HEAD } from '@constants/head';
 import { MODAL_TITLE } from '@constants/modal';
+import { ROLE_LEVEL } from '@constants/state';
 import useModal from '@hooks/common/useModal';
 import { usePagination } from '@hooks/common/usePagination';
 import { useMembershipFee, useMyProfile } from '@hooks/queries';
@@ -32,7 +33,10 @@ const SupportHistorySection = ({
   hasPermission = false,
 }: Props) => {
   const { openModal } = useModal();
-  const { page, size, handlePageChange } = usePagination(defaultSize);
+  const { page, size, handlePageChange } = usePagination({
+    defaultSize,
+    sectionName: 'history',
+  });
 
   const { data: myProfile } = useMyProfile();
   const { membershipFeeModifyMutate } = useMembershipFeeModifyMutation();
@@ -47,7 +51,7 @@ const SupportHistorySection = ({
    */
   const handleButtonClick = useCallback(
     (membership: MembershipFeeType) => {
-      const isAdminLevel = myProfile.roleLevel! >= 3;
+      const isAdminLevel = myProfile.roleLevel! >= ROLE_LEVEL.SUPER;
 
       openModal({
         title: MODAL_TITLE.SUPPORT_HISTORY,

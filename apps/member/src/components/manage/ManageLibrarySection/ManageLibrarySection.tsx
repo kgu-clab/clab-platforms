@@ -21,7 +21,9 @@ import { calculateDDay, formattedDate } from '@utils/date';
 type Mode = 'condition' | 'overdue';
 
 const ManageLibrarySection = () => {
-  const { page, size, handlePageChange } = usePagination();
+  const { page, size, handlePageChange } = usePagination({
+    sectionName: 'library',
+  });
   const { openModal } = useModal();
 
   const [mode, setMode] = useState<Mode>('condition');
