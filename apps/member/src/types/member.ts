@@ -53,3 +53,19 @@ export interface MemberProfileRequestType {
   studentStatus?: string;
   imageUrl?: string | null;
 }
+
+/**
+ * 멤버 레벨 목록
+ */
+export interface MemberRoleListType {
+  id: string;
+  name: string;
+  role: RoleLevelKey;
+}
+
+/**
+ * 멤버 레벨 변경
+ */
+export interface MemberRoleRequestType {
+  role: RoleLevelKey;
+}
