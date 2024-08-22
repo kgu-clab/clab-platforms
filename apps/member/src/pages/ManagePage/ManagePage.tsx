@@ -6,6 +6,7 @@ import ManageActivitySection from '@components/manage/ManageActivitySection/Mana
 import ManagerAlertSection from '@components/manage/ManageAlertSection/ManagerAlertSection';
 import ManageBannerSection from '@components/manage/ManageBannerSection/ManageBannerSection';
 import ManageCalendarSection from '@components/manage/ManageCalendarSection/ManageCalendarSection';
+import ManageLevelSection from '@components/manage/ManageLevelSection/ManageLevelSection';
 import ManageLibrarySection from '@components/manage/ManageLibrarySection/ManageLibrarySection';
 import SupportHistorySection from '@components/support/SupportHistorySection/SupportHistorySection';
 
@@ -36,6 +37,9 @@ const ManagePage = () => {
       </Suspense>
       <Suspense>
         <ManageCalendarSection />
+      </Suspense>
+      <Suspense>
+        <ManageLevelSection />
       </Suspense>
       <Suspense>
         <ManageActivitySection />

@@ -2,6 +2,7 @@ import { SERVICE_NAME } from '@constants/environment';
 
 import type { Bookstore, BookstoreKorean } from '@type/book';
 import type { CareerLevel, EmploymentType } from '@type/community';
+import { RoleLevelKey, RoleLevelType } from '@type/member';
 import type { MembershipStatusType } from '@type/membershipFee';
 import type { SchedulePriority } from '@type/schedule';
 
@@ -127,6 +128,27 @@ export function toKoreaEmploymentType(employmentType: EmploymentType | null) {
       return '어시스턴트';
     case 'PART_TIME':
       return '파트타임';
+    default:
+      return '-';
+  }
+}
+
+export function toKoreaMemberLevel(
+  memberLevel: RoleLevelKey | RoleLevelType | null,
+) {
+  switch (memberLevel) {
+    case 'GUEST':
+    case 0:
+      return '게스트';
+    case 'USER':
+    case 1:
+      return '일반';
+    case 'ADMIN':
+    case 2:
+      return '운영진';
+    case 'SUPER':
+    case 3:
+      return '관리자';
     default:
       return '-';
   }
