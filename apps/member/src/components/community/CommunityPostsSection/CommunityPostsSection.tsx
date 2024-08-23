@@ -32,7 +32,7 @@ const CommunityPostsSection = ({
   size: defaultSize,
 }: Props) => {
   const navigate = useNavigate();
-  const { page, size, handlePageChange } = usePagination(defaultSize);
+  const { page, size, handlePageChange } = usePagination({ defaultSize });
   const { data } = useBoardByCategory({ category: type, page, size });
 
   const handleBoardClick = useCallback(

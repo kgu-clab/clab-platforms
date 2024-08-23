@@ -36,7 +36,9 @@ const ManagerAlertSection = ({ category }: ManagerAlertSectionProps) => {
   });
 
   const [mode, setMode] = useState<ModeState>('view');
-  const { page, size, handlePageChange } = usePagination();
+  const { page, size, handlePageChange } = usePagination({
+    sectionName: category,
+  });
 
   const title = getCategoryTitle(category);
 

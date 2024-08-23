@@ -1,5 +1,5 @@
 import type { CommunityCategoryType } from './community';
-import type { RoleLevel } from './member';
+import type { RoleLevelType } from './member';
 
 export interface CommentItem {
   id: number;
@@ -16,7 +16,7 @@ export interface CommentItem {
 
 export interface CommentListItem extends CommentItem {
   writerId: string | null;
-  writerRoleLevel: RoleLevel;
+  writerRoleLevel: RoleLevelType;
   children: Array<CommentListItem>;
   isOwner: boolean;
   isDeleted: boolean;

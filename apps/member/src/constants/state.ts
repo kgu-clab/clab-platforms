@@ -94,3 +94,12 @@ export const ACTIVITY_BOARD_CATEGORY_STATE = {
   ASSIGNMENT: 'ASSIGNMENT',
   SUBMIT: 'SUBMIT',
 } as const;
+
+/**
+ * 멤버 권한을 정의합니다.
+ */
+export const ROLE_LEVEL = {
+  SUPER: 3,
+  ADMIN: 2,
+  USER: 1,
+} as const;

@@ -1,10 +1,11 @@
 import { cn, toDecodeHTMLEntities } from '@clab-platforms/utils';
 
 import { SERVICE_NAME } from '@constants/environment';
+import { ROLE_LEVEL } from '@constants/state';
 import { formattedDate } from '@utils/date';
 
 import { StrictPropsWithChildren } from '@type/component';
-import type { RoleLevel } from '@type/member';
+import type { RoleLevelType } from '@type/member';
 
 import Avatar from '../Avatar/Avatar';
 import Share from '../Share/Share';
@@ -18,7 +19,7 @@ interface PostHeaderProps {
   createdAt: string;
   src?: string | null;
   writer?: string;
-  roleLevel?: RoleLevel;
+  roleLevel?: RoleLevelType;
 }
 
 const Post = ({ className, children }: Props) => {
@@ -29,7 +30,7 @@ const PostHead = ({
   title,
   src,
   writer = SERVICE_NAME,
-  roleLevel = 1,
+  roleLevel = ROLE_LEVEL.USER,
   createdAt,
 }: PostHeaderProps) => {
   return (

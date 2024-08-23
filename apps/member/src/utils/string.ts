@@ -2,6 +2,7 @@ import { SERVICE_NAME } from '@constants/environment';
 
 import type { Bookstore, BookstoreKorean } from '@type/book';
 import type { CareerLevel, EmploymentType } from '@type/community';
+import { RoleLevelKey, RoleLevelType } from '@type/member';
 import type { MembershipStatusType } from '@type/membershipFee';
 import type { SchedulePriority } from '@type/schedule';
 
@@ -131,3 +132,25 @@ export function toKoreaEmploymentType(employmentType: EmploymentType | null) {
       return '-';
   }
 }
+
+export function toKoreaMemberLevel(
+  memberLevel: RoleLevelKey | RoleLevelType | null,
+) {
+  switch (memberLevel) {
+    case 'USER':
+    case 1:
+      return '일반';
+    case 'ADMIN':
+    case 2:
+      return '운영진';
+    case 'SUPER':
+    case 3:
+      return '관리자';
+    default:
+      return '-';
+  }
+}
+
+export const createQueryParams = (name: string, page: number) => {
+  return `?${name}=${page}`;
+};

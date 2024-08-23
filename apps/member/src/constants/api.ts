@@ -20,6 +20,9 @@ export const END_POINT = {
   MY_NOTIFICATION: '/v1/notifications',
   MY_COMMENTS: '/v1/comments/my-comments',
   MY_INFO_EDIT: (id: string) => `/v1/members/${id}`,
+  // 멤버 래밸 관리
+  MEMBER_LEVEL: `/v1/members/roles`,
+  MEMBER_LEVEL_EDIT: (memberId: string) => `/v1/members/${memberId}/roles`,
   // -- 커뮤니티
   BOARDS: `/v1/boards`,
   BOARDS_LIST: `/v1/boards/category`,

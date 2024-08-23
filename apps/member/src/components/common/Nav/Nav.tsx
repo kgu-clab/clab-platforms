@@ -6,6 +6,7 @@ import { cn } from '@clab-platforms/utils';
 
 import { IS_DEVELOPMENT } from '@constants/environment';
 import { PATH } from '@constants/path';
+import { ROLE_LEVEL } from '@constants/state';
 import useModal from '@hooks/common/useModal';
 import { useMyProfile } from '@hooks/queries';
 
@@ -82,7 +83,7 @@ const Nav = () => {
             >
               회비
             </Menubar.Item>
-            {data.roleLevel! >= 2 && (
+            {data.roleLevel! >= ROLE_LEVEL.ADMIN && (
               <>
                 <Menubar.Item
                   selected={pathName.startsWith(PATH.MANAGE)}

@@ -3,12 +3,14 @@ import { useState } from 'react';
 import { Menubar, Table } from '@clab-platforms/design-system';
 
 import ActionButton from '@components/common/ActionButton/ActionButton';
+import Pagination from '@components/common/Pagination/Pagination';
 import { Section } from '@components/common/Section';
 import ActivityInfoModal from '@components/modal/ActivityInfoModal/ActivityInfoModal';
 
 import { TABLE_HEAD } from '@constants/head';
 import { ACTIVITY_STATE } from '@constants/state';
 import useModal from '@hooks/common/useModal';
+import { usePagination } from '@hooks/common/usePagination';
 import { useActivityGroupMember } from '@hooks/queries';
 import { useActivityGroupDeleteMutation } from '@hooks/queries/activity/useActivityGroupDeleteMutation';
 import { useActivityGroupStatusMutation } from '@hooks/queries/activity/useActivityGroupStatusMutation';
@@ -18,9 +20,17 @@ import type { ActivityGroupStatusType } from '@type/activity';
 const ManageActivitySection = () => {
   const [mode, setMode] = useState<ActivityGroupStatusType>('WAITING');
   const { openModal } = useModal();
+  const { page, size, handlePageChange } = usePagination({
+    defaultSize: 6,
+    sectionName: 'activity',
+  });
   const { activityGroupDeleteMutate } = useActivityGroupDeleteMutation();
   const { activityGroupStatusMutate } = useActivityGroupStatusMutation();
-  const { data: groupData } = useActivityGroupMember({ status: mode });
+  const { data: groupData } = useActivityGroupMember({
+    page,
+    size,
+    status: mode,
+  });
 
   const handleInfoButtonClick = (groupId: number) => {
     return openModal({
@@ -174,7 +184,16 @@ const ManageActivitySection = () => {
           </Menubar.Item>
         </Menubar>
       </Section.Header>
-      <Section.Body>{renderMode}</Section.Body>
+      <Section.Body>
+        {renderMode}
+        <Pagination
+          className="mt-4 justify-center"
+          totalItems={groupData.totalItems}
+          postLimit={size}
+          onChange={handlePageChange}
+          page={page}
+        />
+      </Section.Body>
     </Section>
   );
 };

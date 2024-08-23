@@ -39,6 +39,7 @@ export const TABLE_HEAD = {
     '합불 처리',
     '생성',
   ] as const,
+  MEMBER_MANAGE_TABLE: ['번호', '학번', '이름', '상태'],
 } as const;
 /**
  * 관리자 페이지에서 기능을 나타내는 상수

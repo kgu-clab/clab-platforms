@@ -24,7 +24,9 @@ const ManageCalendarSection = () => {
   const { openModal } = useModal();
 
   const [mode, setMode] = useState<Mode>('view');
-  const { page, size, handlePageChange } = usePagination();
+  const { page, size, handlePageChange } = usePagination({
+    sectionName: 'calendar',
+  });
 
   const { data } = useSchedule({
     // 오늘 기준으로 최근 1년 부터 ~ 이번달 까지

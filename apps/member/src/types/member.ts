@@ -1,8 +1,14 @@
+import { ROLE_LEVEL } from '@constants/state';
+
 /**
  * 계정의 권한 레벨
  * 익명일 경우 null
  */
-export type RoleLevel = 1 | 2 | 3 | null;
+export type RoleLevelType = (typeof ROLE_LEVEL)[keyof typeof ROLE_LEVEL];
+/**
+ * 계정 권한의 string
+ */
+export type RoleLevelKey = keyof typeof ROLE_LEVEL;
 
 /**
  * 멤버 정보
@@ -29,7 +35,7 @@ export interface MemberInfo {
  * 멤버 프로필 정보
  */
 export interface MemberProfileType extends MemberInfo {
-  roleLevel: RoleLevel;
+  roleLevel: RoleLevelType;
   password?: string;
 }
 /**
@@ -46,4 +52,20 @@ export interface MemberProfileRequestType {
   githubUrl?: string;
   studentStatus?: string;
   imageUrl?: string | null;
+}
+
+/**
+ * 멤버 레벨 목록
+ */
+export interface MemberRoleListType {
+  id: string;
+  name: string;
+  role: RoleLevelKey;
+}
+
+/**
+ * 멤버 레벨 변경
+ */
+export interface MemberRoleRequestType {
+  role: RoleLevelKey;
 }
