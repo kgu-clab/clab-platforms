@@ -20,12 +20,12 @@ export const useMemberRoleMutation = () => {
         });
         toast({
           state: 'success',
-          message: '레벨이 수정되었어요.',
+          message: '사용자 권한이 변경되었어요.',
         });
       } else {
         toast({
           state: 'error',
-          message: '레벨 수정에 실패했어요',
+          message: '사용자 권한 변경에 실패했어요.',
         });
       }
     },

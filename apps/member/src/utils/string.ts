@@ -137,9 +137,6 @@ export function toKoreaMemberLevel(
   memberLevel: RoleLevelKey | RoleLevelType | null,
 ) {
   switch (memberLevel) {
-    case 'GUEST':
-    case 0:
-      return '게스트';
     case 'USER':
     case 1:
       return '일반';

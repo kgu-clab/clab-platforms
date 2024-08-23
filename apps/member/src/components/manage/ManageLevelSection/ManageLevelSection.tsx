@@ -23,7 +23,7 @@ import { useMemberRole, useMemberRoleMutation } from '@hooks/queries/member';
 import { isNumeric } from '@utils/member';
 import { toKoreaMemberLevel } from '@utils/string';
 
-import { RoleLevelKey } from '@type/member';
+import type { RoleLevelKey } from '@type/member';
 
 type Mode = '' | 'ADMIN' | 'USER' | 'SUPER';
 
@@ -36,7 +36,6 @@ const roleColors: Record<RoleLevelKey, BadgeColorVariant> = {
   SUPER: 'red',
   ADMIN: 'blue',
   USER: 'green',
-  GUEST: 'yellow',
 };
 
 const ManageLevelSection = () => {
@@ -84,7 +83,7 @@ const ManageLevelSection = () => {
   useEffect(() => {
     navigation('/manage');
     setSearchWords('');
-  }, [mode]);
+  }, [mode, navigation]);
 
   return (
     <Section>

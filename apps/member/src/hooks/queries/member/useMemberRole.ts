@@ -4,7 +4,7 @@ import { getMemberRole } from '@api/member';
 import { MEMBER_QUERY_KEY } from '@constants/key';
 
 import { WithPaginationParams } from '@type/api';
-import { RoleLevelKey } from '@type/member';
+import type { RoleLevelKey } from '@type/member';
 
 interface useMemberRoleParams extends WithPaginationParams {
   memberId?: string;

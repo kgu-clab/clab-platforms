@@ -102,5 +102,4 @@ export const ROLE_LEVEL = {
   SUPER: 3,
   ADMIN: 2,
   USER: 1,
-  GUEST: 0,
 } as const;
