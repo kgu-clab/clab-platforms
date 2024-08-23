@@ -150,3 +150,7 @@ export function toKoreaMemberLevel(
       return '-';
   }
 }
+
+export const createQueryParams = (name: string, page: number) => {
+  return `?${name}=${page}`;
+};

@@ -1,6 +1,8 @@
 import { useCallback, useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
+import { createQueryParams } from '@utils/string';
+
 /**
  * 페이지네이션을 위한 페이지 조작 훅입니다.
  * Pagination Component와 같이 사용합니다.
@@ -29,7 +31,8 @@ export const usePagination = ({
 
   const handlePageChange = useCallback(
     (page: number) => {
-      navigate(`?${sectionName}=` + page);
+      const queryParams = createQueryParams(sectionName, page);
+      navigate(queryParams);
     },
     [navigate, sectionName],
   );
