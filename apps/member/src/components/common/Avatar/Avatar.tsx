@@ -15,7 +15,6 @@ const SIZE_STYLES = {
 } as const;
 
 const RING_STYLES: Record<RoleLevelType, string> = {
-  0: '',
   1: 'ring-gray-500',
   2: 'ring-purple-500',
   3: 'ring-red-500',
