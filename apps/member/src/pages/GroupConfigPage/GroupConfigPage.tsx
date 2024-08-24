@@ -8,6 +8,7 @@ import ActivityPostEditor from '@components/group/ActivityPostEditor/ActivityPos
 import ActivityProfileEditor from '@components/group/ActivityProfileEditor/ActivityProfileEditor';
 
 import { GROUP_MESSAGE } from '@constants/message';
+import { PATH_FINDER } from '@constants/path';
 import { useActivityGroup } from '@hooks/queries/activity/useActivityGroup';
 
 const GroupConfigPage = () => {
@@ -21,7 +22,10 @@ const GroupConfigPage = () => {
 
   return (
     <Content>
-      <Header title={[data.name, '관리']} />
+      <Header
+        title={[data.name, '관리']}
+        path={[PATH_FINDER.ACTIVITY_DETAIL(id)]}
+      />
       <ActivityProfileEditor data={data} />
       <ActivityParticipantEditor groupId={+id} />
       <ActivityNoticeEditor groupId={+id} data={data.notices} />

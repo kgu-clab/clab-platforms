@@ -10,6 +10,7 @@ import Section from '@components/common/Section/Section';
 import Select from '@components/common/Select/Select';
 import Textarea from '@components/common/Textarea/Textarea';
 
+import { PATH } from '@constants/path';
 import { BOARD_CONTENT_MAX_LENGTH } from '@constants/state';
 import useToast from '@hooks/common/useToast';
 import {
@@ -54,7 +55,7 @@ const GroupApplyPage = () => {
         applyReason: reason,
       },
     });
-    await navigate('/activity');
+    await navigate(PATH.ACTIVITY);
   };
 
   useEffect(() => {
@@ -64,7 +65,7 @@ const GroupApplyPage = () => {
 
   return (
     <Content>
-      <Header title={['활동', '활동 신청']} />
+      <Header title={['활동', '활동 신청']} path={PATH.ACTIVITY} />
       <Section className="space-y-4">
         <div>
           <Label htmlFor="select" required>

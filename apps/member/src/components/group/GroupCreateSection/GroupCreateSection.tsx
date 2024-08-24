@@ -12,6 +12,7 @@ import Select from '@components/common/Select/Select';
 import Textarea from '@components/common/Textarea/Textarea';
 
 import { getSearchImage } from '@api/activity';
+import { PATH } from '@constants/path';
 import { SELECT_ACTIVITY_GROUP_CATEGORY_TYPE } from '@constants/select';
 import {
   ACTIVITY_GROUP_CONTENT_MAX_LENGTH,
@@ -138,7 +139,7 @@ const GroupCreateSection = () => {
     }
 
     await activityGroupMutate(inputs);
-    await navigate('/activity');
+    await navigate(PATH.ACTIVITY);
   };
 
   const handleSearchClick = async () => {
