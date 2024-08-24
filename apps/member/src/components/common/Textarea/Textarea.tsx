@@ -8,7 +8,7 @@ interface TextareaProps extends ComponentPropsWithRef<'textarea'> {
 }
 
 const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
-  ({ id, label, className, value, maxLength, ...rest }, ref) => {
+  ({ id, label, className, value, maxLength, disabled, ...rest }, ref) => {
     const hasValue = value && value.length > 0;
 
     return (
@@ -28,6 +28,7 @@ const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
           )}
           value={value}
           maxLength={maxLength}
+          disabled={disabled}
           {...rest}
         />
         {maxLength && (

@@ -38,6 +38,7 @@ const AssignmentUploadSection = ({
     useActivityGroupBoardMutation();
   const { activityGroupBoardPatchMutate, activityGroupBoardPatchIsPending } =
     useActivityGroupBoardPatchMutation();
+  const [editMode, setEditMode] = useState(false);
 
   const uploaderRef = useRef<HTMLInputElement>(null);
   const [uploadedFile, setUploadedFile] = useState<ResponseFile | null>(
@@ -52,6 +53,7 @@ const AssignmentUploadSection = ({
   };
 
   const handleDeleteFileClick = () => {
+    setEditMode(true);
     setUploadedFile(null);
   };
 
@@ -93,6 +95,8 @@ const AssignmentUploadSection = ({
         files: file ? formData : undefined,
       });
     }
+
+    setEditMode(false);
   };
 
   useEffect(() => {
@@ -101,6 +105,7 @@ const AssignmentUploadSection = ({
       setDescription(myAssignment.content || '');
     }
   }, [myAssignment]);
+  useEffect(() => {}, [editMode]);
 
   return (
     <Section>
@@ -153,6 +158,7 @@ const AssignmentUploadSection = ({
               placeholder={description || '제출물 설명을 입력해주세요.'}
               value={description}
               onChange={handleDescriptionChange}
+              disabled={!editMode && !(myAssignment === undefined)} // 제출물이 없는 상태엔 입력 가능, 제출물이 있지만 수정하기 버튼이 클릭되지 않으면 수정 불가
             />
           </Table.Cell>
         </Table.Row>
@@ -164,7 +170,7 @@ const AssignmentUploadSection = ({
             color="orange"
             onClick={handleDeleteFileClick}
           >
-            첨부파일 변경하기
+            수정하기
           </Button>
         )}
         <Button
