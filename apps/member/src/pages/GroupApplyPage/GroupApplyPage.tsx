@@ -18,7 +18,8 @@ import {
 
 const GroupApplyPage = () => {
   const { data: groupData } = useActivityGroupMember();
-  const { activityGroupMemberMutate } = useActivityGroupMemberMutation();
+  const { activityGroupMemberMutate, activityGroupMemberIsPending } =
+    useActivityGroupMemberMutation();
   const toast = useToast();
 
   const [groupID, setGroupID] = useState(0);
@@ -87,7 +88,11 @@ const GroupApplyPage = () => {
             onChange={handleReasonChange}
           />
         </div>
-        <Button className="w-full" onClick={handleApplyButtonClick}>
+        <Button
+          className="w-full"
+          onClick={handleApplyButtonClick}
+          disabled={activityGroupMemberIsPending}
+        >
           신청하기
         </Button>
       </Section>

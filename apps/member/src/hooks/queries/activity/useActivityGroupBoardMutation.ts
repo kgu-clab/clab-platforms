@@ -38,6 +38,7 @@ export function useActivityGroupBoardMutation() {
 
   return {
     activityGroupBoardMutate: mutation.mutate,
+    activityGroupBoardIsPending: mutation.isPending,
   };
 }
 
@@ -72,6 +73,7 @@ export function useActivityGroupBoardPatchMutation() {
 
   return {
     activityGroupBoardPatchMutate: mutation.mutate,
+    activityGroupBoardPatchIsPending: mutation.isPending,
   };
 }
 

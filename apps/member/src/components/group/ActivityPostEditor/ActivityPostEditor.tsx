@@ -26,6 +26,11 @@ interface ActivityPostEditorProps {
   assignments: ActivityBoardType[];
 }
 
+const defaultPost = {
+  title: '',
+  content: '',
+};
+
 const ActivityPostEditor = ({
   groupId,
   activities,
@@ -33,10 +38,7 @@ const ActivityPostEditor = ({
 }: ActivityPostEditorProps) => {
   const toast = useToast();
   const { openModal } = useModal();
-  const [post, setPost] = useState({
-    title: '',
-    content: '',
-  });
+  const [post, setPost] = useState(defaultPost);
   const [editAssignment, setEditAssignment] = useState<boolean[]>(
     Array.from({ length: activities.length }, () => false),
   );
@@ -45,7 +47,8 @@ const ActivityPostEditor = ({
     setEditAssignment(Array.from({ length: activities.length }, () => false));
   }, [activities]);
 
-  const { activityGroupBoardMutate } = useActivityGroupBoardMutation();
+  const { activityGroupBoardMutate, activityGroupBoardIsPending } =
+    useActivityGroupBoardMutation();
   const { activityGroupBoardDeleteMutate } =
     useActivityGroupBoardDeleteMutation();
 
@@ -55,7 +58,7 @@ const ActivityPostEditor = ({
     const { name, value } = e.target;
     setPost((prev) => ({ ...prev, [name]: value }));
   };
-  const handleAddWeeklyClick = () => {
+  const handleAddWeeklyClick = async () => {
     if (!post.title || !post.content) {
       return toast({
         state: 'error',
@@ -67,10 +70,11 @@ const ActivityPostEditor = ({
       category: 'WEEKLY_ACTIVITY',
       ...post,
     };
-    activityGroupBoardMutate({
+    await activityGroupBoardMutate({
       activityGroupId: groupId,
       body: activityBoardItem,
     });
+    await setPost(defaultPost);
   };
   const handleDeleteWeeklyClick = (activityGroupBoardId: number) => {
     activityGroupBoardDeleteMutate(activityGroupBoardId);
@@ -90,7 +94,11 @@ const ActivityPostEditor = ({
     <>
       <Section>
         <Section.Header title="주차별 활동 관리">
-          <Button size="sm" onClick={handleAddWeeklyClick}>
+          <Button
+            size="sm"
+            onClick={handleAddWeeklyClick}
+            disabled={activityGroupBoardIsPending}
+          >
             추가
           </Button>
         </Section.Header>

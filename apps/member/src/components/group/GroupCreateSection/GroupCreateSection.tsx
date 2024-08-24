@@ -75,7 +75,8 @@ const CategoryOptions = Object.entries(SELECT_ACTIVITY_GROUP_CATEGORY_TYPE).map(
 );
 const GroupCreateSection = () => {
   const toast = useToast();
-  const { activityGroupMutate } = useActivityGroupMutation();
+  const { activityGroupMutate, activityGroupIsPending } =
+    useActivityGroupMutation();
   const [photoList, setPhotoList] = useState<PhotoType[]>([]);
   const [photoKeyword, setPhotoKeyword] = useState('');
   const [inputs, setInputs] = useState<InputsType>({
@@ -280,7 +281,11 @@ const GroupCreateSection = () => {
             onChange={onChange}
           />
         </ComponentWithLabel>
-        <Button className="w-full" onClick={handleApplyButtonClick}>
+        <Button
+          className="w-full"
+          onClick={handleApplyButtonClick}
+          disabled={activityGroupIsPending}
+        >
           새로운 그룹 추가하기
         </Button>
       </Section.Body>

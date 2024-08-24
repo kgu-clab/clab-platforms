@@ -34,8 +34,9 @@ const AssignmentUploadSection = ({
 }: Props) => {
   const toast = useToast();
   const { data: myProfile } = useMyProfile();
-  const { activityGroupBoardMutate } = useActivityGroupBoardMutation();
-  const { activityGroupBoardPatchMutate } =
+  const { activityGroupBoardMutate, activityGroupBoardIsPending } =
+    useActivityGroupBoardMutation();
+  const { activityGroupBoardPatchMutate, activityGroupBoardPatchIsPending } =
     useActivityGroupBoardPatchMutation();
 
   const uploaderRef = useRef<HTMLInputElement>(null);
@@ -166,7 +167,13 @@ const AssignmentUploadSection = ({
             첨부파일 변경하기
           </Button>
         )}
-        <Button className="w-full" onClick={handleSubmitButtonClick}>
+        <Button
+          className="w-full"
+          onClick={handleSubmitButtonClick}
+          disabled={
+            activityGroupBoardIsPending || activityGroupBoardPatchIsPending
+          }
+        >
           제출하기
         </Button>
       </div>

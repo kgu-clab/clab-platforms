@@ -35,7 +35,7 @@ const ActivityBoardEditModal = ({ prevData, groupId }: Props) => {
   const [uploadedFile, setUploadedFile] = useState<ResponseFile | null>(
     prevData?.files?.[0] || null,
   );
-  const { activityGroupBoardPatchMutate } =
+  const { activityGroupBoardPatchMutate, activityGroupBoardPatchIsPending } =
     useActivityGroupBoardPatchMutation();
 
   const handleBoardChange = (
@@ -114,7 +114,11 @@ const ActivityBoardEditModal = ({ prevData, groupId }: Props) => {
         )}
       </Modal.Body>
       <Modal.Footer>
-        <Modal.Button color="orange" onClick={handleEditButtonClick}>
+        <Modal.Button
+          color="orange"
+          onClick={handleEditButtonClick}
+          disabled={activityGroupBoardPatchIsPending}
+        >
           변경
         </Modal.Button>
         <Modal.Button color="gray" onClick={closeModal}>

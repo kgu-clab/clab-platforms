@@ -29,8 +29,9 @@ const AssignmentFeedbackModal = ({
   const toast = useToast();
   const [feedback, setFeedback] = useState('');
   const { data: myProfile } = useMyProfile();
-  const { activityGroupBoardMutate } = useActivityGroupBoardMutation();
-  const { activityGroupBoardPatchMutate } =
+  const { activityGroupBoardMutate, activityGroupBoardIsPending } =
+    useActivityGroupBoardMutation();
+  const { activityGroupBoardPatchMutate, activityGroupBoardPatchIsPending } =
     useActivityGroupBoardPatchMutation();
 
   const handleFeedbackChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -98,7 +99,13 @@ const AssignmentFeedbackModal = ({
         />
       </Modal.Body>
       <Modal.Footer>
-        <Modal.Button color="orange" onClick={handleFeedbackUploadClick}>
+        <Modal.Button
+          color="orange"
+          onClick={handleFeedbackUploadClick}
+          disabled={
+            activityGroupBoardIsPending || activityGroupBoardPatchIsPending
+          }
+        >
           입력
         </Modal.Button>
         <Modal.Button color="gray" onClick={closeModal}>

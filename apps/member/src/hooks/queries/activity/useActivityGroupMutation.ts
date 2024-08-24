@@ -33,5 +33,8 @@ export function useActivityGroupMutation() {
     },
   });
 
-  return { activityGroupMutate: mutation.mutate };
+  return {
+    activityGroupMutate: mutation.mutate,
+    activityGroupIsPending: mutation.isPending,
+  };
 }
