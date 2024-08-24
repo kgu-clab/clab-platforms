@@ -1,4 +1,5 @@
 import { PropsWithChildren, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import { Button, Grid, Input } from '@clab-platforms/design-system';
 import { SearchOutline } from '@clab-platforms/icon';
@@ -13,6 +14,7 @@ import Textarea from '@components/common/Textarea/Textarea';
 import { getSearchImage } from '@api/activity';
 import { SELECT_ACTIVITY_GROUP_CATEGORY_TYPE } from '@constants/select';
 import {
+  ACTIVITY_GROUP_CONTENT_MAX_LENGTH,
   BOARD_CONTENT_MAX_LENGTH,
   BOARD_TITLE_MAX_LENGTH,
 } from '@constants/state';
@@ -74,6 +76,7 @@ const CategoryOptions = Object.entries(SELECT_ACTIVITY_GROUP_CATEGORY_TYPE).map(
   }),
 );
 const GroupCreateSection = () => {
+  const navigate = useNavigate();
   const toast = useToast();
   const { activityGroupMutate, activityGroupIsPending } =
     useActivityGroupMutation();
@@ -114,14 +117,28 @@ const GroupCreateSection = () => {
     }));
   };
 
-  const handleApplyButtonClick = () => {
+  const handleApplyButtonClick = async () => {
     if (subject.length === 0 || name.length === 0 || content.length === 0) {
       return toast({
         state: 'error',
         message: '필수 입력 사항을 모두 입력해주세요.',
       });
+    } else if (content.length > ACTIVITY_GROUP_CONTENT_MAX_LENGTH) {
+      return toast({
+        state: 'error',
+        message: '내용은 200자 이내로 작성해주세요.',
+      });
+    } else if (curriculum) {
+      if (curriculum.length > BOARD_CONTENT_MAX_LENGTH) {
+        return toast({
+          state: 'error',
+          message: '커리큘럼은 200자 이내로 작성해주세요.',
+        });
+      }
     }
-    activityGroupMutate(inputs);
+
+    await activityGroupMutate(inputs);
+    await navigate('/activity');
   };
 
   const handleSearchClick = async () => {
@@ -224,22 +241,37 @@ const GroupCreateSection = () => {
             id="content"
             name="content"
             placeholder="활동 내용을 작성해주세요"
-            className="scrollbar-hide h-80 w-full resize-none"
-            maxLength={BOARD_CONTENT_MAX_LENGTH}
+            className="scrollbar-hide h-48 w-full resize-none"
             value={content}
             onChange={onChange}
           />
+          <p
+            className={cn('mt-2 text-right text-xs', {
+              ' text-red-500':
+                content.length > ACTIVITY_GROUP_CONTENT_MAX_LENGTH,
+            })}
+          >
+            <span>{content.length}</span>
+            <span>{'/' + ACTIVITY_GROUP_CONTENT_MAX_LENGTH + '자'}</span>
+          </p>
         </ComponentWithLabel>
         <ComponentWithLabel title="커리큘럼" htmlFor="curriculum">
           <Textarea
             id="curriculum"
             name="curriculum"
             placeholder="커리큘럼을 작성해주세요"
-            className="scrollbar-hide h-80 w-full resize-none"
-            maxLength={BOARD_CONTENT_MAX_LENGTH}
+            className="scrollbar-hide h-64 w-full resize-none"
             value={curriculum}
             onChange={onChange}
           />
+          <p
+            className={cn('mt-2 text-right text-xs', {
+              ' text-red-500': content.length > BOARD_CONTENT_MAX_LENGTH,
+            })}
+          >
+            <span>{content.length}</span>
+            <span>{'/' + BOARD_CONTENT_MAX_LENGTH + '자'}</span>
+          </p>
         </ComponentWithLabel>
         <Grid gap="md" col="2">
           <Input
@@ -274,7 +306,7 @@ const GroupCreateSection = () => {
           <Input
             id="githubUrl"
             name="githubUrl"
-            placeholder="github URL을 입력해주세요"
+            placeholder="https://github.com/KGU-C-Lab"
             className="grow"
             maxLength={BOARD_TITLE_MAX_LENGTH}
             value={githubUrl}
