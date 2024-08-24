@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import { Button } from '@clab-platforms/design-system';
 
@@ -17,6 +18,7 @@ import {
 } from '@hooks/queries';
 
 const GroupApplyPage = () => {
+  const navigate = useNavigate();
   const { data: groupData } = useActivityGroupMember();
   const { activityGroupMemberMutate, activityGroupMemberIsPending } =
     useActivityGroupMemberMutation();
@@ -38,7 +40,7 @@ const GroupApplyPage = () => {
     setReason(e.target.value);
   };
 
-  const handleApplyButtonClick = () => {
+  const handleApplyButtonClick = async () => {
     if (groupID === 0 || reason.length === 0) {
       return toast({
         state: 'error',
@@ -46,12 +48,13 @@ const GroupApplyPage = () => {
       });
     }
 
-    activityGroupMemberMutate({
+    await activityGroupMemberMutate({
       activityGroupId: groupID,
       body: {
         applyReason: reason,
       },
     });
+    await navigate('/activity');
   };
 
   useEffect(() => {
