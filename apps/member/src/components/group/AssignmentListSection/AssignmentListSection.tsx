@@ -11,7 +11,7 @@ import { ACTIVITY_MEMBER_ROLE, ACTIVITY_MEMBER_STATE } from '@constants/state';
 import useModal from '@hooks/common/useModal';
 import { useActivityGroupBoardByParent } from '@hooks/queries/activity/useActivityGroupBoardByParent';
 import { useActivityGroupMemberList } from '@hooks/queries/activity/useActivityGroupMemberList';
-import { formattedDate } from '@utils/date';
+import { formattedDate, toKoreaISOString } from '@utils/date';
 
 import type { ActivityBoardType } from '@type/activity';
 
@@ -70,7 +70,9 @@ const AssignmentListSection = () => {
                 <Table.Cell>{item.memberId}</Table.Cell>
                 <Table.Cell>{item.memberName}</Table.Cell>
                 <Table.Cell>
-                  {item.files ? formattedDate(item.updatedAt || '') : '-'}
+                  {item.files
+                    ? formattedDate(toKoreaISOString(item.updatedAt || ''))
+                    : '-'}
                 </Table.Cell>
                 <Table.Cell className="hover:underline">
                   {item.files

@@ -14,7 +14,7 @@ import {
   useActivityGroupBoardPatchMutation,
   useMyProfile,
 } from '@hooks/queries';
-import { formattedDate, isDateValid } from '@utils/date';
+import { formattedDate, isDateValid, toKoreaISOString } from '@utils/date';
 
 import type { ActivityBoardType } from '@type/activity';
 import type { ResponseFile } from '@type/api';
@@ -125,7 +125,7 @@ const AssignmentUploadSection = ({
             })}
           >
             {uploadedFile
-              ? formattedDate(uploadedFile.createdAt)
+              ? formattedDate(toKoreaISOString(uploadedFile.createdAt))
               : '아직 제출하지 않았습니다.'}
           </Table.Cell>
         </Table.Row>
