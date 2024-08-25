@@ -65,9 +65,8 @@ export const ACTIVITY_GROUP_CONTENT_MAX_LENGTH = 200;
  * 활동 그룹 멤버 역할을 정의합니다.
  */
 export const ACTIVITY_MEMBER_ROLE = {
-  LEADER: 'LEADER',
   MEMBER: 'MEMBER',
-  NONE: 'NONE',
+  LEADER: 'LEADER',
 } as const;
 
 /**

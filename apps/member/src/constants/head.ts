@@ -1,6 +1,14 @@
 export const TABLE_HEAD = {
   ACTIVITY_GROUP_PARTICIPANTS: ['번호', '학번', '이름'] as const,
-  ACTIVITY_GROUP_APPLIES: ['번호', '학번', '이름', '상태', '기능'] as const,
+  ACTIVITY_GROUP_APPLIES: [
+    '번호',
+    '학번',
+    '이름',
+    '상태',
+    '레벨',
+    '관리',
+    '기능',
+  ] as const,
   ACTIVITY_GROUP_DETAIL: ['번호', '이름', '대상', '리더', '기능'] as const,
   ACTIVITY_GROUP_ASSIGNMENT: [
     '학번',
