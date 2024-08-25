@@ -97,15 +97,15 @@ const AssignmentUploadSection = ({
     }
 
     setEditMode(false);
+    setUploadedFile(null);
   };
 
   useEffect(() => {
-    if (myAssignment) {
-      setUploadedFile(myAssignment.files?.[0] || null);
-      setDescription(myAssignment.content || '');
+    if (!editMode) {
+      setDescription(myAssignment?.content || '');
+      setUploadedFile(myAssignment?.files?.[0] || null);
     }
-  }, [myAssignment]);
-  useEffect(() => {}, [editMode]);
+  }, [editMode, myAssignment]);
 
   return (
     <Section>
@@ -164,7 +164,7 @@ const AssignmentUploadSection = ({
         </Table.Row>
       </Table>
       <div className="mt-2 flex gap-4">
-        {uploadedFile && (
+        {uploadedFile !== null && !editMode && (
           <Button
             className="w-full"
             color="orange"
