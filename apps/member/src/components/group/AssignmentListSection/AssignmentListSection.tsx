@@ -9,8 +9,10 @@ import { TABLE_HEAD } from '@constants/head';
 import { GROUP_MESSAGE } from '@constants/message';
 import { ACTIVITY_MEMBER_ROLE, ACTIVITY_MEMBER_STATE } from '@constants/state';
 import useModal from '@hooks/common/useModal';
-import { useActivityGroupBoardByParent } from '@hooks/queries/activity/useActivityGroupBoardByParent';
-import { useActivityGroupMemberList } from '@hooks/queries/activity/useActivityGroupMemberList';
+import {
+  useActivityGroupBoardByParent,
+  useActivityGroupMemberList,
+} from '@hooks/queries';
 import { formattedDate, toKoreaISOString } from '@utils/date';
 
 import type { ActivityBoardType } from '@type/activity';
@@ -64,38 +66,40 @@ const AssignmentListSection = () => {
       <Section>
         <Section.Header title="제출물 조회" />
         <Section.Body>
-          <Table head={TABLE_HEAD.ACTIVITY_GROUP_ASSIGNMENT}>
-            {assignmentList.items.map((item) => (
-              <Table.Row key={item.id}>
-                <Table.Cell>{item.memberId}</Table.Cell>
-                <Table.Cell>{item.memberName}</Table.Cell>
-                <Table.Cell>
-                  {item.files
-                    ? formattedDate(toKoreaISOString(item.updatedAt || ''))
-                    : '-'}
-                </Table.Cell>
-                <Table.Cell className="hover:underline">
-                  {item.files
-                    ? item.files.map((file) => (
-                        <File key={file.fileUrl} href={file.fileUrl}>
-                          {file.originalFileName}
-                        </File>
-                      ))
-                    : '-'}
-                </Table.Cell>
-                <Table.Cell>
-                  <Button
-                    size="sm"
-                    onClick={() =>
-                      handleAssignmentDetailClick(item, +id, +assignmentId)
-                    }
-                  >
-                    더보기
-                  </Button>
-                </Table.Cell>
-              </Table.Row>
-            ))}
-          </Table>
+          <div className="overflow-x-auto">
+            <Table head={TABLE_HEAD.ACTIVITY_GROUP_ASSIGNMENT}>
+              {assignmentList.items.map((item) => (
+                <Table.Row key={item.id}>
+                  <Table.Cell>{item.memberId}</Table.Cell>
+                  <Table.Cell>{item.memberName}</Table.Cell>
+                  <Table.Cell>
+                    {item.files
+                      ? formattedDate(toKoreaISOString(item.updatedAt || ''))
+                      : '-'}
+                  </Table.Cell>
+                  <Table.Cell className="hover:underline">
+                    {item.files
+                      ? item.files.map((file) => (
+                          <File key={file.fileUrl} href={file.fileUrl}>
+                            {file.originalFileName}
+                          </File>
+                        ))
+                      : '-'}
+                  </Table.Cell>
+                  <Table.Cell>
+                    <Button
+                      size="sm"
+                      onClick={() =>
+                        handleAssignmentDetailClick(item, +id, +assignmentId)
+                      }
+                    >
+                      더보기
+                    </Button>
+                  </Table.Cell>
+                </Table.Row>
+              ))}
+            </Table>
+          </div>
         </Section.Body>
       </Section>
       <Section>

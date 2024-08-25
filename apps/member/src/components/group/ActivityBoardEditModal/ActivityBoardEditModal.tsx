@@ -11,10 +11,10 @@ import { FORM_DATA_KEY } from '@constants/api';
 import { ACTIVITY_BOARD_CATEGORY_STATE } from '@constants/state';
 import useModal from '@hooks/common/useModal';
 import useToast from '@hooks/common/useToast';
-import { useActivityGroupBoardPatchMutation } from '@hooks/queries/activity/useActivityGroupBoardMutation';
+import { useActivityGroupBoardPatchMutation } from '@hooks/queries';
 
 import type { ActivityBoardType } from '@type/activity';
-import { ResponseFile } from '@type/api';
+import type { ResponseFile } from '@type/api';
 
 interface Props {
   prevData: ActivityBoardType;
@@ -48,15 +48,15 @@ const ActivityBoardEditModal = ({ prevData, groupId }: Props) => {
     setUploadedFile(null);
   };
   const handleEditButtonClick = () => {
+    const formData = new FormData();
+    const file = uploaderRef.current?.files?.[0];
+
     if (!board.title || !board.content) {
       return toast({
         state: 'error',
         message: '제목과 내용을 입력해주세요.',
       });
     }
-
-    const formData = new FormData();
-    const file = uploaderRef.current?.files?.[0];
     if (file) {
       formData.append(FORM_DATA_KEY, file);
     }
@@ -95,22 +95,20 @@ const ActivityBoardEditModal = ({ prevData, groupId }: Props) => {
           onChange={handleBoardChange}
           placeholder={board.content}
         />
+        <FileUploader
+          uploadedFile={uploadedFile}
+          uploaderRef={uploaderRef}
+          handleDeleteFileClick={handleDeleteFileClick}
+        />
         {prevData.category === ACTIVITY_BOARD_CATEGORY_STATE.ASSIGNMENT && (
-          <>
-            <FileUploader
-              uploadedFile={uploadedFile}
-              uploaderRef={uploaderRef}
-              handleDeleteFileClick={handleDeleteFileClick}
-            />
-            <Input
-              label="종료 일시"
-              type="datetime-local"
-              id="dueDateTime"
-              name="dueDateTime"
-              value={board.dueDateTime}
-              onChange={handleBoardChange}
-            />
-          </>
+          <Input
+            label="종료 일시"
+            type="datetime-local"
+            id="dueDateTime"
+            name="dueDateTime"
+            value={board.dueDateTime}
+            onChange={handleBoardChange}
+          />
         )}
       </Modal.Body>
       <Modal.Footer>

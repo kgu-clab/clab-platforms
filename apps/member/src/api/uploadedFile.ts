@@ -11,6 +11,10 @@ interface PostUploadedFileAssignmentParams {
   groupBoardId: number;
   files: FormData;
 }
+interface PostUploadedFileWeeklyParams {
+  groupId: number;
+  files: FormData;
+}
 
 /**
  * 파일 업로드
@@ -92,6 +96,24 @@ export async function postFilesActivityPhotos(multipartFile: FormData) {
   const { data } = await server.post<FormData, BaseResponse<ResponseFile[]>>({
     url: createURL(END_POINT.UPLOADEDFILE_ACTIVITY_PHOTO, STORAGE_PERIOD(10)), // 함께하는 활동 사진은 10년간 보관
     body: multipartFile,
+  });
+
+  return data;
+}
+/**
+ * 활동 그룹 주차별활동 파일 업로드
+ */
+export async function postUploadedFileWeekly({
+  groupId,
+  files,
+}: PostUploadedFileWeeklyParams) {
+  const url = createURL(
+    END_POINT.UPLOADEDFILE_ACTIVITY_WEEKLY(groupId),
+    STORAGE_PERIOD(3), // 활동 과제 파일은 3년간 보관
+  );
+  const { data } = await server.post<FormData, BaseResponse<ResponseFile[]>>({
+    url,
+    body: files,
   });
 
   return data;
