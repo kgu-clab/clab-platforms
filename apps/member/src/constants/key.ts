@@ -86,6 +86,7 @@ export const ACTIVITY_QUERY_KEY = {
   APPLICATIONS: () => [...BOOK_QUERY_KEY.ALL, 'applications'],
   BOARDS: () => [...ACTIVITY_QUERY_KEY.ALL, 'boards'],
   MEMBERS: () => [...ACTIVITY_QUERY_KEY.ALL, 'members'],
+  MY_APPLIED: () => [...ACTIVITY_QUERY_KEY.MY(), 'applied'],
   MY_ASSIGNMENT: (id: number) => [...ACTIVITY_QUERY_KEY.MY_ASSIGNMENTS(), id],
   DETAIL: (id: number) => [...ACTIVITY_QUERY_KEY.DETAILS(), id],
   STATUS: (status: ActivityGroupStatusType) => [

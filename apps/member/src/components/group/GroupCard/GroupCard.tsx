@@ -63,19 +63,20 @@ const GroupCard = ({
   category,
   subject,
   imageUrl,
-  leaderId,
-  leaderName,
+  leaders,
   participantCount,
   weeklyActivityCount,
   createdAt,
 }: GroupCardProps) => {
   const navigate = useNavigate();
+  const leaderName = leaders[0].name;
+  const leaderId = leaders[0].id;
 
   return (
     <Grid
       col="3"
       gap="sm"
-      className="h-[227px] cursor-pointer rounded-lg border transition-colors hover:bg-gray-50"
+      className="h-[227px] cursor-pointer overflow-auto rounded-lg border transition-colors hover:bg-gray-50"
       onClick={() => navigate(PATH_FINDER.ACTIVITY_DETAIL(id))}
     >
       <Image
@@ -84,13 +85,15 @@ const GroupCard = ({
         height="min-h-fit h-full"
         className="rounded-l-lg border-r object-cover"
       />
-      <div className="col-span-2 flex flex-col gap-2 divide-y p-4">
-        <div className="h-full">
-          <p className="text-lg font-bold">{name}</p>
-          <p className="text-sm text-gray-600">{content}</p>
+      <div className="col-span-2 flex flex-col gap-2 divide-y p-4 ">
+        <div className="h-full overflow-hidden text-ellipsis sm:h-24 ">
+          <p className="truncate text-lg font-bold">{name}</p>
+          <p className="line-clamp-4 text-sm text-gray-600 sm:line-clamp-3">
+            {content}
+          </p>
         </div>
 
-        <div className="grid pt-4 text-sm md:grid-cols-2 md:divide-x">
+        <div className="grid pt-2 text-sm md:grid-cols-2 md:divide-x">
           <div className="hidden pr-4 md:block">
             <b>내용</b>
             <div className="mt-2 grid grid-cols-3 gap-4">

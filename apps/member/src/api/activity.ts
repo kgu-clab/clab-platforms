@@ -2,6 +2,7 @@ import { createPagination, createURL } from '@clab-platforms/utils';
 
 import { END_POINT } from '@constants/api';
 import { UNSPLASH_ACCESS_KEY } from '@constants/environment';
+import { ACTIVITY_BOARD_CATEGORY_STATE } from '@constants/state';
 import { createFormData } from '@utils/api';
 import { groupBoardParser } from '@utils/group';
 
@@ -12,9 +13,9 @@ import type {
   ActivityGroupBoardParserType,
   ActivityGroupCreateItem,
   ActivityGroupItem,
-  ActivityGroupMemberMyType,
   ActivityGroupMemberType,
   ActivityGroupStatusType,
+  ActivityMemberRoleType,
   ActivityPhotoItem,
   ActivityPhotosBody,
   ActivityRequestType,
@@ -26,6 +27,7 @@ import { server } from './server';
 import {
   postFilesActivityPhotos,
   postUploadedFileAssignment,
+  postUploadedFileWeekly,
 } from './uploadedFile';
 
 export interface PatchActivityGroupMemberApplyParams {
@@ -87,6 +89,18 @@ export interface PatchActivityGroupParams {
 export interface PatchActivityGroupAdminParams {
   activityGroupId: number;
   body: ActivityGroupCreateItem;
+}
+
+export interface PatchActivityGroupMemberRoleParams {
+  activityGroupId: number;
+  memberId: string;
+  position: ActivityMemberRoleType;
+}
+
+export interface GetActivityGroupMemberMyParams {
+  status?: ActivityGroupStatusType;
+  page: number;
+  size: number;
 }
 
 /**
@@ -151,16 +165,12 @@ export async function postActivityGroupMemberApply({
   activityGroupId,
   body,
 }: PostActivityGroupMemberApplyParams) {
-  const { data } = await server.post<ActivityRequestType, BaseResponse<number>>(
-    {
-      url: createPagination(END_POINT.ACTIVITY_GROUP_MEMBER_APPLY, {
-        activityGroupId,
-      }),
-      body,
-    },
-  );
-
-  return data;
+  return server.post<ActivityRequestType, BaseResponse<number>>({
+    url: createPagination(END_POINT.ACTIVITY_GROUP_MEMBER_APPLY, {
+      activityGroupId,
+    }),
+    body,
+  });
 }
 
 /**
@@ -187,11 +197,14 @@ export async function getActivityGroupApplyByStatus(
 /**
  * 나의 활동 목록 조회
  */
-export async function getActivityGroupMemberMy(page: number, size: number) {
-  const { data } = await server.get<
-    ResponsePagination<ActivityGroupMemberMyType>
-  >({
+export async function getActivityGroupMemberMy({
+  status,
+  page,
+  size,
+}: GetActivityGroupMemberMyParams) {
+  const { data } = await server.get<ResponsePagination<ActivityGroupItem>>({
     url: createPagination(END_POINT.ACTIVITY_GROUP_MEMBER_MY, {
+      status,
       page,
       size,
     }),
@@ -263,11 +276,28 @@ export async function postActivityBoard({
 
   let fileUrl: string | null = null;
 
-  if (parentId && memberId && files) {
-    // 파일이 있을 경우 파일 업로드 진행
+  if (
+    body.category === ACTIVITY_BOARD_CATEGORY_STATE.ASSIGNMENT &&
+    parentId &&
+    memberId &&
+    files
+  ) {
+    // 파일이 있을 경우 파일 업로드 진행 (과제 파일)
     const data = await postUploadedFileAssignment({
       groupId: activityGroupId,
       groupBoardId: parentId,
+      files,
+    });
+
+    fileUrl = data[0].fileUrl;
+  } else if (
+    body.category === ACTIVITY_BOARD_CATEGORY_STATE.WEEKLY_ACTIVITY &&
+    memberId &&
+    files
+  ) {
+    // 파일이 있을 경우 파일 업로드 진행 (주차별 파일)
+    const data = await postUploadedFileWeekly({
+      groupId: activityGroupId,
       files,
     });
 
@@ -300,8 +330,16 @@ export async function patchActivityBoard({
 }: PatchActivityBoardParams) {
   let fileUrl: string | null = null;
 
-  if (groupId && groupBoardId && files) {
-    // 파일이 있을 경우 파일 업로드 진행
+  if (groupBoardId === null && groupId && files) {
+    // 파일이 있을 경우 파일 업로드 진행 (주차별 활동 파일)
+    const data = await postUploadedFileWeekly({
+      groupId: groupId,
+      files,
+    });
+
+    fileUrl = data[0].fileUrl;
+  } else if (groupId && groupBoardId && files) {
+    // 파일이 있을 경우 파일 업로드 진행 (과제 파일)
     const data = await postUploadedFileAssignment({
       groupId: groupId,
       groupBoardId: groupBoardId,
@@ -509,6 +547,42 @@ export async function deleteActivityGroupBoards(activityGroupBoardId: number) {
   >({
     url: createPagination(END_POINT.ACTIVITY_GROUP_BOARDS, {
       activityGroupBoardId,
+    }),
+  });
+
+  return data;
+}
+
+/**
+ * 활동 그룹 멤버 역할 변경
+ */
+export async function patchActivityGroupMemberRole({
+  activityGroupId,
+  memberId,
+  position,
+}: PatchActivityGroupMemberRoleParams) {
+  const { data } = await server.patch<never, BaseResponse<number>>({
+    url: createPagination(END_POINT.ACTIVITY_GROUP_ADMIN_POSITION, {
+      activityGroupId,
+      memberId,
+      position,
+    }),
+  });
+
+  return data;
+}
+
+/**
+ * 내가 지원한 활동 목록 조회
+ */
+export async function getActivityGroupMemberApplied(
+  page: number,
+  size: number,
+) {
+  const { data } = await server.get<ResponsePagination<ActivityGroupItem>>({
+    url: createPagination(END_POINT.ACTIVITY_GROUP_MEMBER_APPLIED, {
+      page,
+      size,
     }),
   });
 
