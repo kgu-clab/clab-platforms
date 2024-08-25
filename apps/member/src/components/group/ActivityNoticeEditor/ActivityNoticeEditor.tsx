@@ -7,7 +7,7 @@ import Section from '@components/common/Section/Section';
 import Textarea from '@components/common/Textarea/Textarea';
 
 import useToast from '@hooks/common/useToast';
-import { useActivityGroupBoardMutation } from '@hooks/queries/activity/useActivityGroupBoardMutation';
+import { useActivityGroupBoardMutation } from '@hooks/queries';
 
 import type { ActivityBoardType } from '@type/activity';
 

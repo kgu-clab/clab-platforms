@@ -6,11 +6,11 @@ import Textarea from '@components/common/Textarea/Textarea';
 
 import useModal from '@hooks/common/useModal';
 import useToast from '@hooks/common/useToast';
-import { useMyProfile } from '@hooks/queries';
 import {
   useActivityGroupBoardMutation,
   useActivityGroupBoardPatchMutation,
-} from '@hooks/queries/activity';
+  useMyProfile,
+} from '@hooks/queries';
 
 import type { ActivityBoardType } from '@type/activity';
 

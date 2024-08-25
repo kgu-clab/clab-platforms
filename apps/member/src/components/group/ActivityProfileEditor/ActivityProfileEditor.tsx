@@ -8,7 +8,7 @@ import Textarea from '@components/common/Textarea/Textarea';
 
 import { ACTIVITY_GROUP_CONTENT_MAX_LENGTH } from '@constants/state';
 import useToast from '@hooks/common/useToast';
-import { useActivityGroupAdminMutation } from '@hooks/queries/activity/useActivityGroupAdminMutation';
+import { useActivityGroupAdminMutation } from '@hooks/queries';
 
 import type {
   ActivityGroupBoardParserType,

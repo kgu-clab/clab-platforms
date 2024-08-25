@@ -20,9 +20,9 @@ import {
   BOARD_TITLE_MAX_LENGTH,
 } from '@constants/state';
 import useToast from '@hooks/common/useToast';
-import { useActivityGroupMutation } from '@hooks/queries/activity/useActivityGroupMutation';
+import { useActivityGroupMutation } from '@hooks/queries';
 
-import { ActivityGroupCategoryType } from '@type/activity';
+import type { ActivityGroupCategoryType } from '@type/activity';
 
 interface PhotoType {
   id: string;

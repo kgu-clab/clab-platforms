@@ -34,4 +34,5 @@ export const API_ERROR_MESSAGE = {
   BOOKALREADYBORROWEDEXCEPTION: '해당 도서는 대여 상태에요.',
   OVERDUEEXCEPTION: '도서 대여 연장은 최대 2회까지 가능해요.',
   NOTFOUNDEXCEPTION: '요청하신 정보를 찾을 수 없어요.',
+  ALREADYAPPLIEDEXCEPTION: '이미 신청한 활동이에요.',
 } as const;
