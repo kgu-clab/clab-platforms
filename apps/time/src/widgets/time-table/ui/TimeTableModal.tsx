@@ -259,13 +259,13 @@ const TimeTableModalMajorInput = memo(function TimeTableModalMajorInput({
     <Modal.Item title="전공 선택">
       <div className="relative" ref={ref}>
         <div
-          className="flex w-full flex-wrap gap-y-1 rounded-md border border-gray-400 p-1 text-sm"
+          className="flex w-full flex-wrap gap-y-1 rounded-md border border-gray-400 p-2 text-sm"
           onClick={() => setOpen(true)}
         >
           {selectedMajor && selectedValue}
           <div className="grow">
             <input
-              className="w-full px-1 py-0.5 text-gray-600 focus:outline-0"
+              className="w-full text-gray-600 focus:outline-0"
               value={inputValue}
               placeholder="전공을 입력해주세요"
               onChange={(e) => handleInputChange(e)}
@@ -299,7 +299,7 @@ const TimeTableLectureSearchInput = memo(function TimeTableLectureSearchInput({
   return (
     <Modal.Item title="강의 검색">
       <Input
-        inputClassName="border-gray-400 px-1 px-1.5 rounded-md"
+        inputClassName="border-gray-400 rounded-md"
         placeholder="강의명을 입력해주세요"
         onChange={(event) =>
           handleLectureSearchInputChange(event.currentTarget.value)
@@ -394,7 +394,7 @@ export default function TimeTableModal<
             />
             <TimeTableModalFilter
               title="학년 선택"
-              list={[...GRADE] as Grade[]}
+              list={[...Object.keys(GRADE)] as Grade[]}
               origin={selectedGrade}
               handleFilterItem={(grade) =>
                 handleFilterItem(grade, selectedGrade, setSelectedGrade)

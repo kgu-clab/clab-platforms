@@ -53,7 +53,7 @@ function TimeTableHeader({ type, children }: TimeTableHeaderProps) {
   return type === 'ROW' ? (
     <th className="h-16 border border-gray-400 bg-gray-50">{children}</th>
   ) : (
-    <td className="h-24 border border-gray-400 bg-gray-50 px-4 text-sm">
+    <td className="h-24 w-12 border border-gray-400 bg-gray-50 p-0 text-sm sm:w-fit sm:p-4">
       {children}
     </td>
   );
@@ -201,7 +201,7 @@ function TimeTable() {
         <table className="w-full table-fixed border-collapse bg-white">
           <thead className="w-full">
             <tr>
-              <TimeTableHeader type="ROW">교시</TimeTableHeader>
+              <TimeTableHeader type="COLUMN" />
               {DAY_VALUE_ARRAY.map((day) => (
                 <TimeTableHeader key={day} type="ROW">
                   {day}
@@ -214,7 +214,10 @@ function TimeTable() {
               return (
                 <tr key={period} className="text-center">
                   <TimeTableHeader type="COLUMN">
-                    <p>{period}교시</p>
+                    <p className="flex justify-center">
+                      {period}
+                      <span className="hidden sm:block">교시</span>
+                    </p>
                     <p className="hidden md:block">
                       {getFormattedTime({
                         hour: time.start.hour,

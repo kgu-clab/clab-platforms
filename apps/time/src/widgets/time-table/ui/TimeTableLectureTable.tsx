@@ -25,18 +25,31 @@ interface TimeTableLectureTableItemProps {
 }
 
 const LECTURE_TABLE_ROW_HEADER = [
-  '캠퍼스',
-  '카테고리',
-  '과목코드',
-  '학점',
-  '학년',
-  '전공',
-  '수업명',
-  '담당교수',
-  '학기',
-  '시간',
-  '수업구분',
+  { title: '캠퍼스', size: 1 },
+  { title: '카테고리', size: 1 },
+  { title: '과목코드', size: 1 },
+  { title: '학점', size: 1 },
+  { title: '학년', size: 1 },
+  { title: '전공', size: 3 },
+  { title: '수업명', size: 4 },
+  { title: '담당교수', size: 3 },
+  { title: '학기', size: 1 },
+  { title: '시간', size: 3 },
+  { title: '수업구분', size: 7 },
 ] as const;
+
+function TimeTableLectureNotification({ text }: { text: string }) {
+  return (
+    <tr className="size-full">
+      <td
+        colSpan={LECTURE_TABLE_ROW_HEADER.length}
+        className="size-full px-10 py-24 text-center"
+      >
+        {text}
+      </td>
+    </tr>
+  );
+}
 
 function TimeTableLectureItem({
   isAddableLecture,
@@ -48,16 +61,7 @@ function TimeTableLectureItem({
   const specialPeriodSet = new Set<string>(SPECIAL_PERIOD);
 
   const handleTimeTableLectureItem = () => {
-    if (specialPeriodSet.has(lecture.time)) {
-      searchParamsAction.append('id', lecture.id.toString());
-      router.push(`/timetable?${searchParamsAction.getParams()}`, {
-        scroll: false,
-      });
-      close();
-      return;
-    }
-
-    if (isAddableLecture(lecture.time)) {
+    if (specialPeriodSet.has(lecture.time) || isAddableLecture(lecture.time)) {
       searchParamsAction.append('id', lecture.id.toString());
       router.push(`/timetable?${searchParamsAction.getParams()}`, {
         scroll: false,
@@ -70,22 +74,22 @@ function TimeTableLectureItem({
 
   return (
     <tr
-      className="h-12 cursor-pointer divide-x divide-gray-300 text-[12px] transition-colors hover:bg-gray-50"
+      className="h-12 shrink-0 cursor-pointer divide-x divide-gray-300 text-[12px] transition-colors hover:bg-gray-50"
       onClick={() => handleTimeTableLectureItem()}
     >
-      <td className="shrink-0 whitespace-nowrap p-2">{lecture.campus}</td>
-      <td className="shrink-0 whitespace-nowrap p-2">{lecture.category}</td>
-      <td className="shrink-0 whitespace-nowrap p-2">{lecture.code}</td>
-      <td className="shrink-0 whitespace-nowrap p-2">{lecture.credit}</td>
-      <td className="shrink-0 whitespace-nowrap p-2">{lecture.grade ?? '-'}</td>
-      <td className="shrink-0 whitespace-nowrap p-2">
+      <td className="whitespace-nowrap p-2">{lecture.campus}</td>
+      <td className="whitespace-nowrap p-2">{lecture.category}</td>
+      <td className="whitespace-nowrap p-2">{lecture.code}</td>
+      <td className="whitespace-nowrap p-2">{lecture.credit}</td>
+      <td className="whitespace-nowrap p-2">{lecture.grade ?? '-'}</td>
+      <td className="whitespace-nowrap p-2">
         {lecture.major !== 'None' ? lecture.major : '-'}
       </td>
-      <td className="shrink-0 whitespace-nowrap p-2">{lecture.name}</td>
-      <td className="shrink-0 whitespace-nowrap p-2">{lecture.professor}</td>
-      <td className="shrink-0 whitespace-nowrap p-2">{lecture.semester}</td>
-      <td className="shrink-0 whitespace-nowrap p-2">{lecture.time}</td>
-      <td className="shrink-0 whitespace-nowrap p-2">{lecture.groupName}</td>
+      <td className="whitespace-nowrap p-2">{lecture.name}</td>
+      <td className="whitespace-nowrap p-2">{lecture.professor}</td>
+      <td className="whitespace-nowrap p-2">{lecture.semester}</td>
+      <td className="whitespace-nowrap p-2">{lecture.time}</td>
+      <td className="whitespace-nowrap p-2">{lecture.groupName}</td>
     </tr>
   );
 }
@@ -125,14 +129,7 @@ function TimeTableLectureContent({
               ))}
             </>
           ) : (
-            <tr className="h-full">
-              <td
-                colSpan={LECTURE_TABLE_ROW_HEADER.length}
-                className="h-full text-center"
-              >
-                검색 결과가 없습니다
-              </td>
-            </tr>
+            <TimeTableLectureNotification text="검색 결과가 없습니다" />
           )}
         </>
       )}
@@ -156,42 +153,29 @@ function TimeTableLectureTable({
   isAddableLecture,
 }: TimeTableLectureTableProps) {
   return (
-    <div className="mt-3 h-96 w-full overflow-y-scroll">
-      <table className="size-full table-auto border-separate border-spacing-0 break-keep border-x border-b border-gray-400 text-sm">
-        <thead className="sticky top-0 z-20 w-full text-center">
+    <div className="mt-3 flex size-full max-h-[250px] overflow-auto md:max-h-96">
+      <table className="h-full w-auto grow table-fixed border-separate border-spacing-0 break-keep border-x border-b border-gray-400 text-sm">
+        <thead className="sticky top-0 z-20 size-full text-center">
           <tr className="divide-x divide-gray-400 bg-gray-100">
-            {LECTURE_TABLE_ROW_HEADER.map((header) => (
+            {LECTURE_TABLE_ROW_HEADER.map(({ title, size }) => (
               <th
-                className="whitespace-nowrap border-y border-gray-400 p-2"
-                key={header}
+                className="shrink-0 whitespace-nowrap border-y border-gray-400 px-1 py-2"
+                key={title}
+                style={{ minWidth: `${size * 2}rem` }}
               >
-                {header}
+                {title}
               </th>
             ))}
           </tr>
         </thead>
         <ErrorBoundary
           fallback={
-            <tr>
-              <td
-                colSpan={LECTURE_TABLE_ROW_HEADER.length}
-                className="text-center"
-              >
-                강의 정보 불러오기에 실패했습니다.
-              </td>
-            </tr>
+            <TimeTableLectureNotification text="강의 정보 불러오기에 실패했습니다" />
           }
         >
           <Suspense
             fallback={
-              <tr>
-                <td
-                  colSpan={LECTURE_TABLE_ROW_HEADER.length}
-                  className="text-center"
-                >
-                  강의 정보를 불러오고 있습니다
-                </td>
-              </tr>
+              <TimeTableLectureNotification text="강의 정보를 불러오고 있습니다" />
             }
           >
             <TimeTableLectureContent

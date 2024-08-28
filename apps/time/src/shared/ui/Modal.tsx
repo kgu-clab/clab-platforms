@@ -79,7 +79,7 @@ function ModalFilterItem({
     <button type="button" onClick={onClick}>
       <li
         className={cn(
-          'cursor-pointer px-4 py-1 text-sm transition-colors ',
+          'cursor-pointer px-5 py-1.5 text-sm transition-colors',
           selected
             ? 'bg-blue-500 text-white hover:bg-blue-600'
             : 'hover:bg-blue-500 hover:text-white',
@@ -111,7 +111,7 @@ function ModalDropdown({ title, value, children }: ModalDropdownProps) {
       <p className="w-20 shrink-0 break-keep">{title}</p>
       <div className="relative grow" onClick={() => setOpen((prev) => !prev)}>
         <ModalDropdownContext.Provider value={defaultModalDropdownContext}>
-          <div className="flex items-center justify-between rounded-md border border-gray-400 p-1">
+          <div className="flex items-center justify-between rounded-md border border-gray-400 px-1 py-1.5">
             <div className={cn('flex text-gray-500')}>{value}</div>
             <ChevronDownOutline
               className={cn(
@@ -142,7 +142,7 @@ function ModalDropdownItem({
   return (
     <button
       className={cn(
-        'w-full rounded-sm p-2 text-start transition-colors hover:bg-gray-100',
+        'w-full rounded-md px-2 py-3 text-start transition-colors hover:bg-gray-100',
         selected ? 'text-blue-400' : 'text-black',
       )}
       type="button"
@@ -196,17 +196,19 @@ export default function Modal({ title, close, size, children }: ModalProps) {
       <div
         ref={modalRef}
         className={cn(
-          'mx-auto h-fit w-full space-y-4 rounded-xl bg-white px-6 py-8',
+          'relative mx-auto max-h-fit w-full overflow-hidden rounded-xl bg-white p-0',
           !size ? 'container' : MAX_SIZE_VALUE[size],
         )}
       >
-        <div className="flex w-full justify-between">
+        <div className="sticky top-0 flex w-full justify-between bg-white p-6">
           <p className="font-bold">{title ?? ''}</p>
           <button type="button" onClick={close}>
             <CloseOutline width={24} height={24} />
           </button>
         </div>
-        {children}
+        <div className="scrollbar-hidden size-full overflow-y-scroll px-6 pb-6">
+          {children}
+        </div>
       </div>
     </div>
   );
