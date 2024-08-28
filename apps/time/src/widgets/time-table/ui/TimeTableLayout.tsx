@@ -1,6 +1,6 @@
 'use client';
 
-import { TimeTable, TimeTableHeader } from '@/widgets/time-table';
+import { TimeTable, TimeTableHeader } from '@/widgets/time-table/ui';
 
 export default function TimeTableLayout() {
   return (

@@ -1,4 +1,4 @@
-import { CAMPUS_STATUS, DAY_STATUS, REGION } from '@/widgets/time-table';
+import { CAMPUS_STATUS, DAY_STATUS, REGION } from '@/widgets/time-table/model';
 
 export type Region = (typeof REGION)[keyof typeof REGION];
 

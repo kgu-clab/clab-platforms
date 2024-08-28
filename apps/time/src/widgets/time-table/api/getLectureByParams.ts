@@ -1,12 +1,12 @@
 import { getAPIURL } from '@/shared/utils';
+import { TIMETABLE_ENDPOINT } from '@/widgets/time-table/api';
 import {
   DayCampus,
   DayPeriod,
   LectureKey,
   NightCampus,
   NightPeriod,
-  TIMETABLE_ENDPOINT,
-} from '@/widgets/time-table';
+} from '@/widgets/time-table/types';
 
 export interface GetLectureByParamsValue {
   id: number;

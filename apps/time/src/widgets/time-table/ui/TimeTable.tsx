@@ -7,21 +7,22 @@ import { cn } from '@clab-platforms/utils';
 import { DAY_VALUE_ARRAY, MODAL_KEY } from '@/shared/constants';
 import { useModalAction } from '@/shared/hooks';
 import type { DayKor } from '@/shared/types';
+import type { GetLectureByParamsValue } from '@/widgets/time-table/api';
 import {
   DAY_PERIOD_ARRAY,
-  type DayPeriod,
-  GetLectureByParamsValue,
   LECTURE_COLOR,
   NIGHT_PERIOD_ARRAY,
-  type NightPeriod,
   PERIOD_STATUS,
-  TimeTableLectureRemoveModal,
-  TimeTableModal,
   getFormattedTime,
   getLectureFillRange,
   useLectureByParams,
   useTimeTableParams,
-} from '@/widgets/time-table';
+} from '@/widgets/time-table/model';
+import type { DayPeriod, NightPeriod } from '@/widgets/time-table/types';
+import {
+  TimeTableLectureRemoveModal,
+  TimeTableModal,
+} from '@/widgets/time-table/ui';
 
 interface TimeTableHeaderProps extends PropsWithChildren {
   type: 'ROW' | 'COLUMN';

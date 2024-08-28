@@ -1,11 +1,11 @@
 import { useQuery } from '@tanstack/react-query';
 
+import { getLectureByParams } from '@/widgets/time-table/api';
 import {
   getFormattedLectureList,
-  getLectureByParams,
   timeTableQueryKeys,
   useTimeTableParams,
-} from '@/widgets/time-table';
+} from '@/widgets/time-table/model';
 import { useRouter } from 'next/navigation';
 
 export function useLectureByParams(idList: number[]) {

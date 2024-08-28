@@ -3,7 +3,7 @@ import {
   NIGHT_PERIOD,
   PERIOD_STATUS,
   SPECIAL_PERIOD,
-} from '@/widgets/time-table';
+} from '@/widgets/time-table/model';
 
 export type SpecialPeriod = (typeof SPECIAL_PERIOD)[number];
 

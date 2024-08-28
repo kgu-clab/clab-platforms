@@ -1,4 +1,4 @@
-import { LectureKey, LectureValue } from '@/widgets/time-table';
+import type { LectureKey, LectureValue } from '@/widgets/time-table/types';
 
 export const LECTURE = {
   CULTURE: '교양',

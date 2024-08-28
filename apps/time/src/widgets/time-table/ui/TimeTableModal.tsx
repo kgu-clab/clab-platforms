@@ -23,17 +23,6 @@ import {
 import type { DayKor } from '@/shared/types';
 import { Modal } from '@/shared/ui';
 import {
-  DayCampus,
-  DayPeriod,
-  DayStatus,
-  Grade,
-  LectureKey,
-  NightCampus,
-  NightPeriod,
-  Region,
-  SpecialPeriod,
-} from '@/widgets/time-table';
-import {
   DAY_PERIOD_ARRAY,
   DAY_STATUS,
   GRADE,
@@ -43,9 +32,20 @@ import {
   REGION,
   REGION_VALUE_ARRAY,
   SPECIAL_PERIOD,
-  TimeTableLectureTable,
   useMajorList,
-} from '@/widgets/time-table';
+} from '@/widgets/time-table/model';
+import type {
+  DayCampus,
+  DayPeriod,
+  DayStatus,
+  Grade,
+  LectureKey,
+  NightCampus,
+  NightPeriod,
+  Region,
+  SpecialPeriod,
+} from '@/widgets/time-table/types';
+import { TimeTableLectureTable } from '@/widgets/time-table/ui';
 
 interface TimeTableModalFilterProps<T> {
   title: string;

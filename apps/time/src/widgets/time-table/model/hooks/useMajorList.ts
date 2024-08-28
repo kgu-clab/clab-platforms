@@ -3,8 +3,8 @@ import { useQuery } from '@tanstack/react-query';
 import {
   type GetMajorListParams,
   getMajorList,
-  timeTableQueryKeys,
-} from '@/widgets/time-table';
+} from '@/widgets/time-table/api';
+import { timeTableQueryKeys } from '@/widgets/time-table/model';
 
 export function useMajorList({ major }: GetMajorListParams) {
   const { data } = useQuery({

@@ -4,11 +4,8 @@ import { type ReactNode, useCallback } from 'react';
 
 import { cn } from '@clab-platforms/utils';
 
-import {
-  DAY_STATUS,
-  type DayStatus,
-  useTimeTableParams,
-} from '@/widgets/time-table';
+import { DAY_STATUS, useTimeTableParams } from '@/widgets/time-table/model';
+import type { DayStatus } from '@/widgets/time-table/types';
 import { useRouter } from 'next/navigation';
 
 interface TimeTableFilterItemProps {

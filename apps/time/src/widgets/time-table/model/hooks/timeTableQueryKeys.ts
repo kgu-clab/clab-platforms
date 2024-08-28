@@ -1,4 +1,7 @@
-import { GetLectureListParams, GetMajorListParams } from '@/widgets/time-table';
+import type {
+  GetLectureListParams,
+  GetMajorListParams,
+} from '@/widgets/time-table/api';
 
 const timeTableQueryKeys = {
   getLectureList: (params: GetLectureListParams) => ['getLectureList', params],

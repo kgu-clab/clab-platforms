@@ -1,5 +1,5 @@
 import { getAPIURL } from '@/shared/utils';
-import { TIMETABLE_ENDPOINT } from '@/widgets/time-table';
+import { TIMETABLE_ENDPOINT } from '@/widgets/time-table/api';
 
 export interface GetMajorListParams {
   major: string;

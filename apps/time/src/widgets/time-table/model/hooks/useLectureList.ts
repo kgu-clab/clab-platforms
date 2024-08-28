@@ -3,8 +3,8 @@ import { useInfiniteQuery } from '@tanstack/react-query';
 import {
   type GetLectureListParams,
   getLectureList,
-  timeTableQueryKeys,
-} from '@/widgets/time-table';
+} from '@/widgets/time-table/api';
+import { timeTableQueryKeys } from '@/widgets/time-table/model';
 
 export function useLectureList({ ...params }: GetLectureListParams) {
   return useInfiniteQuery({

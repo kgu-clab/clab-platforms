@@ -1,6 +1,6 @@
 import { memo } from 'react';
 
-import { TimeTableFilter, TimeTableUtilButtons } from '@/widgets/time-table';
+import { TimeTableFilter, TimeTableUtilButtons } from '@/widgets/time-table/ui';
 
 function TimeTableHeader() {
   return (

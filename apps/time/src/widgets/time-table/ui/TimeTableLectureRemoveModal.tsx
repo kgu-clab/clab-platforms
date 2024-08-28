@@ -5,7 +5,7 @@ import { Button } from '@clab-platforms/design-system';
 import { MAX_SIZE, MODAL_KEY } from '@/shared/constants';
 import { useModalAction, useModalState } from '@/shared/hooks';
 import { Modal } from '@/shared/ui';
-import { useTimeTableParams } from '@/widgets/time-table';
+import { useTimeTableParams } from '@/widgets/time-table/model';
 import { useRouter } from 'next/navigation';
 
 interface TimeTableLectureRemoveModalProps {

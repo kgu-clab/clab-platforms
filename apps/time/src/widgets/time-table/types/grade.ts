@@ -1,4 +1,4 @@
-import { GRADE } from '@/widgets/time-table';
+import { GRADE } from '@/widgets/time-table/model';
 
 type Grade = keyof typeof GRADE;
 

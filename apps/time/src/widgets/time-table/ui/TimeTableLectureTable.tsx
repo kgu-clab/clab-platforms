@@ -4,13 +4,15 @@ import { memo } from 'react';
 
 import { MODAL_KEY } from '@/shared/constants';
 import { useInfiniteScroll, useModalAction } from '@/shared/hooks';
+import type {
+  GetLectureListParams,
+  GetLectureListResponseValue,
+} from '@/widgets/time-table/api';
 import {
-  type GetLectureListParams,
-  type GetLectureListResponseValue,
   SPECIAL_PERIOD,
   useLectureList,
   useTimeTableParams,
-} from '@/widgets/time-table';
+} from '@/widgets/time-table/model';
 import { ErrorBoundary, Suspense } from '@suspensive/react';
 import { useRouter } from 'next/navigation';
 

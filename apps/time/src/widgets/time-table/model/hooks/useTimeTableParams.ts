@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 
 import { useEditableSearchParams } from '@/shared/hooks';
-import type { DayStatus } from '@/widgets/time-table';
+import type { DayStatus } from '@/widgets/time-table/types';
 import { useRouter } from 'next/navigation';
 
 export interface SearchParamsActionType {

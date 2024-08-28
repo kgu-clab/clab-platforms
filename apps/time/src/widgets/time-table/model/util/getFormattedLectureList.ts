@@ -1,17 +1,16 @@
 import { DAY, DAY_VALUE_ARRAY } from '@/shared/constants';
 import { DayKor } from '@/shared/types';
 import { getFormattedDate } from '@/shared/utils';
+import { GetLectureByParamsValue } from '@/widgets/time-table/api';
 import {
   DAY_PERIOD,
   DAY_PERIOD_ARRAY,
-  DayStatus,
-  GetLectureByParamsValue,
   NIGHT_PERIOD,
   NIGHT_PERIOD_ARRAY,
   PERIOD_STATUS,
-  PeriodStatus,
   SPECIAL_PERIOD,
-} from '@/widgets/time-table';
+} from '@/widgets/time-table/model';
+import type { DayStatus, PeriodStatus } from '@/widgets/time-table/types';
 
 interface GetLectureFillRangeParams<T> {
   dayStatus: DayStatus;
