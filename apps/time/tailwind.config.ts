@@ -8,6 +8,16 @@ const config: Config = {
       container: {
         center: true,
         padding: '2rem',
+        screens: {
+          sm: '100%',
+          md: '768px',
+          lg: '1024px',
+          xl: '1280px',
+          '2xl': '1536px',
+        },
+      },
+      screens: {
+        xs: '320px',
       },
       fontFamily: {
         sans: ['"Pretendard"', ...defaultTheme.fontFamily.sans],
