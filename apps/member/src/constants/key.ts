@@ -4,6 +4,7 @@ import type {
 } from '@type/activity';
 import type { WithPaginationParams } from '@type/api';
 import type { CommunityCategoryType } from '@type/community';
+import { RoleLevelKey } from '@type/member';
 
 /**
  * 전역 상태 관리 키
@@ -23,6 +24,12 @@ export const MEMBER_QUERY_KEY = {
   COMMENTS: () => [...MEMBER_QUERY_KEY.ALL, 'comments'],
   MEMBERS: () => [...MEMBER_QUERY_KEY.ALL, 'members'],
   MEMBER: (memberId: string) => [...MEMBER_QUERY_KEY.MEMBERS(), memberId],
+  PAGES: () => [...MEMBER_QUERY_KEY.ALL, 'pages'],
+  PAGE: (pagination: WithPaginationParams, role?: RoleLevelKey) => [
+    ...MEMBER_QUERY_KEY.PAGES(),
+    pagination,
+    role,
+  ],
 } as const;
 
 /**

@@ -6,6 +6,7 @@ import { CloseOutline, MenuOutline } from '@clab-platforms/icon';
 import { cn } from '@clab-platforms/utils';
 
 import { PATH } from '@constants/path';
+import { ROLE_LEVEL } from '@constants/state';
 import { useMyProfile } from '@hooks/queries';
 
 const Sidebar = () => {
@@ -91,7 +92,7 @@ const Sidebar = () => {
           >
             회비
           </Menubar.Item>
-          {data.roleLevel! >= 2 && (
+          {data.roleLevel! >= ROLE_LEVEL.ADMIN && (
             <>
               <Menubar.Item
                 selected={pathName.startsWith(PATH.MANAGE)}

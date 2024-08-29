@@ -11,6 +11,9 @@ import type {
   MemberInfo,
   MemberProfileRequestType,
   MemberProfileType,
+  MemberRoleListType,
+  MemberRoleRequestType,
+  RoleLevelKey,
 } from '@type/member';
 
 import { server } from './server';
@@ -26,6 +29,20 @@ export interface PatchUserInfoParams {
   body: MemberProfileRequestType;
   file?: File; // 프로필 이미지
 }
+
+export interface GetMemberRoleParams extends WithPaginationParams {
+  memberId?: string;
+  memberName?: string;
+  role?: RoleLevelKey;
+  sortBy?: string;
+  sortDirection?: string;
+}
+
+export interface PatchMemberRoleParams {
+  memberId: string;
+  body: MemberRoleRequestType;
+}
+
 /**
  * 멤버 정보 조회
  */
@@ -69,6 +86,51 @@ export async function patchUserInfo({
     BaseResponse<string>
   >({
     url: END_POINT.MY_INFO_EDIT(id),
+    body,
+  });
+
+  return data;
+}
+
+/**
+ * 멤버 레밸 조회
+ */
+export async function getMemberRole({
+  memberId,
+  memberName,
+  role,
+  page,
+  size,
+  sortBy,
+  sortDirection,
+}: GetMemberRoleParams) {
+  const { data } = await server.get<ResponsePagination<MemberRoleListType>>({
+    url: createPagination(END_POINT.MEMBER_LEVEL, {
+      memberId,
+      memberName,
+      role,
+      page,
+      size,
+      sortBy,
+      sortDirection,
+    }),
+  });
+
+  return data;
+}
+
+/**
+ * 멤버 레벨 수정
+ */
+export async function patchMemberRole({
+  memberId,
+  body,
+}: PatchMemberRoleParams) {
+  const { data } = await server.patch<
+    MemberRoleRequestType,
+    BaseResponse<string>
+  >({
+    url: END_POINT.MEMBER_LEVEL_EDIT(memberId),
     body,
   });
 
