@@ -41,7 +41,7 @@ const GroupApplyPage = () => {
     setReason(e.target.value);
   };
 
-  const handleApplyButtonClick = async () => {
+  const handleApplyButtonClick = () => {
     if (groupID === 0 || reason.length === 0) {
       return toast({
         state: 'error',
@@ -49,13 +49,15 @@ const GroupApplyPage = () => {
       });
     }
 
-    await activityGroupMemberMutate({
-      activityGroupId: groupID,
-      body: {
-        applyReason: reason,
+    activityGroupMemberMutate(
+      {
+        activityGroupId: groupID,
+        body: {
+          applyReason: reason,
+        },
       },
-    });
-    await navigate(PATH.ACTIVITY);
+      { onSuccess: () => navigate(PATH.ACTIVITY) },
+    );
   };
 
   useEffect(() => {

@@ -64,7 +64,7 @@ const ActivityPostEditor = ({
     const { name, value } = e.target;
     setPost((prev) => ({ ...prev, [name]: value }));
   };
-  const handleAddWeeklyClick = async () => {
+  const handleAddWeeklyClick = () => {
     const formData = new FormData();
     const file = uploaderRef.current?.files?.[0];
 
@@ -82,13 +82,15 @@ const ActivityPostEditor = ({
       category: ACTIVITY_BOARD_CATEGORY_STATE.WEEKLY_ACTIVITY,
       ...post,
     };
-    await activityGroupBoardMutate({
-      activityGroupId: groupId,
-      memberId: myProfile.id,
-      body: activityBoardItem,
-      files: file ? formData : undefined,
-    });
-    await setPost(defaultPost);
+    activityGroupBoardMutate(
+      {
+        activityGroupId: groupId,
+        memberId: myProfile.id,
+        body: activityBoardItem,
+        files: file ? formData : undefined,
+      },
+      { onSuccess: () => setPost(defaultPost) },
+    );
   };
   const handleDeleteWeeklyClick = (activityGroupBoardId: number) => {
     activityGroupBoardDeleteMutate(activityGroupBoardId);

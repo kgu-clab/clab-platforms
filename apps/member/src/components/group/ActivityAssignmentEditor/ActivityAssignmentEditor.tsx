@@ -29,11 +29,8 @@ const ActivityAssignmentEditor = ({ parentId, activityGroupId }: Props) => {
   const { data: myProfile } = useMyProfile();
 
   const uploaderRef = useRef<HTMLInputElement>(null);
-  const {
-    activityGroupBoardMutate,
-    activityGroupBoardIsPending,
-    activityGroupBoardIsSuccess,
-  } = useActivityGroupBoardMutation();
+  const { activityGroupBoardMutate, activityGroupBoardIsPending } =
+    useActivityGroupBoardMutation();
 
   const handlePostChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
@@ -41,7 +38,7 @@ const ActivityAssignmentEditor = ({ parentId, activityGroupId }: Props) => {
     const { name, value } = e.target;
     setBoard((prev) => ({ ...prev, [name]: value }));
   };
-  const handleAddAssignmentClick = async () => {
+  const handleAddAssignmentClick = () => {
     const formData = new FormData();
     const file = uploaderRef.current?.files?.[0];
 
@@ -54,17 +51,19 @@ const ActivityAssignmentEditor = ({ parentId, activityGroupId }: Props) => {
       formData.append(FORM_DATA_KEY, file);
     }
 
-    await activityGroupBoardMutate({
-      parentId: parentId,
-      activityGroupId: activityGroupId,
-      memberId: myProfile.id,
-      body: {
-        category: ACTIVITY_BOARD_CATEGORY_STATE.ASSIGNMENT,
-        ...board,
+    activityGroupBoardMutate(
+      {
+        parentId: parentId,
+        activityGroupId: activityGroupId,
+        memberId: myProfile.id,
+        body: {
+          category: ACTIVITY_BOARD_CATEGORY_STATE.ASSIGNMENT,
+          ...board,
+        },
+        files: file ? formData : undefined,
       },
-      files: file ? formData : undefined,
-    });
-    if (activityGroupBoardIsSuccess) setBoard(defaultBoard);
+      { onSuccess: () => setBoard(defaultBoard) },
+    );
   };
 
   return (

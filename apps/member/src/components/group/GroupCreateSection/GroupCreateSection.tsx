@@ -118,7 +118,7 @@ const GroupCreateSection = () => {
     }));
   };
 
-  const handleApplyButtonClick = async () => {
+  const handleApplyButtonClick = () => {
     if (subject.length === 0 || name.length === 0 || content.length === 0) {
       return toast({
         state: 'error',
@@ -138,8 +138,9 @@ const GroupCreateSection = () => {
       }
     }
 
-    await activityGroupMutate(inputs);
-    await navigate(PATH.ACTIVITY);
+    activityGroupMutate(inputs, {
+      onSuccess: () => navigate(PATH.ACTIVITY),
+    });
   };
 
   const handleSearchClick = async () => {
@@ -307,7 +308,7 @@ const GroupCreateSection = () => {
           <Input
             id="githubUrl"
             name="githubUrl"
-            placeholder="https://github.com/KGU-C-Lab"
+            placeholder="https://github.com/kgu-clab"
             className="grow"
             maxLength={BOARD_TITLE_MAX_LENGTH}
             value={githubUrl}

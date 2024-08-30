@@ -32,11 +32,8 @@ const defaultNotice: ActivityBoardType = {
 const ActivityNoticeEditor = ({ groupId, data }: ActivityNoticeEditorProps) => {
   const toast = useToast();
   const [notice, setNotice] = useState<ActivityBoardType>(defaultNotice);
-  const {
-    activityGroupBoardMutate,
-    activityGroupBoardIsPending,
-    activityGroupBoardIsSuccess,
-  } = useActivityGroupBoardMutation();
+  const { activityGroupBoardMutate, activityGroupBoardIsPending } =
+    useActivityGroupBoardMutation();
 
   const handleNoticeChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
@@ -44,17 +41,19 @@ const ActivityNoticeEditor = ({ groupId, data }: ActivityNoticeEditorProps) => {
     const { name, value } = e.target;
     setNotice((prev) => ({ ...prev, [name]: value }));
   };
-  const handleAddNoticeButtonClick = async () => {
+  const handleAddNoticeButtonClick = () => {
     if (!notice.title || !notice.content)
       return toast({
         state: 'error',
         message: '제목, 내용은 필수 입력 요소입니다.',
       });
-    await activityGroupBoardMutate({
-      activityGroupId: groupId,
-      body: notice,
-    });
-    if (activityGroupBoardIsSuccess) setNotice(defaultNotice);
+    activityGroupBoardMutate(
+      {
+        activityGroupId: groupId,
+        body: notice,
+      },
+      { onSuccess: () => setNotice(defaultNotice) },
+    );
   };
 
   return (

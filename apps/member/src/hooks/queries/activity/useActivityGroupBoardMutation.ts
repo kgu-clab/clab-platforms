@@ -18,7 +18,6 @@ export function useActivityGroupBoardMutation() {
   const {
     mutate: activityGroupBoardMutate,
     isPending: activityGroupBoardIsPending,
-    isSuccess: activityGroupBoardIsSuccess,
   } = useMutation({
     mutationFn: postActivityBoard,
     onSuccess: (data) => {
@@ -43,7 +42,6 @@ export function useActivityGroupBoardMutation() {
   return {
     activityGroupBoardMutate,
     activityGroupBoardIsPending,
-    activityGroupBoardIsSuccess,
   };
 }
 
