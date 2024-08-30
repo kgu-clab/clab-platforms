@@ -30,9 +30,9 @@ export const MY_MESSAGE = {
  * Server 팀과 협의하여 정의합니다.
  */
 export const API_ERROR_MESSAGE = {
-  BOOKALREADYAPPLIEDFORLOANEXCEPTION: '이미 대여 신청한 도서이에요.',
-  BOOKALREADYBORROWEDEXCEPTION: '해당 도서는 대여 상태에요.',
-  OVERDUEEXCEPTION: '도서 대여 연장은 최대 2회까지 가능해요.',
-  NOTFOUNDEXCEPTION: '요청하신 정보를 찾을 수 없어요.',
-  ALREADYAPPLIEDEXCEPTION: '이미 신청한 활동이에요.',
+  BOOK_ALREADY_APPLIED_FOR_LOAN_EXCEPTION: '이미 대여 신청한 도서이에요.',
+  ALREADY_BORROWED_BOOK_EXCEPTION: '해당 도서는 대여 상태에요.',
+  OVER_DUE_EXCEPTION: '도서 대여 연장은 최대 2회까지 가능해요.',
+  NOT_FOUND_EXCEPTION: '요청하신 정보를 찾을 수 없어요.',
+  ALREADY_APPLIED_EXCEPTION: '이미 신청한 활동이에요.',
 } as const;
