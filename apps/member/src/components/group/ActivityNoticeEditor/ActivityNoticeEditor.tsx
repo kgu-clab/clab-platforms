@@ -32,8 +32,11 @@ const defaultNotice: ActivityBoardType = {
 const ActivityNoticeEditor = ({ groupId, data }: ActivityNoticeEditorProps) => {
   const toast = useToast();
   const [notice, setNotice] = useState<ActivityBoardType>(defaultNotice);
-  const { activityGroupBoardMutate, activityGroupBoardIsPending } =
-    useActivityGroupBoardMutation();
+  const {
+    activityGroupBoardMutate,
+    activityGroupBoardIsPending,
+    activityGroupBoardIsSuccess,
+  } = useActivityGroupBoardMutation();
 
   const handleNoticeChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
@@ -51,7 +54,7 @@ const ActivityNoticeEditor = ({ groupId, data }: ActivityNoticeEditorProps) => {
       activityGroupId: groupId,
       body: notice,
     });
-    await setNotice(defaultNotice);
+    if (activityGroupBoardIsSuccess) setNotice(defaultNotice);
   };
 
   return (

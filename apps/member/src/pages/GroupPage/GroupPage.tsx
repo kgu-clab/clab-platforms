@@ -35,9 +35,10 @@ const GroupPage = () => {
   const [subMenu, setSubMenu] = useState(SubMenubarItems[0]);
   const { data: progressingData } = useActivityGroupMember();
   const { data: waitingData } = useActivityGroupMemberApplied();
-  const { refetch, data: acceptedData } = useMyActivityGroupMember({
-    status: subMenu.value,
-  });
+  const { refetch: acceptedDataRefetch, data: acceptedData } =
+    useMyActivityGroupMember({
+      status: subMenu.value,
+    });
 
   const [renderData, setRenderData] = useState<ActivityGroupItem[]>(
     progressingData.items,
@@ -57,8 +58,8 @@ const GroupPage = () => {
     }
   }, [menu, progressingData, acceptedData, waitingData]);
   useEffect(() => {
-    refetch();
-  }, [subMenu]);
+    acceptedDataRefetch();
+  }, [subMenu, acceptedDataRefetch]);
 
   return (
     <Content>

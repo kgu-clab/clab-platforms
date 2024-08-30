@@ -29,8 +29,11 @@ const ActivityAssignmentEditor = ({ parentId, activityGroupId }: Props) => {
   const { data: myProfile } = useMyProfile();
 
   const uploaderRef = useRef<HTMLInputElement>(null);
-  const { activityGroupBoardMutate, activityGroupBoardIsPending } =
-    useActivityGroupBoardMutation();
+  const {
+    activityGroupBoardMutate,
+    activityGroupBoardIsPending,
+    activityGroupBoardIsSuccess,
+  } = useActivityGroupBoardMutation();
 
   const handlePostChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
@@ -61,7 +64,7 @@ const ActivityAssignmentEditor = ({ parentId, activityGroupId }: Props) => {
       },
       files: file ? formData : undefined,
     });
-    await setBoard(defaultBoard);
+    if (activityGroupBoardIsSuccess) setBoard(defaultBoard);
   };
 
   return (

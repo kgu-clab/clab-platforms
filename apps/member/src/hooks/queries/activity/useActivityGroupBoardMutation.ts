@@ -15,7 +15,11 @@ export function useActivityGroupBoardMutation() {
   const queryClient = useQueryClient();
   const toast = useToast();
 
-  const mutation = useMutation({
+  const {
+    mutate: activityGroupBoardMutate,
+    isPending: activityGroupBoardIsPending,
+    isSuccess: activityGroupBoardIsSuccess,
+  } = useMutation({
     mutationFn: postActivityBoard,
     onSuccess: (data) => {
       if (data) {
@@ -37,8 +41,9 @@ export function useActivityGroupBoardMutation() {
   });
 
   return {
-    activityGroupBoardMutate: mutation.mutate,
-    activityGroupBoardIsPending: mutation.isPending,
+    activityGroupBoardMutate,
+    activityGroupBoardIsPending,
+    activityGroupBoardIsSuccess,
   };
 }
 
@@ -49,7 +54,10 @@ export function useActivityGroupBoardPatchMutation() {
   const queryClient = useQueryClient();
   const toast = useToast();
 
-  const mutation = useMutation({
+  const {
+    mutate: activityGroupBoardPatchMutate,
+    isPending: activityGroupBoardPatchIsPending,
+  } = useMutation({
     mutationFn: patchActivityBoard,
     onSuccess: (data) => {
       if (data) {
@@ -72,8 +80,8 @@ export function useActivityGroupBoardPatchMutation() {
   });
 
   return {
-    activityGroupBoardPatchMutate: mutation.mutate,
-    activityGroupBoardPatchIsPending: mutation.isPending,
+    activityGroupBoardPatchMutate,
+    activityGroupBoardPatchIsPending,
   };
 }
 

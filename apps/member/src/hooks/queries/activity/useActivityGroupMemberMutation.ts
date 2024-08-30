@@ -12,7 +12,10 @@ export function useActivityGroupMemberMutation() {
   const queryClient = useQueryClient();
   const toast = useToast();
 
-  const mutation = useMutation({
+  const {
+    mutate: activityGroupMemberMutate,
+    isPending: activityGroupMemberIsPending,
+  } = useMutation({
     mutationFn: postActivityGroupMemberApply,
     onSuccess: ({ success, data: data, errorMessage }) => {
       if (errorMessage) {
@@ -34,7 +37,7 @@ export function useActivityGroupMemberMutation() {
   });
 
   return {
-    activityGroupMemberMutate: mutation.mutate,
-    activityGroupMemberIsPending: mutation.isPending,
+    activityGroupMemberMutate,
+    activityGroupMemberIsPending,
   };
 }

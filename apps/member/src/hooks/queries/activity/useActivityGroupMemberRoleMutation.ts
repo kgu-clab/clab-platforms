@@ -17,12 +17,12 @@ export function useActivityGroupMemberRoleMutation() {
       if (!data) {
         return toast({
           state: 'error',
-          message: '멤버 레벨 변경에 실패했어요.',
+          message: '멤버 권한 변경에 실패했어요.',
         });
       }
       toast({
         state: 'success',
-        message: '멤버 레벨이 변경됐어요.',
+        message: '멤버 권한이 변경됐어요.',
       });
 
       queryClient.invalidateQueries({
