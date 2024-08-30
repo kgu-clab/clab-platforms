@@ -35,7 +35,7 @@ const actions = [
 
 export default function Nav() {
   return (
-    <nav className="fixed top-0 w-full border-b bg-white">
+    <nav className="sticky top-0 w-full border-b bg-white">
       <div className="container flex h-14 items-center justify-between text-nowrap">
         <div className="flex items-center gap-2 sm:w-1/5">
           <Image
@@ -50,7 +50,14 @@ export default function Nav() {
           </Link>
         </div>
         <ul className="hidden w-3/5 items-center justify-center gap-4 text-sm sm:flex">
-          {links.map((link) => link)}
+          {links.map((link) => (
+            <div
+              key={link.key}
+              className="text-gray-600 transition-all hover:font-medium hover:text-black"
+            >
+              {link}
+            </div>
+          ))}
         </ul>
         <div className="flex items-center justify-end gap-4 text-sm sm:w-1/5">
           {actions.map((action) => action)}
