@@ -14,9 +14,7 @@ export function useLectureByParams(idList: number[]) {
   const router = useRouter();
   const { data, isError } = useQuery({
     queryKey: timeTableQueryKeys.getLectureByParams(idList),
-    queryFn: idList.length
-      ? () => getLectureByParams(idList)
-      : () => Promise.resolve(null),
+    queryFn: () => getLectureByParams(idList),
     enabled: !!idList.length,
   });
   const reset = () => {
