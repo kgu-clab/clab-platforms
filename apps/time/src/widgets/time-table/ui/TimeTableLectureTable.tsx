@@ -61,6 +61,7 @@ function TimeTableLectureItem({
   const { close } = useModalAction({ key: MODAL_KEY.timeTable });
   const router = useRouter();
   const specialPeriodSet = new Set<string>(SPECIAL_PERIOD);
+  // const parsedLecture = lecture.filter((item) => )
 
   const handleTimeTableLectureItem = () => {
     if (specialPeriodSet.has(lecture.time) || isAddableLecture(lecture.time)) {
@@ -155,15 +156,15 @@ function TimeTableLectureTable({
   isAddableLecture,
 }: TimeTableLectureTableProps) {
   return (
-    <div className="mt-3 flex size-full max-h-[250px] overflow-auto md:max-h-96">
-      <table className="h-full w-auto grow table-fixed border-separate border-spacing-0 break-keep border-x border-b border-gray-400 text-sm">
-        <thead className="sticky top-0 z-20 size-full text-center">
+    <div className="mt-3 flex grow overflow-auto text-sm">
+      <table className="h-full w-auto grow table-fixed border-separate border-spacing-0 break-keep border-x border-b border-gray-400">
+        <thead className="sticky top-0 z-20 size-full h-12 text-center">
           <tr className="divide-x divide-gray-400 bg-gray-100">
             {LECTURE_TABLE_ROW_HEADER.map(({ title, size }) => (
               <th
                 className="shrink-0 whitespace-nowrap border-y border-gray-400 px-1 py-2"
                 key={title}
-                style={{ minWidth: `${size * 2}rem` }}
+                style={{ width: `${size * 2}rem` }}
               >
                 {title}
               </th>

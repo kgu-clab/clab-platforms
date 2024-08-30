@@ -169,7 +169,9 @@ function ModalItem({ title, children }: ModalItemProps) {
 }
 
 function ModalContent({ children }: PropsWithChildren) {
-  return <div className="flex flex-col gap-y-3">{children}</div>;
+  return (
+    <div className="flex grow flex-col gap-y-3 overflow-hidden">{children}</div>
+  );
 }
 
 export default function Modal({ title, close, size, children }: ModalProps) {
@@ -192,11 +194,11 @@ export default function Modal({ title, close, size, children }: ModalProps) {
   }, [close]);
 
   return (
-    <div className="fixed left-0 top-0 z-40 flex h-dvh w-dvw flex-col items-center justify-center bg-gray-800/60 transition-colors">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 transition-colors">
       <div
         ref={modalRef}
         className={cn(
-          'relative mx-auto max-h-fit w-full overflow-hidden rounded-xl bg-white p-0',
+          'flex h-fit max-h-[90vh] min-h-[500px] w-11/12 flex-col overflow-hidden rounded-lg bg-white p-0 shadow-xl',
           !size ? 'container' : MAX_SIZE_VALUE[size],
         )}
       >
@@ -206,7 +208,7 @@ export default function Modal({ title, close, size, children }: ModalProps) {
             <CloseOutline width={24} height={24} />
           </button>
         </div>
-        <div className="scrollbar-hidden size-full overflow-y-scroll px-6 pb-6">
+        <div className="scrollbar-hidden flex grow flex-col px-6 pb-6">
           {children}
         </div>
       </div>
