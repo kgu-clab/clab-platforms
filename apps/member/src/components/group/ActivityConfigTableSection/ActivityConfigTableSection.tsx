@@ -42,7 +42,7 @@ const ActivityConfigTableSection = ({
             <Table.Cell>{index + 1}</Table.Cell>
             <Table.Cell className="truncate">{board.title}</Table.Cell>
             <Table.Cell>
-              {formattedDate(toKoreaISOString(board.updatedAt || ''))}
+              {formattedDate(toKoreaISOString(board.updatedAt))}
             </Table.Cell>
             <Table.Cell className="space-x-2">
               <Button size="sm" onClick={() => handleEditNoticeClick(board)}>

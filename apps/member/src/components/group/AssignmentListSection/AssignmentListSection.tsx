@@ -74,7 +74,7 @@ const AssignmentListSection = () => {
                   <Table.Cell>{item.memberName}</Table.Cell>
                   <Table.Cell>
                     {item.files
-                      ? formattedDate(toKoreaISOString(item.updatedAt || ''))
+                      ? formattedDate(toKoreaISOString(item.updatedAt))
                       : '-'}
                   </Table.Cell>
                   <Table.Cell className="hover:underline">

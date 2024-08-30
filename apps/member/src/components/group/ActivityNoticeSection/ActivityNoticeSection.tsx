@@ -98,7 +98,7 @@ ActivityNoticeSection.Item = ({
       >
         <p className="w-full truncate">{data.title}</p>
         <p className="whitespace-nowrap text-sm text-gray-500">
-          {formattedDate(toKoreaISOString(data.updatedAt || ''))}
+          {formattedDate(toKoreaISOString(data.updatedAt))}
         </p>
       </div>
     </div>
