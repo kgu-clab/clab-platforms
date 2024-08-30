@@ -158,13 +158,13 @@ const AssignmentUploadSection = ({
               placeholder={description || '제출물 설명을 입력해주세요.'}
               value={description}
               onChange={handleDescriptionChange}
-              disabled={!editMode && !(myAssignment === undefined)} // 제출물이 없는 상태엔 입력 가능, 제출물이 있지만 수정하기 버튼이 클릭되지 않으면 수정 불가
+              disabled={!editMode && Boolean(myAssignment)} // 제출물이 없는 상태엔 입력 가능, 제출물이 있지만 수정하기 버튼이 클릭되지 않으면 수정 불가
             />
           </Table.Cell>
         </Table.Row>
       </Table>
       <div className="mt-2 flex gap-4">
-        {uploadedFile !== null && !editMode && (
+        {uploadedFile && !editMode && (
           <Button
             className="w-full"
             color="orange"
