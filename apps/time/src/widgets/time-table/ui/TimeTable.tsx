@@ -83,7 +83,7 @@ function TimeTableSpecialLectureTable({
       <table className="border- w-full border border-gray-400 bg-white">
         <thead>
           <tr className="divide-x divide-gray-400 border border-gray-400 bg-gray-50">
-            {...SPECIAL_LECTURE_TABLE_HEADER.map((header) => (
+            {SPECIAL_LECTURE_TABLE_HEADER.map((header) => (
               <th key={header} className="px-4 py-2">
                 {header}
               </th>
