@@ -1,14 +1,14 @@
 import { createURL } from '@clab-platforms/utils';
 
-import { API_BASE_URL } from '@constants/api';
+import { SERVER_BASE_URL } from '@constants/api';
 
 interface FileProps extends React.PropsWithChildren {
   href: string;
 }
 
 const File = ({ children, href }: FileProps) => {
-  if (!href.startsWith(API_BASE_URL)) {
-    href = createURL(API_BASE_URL, href);
+  if (!href.startsWith(SERVER_BASE_URL)) {
+    href = createURL(SERVER_BASE_URL, href);
   }
 
   return (

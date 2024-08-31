@@ -30,8 +30,14 @@ export function useActivityGroupMutation() {
       queryClient.invalidateQueries({
         queryKey: ACTIVITY_QUERY_KEY.DETAIL(data),
       });
+      queryClient.invalidateQueries({
+        queryKey: ACTIVITY_QUERY_KEY.STATUSES(),
+      });
     },
   });
 
-  return { activityGroupMutate: mutation.mutate };
+  return {
+    activityGroupMutate: mutation.mutate,
+    activityGroupIsPending: mutation.isPending,
+  };
 }

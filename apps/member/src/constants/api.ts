@@ -64,12 +64,15 @@ export const END_POINT = {
   UPLOADEDFILE_MEMBERSHIP_FEE: '/v1/files/membership-fee',
   UPLOADEDFILE_PROFILES: '/v1/files/profiles',
   UPLOADEDFILE_ACTIVITY_PHOTO: '/v1/files/activity-photos',
+  UPLOADEDFILE_ACTIVITY_WEEKLY: (groupId: number) =>
+    `/v1/files/weekly-activities/${groupId}`,
   // -- 활동그룹 멤버
   ACTIVITY_GROUP_MEMBER: (id: number) => `/v1/activity-group/member/${id}`,
   ACTIVITY_GROUP_MEMBER_MY: `/v1/activity-group/member/my`,
   ACTIVITY_GROUP_MEMBER_STATUS: `/v1/activity-group/member/status`,
   ACTIVITY_GROUP_MEMBER_APPLY: `/v1/activity-group/member/apply`,
   ACTIVITY_GROUP_MEMBER_MEMBERS: `/v1/activity-group/member/members`,
+  ACTIVITY_GROUP_MEMBER_APPLIED: `/v1/activity-group/member/applied`,
   // -- 활동그룹 관리
   ACTIVITY_GROUP_ADMIN: `/v1/activity-group/admin`,
   ACTIVITY_GROUP_ADMIN_DETAIL: (id: number) => `/v1/activity-group/admin/${id}`,
@@ -77,6 +80,7 @@ export const END_POINT = {
     `/v1/activity-group/admin/manage/${id}`,
   ACTIVITY_GROUP_ADMIN_MEMBERS: `/v1/activity-group/admin/members`,
   ACTIVITY_GROUP_ADMIN_ACCEPT: `/v1/activity-group/admin/accept`,
+  ACTIVITY_GROUP_ADMIN_POSITION: `/v1/activity-group/admin/position`,
   // -- 활동그룹 게시판
   ACTIVITY_GROUP_BOARD: `/v1/activity-group/boards`,
   ACTIVITY_GROUP_BOARDS: `/v1/activity-group/boards`,

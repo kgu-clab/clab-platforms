@@ -8,6 +8,7 @@ import AssignmentListSection from '@components/group/AssignmentListSection/Assig
 import AssignmentUploadSection from '@components/group/AssignmentUploadSection/AssignmentUploadSection';
 
 import { GROUP_MESSAGE } from '@constants/message';
+import { PATH_FINDER } from '@constants/path';
 import { ACTIVITY_MEMBER_ROLE } from '@constants/state';
 import {
   useActivityGroup,
@@ -15,7 +16,6 @@ import {
   useMyProfile,
 } from '@hooks/queries';
 import { useActivityGroupBoard } from '@hooks/queries/activity/useActivityGroupBoard';
-import { toKoreaISOString } from '@utils/date';
 
 const GroupAssignmentPage = () => {
   const { id, assignmentId } = useParams();
@@ -39,7 +39,7 @@ const GroupAssignmentPage = () => {
 
   return (
     <Content>
-      <Header title={[...state.name]} />
+      <Header title={[...state.name]} path={PATH_FINDER.ACTIVITY_DETAIL(id)} />
       <Section>
         <Section.Header title="과제 설명" />
         <Section.Body>
@@ -64,7 +64,7 @@ const GroupAssignmentPage = () => {
           <AssignmentUploadSection
             activityGroupId={+id}
             assignmentId={+assignmentId}
-            dueDateTime={toKoreaISOString(board?.dueDateTime ?? '')}
+            dueDateTime={board?.dueDateTime ?? ''}
             myAssignment={myAssignment?.[0]}
           />
           <Section>

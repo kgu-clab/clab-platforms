@@ -7,7 +7,7 @@ import Section from '@components/common/Section/Section';
 import Textarea from '@components/common/Textarea/Textarea';
 
 import useToast from '@hooks/common/useToast';
-import { useActivityGroupBoardMutation } from '@hooks/queries/activity/useActivityGroupBoardMutation';
+import { useActivityGroupBoardMutation } from '@hooks/queries';
 
 import type { ActivityBoardType } from '@type/activity';
 
@@ -19,18 +19,21 @@ interface ActivityNoticeEditorProps {
   data: ActivityBoardType[];
 }
 
+const defaultNotice: ActivityBoardType = {
+  title: '',
+  content: '',
+  id: -1,
+  parentId: -1,
+  category: 'NOTICE',
+  files: [],
+  createdAt: new Date().toISOString(),
+};
+
 const ActivityNoticeEditor = ({ groupId, data }: ActivityNoticeEditorProps) => {
   const toast = useToast();
-  const [notice, setNotice] = useState<ActivityBoardType>({
-    title: '',
-    content: '',
-    id: -1,
-    parentId: -1,
-    category: 'NOTICE',
-    files: [],
-    createdAt: new Date().toISOString(),
-  });
-  const { activityGroupBoardMutate } = useActivityGroupBoardMutation();
+  const [notice, setNotice] = useState<ActivityBoardType>(defaultNotice);
+  const { activityGroupBoardMutate, activityGroupBoardIsPending } =
+    useActivityGroupBoardMutation();
 
   const handleNoticeChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
@@ -44,10 +47,13 @@ const ActivityNoticeEditor = ({ groupId, data }: ActivityNoticeEditorProps) => {
         state: 'error',
         message: '제목, 내용은 필수 입력 요소입니다.',
       });
-    activityGroupBoardMutate({
-      activityGroupId: groupId,
-      body: notice,
-    });
+    activityGroupBoardMutate(
+      {
+        activityGroupId: groupId,
+        body: notice,
+      },
+      { onSuccess: () => setNotice(defaultNotice) },
+    );
   };
 
   return (
@@ -55,7 +61,11 @@ const ActivityNoticeEditor = ({ groupId, data }: ActivityNoticeEditorProps) => {
       <Section>
         <Section.Header title="공지 관리">
           <div className="space-x-2">
-            <Button size="sm" onClick={handleAddNoticeButtonClick}>
+            <Button
+              size="sm"
+              onClick={handleAddNoticeButtonClick}
+              disabled={activityGroupBoardIsPending}
+            >
               추가
             </Button>
           </div>

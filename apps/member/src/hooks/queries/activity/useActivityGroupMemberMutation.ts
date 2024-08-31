@@ -2,6 +2,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 import { postActivityGroupMemberApply } from '@api/activity';
 import { ACTIVITY_QUERY_KEY } from '@constants/key';
+import { API_ERROR_MESSAGE } from '@constants/message';
 import useToast from '@hooks/common/useToast';
 
 /**
@@ -11,25 +12,32 @@ export function useActivityGroupMemberMutation() {
   const queryClient = useQueryClient();
   const toast = useToast();
 
-  const mutation = useMutation({
+  const {
+    mutate: activityGroupMemberMutate,
+    isPending: activityGroupMemberIsPending,
+  } = useMutation({
     mutationFn: postActivityGroupMemberApply,
-    onSuccess: (data) => {
-      if (!data) {
+    onSuccess: ({ success, data: data, errorMessage }) => {
+      if (errorMessage) {
         toast({
           state: 'error',
-          message: '신청에 실패했습니다.',
+          message: API_ERROR_MESSAGE[errorMessage],
         });
-      } else {
+      } else if (success) {
         toast({
           state: 'success',
           message: '신청이 완료되었습니다.',
         });
       }
+
       queryClient.invalidateQueries({
         queryKey: ACTIVITY_QUERY_KEY.APPLICATION(data),
       });
     },
   });
 
-  return { activityGroupMemberMutate: mutation.mutate };
+  return {
+    activityGroupMemberMutate,
+    activityGroupMemberIsPending,
+  };
 }

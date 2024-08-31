@@ -15,19 +15,22 @@ interface Props {
   activityGroupId: number;
 }
 
+const defaultBoard = {
+  title: '',
+  content: '',
+  dueDateTime: '',
+  fileUrls: [],
+};
+
 const ActivityAssignmentEditor = ({ parentId, activityGroupId }: Props) => {
   const toast = useToast();
-  const [board, setBoard] = useState({
-    title: '',
-    content: '',
-    dueDateTime: '',
-    fileUrls: [],
-  });
+  const [board, setBoard] = useState(defaultBoard);
 
   const { data: myProfile } = useMyProfile();
 
   const uploaderRef = useRef<HTMLInputElement>(null);
-  const { activityGroupBoardMutate } = useActivityGroupBoardMutation();
+  const { activityGroupBoardMutate, activityGroupBoardIsPending } =
+    useActivityGroupBoardMutation();
 
   const handlePostChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
@@ -48,23 +51,30 @@ const ActivityAssignmentEditor = ({ parentId, activityGroupId }: Props) => {
       formData.append(FORM_DATA_KEY, file);
     }
 
-    activityGroupBoardMutate({
-      parentId: parentId,
-      activityGroupId: activityGroupId,
-      memberId: myProfile.id,
-      body: {
-        category: ACTIVITY_BOARD_CATEGORY_STATE.ASSIGNMENT,
-        ...board,
+    activityGroupBoardMutate(
+      {
+        parentId: parentId,
+        activityGroupId: activityGroupId,
+        memberId: myProfile.id,
+        body: {
+          category: ACTIVITY_BOARD_CATEGORY_STATE.ASSIGNMENT,
+          ...board,
+        },
+        files: file ? formData : undefined,
       },
-      files: file ? formData : undefined,
-    });
+      { onSuccess: () => setBoard(defaultBoard) },
+    );
   };
 
   return (
     <Section>
       <Section.Header title="과제 관리">
         <div className="space-x-2">
-          <Button size="sm" onClick={handleAddAssignmentClick}>
+          <Button
+            size="sm"
+            onClick={handleAddAssignmentClick}
+            disabled={activityGroupBoardIsPending}
+          >
             추가
           </Button>
         </div>

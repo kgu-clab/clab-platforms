@@ -14,7 +14,7 @@ import {
   useActivityGroupBoardPatchMutation,
   useMyProfile,
 } from '@hooks/queries';
-import { formattedDate, isDateValid } from '@utils/date';
+import { formattedDate, isDateValid, toKoreaISOString } from '@utils/date';
 
 import type { ActivityBoardType } from '@type/activity';
 import type { ResponseFile } from '@type/api';
@@ -34,9 +34,11 @@ const AssignmentUploadSection = ({
 }: Props) => {
   const toast = useToast();
   const { data: myProfile } = useMyProfile();
-  const { activityGroupBoardMutate } = useActivityGroupBoardMutation();
-  const { activityGroupBoardPatchMutate } =
+  const { activityGroupBoardMutate, activityGroupBoardIsPending } =
+    useActivityGroupBoardMutation();
+  const { activityGroupBoardPatchMutate, activityGroupBoardPatchIsPending } =
     useActivityGroupBoardPatchMutation();
+  const [editMode, setEditMode] = useState(false);
 
   const uploaderRef = useRef<HTMLInputElement>(null);
   const [uploadedFile, setUploadedFile] = useState<ResponseFile | null>(
@@ -51,6 +53,7 @@ const AssignmentUploadSection = ({
   };
 
   const handleDeleteFileClick = () => {
+    setEditMode(true);
     setUploadedFile(null);
   };
 
@@ -92,14 +95,17 @@ const AssignmentUploadSection = ({
         files: file ? formData : undefined,
       });
     }
+
+    setEditMode(false);
+    setUploadedFile(null);
   };
 
   useEffect(() => {
-    if (myAssignment) {
-      setUploadedFile(myAssignment.files?.[0] || null);
-      setDescription(myAssignment.content || '');
+    if (!editMode) {
+      setDescription(myAssignment?.content || '');
+      setUploadedFile(myAssignment?.files?.[0] || null);
     }
-  }, [myAssignment]);
+  }, [editMode, myAssignment]);
 
   return (
     <Section>
@@ -124,7 +130,7 @@ const AssignmentUploadSection = ({
             })}
           >
             {uploadedFile
-              ? formattedDate(uploadedFile.createdAt)
+              ? formattedDate(toKoreaISOString(uploadedFile.createdAt))
               : '아직 제출하지 않았습니다.'}
           </Table.Cell>
         </Table.Row>
@@ -152,21 +158,28 @@ const AssignmentUploadSection = ({
               placeholder={description || '제출물 설명을 입력해주세요.'}
               value={description}
               onChange={handleDescriptionChange}
+              disabled={!editMode && Boolean(myAssignment)} // 제출물이 없는 상태엔 입력 가능, 제출물이 있지만 수정하기 버튼이 클릭되지 않으면 수정 불가
             />
           </Table.Cell>
         </Table.Row>
       </Table>
       <div className="mt-2 flex gap-4">
-        {uploadedFile && (
+        {uploadedFile && !editMode && (
           <Button
             className="w-full"
             color="orange"
             onClick={handleDeleteFileClick}
           >
-            첨부파일 변경하기
+            수정하기
           </Button>
         )}
-        <Button className="w-full" onClick={handleSubmitButtonClick}>
+        <Button
+          className="w-full"
+          onClick={handleSubmitButtonClick}
+          disabled={
+            activityGroupBoardIsPending || activityGroupBoardPatchIsPending
+          }
+        >
           제출하기
         </Button>
       </div>
