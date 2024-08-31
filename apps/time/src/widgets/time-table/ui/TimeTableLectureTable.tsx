@@ -61,7 +61,6 @@ function TimeTableLectureItem({
   const { close } = useModalAction({ key: MODAL_KEY.timeTable });
   const router = useRouter();
   const specialPeriodSet = new Set<string>(SPECIAL_PERIOD);
-  // const parsedLecture = lecture.filter((item) => )
 
   const handleTimeTableLectureItem = () => {
     if (specialPeriodSet.has(lecture.time) || isAddableLecture(lecture.time)) {
