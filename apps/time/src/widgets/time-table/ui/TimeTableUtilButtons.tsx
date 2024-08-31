@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import {
   ClipboardDocumentCheckSolid,
@@ -18,10 +18,6 @@ function TimeTableCopyButton() {
       await navigator.clipboard.writeText(url);
       setIsCopy(true);
 
-      if (timeoutRef.current) {
-        clearTimeout(timeoutRef.current);
-      }
-
       timeoutRef.current = window.setTimeout(() => {
         setIsCopy(false);
         timeoutRef.current = null;
@@ -30,6 +26,14 @@ function TimeTableCopyButton() {
       alert(`Failed to copy: ${error}`);
     }
   };
+
+  useEffect(() => {
+    return () => {
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current);
+      }
+    };
+  }, []);
 
   return (
     <button
