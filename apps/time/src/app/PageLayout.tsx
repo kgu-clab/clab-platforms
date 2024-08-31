@@ -2,7 +2,7 @@ import React from 'react';
 
 import { cn } from '@clab-platforms/utils';
 
-import { Footer, Nav } from '@/widgets/menu';
+import { Footer, Nav } from '@/widgets/menu/ui';
 
 interface PageProps {
   nav?: boolean;

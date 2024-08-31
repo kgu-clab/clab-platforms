@@ -23,17 +23,6 @@ import {
 import type { DayKor } from '@/shared/types';
 import { Modal } from '@/shared/ui';
 import {
-  DayCampus,
-  DayPeriod,
-  DayStatus,
-  Grade,
-  LectureKey,
-  NightCampus,
-  NightPeriod,
-  Region,
-  SpecialPeriod,
-} from '@/widgets/time-table';
-import {
   DAY_PERIOD_ARRAY,
   DAY_STATUS,
   GRADE,
@@ -43,9 +32,20 @@ import {
   REGION,
   REGION_VALUE_ARRAY,
   SPECIAL_PERIOD,
-  TimeTableLectureTable,
   useMajorList,
-} from '@/widgets/time-table';
+} from '@/widgets/time-table/model';
+import type {
+  DayCampus,
+  DayPeriod,
+  DayStatus,
+  Grade,
+  LectureKey,
+  NightCampus,
+  NightPeriod,
+  Region,
+  SpecialPeriod,
+} from '@/widgets/time-table/types';
+import { TimeTableLectureTable } from '@/widgets/time-table/ui';
 
 interface TimeTableModalFilterProps<T> {
   title: string;
@@ -85,6 +85,7 @@ interface TimeTableModalProps<T> {
   dayStatus: DayStatus;
   day: DayKor;
   period: T;
+  isAddableLecture: (time: string) => boolean;
 }
 
 function TimeTableModalFilter<T extends string>({
@@ -234,7 +235,7 @@ const TimeTableModalMajorInput = memo(function TimeTableModalMajorInput({
   const debouncedValue = useDebounce({
     value: inputValue,
     delay: 1000,
-  }) as string;
+  });
   const findMajorList = useMajorList({ major: debouncedValue });
   const ref = useOutsideClick({ callback: () => setOpen(false) });
 
@@ -247,10 +248,7 @@ const TimeTableModalMajorInput = memo(function TimeTableModalMajorInput({
       {...selectedMajor.map((major) => (
         <TimeTableModalDropdownButton
           key={major}
-          onClick={() => {
-            handleMajorInputChange(major);
-            setInputValue('');
-          }}
+          onClick={() => handleMajorInputChange(major)}
           value={major}
         />
       ))}
@@ -261,13 +259,13 @@ const TimeTableModalMajorInput = memo(function TimeTableModalMajorInput({
     <Modal.Item title="전공 선택">
       <div className="relative" ref={ref}>
         <div
-          className="flex w-full flex-wrap gap-y-1 rounded-md border border-gray-400 p-1 text-sm"
+          className="flex w-full flex-wrap gap-y-1 rounded-md border border-gray-400 p-2 text-sm"
           onClick={() => setOpen(true)}
         >
           {selectedMajor && selectedValue}
           <div className="grow">
             <input
-              className="w-full px-1 py-0.5 text-gray-600 focus:outline-0"
+              className="w-full text-gray-600 focus:outline-0"
               value={inputValue}
               placeholder="전공을 입력해주세요"
               onChange={(e) => handleInputChange(e)}
@@ -279,7 +277,10 @@ const TimeTableModalMajorInput = memo(function TimeTableModalMajorInput({
             {...findMajorList.map((major) => (
               <Modal.DropdownItem
                 key={major}
-                onClick={() => handleMajorInputChange(major)}
+                onClick={() => {
+                  handleMajorInputChange(major);
+                  setInputValue('');
+                }}
                 selected={selectedMajor.includes(major)}
               >
                 {major}
@@ -298,7 +299,7 @@ const TimeTableLectureSearchInput = memo(function TimeTableLectureSearchInput({
   return (
     <Modal.Item title="강의 검색">
       <Input
-        inputClassName="border-gray-400 px-1 px-1.5 rounded-md"
+        inputClassName="border-gray-400 rounded-md"
         placeholder="강의명을 입력해주세요"
         onChange={(event) =>
           handleLectureSearchInputChange(event.currentTarget.value)
@@ -310,7 +311,7 @@ const TimeTableLectureSearchInput = memo(function TimeTableLectureSearchInput({
 
 export default function TimeTableModal<
   T extends DayPeriod | NightPeriod | SpecialPeriod,
->({ dayStatus, day, period }: TimeTableModalProps<T>) {
+>({ dayStatus, day, period, isAddableLecture }: TimeTableModalProps<T>) {
   const { close } = useModalAction({ key: MODAL_KEY.timeTable });
   const visible = useModalState({ key: MODAL_KEY.timeTable }).visible;
   const [selectedRegion, setSelectedRegion] = useState<Region[]>([
@@ -393,7 +394,7 @@ export default function TimeTableModal<
             />
             <TimeTableModalFilter
               title="학년 선택"
-              list={[...GRADE] as Grade[]}
+              list={[...Object.keys(GRADE)] as Grade[]}
               origin={selectedGrade}
               handleFilterItem={(grade) =>
                 handleFilterItem(grade, selectedGrade, setSelectedGrade)
@@ -434,6 +435,7 @@ export default function TimeTableModal<
               }
             />
             <TimeTableLectureTable
+              isAddableLecture={isAddableLecture}
               selectedValues={{
                 campus: selectedRegion.map(
                   (region) =>

@@ -143,3 +143,8 @@ export const NIGHT_PERIOD_ARRAY = Object.entries(NIGHT_PERIOD).sort(
 );
 
 export const SPECIAL_PERIOD = ['이러닝', '교외수업', '사회봉사'] as const;
+
+export const PERIOD_STATUS = {
+  fill: 'FILL',
+  empty: 'EMPTY',
+} as const;

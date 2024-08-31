@@ -1,5 +1,6 @@
 import { DayKor } from '@/shared/types';
 import { getAPIURL } from '@/shared/utils';
+import { TIMETABLE_ENDPOINT } from '@/widgets/time-table/api';
 import type {
   DayCampus,
   DayPeriod,
@@ -7,8 +8,7 @@ import type {
   LectureKey,
   NightCampus,
   NightPeriod,
-} from '@/widgets/time-table';
-import { TIMETABLE_ENDPOINT } from '@/widgets/time-table';
+} from '@/widgets/time-table/types';
 
 export interface GetLectureListParams {
   campus: (DayCampus | NightCampus)[];

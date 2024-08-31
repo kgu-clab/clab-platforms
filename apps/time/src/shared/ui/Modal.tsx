@@ -13,11 +13,14 @@ import {
 import { ChevronDownOutline, CloseOutline } from '@clab-platforms/icon';
 import { cn } from '@clab-platforms/utils';
 
+import { MAX_SIZE_VALUE } from '@/shared/constants';
 import { useOutsideClick } from '@/shared/hooks';
+import { MaxSize } from '@/shared/types';
 
 interface ModalProps extends PropsWithChildren {
   title: string;
   close: () => void;
+  size?: MaxSize;
 }
 
 interface ModalFilterProps extends PropsWithChildren {
@@ -76,7 +79,7 @@ function ModalFilterItem({
     <button type="button" onClick={onClick}>
       <li
         className={cn(
-          'cursor-pointer px-4 py-1 text-sm transition-colors ',
+          'cursor-pointer px-5 py-1.5 text-sm transition-colors',
           selected
             ? 'bg-blue-500 text-white hover:bg-blue-600'
             : 'hover:bg-blue-500 hover:text-white',
@@ -108,7 +111,7 @@ function ModalDropdown({ title, value, children }: ModalDropdownProps) {
       <p className="w-20 shrink-0 break-keep">{title}</p>
       <div className="relative grow" onClick={() => setOpen((prev) => !prev)}>
         <ModalDropdownContext.Provider value={defaultModalDropdownContext}>
-          <div className="flex items-center justify-between rounded-md border border-gray-400 p-1">
+          <div className="flex items-center justify-between rounded-md border border-gray-400 px-1 py-1.5">
             <div className={cn('flex text-gray-500')}>{value}</div>
             <ChevronDownOutline
               className={cn(
@@ -139,7 +142,7 @@ function ModalDropdownItem({
   return (
     <button
       className={cn(
-        'w-full rounded-sm p-2 text-start transition-colors hover:bg-gray-100',
+        'w-full rounded-md px-2 py-3 text-start transition-colors hover:bg-gray-100',
         selected ? 'text-blue-400' : 'text-black',
       )}
       type="button"
@@ -166,10 +169,12 @@ function ModalItem({ title, children }: ModalItemProps) {
 }
 
 function ModalContent({ children }: PropsWithChildren) {
-  return <div className="flex flex-col gap-y-3">{children}</div>;
+  return (
+    <div className="flex grow flex-col gap-y-3 overflow-hidden">{children}</div>
+  );
 }
 
-export default function Modal({ title, close, children }: ModalProps) {
+export default function Modal({ title, close, size, children }: ModalProps) {
   const modalRef = useOutsideClick({ callback: close });
 
   useEffect(() => {
@@ -189,18 +194,23 @@ export default function Modal({ title, close, children }: ModalProps) {
   }, [close]);
 
   return (
-    <div className="fixed top-0 z-40 flex h-dvh w-dvw flex-col items-center justify-center bg-gray-800/60 transition-colors">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 transition-colors">
       <div
         ref={modalRef}
-        className="container h-fit space-y-4 rounded-xl bg-white p-6"
+        className={cn(
+          'flex h-fit max-h-[90vh] min-h-[500px] w-11/12 flex-col overflow-hidden rounded-lg bg-white p-0 shadow-xl',
+          !size ? 'container' : MAX_SIZE_VALUE[size],
+        )}
       >
-        <div className="flex w-full justify-between">
+        <div className="sticky top-0 flex w-full justify-between bg-white p-6">
           <p className="font-bold">{title ?? ''}</p>
           <button type="button" onClick={close}>
             <CloseOutline width={24} height={24} />
           </button>
         </div>
-        {children}
+        <div className="scrollbar-hidden flex grow flex-col px-6 pb-6">
+          {children}
+        </div>
       </div>
     </div>
   );

@@ -16,7 +16,7 @@ import {
   HomeCardDescription,
   HomeCardHeader,
   HomeCardIcon,
-} from '@/widgets/home';
+} from '@/widgets/home/ui';
 
 const buttons = [
   {

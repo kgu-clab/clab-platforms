@@ -1,81 +1,103 @@
 'use client';
 
-import { Suspense, memo } from 'react';
+import { memo } from 'react';
 
 import { MODAL_KEY } from '@/shared/constants';
+import { useInfiniteScroll, useModalAction } from '@/shared/hooks';
+import type {
+  GetLectureListParams,
+  GetLectureListResponseValue,
+} from '@/widgets/time-table/api';
 import {
-  useEditableSearchParams,
-  useInfiniteScroll,
-  useModalAction,
-} from '@/shared/hooks';
-import {
-  type GetLectureListParams,
-  type GetLectureListResponseValue,
+  SPECIAL_PERIOD,
   useLectureList,
-} from '@/widgets/time-table';
+  useTimeTableParams,
+} from '@/widgets/time-table/model';
+import { ErrorBoundary, Suspense } from '@suspensive/react';
 import { useRouter } from 'next/navigation';
 
 interface TimeTableLectureTableProps {
+  isAddableLecture: (time: string) => boolean;
   selectedValues: GetLectureListParams;
 }
 
 interface TimeTableLectureTableItemProps {
+  isAddableLecture: (time: string) => boolean;
   lecture: GetLectureListResponseValue;
 }
 
 const LECTURE_TABLE_ROW_HEADER = [
-  '캠퍼스',
-  '카테고리',
-  '과목코드',
-  '학점',
-  '학년',
-  '전공',
-  '수업명',
-  '담당교수',
-  '학기',
-  '시간',
-  '수업구분',
+  { title: '캠퍼스', size: 1 },
+  { title: '카테고리', size: 1 },
+  { title: '과목코드', size: 1 },
+  { title: '학점', size: 1 },
+  { title: '학년', size: 1 },
+  { title: '전공', size: 3 },
+  { title: '수업명', size: 4 },
+  { title: '담당교수', size: 3 },
+  { title: '학기', size: 1 },
+  { title: '시간', size: 3 },
+  { title: '수업구분', size: 7 },
 ] as const;
 
-function TimeTableLectureItem({ lecture }: TimeTableLectureTableItemProps) {
-  const searchParams = useEditableSearchParams();
-  const router = useRouter();
+function TimeTableLectureNotification({ text }: { text: string }) {
+  return (
+    <tr className="size-full">
+      <td
+        colSpan={LECTURE_TABLE_ROW_HEADER.length}
+        className="size-full px-10 py-24 text-center"
+      >
+        {text}
+      </td>
+    </tr>
+  );
+}
+
+function TimeTableLectureItem({
+  isAddableLecture,
+  lecture,
+}: TimeTableLectureTableItemProps) {
+  const { searchParamsAction } = useTimeTableParams();
   const { close } = useModalAction({ key: MODAL_KEY.timeTable });
+  const router = useRouter();
+  const specialPeriodSet = new Set<string>(SPECIAL_PERIOD);
 
-  const handleTimeTableLectureItem = (id: number) => {
-    const selectedId = searchParams.getAll('id');
-
-    if (!selectedId.includes(String(id))) {
-      searchParams.append('id', id.toString());
-      router.push(`/timetable?${searchParams.toString()}`);
+  const handleTimeTableLectureItem = () => {
+    if (specialPeriodSet.has(lecture.time) || isAddableLecture(lecture.time)) {
+      searchParamsAction.append('id', lecture.id.toString());
+      router.push(`/timetable?${searchParamsAction.getParams()}`, {
+        scroll: false,
+      });
+      close();
+    } else {
+      alert('선택된 시간에 이미 수강하는 강의가 존재합니다.');
     }
-
-    close();
   };
 
   return (
     <tr
-      className="h-12 cursor-pointer divide-x divide-gray-300 text-[12px] transition-colors hover:bg-gray-50"
-      onClick={() => handleTimeTableLectureItem(lecture.id)}
+      className="h-12 shrink-0 cursor-pointer divide-x divide-gray-300 text-[12px] transition-colors hover:bg-gray-50"
+      onClick={() => handleTimeTableLectureItem()}
     >
-      <td className="shrink-0 whitespace-nowrap p-2">{lecture.campus}</td>
-      <td className="shrink-0 whitespace-nowrap p-2">{lecture.category}</td>
-      <td className="shrink-0 whitespace-nowrap p-2">{lecture.code}</td>
-      <td className="shrink-0 whitespace-nowrap p-2">{lecture.credit}</td>
-      <td className="shrink-0 whitespace-nowrap p-2">{lecture.grade ?? '-'}</td>
-      <td className="shrink-0 whitespace-nowrap p-2">
+      <td className="whitespace-nowrap p-2">{lecture.campus}</td>
+      <td className="whitespace-nowrap p-2">{lecture.category}</td>
+      <td className="whitespace-nowrap p-2">{lecture.code}</td>
+      <td className="whitespace-nowrap p-2">{lecture.credit}</td>
+      <td className="whitespace-nowrap p-2">{lecture.grade ?? '-'}</td>
+      <td className="whitespace-nowrap p-2">
         {lecture.major !== 'None' ? lecture.major : '-'}
       </td>
-      <td className="shrink-0 whitespace-nowrap p-2">{lecture.name}</td>
-      <td className="shrink-0 whitespace-nowrap p-2">{lecture.professor}</td>
-      <td className="shrink-0 whitespace-nowrap p-2">{lecture.semester}</td>
-      <td className="shrink-0 whitespace-nowrap p-2">{lecture.time}</td>
-      <td className="shrink-0 whitespace-nowrap p-2">{lecture.groupName}</td>
+      <td className="whitespace-nowrap p-2">{lecture.name}</td>
+      <td className="whitespace-nowrap p-2">{lecture.professor}</td>
+      <td className="whitespace-nowrap p-2">{lecture.semester}</td>
+      <td className="whitespace-nowrap p-2">{lecture.time}</td>
+      <td className="whitespace-nowrap p-2">{lecture.groupName}</td>
     </tr>
   );
 }
 
 function TimeTableLectureContent({
+  isAddableLecture,
   selectedValues,
 }: TimeTableLectureTableProps) {
   const { data, hasNextPage, fetchNextPage } = useLectureList({
@@ -102,20 +124,14 @@ function TimeTableLectureContent({
             <>
               {...data.map((lecture) => (
                 <TimeTableLectureItem
+                  isAddableLecture={isAddableLecture}
                   key={`lecture-${lecture.id}`}
                   lecture={lecture}
                 />
               ))}
             </>
           ) : (
-            <tr className="h-full">
-              <td
-                colSpan={LECTURE_TABLE_ROW_HEADER.length}
-                className="h-full text-center"
-              >
-                검색 결과가 없습니다
-              </td>
-            </tr>
+            <TimeTableLectureNotification text="검색 결과가 없습니다" />
           )}
         </>
       )}
@@ -134,33 +150,42 @@ function TimeTableLectureContent({
   );
 }
 
-function TimeTableLectureTable({ selectedValues }: TimeTableLectureTableProps) {
+function TimeTableLectureTable({
+  selectedValues,
+  isAddableLecture,
+}: TimeTableLectureTableProps) {
   return (
-    <div className="mt-3 h-96 w-full overflow-y-scroll">
-      <table className="size-full table-auto border-separate border-spacing-0 break-keep border-x border-b border-gray-400 text-sm">
-        <thead className="sticky top-0 z-20 w-full text-center">
+    <div className="mt-3 flex grow overflow-auto text-sm">
+      <table className="h-full w-auto grow table-fixed border-separate border-spacing-0 break-keep border-x border-b border-gray-400">
+        <thead className="sticky top-0 z-20 size-full h-12 text-center">
           <tr className="divide-x divide-gray-400 bg-gray-100">
-            {LECTURE_TABLE_ROW_HEADER.map((header) => (
-              <th className="border-y border-gray-400 py-2" key={header}>
-                {header}
+            {LECTURE_TABLE_ROW_HEADER.map(({ title, size }) => (
+              <th
+                className="shrink-0 whitespace-nowrap border-y border-gray-400 px-1 py-2"
+                key={title}
+                style={{ width: `${size * 2}rem` }}
+              >
+                {title}
               </th>
             ))}
           </tr>
         </thead>
-        <Suspense
+        <ErrorBoundary
           fallback={
-            <tr>
-              <td
-                colSpan={LECTURE_TABLE_ROW_HEADER.length}
-                className="text-center"
-              >
-                강의 정보를 불러오고 있습니다
-              </td>
-            </tr>
+            <TimeTableLectureNotification text="강의 정보 불러오기에 실패했습니다" />
           }
         >
-          <TimeTableLectureContent selectedValues={selectedValues} />
-        </Suspense>
+          <Suspense
+            fallback={
+              <TimeTableLectureNotification text="강의 정보를 불러오고 있습니다" />
+            }
+          >
+            <TimeTableLectureContent
+              isAddableLecture={isAddableLecture}
+              selectedValues={selectedValues}
+            />
+          </Suspense>
+        </ErrorBoundary>
       </table>
     </div>
   );

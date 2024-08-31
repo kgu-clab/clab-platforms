@@ -11,3 +11,13 @@
     font-size: 16px;
   }
 }
+
+.scrollbar-hidden {
+  @apply overflow-auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.scrollbar-hidden::-webkit-scrollbar {
+  display: none;
+}

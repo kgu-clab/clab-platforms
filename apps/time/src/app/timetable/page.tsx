@@ -1,5 +1,5 @@
 import PageLayout from '@/app/PageLayout';
-import { TimeTableContainer } from '@/widgets/time-table';
+import { TimeTableContainer } from '@/widgets/time-table/ui';
 
 export default function TimeTablePage() {
   return (

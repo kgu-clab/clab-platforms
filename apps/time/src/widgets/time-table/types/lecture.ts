@@ -1,4 +1,4 @@
-import { LECTURE } from '@/widgets/time-table';
+import { LECTURE } from '@/widgets/time-table/model';
 
 export type LectureKey = keyof typeof LECTURE;
 

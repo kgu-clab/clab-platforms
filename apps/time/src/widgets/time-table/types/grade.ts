@@ -1,5 +1,5 @@
-import { GRADE } from '@/widgets/time-table';
+import { GRADE } from '@/widgets/time-table/model';
 
-type Grade = (typeof GRADE)[number];
+type Grade = keyof typeof GRADE;
 
 export type { Grade };
