@@ -1,11 +1,14 @@
 import { ChangeEvent, useState } from 'react';
 
 import { Button, Input } from '@clab-platforms/design-system';
+import { cn } from '@clab-platforms/utils';
 
 import Section from '@components/common/Section/Section';
 import Textarea from '@components/common/Textarea/Textarea';
 
-import { useActivityGroupAdminMutation } from '@hooks/queries/activity/useActivityGroupAdminMutation';
+import { ACTIVITY_GROUP_CONTENT_MAX_LENGTH } from '@constants/state';
+import useToast from '@hooks/common/useToast';
+import { useActivityGroupAdminMutation } from '@hooks/queries';
 
 import type {
   ActivityGroupBoardParserType,
@@ -19,6 +22,7 @@ interface ActivityProfileEditorProps {
 }
 
 const ActivityProfileEditor = ({ data }: ActivityProfileEditorProps) => {
+  const toast = useToast();
   const [activityDetail, setActivityDetail] =
     useState<ActivityGroupBoardParserType>(data);
   const { activityGroupAdminMutate } = useActivityGroupAdminMutation();
@@ -30,6 +34,12 @@ const ActivityProfileEditor = ({ data }: ActivityProfileEditorProps) => {
     setActivityDetail({ ...activityDetail, [name]: value });
   };
   const handleSaveButtonClick = () => {
+    if (activityDetail.content.length > ACTIVITY_GROUP_CONTENT_MAX_LENGTH)
+      return toast({
+        state: 'error',
+        message: '내용은 200자 이내로 작성해주세요.',
+      });
+
     const activityGroupItem: ActivityGroupCreateItem = {
       category: activityDetail.category,
       subject: activityDetail.subject,
@@ -60,16 +70,25 @@ const ActivityProfileEditor = ({ data }: ActivityProfileEditorProps) => {
             value={activityDetail.name}
             onChange={handleActivityDetail}
           />
-          <Textarea
-            id="content"
-            name="content"
-            label="내용"
-            placeholder="내용을 입력해주세요."
-            className="w-full"
-            maxLength={200}
-            value={activityDetail.content}
-            onChange={handleActivityDetail}
-          />
+          <div>
+            <Textarea
+              id="content"
+              name="content"
+              label="내용"
+              placeholder="내용을 입력해주세요."
+              className="h-32 w-full"
+              value={activityDetail.content}
+              onChange={handleActivityDetail}
+            />
+            <p
+              className={cn('mt-2 text-right text-xs', {
+                ' text-red-500': activityDetail.content.length > 200,
+              })}
+            >
+              <span>{activityDetail.content.length}</span>
+              <span>{'/' + ACTIVITY_GROUP_CONTENT_MAX_LENGTH + '자'}</span>
+            </p>
+          </div>
           <Input
             id="subject"
             name="subject"

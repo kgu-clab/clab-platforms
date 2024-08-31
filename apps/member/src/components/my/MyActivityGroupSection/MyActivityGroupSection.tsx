@@ -5,10 +5,10 @@ import Section from '@components/common/Section/Section';
 import { MY_MESSAGE } from '@constants/message';
 import { PATH_FINDER } from '@constants/path';
 
-import type { ActivityGroupMemberMyType } from '@type/activity';
+import type { ActivityGroupItem } from '@type/activity';
 
 interface MyActivityGroupSectionProps {
-  data: ActivityGroupMemberMyType[];
+  data: ActivityGroupItem[];
 }
 
 const MyActivityGroupSection = ({ data }: MyActivityGroupSectionProps) => {

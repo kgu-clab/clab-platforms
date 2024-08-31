@@ -18,6 +18,10 @@ export type ActivityMemberRoleType =
   (typeof ACTIVITY_MEMBER_ROLE)[keyof typeof ACTIVITY_MEMBER_ROLE];
 export type ActivityGroupStatusType =
   (typeof ACTIVITY_STATE)[keyof typeof ACTIVITY_STATE];
+type LeaderType = {
+  id: string;
+  name: string;
+};
 
 export interface ActivityGroupDetailType {
   id: number;
@@ -75,8 +79,7 @@ export interface ActivityGroupItem {
   category: ActivityGroupCategoryType;
   subject: string;
   imageUrl: string;
-  leaderId: string;
-  leaderName: string;
+  leaders: Array<LeaderType>;
   participantCount: number;
   weeklyActivityCount: number;
   createdAt: string;
@@ -129,15 +132,6 @@ export interface ActivityGroupBoardParserType extends ActivityGroupDetailType {
   notices: Array<ActivityBoardType>;
   activities: Array<ActivityBoardType>;
   assignments: Array<ActivityBoardType>;
-}
-
-export interface ActivityGroupMemberMyType {
-  id: number;
-  category: ActivityGroupCategoryType;
-  imageUrl: string;
-  name: string;
-  subject: string;
-  createdAt: string;
 }
 
 export interface ActivityPhotosBody {

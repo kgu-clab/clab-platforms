@@ -5,7 +5,7 @@ import { Section } from '@components/common/Section';
 import { TABLE_HEAD } from '@constants/head';
 import useModal from '@hooks/common/useModal';
 import { useActivityGroupBoardDeleteMutation } from '@hooks/queries';
-import { formattedDate } from '@utils/date';
+import { formattedDate, toKoreaISOString } from '@utils/date';
 
 import { ActivityBoardType } from '@type/activity';
 
@@ -41,7 +41,9 @@ const ActivityConfigTableSection = ({
           <Table.Row key={board.id}>
             <Table.Cell>{index + 1}</Table.Cell>
             <Table.Cell className="truncate">{board.title}</Table.Cell>
-            <Table.Cell>{formattedDate(board.updatedAt)}</Table.Cell>
+            <Table.Cell>
+              {formattedDate(toKoreaISOString(board.updatedAt))}
+            </Table.Cell>
             <Table.Cell className="space-x-2">
               <Button size="sm" onClick={() => handleEditNoticeClick(board)}>
                 수정

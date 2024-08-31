@@ -1,5 +1,6 @@
 import { SERVICE_NAME } from '@constants/environment';
 
+import { ActivityMemberRoleType } from '@type/activity';
 import type { Bookstore, BookstoreKorean } from '@type/book';
 import type { CareerLevel, EmploymentType } from '@type/community';
 import { RoleLevelKey, RoleLevelType } from '@type/member';
@@ -151,6 +152,19 @@ export function toKoreaMemberLevel(
   }
 }
 
-export const createQueryParams = (name: string, page: number) => {
+export const createQueryParams = (name: string, page: number | string) => {
   return `?${name}=${page}`;
 };
+
+export function toKoreaActivityGroupMemberLevel(
+  memberLevel: ActivityMemberRoleType | null,
+) {
+  switch (memberLevel) {
+    case 'MEMBER':
+      return '멤버';
+    case 'LEADER':
+      return '리더';
+    default:
+      return '-';
+  }
+}

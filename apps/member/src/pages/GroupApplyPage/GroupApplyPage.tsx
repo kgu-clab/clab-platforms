@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import { Button } from '@clab-platforms/design-system';
 
@@ -9,6 +10,7 @@ import Section from '@components/common/Section/Section';
 import Select from '@components/common/Select/Select';
 import Textarea from '@components/common/Textarea/Textarea';
 
+import { PATH } from '@constants/path';
 import { BOARD_CONTENT_MAX_LENGTH } from '@constants/state';
 import useToast from '@hooks/common/useToast';
 import {
@@ -17,8 +19,10 @@ import {
 } from '@hooks/queries';
 
 const GroupApplyPage = () => {
+  const navigate = useNavigate();
   const { data: groupData } = useActivityGroupMember();
-  const { activityGroupMemberMutate } = useActivityGroupMemberMutation();
+  const { activityGroupMemberMutate, activityGroupMemberIsPending } =
+    useActivityGroupMemberMutation();
   const toast = useToast();
 
   const [groupID, setGroupID] = useState(0);
@@ -45,12 +49,15 @@ const GroupApplyPage = () => {
       });
     }
 
-    activityGroupMemberMutate({
-      activityGroupId: groupID,
-      body: {
-        applyReason: reason,
+    activityGroupMemberMutate(
+      {
+        activityGroupId: groupID,
+        body: {
+          applyReason: reason,
+        },
       },
-    });
+      { onSuccess: () => navigate(PATH.ACTIVITY) },
+    );
   };
 
   useEffect(() => {
@@ -60,7 +67,7 @@ const GroupApplyPage = () => {
 
   return (
     <Content>
-      <Header title={['활동', '활동 신청']} />
+      <Header title={['활동', '활동 신청']} path={PATH.ACTIVITY} />
       <Section className="space-y-4">
         <div>
           <Label htmlFor="select" required>
@@ -87,7 +94,11 @@ const GroupApplyPage = () => {
             onChange={handleReasonChange}
           />
         </div>
-        <Button className="w-full" onClick={handleApplyButtonClick}>
+        <Button
+          className="w-full"
+          onClick={handleApplyButtonClick}
+          disabled={activityGroupMemberIsPending}
+        >
           신청하기
         </Button>
       </Section>

@@ -10,7 +10,7 @@ import WeeklyActivitySection from '@components/group/WeeklyActivitySection/Weekl
 
 import { TABLE_HEAD } from '@constants/head';
 import { GROUP_MESSAGE } from '@constants/message';
-import { PATH_FINDER } from '@constants/path';
+import { PATH, PATH_FINDER } from '@constants/path';
 import { ACTIVITY_MEMBER_STATE } from '@constants/state';
 import useModal from '@hooks/common/useModal';
 import { useMyProfile } from '@hooks/queries';
@@ -53,7 +53,7 @@ const GroupDetailPage = () => {
 
   return (
     <Content>
-      <Header title={['활동', data.name]}>
+      <Header title={['활동', data.name]} path={PATH.ACTIVITY}>
         <Button size="sm" onClick={handleApplicationClick}>
           참여자 목록
         </Button>

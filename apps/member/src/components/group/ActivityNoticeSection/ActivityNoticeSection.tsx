@@ -7,7 +7,7 @@ import DropdownButton from '@components/common/DropdownButton/DropdownButton';
 import Section from '@components/common/Section/Section';
 
 import useModal from '@hooks/common/useModal';
-import { formattedDate } from '@utils/date';
+import { formattedDate, toKoreaISOString } from '@utils/date';
 import dayjs from 'dayjs';
 
 import type { ActivityBoardType } from '@type/activity';
@@ -98,7 +98,7 @@ ActivityNoticeSection.Item = ({
       >
         <p className="w-full truncate">{data.title}</p>
         <p className="whitespace-nowrap text-sm text-gray-500">
-          {formattedDate(data.createdAt)}
+          {formattedDate(toKoreaISOString(data.updatedAt))}
         </p>
       </div>
     </div>

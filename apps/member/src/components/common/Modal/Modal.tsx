@@ -5,6 +5,8 @@ import { cn } from '@clab-platforms/utils';
 import useModal from '@hooks/common/useModal';
 
 interface ModalProps extends PropsWithChildren {
+  disabled?: boolean;
+  loading?: boolean;
   className?: string;
 }
 
@@ -71,7 +73,14 @@ const Footer = ({ className, children }: ModalProps) => {
   );
 };
 
-const Button = ({ color, onClick, className, children }: ModalButtonProps) => {
+const Button = ({
+  color,
+  onClick,
+  className,
+  disabled,
+  loading,
+  children,
+}: ModalButtonProps) => {
   const colorStyle = {
     red: 'border-red-300 bg-red-100 text-red-500 hover:bg-red-200',
     sky: 'border-sky-300 bg-sky-100 text-sky-500 hover:bg-sky-200',
@@ -89,6 +98,7 @@ const Button = ({ color, onClick, className, children }: ModalButtonProps) => {
         className,
       )}
       onClick={onClick}
+      disabled={loading || disabled}
     >
       {children}
     </button>
