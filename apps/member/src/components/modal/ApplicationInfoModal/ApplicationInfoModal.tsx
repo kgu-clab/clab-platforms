@@ -35,7 +35,7 @@ const ApplicationInfoModal = ({
       <DetailsList.Item label="거주지">{address}</DetailsList.Item>
       <DetailsList.Item label="희망분야">{interests}</DetailsList.Item>
       <DetailsList.Item label="Github">{githubUrl || '-'}</DetailsList.Item>
-      <p className="mt-8 overflow-y-scroll">{otherActivities}</p>
+      <p className="mt-8">{otherActivities}</p>
     </DetailsList>
   );
 };

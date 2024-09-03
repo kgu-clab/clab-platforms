@@ -5,10 +5,6 @@ import { useGetModalStore } from '@store/modal';
 
 import Modal from './Modal';
 
-const preventScroll = (e: WheelEvent | TouchEvent) => {
-  e.preventDefault();
-};
-
 const ModalContainer = () => {
   const { isOpen, title, content, custom, accept, cancel } = useGetModalStore();
   const { closeModal } = useModal();
@@ -34,14 +30,12 @@ const ModalContainer = () => {
 
   useLayoutEffect(() => {
     if (isOpen) {
-      document.addEventListener('wheel', preventScroll, { passive: false });
-      document.addEventListener('touchmove', preventScroll, { passive: false });
+      document.body.classList.add('overflow-hidden');
       document.addEventListener('keydown', handleKeyDown);
     }
 
     return () => {
-      document.removeEventListener('wheel', preventScroll);
-      document.removeEventListener('touchmove', preventScroll);
+      document.body.classList.remove('overflow-hidden');
       document.removeEventListener('keydown', handleKeyDown);
     };
   }, [isOpen, handleKeyDown]);
