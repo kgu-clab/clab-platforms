@@ -198,7 +198,7 @@ export default function Modal({ title, close, size, children }: ModalProps) {
       <div
         ref={modalRef}
         className={cn(
-          'flex h-fit max-h-[90vh] min-h-[500px] w-11/12 flex-col overflow-hidden rounded-lg bg-white p-0 shadow-xl',
+          'flex max-h-[90vh] w-11/12 flex-col overflow-hidden rounded-lg bg-white p-0 shadow-xl',
           !size ? 'container' : MAX_SIZE_VALUE[size],
         )}
       >
