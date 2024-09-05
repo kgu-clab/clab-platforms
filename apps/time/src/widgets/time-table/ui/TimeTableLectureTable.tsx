@@ -27,15 +27,15 @@ interface TimeTableLectureTableItemProps {
 }
 
 const LECTURE_TABLE_ROW_HEADER = [
-  { title: '캠퍼스', size: 1 },
-  { title: '카테고리', size: 1 },
-  { title: '과목코드', size: 1 },
-  { title: '학점', size: 1 },
-  { title: '학년', size: 1 },
+  { title: '캠퍼스', size: 2 },
+  { title: '카테고리', size: 2 },
+  { title: '과목코드', size: 2 },
+  { title: '학점', size: 2 },
+  { title: '학년', size: 2 },
   { title: '전공', size: 3 },
   { title: '수업명', size: 4 },
   { title: '담당교수', size: 3 },
-  { title: '학기', size: 1 },
+  { title: '학기', size: 2 },
   { title: '시간', size: 3 },
   { title: '수업구분', size: 7 },
 ] as const;
@@ -45,7 +45,7 @@ function TimeTableLectureNotification({ text }: { text: string }) {
     <tr className="size-full">
       <td
         colSpan={LECTURE_TABLE_ROW_HEADER.length}
-        className="size-full px-10 py-24 text-center"
+        className="size-full px-10 py-40 text-center"
       >
         {text}
       </td>
@@ -118,7 +118,7 @@ function TimeTableLectureContent({
 
   return (
     <tbody className="size-full divide-y divide-gray-300">
-      {data && (
+      {data ? (
         <>
           {data.length ? (
             <>
@@ -134,6 +134,8 @@ function TimeTableLectureContent({
             <TimeTableLectureNotification text="검색 결과가 없습니다" />
           )}
         </>
+      ) : (
+        <TimeTableLectureNotification text="강의 정보를 불러오고 있습니다" />
       )}
       {hasNextPage && (
         <tr className="block">
@@ -163,7 +165,7 @@ function TimeTableLectureTable({
               <th
                 className="shrink-0 whitespace-nowrap border-y border-gray-400 px-1 py-2"
                 key={title}
-                style={{ width: `${size * 2}rem` }}
+                style={{ minWidth: `${size * 2}rem` }}
               >
                 {title}
               </th>
