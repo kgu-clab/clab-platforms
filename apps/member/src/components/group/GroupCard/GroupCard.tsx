@@ -88,7 +88,7 @@ const GroupCard = ({
       <div className="col-span-2 flex flex-col gap-2 divide-y p-4 ">
         <div className="h-full overflow-hidden text-ellipsis sm:h-24 ">
           <p className="truncate text-lg font-bold">{name}</p>
-          <p className="line-clamp-4 text-sm text-gray-600 sm:line-clamp-3">
+          <p className="line-clamp-4 whitespace-pre-line text-sm text-gray-600 sm:line-clamp-3">
             {content}
           </p>
         </div>
