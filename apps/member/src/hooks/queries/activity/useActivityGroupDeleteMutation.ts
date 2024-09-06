@@ -2,6 +2,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 import { deleteActivityGroup } from '@api/activity';
 import { ACTIVITY_QUERY_KEY } from '@constants/key';
+import { ACTIVITY_STATE } from '@constants/state';
 import useToast from '@hooks/common/useToast';
 
 /**
@@ -25,9 +26,15 @@ export function useActivityGroupDeleteMutation() {
           message: '활동 그룹 삭제에 성공했습니다.',
         });
       }
+      const queryKeys = [
+        ACTIVITY_QUERY_KEY.STATUS(ACTIVITY_STATE.END),
+        ACTIVITY_QUERY_KEY.STATUS(ACTIVITY_STATE.PROGRESSING),
+        ACTIVITY_QUERY_KEY.STATUS(ACTIVITY_STATE.WAITING),
+        ACTIVITY_QUERY_KEY.DETAIL(data),
+      ];
 
-      queryClient.invalidateQueries({
-        queryKey: ACTIVITY_QUERY_KEY.DETAIL(data),
+      queryKeys.forEach((queryKey) => {
+        queryClient.invalidateQueries({ queryKey });
       });
     },
   });

@@ -31,6 +31,7 @@ export function useActivityGroupBoardMutation() {
         ACTIVITY_QUERY_KEY.BOARD({ id: data.id }),
         ACTIVITY_QUERY_KEY.BOARD({ id: data.parentId, parent: true }),
         ACTIVITY_QUERY_KEY.DETAIL(data.groupId),
+        ACTIVITY_QUERY_KEY.MY_ASSIGNMENT(data.parentId),
       ];
 
       queryKeys.forEach((queryKey) => {
@@ -69,6 +70,7 @@ export function useActivityGroupBoardPatchMutation() {
         ACTIVITY_QUERY_KEY.BOARD({ id: data.id }),
         ACTIVITY_QUERY_KEY.BOARD({ id: data.parentId, parent: true }),
         ACTIVITY_QUERY_KEY.DETAIL(data.groupId),
+        ACTIVITY_QUERY_KEY.MY_ASSIGNMENT(data.parentId),
       ];
 
       queryKeys.forEach((queryKey) => {
