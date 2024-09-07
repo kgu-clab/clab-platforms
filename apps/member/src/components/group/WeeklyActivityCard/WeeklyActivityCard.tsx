@@ -3,9 +3,11 @@ import { useNavigate } from 'react-router-dom';
 import { RegularFileAltOutline } from '@clab-platforms/icon';
 
 import File from '@components/common/File/File';
+import Image from '@components/common/Image/Image';
 
 import { PATH_FINDER } from '@constants/path';
 import useToast from '@hooks/common/useToast';
+import { isImageFile } from '@utils/api';
 
 import { ActivityBoardType } from '@type/activity';
 import type { ResponseFile } from '@type/api';
@@ -44,7 +46,6 @@ const WeeklyActivityCard = ({
       });
     }
   };
-
   return (
     <div key={index + 1}>
       <div className="flex items-center justify-between pt-2">
@@ -54,13 +55,29 @@ const WeeklyActivityCard = ({
         </div>
       </div>
       <div className="overflow-hidden transition duration-500 ease-in-out">
-        <div className="mt-2 space-y-4">
+        <div className="mt-2 space-y-3">
           <p className="whitespace-pre-line break-keep text-sm">{content}</p>
-          {files?.map((file) => (
-            <File key={file.fileUrl} href={file.fileUrl}>
-              <p className="mt-4 text-gray-700 ">{file.originalFileName}</p>
-            </File>
-          ))}
+          <hr />
+          <div>
+            {files?.map((file) => (
+              <div key={file.fileUrl} className="flex gap-2">
+                {isImageFile(file.fileUrl) ? (
+                  <Image
+                    src={file.fileUrl}
+                    alt={file.originalFileName}
+                    height="w-[300px]"
+                    className="object-cover"
+                  />
+                ) : (
+                  <File
+                    href={file.fileUrl}
+                    name={file.originalFileName}
+                    key={file.fileUrl}
+                  />
+                )}
+              </div>
+            ))}
+          </div>
           {assignments?.map(({ id: assignmentId, title: assignmentTitle }) => (
             <div
               key={assignmentId}

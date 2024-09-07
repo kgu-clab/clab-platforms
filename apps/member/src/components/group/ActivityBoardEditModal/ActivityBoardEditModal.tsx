@@ -21,7 +21,7 @@ interface Props {
   groupId: number;
 }
 interface FileUploaderProps {
-  uploadedFile: ResponseFile | null;
+  uploadedFile: Array<ResponseFile> | null;
   uploaderRef: React.RefObject<HTMLInputElement>;
   handleDeleteFileClick: () => void;
 }
@@ -32,8 +32,8 @@ const ActivityBoardEditModal = ({ prevData, groupId }: Props) => {
   const [board, setBoard] = useState<ActivityBoardType>(prevData);
 
   const uploaderRef = useRef<HTMLInputElement>(null);
-  const [uploadedFile, setUploadedFile] = useState<ResponseFile | null>(
-    prevData?.files?.[0] || null,
+  const [uploadedFile, setUploadedFile] = useState<Array<ResponseFile> | null>(
+    prevData?.files || null,
   );
   const { activityGroupBoardPatchMutate, activityGroupBoardPatchIsPending } =
     useActivityGroupBoardPatchMutation();
@@ -49,7 +49,7 @@ const ActivityBoardEditModal = ({ prevData, groupId }: Props) => {
   };
   const handleEditButtonClick = () => {
     const formData = new FormData();
-    const file = uploaderRef.current?.files?.[0];
+    const files = uploaderRef.current?.files;
 
     if (!board.title || !board.content) {
       return toast({
@@ -57,8 +57,10 @@ const ActivityBoardEditModal = ({ prevData, groupId }: Props) => {
         message: '제목과 내용을 입력해주세요.',
       });
     }
-    if (file) {
-      formData.append(FORM_DATA_KEY, file);
+    if (files?.length) {
+      Array.from(files).forEach((file) => {
+        formData.append(FORM_DATA_KEY, file);
+      });
     }
 
     activityGroupBoardPatchMutate({
@@ -70,7 +72,7 @@ const ActivityBoardEditModal = ({ prevData, groupId }: Props) => {
         content: board.content,
         dueDateTime: board.dueDateTime,
       },
-      files: file ? formData : undefined,
+      files: files?.length ? formData : undefined,
     });
     closeModal();
   };
@@ -134,22 +136,28 @@ const FileUploader = ({
 }: FileUploaderProps) => {
   return (
     <>
-      {uploadedFile && (
-        <div className="space-y-2">
-          <File key={uploadedFile.fileUrl} href={uploadedFile.fileUrl}>
-            {uploadedFile.originalFileName}
-          </File>
+      {uploadedFile?.length ? (
+        <div>
+          {uploadedFile?.map((file) => (
+            <File
+              key={file.fileUrl}
+              href={file.fileUrl}
+              name={file.originalFileName}
+            />
+          ))}
           <Button className="w-full" onClick={handleDeleteFileClick}>
             첨부파일 변경하기
           </Button>
         </div>
+      ) : (
+        <input
+          ref={uploaderRef}
+          id="uploader"
+          type="file"
+          multiple
+          className={cn(uploadedFile?.length && 'hidden')}
+        />
       )}
-      <input
-        ref={uploaderRef}
-        id="uploader"
-        type="file"
-        className={cn(uploadedFile && 'hidden')}
-      />
     </>
   );
 };

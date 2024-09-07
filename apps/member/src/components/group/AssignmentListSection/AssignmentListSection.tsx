@@ -80,9 +80,11 @@ const AssignmentListSection = () => {
                   <Table.Cell className="hover:underline">
                     {item.files
                       ? item.files.map((file) => (
-                          <File key={file.fileUrl} href={file.fileUrl}>
-                            {file.originalFileName}
-                          </File>
+                          <File
+                            href={file.fileUrl}
+                            name={file.originalFileName}
+                            key={file.fileUrl}
+                          />
                         ))
                       : '-'}
                   </Table.Cell>

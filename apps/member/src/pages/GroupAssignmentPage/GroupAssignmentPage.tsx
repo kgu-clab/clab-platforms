@@ -1,23 +1,31 @@
 import { useLocation, useParams } from 'react-router-dom';
 
+import { Badge, Button } from '@clab-platforms/design-system';
+
 import Content from '@components/common/Content/Content';
 import File from '@components/common/File/File';
 import Header from '@components/common/Header/Header';
+import Image from '@components/common/Image/Image';
 import Section from '@components/common/Section/Section';
+import ActivityBoardEditModal from '@components/group/ActivityBoardEditModal/ActivityBoardEditModal';
 import AssignmentListSection from '@components/group/AssignmentListSection/AssignmentListSection';
 import AssignmentUploadSection from '@components/group/AssignmentUploadSection/AssignmentUploadSection';
 
 import { GROUP_MESSAGE } from '@constants/message';
 import { PATH_FINDER } from '@constants/path';
 import { ACTIVITY_MEMBER_ROLE } from '@constants/state';
+import useModal from '@hooks/common/useModal';
 import {
   useActivityGroup,
   useActivityGroupBoardMyAssignment,
   useMyProfile,
 } from '@hooks/queries';
 import { useActivityGroupBoard } from '@hooks/queries/activity/useActivityGroupBoard';
+import { isImageFile } from '@utils/api';
+import { formattedDate } from '@utils/date';
 
 const GroupAssignmentPage = () => {
+  const { openModal } = useModal();
   const { id, assignmentId } = useParams();
   const { state } = useLocation();
   const { data: myProfile } = useMyProfile();
@@ -37,24 +45,51 @@ const GroupAssignmentPage = () => {
   );
   const feedback = myAssignment?.[0];
 
+  const handleEditNoticeClick = () => {
+    return openModal({
+      title: '수정하기',
+      custom: <ActivityBoardEditModal groupId={+id} prevData={board} />,
+    });
+  };
+
   return (
     <Content>
       <Header title={[...state.name]} path={PATH_FINDER.ACTIVITY_DETAIL(id)} />
       <Section>
-        <Section.Header title="과제 설명" />
+        <Section.Header title="과제 설명">
+          {isLeader && (
+            <Button size="sm" color="orange" onClick={handleEditNoticeClick}>
+              수정
+            </Button>
+          )}
+        </Section.Header>
         <Section.Body>
-          {board?.files.length !== 0 && (
-            <div className="mb-2 flex gap-2 text-sm">
-              <p className="hidden text-gray-500 sm:block">첨부파일 | </p>
-              {board.files.map((file) => (
-                <File key={file.fileUrl} href={file.fileUrl}>
-                  {file.originalFileName}
-                </File>
-              ))}
+          <Badge color="blue" className="px-1">
+            종료 일시 | {formattedDate(board?.dueDateTime)}
+          </Badge>
+          {board?.files && (
+            <div className="my-2 flex gap-2">
+              {board.files.map((file) =>
+                isImageFile(file.fileUrl) ? (
+                  <Image
+                    src={file.fileUrl}
+                    alt={file.originalFileName}
+                    height="w-[300px]"
+                    className="object-cover"
+                    key={file.fileUrl}
+                  />
+                ) : (
+                  <File
+                    href={file.fileUrl}
+                    name={file.originalFileName}
+                    key={file.fileUrl}
+                  />
+                ),
+              )}
             </div>
           )}
           <hr />
-          <p className="pt-3">{board?.content}</p>
+          <p className="py-3">{board?.content}</p>
         </Section.Body>
       </Section>
       {isLeader ? (

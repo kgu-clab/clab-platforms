@@ -86,3 +86,11 @@ export function authorization(token: string | null): Record<string, string> {
 export function isBase64(url: string): boolean {
   return /;base64,/.test(url);
 }
+/**
+ * 주어진 파일이 이미지인지 확인합니다.
+ * @param {string} fileUrl - 확인할 파일입니다.
+ * @returns {boolean} - 파일이 이미지라면 true, 아니면 false를 반환합니다.
+ */
+export const isImageFile = (fileUrl: string): boolean => {
+  return /\.(jpg|jpeg|png|gif)$/i.test(fileUrl);
+};
