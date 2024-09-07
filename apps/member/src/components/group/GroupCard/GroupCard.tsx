@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 
-import { Grid } from '@clab-platforms/design-system';
+import { Badge, Grid } from '@clab-platforms/design-system';
 import {
   CertificateSolidOutline,
   DateRangeOutline,
@@ -10,11 +10,14 @@ import { cn } from '@clab-platforms/utils';
 import Image from '@components/common/Image/Image';
 
 import { PATH_FINDER } from '@constants/path';
+import { createImageUrl } from '@utils/api';
 import { getDateSemester } from '@utils/date';
 
 import type { ActivityGroupItem } from '@type/activity';
 
-interface GroupCardProps extends ActivityGroupItem {}
+interface GroupCardProps extends ActivityGroupItem {
+  applied?: boolean;
+}
 
 interface InfoCardProps {
   title: string;
@@ -67,27 +70,31 @@ const GroupCard = ({
   participantCount,
   weeklyActivityCount,
   createdAt,
+  applied,
 }: GroupCardProps) => {
   const navigate = useNavigate();
-  const leaderName = leaders[0].name;
-  const leaderId = leaders[0].id;
+  const leaderName = leaders ? leaders[0].name : '';
+  const leaderId = leaders ? leaders[0].id : '';
 
   return (
     <Grid
       col="3"
       gap="sm"
-      className="h-[227px] cursor-pointer overflow-auto rounded-lg border transition-colors hover:bg-gray-50"
+      className="h-[227px] cursor-pointer overflow-hidden rounded-lg border transition-colors hover:bg-gray-50"
       onClick={() => navigate(PATH_FINDER.ACTIVITY_DETAIL(id))}
     >
       <Image
-        src={imageUrl}
+        src={createImageUrl(imageUrl)}
         alt={name}
         height="min-h-fit h-full"
         className="rounded-l-lg border-r object-cover"
       />
       <div className="col-span-2 flex flex-col gap-2 divide-y p-4 ">
         <div className="h-full overflow-hidden text-ellipsis sm:h-24 ">
-          <p className="truncate text-lg font-bold">{name}</p>
+          <div className="flex justify-between">
+            <p className="truncate text-lg font-bold">{name}</p>
+            {applied && <Badge color="secondary">내가 지원한 활동</Badge>}
+          </div>
           <p className="line-clamp-4 whitespace-pre-line text-sm text-gray-600 sm:line-clamp-3">
             {content}
           </p>
@@ -107,7 +114,9 @@ const GroupCard = ({
             </div>
           </div>
           <div className="flex flex-col justify-between text-sm md:pl-4">
-            <InfoRow label="팀장">{`${leaderName}(${leaderId})`}</InfoRow>
+            <InfoRow label="팀장">
+              {leaders ? `${leaderName}(${leaderId})` : '-'}
+            </InfoRow>
             <InfoRow label="정보">
               <div className="flex items-center text-sm text-gray-500">
                 <CertificateSolidOutline className="mr-1" />
