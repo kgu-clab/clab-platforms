@@ -8,7 +8,7 @@ import {
 
 import type { ResponseFile } from './api';
 
-type MemberStatusType =
+export type MemberStatusType =
   (typeof ACTIVITY_MEMBER_STATE)[keyof typeof ACTIVITY_MEMBER_STATE];
 export type ActivityGroupBoardCategoryType =
   (typeof ACTIVITY_BOARD_CATEGORY_STATE)[keyof typeof ACTIVITY_BOARD_CATEGORY_STATE];

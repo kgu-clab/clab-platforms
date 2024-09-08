@@ -23,7 +23,6 @@ import type { ActivityGroupItem } from '@type/activity';
 const MenubarItems = [
   { name: '현재 진행중인 그룹', value: ACTIVITY_STATE.PROGRESSING },
   { name: '나의 활동', value: ACTIVITY_MEMBER_STATE.ACCEPTED },
-  { name: '나의 지원', value: ACTIVITY_MEMBER_STATE.WAITING },
 ];
 const SubMenubarItems = [
   { name: '진행중', value: ACTIVITY_STATE.PROGRESSING },
@@ -45,21 +44,27 @@ const GroupPage = () => {
   );
 
   useEffect(() => {
+    const waitingActivityId = new Set(waitingData.items.map((item) => item.id));
+    const updatedProgressingData = progressingData.items.map((item) => ({
+      ...item,
+      applied: waitingActivityId.has(item.id) ? true : false,
+    }));
+
     switch (menu.value) {
       case ACTIVITY_STATE.PROGRESSING:
-        setRenderData(progressingData.items);
+        setRenderData(updatedProgressingData);
         break;
       case ACTIVITY_MEMBER_STATE.ACCEPTED:
         setRenderData(acceptedData.items);
         break;
-      case ACTIVITY_MEMBER_STATE.WAITING:
-        setRenderData(waitingData.items);
-        break;
     }
   }, [menu, progressingData, acceptedData, waitingData]);
+
   useEffect(() => {
     acceptedDataRefetch();
   }, [subMenu, acceptedDataRefetch]);
+
+  const reversedRenderData = [...renderData];
 
   return (
     <Content>
@@ -116,8 +121,8 @@ const GroupPage = () => {
               </Menubar>
             )}
           </>
-          {renderData.length > 0 ? (
-            renderData.map(({ id, ...rest }) => (
+          {reversedRenderData.length > 0 ? (
+            reversedRenderData.map(({ id, ...rest }) => (
               <GroupCard key={id} id={id} {...rest} />
             ))
           ) : (

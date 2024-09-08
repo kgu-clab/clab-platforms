@@ -20,14 +20,14 @@ const ActivityDetailSection = ({ data }: ActivityDetailSectionProps) => {
     <div className="space-y-4">
       <Image
         width="w-full"
-        height="h-[300px]"
+        height="h-[320px]"
         src={data.imageUrl}
         alt={data.name}
         className="rounded-lg border object-cover"
       />
-      <Section>
+      <Section className="flex h-[160px] flex-col justify-between overflow-scroll">
         <h1 className="text-xl font-bold">{data.name}</h1>
-        <p className="my-1 text-sm">{data.content}</p>
+        <p className="my-1 whitespace-pre-line text-sm ">{data.content}</p>
         <div className="flex items-center gap-1 text-sm text-gray-500">
           <CertificateSolidOutline />
           <span>{data.category}</span>

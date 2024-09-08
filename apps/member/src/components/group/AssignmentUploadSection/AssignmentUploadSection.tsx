@@ -8,6 +8,7 @@ import Section from '@components/common/Section/Section';
 import Textarea from '@components/common/Textarea/Textarea';
 
 import { FORM_DATA_KEY } from '@constants/api';
+import { ACTIVITY_BOARD_CATEGORY_STATE } from '@constants/state';
 import useToast from '@hooks/common/useToast';
 import {
   useActivityGroupBoardMutation,
@@ -15,6 +16,7 @@ import {
   useMyProfile,
 } from '@hooks/queries';
 import { formattedDate, isDateValid, toKoreaISOString } from '@utils/date';
+import dayjs from 'dayjs';
 
 import type { ActivityBoardType } from '@type/activity';
 import type { ResponseFile } from '@type/api';
@@ -33,6 +35,7 @@ const AssignmentUploadSection = ({
   myAssignment,
 }: Props) => {
   const toast = useToast();
+  const isAlreadySubmitted = Boolean(myAssignment);
   const { data: myProfile } = useMyProfile();
   const { activityGroupBoardMutate, activityGroupBoardIsPending } =
     useActivityGroupBoardMutation();
@@ -41,8 +44,8 @@ const AssignmentUploadSection = ({
   const [editMode, setEditMode] = useState(false);
 
   const uploaderRef = useRef<HTMLInputElement>(null);
-  const [uploadedFile, setUploadedFile] = useState<ResponseFile | null>(
-    myAssignment?.files?.[0] || null,
+  const [uploadedFile, setUploadedFile] = useState<Array<ResponseFile> | null>(
+    myAssignment?.files || null,
   );
   const [description, setDescription] = useState(myAssignment?.content ?? '');
 
@@ -54,24 +57,25 @@ const AssignmentUploadSection = ({
 
   const handleDeleteFileClick = () => {
     setEditMode(true);
-    setUploadedFile(null);
   };
 
   const handleSubmitButtonClick = () => {
     const formData = new FormData();
-    const file = uploaderRef.current?.files?.[0];
+    const files = uploaderRef.current?.files;
 
-    if (!description || !file) {
+    if (!description && files?.length === 0) {
       return toast({
         state: 'error',
-        message: '첨부파일과 설명을 입력해주세요.',
+        message: '첨부파일이나 설명을 입력해주세요.',
       });
     }
-    if (file) {
-      formData.append(FORM_DATA_KEY, file);
+    if (files?.length) {
+      Array.from(files).forEach((file) => {
+        formData.append(FORM_DATA_KEY, file);
+      });
     }
 
-    if (myAssignment?.content || myAssignment?.files?.length) {
+    if (isAlreadySubmitted && myAssignment) {
       // 기존에 제출한 내용이나 파일이 있는 경우 수정으로 처리합니다.
       activityGroupBoardPatchMutate({
         activityGroupBoardId: myAssignment.id,
@@ -80,7 +84,7 @@ const AssignmentUploadSection = ({
         body: {
           content: description,
         },
-        files: file ? formData : undefined,
+        files: files?.length ? formData : undefined,
       });
     } else {
       // 신규 제출
@@ -89,13 +93,12 @@ const AssignmentUploadSection = ({
         activityGroupId: activityGroupId,
         memberId: myProfile.id,
         body: {
-          category: 'SUBMIT',
+          category: ACTIVITY_BOARD_CATEGORY_STATE.SUBMIT,
           content: description,
         },
-        files: file ? formData : undefined,
+        files: files?.length ? formData : undefined,
       });
     }
-
     setEditMode(false);
     setUploadedFile(null);
   };
@@ -103,7 +106,7 @@ const AssignmentUploadSection = ({
   useEffect(() => {
     if (!editMode) {
       setDescription(myAssignment?.content || '');
-      setUploadedFile(myAssignment?.files?.[0] || null);
+      setUploadedFile(myAssignment?.files || null);
     }
   }, [editMode, myAssignment]);
 
@@ -117,7 +120,21 @@ const AssignmentUploadSection = ({
         </Table.Row>
         <Table.Row>
           <Table.Cell>종료 일시</Table.Cell>
-          <Table.Cell>{formattedDate(dueDateTime)}</Table.Cell>
+          <Table.Cell
+            className={cn({
+              'text-red-500': isDateValid(
+                dueDateTime,
+                toKoreaISOString(dayjs().format('YYYY.MM.DD')),
+              ),
+            })}
+          >
+            {isDateValid(
+              dueDateTime,
+              toKoreaISOString(dayjs().format('YYYY.MM.DD')),
+            )
+              ? '제출 기한이 지났습니다'
+              : formattedDate(dueDateTime)}
+          </Table.Cell>
         </Table.Row>
         <Table.Row>
           <Table.Cell>제출 일시</Table.Cell>
@@ -125,28 +142,34 @@ const AssignmentUploadSection = ({
             className={cn({
               'text-red-500': !isDateValid(
                 dueDateTime,
-                uploadedFile?.createdAt,
+                myAssignment?.updatedAt,
               ),
             })}
           >
             {uploadedFile
-              ? formattedDate(toKoreaISOString(uploadedFile.createdAt))
+              ? formattedDate(toKoreaISOString(myAssignment?.updatedAt))
               : '아직 제출하지 않았습니다.'}
           </Table.Cell>
         </Table.Row>
         <Table.Row>
           <Table.Cell>첨부 파일</Table.Cell>
           <Table.Cell>
-            {uploadedFile && (
-              <File href={uploadedFile.fileUrl}>
-                {uploadedFile.originalFileName}
-              </File>
+            {uploadedFile?.map(
+              (file) =>
+                !editMode && (
+                  <File
+                    key={file.fileUrl}
+                    href={file.fileUrl}
+                    name={file.originalFileName}
+                  />
+                ),
             )}
             <input
               ref={uploaderRef}
               id="uploader"
               type="file"
-              className={cn(uploadedFile && 'hidden')}
+              multiple
+              className={cn(!editMode && isAlreadySubmitted && 'hidden')}
             />
           </Table.Cell>
         </Table.Row>
@@ -173,15 +196,17 @@ const AssignmentUploadSection = ({
             수정하기
           </Button>
         )}
-        <Button
-          className="w-full"
-          onClick={handleSubmitButtonClick}
-          disabled={
-            activityGroupBoardIsPending || activityGroupBoardPatchIsPending
-          }
-        >
-          제출하기
-        </Button>
+        {(!isAlreadySubmitted || editMode) && (
+          <Button
+            className="w-full"
+            onClick={handleSubmitButtonClick}
+            disabled={
+              activityGroupBoardIsPending || activityGroupBoardPatchIsPending
+            }
+          >
+            제출하기
+          </Button>
+        )}
       </div>
     </Section>
   );

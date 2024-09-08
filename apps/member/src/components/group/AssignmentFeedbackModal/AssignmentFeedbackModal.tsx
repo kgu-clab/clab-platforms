@@ -83,7 +83,7 @@ const AssignmentFeedbackModal = ({
             ? post.files.map((file) => (
                 <div key={file.fileUrl} className="flex gap-2">
                   <p>제출 파일 | </p>
-                  <File href={file.fileUrl}>{file.originalFileName}</File>
+                  <File href={file.fileUrl} name={file.originalFileName} />
                 </div>
               ))
             : '-'}

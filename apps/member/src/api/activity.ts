@@ -274,7 +274,7 @@ export async function postActivityBoard({
     activityGroupId: activityGroupId,
   };
 
-  let fileUrl: string | null = null;
+  let fileUrl: Array<string> | null = null;
 
   if (
     body.category === ACTIVITY_BOARD_CATEGORY_STATE.ASSIGNMENT &&
@@ -289,7 +289,7 @@ export async function postActivityBoard({
       files,
     });
 
-    fileUrl = data[0].fileUrl;
+    fileUrl = data.map((file) => file.fileUrl);
   } else if (
     body.category === ACTIVITY_BOARD_CATEGORY_STATE.WEEKLY_ACTIVITY &&
     memberId &&
@@ -301,7 +301,7 @@ export async function postActivityBoard({
       files,
     });
 
-    fileUrl = data[0].fileUrl;
+    fileUrl = data.map((file) => file.fileUrl);
   }
 
   const { data } = await server.post<
@@ -311,7 +311,7 @@ export async function postActivityBoard({
     url: createPagination(END_POINT.ACTIVITY_GROUP_BOARD, params),
     body: {
       ...body,
-      fileUrls: fileUrl ? [fileUrl] : undefined,
+      fileUrls: fileUrl ? fileUrl : undefined,
     },
   });
 
@@ -328,7 +328,7 @@ export async function patchActivityBoard({
   body,
   files,
 }: PatchActivityBoardParams) {
-  let fileUrl: string | null = null;
+  let fileUrl: Array<string> | null = null;
 
   if (groupBoardId === null && groupId && files) {
     // 파일이 있을 경우 파일 업로드 진행 (주차별 활동 파일)
@@ -336,8 +336,7 @@ export async function patchActivityBoard({
       groupId: groupId,
       files,
     });
-
-    fileUrl = data[0].fileUrl;
+    fileUrl = data.map((file) => file.fileUrl);
   } else if (groupId && groupBoardId && files) {
     // 파일이 있을 경우 파일 업로드 진행 (과제 파일)
     const data = await postUploadedFileAssignment({
@@ -345,8 +344,7 @@ export async function patchActivityBoard({
       groupBoardId: groupBoardId,
       files,
     });
-
-    fileUrl = data[0].fileUrl;
+    fileUrl = data.map((file) => file.fileUrl);
   }
 
   const { data } = await server.patch<
@@ -358,7 +356,7 @@ export async function patchActivityBoard({
     }),
     body: {
       ...body,
-      fileUrls: fileUrl ? [fileUrl] : undefined,
+      fileUrls: fileUrl ? fileUrl : undefined,
     },
   });
 

@@ -40,15 +40,17 @@ const ActivityAssignmentEditor = ({ parentId, activityGroupId }: Props) => {
   };
   const handleAddAssignmentClick = () => {
     const formData = new FormData();
-    const file = uploaderRef.current?.files?.[0];
+    const files = uploaderRef.current?.files;
 
     if (!board.title || !board.content || !board.dueDateTime)
       return toast({
         state: 'error',
         message: '제목, 내용, 종료 일시는 필수 입력 요소입니다.',
       });
-    if (file) {
-      formData.append(FORM_DATA_KEY, file);
+    if (files) {
+      Array.from(files).forEach((file) => {
+        formData.append(FORM_DATA_KEY, file);
+      });
     }
 
     activityGroupBoardMutate(
@@ -60,7 +62,7 @@ const ActivityAssignmentEditor = ({ parentId, activityGroupId }: Props) => {
           category: ACTIVITY_BOARD_CATEGORY_STATE.ASSIGNMENT,
           ...board,
         },
-        files: file ? formData : undefined,
+        files: files?.length ? formData : undefined,
       },
       { onSuccess: () => setBoard(defaultBoard) },
     );
@@ -68,17 +70,7 @@ const ActivityAssignmentEditor = ({ parentId, activityGroupId }: Props) => {
 
   return (
     <Section>
-      <Section.Header title="과제 관리">
-        <div className="space-x-2">
-          <Button
-            size="sm"
-            onClick={handleAddAssignmentClick}
-            disabled={activityGroupBoardIsPending}
-          >
-            추가
-          </Button>
-        </div>
-      </Section.Header>
+      <Section.Header title="과제 관리" />
       <Section.Body className="space-y-4">
         <div className="space-y-2">
           <Input
@@ -112,10 +104,17 @@ const ActivityAssignmentEditor = ({ parentId, activityGroupId }: Props) => {
               <label htmlFor="fileUpload" className="mb-1 ml-1 text-xs">
                 첨부 파일
               </label>
-              <input ref={uploaderRef} id="fileUpload" type="file" />
+              <input ref={uploaderRef} id="fileUpload" type="file" multiple />
             </div>
           </Grid>
         </div>
+        <Button
+          className="w-full"
+          onClick={handleAddAssignmentClick}
+          disabled={activityGroupBoardIsPending}
+        >
+          추가
+        </Button>
       </Section.Body>
     </Section>
   );
