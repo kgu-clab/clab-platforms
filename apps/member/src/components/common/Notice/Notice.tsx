@@ -42,7 +42,7 @@ const Notice = ({
           },
         )}
       >
-        D-{dDay}
+        {dDay === 0 ? 'D-Day' : `D-${dDay}`}
       </div>
     );
   }

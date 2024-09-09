@@ -30,7 +30,9 @@ export function toYYMMDD(date: string) {
  * @return {number} 오늘부터 주어진 날짜까지의 일수 차이, 절대값으로 반환됩니다.
  */
 export function calculateDDay(date: string): number {
-  return Math.abs(dayjs(date).diff(dayjs(), 'day'));
+  return Math.abs(
+    dayjs(date).startOf('day').diff(dayjs().startOf('day'), 'day'),
+  );
 }
 /**
  * 주어진 날짜를 'YY.MM.DD(dd) HH:mm' 형식으로 포맷합니다.

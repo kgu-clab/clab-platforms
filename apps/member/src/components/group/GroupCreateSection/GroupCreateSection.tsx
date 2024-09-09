@@ -16,11 +16,11 @@ import { PATH } from '@constants/path';
 import { SELECT_ACTIVITY_GROUP_CATEGORY_TYPE } from '@constants/select';
 import {
   ACTIVITY_GROUP_CONTENT_MAX_LENGTH,
-  BOARD_CONTENT_MAX_LENGTH,
   BOARD_TITLE_MAX_LENGTH,
 } from '@constants/state';
 import useToast from '@hooks/common/useToast';
 import { useActivityGroupMutation } from '@hooks/queries';
+import { toKoreaActivityGroupCategory } from '@utils/string';
 
 import type { ActivityGroupCategoryType } from '@type/activity';
 
@@ -72,7 +72,7 @@ const ComponentWithLabel = ({
 
 const CategoryOptions = Object.entries(SELECT_ACTIVITY_GROUP_CATEGORY_TYPE).map(
   ([key, value]) => ({
-    name: key,
+    name: toKoreaActivityGroupCategory(key as ActivityGroupCategoryType),
     value,
   }),
 );
@@ -127,13 +127,13 @@ const GroupCreateSection = () => {
     } else if (content.length > ACTIVITY_GROUP_CONTENT_MAX_LENGTH) {
       return toast({
         state: 'error',
-        message: '내용은 200자 이내로 작성해주세요.',
+        message: `내용은 ${ACTIVITY_GROUP_CONTENT_MAX_LENGTH}자 이내로 작성해주세요.`,
       });
     } else if (curriculum) {
-      if (curriculum.length > BOARD_CONTENT_MAX_LENGTH) {
+      if (curriculum.length > ACTIVITY_GROUP_CONTENT_MAX_LENGTH) {
         return toast({
           state: 'error',
-          message: '커리큘럼은 200자 이내로 작성해주세요.',
+          message: `커리큘럼은 ${ACTIVITY_GROUP_CONTENT_MAX_LENGTH}자 이내로 작성해주세요.`,
         });
       }
     }
@@ -268,11 +268,13 @@ const GroupCreateSection = () => {
           />
           <p
             className={cn('mt-2 text-right text-xs', {
-              ' text-red-500': content.length > BOARD_CONTENT_MAX_LENGTH,
+              ' text-red-500':
+                curriculum &&
+                curriculum.length > ACTIVITY_GROUP_CONTENT_MAX_LENGTH,
             })}
           >
-            <span>{content.length}</span>
-            <span>{'/' + BOARD_CONTENT_MAX_LENGTH + '자'}</span>
+            <span>{curriculum ? curriculum.length : '0'}</span>
+            <span>{'/' + ACTIVITY_GROUP_CONTENT_MAX_LENGTH + '자'}</span>
           </p>
         </ComponentWithLabel>
         <Grid gap="md" col="2">

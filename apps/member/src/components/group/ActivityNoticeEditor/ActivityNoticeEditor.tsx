@@ -59,17 +59,7 @@ const ActivityNoticeEditor = ({ groupId, data }: ActivityNoticeEditorProps) => {
   return (
     <>
       <Section>
-        <Section.Header title="공지 관리">
-          <div className="space-x-2">
-            <Button
-              size="sm"
-              onClick={handleAddNoticeButtonClick}
-              disabled={activityGroupBoardIsPending}
-            >
-              추가
-            </Button>
-          </div>
-        </Section.Header>
+        <Section.Header title="공지 관리" />
         <Section.Body className="space-y-4">
           <div className="space-y-2">
             <Input
@@ -92,6 +82,13 @@ const ActivityNoticeEditor = ({ groupId, data }: ActivityNoticeEditorProps) => {
           </div>
           <Hr>미리보기</Hr>
           <ActivityNoticeSection data={[notice, ...data]} />
+          <Button
+            className="w-full"
+            onClick={handleAddNoticeButtonClick}
+            disabled={activityGroupBoardIsPending}
+          >
+            추가
+          </Button>
         </Section.Body>
       </Section>
       <ActivityConfigTableSection tableList={data} groupId={groupId} />

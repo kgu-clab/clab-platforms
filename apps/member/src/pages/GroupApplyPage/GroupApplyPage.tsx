@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { Button } from '@clab-platforms/design-system';
@@ -17,6 +17,7 @@ import {
   useActivityGroupMember,
   useActivityGroupMemberMutation,
 } from '@hooks/queries';
+import { toKoreaActivityGroupCategory } from '@utils/string';
 
 const GroupApplyPage = () => {
   const navigate = useNavigate();
@@ -25,11 +26,10 @@ const GroupApplyPage = () => {
     useActivityGroupMemberMutation();
   const toast = useToast();
 
-  const [groupID, setGroupID] = useState(0);
+  const [groupID, setGroupID] = useState<number | string>('none');
   const [reason, setReason] = useState('');
-
   const options = groupData.items.map((item) => ({
-    name: item.name,
+    name: `${toKoreaActivityGroupCategory(item.category)} / ${item.name} / ${item.leaders[0].name}`,
     value: item.id,
   }));
 
@@ -42,7 +42,7 @@ const GroupApplyPage = () => {
   };
 
   const handleApplyButtonClick = () => {
-    if (groupID === 0 || reason.length === 0) {
+    if (typeof groupID !== 'number' || reason.length === 0) {
       return toast({
         state: 'error',
         message: '필수 입력 사항을 모두 입력해주세요.',
@@ -51,7 +51,7 @@ const GroupApplyPage = () => {
 
     activityGroupMemberMutate(
       {
-        activityGroupId: groupID,
+        activityGroupId: +groupID,
         body: {
           applyReason: reason,
         },
@@ -60,18 +60,13 @@ const GroupApplyPage = () => {
     );
   };
 
-  useEffect(() => {
-    if (groupData.items.length && groupData.items[0].id)
-      setGroupID(groupData.items[0].id);
-  }, [groupData.items]);
-
   return (
     <Content>
       <Header title={['활동', '활동 신청']} path={PATH.ACTIVITY} />
       <Section className="space-y-4">
         <div>
           <Label htmlFor="select" required>
-            이름
+            활동
           </Label>
           <Select
             id="select"

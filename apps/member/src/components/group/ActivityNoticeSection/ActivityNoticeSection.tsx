@@ -18,7 +18,7 @@ interface ActivityNoticeSectionProps {
 
 interface ActivityNoticeSectionItemProps {
   className?: string;
-  onClick: (content: string) => void;
+  onClick: (content: string, title?: string) => void;
   data: ActivityBoardType;
 }
 
@@ -37,9 +37,9 @@ const ActivityNoticeSection = ({ data }: ActivityNoticeSectionProps) => {
   const latestNotice = sortedNotices[0];
   const otherNotices = sortedNotices.slice(1);
 
-  const onClickAlert = (content: string) => {
+  const onClickAlert = (content: string, title?: string) => {
     openModal({
-      title: '📣 공지사항',
+      title: `📣 ${title}`,
       content: content,
     });
   };
@@ -94,11 +94,13 @@ ActivityNoticeSection.Item = ({
     >
       <div
         className="flex cursor-pointer items-center justify-between gap-2"
-        onClick={() => onClick(data.content)}
+        onClick={() => onClick(data.content, data.title)}
       >
         <p className="w-full truncate">{data.title}</p>
         <p className="whitespace-nowrap text-sm text-gray-500">
-          {formattedDate(toKoreaISOString(data.updatedAt))}
+          {formattedDate(
+            data.updatedAt ? toKoreaISOString(data.updatedAt) : String(dayjs()),
+          )}
         </p>
       </div>
     </div>

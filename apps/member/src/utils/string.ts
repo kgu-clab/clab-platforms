@@ -1,6 +1,12 @@
 import { SERVICE_NAME } from '@constants/environment';
+import { SELECT_ACTIVITY_GROUP_CATEGORY_TYPE } from '@constants/select';
+import { ACTIVITY_MEMBER_ROLE, ACTIVITY_MEMBER_STATE } from '@constants/state';
 
-import { ActivityMemberRoleType } from '@type/activity';
+import {
+  ActivityGroupCategoryType,
+  ActivityMemberRoleType,
+  MemberStatusType,
+} from '@type/activity';
 import type { Bookstore, BookstoreKorean } from '@type/book';
 import type { CareerLevel, EmploymentType } from '@type/community';
 import { RoleLevelKey, RoleLevelType } from '@type/member';
@@ -160,10 +166,38 @@ export function toKoreaActivityGroupMemberLevel(
   memberLevel: ActivityMemberRoleType | null,
 ) {
   switch (memberLevel) {
-    case 'MEMBER':
+    case ACTIVITY_MEMBER_ROLE.MEMBER:
       return '멤버';
-    case 'LEADER':
+    case ACTIVITY_MEMBER_ROLE.LEADER:
       return '리더';
+    default:
+      return '-';
+  }
+}
+
+export function toKoreaActivityGroupCategory(
+  activityGroupCategory: ActivityGroupCategoryType | null,
+) {
+  switch (activityGroupCategory) {
+    case SELECT_ACTIVITY_GROUP_CATEGORY_TYPE.STUDY:
+      return '스터디';
+    case SELECT_ACTIVITY_GROUP_CATEGORY_TYPE.PROJECT:
+      return '프로젝트';
+    default:
+      return '-';
+  }
+}
+
+export function toKoreaActivityGroupMemberStatus(
+  status: MemberStatusType,
+): string {
+  switch (status) {
+    case ACTIVITY_MEMBER_STATE.ACCEPTED:
+      return '승인';
+    case ACTIVITY_MEMBER_STATE.REJECTED:
+      return '거절';
+    case ACTIVITY_MEMBER_STATE.WAITING:
+      return '대기';
     default:
       return '-';
   }

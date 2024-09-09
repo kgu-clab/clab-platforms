@@ -66,7 +66,7 @@ const ActivityPostEditor = ({
   };
   const handleAddWeeklyClick = () => {
     const formData = new FormData();
-    const file = uploaderRef.current?.files?.[0];
+    const files = uploaderRef.current?.files;
 
     if (!post.title || !post.content) {
       return toast({
@@ -74,8 +74,10 @@ const ActivityPostEditor = ({
         message: '제목, 내용은 필수 입력 요소입니다.',
       });
     }
-    if (file) {
-      formData.append(FORM_DATA_KEY, file);
+    if (files?.length) {
+      Array.from(files).forEach((file) => {
+        formData.append(FORM_DATA_KEY, file);
+      });
     }
 
     const activityBoardItem: SubmitBoardType = {
@@ -87,7 +89,7 @@ const ActivityPostEditor = ({
         activityGroupId: groupId,
         memberId: myProfile.id,
         body: activityBoardItem,
-        files: file ? formData : undefined,
+        files: files?.length ? formData : undefined,
       },
       { onSuccess: () => setPost(defaultPost) },
     );
@@ -109,15 +111,7 @@ const ActivityPostEditor = ({
   return (
     <>
       <Section>
-        <Section.Header title="주차별 활동 관리">
-          <Button
-            size="sm"
-            onClick={handleAddWeeklyClick}
-            disabled={activityGroupBoardIsPending}
-          >
-            추가
-          </Button>
-        </Section.Header>
+        <Section.Header title="주차별 활동 관리" />
         <Section.Body className="space-y-4">
           <div className="space-y-2">
             <Input
@@ -142,7 +136,7 @@ const ActivityPostEditor = ({
               <label htmlFor="fileUpload" className="mb-1 ml-1 text-xs">
                 첨부 파일
               </label>
-              <input ref={uploaderRef} id="fileUpload" type="file" />
+              <input ref={uploaderRef} id="fileUpload" type="file" multiple />
             </div>
           </div>
           <Hr>미리보기</Hr>
@@ -155,6 +149,13 @@ const ActivityPostEditor = ({
               isParticipant
             />
           </Section>
+          <Button
+            className="w-full"
+            onClick={handleAddWeeklyClick}
+            disabled={activityGroupBoardIsPending}
+          >
+            추가
+          </Button>
         </Section.Body>
       </Section>
       {activities.map((weeklyData, index) => (
@@ -166,7 +167,7 @@ const ActivityPostEditor = ({
                 color="orange"
                 onClick={() => handleAssignmentEditClick(index)}
               >
-                과제 관리
+                {editAssignment[index] ? '과제 닫기' : '과제 열기'}
               </Button>
               <Button
                 size="sm"
