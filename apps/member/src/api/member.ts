@@ -7,6 +7,7 @@ import type {
   ResponsePagination,
   WithPaginationParams,
 } from '@type/api';
+import { AddMemberRequestType } from '@type/manage.ts';
 import type {
   MemberInfo,
   MemberProfileRequestType,
@@ -133,6 +134,18 @@ export async function patchMemberRole({
     url: END_POINT.MEMBER_LEVEL_EDIT(memberId),
     body,
   });
+
+  return data;
+}
+
+/**
+ * 멤버 추가
+ */
+export async function addMember(body: AddMemberRequestType) {
+  const { data } = await server.post<
+    AddMemberRequestType,
+    BaseResponse<string>
+  >({ url: END_POINT.MEMBER_ADD, body });
 
   return data;
 }
