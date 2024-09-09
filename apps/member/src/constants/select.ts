@@ -8,13 +8,13 @@ type Options<N = string, V = string> = {
   value: V;
 };
 
-type SelectOptions<N = string, V = string> = {
-  [key: string]: Options<N, V>[];
-};
+// type SelectOptions<N = string, V = string> = {
+//   [key: string]: Options<N, V>[];
+// };
 
 export const SELECT_DEFAULT_OPTION = 'none';
 
-export const SELECT_OPTIONS: SelectOptions = {
+export const SELECT_OPTIONS = {
   ACCOUNT_PANEL: [
     { name: '1', value: '1시간' },
     { name: '2', value: '2시간' },
@@ -30,6 +30,18 @@ export const SELECT_OPTIONS: SelectOptions = {
     { name: 'Data', value: 'Data' },
     { name: 'VR/AR', value: 'VR/AR' },
     { name: 'Game', value: 'Game' },
+  ],
+  STUDENT_STATUS: [
+    { name: '재학생', value: 'CURRENT' },
+    { name: '휴학생', value: 'ON_LEAVE' },
+    { name: '졸업생', value: 'GRADUATED' },
+  ],
+  GRADE: [
+    { name: '1학년', value: 1 },
+    { name: '2학년', value: 2 },
+    { name: '3학년', value: 3 },
+    { name: '4학년', value: 4 },
+    { name: '5학년', value: 5 },
   ],
 } as const;
 
