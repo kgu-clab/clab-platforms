@@ -4,7 +4,6 @@ import type {
 } from '@type/activity';
 import type { WithPaginationParams } from '@type/api';
 import type { CommunityCategoryType } from '@type/community';
-import { AddMemberRequestType } from '@type/manage.ts';
 import { RoleLevelKey } from '@type/member';
 
 /**
@@ -25,10 +24,6 @@ export const MEMBER_QUERY_KEY = {
   COMMENTS: () => [...MEMBER_QUERY_KEY.ALL, 'comments'],
   MEMBERS: () => [...MEMBER_QUERY_KEY.ALL, 'members'],
   MEMBER: (memberId: string) => [...MEMBER_QUERY_KEY.MEMBERS(), memberId],
-  ADD_MEMBER: (data: AddMemberRequestType) => [
-    ...MEMBER_QUERY_KEY.MEMBERS(),
-    data,
-  ],
   PAGES: () => [...MEMBER_QUERY_KEY.ALL, 'pages'],
   PAGE: (pagination: WithPaginationParams, role?: RoleLevelKey) => [
     ...MEMBER_QUERY_KEY.PAGES(),
