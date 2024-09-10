@@ -16,7 +16,7 @@ export interface AddMemberRequestType {
   birth: string;
   address: string;
   interests: string;
-  githubUrl: string;
+  githubUrl?: string;
   studentStatus: string;
-  imageUrl: string;
+  imageUrl?: string;
 }
