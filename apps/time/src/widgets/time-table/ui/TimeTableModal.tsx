@@ -259,11 +259,11 @@ const TimeTableModalMajorInput = memo(function TimeTableModalMajorInput({
     <Modal.Item title="전공 선택">
       <div className="relative" ref={ref}>
         <div
-          className="flex w-full flex-wrap gap-y-1 rounded-md border border-gray-400 p-2 text-sm"
+          className="flex w-full flex-wrap gap-1 rounded-md border border-gray-400 p-2 text-sm"
           onClick={() => setOpen(true)}
         >
           {selectedMajor && selectedValue}
-          <div className="grow">
+          <div className="flex grow items-center">
             <input
               className="w-full text-gray-600 focus:outline-0"
               value={inputValue}
@@ -339,7 +339,6 @@ export default function TimeTableModal<
     setSelectedDay([day]);
     setSelectedPeriod([period]);
     setSelectedLectureType([]);
-    setSelectedMajor([]);
     setSearchKeyword('');
   }, [day, period]);
 
