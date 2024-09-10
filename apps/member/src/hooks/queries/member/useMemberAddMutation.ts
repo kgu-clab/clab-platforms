@@ -18,7 +18,7 @@ export const useMemberAddMutation = () => {
     onSuccess: (data) => {
       if (data) {
         queryClient.invalidateQueries({
-          queryKey: MEMBER_QUERY_KEY.MEMBERS(),
+          queryKey: MEMBER_QUERY_KEY.PAGES(),
         });
         toast({
           state: 'success',
