@@ -1,5 +1,7 @@
 import { useParams } from 'react-router-dom';
 
+import EmptyBox from '@components/common/EmptyBox/EmptyBox';
+
 import { GROUP_MESSAGE } from '@constants/message';
 
 import type { ActivityBoardWithAssignmentType } from '@type/activity';
@@ -25,15 +27,19 @@ const WeeklyActivitySection = ({
         <h1 className="text-lg font-semibold">주차별 활동</h1>
       </div>
       <div className="space-y-4 divide-y p-4">
-        {[...data].map((activity, index) => (
-          <WeeklyActivityCard
-            key={index}
-            index={index}
-            groupId={+id}
-            isParticipant={isParticipant}
-            {...activity}
-          />
-        ))}
+        {data.length ? (
+          [...data].map((activity, index) => (
+            <WeeklyActivityCard
+              key={index}
+              index={index}
+              groupId={+id}
+              isParticipant={isParticipant}
+              {...activity}
+            />
+          ))
+        ) : (
+          <EmptyBox>{GROUP_MESSAGE.NO_WEEKLY_ACTIVITY}</EmptyBox>
+        )}
       </div>
     </div>
   );

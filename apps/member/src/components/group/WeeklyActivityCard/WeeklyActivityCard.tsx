@@ -8,6 +8,7 @@ import Image from '@components/common/Image/Image';
 import { PATH_FINDER } from '@constants/path';
 import useToast from '@hooks/common/useToast';
 import { isImageFile } from '@utils/api';
+import { formattedDate } from '@utils/date';
 
 import { ActivityBoardType } from '@type/activity';
 import type { ResponseFile } from '@type/api';
@@ -58,40 +59,51 @@ const WeeklyActivityCard = ({
         <div className="mt-2 space-y-3">
           <p className="whitespace-pre-line break-keep text-sm">{content}</p>
           <hr />
-          <div>
-            {files?.map((file) => (
-              <div key={file.fileUrl} className="flex gap-2">
-                {isImageFile(file.fileUrl) ? (
-                  <Image
-                    src={file.fileUrl}
-                    alt={file.originalFileName}
-                    height="w-[300px]"
-                    className="object-cover"
-                  />
-                ) : (
-                  <File
-                    href={file.fileUrl}
-                    name={file.originalFileName}
-                    key={file.fileUrl}
-                  />
-                )}
-              </div>
-            ))}
-          </div>
-          {assignments?.map(({ id: assignmentId, title: assignmentTitle }) => (
-            <div
-              key={assignmentId}
-              onClick={() => onClick(assignmentId, [title, assignmentTitle])}
-              className="flex cursor-pointer items-center rounded-lg transition-colors duration-300 ease-in-out hover:bg-gray-100"
-            >
-              <RegularFileAltOutline
-                width={25}
-                height={25}
-                className="flex items-center justify-center p-1 text-red-500"
-              />
-              <span>{assignmentTitle}</span>
+          {isParticipant && (
+            <div>
+              {files?.map((file) => (
+                <div key={file.fileUrl} className="flex gap-2">
+                  {isImageFile(file.fileUrl) ? (
+                    <Image
+                      src={file.fileUrl}
+                      alt={file.originalFileName}
+                      height="w-[300px]"
+                      className="object-cover"
+                    />
+                  ) : (
+                    <File
+                      href={file.fileUrl}
+                      name={file.originalFileName}
+                      key={file.fileUrl}
+                    />
+                  )}
+                </div>
+              ))}
             </div>
-          ))}
+          )}
+          {assignments?.map(
+            ({
+              id: assignmentId,
+              title: assignmentTitle,
+              dueDateTime: assignmentDueDateTime,
+            }) => (
+              <div
+                key={assignmentId}
+                onClick={() => onClick(assignmentId, [title, assignmentTitle])}
+                className="flex cursor-pointer items-center rounded-lg transition-colors duration-300 ease-in-out hover:bg-gray-100"
+              >
+                <RegularFileAltOutline
+                  width={25}
+                  height={25}
+                  className="flex items-center justify-center p-1 text-red-500"
+                />
+                <span>
+                  {assignmentTitle} - {formattedDate(assignmentDueDateTime)}
+                  까지
+                </span>
+              </div>
+            ),
+          )}
         </div>
       </div>
     </div>
