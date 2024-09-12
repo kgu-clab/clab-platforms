@@ -42,7 +42,7 @@ export const SENTRY_DSN: TEnvironmentValue = import.meta.env.VITE_SENTRY_DSN;
  */
 export const LOGIN_URL = IS_DEVELOPMENT
   ? `${memberConfig.loginUrl}/dev` // 개발 환경에서는 dev 페이지로 이동합니다.
-  : `${memberConfig.loginUrl}/play`; // 프로덕션 환경에서는 members 페이지로 이동합니다.
+  : `${memberConfig.loginUrl}/members`; // 프로덕션 환경에서는 members 페이지로 이동합니다.
 
 /**
  * unsplash 엑세스키를 가져옵니다.
