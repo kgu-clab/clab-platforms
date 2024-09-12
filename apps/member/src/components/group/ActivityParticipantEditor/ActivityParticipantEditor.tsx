@@ -218,7 +218,7 @@ const ActivityParticipantEditor = ({
                         checked={selectedMember[id].status}
                         onChange={() => handleChangeRoleToggle(id)}
                       />
-                    ) : (
+                    ) : status === ACTIVITY_MEMBER_STATE.ACCEPTED ? (
                       <Button
                         size="sm"
                         onClick={() => handleLeaderClick(memberId, role)}
@@ -227,6 +227,8 @@ const ActivityParticipantEditor = ({
                           ? '리더로 변경하기'
                           : '멤버로 변경하기'}
                       </Button>
+                    ) : (
+                      '-'
                     )}
                   </Table.Cell>
                 </Table.Row>
