@@ -61,6 +61,7 @@ const WeeklyActivityCard = ({
           <hr />
           {isParticipant && (
             <div>
+              <p className="text-sm text-gray-500">첨부 파일</p>
               {files?.map((file) => (
                 <div key={file.fileUrl} className="flex gap-2">
                   {isImageFile(file.fileUrl) ? (

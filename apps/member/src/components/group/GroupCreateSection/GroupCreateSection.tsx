@@ -203,7 +203,10 @@ const GroupCreateSection = () => {
             value={name}
             onChange={onChange}
           />
-          <TextCounting maxLength={BOARD_TITLE_MAX_LENGTH} text={name} />
+          <TextCounting
+            maxLength={ACTIVITY_GROUP_NAME_MAX_LENGTH}
+            text={name}
+          />
         </ComponentWithLabel>
         <ComponentWithLabel
           title="이미지"

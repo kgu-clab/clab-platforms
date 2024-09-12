@@ -137,18 +137,20 @@ const FileUploader = ({
   return (
     <>
       {uploadedFile?.length ? (
-        <div>
-          {uploadedFile?.map((file) => (
-            <File
-              key={file.fileUrl}
-              href={file.fileUrl}
-              name={file.originalFileName}
-            />
-          ))}
+        <>
+          <div className="flex flex-col gap-1">
+            {uploadedFile?.map((file) => (
+              <File
+                key={file.fileUrl}
+                href={file.fileUrl}
+                name={file.originalFileName}
+              />
+            ))}
+          </div>
           <Button className="w-full" onClick={handleDeleteFileClick}>
             첨부파일 변경하기
           </Button>
-        </div>
+        </>
       ) : (
         <input
           ref={uploaderRef}
