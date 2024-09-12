@@ -9,6 +9,7 @@ import Image from '@components/common/Image/Image';
 import Label from '@components/common/Label/Label';
 import { Section } from '@components/common/Section';
 import Select from '@components/common/Select/Select';
+import TextCounting from '@components/common/TextCounting/TextCounting';
 import Textarea from '@components/common/Textarea/Textarea';
 
 import { getSearchImage } from '@api/activity';
@@ -16,6 +17,7 @@ import { PATH } from '@constants/path';
 import { SELECT_ACTIVITY_GROUP_CATEGORY_TYPE } from '@constants/select';
 import {
   ACTIVITY_GROUP_CONTENT_MAX_LENGTH,
+  ACTIVITY_GROUP_NAME_MAX_LENGTH,
   BOARD_TITLE_MAX_LENGTH,
 } from '@constants/state';
 import useToast from '@hooks/common/useToast';
@@ -124,6 +126,11 @@ const GroupCreateSection = () => {
         state: 'error',
         message: '필수 입력 사항을 모두 입력해주세요.',
       });
+    } else if (name.length > ACTIVITY_GROUP_NAME_MAX_LENGTH) {
+      return toast({
+        state: 'error',
+        message: `활동명은 ${ACTIVITY_GROUP_NAME_MAX_LENGTH}자 이내로 작성해주세요.`,
+      });
     } else if (content.length > ACTIVITY_GROUP_CONTENT_MAX_LENGTH) {
       return toast({
         state: 'error',
@@ -196,6 +203,7 @@ const GroupCreateSection = () => {
             value={name}
             onChange={onChange}
           />
+          <TextCounting maxLength={BOARD_TITLE_MAX_LENGTH} text={name} />
         </ComponentWithLabel>
         <ComponentWithLabel
           title="이미지"
@@ -247,15 +255,10 @@ const GroupCreateSection = () => {
             value={content}
             onChange={onChange}
           />
-          <p
-            className={cn('mt-2 text-right text-xs', {
-              ' text-red-500':
-                content.length > ACTIVITY_GROUP_CONTENT_MAX_LENGTH,
-            })}
-          >
-            <span>{content.length}</span>
-            <span>{'/' + ACTIVITY_GROUP_CONTENT_MAX_LENGTH + '자'}</span>
-          </p>
+          <TextCounting
+            maxLength={ACTIVITY_GROUP_CONTENT_MAX_LENGTH}
+            text={content}
+          />
         </ComponentWithLabel>
         <ComponentWithLabel title="커리큘럼" htmlFor="curriculum">
           <Textarea
@@ -266,16 +269,10 @@ const GroupCreateSection = () => {
             value={curriculum}
             onChange={onChange}
           />
-          <p
-            className={cn('mt-2 text-right text-xs', {
-              ' text-red-500':
-                curriculum &&
-                curriculum.length > ACTIVITY_GROUP_CONTENT_MAX_LENGTH,
-            })}
-          >
-            <span>{curriculum ? curriculum.length : '0'}</span>
-            <span>{'/' + ACTIVITY_GROUP_CONTENT_MAX_LENGTH + '자'}</span>
-          </p>
+          <TextCounting
+            maxLength={ACTIVITY_GROUP_CONTENT_MAX_LENGTH}
+            text={curriculum}
+          />
         </ComponentWithLabel>
         <Grid gap="md" col="2">
           <Input

@@ -8,10 +8,11 @@ import Header from '@components/common/Header/Header';
 import Label from '@components/common/Label/Label';
 import Section from '@components/common/Section/Section';
 import Select from '@components/common/Select/Select';
+import TextCounting from '@components/common/TextCounting/TextCounting';
 import Textarea from '@components/common/Textarea/Textarea';
 
 import { PATH } from '@constants/path';
-import { BOARD_CONTENT_MAX_LENGTH } from '@constants/state';
+import { ACTIVITY_GROUP_CONTENT_MAX_LENGTH } from '@constants/state';
 import useToast from '@hooks/common/useToast';
 import {
   useActivityGroupMember,
@@ -47,6 +48,11 @@ const GroupApplyPage = () => {
         state: 'error',
         message: '필수 입력 사항을 모두 입력해주세요.',
       });
+    } else if (reason.length > ACTIVITY_GROUP_CONTENT_MAX_LENGTH) {
+      return toast({
+        state: 'error',
+        message: `지원 동기는 ${ACTIVITY_GROUP_CONTENT_MAX_LENGTH}자 이내로 작성해주세요.`,
+      });
     }
 
     activityGroupMemberMutate(
@@ -78,15 +84,18 @@ const GroupApplyPage = () => {
         </div>
         <div>
           <Label htmlFor="reason" required>
-            지원서
+            지원 동기
           </Label>
           <Textarea
             id="reason"
             placeholder="지원동기를 입력해주세요."
-            maxLength={BOARD_CONTENT_MAX_LENGTH}
             className="scrollbar-hide h-80 w-full resize-none"
             value={reason}
             onChange={handleReasonChange}
+          />
+          <TextCounting
+            maxLength={ACTIVITY_GROUP_CONTENT_MAX_LENGTH}
+            text={reason}
           />
         </div>
         <Button

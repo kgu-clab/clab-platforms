@@ -57,6 +57,12 @@ export const BOARD_TITLE_MAX_LENGTH = 100;
  */
 export const BOARD_CONTENT_MAX_LENGTH = 5000;
 /**
+ * 활동명 최대 길이
+ * 30자
+ */
+export const ACTIVITY_GROUP_NAME_MAX_LENGTH = 30;
+/**
+/**
  * 활동 내용의 최대 길이
  * 1000자
  */
