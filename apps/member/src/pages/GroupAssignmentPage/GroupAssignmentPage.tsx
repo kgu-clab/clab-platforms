@@ -7,9 +7,9 @@ import File from '@components/common/File/File';
 import Header from '@components/common/Header/Header';
 import Image from '@components/common/Image/Image';
 import Section from '@components/common/Section/Section';
-import ActivityBoardEditModal from '@components/group/ActivityBoardEditModal/ActivityBoardEditModal';
 import AssignmentListSection from '@components/group/AssignmentListSection/AssignmentListSection';
 import AssignmentUploadSection from '@components/group/AssignmentUploadSection/AssignmentUploadSection';
+import { ActivityBoardEditModal } from '@components/modal';
 
 import { GROUP_MESSAGE } from '@constants/message';
 import { PATH_FINDER } from '@constants/path';

@@ -26,7 +26,7 @@ interface FileUploaderProps {
   handleDeleteFileClick: () => void;
 }
 
-const ActivityBoardEditModal = ({ prevData, groupId }: Props) => {
+export const ActivityBoardEditModal = ({ prevData, groupId }: Props) => {
   const { closeModal } = useModal();
   const toast = useToast();
   const [board, setBoard] = useState<ActivityBoardType>(prevData);
@@ -164,5 +164,3 @@ const FileUploader = ({
     </>
   );
 };
-
-export default ActivityBoardEditModal;
