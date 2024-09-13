@@ -12,7 +12,7 @@ import {
 import EmptyBox from '@components/common/EmptyBox/EmptyBox';
 import Pagination from '@components/common/Pagination/Pagination';
 import Section from '@components/common/Section/Section';
-import CheckConfirmModal from '@components/modal/CheckConfirmModal/CheckConfirmModal';
+import { CheckConfirmModal } from '@components/modal';
 
 import { TABLE_HEAD } from '@constants/head';
 import { GROUP_MESSAGE } from '@constants/message';

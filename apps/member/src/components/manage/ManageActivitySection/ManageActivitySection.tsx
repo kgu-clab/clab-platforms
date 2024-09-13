@@ -6,8 +6,7 @@ import ActionButton from '@components/common/ActionButton/ActionButton';
 import EmptyBox from '@components/common/EmptyBox/EmptyBox';
 import Pagination from '@components/common/Pagination/Pagination';
 import { Section } from '@components/common/Section';
-import ActivityInfoModal from '@components/modal/ActivityInfoModal/ActivityInfoModal';
-import CheckConfirmModal from '@components/modal/CheckConfirmModal/CheckConfirmModal';
+import { CheckConfirmModal } from '@components/modal';
 
 import { TABLE_HEAD } from '@constants/head';
 import { GROUP_MESSAGE } from '@constants/message';
@@ -21,6 +20,8 @@ import {
 } from '@hooks/queries';
 
 import type { ActivityGroupStatusType } from '@type/activity';
+
+import { ActivityInfoModal } from './ActivityInfoModal';
 
 const ManageActivitySection = () => {
   const [mode, setMode] = useState<ActivityGroupStatusType>(

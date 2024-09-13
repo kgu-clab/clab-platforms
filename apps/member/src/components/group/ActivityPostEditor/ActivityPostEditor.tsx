@@ -18,8 +18,8 @@ import {
 
 import type { ActivityBoardType, SubmitBoardType } from '@type/activity';
 
+import ActivityBoardEditModal from '../../modal/ActivityBoardEditModal.tsx';
 import ActivityAssignmentEditor from '../ActivityAssignmentEditor/ActivityAssignmentEditor';
-import ActivityBoardEditModal from '../ActivityBoardEditModal/ActivityBoardEditModal';
 import ActivityConfigTableSection from '../ActivityConfigTableSection/ActivityConfigTableSection.tsx';
 import WeeklyActivityCard from '../WeeklyActivityCard/WeeklyActivityCard';
 

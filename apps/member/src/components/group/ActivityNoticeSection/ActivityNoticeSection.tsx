@@ -5,7 +5,6 @@ import { cn } from '@clab-platforms/utils';
 
 import DropdownButton from '@components/common/DropdownButton/DropdownButton';
 import Section from '@components/common/Section/Section';
-import ActivityNoticeModal from '@components/modal/ActivityNoticeModal/ActivityNoticeModal';
 
 import useModal from '@hooks/common/useModal';
 import { formattedDate, toKoreaISOString } from '@utils/date';
@@ -13,6 +12,8 @@ import dayjs from 'dayjs';
 
 import type { ActivityBoardType } from '@type/activity';
 import type { ResponseFile } from '@type/api';
+
+import { ActivityNoticeModal } from './ActivityNoticeModal';
 
 interface ActivityNoticeSectionProps {
   data: Array<ActivityBoardType>;

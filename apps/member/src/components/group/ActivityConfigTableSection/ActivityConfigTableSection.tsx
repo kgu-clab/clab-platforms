@@ -9,7 +9,7 @@ import { formattedDate, toKoreaISOString } from '@utils/date';
 
 import { ActivityBoardType } from '@type/activity';
 
-import ActivityBoardEditModal from '../ActivityBoardEditModal/ActivityBoardEditModal';
+import ActivityBoardEditModal from '../../modal/ActivityBoardEditModal';
 
 interface ActivityConfigTableSectionProps {
   tableList: ActivityBoardType[];

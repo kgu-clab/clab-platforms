@@ -10,11 +10,14 @@ interface ActivityNoticeModalProps {
   files?: Array<ResponseFile>;
 }
 
-const ActivityNoticeModal = ({ content, files }: ActivityNoticeModalProps) => {
+export const ActivityNoticeModal = ({
+  content,
+  files,
+}: ActivityNoticeModalProps) => {
   return (
     <div className="flex flex-col gap-4">
       {files?.map((file) => (
-        <div key={file.fileUrl} className="flex gap-2">
+        <div key={file.fileUrl} className="mx-auto flex flex-col gap-2 ">
           {isImageFile(file.fileUrl) ? (
             <Image
               src={file.fileUrl}
@@ -36,5 +39,3 @@ const ActivityNoticeModal = ({ content, files }: ActivityNoticeModalProps) => {
     </div>
   );
 };
-
-export default ActivityNoticeModal;

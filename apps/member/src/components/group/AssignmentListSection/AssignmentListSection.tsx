@@ -17,7 +17,7 @@ import { formattedDate, toKoreaISOString } from '@utils/date';
 
 import type { ActivityBoardType } from '@type/activity';
 
-import AssignmentFeedbackModal from '../AssignmentFeedbackModal/AssignmentFeedbackModal';
+import AssignmentFeedbackModal from './AssignmentFeedbackModal';
 
 const AssignmentListSection = () => {
   const { id, assignmentId } = useParams();

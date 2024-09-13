@@ -8,7 +8,7 @@ interface CheckConfirmModalProps {
   handleClose: () => void;
 }
 
-const CheckConfirmModal = ({
+export const CheckConfirmModal = ({
   message,
   handleConfirmButton,
   handleClose,
@@ -30,11 +30,10 @@ const CheckConfirmModal = ({
         >
           확인
         </Button>
-        <Button className="w-full" color="red" onClick={() => handleClose()}>
+        <Button className="w-full" color="red" onClick={handleClose}>
           취소
         </Button>
       </Modal.Footer>
     </Modal>
   );
 };
-export default CheckConfirmModal;

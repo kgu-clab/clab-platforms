@@ -22,7 +22,7 @@ const LongTextItem = ({ label, text }: LongTextItemProps) => {
   );
 };
 
-const ActivityInfoModal = ({ id }: MemberInfoModalProps) => {
+export const ActivityInfoModal = ({ id }: MemberInfoModalProps) => {
   const { data, isLoading } = useActivityGroup(+id);
 
   if (isLoading) return null;
@@ -51,5 +51,3 @@ const ActivityInfoModal = ({ id }: MemberInfoModalProps) => {
     </div>
   );
 };
-
-export default ActivityInfoModal;

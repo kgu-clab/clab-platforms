@@ -6,7 +6,7 @@ interface ApplicationInfoModalProps {
   applicationInfo: ApplicationMemberType;
 }
 
-const ApplicationInfoModal = ({
+export const ApplicationInfoModal = ({
   applicationInfo,
 }: ApplicationInfoModalProps) => {
   const {
@@ -39,5 +39,3 @@ const ApplicationInfoModal = ({
     </DetailsList>
   );
 };
-
-export default ApplicationInfoModal;
