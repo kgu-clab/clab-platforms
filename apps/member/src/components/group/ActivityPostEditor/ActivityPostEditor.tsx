@@ -5,6 +5,7 @@ import { Button, Input } from '@clab-platforms/design-system';
 import Hr from '@components/common/Hr/Hr';
 import Section from '@components/common/Section/Section';
 import Textarea from '@components/common/Textarea/Textarea';
+import { ActivityBoardEditModal } from '@components/modal';
 
 import { FORM_DATA_KEY } from '@constants/api.ts';
 import { ACTIVITY_BOARD_CATEGORY_STATE } from '@constants/state.ts';
@@ -19,7 +20,6 @@ import {
 import type { ActivityBoardType, SubmitBoardType } from '@type/activity';
 
 import ActivityAssignmentEditor from '../ActivityAssignmentEditor/ActivityAssignmentEditor';
-import ActivityBoardEditModal from '../ActivityBoardEditModal/ActivityBoardEditModal';
 import ActivityConfigTableSection from '../ActivityConfigTableSection/ActivityConfigTableSection.tsx';
 import WeeklyActivityCard from '../WeeklyActivityCard/WeeklyActivityCard';
 

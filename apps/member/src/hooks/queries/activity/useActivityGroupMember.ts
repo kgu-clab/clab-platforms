@@ -17,7 +17,7 @@ interface Params extends WithPaginationParams {
 export function useActivityGroupMember({
   status = ACTIVITY_STATE.PROGRESSING,
   page = 0,
-  size = 20,
+  size = 99,
 }: Params = {}) {
   return useSuspenseQuery({
     queryKey: ACTIVITY_QUERY_KEY.STATUS(status),

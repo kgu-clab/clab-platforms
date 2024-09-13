@@ -5,9 +5,9 @@ export const TABLE_HEAD = {
     '학번',
     '이름',
     '상태',
-    '레벨',
+    '역할',
     '관리',
-    '기능',
+    '역할 변경',
   ] as const,
   ACTIVITY_GROUP_DETAIL: ['번호', '이름', '대상', '리더', '기능'] as const,
   ACTIVITY_GROUP_ASSIGNMENT: [

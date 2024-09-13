@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 
 import { Button, Input } from '@clab-platforms/design-system';
 
@@ -6,6 +6,7 @@ import Hr from '@components/common/Hr/Hr';
 import Section from '@components/common/Section/Section';
 import Textarea from '@components/common/Textarea/Textarea';
 
+import { FORM_DATA_KEY } from '@constants/api';
 import useToast from '@hooks/common/useToast';
 import { useActivityGroupBoardMutation } from '@hooks/queries';
 
@@ -32,6 +33,7 @@ const defaultNotice: ActivityBoardType = {
 const ActivityNoticeEditor = ({ groupId, data }: ActivityNoticeEditorProps) => {
   const toast = useToast();
   const [notice, setNotice] = useState<ActivityBoardType>(defaultNotice);
+  const uploaderRef = useRef<HTMLInputElement>(null);
   const { activityGroupBoardMutate, activityGroupBoardIsPending } =
     useActivityGroupBoardMutation();
 
@@ -41,16 +43,27 @@ const ActivityNoticeEditor = ({ groupId, data }: ActivityNoticeEditorProps) => {
     const { name, value } = e.target;
     setNotice((prev) => ({ ...prev, [name]: value }));
   };
+
   const handleAddNoticeButtonClick = () => {
+    const formData = new FormData();
+    const files = uploaderRef.current?.files;
+
     if (!notice.title || !notice.content)
       return toast({
         state: 'error',
         message: '제목, 내용은 필수 입력 요소입니다.',
       });
+    if (files) {
+      Array.from(files).forEach((file) => {
+        formData.append(FORM_DATA_KEY, file);
+      });
+    }
+
     activityGroupBoardMutate(
       {
         activityGroupId: groupId,
         body: notice,
+        files: files?.length ? formData : undefined,
       },
       { onSuccess: () => setNotice(defaultNotice) },
     );
@@ -79,6 +92,7 @@ const ActivityNoticeEditor = ({ groupId, data }: ActivityNoticeEditorProps) => {
               value={notice.content}
               onChange={handleNoticeChange}
             />
+            <input ref={uploaderRef} id="uploader" type="file" multiple />
           </div>
           <Hr>미리보기</Hr>
           <ActivityNoticeSection data={[notice, ...data]} />

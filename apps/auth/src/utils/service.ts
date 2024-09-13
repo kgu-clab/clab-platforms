@@ -12,7 +12,7 @@ const SERVICE_MAP: Record<ServiceCode, ServiceMap> = {
   play: { url: 'https://play.clab.page/auth', name: '플레이' },
   members: { url: 'https://members.clab.page/auth', name: '멤버스' },
   test: {
-    url: 'https://members.test.clab.page/auth',
+    url: 'https://members.test.clab.page/test',
     name: '스테이징 멤버스',
   },
 } as const;

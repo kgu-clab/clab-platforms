@@ -27,12 +27,14 @@ import { server } from './server';
 import {
   postFilesActivityPhotos,
   postUploadedFileAssignment,
+  postUploadedFileNotice,
+  postUploadedFileSubmit,
   postUploadedFileWeekly,
 } from './uploadedFile';
 
 export interface PatchActivityGroupMemberApplyParams {
   activityGroupId: number;
-  memberId: string;
+  memberId: Array<string>;
   status: string;
 }
 
@@ -278,26 +280,50 @@ export async function postActivityBoard({
 
   if (
     body.category === ACTIVITY_BOARD_CATEGORY_STATE.ASSIGNMENT &&
-    parentId &&
-    memberId &&
+    activityGroupId &&
     files
   ) {
     // 파일이 있을 경우 파일 업로드 진행 (과제 파일)
     const data = await postUploadedFileAssignment({
       groupId: activityGroupId,
-      groupBoardId: parentId,
       files,
     });
 
     fileUrl = data.map((file) => file.fileUrl);
   } else if (
     body.category === ACTIVITY_BOARD_CATEGORY_STATE.WEEKLY_ACTIVITY &&
-    memberId &&
+    activityGroupId &&
     files
   ) {
     // 파일이 있을 경우 파일 업로드 진행 (주차별 파일)
     const data = await postUploadedFileWeekly({
       groupId: activityGroupId,
+      files,
+    });
+
+    fileUrl = data.map((file) => file.fileUrl);
+  } else if (
+    body.category === ACTIVITY_BOARD_CATEGORY_STATE.NOTICE &&
+    activityGroupId &&
+    files
+  ) {
+    // 파일이 있을 경우 파일 업로드 진행 (공지사항 파일)
+    const data = await postUploadedFileNotice({
+      groupId: activityGroupId,
+      files,
+    });
+
+    fileUrl = data.map((file) => file.fileUrl);
+  } else if (
+    body.category === ACTIVITY_BOARD_CATEGORY_STATE.SUBMIT &&
+    activityGroupId &&
+    parentId &&
+    files
+  ) {
+    // 파일이 있을 경우 파일 업로드 진행 (과제 제출물 파일)
+    const data = await postUploadedFileSubmit({
+      groupId: activityGroupId,
+      groupBoardId: parentId,
       files,
     });
 
@@ -330,20 +356,55 @@ export async function patchActivityBoard({
 }: PatchActivityBoardParams) {
   let fileUrl: Array<string> | null = null;
 
-  if (groupBoardId === null && groupId && files) {
-    // 파일이 있을 경우 파일 업로드 진행 (주차별 활동 파일)
-    const data = await postUploadedFileWeekly({
-      groupId: groupId,
-      files,
-    });
-    fileUrl = data.map((file) => file.fileUrl);
-  } else if (groupId && groupBoardId && files) {
+  if (
+    body.category === ACTIVITY_BOARD_CATEGORY_STATE.ASSIGNMENT &&
+    groupId &&
+    files
+  ) {
     // 파일이 있을 경우 파일 업로드 진행 (과제 파일)
     const data = await postUploadedFileAssignment({
-      groupId: groupId,
-      groupBoardId: groupBoardId,
+      groupId,
       files,
     });
+
+    fileUrl = data.map((file) => file.fileUrl);
+  } else if (
+    body.category === ACTIVITY_BOARD_CATEGORY_STATE.WEEKLY_ACTIVITY &&
+    groupId &&
+    files
+  ) {
+    // 파일이 있을 경우 파일 업로드 진행 (주차별 파일)
+    const data = await postUploadedFileWeekly({
+      groupId,
+      files,
+    });
+
+    fileUrl = data.map((file) => file.fileUrl);
+  } else if (
+    body.category === ACTIVITY_BOARD_CATEGORY_STATE.NOTICE &&
+    groupId &&
+    files
+  ) {
+    // 파일이 있을 경우 파일 업로드 진행 (공지사항 파일)
+    const data = await postUploadedFileNotice({
+      groupId,
+      files,
+    });
+
+    fileUrl = data.map((file) => file.fileUrl);
+  } else if (
+    body.category === ACTIVITY_BOARD_CATEGORY_STATE.SUBMIT &&
+    groupId &&
+    groupBoardId &&
+    files
+  ) {
+    // 파일이 있을 경우 파일 업로드 진행 (과제 제출물 파일)
+    const data = await postUploadedFileSubmit({
+      groupId,
+      groupBoardId,
+      files,
+    });
+
     fileUrl = data.map((file) => file.fileUrl);
   }
 

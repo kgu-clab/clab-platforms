@@ -26,7 +26,7 @@ interface FileUploaderProps {
   handleDeleteFileClick: () => void;
 }
 
-const ActivityBoardEditModal = ({ prevData, groupId }: Props) => {
+export const ActivityBoardEditModal = ({ prevData, groupId }: Props) => {
   const { closeModal } = useModal();
   const toast = useToast();
   const [board, setBoard] = useState<ActivityBoardType>(prevData);
@@ -71,6 +71,7 @@ const ActivityBoardEditModal = ({ prevData, groupId }: Props) => {
         title: board.title,
         content: board.content,
         dueDateTime: board.dueDateTime,
+        category: board.category,
       },
       files: files?.length ? formData : undefined,
     });
@@ -137,18 +138,20 @@ const FileUploader = ({
   return (
     <>
       {uploadedFile?.length ? (
-        <div>
-          {uploadedFile?.map((file) => (
-            <File
-              key={file.fileUrl}
-              href={file.fileUrl}
-              name={file.originalFileName}
-            />
-          ))}
+        <>
+          <div className="flex flex-col gap-1">
+            {uploadedFile?.map((file) => (
+              <File
+                key={file.fileUrl}
+                href={file.fileUrl}
+                name={file.originalFileName}
+              />
+            ))}
+          </div>
           <Button className="w-full" onClick={handleDeleteFileClick}>
             첨부파일 변경하기
           </Button>
-        </div>
+        </>
       ) : (
         <input
           ref={uploaderRef}
@@ -161,5 +164,3 @@ const FileUploader = ({
     </>
   );
 };
-
-export default ActivityBoardEditModal;

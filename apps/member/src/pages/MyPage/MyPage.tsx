@@ -9,7 +9,6 @@ import MyProfileSection from '@components/my/MyProfileSection/MyProfileSection';
 import {
   useBookLoanRecordConditions,
   useMembershipFee,
-  useMyActivityGroupMember,
   useMyBoards,
   useMyComments,
   useMyNotifications,
@@ -29,7 +28,6 @@ const MyPage = () => {
     borrowerId: myProfile.id,
     size: 10,
   });
-  const { data: myActivityGroup } = useMyActivityGroupMember();
 
   return (
     <Content>
@@ -42,7 +40,7 @@ const MyPage = () => {
           data={myBookLoanRecord.items}
         />
       </Grid>
-      <MyActivityGroupSection data={myActivityGroup.items} />
+      <MyActivityGroupSection />
       <Grid gap="md" className="md:grid-cols-2">
         <MyHistorySection title="나의 게시글" data={myBoardsData.items} />
         <MyHistorySection title="나의 댓글" data={myCommentsData.items} />

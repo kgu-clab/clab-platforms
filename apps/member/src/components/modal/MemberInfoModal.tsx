@@ -10,7 +10,7 @@ interface MemberInfoModalProps {
   id: string;
 }
 
-const MemberInfoModal = ({ id }: MemberInfoModalProps) => {
+export const MemberInfoModal = ({ id }: MemberInfoModalProps) => {
   const { data, isLoading } = useMembers({ id });
 
   if (isLoading) return null;
@@ -34,5 +34,3 @@ const MemberInfoModal = ({ id }: MemberInfoModalProps) => {
     </div>
   );
 };
-
-export default MemberInfoModal;

@@ -1,9 +1,9 @@
 import { ChangeEvent, useState } from 'react';
 
 import { Button, Input } from '@clab-platforms/design-system';
-import { cn } from '@clab-platforms/utils';
 
 import Section from '@components/common/Section/Section';
+import TextCounting from '@components/common/TextCounting/TextCounting';
 import Textarea from '@components/common/Textarea/Textarea';
 
 import { ACTIVITY_GROUP_CONTENT_MAX_LENGTH } from '@constants/state';
@@ -34,11 +34,12 @@ const ActivityProfileEditor = ({ data }: ActivityProfileEditorProps) => {
     setActivityDetail({ ...activityDetail, [name]: value });
   };
   const handleSaveButtonClick = () => {
-    if (activityDetail.content.length > ACTIVITY_GROUP_CONTENT_MAX_LENGTH)
+    if (activityDetail.content.length > ACTIVITY_GROUP_CONTENT_MAX_LENGTH) {
       return toast({
         state: 'error',
-        message: '내용은 200자 이내로 작성해주세요.',
+        message: `내용은 ${ACTIVITY_GROUP_CONTENT_MAX_LENGTH}자 이내로 작성해주세요.`,
       });
+    }
 
     const activityGroupItem: ActivityGroupCreateItem = {
       category: activityDetail.category,
@@ -80,14 +81,10 @@ const ActivityProfileEditor = ({ data }: ActivityProfileEditorProps) => {
               value={activityDetail.content}
               onChange={handleActivityDetail}
             />
-            <p
-              className={cn('mt-2 text-right text-xs', {
-                ' text-red-500': activityDetail.content.length > 200,
-              })}
-            >
-              <span>{activityDetail.content.length}</span>
-              <span>{'/' + ACTIVITY_GROUP_CONTENT_MAX_LENGTH + '자'}</span>
-            </p>
+            <TextCounting
+              maxLength={ACTIVITY_GROUP_CONTENT_MAX_LENGTH}
+              text={activityDetail.content}
+            />
           </div>
           <Input
             id="subject"

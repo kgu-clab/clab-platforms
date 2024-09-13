@@ -14,6 +14,11 @@ export const GROUP_MESSAGE = {
   NO_ACTIVITY: '해당 활동을 찾을 수 없어요.',
   NO_FEEDBACK: '작성된 피드백이 없어요.',
   NO_PERMISSION: '해당 활동에 접근 권한이 없어요.',
+  NO_WEEKLY_ACTIVITY: '현재 생성된 주차별 활동이 없어요.',
+  NO_WAITING_ACTIVITY: '생성 신청된 활동 그룹이 없어요.',
+  NO_END_ACTIVITY: '종료된 활동 그룹이 없어요.',
+  NO_PROGRESSING_ACTIVITY: '진행중인 활동 그룹이 없어요.',
+  NO_PARTICIPANT: '활동 멤버가 없어요.',
 } as const;
 
 export const LIBRARY_MESSAGE = {

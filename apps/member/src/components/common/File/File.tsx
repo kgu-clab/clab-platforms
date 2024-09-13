@@ -21,6 +21,7 @@ const File = ({ href, name }: FileProps) => {
       .then((blob) => {
         const href = window.URL.createObjectURL(new Blob([blob]));
         const a = document.createElement('a');
+
         a.href = href;
         a.download = name;
         document.body.appendChild(a);

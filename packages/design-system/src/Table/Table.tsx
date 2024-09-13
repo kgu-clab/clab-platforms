@@ -8,7 +8,9 @@ export interface TableProps extends TableHTMLAttributes<HTMLTableElement> {
 
 export interface RowProps extends HTMLAttributes<HTMLTableRowElement> {}
 
-export interface CellProps extends HTMLAttributes<HTMLTableCellElement> {}
+export interface CellProps extends HTMLAttributes<HTMLTableCellElement> {
+  colSpan?: number;
+}
 
 const Table = ({ head, className, children, ...rest }: TableProps) => {
   return (
@@ -51,10 +53,11 @@ const Row = ({ className, onClick, children, ...rest }: RowProps) => {
   );
 };
 
-const Cell = ({ className, children, ...rest }: CellProps) => {
+const Cell = ({ className, children, colSpan, ...rest }: CellProps) => {
   return (
     <td
       className={cn('p-2 first:rounded-l-lg last:rounded-r-lg', className)}
+      colSpan={colSpan}
       {...rest}
     >
       {children}

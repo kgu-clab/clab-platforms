@@ -60,25 +60,6 @@ export async function postUploadedFileMembershipFee(multipartFile: FormData) {
   return data;
 }
 /**
- * 활동 그룹 과제 업로드
- */
-export async function postUploadedFileAssignment({
-  groupId,
-  groupBoardId,
-  files,
-}: PostUploadedFileAssignmentParams) {
-  const url = createURL(
-    END_POINT.UPLOADEDFILE_ACTIVITY_ASSIGNMENT(groupId, groupBoardId),
-    STORAGE_PERIOD(3), // 활동 과제 파일은 3년간 보관
-  );
-  const { data } = await server.post<FormData, BaseResponse<ResponseFile[]>>({
-    url,
-    body: files,
-  });
-
-  return data;
-}
-/**
  * 멤버 프로필 사진 업로드
  */
 export async function postUploadedFileProfileImage(multipartFile: FormData) {
@@ -109,7 +90,62 @@ export async function postUploadedFileWeekly({
 }: PostUploadedFileWeeklyParams) {
   const url = createURL(
     END_POINT.UPLOADEDFILE_ACTIVITY_WEEKLY(groupId),
+    STORAGE_PERIOD(3), // 활동 주차별활동 파일은 3년간 보관
+  );
+  const { data } = await server.post<FormData, BaseResponse<ResponseFile[]>>({
+    url,
+    body: files,
+  });
+
+  return data;
+}
+/**
+ * 활동 그룹 공지사항 파일 업로드
+ */
+export async function postUploadedFileNotice({
+  groupId,
+  files,
+}: PostUploadedFileWeeklyParams) {
+  const url = createURL(
+    END_POINT.UPLOADEDFILE_ACTIVITY_NOTICE(groupId),
+    STORAGE_PERIOD(3), // 활동 공지사항 파일은 3년간 보관
+  );
+  const { data } = await server.post<FormData, BaseResponse<ResponseFile[]>>({
+    url,
+    body: files,
+  });
+
+  return data;
+}
+/**
+ * 활동 그룹 과제 파일 업로드
+ */
+export async function postUploadedFileAssignment({
+  groupId,
+  files,
+}: PostUploadedFileWeeklyParams) {
+  const url = createURL(
+    END_POINT.UPLOADEDFILE_ACTIVITY_ASSIGNMENT(groupId),
     STORAGE_PERIOD(3), // 활동 과제 파일은 3년간 보관
+  );
+  const { data } = await server.post<FormData, BaseResponse<ResponseFile[]>>({
+    url,
+    body: files,
+  });
+
+  return data;
+}
+/**
+ * 활동 그룹 과제 제출물 업로드
+ */
+export async function postUploadedFileSubmit({
+  groupId,
+  groupBoardId,
+  files,
+}: PostUploadedFileAssignmentParams) {
+  const url = createURL(
+    END_POINT.UPLOADEDFILE_ACTIVITY_SUBMIT(groupId, groupBoardId),
+    STORAGE_PERIOD(3), // 활동 과제 제출물 파일은 3년간 보관
   );
   const { data } = await server.post<FormData, BaseResponse<ResponseFile[]>>({
     url,

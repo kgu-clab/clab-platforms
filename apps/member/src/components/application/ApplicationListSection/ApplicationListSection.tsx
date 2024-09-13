@@ -6,7 +6,6 @@ import { Badge, Button, Table } from '@clab-platforms/design-system';
 import Pagination from '@components/common/Pagination/Pagination';
 import { Section } from '@components/common/Section';
 import Select from '@components/common/Select/Select';
-import ApplicationInfoModal from '@components/modal/ApplicationInfoModal/ApplicationInfoModal';
 
 import { TABLE_HEAD } from '@constants/head';
 import useModal from '@hooks/common/useModal';
@@ -19,7 +18,9 @@ import {
   useApplicationPassMutation,
 } from '@hooks/queries/application';
 
-import { ApplicationMemberType } from '@type/application';
+import type { ApplicationMemberType } from '@type/application';
+
+import { ApplicationInfoModal } from './ApplicationInfoModal';
 
 interface RecruitmentItem {
   id: number;

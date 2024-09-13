@@ -87,7 +87,7 @@ const GroupCard = ({
         src={createImageUrl(imageUrl)}
         alt={name}
         height="min-h-fit h-full"
-        className="rounded-l-lg border-r object-cover"
+        className="overflow-hidden rounded-l-lg border-r object-cover"
       />
       <div className="col-span-2 flex flex-col gap-2 divide-y p-4 ">
         <div className="h-full overflow-hidden text-ellipsis sm:h-24 ">

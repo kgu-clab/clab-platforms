@@ -1,15 +1,14 @@
 import { Button, Table } from '@clab-platforms/design-system';
 
 import { Section } from '@components/common/Section';
+import { ActivityBoardEditModal } from '@components/modal';
 
 import { TABLE_HEAD } from '@constants/head';
 import useModal from '@hooks/common/useModal';
 import { useActivityGroupBoardDeleteMutation } from '@hooks/queries';
 import { formattedDate, toKoreaISOString } from '@utils/date';
 
-import { ActivityBoardType } from '@type/activity';
-
-import ActivityBoardEditModal from '../ActivityBoardEditModal/ActivityBoardEditModal';
+import type { ActivityBoardType } from '@type/activity';
 
 interface ActivityConfigTableSectionProps {
   tableList: ActivityBoardType[];

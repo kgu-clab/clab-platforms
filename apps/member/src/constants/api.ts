@@ -60,13 +60,17 @@ export const END_POINT = {
   NEWS: (id: number) => `/v1/news/${id}`,
   // -- 파일 업로드
   UPLOADEDFILE_BOARD: '/v1/files/boards',
-  UPLOADEDFILE_ACTIVITY_ASSIGNMENT: (groupId: number, boardId: number) =>
-    `/v1/files/assignment/${groupId}/${boardId}`,
+  UPLOADEDFILE_ACTIVITY_SUBMIT: (groupId: number, boardId: number) =>
+    `/v1/files/submits/${groupId}/${boardId}`,
   UPLOADEDFILE_MEMBERSHIP_FEE: '/v1/files/membership-fee',
   UPLOADEDFILE_PROFILES: '/v1/files/profiles',
   UPLOADEDFILE_ACTIVITY_PHOTO: '/v1/files/activity-photos',
   UPLOADEDFILE_ACTIVITY_WEEKLY: (groupId: number) =>
     `/v1/files/weekly-activities/${groupId}`,
+  UPLOADEDFILE_ACTIVITY_NOTICE: (groupId: number) =>
+    `/v1/files/notices/${groupId}`,
+  UPLOADEDFILE_ACTIVITY_ASSIGNMENT: (groupId: number) =>
+    `/v1/files/assignment/${groupId}`,
   // -- 활동그룹 멤버
   ACTIVITY_GROUP_MEMBER: (id: number) => `/v1/activity-group/member/${id}`,
   ACTIVITY_GROUP_MEMBER_MY: `/v1/activity-group/member/my`,

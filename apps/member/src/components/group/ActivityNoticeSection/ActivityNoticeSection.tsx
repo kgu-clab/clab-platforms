@@ -11,6 +11,9 @@ import { formattedDate, toKoreaISOString } from '@utils/date';
 import dayjs from 'dayjs';
 
 import type { ActivityBoardType } from '@type/activity';
+import type { ResponseFile } from '@type/api';
+
+import { ActivityNoticeModal } from './ActivityNoticeModal';
 
 interface ActivityNoticeSectionProps {
   data: Array<ActivityBoardType>;
@@ -18,7 +21,11 @@ interface ActivityNoticeSectionProps {
 
 interface ActivityNoticeSectionItemProps {
   className?: string;
-  onClick: (content: string, title?: string) => void;
+  onClick: (
+    content: string,
+    title?: string,
+    files?: Array<ResponseFile>,
+  ) => void;
   data: ActivityBoardType;
 }
 
@@ -37,10 +44,14 @@ const ActivityNoticeSection = ({ data }: ActivityNoticeSectionProps) => {
   const latestNotice = sortedNotices[0];
   const otherNotices = sortedNotices.slice(1);
 
-  const onClickAlert = (content: string, title?: string) => {
+  const onClickAlert = (
+    content: string,
+    title?: string,
+    files?: Array<ResponseFile>,
+  ) => {
     openModal({
       title: `📣 ${title}`,
-      content: content,
+      content: <ActivityNoticeModal content={content} files={files} />,
     });
   };
 
@@ -94,7 +105,7 @@ ActivityNoticeSection.Item = ({
     >
       <div
         className="flex cursor-pointer items-center justify-between gap-2"
-        onClick={() => onClick(data.content, data.title)}
+        onClick={() => onClick(data.content, data.title, data.files)}
       >
         <p className="w-full truncate">{data.title}</p>
         <p className="whitespace-nowrap text-sm text-gray-500">
