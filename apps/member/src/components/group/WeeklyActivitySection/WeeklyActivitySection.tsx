@@ -28,7 +28,7 @@ const WeeklyActivitySection = ({
       </div>
       <div className="space-y-4 divide-y p-4">
         {data.length ? (
-          [...data].map((activity, index) => (
+          data.map((activity, index) => (
             <WeeklyActivityCard
               key={index}
               index={index}
