@@ -39,10 +39,10 @@ C-Lab의 공식 인터널 플랫폼이에요. 동아리의 모든 활동은 이�
   </tr>
   <tr>
     <td width="50%" style="padding: 0;">
-      <img width="518" alt="image" src="https://github.com/KGU-C-Lab/clab-platforms/assets/39869096/d4e5b561-74a2-4bdc-b306-48aba58e3c5a">
+      <img width="518" alt="image" src="https://github.com/kgu-clab/clab-platforms/assets/39869096/d4e5b561-74a2-4bdc-b306-48aba58e3c5a">
     </td>
     <td width="50%" style="padding: 0;">
-      <img width="1494" alt="image" src="https://github.com/KGU-C-Lab/clab-platforms/assets/39869096/38f6c917-ce46-4548-ad30-7a591b59d20b">
+      <img width="1494" alt="image" src="https://github.com/kgu-clab/clab-platforms/assets/39869096/38f6c917-ce46-4548-ad30-7a591b59d20b">
     </td>
   </tr>
   <tr>
@@ -51,10 +51,10 @@ C-Lab의 공식 인터널 플랫폼이에요. 동아리의 모든 활동은 이�
   </tr>
   <tr>
     <td width="50%" style="padding: 0;">
-      <img width="1488" alt="image" src="https://github.com/KGU-C-Lab/clab-platforms/assets/39869096/7d96d285-4b6a-4ba3-bf35-aaaba9a73130">
+      <img width="1488" alt="image" src="https://github.com/kgu-clab/clab-platforms/assets/39869096/7d96d285-4b6a-4ba3-bf35-aaaba9a73130">
     </td>
     <td width="50%" style="padding: 0;">
-      <img width="1263" alt="image" src="https://github.com/KGU-C-Lab/clab-platforms/assets/39869096/d96e61e7-b6e9-40cd-aab2-4ffaeb43c947">
+      <img width="1263" alt="image" src="https://github.com/kgu-clab/clab-platforms/assets/39869096/d96e61e7-b6e9-40cd-aab2-4ffaeb43c947">
     </td>
   </tr>
     <tr>
@@ -63,10 +63,10 @@ C-Lab의 공식 인터널 플랫폼이에요. 동아리의 모든 활동은 이�
   </tr>
   <tr>
     <td width="50%" style="padding: 0;">
-      <img width="1488" alt="image" src="https://github.com/KGU-C-Lab/clab-platforms/assets/39869096/1c466eca-7c76-43b2-a1fa-d240156a3e73">
+      <img width="1488" alt="image" src="https://github.com/kgu-clab/clab-platforms/assets/39869096/1c466eca-7c76-43b2-a1fa-d240156a3e73">
     </td>
     <td width="50%" style="padding: 0;">
-      <img width="1263" alt="image" src="https://github.com/KGU-C-Lab/clab-platforms/assets/39869096/1c26f29a-1ba7-4408-9b93-df0330bdad28">
+      <img width="1263" alt="image" src="https://github.com/kgu-clab/clab-platforms/assets/39869096/1c26f29a-1ba7-4408-9b93-df0330bdad28">
     </td>
   </tr>
 </table>
@@ -75,15 +75,15 @@ C-Lab의 공식 인터널 플랫폼이에요. 동아리의 모든 활동은 이�
 
 동아리원이 아니더라도 누구나 기여할 수 있습니다. 해당 프로젝트에 기여하고 싶다면 아래 문서를 참고해주세요.
 
-[CONTRIBUTING.md](https://github.com/KGU-C-Lab/clab-platforms/blob/main/CONTRIBUTING.md)
+[CONTRIBUTING.md](https://github.com/kgu-clab/clab-platforms/blob/main/CONTRIBUTING.md)
 
 ### Contributors
 
-[![contributors](https://contrib.rocks/image?repo=KGU-C-Lab/clab-platforms)](https://github.com/KGU-C-Lab/clab-platforms/contributors)
+[![contributors](https://contrib.rocks/image?repo=KGU-C-Lab/clab-platforms)](https://github.com/kgu-clab/clab-platforms/contributors)
 
 ## License
 
-C-Lab의 모든 공개 프로젝트는 [GNU General Public License v3.0](https://github.com/KGU-C-Lab/clab-platforms/blob/main/LICENSE)의 라이선스를 따라요.  
+C-Lab의 모든 공개 프로젝트는 [GNU General Public License v3.0](https://github.com/kgu-clab/clab-platforms/blob/main/LICENSE)의 라이선스를 따라요.  
 자세한 사항은 `LICENSE`를 참고해주세요.
 
 GPL-3.0 © Kyonggi University C-Lab

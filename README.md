@@ -1,4 +1,4 @@
-# clab-platforms &middot; [![GitHub License](https://img.shields.io/github/license/KGU-C-Lab/clab-platforms)](https://github.com/KGU-C-Lab/clab-platforms/blob/main/LICENSE) [![pnpm CI](https://github.com/KGU-C-Lab/clab-platforms/actions/workflows/pnpm-ci.yml/badge.svg)](https://github.com/KGU-C-Lab/clab-platforms/actions/workflows/pnpm-ci.yml) [![codecov](https://codecov.io/gh/KGU-C-Lab/clab.page/graph/badge.svg?token=Z5PFR6US6Z)](https://codecov.io/gh/KGU-C-Lab/clab.page)
+# clab-platforms &middot; [![GitHub License](https://img.shields.io/github/license/KGU-C-Lab/clab-platforms)](https://github.com/kgu-clab/clab-platforms/blob/main/LICENSE) [![pnpm CI](https://github.com/kgu-clab/clab-platforms/actions/workflows/pnpm-ci.yml/badge.svg)](https://github.com/kgu-clab/clab-platforms/actions/workflows/pnpm-ci.yml) [![codecov](https://codecov.io/gh/KGU-C-Lab/clab.page/graph/badge.svg?token=Z5PFR6US6Z)](https://codecov.io/gh/KGU-C-Lab/clab.page)
 
 [경기대학교 AI컴퓨터공학부 개발동아리 C-Lab](https://www.clab.page/)의 공식 프론트엔드 시스템이에요.  
 지속적으로 늘어나는 프론트엔드 프로젝트를 유연하고 효율적으로 관리하기 위해 [모노레포(Monorepo)](https://en.wikipedia.org/wiki/Monorepo) 환경으로 만들어졌어요.
@@ -30,7 +30,7 @@
 
 모임에 대한 소개, 활동, 블로그 등 다양한 정보를 공유하는 랜딩페이지 시스템이에요.
 
-### [member](https://github.com/KGU-C-Lab/clab-platforms/blob/main/apps/member) &middot; [![Website](https://img.shields.io/website?url=https%3A%2F%2Fplay.clab.page&up_message=online&up_color=black&down_message=offline&down_color=black&label=in%20production&labelColor=black)](https://play.clab.page/) ![GitHub package.json version](https://img.shields.io/github/package-json/v/KGU-C-Lab/clab-platforms?filename=apps%2Fmember%2Fpackage.json&labelColor=black&color=black)
+### [member](https://github.com/kgu-clab/clab-platforms/blob/main/apps/member) &middot; [![Website](https://img.shields.io/website?url=https%3A%2F%2Fplay.clab.page&up_message=online&up_color=black&down_message=offline&down_color=black&label=in%20production&labelColor=black)](https://play.clab.page/) ![GitHub package.json version](https://img.shields.io/github/package-json/v/KGU-C-Lab/clab-platforms?filename=apps%2Fmember%2Fpackage.json&labelColor=black&color=black)
 
 구성원의 활동과 커뮤니케이션을 지원하는 인터널(Internal) 그룹웨어 시스템이에요.
 
@@ -44,7 +44,7 @@
 
 ## Packages
 
-### [design-system](https://github.com/KGU-C-Lab/clab-platforms/tree/main/packages/design-system) &middot; ![WIP](https://img.shields.io/badge/work_in_progress-black) ![GitHub package.json version](https://img.shields.io/github/package-json/v/KGU-C-Lab/clab-platforms?filename=packages%2Fdesign-system%2Fpackage.json&labelColor=black&color=black)
+### [design-system](https://github.com/kgu-clab/clab-platforms/tree/main/packages/design-system) &middot; ![WIP](https://img.shields.io/badge/work_in_progress-black) ![GitHub package.json version](https://img.shields.io/github/package-json/v/KGU-C-Lab/clab-platforms?filename=packages%2Fdesign-system%2Fpackage.json&labelColor=black&color=black)
 
 일관성 있는 UI&UX를 위한 디자인 시스템이에요. @clab-platforms의 모든 프로젝트는 해당 디자인 시스템을 사용해요.
 
@@ -52,7 +52,7 @@
 
 > Back-end, Server, Infra에 대한 정보는 다른 저장소에서 확인할 수 있어요.
 
-### [clab-platforms-server](https://github.com/KGU-C-Lab/clab-platforms-server)
+### [clab-platforms-server](https://github.com/kgu-clab/clab-platforms-server)
 
 경기대학교 AI컴퓨터공학부 개발동아리 C-Lab의 공식 백엔드 시스템이에요.
 
@@ -60,11 +60,11 @@
 
 동아리원이 아니더라도 누구나 기여할 수 있습니다. 해당 프로젝트에 기여하고 싶다면 아래 문서를 참고해주세요.
 
-[CONTRIBUTING.md](https://github.com/KGU-C-Lab/clab-platforms/blob/main/CONTRIBUTING.md)
+[CONTRIBUTING.md](https://github.com/kgu-clab/clab-platforms/blob/main/CONTRIBUTING.md)
 
 ### Contributors
 
-[![contributors](https://contrib.rocks/image?repo=KGU-C-Lab/clab-platforms)](https://github.com/KGU-C-Lab/clab-platforms/contributors)
+[![contributors](https://contrib.rocks/image?repo=KGU-C-Lab/clab-platforms)](https://github.com/kgu-clab/clab-platforms/contributors)
 
 ## FAQs
 
@@ -85,7 +85,7 @@
 
 ## License
 
-C-Lab의 모든 공개 프로젝트는 [GNU General Public License v3.0](https://github.com/KGU-C-Lab/clab-platforms/blob/main/LICENSE)의 라이선스를 따라요.  
+C-Lab의 모든 공개 프로젝트는 [GNU General Public License v3.0](https://github.com/kgu-clab/clab-platforms/blob/main/LICENSE)의 라이선스를 따라요.  
 자세한 사항은 `LICENSE`를 참고해주세요.
 
 GPL-3.0 © Kyonggi University C-Lab

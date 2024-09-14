@@ -15,7 +15,7 @@ export default function Footer() {
         </p>
         <p className="mt-1 font-bold">© C-Lab. All rights reserved.</p>
       </div>
-      <Link href="https://github.com/kgu-c-lab" target="_blank">
+      <Link href="https://github.com/kgu-clab" target="_blank">
         <Image
           src="/svg/github.svg"
           width={32}

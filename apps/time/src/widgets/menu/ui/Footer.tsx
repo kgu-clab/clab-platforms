@@ -31,7 +31,7 @@ const Footer = () => {
       <div className="mt-2 space-y-1 text-xs font-medium text-gray-400">
         <p className="space-x-1">
           <span>Developed By</span>
-          <a href="https://github.com/KGU-C-Lab" target="_blank">
+          <a href="https://github.com/kgu-clab" target="_blank">
             C-Lab CoreTeam
           </a>
         </p>
