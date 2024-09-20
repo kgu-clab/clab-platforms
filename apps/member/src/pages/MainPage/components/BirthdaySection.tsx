@@ -1,10 +1,11 @@
 import Image from '@components/common/Image/Image';
 import Section from '@components/common/Section/Section';
 
-import { useBirthday } from '@hooks/queries';
 import { createImageUrl } from '@utils/api';
 import { formatMemberName } from '@utils/string';
 import dayjs from 'dayjs';
+
+import { useBirthday } from '../hooks/useBirthday';
 
 export function BirthdaySection() {
   const { data } = useBirthday();
@@ -19,7 +20,7 @@ export function BirthdaySection() {
           </p>
         ) : (
           data.items.map(({ id, ...props }) => (
-            <Card key={id} id={id} {...props} />
+            <BirthdayCard key={id} id={id} {...props} />
           ))
         )}
       </Section.Body>
@@ -27,14 +28,14 @@ export function BirthdaySection() {
   );
 }
 
-interface CardProps {
+interface BirthdayCardProps {
   id: string;
   name: string;
   imageUrl: string | null;
   birth: string;
 }
 
-const Card = ({ id, name, imageUrl, birth }: CardProps) => {
+const BirthdayCard = ({ id, name, imageUrl, birth }: BirthdayCardProps) => {
   return (
     <div className="flex flex-col items-center gap-4 rounded-lg px-4 pt-2">
       <Image

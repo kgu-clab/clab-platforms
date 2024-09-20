@@ -7,7 +7,6 @@ export * from './my';
 export * from './schedule';
 export * from './queryClient';
 export * from './useAccusesMutation';
-export * from './useBirthday';
 export * from './blog/useBlog';
 export * from './blog/useBlogDetail';
 export * from './useHire';
