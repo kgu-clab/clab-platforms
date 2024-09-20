@@ -8,7 +8,7 @@ import { PATH_FINDER } from '@constants/path';
 import { usePagination } from '@hooks/common/usePagination';
 import { useMyActivityGroupMember } from '@hooks/queries';
 
-const MyActivityGroupSection = () => {
+export function ActivityGroupSection() {
   const { page, size, handlePageChange } = usePagination({ defaultSize: 4 });
   const { data } = useMyActivityGroupMember({
     page,
@@ -46,6 +46,4 @@ const MyActivityGroupSection = () => {
       </Section.Body>
     </Section>
   );
-};
-
-export default MyActivityGroupSection;
+}

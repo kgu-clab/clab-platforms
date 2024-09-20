@@ -1,43 +1,37 @@
 import EmptyBox from '@components/common/EmptyBox/EmptyBox';
 import ListButton from '@components/common/ListButton/ListButton';
 import Section from '@components/common/Section/Section';
-import MembershipInfoModal from '@components/membership/MembershipInfoModal/MembershipInfoModal';
 import MembershipStatusBadge from '@components/membership/MembershipStatusBadge/MembershipStatusBadge';
 
 import { MY_MESSAGE } from '@constants/message';
-import { MODAL_TITLE } from '@constants/modal';
-import useModal from '@hooks/common/useModal';
+import { useMembershipInfoModal } from '@hooks/modal/useMembershipInfoModal';
+import { useMembershipFee, useMyProfile } from '@hooks/queries';
 import { toYYMMDD } from '@utils/date';
 
-import type { MembershipFeeType } from '@type/membershipFee';
-
-interface MyMembershipFeeProps {
-  data: Array<MembershipFeeType>;
-}
-
-const TITLE = '회비 신청 내역';
-
-const MyMembershipHistorySection = ({ data }: MyMembershipFeeProps) => {
-  const { openModal } = useModal();
-
-  const handleButtonClick = (membership: MembershipFeeType) => {
-    openModal({
-      title: MODAL_TITLE.SUPPORT_HISTORY,
-      content: <MembershipInfoModal data={membership} hasPermission />,
-    });
-  };
+export function MembershipHistorySection() {
+  const { open } = useMembershipInfoModal();
+  const { data: myProfile } = useMyProfile();
+  const { data: membershipFee } = useMembershipFee({
+    memberId: myProfile.id,
+    size: 10,
+  });
 
   return (
     <Section>
-      <Section.Header title={TITLE} />
+      <Section.Header title="회비 신청 내역" />
       <Section.Body className="text-sm">
-        {data.length === 0 ? (
+        {membershipFee.items.length === 0 ? (
           <EmptyBox>{MY_MESSAGE.NO_MEMBERSHIP}</EmptyBox>
         ) : (
-          data.map((membership) => (
+          membershipFee.items.map((membership) => (
             <ListButton
               key={membership.id}
-              onClick={() => handleButtonClick(membership)}
+              onClick={() =>
+                open({
+                  data: membership,
+                  isOwner: true, // 회비 신청 내역, 모든 정보가 보여지도록 설정
+                })
+              }
             >
               <p className="grow space-x-2 truncate pr-4">
                 <MembershipStatusBadge status={membership.status} />
@@ -52,6 +46,4 @@ const MyMembershipHistorySection = ({ data }: MyMembershipFeeProps) => {
       </Section.Body>
     </Section>
   );
-};
-
-export default MyMembershipHistorySection;
+}

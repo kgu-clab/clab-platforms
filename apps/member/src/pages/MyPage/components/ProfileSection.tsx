@@ -8,21 +8,17 @@ import Section from '@components/common/Section/Section';
 import Select from '@components/common/Select/Select';
 
 import { SELECT_OPTIONS } from '@constants/select';
-import useModal from '@hooks/common/useModal';
-import { useUserInfoMutation } from '@hooks/queries';
+import { useMyProfile, useUserInfoMutation } from '@hooks/queries';
+import { useChangePasswordModal } from '@pages/MyPage/hooks/useChangePasswordModal';
 
 import type { MemberProfileType } from '@type/member';
 
-import ChangePasswordModal from '../ChangePasswordModal/ChangePasswordModal';
-import MyProfileImage from '../MyProfileImage/MyProfileImage';
+import { ProfileImage } from './ProfileImage';
 
-interface MyProfileSectionProps {
-  data: MemberProfileType;
-}
-
-const MyProfileSection = ({ data }: MyProfileSectionProps) => {
-  const { openModal } = useModal();
+export function ProfileSection() {
+  const { data } = useMyProfile();
   const { userInfoMutate, isPending } = useUserInfoMutation();
+  const { open } = useChangePasswordModal();
 
   const [isEdit, setIsEdit] = useState(false);
   const [inputs, setInputs] = useState<MemberProfileType>(data);
@@ -33,6 +29,7 @@ const MyProfileSection = ({ data }: MyProfileSectionProps) => {
       if (prev && isModified) {
         // 편집모드이면서 수정된 내용이 있을 경우
         const file = document.getElementById('imageUrl') as HTMLInputElement;
+
         if (!isPending) {
           userInfoMutate({
             id: data.id,
@@ -52,14 +49,6 @@ const MyProfileSection = ({ data }: MyProfileSectionProps) => {
     setInputs((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleChangePasswordClick = () => {
-    // 비밀번호 변경 모달 열기
-    return openModal({
-      title: '비밀번호 변경',
-      custom: <ChangePasswordModal memberId={data.id} />,
-    });
-  };
-
   const { interests, contact, email, address, githubUrl } = inputs;
 
   return (
@@ -67,7 +56,7 @@ const MyProfileSection = ({ data }: MyProfileSectionProps) => {
       <Section.Header title="나의 정보">
         <div className="flex gap-2">
           {isEdit && (
-            <Button size="sm" onClick={handleChangePasswordClick}>
+            <Button size="sm" onClick={() => open({ memberId: data.id })}>
               비빌번호 변경
             </Button>
           )}
@@ -84,7 +73,7 @@ const MyProfileSection = ({ data }: MyProfileSectionProps) => {
         </div>
       </Section.Header>
       <Section.Body className="flex flex-col gap-4">
-        <MyProfileImage isEdit={isEdit} data={data} onChange={setInputs} />
+        <ProfileImage disabled={!isEdit} value={data} onChange={setInputs} />
         <Grid gap="md" col="2">
           <Select
             label="분야"
@@ -135,6 +124,4 @@ const MyProfileSection = ({ data }: MyProfileSectionProps) => {
       </Section.Body>
     </Section>
   );
-};
-
-export default MyProfileSection;
+}
