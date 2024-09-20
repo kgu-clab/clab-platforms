@@ -8,6 +8,7 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   labelClassName?: string;
   inputClassName?: string;
   messageClassName?: string;
+  required?: boolean;
 }
 
 const Input = forwardRef<HTMLInputElement, InputProps>(
@@ -20,6 +21,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
       labelClassName,
       inputClassName,
       messageClassName,
+      required,
       ...rest
     },
     ref,
@@ -32,6 +34,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
             className={cn('mb-1 ml-1 text-xs', labelClassName)}
           >
             {label}
+            {required && <span className="font-bol ml-1 text-red-400">*</span>}
           </label>
         )}
         <input
@@ -41,6 +44,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
             'outline-clab-primary rounded-lg border p-2',
             inputClassName,
           )}
+          required={required}
           {...rest}
         />
         {message && (
