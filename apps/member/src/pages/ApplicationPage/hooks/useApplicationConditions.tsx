@@ -3,9 +3,9 @@ import { useSuspenseQuery } from '@tanstack/react-query';
 import { getApplicationConditions } from '@api/application';
 import { APPLICATION_QUERY_KEY } from '@constants/key';
 
-import { WithPaginationParams } from '@type/api';
+import type { WithPaginationParams } from '@type/api';
 
-interface useApplicationConditionsParams extends WithPaginationParams {
+export interface UseApplicationConditionsOptions extends WithPaginationParams {
   recruitmentId: number;
 }
 
@@ -16,12 +16,12 @@ export function useApplicationConditions({
   recruitmentId,
   page = 0,
   size = 6,
-}: useApplicationConditionsParams) {
+}: UseApplicationConditionsOptions) {
   return useSuspenseQuery({
+    queryFn: () => getApplicationConditions({ recruitmentId, page, size }),
     queryKey: APPLICATION_QUERY_KEY.RECRUITMENT_PAGE(recruitmentId, {
       page,
       size,
     }),
-    queryFn: () => getApplicationConditions({ recruitmentId, page, size }),
   });
 }

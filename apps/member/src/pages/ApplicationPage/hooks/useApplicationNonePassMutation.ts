@@ -1,28 +1,26 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
-import { patchApplicationPass } from '@api/application';
+import { patchApplicationNonePass } from '@api/application';
 import { APPLICATION_QUERY_KEY } from '@constants/key';
 import useToast from '@hooks/common/useToast';
 
 /**
- * 지원 합격 상태를 설정
+ * 지원 취소 상태를 설정
  */
-export function useApplicationPassMutation() {
+export function useApplicationNonePassMutation() {
   const queryClient = useQueryClient();
   const toast = useToast();
 
-  const mutation = useMutation({
-    mutationFn: patchApplicationPass,
+  return useMutation({
+    mutationFn: patchApplicationNonePass,
     onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: APPLICATION_QUERY_KEY.PAGES(),
       });
       toast({
         state: 'success',
-        message: '합격 상태로 변경됐어요.',
+        message: '불합격 상태로 변경됐어요.',
       });
     },
   });
-
-  return { applicationPassMutate: mutation.mutate };
 }

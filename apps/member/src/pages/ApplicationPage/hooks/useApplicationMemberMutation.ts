@@ -9,7 +9,7 @@ import useToast from '@hooks/common/useToast';
 export function useApplicationMemberMutation() {
   const toast = useToast();
 
-  const mutation = useMutation({
+  return useMutation({
     mutationFn: postApplicationMember,
     onSuccess: (data) => {
       if (data === null) {
@@ -24,6 +24,4 @@ export function useApplicationMemberMutation() {
       });
     },
   });
-
-  return { applicationMemberMutate: mutation.mutate };
 }

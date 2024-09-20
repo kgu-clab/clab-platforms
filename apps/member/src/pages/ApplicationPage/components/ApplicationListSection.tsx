@@ -1,5 +1,4 @@
-import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useMemo, useState } from 'react';
 
 import { Badge, Button, Table } from '@clab-platforms/design-system';
 
@@ -8,53 +7,50 @@ import { Section } from '@components/common/Section';
 import Select from '@components/common/Select/Select';
 
 import { TABLE_HEAD } from '@constants/head';
-import { useModal } from '@hooks/common/useModal';
 import { usePagination } from '@hooks/common/usePagination';
+import { formattedDate } from '@utils/date';
+import { toKoreanApplicationType } from '@utils/string';
+
 import {
   useApplicationAllMemberMutation,
   useApplicationConditions,
+  useApplicationInoModal,
   useApplicationMemberMutation,
   useApplicationNonePassMutation,
   useApplicationPassMutation,
-} from '@hooks/queries/application';
+  useRecruitment,
+} from '../hooks';
 
-import type { ApplicationMemberType } from '@type/application';
+export function ApplicationListSection() {
+  const { open } = useApplicationInoModal();
+  const { data: recruitmentList } = useRecruitment();
 
-import { ApplicationInfoModal } from './ApplicationInfoModal';
-
-interface RecruitmentItem {
-  id: number;
-  value: number;
-  name: string;
-}
-
-interface ApplicationListSectionProps {
-  recruitmentList: RecruitmentItem[];
-}
-
-const ApplicationListSection = ({
-  recruitmentList,
-}: ApplicationListSectionProps) => {
-  const navigate = useNavigate();
-  const { open } = useModal();
   const [selectRecruitment, setSelectRecruitment] = useState(
-    recruitmentList.length, // 가장 최신의 모집공고
+    recruitmentList.length,
   );
   const { page, size, handlePageChange } = usePagination();
-  const { data } = useApplicationConditions({
+
+  const { mutate: applicationMemberMutate } = useApplicationMemberMutation();
+  const { mutate: applicationAllMemberMutate } =
+    useApplicationAllMemberMutation();
+  const { mutate: applicationNonePassMutate } =
+    useApplicationNonePassMutation();
+  const { mutate: applicationPassMutate } = useApplicationPassMutation();
+  const { data: applicationConditions } = useApplicationConditions({
     recruitmentId: selectRecruitment,
     page,
     size,
   });
-  const { applicationMemberMutate } = useApplicationMemberMutation();
-  const { applicationAllMemberMutate } = useApplicationAllMemberMutation();
-  const { applicationNonePassMutate } = useApplicationNonePassMutation();
-  const { applicationPassMutate } = useApplicationPassMutation();
 
-  useEffect(() => {
-    navigate('');
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [selectRecruitment]);
+  const options = useMemo(
+    () =>
+      recruitmentList.map(({ id, applicationType, startDate, endDate }) => ({
+        id: id,
+        value: id,
+        name: `${id}. ${toKoreanApplicationType(applicationType)} / ${formattedDate(startDate)} ~ ${formattedDate(endDate)}`,
+      })),
+    [recruitmentList],
+  );
 
   const handleRecruitmentChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setSelectRecruitment(+e.target.value);
@@ -79,13 +75,6 @@ const ApplicationListSection = ({
     applicationAllMemberMutate(selectRecruitment);
   };
 
-  const handleViewButtonClick = (info: ApplicationMemberType) => {
-    return open({
-      title: '지원서',
-      content: <ApplicationInfoModal applicationInfo={info} />,
-    });
-  };
-
   return (
     <Section>
       <Section.Header
@@ -95,7 +84,7 @@ const ApplicationListSection = ({
       <Section.Body className="space-y-4">
         <div className="flex gap-8">
           <Select
-            options={recruitmentList}
+            options={options}
             label="모집 공고"
             onChange={handleRecruitmentChange}
             className="h-fit w-full"
@@ -109,16 +98,13 @@ const ApplicationListSection = ({
           </Button>
         </div>
         <Table head={TABLE_HEAD.APPLY_TABLE}>
-          {data.items.map((application, index) => (
+          {applicationConditions.items.map((application, index) => (
             <Table.Row key={application.studentId}>
               <Table.Cell>{index + 1 + page * 20}</Table.Cell>
               <Table.Cell>{application.name}</Table.Cell>
               <Table.Cell>{application.studentId}</Table.Cell>
               <Table.Cell>
-                <Button
-                  size="sm"
-                  onClick={() => handleViewButtonClick(application)}
-                >
+                <Button size="sm" onClick={() => open({ data: application })}>
                   보기
                 </Button>
               </Table.Cell>
@@ -172,7 +158,7 @@ const ApplicationListSection = ({
         </Table>
         <Pagination
           className="mt-4 justify-center"
-          totalItems={data.totalItems}
+          totalItems={applicationConditions.totalItems}
           postLimit={size}
           onChange={handlePageChange}
           page={page}
@@ -180,6 +166,4 @@ const ApplicationListSection = ({
       </Section.Body>
     </Section>
   );
-};
-
-export default ApplicationListSection;
+}

@@ -7,9 +7,10 @@ import {
   ActivityMemberRoleType,
   MemberStatusType,
 } from '@type/activity';
+import type { ApplicationType } from '@type/application';
 import type { Bookstore, BookstoreKorean } from '@type/book';
 import type { CareerLevel, EmploymentType } from '@type/community';
-import { RoleLevelKey, RoleLevelType } from '@type/member';
+import type { RoleLevelKey, RoleLevelType } from '@type/member';
 import type { MembershipStatusType } from '@type/membershipFee';
 import type { SchedulePriority } from '@type/schedule';
 
@@ -155,6 +156,19 @@ export function toKoreaMemberLevel(
       return '관리자';
     default:
       return '-';
+  }
+}
+
+export function toKoreanApplicationType(type: ApplicationType) {
+  switch (type) {
+    case 'NORMAL':
+      return '회원';
+    case 'OPERATION':
+      return '운영진';
+    case 'CORE_TEAM':
+      return '코어팀';
+    default:
+      return '알수없음';
   }
 }
 

@@ -1,14 +1,33 @@
+import { useMemo } from 'react';
+
 import { DetailsList } from '@clab-platforms/design-system';
+
+import { useModal } from '@hooks/common/useModal';
 
 import { ApplicationMemberType } from '@type/application';
 
-interface ApplicationInfoModalProps {
-  applicationInfo: ApplicationMemberType;
+interface Options {
+  data: ApplicationMemberType;
 }
 
-export const ApplicationInfoModal = ({
-  applicationInfo,
-}: ApplicationInfoModalProps) => {
+export function useApplicationInoModal() {
+  const { open } = useModal();
+
+  return useMemo(
+    () => ({
+      open: (options: Options) =>
+        open({
+          title: '지원서',
+          content: <ApplicationInfoModal {...options} />,
+        }),
+    }),
+    [open],
+  );
+}
+
+interface Props extends Options {}
+
+function ApplicationInfoModal({ data }: Props) {
   const {
     studentId,
     name,
@@ -21,7 +40,7 @@ export const ApplicationInfoModal = ({
     interests,
     otherActivities,
     githubUrl,
-  } = applicationInfo;
+  } = data;
 
   return (
     <DetailsList className="max-h-[540px] overflow-auto">
@@ -34,8 +53,8 @@ export const ApplicationInfoModal = ({
       <DetailsList.Item label="생년월일">{birth}</DetailsList.Item>
       <DetailsList.Item label="거주지">{address}</DetailsList.Item>
       <DetailsList.Item label="희망분야">{interests}</DetailsList.Item>
-      <DetailsList.Item label="Github">{githubUrl || '-'}</DetailsList.Item>
+      <DetailsList.Item label="Github">{githubUrl ?? '-'}</DetailsList.Item>
       <p className="mt-8">{otherActivities}</p>
     </DetailsList>
   );
-};
+}
