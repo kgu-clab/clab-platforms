@@ -40,7 +40,7 @@ const LibraryPage = lazy(() => import('@pages/LibraryPage/LibraryPage'));
 const LibraryDetailPage = lazy(
   () => import('@pages/LibraryDetailPage/LibraryDetailPage'),
 );
-const MyPage = lazy(() => import('@pages/MyPage'));
+const MyPage = lazy(() => import('@pages/MyPage/MyPage'));
 const CalendarPage = lazy(() => import('@pages/CalendarPage/CalendarPage'));
 const SupportPage = lazy(() => import('@pages/SupportPage/SupportPage'));
 const LoginPage = lazy(() => import('@pages/LoginPage/LoginPage'));
