@@ -52,7 +52,11 @@ export const ActivityBoardEditModal = ({ prevData, groupId }: Props) => {
   };
   const handleDeleteFileClick = () => {
     setUploadedFile(null);
+    if (uploaderRef.current) {
+      uploaderRef.current.value = '';
+    }
   };
+
   const handleEditButtonClick = () => {
     const formData = new FormData();
     const files = uploaderRef.current?.files;
