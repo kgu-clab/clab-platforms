@@ -4,11 +4,15 @@ import { Button, Input } from '@clab-platforms/design-system';
 
 import Hr from '@components/common/Hr/Hr';
 import Section from '@components/common/Section/Section';
+import TextCounting from '@components/common/TextCounting/TextCounting';
 import Textarea from '@components/common/Textarea/Textarea';
 import { ActivityBoardEditModal } from '@components/modal';
 
 import { FORM_DATA_KEY } from '@constants/api.ts';
-import { ACTIVITY_BOARD_CATEGORY_STATE } from '@constants/state.ts';
+import {
+  ACTIVITY_BOARD_CATEGORY_STATE,
+  ACTIVITY_GROUP_CONTENT_MAX_LENGTH,
+} from '@constants/state.ts';
 import useModal from '@hooks/common/useModal';
 import useToast from '@hooks/common/useToast';
 import {
@@ -73,7 +77,13 @@ const ActivityPostEditor = ({
         state: 'error',
         message: '제목, 내용은 필수 입력 요소입니다.',
       });
+    } else if (post.content.length > ACTIVITY_GROUP_CONTENT_MAX_LENGTH) {
+      return toast({
+        state: 'error',
+        message: `내용은 ${ACTIVITY_GROUP_CONTENT_MAX_LENGTH}자 이내로 작성해주세요.`,
+      });
     }
+
     if (files?.length) {
       Array.from(files).forEach((file) => {
         formData.append(FORM_DATA_KEY, file);
@@ -128,9 +138,12 @@ const ActivityPostEditor = ({
               label="내용"
               placeholder="내용을 입력해주세요."
               className="w-full"
-              maxLength={200}
               value={post.content}
               onChange={handlePostChange}
+            />
+            <TextCounting
+              maxLength={ACTIVITY_GROUP_CONTENT_MAX_LENGTH}
+              text={post.content}
             />
             <div className="flex flex-col">
               <label htmlFor="fileUpload" className="mb-1 ml-1 text-xs">
@@ -167,7 +180,7 @@ const ActivityPostEditor = ({
                 color="orange"
                 onClick={() => handleAssignmentEditClick(index)}
               >
-                {editAssignment[index] ? '과제 닫기' : '과제 열기'}
+                {editAssignment[index] ? '과제 관리 닫기' : '과제 관리 하기'}
               </Button>
               <Button
                 size="sm"
