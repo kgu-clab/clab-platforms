@@ -1,11 +1,12 @@
 import { Button } from '@clab-platforms/design-system';
 
 import Footer from '@components/common/Footer/Footer';
+import Linker from '@components/common/Linker/Linker';
 import LoginButton from '@components/common/LoginButton/LoginButton';
 
 import { IS_PRODUCTION } from '@constants/environment';
 
-const LoginPage = () => {
+export default function LoginPage() {
   return (
     <main>
       <div className="flex min-h-dvh flex-col items-center justify-center space-y-8">
@@ -28,14 +29,10 @@ const LoginPage = () => {
         )}
         <div className="text-center text-sm">
           <p className="text-gray-500">C-Lab 회원이 아니신가요?</p>
-          <button className="text-bold cursor-pointer underline after:content-['_↗']">
-            동아리 지원하러 가기
-          </button>
+          <Linker to="https://www.clab.page/apply">동아리 지원하러 가기</Linker>
         </div>
       </div>
       <Footer />
     </main>
   );
-};
-
-export default LoginPage;
+}
