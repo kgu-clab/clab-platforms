@@ -7,12 +7,15 @@ import Section from '@components/common/Section/Section';
 
 import { useSchedule } from '@hooks/queries';
 import { now, transformEvents } from '@utils/date';
+import dayjs from 'dayjs';
 
-import CalendarSchedule from '../CalendarSchedule/CalendarSchedule';
+import type { ScheduleItem } from '@type/schedule';
+
+import { useScheduleInfoModal } from '../hooks/useScheduleInfoModal';
 
 const today = now();
 
-const CalendarSection = () => {
+export default function CalendarSection() {
   const [date, setDate] = useState(today);
   const { data } = useSchedule({
     startDate: date.startOf('month').toString(),
@@ -103,6 +106,54 @@ const CalendarSection = () => {
       </Section.Body>
     </Section>
   );
-};
+}
 
-export default CalendarSection;
+interface CalendarScheduleProps extends ScheduleItem {
+  day: dayjs.Dayjs;
+}
+
+const CalendarSchedule = ({
+  day,
+  title,
+  detail,
+  startDateTime,
+  endDateTime,
+}: CalendarScheduleProps) => {
+  const { open } = useScheduleInfoModal();
+
+  const isDateDiff = dayjs(startDateTime).diff(endDateTime, 'd');
+  const isBeforeToday = day.isBefore(today, 'day');
+
+  return (
+    <button
+      className={cn(
+        'w-full truncate px-2 text-left text-xs',
+        isDateDiff === 0 ? 'rounded bg-blue-100' : 'bg-red-100',
+        {
+          'rounded-l bg-red-100':
+            isDateDiff !== 0 && day.isSame(startDateTime, 'date'),
+        },
+        {
+          'bg-red-100':
+            isDateDiff !== 0 &&
+            day.isAfter(startDateTime, 'date') &&
+            day.isBefore(endDateTime, 'date'),
+        },
+        {
+          'rounded-r bg-red-100':
+            isDateDiff !== 0 && day.isSame(endDateTime, 'date'),
+        },
+        { 'opacity-50': isBeforeToday },
+      )}
+      onClick={() =>
+        open({
+          detail,
+          startDateTime,
+          endDateTime,
+        })
+      }
+    >
+      {title}
+    </button>
+  );
+};

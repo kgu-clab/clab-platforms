@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { Menubar, Table } from '@clab-platforms/design-system';
 import { toDecodeHTMLEntities } from '@clab-platforms/utils';
 
-import AddScheduleForm from '@components/calendar/AddScheduleForm/AddScheduleForm';
+import { ScheduleFormSection } from '@components/calendar/ScheduleFormSection';
 import ActionButton from '@components/common/ActionButton/ActionButton';
 import Pagination from '@components/common/Pagination/Pagination';
 import { Section } from '@components/common/Section';
@@ -83,7 +83,9 @@ const ManageCalendarSection = () => {
         )}
       </Table>
     ),
-    add: <AddScheduleForm onSubmit={() => handleMenubarItemClick('view')} />,
+    add: (
+      <ScheduleFormSection onSubmit={() => handleMenubarItemClick('view')} />
+    ),
   }[mode];
 
   return (

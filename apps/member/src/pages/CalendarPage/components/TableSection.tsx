@@ -3,24 +3,14 @@ import { Table } from '@clab-platforms/design-system';
 import { Section } from '@components/common/Section';
 
 import { TABLE_HEAD } from '@constants/head';
-import { useModal } from '@hooks/common/useModal';
 import { useSchedule } from '@hooks/queries';
-import { formattedDate, formattedDatePeriod } from '@utils/date';
+import { formattedDate } from '@utils/date';
 
-const CalendarTableSection = () => {
-  const { open } = useModal();
+import { useScheduleInfoModal } from '../hooks/useScheduleInfoModal';
+
+export function TableSection() {
+  const { open } = useScheduleInfoModal();
   const { data } = useSchedule();
-
-  const handleScheduleClick = (
-    detail: string,
-    startDateTime: string,
-    endDateTime: string,
-  ) => {
-    open({
-      title: '📆 일정',
-      content: `일시: ${formattedDatePeriod(startDateTime, endDateTime)}\n내용: ${detail}`,
-    });
-  };
 
   return (
     <Section>
@@ -28,9 +18,7 @@ const CalendarTableSection = () => {
         {data.items.map(({ id, title, detail, startDateTime, endDateTime }) => (
           <Table.Row
             key={id}
-            onClick={() =>
-              handleScheduleClick(detail, startDateTime, endDateTime)
-            }
+            onClick={() => open({ detail, startDateTime, endDateTime })}
           >
             <Table.Cell>{`${formattedDate(startDateTime)} ~ ${formattedDate(endDateTime)}`}</Table.Cell>
             <Table.Cell>{title}</Table.Cell>
@@ -39,6 +27,4 @@ const CalendarTableSection = () => {
       </Table>
     </Section>
   );
-};
-
-export default CalendarTableSection;
+}

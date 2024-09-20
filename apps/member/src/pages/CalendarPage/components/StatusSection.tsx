@@ -8,10 +8,12 @@ import {
 import Section from '@components/common/Section/Section';
 import StatusCard from '@components/common/StatusCard/StatusCard';
 
-import { useSchedule, useScheduleCollect } from '@hooks/queries';
+import { useSchedule } from '@hooks/queries';
 import { calculateDDay, findClosestEvent, transformEvents } from '@utils/date';
 
-const CalendarStatusSection = () => {
+import { useScheduleCollect } from '../hooks/useScheduleCollect';
+
+export function StatusSection() {
   const { data: monthData } = useSchedule();
   const { data: yearData } = useScheduleCollect();
 
@@ -50,6 +52,4 @@ const CalendarStatusSection = () => {
       </Section.Body>
     </Section>
   );
-};
-
-export default CalendarStatusSection;
+}

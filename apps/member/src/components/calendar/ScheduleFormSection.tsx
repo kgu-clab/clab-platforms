@@ -7,11 +7,11 @@ import Textarea from '@components/common/Textarea/Textarea';
 import useToast from '@hooks/common/useToast';
 import { useScheduleMutation } from '@hooks/queries';
 
-interface AddScheduleFormProps {
+interface Props {
   onSubmit: () => void;
 }
 
-const AddScheduleForm = ({ onSubmit }: AddScheduleFormProps) => {
+export function ScheduleFormSection({ onSubmit }: Props) {
   const toast = useToast();
   const [inputs, setInputs] = useState({
     title: '',
@@ -93,6 +93,4 @@ const AddScheduleForm = ({ onSubmit }: AddScheduleFormProps) => {
       </Button>
     </div>
   );
-};
-
-export default AddScheduleForm;
+}

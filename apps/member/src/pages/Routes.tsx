@@ -41,10 +41,10 @@ const LibraryPage = lazy(() => import('@pages/LibraryPage'));
 const LibraryDetailPage = lazy(() => import('@pages/LibraryDetailPage'));
 const MyPage = lazy(() => import('@pages/MyPage'));
 const SupportPage = lazy(() => import('@pages/SupportPage'));
-const CalendarPage = lazy(() => import('@pages/CalendarPage/CalendarPage'));
+const CalendarPage = lazy(() => import('@pages/CalendarPage'));
 const LoginPage = lazy(() => import('@pages/LoginPage'));
-const AuthPage = lazy(() => import('@pages/AuthPage/AuthPage'));
-const BlogPage = lazy(() => import('@pages/BlogPage/BlogPage'));
+const AuthPage = lazy(() => import('@pages/AuthPage'));
+const BlogPage = lazy(() => import('@pages/BlogPage'));
 const ManagePage = lazy(() => import('@pages/ManagePage/ManagePage'));
 
 const router = createBrowserRouter([
@@ -213,11 +213,19 @@ const router = createBrowserRouter([
     children: [
       {
         path: PATH.LOGIN,
-        element: <LoginPage />,
+        element: (
+          <Suspense>
+            <LoginPage />
+          </Suspense>
+        ),
       },
       {
         path: PATH.AUTH,
-        element: <AuthPage />,
+        element: (
+          <Suspense>
+            <AuthPage />
+          </Suspense>
+        ),
       },
     ],
   },
