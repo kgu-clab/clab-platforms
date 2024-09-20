@@ -19,6 +19,7 @@ import { GROUP_MESSAGE } from '@constants/message';
 import { ACTIVITY_MEMBER_ROLE, ACTIVITY_MEMBER_STATE } from '@constants/state';
 import useModal from '@hooks/common/useModal';
 import { usePagination } from '@hooks/common/usePagination';
+import useToast from '@hooks/common/useToast';
 import {
   useActivityGroupApplication,
   useActivityGroupApplicationMutation,
@@ -62,6 +63,7 @@ function getRoleColor(state: ActivityMemberRoleType): BadgeColorVariant {
 const ActivityParticipantEditor = ({
   groupId,
 }: ActivityParticipantEditorProps) => {
+  const toast = useToast();
   const [mode, setMode] = useState(false);
   const { page, size, handlePageChange } = usePagination({ defaultSize: 10 });
   const { openModal, closeModal } = useModal();
@@ -132,11 +134,16 @@ const ActivityParticipantEditor = ({
     const changeList = selectedMember
       .filter((member) => member.status === true)
       .map((member) => member.memberId);
-
+    if (!changeList.length) {
+      return toast({
+        state: 'error',
+        message: '선택된 멤버가 없어요',
+      });
+    }
     openModal({
       content: (
         <CheckConfirmModal
-          message="변경하시겠습니까?"
+          message="승인하시겠습니까?"
           handleConfirmButton={() => {
             activityGroupApplicationMutate({
               activityGroupId: groupId,
@@ -153,11 +160,13 @@ const ActivityParticipantEditor = ({
   return (
     <Section>
       <Section.Header title="참여자 관리">
-        <Menubar>
-          <Menubar.Item selected={mode} onClick={() => setMode(!mode)}>
-            선택
-          </Menubar.Item>
-        </Menubar>
+        {!(applyMemberList.items.length === 1) && (
+          <Menubar>
+            <Menubar.Item selected={mode} onClick={() => setMode(!mode)}>
+              선택
+            </Menubar.Item>
+          </Menubar>
+        )}
       </Section.Header>
       <Section.Body>
         {applyMemberList.items.length === 1 ? (
