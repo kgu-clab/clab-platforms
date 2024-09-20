@@ -41,8 +41,8 @@ const LibraryDetailPage = lazy(
   () => import('@pages/LibraryDetailPage/LibraryDetailPage'),
 );
 const MyPage = lazy(() => import('@pages/MyPage'));
+const SupportPage = lazy(() => import('@pages/SupportPage'));
 const CalendarPage = lazy(() => import('@pages/CalendarPage/CalendarPage'));
-const SupportPage = lazy(() => import('@pages/SupportPage/SupportPage'));
 const LoginPage = lazy(() => import('@pages/LoginPage/LoginPage'));
 const AuthPage = lazy(() => import('@pages/AuthPage/AuthPage'));
 const BlogPage = lazy(() => import('@pages/BlogPage/BlogPage'));

@@ -12,6 +12,8 @@ import { useMembershipFee, useMyProfile } from '@hooks/queries';
 import { formattedDate } from '@utils/date';
 import { formatMemberName } from '@utils/string';
 
+const TITLE = '신쳥 내역';
+
 interface Props {
   title?: string;
   size?: number;
@@ -19,12 +21,12 @@ interface Props {
   hasPermission?: boolean;
 }
 
-const SupportHistorySection = ({
+export function SupportHistorySection({
   title,
   size: defaultSize,
   withPagination,
   hasPermission = false,
-}: Props) => {
+}: Props) {
   const { page, size, handlePageChange } = usePagination({
     defaultSize,
     sectionName: 'history',
@@ -41,7 +43,7 @@ const SupportHistorySection = ({
   return (
     <Section>
       <Section.Header
-        title={title ?? '신청 내역'}
+        title={title ?? TITLE}
         description="최근에 신청된 회비 신청 내역이에요"
       />
       <Section.Body>
@@ -52,7 +54,7 @@ const SupportHistorySection = ({
               onClick={() =>
                 open({
                   data: membership,
-                  hasPermission: myProfile.roleLevel! >= ROLE_LEVEL.SUPER,
+                  hasPermission: myProfile.roleLevel >= ROLE_LEVEL.SUPER,
                 })
               }
             >
@@ -80,6 +82,12 @@ const SupportHistorySection = ({
       </Section.Body>
     </Section>
   );
-};
+}
 
-export default SupportHistorySection;
+export function SupportHistorySectionSkeleton() {
+  return (
+    <Section className="h-96 animate-pulse">
+      <Section.Header title={TITLE} />
+    </Section>
+  );
+}

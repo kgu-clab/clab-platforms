@@ -43,13 +43,13 @@ export const useSupportRequestForm = () => {
     }));
   }, []);
 
-  const handleCheckboxChange = (index: number) => {
+  const handleCheckboxChange = useCallback((index: number) => {
     setCheckList((prev) => {
       const next = [...prev];
       next[index] = !prev[index];
       return next;
     });
-  };
+  }, []);
 
   const resetFormData = useCallback(() => {
     setFormData(INIT_FORM_DATA);
@@ -64,5 +64,5 @@ export const useSupportRequestForm = () => {
     handleInputChange,
     handleTabsChange,
     resetFormData,
-  };
+  } as const;
 };

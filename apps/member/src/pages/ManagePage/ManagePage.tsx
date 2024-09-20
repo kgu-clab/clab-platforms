@@ -8,7 +8,7 @@ import ManageBannerSection from '@components/manage/ManageBannerSection/ManageBa
 import ManageCalendarSection from '@components/manage/ManageCalendarSection/ManageCalendarSection';
 import ManageLevelSection from '@components/manage/ManageLevelSection/ManageLevelSection';
 import ManageLibrarySection from '@components/manage/ManageLibrarySection/ManageLibrarySection';
-import SupportHistorySection from '@components/support/SupportHistorySection/SupportHistorySection';
+import { SupportHistorySection } from '@components/support/SupportHistorySection';
 
 import { ROLE_LEVEL } from '@constants/state';
 import { useMyProfile } from '@hooks/queries';
@@ -16,7 +16,7 @@ import { useMyProfile } from '@hooks/queries';
 const ManagePage = () => {
   const { data } = useMyProfile();
 
-  if (data.roleLevel! < ROLE_LEVEL.ADMIN) {
+  if (data.roleLevel < ROLE_LEVEL.ADMIN) {
     throw new Error('접근 권한이 없습니다.');
   }
 

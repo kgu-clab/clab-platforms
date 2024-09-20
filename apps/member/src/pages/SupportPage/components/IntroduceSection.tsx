@@ -11,7 +11,7 @@ import {
   type StatusCardProps,
 } from '@components/common/StatusCard';
 
-const stepContents: StatusCardProps[] = [
+const SEPT_CONTENTS: StatusCardProps[] = [
   {
     icon: <SurveyColor width={32} height={32} />,
     label: '신청서 작성',
@@ -38,12 +38,12 @@ const stepContents: StatusCardProps[] = [
   },
 ];
 
-const SupportProcedureSection = () => {
+export function IntroduceSection() {
   return (
     <Section>
       <Section.Header title="회비 사용 절차는 이렇게 진행돼요" />
       <Section.Body className="grid grid-cols-2 gap-4 break-keep md:grid-cols-4">
-        {stepContents.map(({ icon, label, description }) => (
+        {SEPT_CONTENTS.map(({ icon, label, description }) => (
           <StatusCard
             key={label}
             icon={icon}
@@ -54,6 +54,4 @@ const SupportProcedureSection = () => {
       </Section.Body>
     </Section>
   );
-};
-
-export default SupportProcedureSection;
+}

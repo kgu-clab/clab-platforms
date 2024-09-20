@@ -10,13 +10,47 @@ import { formatComma } from '@clab-platforms/utils';
 
 import Linker from '@components/common/Linker/Linker';
 import Loading from '@components/common/Loading/Loading';
+import Section from '@components/common/Section/Section';
 import Uploader from '@components/common/Uploader/Uploader';
 
+import { PATH } from '@constants/path';
 import { SELECT_DEFAULT_OPTION } from '@constants/select';
 import useToast from '@hooks/common/useToast';
-import { useSupportRequestForm } from '@hooks/useSupportRequestForm';
+import { useMembershipFeeMutation } from '@hooks/queries/useMembershipFeeMutation';
+import { createFormData } from '@utils/api';
 
 import type { SupportRequestDataType } from '@type/support';
+
+import { useSupportRequestForm } from '../hooks/useSupportRequestForm';
+
+export function RequestSection() {
+  const { membershipFeeMutate, isPending, isSuccess } =
+    useMembershipFeeMutation();
+
+  const handleRequestSubmit = async (data: SupportRequestDataType) => {
+    membershipFeeMutate({
+      ...data,
+      multipartFile: createFormData(data.file),
+    });
+  };
+
+  return (
+    <Section>
+      <Section.Header title="사용 신청서" />
+      <Linker to={PATH.LIBRARY}>
+        혹시 도서 신청을 하시나요? 이미 보유중인 책일 수도 있어요.
+      </Linker>
+      <hr className="mt-4 border border-dashed" />
+      <Section.Body>
+        <RequestForm
+          isPending={isPending}
+          isSuccess={isSuccess}
+          onSubmit={handleRequestSubmit}
+        />
+      </Section.Body>
+    </Section>
+  );
+}
 
 const TABS_OPTIONS = [
   {
@@ -33,17 +67,17 @@ const TABS_OPTIONS = [
   },
 ] as const;
 
-interface SupportRequestFormProps {
+interface RequestFormProps {
   isPending: boolean;
   isSuccess: boolean;
   onSubmit: (data: SupportRequestDataType) => void;
 }
 
-const SupportRequestForm = ({
+export function RequestForm({
   isPending,
   isSuccess,
   onSubmit,
-}: SupportRequestFormProps) => {
+}: RequestFormProps) {
   const toast = useToast();
   const {
     formData,
@@ -170,6 +204,4 @@ const SupportRequestForm = ({
       </div>
     </form>
   );
-};
-
-export default SupportRequestForm;
+}
