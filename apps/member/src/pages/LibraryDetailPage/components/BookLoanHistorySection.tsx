@@ -1,20 +1,21 @@
 import { Table } from '@clab-platforms/design-system';
 
 import Section from '@components/common/Section/Section';
+import BookLoanConditionStatusBadge from '@components/library/BookLoanConditionStatusBadge';
 
 import { TABLE_HEAD } from '@constants/head';
 import { useBookLoanRecordConditions } from '@hooks/queries';
+import { useBookDetails } from '@pages/LibraryPage/hooks/useBookDetails';
 import { formattedDate } from '@utils/date';
 import { formatMemberName } from '@utils/string';
 
-import BookLoanConditionStatusBadge from '../BookLoanConditionStatusBadge/BookLoanConditionStatusBadge';
-
-interface BookLoanHistorySectionProps {
-  id: number;
+interface Props {
+  paramsId: string;
 }
 
-const BookLoanHistorySection = ({ id }: BookLoanHistorySectionProps) => {
-  const { data } = useBookLoanRecordConditions({ bookId: id });
+export function LoanHistorySection({ paramsId }: Props) {
+  const { data: bookDetails } = useBookDetails(+paramsId);
+  const { data } = useBookLoanRecordConditions({ bookId: bookDetails.id });
 
   return (
     <Section>
@@ -46,6 +47,4 @@ const BookLoanHistorySection = ({ id }: BookLoanHistorySectionProps) => {
       </Section.Body>
     </Section>
   );
-};
-
-export default BookLoanHistorySection;
+}

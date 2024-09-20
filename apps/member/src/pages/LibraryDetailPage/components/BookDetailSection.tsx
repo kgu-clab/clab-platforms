@@ -12,7 +12,8 @@ import Section from '@components/common/Section/Section';
 import { BOOK_STORE_URL } from '@constants/path';
 import { SELECT_DEFAULT_OPTION } from '@constants/select';
 import { BOOK_STATE } from '@constants/state';
-import { useBookLoanBorrowMutation, useMyProfile } from '@hooks/queries';
+import { useMyProfile } from '@hooks/queries';
+import { useBookDetails } from '@pages/LibraryPage/hooks/useBookDetails';
 import { createImageUrl } from '@utils/api';
 import { bookReviewParser, toBookstore } from '@utils/string';
 
@@ -20,13 +21,11 @@ import yes24Icon from '@assets/svg/yes24.svg';
 import aladinIcon from '@assets/webp/aladin.webp';
 import kyoboIcon from '@assets/webp/kyobobook.webp';
 
-import type { BookItem, BookstoreKorean } from '@type/book';
+import type { BookstoreKorean } from '@type/book';
 
-interface BookDetailSectionProps {
-  data: BookItem;
-}
+import { useBookLoanBorrowMutation } from '../hooks/useBookLoanBorrowMutation';
 
-const options = [
+const OPTIONS = [
   {
     icon: <img src={kyoboIcon} alt="교보문고" className="size-6" />,
     value: '교보문고',
@@ -41,9 +40,15 @@ const options = [
   },
 ] as const;
 
-const BookDetailSection = ({ data }: BookDetailSectionProps) => {
+interface Props {
+  paramsId: string;
+}
+
+export function DetailsSection({ paramsId }: Props) {
+  const { data: bookDetails } = useBookDetails(+paramsId);
   const { data: myInfo } = useMyProfile();
   const { bookBorrowMutate } = useBookLoanBorrowMutation();
+
   const {
     id,
     borrowerId,
@@ -53,7 +58,7 @@ const BookDetailSection = ({ data }: BookDetailSectionProps) => {
     publisher,
     imageUrl,
     reviewLinks,
-  } = data;
+  } = bookDetails;
 
   const handleBorrowClick = (bookId: number) => {
     bookBorrowMutate({
@@ -100,7 +105,7 @@ const BookDetailSection = ({ data }: BookDetailSectionProps) => {
               <label className="mb-1 ml-1 text-xs">온라인 서점 바로가기</label>
               <Tabs
                 value={SELECT_DEFAULT_OPTION}
-                options={options}
+                options={OPTIONS}
                 onChange={handleTabsChange}
               />
             </div>
@@ -110,6 +115,4 @@ const BookDetailSection = ({ data }: BookDetailSectionProps) => {
       </Grid>
     </Section>
   );
-};
-
-export default BookDetailSection;
+}

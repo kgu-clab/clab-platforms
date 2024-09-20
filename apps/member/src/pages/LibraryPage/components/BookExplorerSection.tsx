@@ -1,13 +1,47 @@
-import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import { cn } from '@clab-platforms/utils';
 
 import Image from '@components/common/Image/Image';
+import Pagination from '@components/common/Pagination/Pagination';
+import { Section } from '@components/common/Section';
 
 import { PATH_FINDER } from '@constants/path';
 import { BOOK_STATE } from '@constants/state';
+import { usePagination } from '@hooks/common/usePagination';
 
 import type { BookItem } from '@type/book';
+
+import { useBooks } from '../hooks/useBooks';
+
+export default function BookExplorerSection() {
+  const { page, size, handlePageChange } = usePagination({ defaultSize: 16 });
+
+  const { data } = useBooks({ page, size });
+
+  return (
+    <Section>
+      <Section.Header
+        title="둘러보기"
+        description="소장 도서를 둘러볼 수 있어요"
+      />
+      <Section.Body>
+        <div className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4">
+          {data.items.map(({ id, ...props }) => (
+            <BookCard key={id} id={id} {...props} />
+          ))}
+        </div>
+        <Pagination
+          className="mt-4 justify-center"
+          totalItems={data.totalItems}
+          postLimit={size}
+          onChange={handlePageChange}
+          page={page}
+        />
+      </Section.Body>
+    </Section>
+  );
+}
 
 interface BookCardProps extends BookItem {}
 
@@ -19,12 +53,10 @@ const BookCard = ({
   publisher,
   borrowerId,
 }: BookCardProps) => {
-  const navigate = useNavigate();
-
   return (
-    <div
+    <Link
+      to={PATH_FINDER.LIBRARY_DETAIL(id)}
       className="group flex cursor-pointer flex-col space-y-1 overflow-hidden rounded-lg border"
-      onClick={() => navigate(PATH_FINDER.LIBRARY_DETAIL(id))}
     >
       <Image
         src={imageUrl}
@@ -60,8 +92,6 @@ const BookCard = ({
           </span>
         </div>
       </div>
-    </div>
+    </Link>
   );
 };
-
-export default BookCard;

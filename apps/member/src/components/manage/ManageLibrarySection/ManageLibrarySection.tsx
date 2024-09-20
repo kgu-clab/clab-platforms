@@ -5,7 +5,7 @@ import { Menubar, Table } from '@clab-platforms/design-system';
 import ActionButton from '@components/common/ActionButton/ActionButton';
 import Pagination from '@components/common/Pagination/Pagination';
 import { Section } from '@components/common/Section';
-import BookLoanConditionStatusBadge from '@components/library/BookLoanConditionStatusBadge/BookLoanConditionStatusBadge';
+import BookLoanConditionStatusBadge from '@components/library/BookLoanConditionStatusBadge';
 import { MemberInfoModal } from '@components/modal';
 
 import { TABLE_HEAD } from '@constants/head';

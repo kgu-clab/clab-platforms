@@ -36,14 +36,12 @@ const GroupConfigPage = lazy(
 const GroupCreatePage = lazy(
   () => import('@pages/GroupCreatePage/GroupCreatePage'),
 );
-const LibraryPage = lazy(() => import('@pages/LibraryPage/LibraryPage'));
-const LibraryDetailPage = lazy(
-  () => import('@pages/LibraryDetailPage/LibraryDetailPage'),
-);
+const LibraryPage = lazy(() => import('@pages/LibraryPage'));
+const LibraryDetailPage = lazy(() => import('@pages/LibraryDetailPage'));
 const MyPage = lazy(() => import('@pages/MyPage'));
 const SupportPage = lazy(() => import('@pages/SupportPage'));
 const CalendarPage = lazy(() => import('@pages/CalendarPage/CalendarPage'));
-const LoginPage = lazy(() => import('@pages/LoginPage/LoginPage'));
+const LoginPage = lazy(() => import('@pages/LoginPage'));
 const AuthPage = lazy(() => import('@pages/AuthPage/AuthPage'));
 const BlogPage = lazy(() => import('@pages/BlogPage/BlogPage'));
 const ManagePage = lazy(() => import('@pages/ManagePage/ManagePage'));

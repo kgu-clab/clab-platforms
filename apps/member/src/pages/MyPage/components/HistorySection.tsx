@@ -3,7 +3,7 @@ import { useMemo } from 'react';
 import EmptyBox from '@components/common/EmptyBox/EmptyBox';
 import ListButton from '@components/common/ListButton/ListButton';
 import Section from '@components/common/Section/Section';
-import BookLoanConditionStatusBadge from '@components/library/BookLoanConditionStatusBadge/BookLoanConditionStatusBadge';
+import BookLoanConditionStatusBadge from '@components/library/BookLoanConditionStatusBadge';
 
 import { MY_MESSAGE } from '@constants/message';
 import { MODAL_TITLE } from '@constants/modal';
