@@ -16,6 +16,8 @@ import {
 import useModal from '@hooks/common/useModal';
 import useToast from '@hooks/common/useToast';
 import { useActivityGroupBoardPatchMutation } from '@hooks/queries';
+import { isDateValid } from '@utils/date';
+import dayjs from 'dayjs';
 
 import type { ActivityBoardType } from '@type/activity';
 import type { ResponseFile } from '@type/api';
@@ -66,6 +68,17 @@ export const ActivityBoardEditModal = ({ prevData, groupId }: Props) => {
         message: `내용은 ${ACTIVITY_GROUP_CONTENT_MAX_LENGTH}자 이내로 작성해주세요.`,
       });
     }
+
+    if (
+      prevData.category === ACTIVITY_BOARD_CATEGORY_STATE.ASSIGNMENT &&
+      isDateValid(board.dueDateTime, String(dayjs()))
+    ) {
+      return toast({
+        state: 'error',
+        message: '종료 일시는 현재 일시 이후로 선택해주세요.',
+      });
+    }
+
     if (files?.length) {
       Array.from(files).forEach((file) => {
         formData.append(FORM_DATA_KEY, file);
@@ -116,6 +129,16 @@ export const ActivityBoardEditModal = ({ prevData, groupId }: Props) => {
           uploaderRef={uploaderRef}
           handleDeleteFileClick={handleDeleteFileClick}
         />
+        {!uploadedFile &&
+          prevData?.files?.map((file) => (
+            <div key={file.fileUrl} className="mx-auto flex flex-col gap-2 ">
+              <File
+                href={file.fileUrl}
+                name={file.originalFileName}
+                key={file.fileUrl}
+              />
+            </div>
+          ))}
         {prevData.category === ACTIVITY_BOARD_CATEGORY_STATE.ASSIGNMENT && (
           <Input
             label="종료 일시"

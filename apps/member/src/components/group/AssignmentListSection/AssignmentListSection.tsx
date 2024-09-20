@@ -1,6 +1,7 @@
 import { useParams } from 'react-router-dom';
 
 import { Button, Table } from '@clab-platforms/design-system';
+import { cn } from '@clab-platforms/utils';
 
 import File from '@components/common/File/File';
 import { Section } from '@components/common/Section';
@@ -13,16 +14,24 @@ import {
   useActivityGroupBoardByParent,
   useActivityGroupMemberList,
 } from '@hooks/queries';
-import { formattedDate, toKoreaISOString } from '@utils/date';
+import {
+  calOverDate,
+  formattedDate,
+  isDateValid,
+  toKoreaISOString,
+} from '@utils/date';
 
 import type { ActivityBoardType } from '@type/activity';
 
 import AssignmentFeedbackModal from './AssignmentFeedbackModal';
 
-const AssignmentListSection = () => {
+interface AssignmentListSectionProps {
+  dueDate: string;
+}
+
+const AssignmentListSection = ({ dueDate }: AssignmentListSectionProps) => {
   const { id, assignmentId } = useParams();
   const { openModal } = useModal();
-
   if (!assignmentId || !id) {
     throw new Error(GROUP_MESSAGE.NO_ACTIVITY);
   }
@@ -72,9 +81,17 @@ const AssignmentListSection = () => {
                 <Table.Row key={item.id}>
                   <Table.Cell>{item.memberId}</Table.Cell>
                   <Table.Cell>{item.memberName}</Table.Cell>
-                  <Table.Cell>
-                    {item.files
-                      ? formattedDate(toKoreaISOString(item.updatedAt))
+                  <Table.Cell
+                    className={cn(
+                      isDateValid(dueDate, toKoreaISOString(item.updatedAt))
+                        ? 'text-red-500'
+                        : '',
+                    )}
+                  >
+                    {item.updatedAt
+                      ? isDateValid(dueDate, toKoreaISOString(item.updatedAt))
+                        ? calOverDate(dueDate, toKoreaISOString(item.updatedAt))
+                        : formattedDate(toKoreaISOString(item.updatedAt))
                       : '-'}
                   </Table.Cell>
                   <Table.Cell className="hover:underline">
