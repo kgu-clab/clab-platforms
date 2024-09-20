@@ -1,8 +1,9 @@
 import { PropsWithChildren } from 'react';
 
+import { CloseOutline } from '@clab-platforms/icon';
 import { cn } from '@clab-platforms/utils';
 
-import useModal from '@hooks/common/useModal';
+import { useModal } from '@hooks/common/useModal';
 
 interface ModalProps extends PropsWithChildren {
   disabled?: boolean;
@@ -16,7 +17,7 @@ interface ModalButtonProps extends ModalProps {
 }
 
 const Modal = ({ children }: PropsWithChildren) => {
-  const { closeModal } = useModal();
+  const { close } = useModal();
 
   return (
     <div
@@ -27,10 +28,7 @@ const Modal = ({ children }: PropsWithChildren) => {
     >
       <div className="flex min-h-screen items-center justify-center px-5">
         <div className="fixed inset-0">
-          <div
-            className="absolute inset-0 bg-gray-600/50"
-            onClick={closeModal}
-          />
+          <div className="absolute inset-0 bg-gray-600/50" onClick={close} />
         </div>
         <div className="z-50 inline-block w-full space-y-4 overflow-hidden rounded-lg bg-white p-4 text-center shadow-lg sm:max-w-lg sm:text-left">
           {children}
@@ -41,11 +39,16 @@ const Modal = ({ children }: PropsWithChildren) => {
 };
 
 const Header = ({ className, children }: ModalProps) => {
+  const { close } = useModal();
+
   return (
-    <header>
+    <header className="flex items-center justify-between">
       <h3 className={cn('text-xl font-semibold leading-6', className)}>
         {children}
       </h3>
+      <button>
+        <CloseOutline onClick={close} />
+      </button>
     </header>
   );
 };

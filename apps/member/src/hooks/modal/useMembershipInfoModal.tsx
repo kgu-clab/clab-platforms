@@ -8,7 +8,7 @@ import MembershipCategoryBadge from '@components/membership/MembershipCategoryBa
 import MembershipStatusBadge from '@components/membership/MembershipStatusBadge/MembershipStatusBadge';
 
 import { MODAL_TITLE } from '@constants/modal';
-import useModal, { UseModalResult } from '@hooks/common/useModal';
+import { UseModalResult, useModal } from '@hooks/common/useModal';
 import { useMembershipFeeModifyMutation } from '@hooks/queries/useMembershipFeeModifyMutation';
 import { createImageUrl } from '@utils/api';
 import { formattedDate } from '@utils/date';
@@ -27,13 +27,13 @@ interface Options {
  * 관리자 권한일 경우 승인과 반려처리를 할 수 있습니다.
  */
 export function useMembershipInfoModal(): UseModalResult<Options> {
-  const { openModal } = useModal();
+  const { open } = useModal();
   const { membershipFeeModifyMutate } = useMembershipFeeModifyMutation();
 
   return useMemo(
     () => ({
       open: (options: Options) =>
-        openModal({
+        open({
           title: MODAL_TITLE.SUPPORT_HISTORY,
           content: <MembershipInfoModal {...options} />,
           accept: options.hasPermission
@@ -64,7 +64,7 @@ export function useMembershipInfoModal(): UseModalResult<Options> {
             : undefined,
         }),
     }),
-    [membershipFeeModifyMutate, openModal],
+    [membershipFeeModifyMutate, open],
   );
 }
 

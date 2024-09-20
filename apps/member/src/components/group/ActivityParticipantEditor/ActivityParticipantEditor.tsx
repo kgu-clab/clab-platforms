@@ -17,7 +17,7 @@ import { CheckConfirmModal } from '@components/modal';
 import { TABLE_HEAD } from '@constants/head';
 import { GROUP_MESSAGE } from '@constants/message';
 import { ACTIVITY_MEMBER_ROLE, ACTIVITY_MEMBER_STATE } from '@constants/state';
-import useModal from '@hooks/common/useModal';
+import { useModal } from '@hooks/common/useModal';
 import { usePagination } from '@hooks/common/usePagination';
 import {
   useActivityGroupApplication,
@@ -64,7 +64,7 @@ const ActivityParticipantEditor = ({
 }: ActivityParticipantEditorProps) => {
   const [mode, setMode] = useState(false);
   const { page, size, handlePageChange } = usePagination({ defaultSize: 10 });
-  const { openModal, closeModal } = useModal();
+  const { open, close } = useModal();
   const { activityGroupApplicationMutate } =
     useActivityGroupApplicationMutation();
   const { data: applyMemberList } = useActivityGroupApplication({
@@ -82,7 +82,7 @@ const ActivityParticipantEditor = ({
       })),
   );
   const handleOpenModal = (name: string, content: string) => {
-    openModal({
+    open({
       title: '📝 ' + name,
       content: content,
     });
@@ -133,7 +133,7 @@ const ActivityParticipantEditor = ({
       .filter((member) => member.status === true)
       .map((member) => member.memberId);
 
-    openModal({
+    open({
       content: (
         <CheckConfirmModal
           message="변경하시겠습니까?"
@@ -144,7 +144,7 @@ const ActivityParticipantEditor = ({
               status: ACTIVITY_MEMBER_STATE.ACCEPTED,
             });
           }}
-          handleClose={closeModal}
+          handleClose={close}
         />
       ),
     });

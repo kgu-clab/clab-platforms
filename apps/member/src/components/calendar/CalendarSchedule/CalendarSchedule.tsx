@@ -1,8 +1,6 @@
-import { useCallback } from 'react';
-
 import { cn } from '@clab-platforms/utils';
 
-import useModal from '@hooks/common/useModal';
+import { useModal } from '@hooks/common/useModal';
 import { formattedDatePeriod, now } from '@utils/date';
 import dayjs from 'dayjs';
 
@@ -21,19 +19,20 @@ const CalendarSchedule = ({
   startDateTime,
   endDateTime,
 }: CalendarScheduleProps) => {
-  const { openModal } = useModal();
+  const { open } = useModal();
   const isDateDiff = dayjs(startDateTime).diff(endDateTime, 'd');
   const isBeforeToday = day.isBefore(today, 'day');
 
-  const handleScheduleClick = useCallback(
-    (detail: string, startDateTime: string, endDateTime: string) => {
-      openModal({
-        title: '📆 일정',
-        content: `일시: ${formattedDatePeriod(startDateTime, endDateTime)}\n내용: ${detail}`,
-      });
-    },
-    [openModal],
-  );
+  const handleScheduleClick = (
+    detail: string,
+    startDateTime: string,
+    endDateTime: string,
+  ) => {
+    open({
+      title: '📆 일정',
+      content: `일시: ${formattedDatePeriod(startDateTime, endDateTime)}\n내용: ${detail}`,
+    });
+  };
 
   return (
     <button

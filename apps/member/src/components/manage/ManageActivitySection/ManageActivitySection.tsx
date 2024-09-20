@@ -11,7 +11,7 @@ import { CheckConfirmModal } from '@components/modal';
 import { TABLE_HEAD } from '@constants/head';
 import { GROUP_MESSAGE } from '@constants/message';
 import { ACTIVITY_STATE } from '@constants/state';
-import useModal from '@hooks/common/useModal';
+import { useModal } from '@hooks/common/useModal';
 import { usePagination } from '@hooks/common/usePagination';
 import {
   useActivityGroupDeleteMutation,
@@ -27,7 +27,7 @@ const ManageActivitySection = () => {
   const [mode, setMode] = useState<ActivityGroupStatusType>(
     ACTIVITY_STATE.WAITING,
   );
-  const { openModal, closeModal } = useModal();
+  const { open, close } = useModal();
   const { page, size, handlePageChange } = usePagination({
     defaultSize: 6,
     sectionName: 'activity',
@@ -41,19 +41,21 @@ const ManageActivitySection = () => {
   });
 
   const handleInfoButtonClick = (groupId: number) => {
-    return openModal({
+    return open({
       title: '그룹 정보',
       content: <ActivityInfoModal id={groupId} />,
     });
   };
+
   const handleMenubarItemClick = (mode: ActivityGroupStatusType) => {
     setMode(mode);
   };
+
   const handleApproveButtonClick = (
     id: number,
     status: ActivityGroupStatusType,
   ) => {
-    openModal({
+    open({
       content: (
         <CheckConfirmModal
           message="승인하시겠습니까?"
@@ -63,20 +65,21 @@ const ManageActivitySection = () => {
               activityGroupStatus: status,
             });
           }}
-          handleClose={closeModal}
+          handleClose={close}
         />
       ),
     });
   };
+
   const handleRejectButtonClick = (id: number) => {
-    openModal({
+    open({
       content: (
         <CheckConfirmModal
           message="거절하시겠습니까?"
           handleConfirmButton={() => {
             activityGroupDeleteMutate(id);
           }}
-          handleClose={closeModal}
+          handleClose={close}
         />
       ),
     });

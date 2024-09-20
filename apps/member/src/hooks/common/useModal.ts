@@ -1,3 +1,5 @@
+import { useCallback } from 'react';
+
 import { useSetModalStore } from '@store/modal';
 import { now } from '@utils/date';
 
@@ -16,14 +18,18 @@ interface OpenModalProps {
   };
 }
 
-const useModal = () => {
+export interface UseModalResult<T> {
+  open: (options: T) => void;
+}
+
+export function useModal() {
   const setModal = useSetModalStore();
   /**
-   * open modal
+   * 모달을 엽니다.
    */
-  const openModal = ({
+  const open = ({
     key = now().toString(),
-    title = 'C-Lab PLAY',
+    title = 'Members',
     content,
     custom,
     accept,
@@ -38,26 +44,24 @@ const useModal = () => {
       ...(accept && { accept }),
       cancel: {
         text: cancel?.text || '닫기',
-        onClick: cancel?.onClick || closeModal,
+        onClick: cancel?.onClick || close,
       },
     });
   };
+
   /**
-   * close modal
+   * 모달을 닫습니다.
    */
-  const closeModal = () => {
+  const close = useCallback(() => {
     setModal((prev) => ({ ...prev, isOpen: false }));
-  };
+  }, [setModal]);
+
   /**
-   * force update modal
-   * - when you need to update modal content
-   * - ex) when you need to update modal content after user input
+   * 모달을 강제 업데이트합니다.
    */
-  const forceUpdateModal = () => {
+  const update = useCallback(() => {
     setModal((prev) => ({ ...prev, key: now().toString() }));
-  };
+  }, [setModal]);
 
-  return { openModal, closeModal, forceUpdateModal };
-};
-
-export default useModal;
+  return { open, close, update } as const;
+}

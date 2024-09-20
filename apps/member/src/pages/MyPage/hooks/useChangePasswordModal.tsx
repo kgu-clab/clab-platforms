@@ -5,7 +5,7 @@ import { cn } from '@clab-platforms/utils';
 
 import Modal from '@components/common/Modal/Modal';
 
-import useModal, { UseModalResult } from '@hooks/common/useModal';
+import { UseModalResult, useModal } from '@hooks/common/useModal';
 import useToast from '@hooks/common/useToast';
 import { useUserInfoMutation } from '@hooks/queries';
 
@@ -17,25 +17,25 @@ interface Options {
  * 비밀번호 변경 모달을 엽니다.
  */
 export function useChangePasswordModal(): UseModalResult<Options> {
-  const { openModal, closeModal } = useModal();
+  const { open, close } = useModal();
 
   return useMemo(
     () => ({
       open: (options: Options) =>
-        openModal({
+        open({
           title: '비밀번호 변경',
-          custom: <ChangePasswordModal closeModal={closeModal} {...options} />,
+          custom: <ChangePasswordModal close={close} {...options} />,
         }),
     }),
-    [closeModal, openModal],
+    [close, open],
   );
 }
 
 interface Props extends Options {
-  closeModal: () => void;
+  close: () => void;
 }
 
-function ChangePasswordModal({ closeModal, memberId }: Props) {
+function ChangePasswordModal({ close, memberId }: Props) {
   const toast = useToast();
   const { userInfoMutate } = useUserInfoMutation();
 
@@ -72,7 +72,7 @@ function ChangePasswordModal({ closeModal, memberId }: Props) {
       },
       {
         onSuccess: () => {
-          closeModal();
+          close();
         },
       },
     );
@@ -118,7 +118,7 @@ function ChangePasswordModal({ closeModal, memberId }: Props) {
         <Modal.Button color="orange" onClick={handledAcceptClick}>
           변경
         </Modal.Button>
-        <Modal.Button color="gray" onClick={closeModal}>
+        <Modal.Button color="gray" onClick={close}>
           취소
         </Modal.Button>
       </Modal.Footer>

@@ -4,7 +4,7 @@ import File from '@components/common/File/File';
 import Modal from '@components/common/Modal/Modal';
 import Textarea from '@components/common/Textarea/Textarea';
 
-import useModal from '@hooks/common/useModal';
+import { useModal } from '@hooks/common/useModal';
 import useToast from '@hooks/common/useToast';
 import {
   useActivityGroupBoardMutation,
@@ -25,7 +25,7 @@ const AssignmentFeedbackModal = ({
   groupId,
   assignmentId,
 }: AssignmentFeedbackModalProps) => {
-  const { closeModal } = useModal();
+  const { close } = useModal();
   const toast = useToast();
   const [feedback, setFeedback] = useState('');
   const { data: myProfile } = useMyProfile();
@@ -65,7 +65,7 @@ const AssignmentFeedbackModal = ({
         },
       });
     }
-    closeModal();
+    close();
   };
 
   useEffect(() => {
@@ -108,7 +108,7 @@ const AssignmentFeedbackModal = ({
         >
           입력
         </Modal.Button>
-        <Modal.Button color="gray" onClick={closeModal}>
+        <Modal.Button color="gray" onClick={close}>
           취소
         </Modal.Button>
       </Modal.Footer>

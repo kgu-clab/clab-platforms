@@ -9,7 +9,7 @@ import { ActivityBoardEditModal } from '@components/modal';
 
 import { FORM_DATA_KEY } from '@constants/api.ts';
 import { ACTIVITY_BOARD_CATEGORY_STATE } from '@constants/state.ts';
-import useModal from '@hooks/common/useModal';
+import { useModal } from '@hooks/common/useModal';
 import useToast from '@hooks/common/useToast';
 import {
   useActivityGroupBoardDeleteMutation,
@@ -40,16 +40,12 @@ const ActivityPostEditor = ({
   assignments,
 }: ActivityPostEditorProps) => {
   const toast = useToast();
-  const { openModal } = useModal();
+  const { open } = useModal();
   const [post, setPost] = useState(defaultPost);
   const [editAssignment, setEditAssignment] = useState<boolean[]>(
     Array.from({ length: activities.length }, () => false),
   );
   const uploaderRef = useRef<HTMLInputElement>(null);
-
-  useEffect(() => {
-    setEditAssignment(Array.from({ length: activities.length }, () => false));
-  }, [activities]);
 
   const { data: myProfile } = useMyProfile();
 
@@ -57,6 +53,10 @@ const ActivityPostEditor = ({
     useActivityGroupBoardMutation();
   const { activityGroupBoardDeleteMutate } =
     useActivityGroupBoardDeleteMutation();
+
+  useEffect(() => {
+    setEditAssignment(Array.from({ length: activities.length }, () => false));
+  }, [activities]);
 
   const handlePostChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
@@ -98,7 +98,7 @@ const ActivityPostEditor = ({
     activityGroupBoardDeleteMutate(activityGroupBoardId);
   };
   const handleEditWeeklyClick = (prevData: ActivityBoardType) =>
-    openModal({
+    open({
       title: '수정하기',
       custom: <ActivityBoardEditModal groupId={groupId} prevData={prevData} />,
     });

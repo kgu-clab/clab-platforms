@@ -5,14 +5,14 @@ import { AboutColor } from '@clab-platforms/icon';
 import Panel from '@components/common/Panel/Panel';
 
 import { MODAL_TITLE } from '@constants/modal';
-import useModal from '@hooks/common/useModal';
+import { useModal } from '@hooks/common/useModal';
 import { useMyNotifications } from '@hooks/queries';
 
 const AlarmPanel = () => {
   const { data } = useMyNotifications({ size: 5 });
 
   const [open, setOpen] = useState(true);
-  const { openModal } = useModal();
+  const { open: openModal } = useModal();
 
   const handleOpenClick = () => setOpen((prev) => !prev);
 

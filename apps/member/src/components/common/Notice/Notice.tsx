@@ -1,8 +1,7 @@
-import { useCallback } from 'react';
-
 import { cn } from '@clab-platforms/utils';
 
-import useModal from '@hooks/common/useModal';
+import { MODAL_TITLE } from '@constants/modal';
+import { useModal } from '@hooks/common/useModal';
 import { calculateDDay, formattedDate } from '@utils/date';
 
 interface Props {
@@ -20,14 +19,14 @@ const Notice = ({
   showDDay = false,
   className,
 }: Props) => {
-  const { openModal } = useModal();
+  const { open } = useModal();
 
-  const handleNoticeClick = useCallback(() => {
-    openModal({
-      title: '📆 공지',
+  const handleNoticeClick = () => {
+    open({
+      title: MODAL_TITLE.NOTICE,
       content,
     });
-  }, [content, openModal]);
+  };
 
   let renderDDay: React.ReactNode | null = null;
   if (showDDay) {

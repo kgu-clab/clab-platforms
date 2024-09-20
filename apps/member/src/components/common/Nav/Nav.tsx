@@ -7,7 +7,7 @@ import { cn } from '@clab-platforms/utils';
 import { IS_DEVELOPMENT } from '@constants/environment';
 import { PATH } from '@constants/path';
 import { ROLE_LEVEL } from '@constants/state';
-import useModal from '@hooks/common/useModal';
+import { useModal } from '@hooks/common/useModal';
 import { useMyProfile } from '@hooks/queries';
 
 import Sidebar from '../Sidebar/Sidebar';
@@ -15,7 +15,7 @@ import Sidebar from '../Sidebar/Sidebar';
 const Nav = () => {
   const location = useLocation();
   const navigate = useNavigate();
-  const { openModal } = useModal();
+  const { open } = useModal();
 
   const { data } = useMyProfile();
 
@@ -24,7 +24,7 @@ const Nav = () => {
   const handleMenubarItemClick = (path: string) => navigate(path);
 
   const handleNotReadyClick = () => {
-    return openModal({
+    return open({
       content: '해당 기능은 준비중입니다.',
     });
   };

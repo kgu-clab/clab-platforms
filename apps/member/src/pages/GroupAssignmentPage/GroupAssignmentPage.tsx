@@ -14,7 +14,7 @@ import { ActivityBoardEditModal } from '@components/modal';
 import { GROUP_MESSAGE } from '@constants/message';
 import { PATH_FINDER } from '@constants/path';
 import { ACTIVITY_MEMBER_ROLE } from '@constants/state';
-import useModal from '@hooks/common/useModal';
+import { useModal } from '@hooks/common/useModal';
 import {
   useActivityGroup,
   useActivityGroupBoardMyAssignment,
@@ -25,7 +25,7 @@ import { isImageFile } from '@utils/api';
 import { formattedDate } from '@utils/date';
 
 const GroupAssignmentPage = () => {
-  const { openModal } = useModal();
+  const { open } = useModal();
   const { id, assignmentId } = useParams();
   const { state } = useLocation();
   const { data: myProfile } = useMyProfile();
@@ -46,7 +46,7 @@ const GroupAssignmentPage = () => {
   const feedback = myAssignment?.[0];
 
   const handleEditNoticeClick = () => {
-    return openModal({
+    return open({
       title: '수정하기',
       custom: <ActivityBoardEditModal groupId={+id} prevData={board} />,
     });

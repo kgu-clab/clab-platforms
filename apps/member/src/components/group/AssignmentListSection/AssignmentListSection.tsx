@@ -8,7 +8,7 @@ import { Section } from '@components/common/Section';
 import { TABLE_HEAD } from '@constants/head';
 import { GROUP_MESSAGE } from '@constants/message';
 import { ACTIVITY_MEMBER_ROLE, ACTIVITY_MEMBER_STATE } from '@constants/state';
-import useModal from '@hooks/common/useModal';
+import { useModal } from '@hooks/common/useModal';
 import {
   useActivityGroupBoardByParent,
   useActivityGroupMemberList,
@@ -21,7 +21,7 @@ import AssignmentFeedbackModal from './AssignmentFeedbackModal';
 
 const AssignmentListSection = () => {
   const { id, assignmentId } = useParams();
-  const { openModal } = useModal();
+  const { open } = useModal();
 
   if (!assignmentId || !id) {
     throw new Error(GROUP_MESSAGE.NO_ACTIVITY);
@@ -50,7 +50,7 @@ const AssignmentListSection = () => {
     groupId: number,
     assignmentId: number,
   ) => {
-    return openModal({
+    return open({
       custom: (
         <AssignmentFeedbackModal
           post={post}

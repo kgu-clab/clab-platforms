@@ -1,4 +1,5 @@
 export const MODAL_TITLE = {
+  NOTICE: '📆 공지',
   ALARM: '🔔 알림',
   REPORT: '🚨 신고하기',
   DELETE: '🗑️ 삭제하기',

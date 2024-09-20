@@ -1,27 +1,26 @@
-import { useCallback } from 'react';
-
 import { Table } from '@clab-platforms/design-system';
 
 import { Section } from '@components/common/Section';
 
 import { TABLE_HEAD } from '@constants/head';
-import useModal from '@hooks/common/useModal';
+import { useModal } from '@hooks/common/useModal';
 import { useSchedule } from '@hooks/queries';
 import { formattedDate, formattedDatePeriod } from '@utils/date';
 
 const CalendarTableSection = () => {
-  const { openModal } = useModal();
+  const { open } = useModal();
   const { data } = useSchedule();
 
-  const handleScheduleClick = useCallback(
-    (detail: string, startDateTime: string, endDateTime: string) => {
-      openModal({
-        title: '📆 일정',
-        content: `일시: ${formattedDatePeriod(startDateTime, endDateTime)}\n내용: ${detail}`,
-      });
-    },
-    [openModal],
-  );
+  const handleScheduleClick = (
+    detail: string,
+    startDateTime: string,
+    endDateTime: string,
+  ) => {
+    open({
+      title: '📆 일정',
+      content: `일시: ${formattedDatePeriod(startDateTime, endDateTime)}\n내용: ${detail}`,
+    });
+  };
 
   return (
     <Section>

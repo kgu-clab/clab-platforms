@@ -1,7 +1,7 @@
 import { Button } from '@clab-platforms/design-system';
 
 import { MODAL_ACCEPT, MODAL_CONTENT, MODAL_TITLE } from '@constants/modal';
-import useModal from '@hooks/common/useModal';
+import { useModal } from '@hooks/common/useModal';
 import { useAccusesMutation } from '@hooks/queries';
 
 interface CommunityReportButtonProps {
@@ -10,10 +10,10 @@ interface CommunityReportButtonProps {
 
 const CommunityReportButton = ({ id }: CommunityReportButtonProps) => {
   const { accusesMutate } = useAccusesMutation();
-  const { openModal } = useModal();
+  const { open } = useModal();
 
   const handleAccusesClick = () => {
-    openModal({
+    open({
       title: MODAL_TITLE.REPORT,
       content: MODAL_CONTENT.REPORT,
       accept: {

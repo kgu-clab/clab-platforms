@@ -8,7 +8,7 @@ import BookLoanConditionStatusBadge from '@components/library/BookLoanConditionS
 import { MY_MESSAGE } from '@constants/message';
 import { MODAL_TITLE } from '@constants/modal';
 import { PATH_FINDER } from '@constants/path';
-import useModal from '@hooks/common/useModal';
+import { useModal } from '@hooks/common/useModal';
 import {
   useBookLoanRecordConditions,
   useMyNotifications,
@@ -24,7 +24,7 @@ interface Props {
 }
 
 export function HistorySection({ category }: Props) {
-  const { openModal } = useModal();
+  const { open } = useModal();
 
   const { data: myProfile } = useMyProfile();
   const { data: myNotifications } = useMyNotifications({});
@@ -74,7 +74,7 @@ export function HistorySection({ category }: Props) {
           <ListButton
             key={`my-alarm-${id}`}
             onClick={() =>
-              openModal({
+              open({
                 title: MODAL_TITLE.ALARM,
                 content: content,
               })
@@ -101,7 +101,7 @@ export function HistorySection({ category }: Props) {
     myBookLoanRecord.items,
     myCommentsData.items,
     myNotifications.items,
-    openModal,
+    open,
   ]);
 
   return (

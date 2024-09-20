@@ -8,7 +8,7 @@ import { Section } from '@components/common/Section';
 import Select from '@components/common/Select/Select';
 
 import { TABLE_HEAD } from '@constants/head';
-import useModal from '@hooks/common/useModal';
+import { useModal } from '@hooks/common/useModal';
 import { usePagination } from '@hooks/common/usePagination';
 import {
   useApplicationAllMemberMutation,
@@ -36,8 +36,8 @@ const ApplicationListSection = ({
   recruitmentList,
 }: ApplicationListSectionProps) => {
   const navigate = useNavigate();
-  const { openModal } = useModal();
-  const [selectRecruitment, setSelectRecruitment] = useState<number>(
+  const { open } = useModal();
+  const [selectRecruitment, setSelectRecruitment] = useState(
     recruitmentList.length, // 가장 최신의 모집공고
   );
   const { page, size, handlePageChange } = usePagination();
@@ -53,28 +53,34 @@ const ApplicationListSection = ({
 
   useEffect(() => {
     navigate('');
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectRecruitment]);
 
   const handleRecruitmentChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setSelectRecruitment(+e.target.value);
   };
+
   const handlePassButtonClick = (recruitmentId: number, studentId: string) => {
     applicationPassMutate({ recruitmentId, studentId });
   };
+
   const handleNonePassButton = (recruitmentId: number, studentId: string) => {
     applicationNonePassMutate({ recruitmentId, studentId });
   };
+
   const handleCreateMemberButton = (
     recruitmentId: number,
     studentId: string,
   ) => {
     applicationMemberMutate({ recruitmentId, studentId });
   };
+
   const handleCreateAllMemberButton = () => {
     applicationAllMemberMutate(selectRecruitment);
   };
+
   const handleViewButtonClick = (info: ApplicationMemberType) => {
-    return openModal({
+    return open({
       title: '지원서',
       content: <ApplicationInfoModal applicationInfo={info} />,
     });

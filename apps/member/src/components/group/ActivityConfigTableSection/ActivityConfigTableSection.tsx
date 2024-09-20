@@ -4,7 +4,7 @@ import { Section } from '@components/common/Section';
 import { ActivityBoardEditModal } from '@components/modal';
 
 import { TABLE_HEAD } from '@constants/head';
-import useModal from '@hooks/common/useModal';
+import { useModal } from '@hooks/common/useModal';
 import { useActivityGroupBoardDeleteMutation } from '@hooks/queries';
 import { formattedDate, toKoreaISOString } from '@utils/date';
 
@@ -19,7 +19,7 @@ const ActivityConfigTableSection = ({
   tableList,
   groupId,
 }: ActivityConfigTableSectionProps) => {
-  const { openModal } = useModal();
+  const { open } = useModal();
   const { activityGroupBoardDeleteMutate } =
     useActivityGroupBoardDeleteMutation();
 
@@ -27,7 +27,7 @@ const ActivityConfigTableSection = ({
     activityGroupBoardDeleteMutate(activityGroupBoardId);
   };
   const handleEditNoticeClick = (prevData: ActivityBoardType) => {
-    return openModal({
+    return open({
       title: '수정하기',
       custom: <ActivityBoardEditModal groupId={groupId} prevData={prevData} />,
     });
