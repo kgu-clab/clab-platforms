@@ -6,7 +6,7 @@ import { COMMUNITY_MESSAGE } from '@constants/message';
 import { PATH_FINDER } from '@constants/path';
 import { useBlog } from '@hooks/queries';
 
-const BlogSection = () => {
+export function BlogSection() {
   const { data } = useBlog();
 
   return (
@@ -29,6 +29,4 @@ const BlogSection = () => {
       </Section.Body>
     </Section>
   );
-};
-
-export default BlogSection;
+}

@@ -5,7 +5,7 @@ import { SectionSkeleton } from '@components/common/Section';
 import ProtectAuth from '@components/router/ProtectAuth';
 
 import { PATH } from '@constants/path';
-import MainPage from '@pages/MainPage/MainPage';
+import MainPage from '@pages/MainPage';
 
 import { GlobalErrorPage } from './GlobalErrorPage';
 import { PageLayout } from './PageLayout';

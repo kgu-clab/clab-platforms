@@ -6,14 +6,7 @@ import { createImageUrl } from '@utils/api';
 import { formatMemberName } from '@utils/string';
 import dayjs from 'dayjs';
 
-interface BirthdayCardProps {
-  id: string;
-  name: string;
-  imageUrl: string | null;
-  birth: string;
-}
-
-const BirthdaySection = () => {
+export function BirthdaySection() {
   const { data } = useBirthday();
 
   return (
@@ -26,15 +19,22 @@ const BirthdaySection = () => {
           </p>
         ) : (
           data.items.map(({ id, ...props }) => (
-            <BirthdayCard key={id} id={id} {...props} />
+            <Card key={id} id={id} {...props} />
           ))
         )}
       </Section.Body>
     </Section>
   );
-};
+}
 
-const BirthdayCard = ({ id, name, imageUrl, birth }: BirthdayCardProps) => {
+interface CardProps {
+  id: string;
+  name: string;
+  imageUrl: string | null;
+  birth: string;
+}
+
+const Card = ({ id, name, imageUrl, birth }: CardProps) => {
   return (
     <div className="flex flex-col items-center gap-4 rounded-lg px-4 pt-2">
       <Image
@@ -53,5 +53,3 @@ const BirthdayCard = ({ id, name, imageUrl, birth }: BirthdayCardProps) => {
     </div>
   );
 };
-
-export default BirthdaySection;

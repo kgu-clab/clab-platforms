@@ -3,7 +3,7 @@ import Image from '@components/common/Image/Image';
 import { useActivityPhoto } from '@hooks/queries';
 import { createImageUrl } from '@utils/api';
 
-const MainBanner = () => {
+const ActivityPhotoBanner = () => {
   const { data } = useActivityPhoto();
 
   if (data.totalItems === 0) {
@@ -30,4 +30,4 @@ const MainBanner = () => {
   );
 };
 
-export default MainBanner;
+export default ActivityPhotoBanner;

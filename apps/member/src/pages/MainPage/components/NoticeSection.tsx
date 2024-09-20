@@ -10,16 +10,15 @@ import { DATE_FORMAT } from '@constants/state';
 import { useSchedule } from '@hooks/queries';
 import { now } from '@utils/date';
 
-const MainNoticeSection = () => {
+export function NoticeSection() {
+  const [open, setOpen] = useState(false);
+
   const { data } = useSchedule({
     startDate: now().format(DATE_FORMAT.WITH_TIME),
   });
 
-  const [open, setOpen] = useState(false);
-  /**
-   * 일정이 없을 경우 렌더링하지 않습니다.
-   */
   if (data.items.length === 0) {
+    // 일정이 없을 경우 렌더링하지 않습니다.
     return null;
   }
 
@@ -63,6 +62,4 @@ const MainNoticeSection = () => {
       </div>
     </Section>
   );
-};
-
-export default MainNoticeSection;
+}

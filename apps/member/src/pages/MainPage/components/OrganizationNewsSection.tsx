@@ -6,7 +6,7 @@ import { COMMUNITY_MESSAGE } from '@constants/message';
 import { PATH_FINDER } from '@constants/path';
 import { useBoardByCategory } from '@hooks/queries';
 
-const OrganizationNewsSection = () => {
+export function OrganizationNewsSection() {
   const { data } = useBoardByCategory({ category: 'organization' });
 
   return (
@@ -29,6 +29,4 @@ const OrganizationNewsSection = () => {
       </Section.Body>
     </Section>
   );
-};
-
-export default OrganizationNewsSection;
+}

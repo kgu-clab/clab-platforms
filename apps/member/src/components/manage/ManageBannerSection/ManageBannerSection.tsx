@@ -2,10 +2,10 @@ import { useState } from 'react';
 
 import { Button, Input } from '@clab-platforms/design-system';
 
+import ActivityPhotoBanner from '@components/common/ActivityPhotoBanner/ActivityPhotoBanner';
 import Hr from '@components/common/Hr/Hr';
 import { Section } from '@components/common/Section';
 import Uploader from '@components/common/Uploader/Uploader';
-import MainBanner from '@components/main/MainBanner/MainBanner';
 
 import { PostActivityPhotoParams } from '@api/activity';
 import { ERROR_MESSAGE } from '@constants/message';
@@ -89,7 +89,7 @@ const ManageBannerSection = () => {
           <Button className="w-full">활동 사진 변경하기</Button>
         </form>
         <Hr>현재 활동 사진</Hr>
-        <MainBanner />
+        <ActivityPhotoBanner />
       </Section.Body>
     </Section>
   );

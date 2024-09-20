@@ -5,6 +5,7 @@ import { QueryErrorResetBoundary } from '@tanstack/react-query';
 import { Grid } from '@clab-platforms/design-system';
 
 import Content from '@components/common/Content/Content';
+import ErrorSection from '@components/common/ErrorSection/ErrorSection';
 import { Section } from '@components/common/Section';
 
 import { ErrorBoundary } from '@suspensive/react';
@@ -18,7 +19,10 @@ export default function MyPage() {
   return (
     <QueryErrorResetBoundary>
       {({ reset }) => (
-        <ErrorBoundary onReset={reset} fallback={<></>}>
+        <ErrorBoundary
+          onReset={reset}
+          fallback={({ reset }) => <ErrorSection reset={reset} />}
+        >
           <Suspense fallback={<Skeleton />}>
             <Content>
               <Suspense>
