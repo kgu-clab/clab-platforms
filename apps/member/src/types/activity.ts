@@ -18,7 +18,7 @@ export type ActivityMemberRoleType =
   (typeof ACTIVITY_MEMBER_ROLE)[keyof typeof ACTIVITY_MEMBER_ROLE];
 export type ActivityGroupStatusType =
   (typeof ACTIVITY_STATE)[keyof typeof ACTIVITY_STATE];
-type LeaderType = {
+export type LeaderType = {
   id: string;
   name: string;
 };

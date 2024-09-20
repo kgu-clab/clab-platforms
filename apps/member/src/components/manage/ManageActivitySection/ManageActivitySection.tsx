@@ -19,7 +19,7 @@ import {
   useActivityGroupStatusMutation,
 } from '@hooks/queries';
 
-import type { ActivityGroupStatusType } from '@type/activity';
+import type { ActivityGroupStatusType, LeaderType } from '@type/activity';
 
 import { ActivityInfoModal } from './ActivityInfoModal';
 
@@ -52,11 +52,13 @@ const ManageActivitySection = () => {
   const handleApproveButtonClick = (
     id: number,
     status: ActivityGroupStatusType,
+    name: string,
+    leaders: Array<LeaderType>,
   ) => {
     openModal({
       content: (
         <CheckConfirmModal
-          message="승인하시겠습니까?"
+          message={`${name} | ${leaders[0].name} 을(를) 승인하시겠습니까?`}
           handleConfirmButton={() => {
             activityGroupStatusMutate({
               activityGroupId: id,
@@ -68,11 +70,16 @@ const ManageActivitySection = () => {
       ),
     });
   };
-  const handleRejectButtonClick = (id: number) => {
+  const handleRejectButtonClick = (
+    id: number,
+    name: string,
+    leaders: Array<LeaderType>,
+    text?: string,
+  ) => {
     openModal({
       content: (
         <CheckConfirmModal
-          message="거절하시겠습니까?"
+          message={`${name} | ${leaders[0].name} 을(를) ${text || '삭제'}하시겠습니까?`}
           handleConfirmButton={() => {
             activityGroupDeleteMutate(id);
           }}
@@ -104,14 +111,21 @@ const ManageActivitySection = () => {
                 <ActionButton
                   color="green"
                   onClick={() =>
-                    handleApproveButtonClick(id, ACTIVITY_STATE.PROGRESSING)
+                    handleApproveButtonClick(
+                      id,
+                      ACTIVITY_STATE.PROGRESSING,
+                      name,
+                      leaders,
+                    )
                   }
                 >
                   승인
                 </ActionButton>
                 <ActionButton
                   color="red"
-                  onClick={() => handleRejectButtonClick(id)}
+                  onClick={() =>
+                    handleRejectButtonClick(id, name, leaders, '거절')
+                  }
                 >
                   거절
                 </ActionButton>
@@ -147,14 +161,19 @@ const ManageActivitySection = () => {
                 </ActionButton>
                 <ActionButton
                   color="red"
-                  onClick={() => handleRejectButtonClick(id)}
+                  onClick={() => handleRejectButtonClick(id, name, leaders)}
                 >
                   삭제
                 </ActionButton>
                 <ActionButton
                   color="green"
                   onClick={() =>
-                    handleApproveButtonClick(id, ACTIVITY_STATE.END)
+                    handleApproveButtonClick(
+                      id,
+                      ACTIVITY_STATE.END,
+                      name,
+                      leaders,
+                    )
                   }
                 >
                   종료
@@ -191,7 +210,7 @@ const ManageActivitySection = () => {
                 </ActionButton>
                 <ActionButton
                   color="red"
-                  onClick={() => handleRejectButtonClick(id)}
+                  onClick={() => handleRejectButtonClick(id, name, leaders)}
                 >
                   삭제
                 </ActionButton>

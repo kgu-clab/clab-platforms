@@ -25,7 +25,7 @@ const ActivityDetailSection = ({ data }: ActivityDetailSectionProps) => {
         alt={data.name}
         className="rounded-lg border object-cover"
       />
-      <Section className="flex h-[160px] flex-col justify-between overflow-scroll">
+      <Section className="flex min-h-[120px] flex-col justify-between">
         <h1 className="text-xl font-bold">{data.name}</h1>
         <p className="my-1 whitespace-pre-line text-sm ">{data.content}</p>
         <div className="flex items-center gap-1 text-sm text-gray-500">
