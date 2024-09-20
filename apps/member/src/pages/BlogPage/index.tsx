@@ -11,7 +11,7 @@ import { useBlogDetail } from '@hooks/queries';
 import { createImageUrl } from '@utils/api';
 import { formattedDate } from '@utils/date';
 
-const BlogPage = () => {
+export default function BlogPage() {
   const { id } = useParams<{ id: string }>();
 
   if (!id) throw new Error(ERROR_MESSAGE.NOT_FOUND);
@@ -46,6 +46,4 @@ const BlogPage = () => {
       </Section>
     </Content>
   );
-};
-
-export default BlogPage;
+}
