@@ -10,10 +10,10 @@ import ProtectAuth from '@components/router/ProtectAuth';
 import { IS_DEVELOPMENT } from '@constants/environment';
 import { PATH } from '@constants/path';
 
-const ErrorPage = () => {
+export function GlobalErrorPage() {
   const error = useRouteError();
   let errorStatus: number | undefined = undefined;
-  let errorMessage: string = 'Unknown error';
+  let errorMessage: string = 'Unknown Error';
 
   if (isRouteErrorResponse(error)) {
     errorStatus = error.status;
@@ -27,7 +27,7 @@ const ErrorPage = () => {
   return (
     <ProtectAuth protect>
       <ScrollToTop>
-        <section>
+        <main>
           {IS_DEVELOPMENT && (
             <div className="fixed left-0 top-0 w-full border-t-4 border-red-500 bg-gray-100 p-4 text-sm">
               <p className="font-semibold">Development Error Message:</p>
@@ -61,10 +61,8 @@ const ErrorPage = () => {
             </div>
           </div>
           <Footer />
-        </section>
+        </main>
       </ScrollToTop>
     </ProtectAuth>
   );
-};
-
-export default ErrorPage;
+}
