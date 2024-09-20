@@ -88,7 +88,7 @@ const ManageActivitySection = () => {
         {groupData.items.length ? (
           groupData.items.map(({ leaders, name, subject, id }, index) => (
             <Table.Row key={id}>
-              <Table.Cell>{index + 1}</Table.Cell>
+              <Table.Cell>{index + 1 + page * 6}</Table.Cell>
               <Table.Cell>{name}</Table.Cell>
               <Table.Cell>{subject}</Table.Cell>
               <Table.Cell>
@@ -132,7 +132,7 @@ const ManageActivitySection = () => {
         {groupData.items.length ? (
           groupData.items.map(({ leaders, name, subject, id }, index) => (
             <Table.Row key={id}>
-              <Table.Cell>{index + 1}</Table.Cell>
+              <Table.Cell>{index + 1 + page * 6}</Table.Cell>
               <Table.Cell>{name}</Table.Cell>
               <Table.Cell>{subject}</Table.Cell>
               <Table.Cell>
@@ -176,7 +176,7 @@ const ManageActivitySection = () => {
         {groupData.items.length ? (
           groupData.items.map(({ leaders, name, subject, id }, index) => (
             <Table.Row key={id}>
-              <Table.Cell>{index + 1}</Table.Cell>
+              <Table.Cell>{index + 1 + page * 6}</Table.Cell>
               <Table.Cell>{name}</Table.Cell>
               <Table.Cell>{subject}</Table.Cell>
               <Table.Cell>

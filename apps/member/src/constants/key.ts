@@ -93,6 +93,18 @@ export const ACTIVITY_QUERY_KEY = {
     ...ACTIVITY_QUERY_KEY.STATUSES(),
     status,
   ],
+  STATUSES_PAGES: (status: ActivityGroupStatusType) => [
+    ...ACTIVITY_QUERY_KEY.STATUS(status),
+    'pages',
+  ],
+  STATUS_PAGE: (
+    status: ActivityGroupStatusType,
+    pagination: WithPaginationParams,
+  ) => [...ACTIVITY_QUERY_KEY.STATUSES_PAGES(status), pagination],
+  CATEGORY_PAGE: (
+    category: CommunityCategoryType,
+    pagination: WithPaginationParams,
+  ) => [...BOARD_QUERY_KEY.CATEGORY_PAGES(category), pagination],
   APPLICATION: (id: number) => [...ACTIVITY_QUERY_KEY.APPLICATIONS(), id],
   BOARD: ({ id, category, parent = false }: BoardParams) => [
     ...ACTIVITY_QUERY_KEY.BOARDS(),
