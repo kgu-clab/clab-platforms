@@ -34,7 +34,9 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
             className={cn('mb-1 ml-1 text-xs', labelClassName)}
           >
             {label}
-            {required && <span className="font-bol ml-1 text-red-400">*</span>}
+            {required && (
+              <span className="font-bol ml-0.5 text-red-400">*</span>
+            )}
           </label>
         )}
         <input
