@@ -242,7 +242,8 @@ const GroupCreateSection = () => {
                   className={cn(
                     'rounded-md object-cover transition duration-300 ease-in-out hover:scale-110 hover:cursor-pointer hover:opacity-50',
                     {
-                      'opacity-50': inputs.imageUrl === photoItem.urls['full'],
+                      'border-4 border-red-500':
+                        inputs.imageUrl === photoItem.urls['full'],
                     },
                   )}
                 />
