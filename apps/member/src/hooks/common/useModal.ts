@@ -43,7 +43,7 @@ export function useModal() {
       custom,
       ...(accept && { accept }),
       cancel: {
-        text: cancel?.text || '닫기',
+        text: cancel?.text ?? '닫기',
         onClick: cancel?.onClick || close,
       },
     });

@@ -6,25 +6,23 @@ import ActionButton from '@components/common/ActionButton/ActionButton';
 import Pagination from '@components/common/Pagination/Pagination';
 import { Section } from '@components/common/Section';
 import BookLoanConditionStatusBadge from '@components/library/BookLoanConditionStatusBadge';
-import { MemberInfoModal } from '@components/modal';
 
 import { TABLE_HEAD } from '@constants/head';
-import { useModal } from '@hooks/common/useModal';
 import { usePagination } from '@hooks/common/usePagination';
-import {
-  useBookLoanRecordApproveMutation,
-  useBookLoanRecordConditions,
-  useBookLoanRecordOverdue,
-} from '@hooks/queries';
+import { useBookLoanRecordConditions } from '@hooks/queries';
 import { calculateDDay, formattedDate } from '@utils/date';
+
+import { useBookLoanRecordApproveMutation } from '../hooks/useBookLoanRecordApproveMutation';
+import { useBookLoanRecordOverdue } from '../hooks/useBookLoanRecordOverdue';
+import { useMemberInfoModal } from '../hooks/useMemberInfoModal';
 
 type Mode = 'condition' | 'overdue';
 
-const ManageLibrarySection = () => {
+export function LibrarySection() {
+  const { open } = useMemberInfoModal();
   const { page, size, handlePageChange } = usePagination({
     sectionName: 'library',
   });
-  const { open } = useModal();
 
   const [mode, setMode] = useState<Mode>('condition');
 
@@ -48,11 +46,8 @@ const ManageLibrarySection = () => {
     bookLoanRecordApproveMutate(id);
   };
 
-  const handleContactButtonClick = (id: string) => {
-    return open({
-      title: '멤버 정보',
-      content: <MemberInfoModal id={id} />,
-    });
+  const handleMemberInfoClick = (memberId: string) => {
+    open({ memberId: memberId });
   };
 
   const renderMode = {
@@ -87,9 +82,7 @@ const ManageLibrarySection = () => {
                     승인
                   </ActionButton>
                 )}
-                <ActionButton
-                  onClick={() => handleContactButtonClick(borrowerId)}
-                >
+                <ActionButton onClick={() => handleMemberInfoClick(borrowerId)}>
                   정보
                 </ActionButton>
               </Table.Cell>
@@ -109,9 +102,7 @@ const ManageLibrarySection = () => {
               <Table.Cell>{formattedDate(dueDate)}</Table.Cell>
               <Table.Cell>{calculateDDay(dueDate)}</Table.Cell>
               <Table.Cell>
-                <ActionButton
-                  onClick={() => handleContactButtonClick(borrowerId)}
-                >
+                <ActionButton onClick={() => handleMemberInfoClick(borrowerId)}>
                   정보
                 </ActionButton>
               </Table.Cell>
@@ -159,6 +150,4 @@ const ManageLibrarySection = () => {
       </Section.Body>
     </Section>
   );
-};
-
-export default ManageLibrarySection;
+}

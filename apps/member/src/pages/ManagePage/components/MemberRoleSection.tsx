@@ -6,23 +6,26 @@ import { Section } from '@components/common/Section';
 import AddMemberForm from '@components/manage/ManageLevelSection/AddMemberForm.tsx';
 import RoleEditView from '@components/manage/ManageLevelSection/RoleEditView.tsx';
 
+import { useView } from '@hooks/common/useView';
 import { Suspense } from '@suspensive/react';
 
-import { Mode, Role } from '@type/manage.ts';
+import { Role } from '@type/manage.ts';
 
-const ManageLevelSection = () => {
+type View = 'view' | 'add';
+
+export function MemberRoleSection() {
   const [role, setRole] = useState<Role>('');
-  const [mode, setMode] = useState<Mode>('view');
+  const { view, setView, handleViewClick } = useView<View>('view');
 
   const handleMenubarItemClick = (role: Role) => {
     setRole(role);
-    setMode('view');
+    setView('view');
   };
 
   const renderView = {
     view: <RoleEditView role={role} />,
     add: <AddMemberForm />,
-  }[mode];
+  }[view];
 
   return (
     <Section>
@@ -32,32 +35,32 @@ const ManageLevelSection = () => {
       >
         <Menubar>
           <Menubar.Item
-            selected={role === '' && mode === 'view'}
+            selected={role === '' && view === 'view'}
             onClick={() => handleMenubarItemClick('')}
           >
             전체
           </Menubar.Item>
           <Menubar.Item
-            selected={role === 'SUPER' && mode === 'view'}
+            selected={role === 'SUPER' && view === 'view'}
             onClick={() => handleMenubarItemClick('SUPER')}
           >
             관리자
           </Menubar.Item>
           <Menubar.Item
-            selected={role === 'ADMIN' && mode === 'view'}
+            selected={role === 'ADMIN' && view === 'view'}
             onClick={() => handleMenubarItemClick('ADMIN')}
           >
             운영진
           </Menubar.Item>
           <Menubar.Item
-            selected={role === 'USER' && mode === 'view'}
+            selected={role === 'USER' && view === 'view'}
             onClick={() => handleMenubarItemClick('USER')}
           >
             일반
           </Menubar.Item>
           <Menubar.Item
-            selected={mode === 'add'}
-            onClick={() => setMode('add')}
+            selected={view === 'add'}
+            onClick={() => handleViewClick('add')}
           >
             추가
           </Menubar.Item>
@@ -76,6 +79,4 @@ const ManageLevelSection = () => {
       </Section.Body>
     </Section>
   );
-};
-
-export default ManageLevelSection;
+}

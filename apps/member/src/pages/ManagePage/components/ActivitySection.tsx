@@ -1,33 +1,31 @@
-import { useState } from 'react';
-
 import { Menubar, Table } from '@clab-platforms/design-system';
 
 import ActionButton from '@components/common/ActionButton/ActionButton';
 import EmptyBox from '@components/common/EmptyBox/EmptyBox';
 import Pagination from '@components/common/Pagination/Pagination';
 import { Section } from '@components/common/Section';
-import { CheckConfirmModal } from '@components/modal';
 
 import { TABLE_HEAD } from '@constants/head';
 import { GROUP_MESSAGE } from '@constants/message';
 import { ACTIVITY_STATE } from '@constants/state';
-import { useModal } from '@hooks/common/useModal';
 import { usePagination } from '@hooks/common/usePagination';
-import {
-  useActivityGroupDeleteMutation,
-  useActivityGroupMember,
-  useActivityGroupStatusMutation,
-} from '@hooks/queries';
+import { useView } from '@hooks/common/useView';
+import { useActivityGroupMember } from '@hooks/queries';
 
 import type { ActivityGroupStatusType } from '@type/activity';
 
-import { ActivityInfoModal } from './ActivityInfoModal';
+import { useActivityGroupConfirmModal } from '../hooks/useActivityGroupConfirmModal';
+import { useActivityGroupDeleteMutation } from '../hooks/useActivityGroupDeleteMutation';
+import { useActivityGroupInfoModal } from '../hooks/useActivityGroupInfoModal';
+import { useActivityGroupStatusMutation } from '../hooks/useActivityGroupStatusMutation';
 
-const ManageActivitySection = () => {
-  const [mode, setMode] = useState<ActivityGroupStatusType>(
+export function ActivitySection() {
+  const { open: openActivityGroupInfoModal } = useActivityGroupInfoModal();
+  const { open: openActivityGroupConfirmModal } =
+    useActivityGroupConfirmModal();
+  const { view, handleViewClick } = useView<ActivityGroupStatusType>(
     ACTIVITY_STATE.WAITING,
   );
-  const { open, close } = useModal();
   const { page, size, handlePageChange } = usePagination({
     defaultSize: 6,
     sectionName: 'activity',
@@ -35,53 +33,38 @@ const ManageActivitySection = () => {
   const { activityGroupDeleteMutate } = useActivityGroupDeleteMutation();
   const { activityGroupStatusMutate } = useActivityGroupStatusMutation();
   const { data: groupData } = useActivityGroupMember({
-    status: mode,
+    status: view,
     page,
     size,
   });
 
   const handleInfoButtonClick = (groupId: number) => {
-    return open({
-      title: '그룹 정보',
-      content: <ActivityInfoModal id={groupId} />,
-    });
-  };
-
-  const handleMenubarItemClick = (mode: ActivityGroupStatusType) => {
-    setMode(mode);
+    return openActivityGroupInfoModal({ groupId });
   };
 
   const handleApproveButtonClick = (
     id: number,
     status: ActivityGroupStatusType,
   ) => {
-    open({
-      content: (
-        <CheckConfirmModal
-          message="승인하시겠습니까?"
-          handleConfirmButton={() => {
-            activityGroupStatusMutate({
-              activityGroupId: id,
-              activityGroupStatus: status,
-            });
-          }}
-          handleClose={close}
-        />
-      ),
+    openActivityGroupConfirmModal({
+      title: '활동',
+      content: '해당 활동을 승인하시겠습니까?',
+      onClick: () => {
+        activityGroupStatusMutate({
+          activityGroupId: id,
+          activityGroupStatus: status,
+        });
+      },
     });
   };
 
   const handleRejectButtonClick = (id: number) => {
-    open({
-      content: (
-        <CheckConfirmModal
-          message="거절하시겠습니까?"
-          handleConfirmButton={() => {
-            activityGroupDeleteMutate(id);
-          }}
-          handleClose={close}
-        />
-      ),
+    openActivityGroupConfirmModal({
+      title: '활동',
+      content: '해당 활동을 종료하시겠습니까?',
+      onClick: () => {
+        activityGroupDeleteMutate(id);
+      },
     });
   };
 
@@ -142,25 +125,19 @@ const ManageActivitySection = () => {
                 {leaders ? `${leaders[0].name} (${leaders[0].id})` : '-'}
               </Table.Cell>
               <Table.Cell className="space-x-2">
-                <ActionButton
-                  color="blue"
-                  onClick={() => handleInfoButtonClick(id)}
-                >
+                <ActionButton onClick={() => handleInfoButtonClick(id)}>
                   정보
+                </ActionButton>
+                <ActionButton onClick={() => handleRejectButtonClick(id)}>
+                  승인
                 </ActionButton>
                 <ActionButton
                   color="red"
-                  onClick={() => handleRejectButtonClick(id)}
-                >
-                  삭제
-                </ActionButton>
-                <ActionButton
-                  color="green"
                   onClick={() =>
                     handleApproveButtonClick(id, ACTIVITY_STATE.END)
                   }
                 >
-                  종료
+                  거절
                 </ActionButton>
               </Table.Cell>
             </Table.Row>
@@ -210,7 +187,7 @@ const ManageActivitySection = () => {
         )}
       </Table>
     ),
-  }[mode];
+  }[view];
 
   return (
     <Section>
@@ -220,20 +197,20 @@ const ManageActivitySection = () => {
       >
         <Menubar>
           <Menubar.Item
-            selected={mode === ACTIVITY_STATE.WAITING}
-            onClick={() => handleMenubarItemClick(ACTIVITY_STATE.WAITING)}
+            selected={view === ACTIVITY_STATE.WAITING}
+            onClick={() => handleViewClick(ACTIVITY_STATE.WAITING)}
           >
             신청
           </Menubar.Item>
           <Menubar.Item
-            selected={mode === ACTIVITY_STATE.PROGRESSING}
-            onClick={() => handleMenubarItemClick(ACTIVITY_STATE.PROGRESSING)}
+            selected={view === ACTIVITY_STATE.PROGRESSING}
+            onClick={() => handleViewClick(ACTIVITY_STATE.PROGRESSING)}
           >
             진행중
           </Menubar.Item>
           <Menubar.Item
-            selected={mode === ACTIVITY_STATE.END}
-            onClick={() => handleMenubarItemClick(ACTIVITY_STATE.END)}
+            selected={view === ACTIVITY_STATE.END}
+            onClick={() => handleViewClick(ACTIVITY_STATE.END)}
           >
             종료
           </Menubar.Item>
@@ -251,6 +228,4 @@ const ManageActivitySection = () => {
       </Section.Body>
     </Section>
   );
-};
-
-export default ManageActivitySection;
+}
