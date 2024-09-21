@@ -1,31 +1,31 @@
 import { Suspense, useCallback, useLayoutEffect } from 'react';
 
-import useModal from '@hooks/common/useModal';
+import { useModal } from '@hooks/common/useModal';
 import { useGetModalStore } from '@store/modal';
 
 import Modal from './Modal';
 
 const ModalContainer = () => {
   const { isOpen, title, content, custom, accept, cancel } = useGetModalStore();
-  const { closeModal } = useModal();
+  const { close } = useModal();
 
   const handleKeyDown = useCallback(
     (event: KeyboardEvent) => {
       if (event.key === 'Escape') {
-        closeModal();
+        close();
       }
     },
-    [closeModal],
+    [close],
   );
 
-  const onClickAccept = () => {
+  const handleAcceptClick = () => {
     accept?.onClick();
-    closeModal();
+    close();
   };
 
-  const onClickCancel = () => {
+  const handleCancelClick = () => {
     cancel?.onClick();
-    closeModal();
+    close();
   };
 
   useLayoutEffect(() => {
@@ -50,12 +50,12 @@ const ModalContainer = () => {
               <Modal.Body>{content}</Modal.Body>
               <Modal.Footer>
                 {accept && (
-                  <Modal.Button color="orange" onClick={onClickAccept}>
+                  <Modal.Button color="orange" onClick={handleAcceptClick}>
                     {accept.text}
                   </Modal.Button>
                 )}
                 {cancel && (
-                  <Modal.Button color="gray" onClick={onClickCancel}>
+                  <Modal.Button color="gray" onClick={handleCancelClick}>
                     {cancel.text}
                   </Modal.Button>
                 )}

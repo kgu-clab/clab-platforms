@@ -4,14 +4,14 @@ import { useNavigate } from 'react-router-dom';
 import { Menubar, Table } from '@clab-platforms/design-system';
 import { toDecodeHTMLEntities } from '@clab-platforms/utils';
 
-import AddScheduleForm from '@components/calendar/AddScheduleForm/AddScheduleForm';
+import { ScheduleFormSection } from '@components/calendar/ScheduleFormSection';
 import ActionButton from '@components/common/ActionButton/ActionButton';
 import Pagination from '@components/common/Pagination/Pagination';
 import { Section } from '@components/common/Section';
 
 import { TABLE_HEAD } from '@constants/head';
 import { PATH } from '@constants/path';
-import useModal from '@hooks/common/useModal';
+import { useModal } from '@hooks/common/useModal';
 import { usePagination } from '@hooks/common/usePagination';
 import { useSchedule, useScheduleDeleteMutation } from '@hooks/queries';
 import { formattedDate, now } from '@utils/date';
@@ -21,7 +21,7 @@ type Mode = 'view' | 'add';
 
 const ManageCalendarSection = () => {
   const navigate = useNavigate();
-  const { openModal } = useModal();
+  const { open } = useModal();
 
   const [mode, setMode] = useState<Mode>('view');
   const { page, size, handlePageChange } = usePagination({
@@ -43,7 +43,7 @@ const ManageCalendarSection = () => {
     id: number,
   ) => {
     e.stopPropagation();
-    return openModal({
+    return open({
       title: '스케줄 삭제',
       content: `해당 스케줄을 정말 삭제하시겠습니까?\n삭제된 데이터는 복구할 수 없습니다.`,
       accept: {
@@ -83,7 +83,9 @@ const ManageCalendarSection = () => {
         )}
       </Table>
     ),
-    add: <AddScheduleForm onSubmit={() => handleMenubarItemClick('view')} />,
+    add: (
+      <ScheduleFormSection onSubmit={() => handleMenubarItemClick('view')} />
+    ),
   }[mode];
 
   return (

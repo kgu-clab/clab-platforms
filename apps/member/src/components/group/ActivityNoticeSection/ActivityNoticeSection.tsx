@@ -6,7 +6,7 @@ import { cn } from '@clab-platforms/utils';
 import DropdownButton from '@components/common/DropdownButton/DropdownButton';
 import Section from '@components/common/Section/Section';
 
-import useModal from '@hooks/common/useModal';
+import { useModal } from '@hooks/common/useModal';
 import { formattedDate, toKoreaISOString } from '@utils/date';
 import dayjs from 'dayjs';
 
@@ -15,11 +15,11 @@ import type { ResponseFile } from '@type/api';
 
 import { ActivityNoticeModal } from './ActivityNoticeModal';
 
-interface ActivityNoticeSectionProps {
+interface Props {
   data: Array<ActivityBoardType>;
 }
 
-interface ActivityNoticeSectionItemProps {
+interface ItemProps {
   className?: string;
   onClick: (
     content: string,
@@ -29,8 +29,8 @@ interface ActivityNoticeSectionItemProps {
   data: ActivityBoardType;
 }
 
-const ActivityNoticeSection = ({ data }: ActivityNoticeSectionProps) => {
-  const { openModal } = useModal();
+const ActivityNoticeSection = ({ data }: Props) => {
+  const { open: openModal } = useModal();
   const [open, setOpen] = useState(false);
 
   if (!data || data.length === 0) {
@@ -44,7 +44,7 @@ const ActivityNoticeSection = ({ data }: ActivityNoticeSectionProps) => {
   const latestNotice = sortedNotices[0];
   const otherNotices = sortedNotices.slice(1);
 
-  const onClickAlert = (
+  const handleNoticeClick = (
     content: string,
     title?: string,
     files?: Array<ResponseFile>,
@@ -60,7 +60,7 @@ const ActivityNoticeSection = ({ data }: ActivityNoticeSectionProps) => {
       <div className="flex items-center gap-2 divide-x">
         <ActivityNoticeSection.Item
           data={latestNotice}
-          onClick={onClickAlert}
+          onClick={handleNoticeClick}
         />
         {otherNotices.length > 0 && (
           <DropdownButton
@@ -82,7 +82,7 @@ const ActivityNoticeSection = ({ data }: ActivityNoticeSectionProps) => {
             <ActivityNoticeSection.Item
               key={notice.id}
               data={notice}
-              onClick={onClickAlert}
+              onClick={handleNoticeClick}
             />
           ))}
         </div>
@@ -91,11 +91,7 @@ const ActivityNoticeSection = ({ data }: ActivityNoticeSectionProps) => {
   );
 };
 
-ActivityNoticeSection.Item = ({
-  className,
-  data,
-  onClick,
-}: ActivityNoticeSectionItemProps) => {
+ActivityNoticeSection.Item = ({ className, data, onClick }: ItemProps) => {
   return (
     <div
       className={cn(

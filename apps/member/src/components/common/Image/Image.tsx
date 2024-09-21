@@ -54,7 +54,7 @@ const Image = ({
       <img
         className={cn(
           {
-            'animate-pulse bg-gray-200': status === 'loading',
+            'animate-pulse bg-gray-200/50': status === 'loading',
             'bg-gray-50': status === 'error',
           },
           _width,

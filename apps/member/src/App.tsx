@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 
 import { server } from '@api/server';
 import { useToken } from '@hooks/common/useToken';
-import AppRouter from '@router/AppRouter';
+import { Routes } from '@pages/Routes';
 import { useSetIsLoggedInStore } from '@store/auth';
 import { authorization } from '@utils/api';
 
@@ -25,7 +25,7 @@ const App = () => {
     return null;
   }
 
-  return <AppRouter />;
+  return <Routes />;
 };
 
 export default App;

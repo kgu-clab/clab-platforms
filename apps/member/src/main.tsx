@@ -16,7 +16,6 @@ import { API_BASE_URL } from '@constants/api.ts';
 import {
   CHANNEL_TALK_TOKEN,
   ENVIRONMENT_MODE,
-  IS_DEVELOPMENT,
   IS_PRODUCTION,
   SENTRY_DSN,
 } from '@constants/environment.ts';
@@ -59,7 +58,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
         <ToastContainer />
         <ModalContainer />
       </RecoilRoot>
-      {IS_DEVELOPMENT && <ReactQueryDevtools initialIsOpen={false} />}
+      <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
   </StrictMode>,
 );

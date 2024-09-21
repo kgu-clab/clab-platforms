@@ -1,9 +1,7 @@
-import { useCallback } from 'react';
-
 import { cn, toDecodeHTMLEntities } from '@clab-platforms/utils';
 
 import { MODAL_ACCEPT, MODAL_CONTENT, MODAL_TITLE } from '@constants/modal';
-import useModal from '@hooks/common/useModal';
+import { useModal } from '@hooks/common/useModal';
 import { useAccusesMutation, useCommentDeleteMutation } from '@hooks/queries';
 import { formattedDate } from '@utils/date';
 import { formatMemberName } from '@utils/string';
@@ -13,7 +11,7 @@ import type { CommentListItem } from '@type/comment';
 import ActionButton from '../ActionButton/ActionButton';
 import Avatar from '../Avatar/Avatar';
 
-interface CommentProps extends Omit<CommentListItem, 'content' | 'children'> {
+interface Props extends Omit<CommentListItem, 'content' | 'children'> {
   children: string;
   onClickReply: () => void;
   isReply?: boolean;
@@ -31,44 +29,38 @@ const Comment = ({
   isDeleted,
   isReply,
   onClickReply,
-}: CommentProps) => {
-  const { openModal } = useModal();
+}: Props) => {
+  const { open } = useModal();
   const { commentDeleteMutate } = useCommentDeleteMutation();
   const { accusesMutate } = useAccusesMutation();
 
-  const handleDeleteClick = useCallback(
-    (id: number) => {
-      return openModal({
-        title: MODAL_TITLE.DELETE,
-        content: MODAL_CONTENT.DELETE,
-        accept: {
-          text: MODAL_ACCEPT.DELETE,
-          onClick: () => commentDeleteMutate(id),
-        },
-      });
-    },
-    [commentDeleteMutate, openModal],
-  );
+  const handleDeleteClick = (id: number) => {
+    return open({
+      title: MODAL_TITLE.DELETE,
+      content: MODAL_CONTENT.DELETE,
+      accept: {
+        text: MODAL_ACCEPT.DELETE,
+        onClick: () => commentDeleteMutate(id),
+      },
+    });
+  };
 
-  const handleReportClick = useCallback(
-    (id: number) => {
-      return openModal({
-        title: MODAL_TITLE.REPORT,
-        content: MODAL_CONTENT.REPORT,
-        accept: {
-          text: MODAL_ACCEPT.REPORT,
-          onClick: () => {
-            accusesMutate({
-              targetType: 'COMMENT',
-              targetId: id,
-              reason: '부적절한 댓글입니다.',
-            });
-          },
+  const handleReportClick = (id: number) => {
+    return open({
+      title: MODAL_TITLE.REPORT,
+      content: MODAL_CONTENT.REPORT,
+      accept: {
+        text: MODAL_ACCEPT.REPORT,
+        onClick: () => {
+          accusesMutate({
+            targetType: 'COMMENT',
+            targetId: id,
+            reason: '부적절한 댓글입니다.',
+          });
         },
-      });
-    },
-    [accusesMutate, openModal],
-  );
+      },
+    });
+  };
 
   return (
     <div

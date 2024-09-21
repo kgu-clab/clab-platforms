@@ -7,7 +7,7 @@ import {
 
 import { ATOM_KEY } from '@constants/key';
 
-interface ModalState {
+type TModal = {
   key: string;
   isOpen: boolean;
   title: string;
@@ -21,9 +21,9 @@ interface ModalState {
     text: string;
     onClick: () => void;
   };
-}
+};
 
-export const modalState = atom<ModalState>({
+export const modalState = atom<TModal>({
   key: ATOM_KEY.MODAL,
   default: {
     key: '',

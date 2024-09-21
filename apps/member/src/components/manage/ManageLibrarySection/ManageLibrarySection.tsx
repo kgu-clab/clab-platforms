@@ -5,11 +5,11 @@ import { Menubar, Table } from '@clab-platforms/design-system';
 import ActionButton from '@components/common/ActionButton/ActionButton';
 import Pagination from '@components/common/Pagination/Pagination';
 import { Section } from '@components/common/Section';
-import BookLoanConditionStatusBadge from '@components/library/BookLoanConditionStatusBadge/BookLoanConditionStatusBadge';
+import BookLoanConditionStatusBadge from '@components/library/BookLoanConditionStatusBadge';
 import { MemberInfoModal } from '@components/modal';
 
 import { TABLE_HEAD } from '@constants/head';
-import useModal from '@hooks/common/useModal';
+import { useModal } from '@hooks/common/useModal';
 import { usePagination } from '@hooks/common/usePagination';
 import {
   useBookLoanRecordApproveMutation,
@@ -24,7 +24,7 @@ const ManageLibrarySection = () => {
   const { page, size, handlePageChange } = usePagination({
     sectionName: 'library',
   });
-  const { openModal } = useModal();
+  const { open } = useModal();
 
   const [mode, setMode] = useState<Mode>('condition');
 
@@ -49,7 +49,7 @@ const ManageLibrarySection = () => {
   };
 
   const handleContactButtonClick = (id: string) => {
-    return openModal({
+    return open({
       title: '멤버 정보',
       content: <MemberInfoModal id={id} />,
     });

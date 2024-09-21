@@ -4,7 +4,7 @@ import Panel from '@components/common/Panel/Panel';
 import ProgressBar from '@components/common/ProgressBar/ProgressBar';
 import Select from '@components/common/Select/Select';
 
-import useModal from '@hooks/common/useModal';
+import { useModal } from '@hooks/common/useModal';
 import {
   useBookLoanExtendMutation,
   useBookLoanRecordConditions,
@@ -31,7 +31,7 @@ const ActionButton = ({
 );
 
 const BookPanel = () => {
-  const { openModal } = useModal();
+  const { open } = useModal();
 
   const { data: myProfile } = useMyProfile();
   const { data } = useBookLoanRecordConditions({
@@ -52,7 +52,7 @@ const BookPanel = () => {
   const handleActionClick = (action: Action) => {
     let selectedBookId = selectOptions[0].value; // 기본값으로 첫 번째 책 선택
 
-    openModal({
+    open({
       title: action,
       content: (
         <Select

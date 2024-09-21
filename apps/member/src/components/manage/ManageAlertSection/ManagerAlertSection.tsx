@@ -12,7 +12,7 @@ import CommunityBoardForm from '@components/community/CommunityBoardForm/Communi
 import { SERVICE_NAME } from '@constants/environment';
 import { TABLE_HEAD, TABLE_HEAD_ACTION } from '@constants/head';
 import { PATH_FINDER } from '@constants/path';
-import useModal from '@hooks/common/useModal';
+import { useModal } from '@hooks/common/useModal';
 import { usePagination } from '@hooks/common/usePagination';
 import { useBoardByCategory, useBoardDeleteMutation } from '@hooks/queries';
 import { getCategoryTitle } from '@utils/community';
@@ -28,7 +28,7 @@ type ModeState = 'view' | 'add';
 
 const ManagerAlertSection = ({ category }: ManagerAlertSectionProps) => {
   const navigate = useNavigate();
-  const { openModal } = useModal();
+  const { open } = useModal();
   const { boardDeleteMutate } = useBoardDeleteMutation();
   const { data } = useBoardByCategory({
     hasPermission: true,
@@ -53,7 +53,7 @@ const ManagerAlertSection = ({ category }: ManagerAlertSectionProps) => {
     id: number,
   ) => {
     e.stopPropagation();
-    return openModal({
+    return open({
       title: `${title} 삭제`,
       content: `해당 ${title}을 정말 삭제하시겠습니까?\n삭제된 데이터는 복구할 수 없습니다.`,
       accept: {

@@ -1,20 +1,23 @@
-import { ComponentPropsWithRef } from 'react';
+import { type ComponentPropsWithoutRef } from 'react';
 
 import { Button } from '@clab-platforms/design-system';
 
-import useModal from '@hooks/common/useModal';
+import { useModal } from '@hooks/common/useModal';
 import { useSetIsLoggedInStore } from '@store/auth';
 import { removeTokens } from '@utils/api';
 
-interface LogoutButtonProps
-  extends Omit<ComponentPropsWithRef<'button'>, 'color' | 'size' | 'onClick'> {}
+interface Props
+  extends Omit<
+    ComponentPropsWithoutRef<typeof Button>,
+    'color' | 'size' | 'onClick'
+  > {}
 
-const LogoutButton = ({ children, ...rest }: LogoutButtonProps) => {
+const LogoutButton = ({ children, ...props }: Props) => {
   const setIsLoggedIn = useSetIsLoggedInStore();
-  const { openModal } = useModal();
+  const { open } = useModal();
 
-  const onClickLogout = () => {
-    openModal({
+  const handleLogoutClick = () => {
+    open({
       title: '로그아웃',
       content: '정말 로그아웃 하시겠습니까?',
       accept: {
@@ -28,7 +31,7 @@ const LogoutButton = ({ children, ...rest }: LogoutButtonProps) => {
   };
 
   return (
-    <Button color="red" size="sm" onClick={onClickLogout} {...rest}>
+    <Button color="red" size="sm" onClick={handleLogoutClick} {...props}>
       {children || '로그아웃'}
     </Button>
   );
