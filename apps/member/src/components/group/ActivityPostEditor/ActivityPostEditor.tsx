@@ -13,7 +13,7 @@ import {
   ACTIVITY_BOARD_CATEGORY_STATE,
   ACTIVITY_GROUP_CONTENT_MAX_LENGTH,
 } from '@constants/state.ts';
-import useModal from '@hooks/common/useModal';
+import { useModal } from '@hooks/common/useModal.ts';
 import useToast from '@hooks/common/useToast';
 import {
   useActivityGroupBoardDeleteMutation,
@@ -44,7 +44,7 @@ const ActivityPostEditor = ({
   assignments,
 }: ActivityPostEditorProps) => {
   const toast = useToast();
-  const { openModal } = useModal();
+  const { open } = useModal();
   const [post, setPost] = useState(defaultPost);
   const [editAssignment, setEditAssignment] = useState<boolean[]>(
     Array.from({ length: activities.length }, () => false),
@@ -108,7 +108,7 @@ const ActivityPostEditor = ({
     activityGroupBoardDeleteMutate(activityGroupBoardId);
   };
   const handleEditWeeklyClick = (prevData: ActivityBoardType) =>
-    openModal({
+    open({
       title: '수정하기',
       custom: <ActivityBoardEditModal groupId={groupId} prevData={prevData} />,
     });

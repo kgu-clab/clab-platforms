@@ -12,14 +12,14 @@ import { TABLE_HEAD } from '@constants/head';
 import { GROUP_MESSAGE } from '@constants/message';
 import { PATH, PATH_FINDER } from '@constants/path';
 import { ACTIVITY_MEMBER_STATE, ACTIVITY_STATE } from '@constants/state';
-import useModal from '@hooks/common/useModal';
+import { useModal } from '@hooks/common/useModal';
 import { useMyProfile } from '@hooks/queries';
 import { useActivityGroup } from '@hooks/queries/activity/useActivityGroup';
 
 const GroupDetailPage = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-  const { openModal } = useModal();
+  const { open } = useModal();
 
   if (!id) throw new Error(GROUP_MESSAGE.NO_ACTIVITY);
 
@@ -37,7 +37,7 @@ const GroupDetailPage = () => {
   );
 
   const handleApplicationClick = () => {
-    openModal({
+    open({
       title: '참여자 목록',
       content: (
         <Table head={TABLE_HEAD.ACTIVITY_GROUP_PARTICIPANTS} className="w-full">

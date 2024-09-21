@@ -12,7 +12,7 @@ import { CheckConfirmModal } from '@components/modal';
 import { TABLE_HEAD } from '@constants/head';
 import { GROUP_MESSAGE } from '@constants/message';
 import { ACTIVITY_STATE } from '@constants/state';
-import useModal from '@hooks/common/useModal';
+import { useModal } from '@hooks/common/useModal';
 import { usePagination } from '@hooks/common/usePagination';
 import {
   useActivityGroupDeleteMutation,
@@ -29,7 +29,7 @@ const ManageActivitySection = () => {
   const [mode, setMode] = useState<ActivityGroupStatusType>(
     ACTIVITY_STATE.WAITING,
   );
-  const { openModal, closeModal } = useModal();
+  const { open, close } = useModal();
   const { page, size, handlePageChange } = usePagination({
     defaultSize: 6,
     sectionName: 'activity',
@@ -43,7 +43,7 @@ const ManageActivitySection = () => {
   });
 
   const handleInfoButtonClick = (groupId: number) => {
-    return openModal({
+    return open({
       title: '그룹 정보',
       content: <ActivityInfoModal id={groupId} />,
     });
@@ -58,7 +58,7 @@ const ManageActivitySection = () => {
     leaders: Array<LeaderType>,
     text: string,
   ) => {
-    openModal({
+    open({
       content: (
         <CheckConfirmModal
           message={`${name} | ${leaders[0].name} 을(를) ${text}하시겠습니까?`}
@@ -68,7 +68,7 @@ const ManageActivitySection = () => {
               activityGroupStatus: status,
             });
           }}
-          handleClose={closeModal}
+          handleClose={close}
         />
       ),
     });
@@ -79,14 +79,14 @@ const ManageActivitySection = () => {
     leaders: Array<LeaderType>,
     text?: string,
   ) => {
-    openModal({
+    open({
       content: (
         <CheckConfirmModal
           message={`${name} | ${leaders[0].name} 을(를) ${text || '삭제'}하시겠습니까?`}
           handleConfirmButton={() => {
             activityGroupDeleteMutate(id);
           }}
-          handleClose={closeModal}
+          handleClose={close}
         />
       ),
     });

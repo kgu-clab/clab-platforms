@@ -13,7 +13,7 @@ import {
   ACTIVITY_BOARD_CATEGORY_STATE,
   ACTIVITY_GROUP_CONTENT_MAX_LENGTH,
 } from '@constants/state';
-import useModal from '@hooks/common/useModal';
+import { useModal } from '@hooks/common/useModal';
 import useToast from '@hooks/common/useToast';
 import { useActivityGroupBoardPatchMutation } from '@hooks/queries';
 import { isDateValid } from '@utils/date';
@@ -33,7 +33,7 @@ interface FileUploaderProps {
 }
 
 export const ActivityBoardEditModal = ({ prevData, groupId }: Props) => {
-  const { closeModal } = useModal();
+  const { close } = useModal();
   const toast = useToast();
   const [board, setBoard] = useState<ActivityBoardType>(prevData);
 
@@ -101,7 +101,7 @@ export const ActivityBoardEditModal = ({ prevData, groupId }: Props) => {
       },
       files: files?.length ? formData : undefined,
     });
-    closeModal();
+    close();
   };
 
   return (
@@ -162,7 +162,7 @@ export const ActivityBoardEditModal = ({ prevData, groupId }: Props) => {
         >
           변경
         </Modal.Button>
-        <Modal.Button color="gray" onClick={closeModal}>
+        <Modal.Button color="gray" onClick={close}>
           취소
         </Modal.Button>
       </Modal.Footer>
