@@ -45,7 +45,7 @@ const CalendarPage = lazy(() => import('@pages/CalendarPage'));
 const LoginPage = lazy(() => import('@pages/LoginPage'));
 const AuthPage = lazy(() => import('@pages/AuthPage'));
 const BlogPage = lazy(() => import('@pages/BlogPage'));
-const ManagePage = lazy(() => import('@pages/ManagePage/ManagePage'));
+const ManagePage = lazy(() => import('@pages/ManagePage'));
 
 const router = createBrowserRouter([
   {

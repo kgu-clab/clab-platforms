@@ -7,17 +7,15 @@ import {
 } from '@clab-platforms/icon';
 import { cn } from '@clab-platforms/utils';
 
-import { useSetToastStore } from '@store/toast';
-
-import type { ToastStateType } from '@type/toast';
+import { type TToastState, useSetToastStore } from '@store/toast';
 
 interface ToastProps {
   id: number;
-  state: ToastStateType;
+  state: TToastState;
   message: string;
 }
 
-const stateIcon = {
+const STATE_ICON = {
   success: <ApprovalColor />,
   error: <CancelColor />,
   warning: <HighPriorityColor />,
@@ -58,7 +56,7 @@ const Toast = ({ id, state, message }: ToastProps) => {
       )}
       onClick={handleClick}
     >
-      <div>{stateIcon[state]}</div>
+      <div>{STATE_ICON[state]}</div>
       <p className="break-keep text-sm font-semibold text-white">{message}</p>
     </div>
   );

@@ -1,34 +1,42 @@
+import { useMemo } from 'react';
+
 import { DetailsList } from '@clab-platforms/design-system';
 
 import Image from '@components/common/Image/Image';
 
+import { UseModalResult, useModal } from '@hooks/common/useModal';
 import { useActivityGroup } from '@hooks/queries';
 import { createImageUrl } from '@utils/api';
 import { toKoreaActivityGroupCategory } from '@utils/string';
 
 import type { ActivityGroupCategoryType } from '@type/activity';
 
-interface MemberInfoModalProps {
-  id: number;
-}
-interface LongTextItemProps {
-  label: string;
-  text?: string;
+interface Options {
+  groupId: number;
 }
 
-const LongTextItem = ({ label, text }: LongTextItemProps) => {
-  return (
-    <li className="flex justify-between gap-4">
-      <span>{label}</span>
-      <span className="text-right font-semibold">{text || '-'}</span>
-    </li>
+/**
+ * 멤버 정보 모달을 엽니다.
+ */
+export function useActivityGroupInfoModal(): UseModalResult<Options> {
+  const { open } = useModal();
+
+  return useMemo(
+    () => ({
+      open: (options: Options) =>
+        open({
+          title: '그룹 정보',
+          content: <ActivityGroupInfoModal {...options} />,
+        }),
+    }),
+    [open],
   );
-};
+}
 
-export const ActivityInfoModal = ({ id }: MemberInfoModalProps) => {
-  const { data, isLoading } = useActivityGroup(+id);
+interface Props extends Options {}
 
-  if (isLoading) return null;
+function ActivityGroupInfoModal({ groupId }: Props) {
+  const { data } = useActivityGroup(groupId);
 
   const { imageUrl, name, content, category, subject, curriculum, techStack } =
     data;
@@ -54,5 +62,19 @@ export const ActivityInfoModal = ({ id }: MemberInfoModalProps) => {
         <DetailsList.Item label="기술스텍">{techStack || '-'}</DetailsList.Item>
       </DetailsList>
     </div>
+  );
+}
+
+interface LongTextItemProps {
+  label: string;
+  text?: string;
+}
+
+const LongTextItem = ({ label, text }: LongTextItemProps) => {
+  return (
+    <li className="flex justify-between gap-4">
+      <span>{label}</span>
+      <span className="text-right font-semibold">{text ?? '-'}</span>
+    </li>
   );
 };

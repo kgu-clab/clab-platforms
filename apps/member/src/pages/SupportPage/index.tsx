@@ -27,6 +27,7 @@ export default function SupportPage() {
             <Header title="회비" />
             <IntroduceSection />
             <RequestSection />
+
             <Suspense fallback={<SupportHistorySectionSkeleton />}>
               <SupportHistorySection />
             </Suspense>

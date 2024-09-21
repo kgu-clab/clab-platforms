@@ -28,16 +28,20 @@ export default function MyPage() {
               <Suspense>
                 <ProfileSection />
               </Suspense>
+
               <Suspense>
                 <HistorySection category="지난 알림" />
               </Suspense>
+
               <Grid gap="md" className="md:grid-cols-2">
                 <MembershipHistorySection />
                 <HistorySection category="도서 대출 내역" />
               </Grid>
+
               <Suspense>
                 <ActivityGroupSection />
               </Suspense>
+
               <Suspense>
                 <Grid gap="md" className="md:grid-cols-2">
                   <HistorySection category="나의 게시글" />

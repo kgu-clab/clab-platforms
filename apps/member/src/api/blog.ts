@@ -3,9 +3,20 @@ import { createPagination } from '@clab-platforms/utils';
 import { END_POINT } from '@constants/api';
 
 import type { BaseResponse, ResponsePagination } from '@type/api';
-import type { BlogPost } from '@type/blog';
 
 import { server } from './server';
+
+export interface BlogPost {
+  id: number;
+  memberId: string;
+  name: string;
+  title: string;
+  subTitle: string;
+  content: string;
+  imageUrl: string;
+  createdAt: string;
+  isOwner: boolean;
+}
 
 /**
  * 블로그 포스트 조회

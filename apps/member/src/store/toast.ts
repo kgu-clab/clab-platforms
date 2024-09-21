@@ -7,11 +7,11 @@ import {
 
 import { ATOM_KEY } from '@constants/key';
 
-import type { ToastStateType } from '@type/toast';
+export type TToastState = 'success' | 'error' | 'warning';
 
 interface ToastItem {
   id: number;
-  state: ToastStateType;
+  state: TToastState;
   message: string;
 }
 

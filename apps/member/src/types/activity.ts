@@ -10,12 +10,16 @@ import type { ResponseFile } from './api';
 
 export type MemberStatusType =
   (typeof ACTIVITY_MEMBER_STATE)[keyof typeof ACTIVITY_MEMBER_STATE];
+
 export type ActivityGroupBoardCategoryType =
   (typeof ACTIVITY_BOARD_CATEGORY_STATE)[keyof typeof ACTIVITY_BOARD_CATEGORY_STATE];
+
 export type ActivityGroupCategoryType =
   (typeof SELECT_ACTIVITY_GROUP_CATEGORY_TYPE)[keyof typeof SELECT_ACTIVITY_GROUP_CATEGORY_TYPE];
+
 export type ActivityMemberRoleType =
   (typeof ACTIVITY_MEMBER_ROLE)[keyof typeof ACTIVITY_MEMBER_ROLE];
+
 export type ActivityGroupStatusType =
   (typeof ACTIVITY_STATE)[keyof typeof ACTIVITY_STATE];
 export type LeaderType = {

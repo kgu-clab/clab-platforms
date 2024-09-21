@@ -8,10 +8,6 @@ type Options<N = string, V = string> = {
   value: V;
 };
 
-// type SelectOptions<N = string, V = string> = {
-//   [key: string]: Options<N, V>[];
-// };
-
 export const SELECT_DEFAULT_OPTION = 'none';
 
 export const SELECT_OPTIONS = {

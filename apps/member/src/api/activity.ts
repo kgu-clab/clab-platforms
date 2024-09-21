@@ -337,7 +337,7 @@ export async function postActivityBoard({
     url: createPagination(END_POINT.ACTIVITY_GROUP_BOARD, params),
     body: {
       ...body,
-      fileUrls: fileUrl ? fileUrl : undefined,
+      fileUrls: fileUrl || undefined,
     },
   });
 

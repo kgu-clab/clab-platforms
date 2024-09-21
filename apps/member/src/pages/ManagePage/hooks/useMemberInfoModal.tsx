@@ -1,19 +1,40 @@
+import { useMemo } from 'react';
+
 import { DetailsList } from '@clab-platforms/design-system';
 
 import Image from '@components/common/Image/Image';
 
+import { UseModalResult, useModal } from '@hooks/common/useModal';
 import { useMembers } from '@hooks/queries/useMembers';
 import { createImageUrl } from '@utils/api';
 import { formattedDate } from '@utils/date';
 
-interface MemberInfoModalProps {
-  id: string;
+interface Options {
+  memberId: string;
 }
 
-export const MemberInfoModal = ({ id }: MemberInfoModalProps) => {
-  const { data, isLoading } = useMembers({ id });
+/**
+ * 멤버 정보 모달을 엽니다.
+ */
+export function useMemberInfoModal(): UseModalResult<Options> {
+  const { open } = useModal();
 
-  if (isLoading) return null;
+  return useMemo(
+    () => ({
+      open: (options: Options) =>
+        open({
+          title: '멤버 정보',
+          content: <MemberInfoModal {...options} />,
+        }),
+    }),
+    [open],
+  );
+}
+
+interface Props extends Options {}
+
+function MemberInfoModal({ memberId }: Props) {
+  const { data } = useMembers({ id: memberId });
 
   const { imageUrl, name, grade, contact, email, createdAt } = data.items[0];
 
@@ -23,7 +44,7 @@ export const MemberInfoModal = ({ id }: MemberInfoModalProps) => {
         <Image src={createImageUrl(imageUrl)} alt={name} />
       </div>
       <DetailsList>
-        <DetailsList.Item label="이름(학번)">{`${name}(${id})`}</DetailsList.Item>
+        <DetailsList.Item label="이름 (학번)">{`${name} (${memberId})`}</DetailsList.Item>
         <DetailsList.Item label="학년">{grade}</DetailsList.Item>
         <DetailsList.Item label="연락처">{contact}</DetailsList.Item>
         <DetailsList.Item label="이메일">{email}</DetailsList.Item>
@@ -33,4 +54,4 @@ export const MemberInfoModal = ({ id }: MemberInfoModalProps) => {
       </DetailsList>
     </div>
   );
-};
+}
