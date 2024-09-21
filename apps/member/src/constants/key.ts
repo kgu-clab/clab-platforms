@@ -82,8 +82,8 @@ export const ACTIVITY_QUERY_KEY = {
   MY_ASSIGNMENTS: () => [...ACTIVITY_QUERY_KEY.MY(), 'assignment'],
   PHOTOS: () => [...ACTIVITY_QUERY_KEY.ALL, 'photos'],
   DETAILS: () => [...ACTIVITY_QUERY_KEY.ALL, 'details'],
-  STATUSES: () => [...BOARD_QUERY_KEY.ALL, 'statuses'],
-  APPLICATIONS: () => [...BOOK_QUERY_KEY.ALL, 'applications'],
+  STATUSES: () => [...ACTIVITY_QUERY_KEY.ALL, 'statuses'],
+  APPLICATIONS: () => [...ACTIVITY_QUERY_KEY.ALL, 'applications'],
   BOARDS: () => [...ACTIVITY_QUERY_KEY.ALL, 'boards'],
   MEMBERS: () => [...ACTIVITY_QUERY_KEY.ALL, 'members'],
   MY_APPLIED: () => [...ACTIVITY_QUERY_KEY.MY(), 'applied'],
@@ -101,10 +101,6 @@ export const ACTIVITY_QUERY_KEY = {
     status: ActivityGroupStatusType,
     pagination: WithPaginationParams,
   ) => [...ACTIVITY_QUERY_KEY.STATUSES_PAGES(status), pagination],
-  CATEGORY_PAGE: (
-    category: CommunityCategoryType,
-    pagination: WithPaginationParams,
-  ) => [...BOARD_QUERY_KEY.CATEGORY_PAGES(category), pagination],
   APPLICATION: (id: number) => [...ACTIVITY_QUERY_KEY.APPLICATIONS(), id],
   BOARD: ({ id, category, parent = false }: BoardParams) => [
     ...ACTIVITY_QUERY_KEY.BOARDS(),
