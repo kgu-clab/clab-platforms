@@ -19,6 +19,7 @@ export const GROUP_MESSAGE = {
   NO_END_ACTIVITY: '종료된 활동 그룹이 없어요.',
   NO_PROGRESSING_ACTIVITY: '진행중인 활동 그룹이 없어요.',
   NO_PARTICIPANT: '활동 멤버가 없어요.',
+  END_ACTIVITY: '종료된 활동 그룹이에요.',
 } as const;
 
 export const LIBRARY_MESSAGE = {

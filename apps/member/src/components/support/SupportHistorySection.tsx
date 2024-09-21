@@ -1,16 +1,18 @@
 import { Table } from '@clab-platforms/design-system';
 
+import ActionButton from '@components/common/ActionButton/ActionButton';
 import Pagination from '@components/common/Pagination/Pagination';
 import Section from '@components/common/Section/Section';
 import MembershipStatusBadge from '@components/membership/MembershipStatusBadge/MembershipStatusBadge';
 
-import { TABLE_HEAD } from '@constants/head';
 import { ROLE_LEVEL } from '@constants/state';
 import { usePagination } from '@hooks/common/usePagination';
 import { useMembershipInfoModal } from '@hooks/modal/useMembershipInfoModal';
 import { useMembershipFee, useMyProfile } from '@hooks/queries';
 import { formattedDate } from '@utils/date';
 import { formatMemberName } from '@utils/string';
+
+import { type MembershipFeeType } from '@type/membershipFee';
 
 const TITLE = '신쳥 내역';
 
@@ -40,6 +42,13 @@ export function SupportHistorySection({
     size,
   });
 
+  const handleInfoClick = (data: MembershipFeeType) => {
+    open({
+      data: data,
+      hasPermission: myProfile.roleLevel >= ROLE_LEVEL.SUPER,
+    });
+  };
+
   return (
     <Section>
       <Section.Header
@@ -47,26 +56,31 @@ export function SupportHistorySection({
         description="최근에 신청된 회비 신청 내역이에요"
       />
       <Section.Body>
-        <Table head={TABLE_HEAD.SUPPORT_HISTORY}>
+        <Table head={['번호', '요청자', '구분', '상태', '신청일', '기능']}>
           {membershipFee.items.map((membership) => (
             <Table.Row
               key={membership.id}
-              onClick={() =>
-                open({
-                  data: membership,
-                  hasPermission: myProfile.roleLevel >= ROLE_LEVEL.SUPER,
-                })
-              }
+              onClick={() => handleInfoClick(membership)}
             >
               <Table.Cell>{membership.id}</Table.Cell>
               <Table.Cell>
-                <MembershipStatusBadge status={membership.status} />
+                {formatMemberName(membership.memberName, membership.memberId)}
               </Table.Cell>
               <Table.Cell> {membership.category}</Table.Cell>
               <Table.Cell>
-                {formatMemberName(membership.memberName, membership.memberId)}
+                <MembershipStatusBadge status={membership.status} />
               </Table.Cell>
               <Table.Cell>{formattedDate(membership.createdAt)}</Table.Cell>
+              <Table.Cell>
+                <ActionButton
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleInfoClick(membership);
+                  }}
+                >
+                  정보
+                </ActionButton>
+              </Table.Cell>
             </Table.Row>
           ))}
         </Table>

@@ -1,13 +1,15 @@
 import { SyntheticEvent, useCallback, useState } from 'react';
 
-import { cn } from '@clab-platforms/utils';
+import { cn, createURL } from '@clab-platforms/utils';
 
+import { SERVER_BASE_URL } from '@constants/api';
 import { NOT_FOUND_IMG } from '@constants/path';
 
 interface ImageProps extends React.ImgHTMLAttributes<HTMLImageElement> {
   width?: string;
   height?: string;
   overflow?: boolean;
+  isFile?: boolean;
 }
 
 type Status = 'loading' | 'error' | 'loaded';
@@ -19,12 +21,19 @@ const Image = ({
   overflow,
   className,
   onClick,
+  isFile,
   ...rest
 }: ImageProps) => {
   const [status, setStatus] = useState<Status>('loading');
 
   const _width = width ?? 'w-full';
   const _height = height ?? 'h-full';
+
+  if (isFile) {
+    if (!src?.startsWith(SERVER_BASE_URL)) {
+      src = createURL(SERVER_BASE_URL, src);
+    }
+  }
 
   const handleLoad = useCallback(() => {
     setStatus('loaded');

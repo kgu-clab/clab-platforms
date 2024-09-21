@@ -11,7 +11,7 @@ import WeeklyActivitySection from '@components/group/WeeklyActivitySection/Weekl
 import { TABLE_HEAD } from '@constants/head';
 import { GROUP_MESSAGE } from '@constants/message';
 import { PATH, PATH_FINDER } from '@constants/path';
-import { ACTIVITY_MEMBER_STATE } from '@constants/state';
+import { ACTIVITY_MEMBER_STATE, ACTIVITY_STATE } from '@constants/state';
 import { useModal } from '@hooks/common/useModal';
 import { useMyProfile } from '@hooks/queries';
 import { useActivityGroup } from '@hooks/queries/activity/useActivityGroup';
@@ -24,14 +24,16 @@ const GroupDetailPage = () => {
   if (!id) throw new Error(GROUP_MESSAGE.NO_ACTIVITY);
 
   const { data: myProfile } = useMyProfile();
-  const { data: activityGroup } = useActivityGroup(+id);
+  const { data } = useActivityGroup(+id);
 
-  const isParticipant = activityGroup.groupMembers.some(
-    (member) => member.memberId === myProfile.id,
-  );
+  if (data.status === ACTIVITY_STATE.END)
+    throw new Error(GROUP_MESSAGE.END_ACTIVITY);
 
-  const acceptedParticipant = activityGroup.groupMembers.filter(
+  const acceptedParticipant = data.groupMembers.filter(
     (member) => member.status === ACTIVITY_MEMBER_STATE.ACCEPTED,
+  );
+  const isParticipant = acceptedParticipant.some(
+    (member) => member.memberId === myProfile.id,
   );
 
   const handleApplicationClick = () => {
@@ -53,11 +55,11 @@ const GroupDetailPage = () => {
 
   return (
     <Content>
-      <Header title={['활동', activityGroup.name]} path={PATH.ACTIVITY}>
+      <Header title={['활동', data.name]} path={PATH.ACTIVITY}>
         <Button size="sm" onClick={handleApplicationClick}>
           참여자 목록
         </Button>
-        {activityGroup.isOwner && (
+        {data.isOwner && (
           <Button
             size="sm"
             color="red"
@@ -67,10 +69,10 @@ const GroupDetailPage = () => {
           </Button>
         )}
       </Header>
-      <ActivityDetailSection data={activityGroup} />
-      <ActivityNoticeSection data={activityGroup.notices} />
+      <ActivityDetailSection data={data} />
+      <ActivityNoticeSection data={data.notices} />
       <WeeklyActivitySection
-        data={activityGroup.activities}
+        data={data.activities}
         isParticipant={isParticipant}
       />
     </Content>

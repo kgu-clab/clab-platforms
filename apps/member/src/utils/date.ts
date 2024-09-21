@@ -213,3 +213,26 @@ export function toKoreaISOString(date: string | undefined | null): string {
 export function getTime({ hours = 0, minutes = 0, seconds = 0 }): number {
   return ((hours * 60 + minutes) * 60 + seconds) * 1000;
 }
+/**
+ * 주어진 날짜와 참조 날짜의 차이를 계산해서 텍스트로 반환합니다.
+ *
+ * @param {string | undefined} checkTime - 유효성을 확인하고자 하는 날짜를 나타내는 문자열입니다.
+ * @param {string | undefined} referenceTime - 유효성 판단의 기준이 되는 날짜를 나타내는 문자열입니다.
+ * @returns {string} 계산한 날짜를 '_일 _시간 _분 _초 늦었어요.' 형태로 나타냅니다.
+ */
+export function calOverDate(
+  checkTime: string | undefined,
+  referenceTime: string | undefined,
+): string {
+  const checkDate = dayjs(checkTime);
+  const referenceDate = dayjs(referenceTime);
+
+  const second = referenceDate.diff(checkDate, 'seconds');
+
+  const days = Math.floor(second / (24 * 3600));
+  const hours = Math.floor((second % (24 * 3600)) / 3600);
+  const minutes = Math.floor((second % 3600) / 60);
+  const seconds = second % 60;
+
+  return `${days}일 ${hours}시간 ${minutes}분 ${seconds}초 늦었어요.`;
+}

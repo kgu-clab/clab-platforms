@@ -3,12 +3,18 @@ import { useRef, useState } from 'react';
 import { Button, Grid, Input } from '@clab-platforms/design-system';
 
 import { Section } from '@components/common/Section';
+import TextCounting from '@components/common/TextCounting/TextCounting';
 import Textarea from '@components/common/Textarea/Textarea';
 
 import { FORM_DATA_KEY } from '@constants/api';
-import { ACTIVITY_BOARD_CATEGORY_STATE } from '@constants/state';
+import {
+  ACTIVITY_BOARD_CATEGORY_STATE,
+  ACTIVITY_GROUP_CONTENT_MAX_LENGTH,
+} from '@constants/state';
 import useToast from '@hooks/common/useToast';
 import { useActivityGroupBoardMutation, useMyProfile } from '@hooks/queries';
+import { isDateValid, toKoreaISOString } from '@utils/date';
+import dayjs from 'dayjs';
 
 interface Props {
   parentId: number;
@@ -42,11 +48,25 @@ const ActivityAssignmentEditor = ({ parentId, activityGroupId }: Props) => {
     const formData = new FormData();
     const files = uploaderRef.current?.files;
 
-    if (!board.title || !board.content || !board.dueDateTime)
+    if (!board.title || !board.content || !board.dueDateTime) {
       return toast({
         state: 'error',
         message: '제목, 내용, 종료 일시는 필수 입력 요소입니다.',
       });
+    } else if (board.content.length > ACTIVITY_GROUP_CONTENT_MAX_LENGTH) {
+      return toast({
+        state: 'error',
+        message: `내용은 ${ACTIVITY_GROUP_CONTENT_MAX_LENGTH}자 이내로 작성해주세요.`,
+      });
+    }
+
+    if (isDateValid(board.dueDateTime, toKoreaISOString(String(dayjs())))) {
+      return toast({
+        state: 'error',
+        message: '종료 일시는 현재 일시 이후로 선택해주세요.',
+      });
+    }
+
     if (files) {
       Array.from(files).forEach((file) => {
         formData.append(FORM_DATA_KEY, file);
@@ -87,9 +107,12 @@ const ActivityAssignmentEditor = ({ parentId, activityGroupId }: Props) => {
             label="내용"
             placeholder="내용을 입력해주세요."
             className="w-full"
-            maxLength={200}
             value={board.content}
             onChange={handlePostChange}
+          />
+          <TextCounting
+            maxLength={ACTIVITY_GROUP_CONTENT_MAX_LENGTH}
+            text={board.content}
           />
           <Grid col="2" gap="md" className="items-center">
             <Input

@@ -77,6 +77,7 @@ const GroupAssignmentPage = () => {
                     height="w-[300px]"
                     className="object-cover"
                     key={file.fileUrl}
+                    isFile
                   />
                 ) : (
                   <File
@@ -93,7 +94,7 @@ const GroupAssignmentPage = () => {
         </Section.Body>
       </Section>
       {isLeader ? (
-        <AssignmentListSection />
+        <AssignmentListSection dueDate={board?.dueDateTime ?? ''} />
       ) : (
         <>
           <AssignmentUploadSection

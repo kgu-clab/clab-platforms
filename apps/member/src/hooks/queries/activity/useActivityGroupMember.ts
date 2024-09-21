@@ -20,7 +20,7 @@ export function useActivityGroupMember({
   size = 99,
 }: Params = {}) {
   return useSuspenseQuery({
-    queryKey: ACTIVITY_QUERY_KEY.STATUS(status),
+    queryKey: ACTIVITY_QUERY_KEY.STATUS_PAGE(status, { page, size }),
     queryFn: () => getActivityGroupByStatus(status, page, size),
   });
 }

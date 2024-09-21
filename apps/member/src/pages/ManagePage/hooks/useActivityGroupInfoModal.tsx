@@ -7,6 +7,9 @@ import Image from '@components/common/Image/Image';
 import { UseModalResult, useModal } from '@hooks/common/useModal';
 import { useActivityGroup } from '@hooks/queries';
 import { createImageUrl } from '@utils/api';
+import { toKoreaActivityGroupCategory } from '@utils/string';
+
+import type { ActivityGroupCategoryType } from '@type/activity';
 
 interface Options {
   groupId: number;
@@ -49,7 +52,9 @@ function ActivityGroupInfoModal({ groupId }: Props) {
         />
       </div>
       <DetailsList className="h-full max-h-[50vh] overflow-scroll">
-        <DetailsList.Item label="분류">{category}</DetailsList.Item>
+        <DetailsList.Item label="분류">
+          {toKoreaActivityGroupCategory(category as ActivityGroupCategoryType)}
+        </DetailsList.Item>
         <DetailsList.Item label="이름">{name}</DetailsList.Item>
         <DetailsList.Item label="대상">{subject}</DetailsList.Item>
         <LongTextItem label="설명" text={content} />

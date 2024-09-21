@@ -122,16 +122,10 @@ const AssignmentUploadSection = ({
           <Table.Cell>종료 일시</Table.Cell>
           <Table.Cell
             className={cn({
-              'text-red-500': isDateValid(
-                dueDateTime,
-                toKoreaISOString(dayjs().format('YYYY.MM.DD')),
-              ),
+              'text-red-500': isDateValid(dueDateTime, String(dayjs())),
             })}
           >
-            {isDateValid(
-              dueDateTime,
-              toKoreaISOString(dayjs().format('YYYY.MM.DD')),
-            )
+            {isDateValid(dueDateTime, String(dayjs()))
               ? '제출 기한이 지났습니다'
               : formattedDate(dueDateTime)}
           </Table.Cell>

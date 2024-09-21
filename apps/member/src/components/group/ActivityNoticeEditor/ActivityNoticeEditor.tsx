@@ -65,7 +65,14 @@ const ActivityNoticeEditor = ({ groupId, data }: ActivityNoticeEditorProps) => {
         body: notice,
         files: files?.length ? formData : undefined,
       },
-      { onSuccess: () => setNotice(defaultNotice) },
+      {
+        onSuccess: () => {
+          setNotice(defaultNotice);
+          if (uploaderRef.current) {
+            uploaderRef.current.value = '';
+          }
+        },
+      },
     );
   };
 

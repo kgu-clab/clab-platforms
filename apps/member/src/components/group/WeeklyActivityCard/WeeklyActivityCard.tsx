@@ -58,29 +58,32 @@ const WeeklyActivityCard = ({
       <div className="overflow-hidden transition duration-500 ease-in-out">
         <div className="mt-2 space-y-3">
           <p className="whitespace-pre-line break-keep text-sm">{content}</p>
-          <hr />
-          {isParticipant && (
-            <div>
-              <p className="text-sm text-gray-500">첨부 파일</p>
-              {files?.map((file) => (
-                <div key={file.fileUrl} className="flex gap-2">
-                  {isImageFile(file.fileUrl) ? (
-                    <Image
-                      src={file.fileUrl}
-                      alt={file.originalFileName}
-                      height="w-[300px]"
-                      className="object-cover"
-                    />
-                  ) : (
-                    <File
-                      href={file.fileUrl}
-                      name={file.originalFileName}
-                      key={file.fileUrl}
-                    />
-                  )}
-                </div>
-              ))}
-            </div>
+          {isParticipant && Boolean(files?.length) && (
+            <>
+              <hr />
+              <div>
+                <p className="text-sm text-gray-500">첨부 파일</p>
+                {files?.map((file) => (
+                  <div key={file.fileUrl} className="flex gap-2">
+                    {isImageFile(file.fileUrl) ? (
+                      <Image
+                        src={file.fileUrl}
+                        alt={file.originalFileName}
+                        height="w-[300px]"
+                        className="object-cover"
+                        isFile
+                      />
+                    ) : (
+                      <File
+                        href={file.fileUrl}
+                        name={file.originalFileName}
+                        key={file.fileUrl}
+                      />
+                    )}
+                  </div>
+                ))}
+              </div>
+            </>
           )}
           {assignments?.map(
             ({

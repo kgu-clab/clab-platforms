@@ -24,6 +24,7 @@ export const ActivityNoticeModal = ({
               alt={file.originalFileName}
               height="w-[300px]"
               className="object-cover"
+              isFile
             />
           ) : (
             <File
