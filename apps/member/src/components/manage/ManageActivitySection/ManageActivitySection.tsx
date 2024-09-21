@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import { Menubar, Table } from '@clab-platforms/design-system';
 
@@ -24,6 +25,7 @@ import type { ActivityGroupStatusType, LeaderType } from '@type/activity';
 import { ActivityInfoModal } from './ActivityInfoModal';
 
 const ManageActivitySection = () => {
+  const navigate = useNavigate();
   const [mode, setMode] = useState<ActivityGroupStatusType>(
     ACTIVITY_STATE.WAITING,
   );
@@ -54,11 +56,12 @@ const ManageActivitySection = () => {
     status: ActivityGroupStatusType,
     name: string,
     leaders: Array<LeaderType>,
+    text: string,
   ) => {
     openModal({
       content: (
         <CheckConfirmModal
-          message={`${name} | ${leaders[0].name} 을(를) 승인하시겠습니까?`}
+          message={`${name} | ${leaders[0].name} 을(를) ${text}하시겠습니까?`}
           handleConfirmButton={() => {
             activityGroupStatusMutate({
               activityGroupId: id,
@@ -89,6 +92,10 @@ const ManageActivitySection = () => {
     });
   };
 
+  useEffect(() => {
+    navigate('');
+  }, [mode, navigate]);
+
   const renderMode = {
     WAITING: (
       <Table head={TABLE_HEAD.ACTIVITY_GROUP_DETAIL}>
@@ -116,6 +123,7 @@ const ManageActivitySection = () => {
                       ACTIVITY_STATE.PROGRESSING,
                       name,
                       leaders,
+                      '승인',
                     )
                   }
                 >
@@ -173,6 +181,7 @@ const ManageActivitySection = () => {
                       ACTIVITY_STATE.END,
                       name,
                       leaders,
+                      '종료',
                     )
                   }
                 >
