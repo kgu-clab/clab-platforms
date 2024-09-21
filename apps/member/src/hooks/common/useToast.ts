@@ -1,15 +1,19 @@
-import { useSetToastStore } from '@store/toast';
-
-import type { ToastStateType } from '@type/toast';
+import { type TToastState, useSetToastStore } from '@store/toast';
 
 interface AddToastProps {
-  state: ToastStateType;
+  state: TToastState;
   message: string;
 }
 
+/**
+ * 토스트 알림을 조작합니다.
+ */
 const useToast = () => {
   const setToast = useSetToastStore();
 
+  /**
+   * 새로운 토스트를 생성합니다.
+   */
   const addToast = ({ state, message }: AddToastProps) => {
     setToast((prev) => [
       ...prev,

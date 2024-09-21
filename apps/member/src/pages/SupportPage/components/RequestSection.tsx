@@ -19,15 +19,16 @@ import useToast from '@hooks/common/useToast';
 import { useMembershipFeeMutation } from '@hooks/queries/useMembershipFeeMutation';
 import { createFormData } from '@utils/api';
 
-import type { SupportRequestDataType } from '@type/support';
-
-import { useSupportRequestForm } from '../hooks/useSupportRequestForm';
+import {
+  type SupportRequestData,
+  useSupportRequestForm,
+} from '../hooks/useSupportRequestForm';
 
 export function RequestSection() {
   const { membershipFeeMutate, isPending, isSuccess } =
     useMembershipFeeMutation();
 
-  const handleRequestSubmit = async (data: SupportRequestDataType) => {
+  const handleRequestSubmit = async (data: SupportRequestData) => {
     membershipFeeMutate({
       ...data,
       multipartFile: createFormData(data.file),
@@ -70,7 +71,7 @@ const TABS_OPTIONS = [
 interface RequestFormProps {
   isPending: boolean;
   isSuccess: boolean;
-  onSubmit: (data: SupportRequestDataType) => void;
+  onSubmit: (data: SupportRequestData) => void;
 }
 
 export function RequestForm({

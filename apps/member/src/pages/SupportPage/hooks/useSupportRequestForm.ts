@@ -2,9 +2,8 @@ import { useCallback, useState } from 'react';
 
 import { SELECT_DEFAULT_OPTION } from '@constants/select';
 
-import type { SupportRequestDataType } from '@type/support';
-
 const INIT_CHECK_LIST = [false, false, false];
+
 const INIT_FORM_DATA = {
   category: SELECT_DEFAULT_OPTION,
   amount: 0,
@@ -13,9 +12,16 @@ const INIT_FORM_DATA = {
   file: null,
 };
 
+export interface SupportRequestData {
+  category: string;
+  amount: number;
+  content: string;
+  account: string;
+  file?: File | null;
+}
+
 export const useSupportRequestForm = () => {
-  const [formData, setFormData] =
-    useState<SupportRequestDataType>(INIT_FORM_DATA);
+  const [formData, setFormData] = useState<SupportRequestData>(INIT_FORM_DATA);
   const [checkList, setCheckList] = useState<boolean[]>(INIT_CHECK_LIST);
 
   const handleInputChange = useCallback(

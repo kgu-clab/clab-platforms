@@ -21,9 +21,9 @@ import {
 } from '@constants/environment.ts';
 import { queryClient } from '@hooks/queries';
 import * as Sentry from '@sentry/react';
-import '@styles/globals.css';
 
 import App from './App.tsx';
+import './globals.css';
 
 /**
  * Channel Talk
