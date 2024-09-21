@@ -162,7 +162,10 @@ const ActivityParticipantEditor = ({
       <Section.Header title="참여자 관리">
         {!(applyMemberList.items.length === 1) && (
           <Menubar>
-            <Menubar.Item selected={mode} onClick={() => setMode(!mode)}>
+            <Menubar.Item
+              selected={mode}
+              onClick={() => setMode((prev) => !prev)}
+            >
               선택
             </Menubar.Item>
           </Menubar>

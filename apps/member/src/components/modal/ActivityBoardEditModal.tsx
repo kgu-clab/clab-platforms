@@ -136,11 +136,7 @@ export const ActivityBoardEditModal = ({ prevData, groupId }: Props) => {
         {!uploadedFile &&
           prevData?.files?.map((file) => (
             <div key={file.fileUrl} className="mx-auto flex flex-col gap-2 ">
-              <File
-                href={file.fileUrl}
-                name={file.originalFileName}
-                key={file.fileUrl}
-              />
+              <File href={file.fileUrl} name={file.originalFileName} />
             </div>
           ))}
         {prevData.category === ACTIVITY_BOARD_CATEGORY_STATE.ASSIGNMENT && (

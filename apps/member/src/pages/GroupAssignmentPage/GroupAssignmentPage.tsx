@@ -94,7 +94,7 @@ const GroupAssignmentPage = () => {
         </Section.Body>
       </Section>
       {isLeader ? (
-        <AssignmentListSection dueDate={board?.dueDateTime || ''} />
+        <AssignmentListSection dueDate={board?.dueDateTime ?? ''} />
       ) : (
         <>
           <AssignmentUploadSection
