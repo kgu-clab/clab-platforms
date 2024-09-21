@@ -15,7 +15,6 @@ import Pagination from '@components/common/Pagination/Pagination';
 import { Section } from '@components/common/Section';
 import Textarea from '@components/common/Textarea/Textarea';
 
-import { TABLE_HEAD } from '@constants/head';
 import { PATH } from '@constants/path';
 import { usePagination } from '@hooks/common/usePagination';
 import useToast from '@hooks/common/useToast';
@@ -23,7 +22,6 @@ import { useView } from '@hooks/common/useView';
 import { useDeleteModal } from '@hooks/modal/useDeleteModal';
 import { useSchedule } from '@hooks/queries';
 import { formattedDate, now } from '@utils/date';
-import { toPriorityText } from '@utils/string';
 
 import { useScheduleDeleteMutation } from '../hooks/useScheduleDeleteMutation';
 import { useScheduleMutation } from '../hooks/useScheduleMutation';
@@ -57,32 +55,30 @@ export function CalendarSection() {
 
   const renderView = {
     view: (
-      <Table head={TABLE_HEAD.CALENDAR_SCHEDULE}>
-        {data.items.map(
-          ({ id, title, startDateTime, endDateTime, priority }) => (
-            <Table.Row
-              key={id}
-              className="text-nowrap text-center"
-              onClick={() => navigate(PATH.CALENDER)}
-            >
-              <Table.Cell>{id}</Table.Cell>
-              <Table.Cell className="w-full truncate text-left">
-                {toDecodeHTMLEntities(title)}
-              </Table.Cell>
-              <Table.Cell>{formattedDate(startDateTime)}</Table.Cell>
-              <Table.Cell>{formattedDate(endDateTime)}</Table.Cell>
-              <Table.Cell>{toPriorityText(priority)}</Table.Cell>
-              <Table.Cell className="space-x-2">
-                <ActionButton
-                  color="red"
-                  onClick={(e) => handleDeleteButtonClick(e, id)}
-                >
-                  삭제
-                </ActionButton>
-              </Table.Cell>
-            </Table.Row>
-          ),
-        )}
+      <Table head={['번호', '제목', '시작일', '종료일', '기능']}>
+        {data.items.map(({ id, title, startDateTime, endDateTime }) => (
+          <Table.Row
+            key={id}
+            className="text-nowrap text-center"
+            onClick={() => navigate(PATH.CALENDER)}
+          >
+            <Table.Cell>{id}</Table.Cell>
+            <Table.Cell className="w-full truncate text-left">
+              {toDecodeHTMLEntities(title)}
+            </Table.Cell>
+            <Table.Cell>{formattedDate(startDateTime)}</Table.Cell>
+            <Table.Cell>{formattedDate(endDateTime)}</Table.Cell>
+
+            <Table.Cell className="space-x-2">
+              <ActionButton
+                color="red"
+                onClick={(e) => handleDeleteButtonClick(e, id)}
+              >
+                삭제
+              </ActionButton>
+            </Table.Cell>
+          </Table.Row>
+        ))}
       </Table>
     ),
     add: <ScheduleForm onSubmit={() => handleViewClick('view')} />,
