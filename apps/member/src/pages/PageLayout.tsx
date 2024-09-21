@@ -1,3 +1,4 @@
+import { Suspense } from 'react';
 import { Outlet } from 'react-router-dom';
 
 import Footer from '@components/common/Footer/Footer';
@@ -13,7 +14,9 @@ export function PageLayout() {
   return (
     <ProtectAuth protect>
       <ScrollToTop>
-        <Nav />
+        <Suspense>
+          <Nav />
+        </Suspense>
         <main className="flex min-h-screen flex-col bg-gray-50 py-14">
           {banner && (
             <TextBanner
