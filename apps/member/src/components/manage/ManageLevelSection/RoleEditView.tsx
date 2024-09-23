@@ -4,20 +4,17 @@ import { useNavigate } from 'react-router-dom';
 import {
   Badge,
   BadgeColorVariant,
-  Button,
   Input,
   Table,
 } from '@clab-platforms/design-system';
-import { SearchOutline } from '@clab-platforms/icon';
+import { SearchOutline, SettingsColor } from '@clab-platforms/icon';
 
 import Pagination from '@components/common/Pagination/Pagination.tsx';
-import Select from '@components/common/Select/Select.tsx';
 
 import { TABLE_HEAD, TABLE_HEAD_ACTION } from '@constants/head.ts';
-import { ROLE_LEVEL } from '@constants/state.ts';
 import { usePagination } from '@hooks/common/usePagination.ts';
-import useToast from '@hooks/common/useToast.ts';
-import { useMemberRole, useMemberRoleMutation } from '@hooks/queries/member';
+import { useMemberRole } from '@hooks/queries/member';
+import { useMemberSettingModal } from '@pages/ManagePage/hooks/useMemberSettingModal.tsx';
 import { isNumeric } from '@utils/member.ts';
 import { toKoreaMemberLevel } from '@utils/string.ts';
 
@@ -28,11 +25,6 @@ interface RoleEditViewProps {
   role: Role;
 }
 
-const roleOptions = Object.keys(ROLE_LEVEL).map((key) => ({
-  name: toKoreaMemberLevel(key as RoleLevelKey),
-  value: key as RoleLevelKey,
-}));
-
 const roleColors: Record<RoleLevelKey, BadgeColorVariant> = {
   SUPER: 'red',
   ADMIN: 'blue',
@@ -41,13 +33,11 @@ const roleColors: Record<RoleLevelKey, BadgeColorVariant> = {
 
 const RoleEditView = ({ role }: RoleEditViewProps) => {
   const navigation = useNavigate();
-  const toast = useToast();
   const { page, size, handlePageChange } = usePagination({
     defaultSize: 6,
     sectionName: 'level',
   });
   const [searchWords, setSearchWords] = useState<string>('');
-  const [changeRole, setChangeRole] = useState(roleOptions[0].value);
 
   const { data, refetch } = useMemberRole({
     page: page,
@@ -58,23 +48,10 @@ const RoleEditView = ({ role }: RoleEditViewProps) => {
     role: role || undefined,
   });
 
-  const { memberRoleMutation } = useMemberRoleMutation();
+  const { open } = useMemberSettingModal();
 
   const handleSearchClick = () => {
     refetch();
-  };
-  const handleLevelChangeButtonClick = (memberId: string) => {
-    if (!changeRole) {
-      return toast({
-        state: 'error',
-        message: '권한을 선택해주세요',
-      });
-    } else {
-      memberRoleMutation({
-        memberId: memberId,
-        body: { role: changeRole },
-      });
-    }
   };
 
   useEffect(() => {
@@ -110,21 +87,16 @@ const RoleEditView = ({ role }: RoleEditViewProps) => {
               <Badge color={roleColors[role]}>{toKoreaMemberLevel(role)}</Badge>
             </Table.Cell>
             <Table.Cell>
-              <div className="mx-auto flex items-center justify-center gap-2">
-                <Select
-                  id="changeRole"
-                  options={roleOptions}
-                  onChange={(e) =>
-                    setChangeRole(e.target.value as RoleLevelKey)
-                  }
+              <button
+                type="button"
+                onClick={() => open({ memberId: id, name, role })}
+              >
+                <SettingsColor
+                  width={16}
+                  height={16}
+                  className="transition-all hover:brightness-150"
                 />
-                <Button
-                  size="sm"
-                  onClick={() => handleLevelChangeButtonClick(id)}
-                >
-                  변경하기
-                </Button>
-              </div>
+              </button>
             </Table.Cell>
           </Table.Row>
         ))}
