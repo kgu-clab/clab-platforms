@@ -7,14 +7,16 @@ import {
   Input,
   Table,
 } from '@clab-platforms/design-system';
-import { SearchOutline, SettingsColor } from '@clab-platforms/icon';
+import { SearchOutline } from '@clab-platforms/icon';
 
+import ActionButton from '@components/common/ActionButton/ActionButton';
 import Pagination from '@components/common/Pagination/Pagination';
 
 import { TABLE_HEAD, TABLE_HEAD_ACTION } from '@constants/head';
 import { usePagination } from '@hooks/common/usePagination';
 import { useMemberRole } from '@hooks/queries/member';
-import { useMemberSettingModal } from '@pages/ManagePage/hooks/useMemberSettingModal';
+import { useMemberPasswordResendModal } from '@pages/ManagePage/hooks/useMemberPasswordResendModal';
+import { useMemberPermissionSettingModal } from '@pages/ManagePage/hooks/useMemberPermissionSettingModal';
 import { isNumeric } from '@utils/member';
 import { toKoreaMemberLevel } from '@utils/string';
 
@@ -48,7 +50,10 @@ const RoleEditView = ({ role }: RoleEditViewProps) => {
     role: role || undefined,
   });
 
-  const { open } = useMemberSettingModal();
+  const { open: permissionSettingModalOpen } =
+    useMemberPermissionSettingModal();
+
+  const { open: passwordResendModalOpen } = useMemberPasswordResendModal();
 
   const handleSearchClick = () => {
     refetch();
@@ -86,17 +91,22 @@ const RoleEditView = ({ role }: RoleEditViewProps) => {
             <Table.Cell>
               <Badge color={roleColors[role]}>{toKoreaMemberLevel(role)}</Badge>
             </Table.Cell>
-            <Table.Cell className="flex items-center justify-center">
-              <button
+            <Table.Cell className="flex items-center justify-center gap-x-2">
+              <ActionButton
                 type="button"
-                onClick={() => open({ memberId: id, name, role })}
+                onClick={() =>
+                  permissionSettingModalOpen({ memberId: id, role })
+                }
               >
-                <SettingsColor
-                  width={16}
-                  height={16}
-                  className="transition-all hover:brightness-150"
-                />
-              </button>
+                권한 변경
+              </ActionButton>
+              <ActionButton
+                type="button"
+                color="red"
+                onClick={() => passwordResendModalOpen({ memberId: id, name })}
+              >
+                비밀번호 재전송
+              </ActionButton>
             </Table.Cell>
           </Table.Row>
         ))}

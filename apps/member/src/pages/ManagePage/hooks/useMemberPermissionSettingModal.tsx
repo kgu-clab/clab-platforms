@@ -2,21 +2,19 @@ import { useMemo, useState } from 'react';
 
 import { Button } from '@clab-platforms/design-system';
 
-import Select from '@components/common/Select/Select.tsx';
+import Select from '@components/common/Select/Select';
 
-import { ROLE_LEVEL } from '@constants/state.ts';
-import { useModal } from '@hooks/common/useModal.ts';
-import useToast from '@hooks/common/useToast.ts';
+import { ROLE_LEVEL } from '@constants/state';
+import { useModal } from '@hooks/common/useModal';
+import useToast from '@hooks/common/useToast';
 import { useMemberRoleMutation } from '@hooks/queries/member';
-import { useMemberPasswordResend } from '@pages/ManagePage/hooks/useMemberPasswordResendMutation.ts';
-import { toKoreaMemberLevel } from '@utils/string.ts';
+import { toKoreaMemberLevel } from '@utils/string';
 
-import { Role } from '@type/manage.ts';
-import type { RoleLevelKey } from '@type/member.ts';
+import { Role } from '@type/manage';
+import type { RoleLevelKey } from '@type/member';
 
 interface Options {
   memberId: string;
-  name: string;
   role: Role;
 }
 
@@ -28,15 +26,15 @@ const roleOptions = Object.keys(ROLE_LEVEL).map((key) => ({
 /**
  * 멤버 설정 모달을 엽니다.
  */
-export function useMemberSettingModal() {
+export function useMemberPermissionSettingModal() {
   const { open } = useModal();
 
   return useMemo(
     () => ({
       open: (options: Options) =>
         open({
-          title: '멤버 설정',
-          content: <MemberSettingModal {...options} />,
+          title: '권한 변경',
+          content: <MemberPermissionSettingModal {...options} />,
         }),
     }),
     [open],
@@ -45,11 +43,10 @@ export function useMemberSettingModal() {
 
 interface Props extends Options {}
 
-function MemberSettingModal({ memberId, name, role }: Props) {
+function MemberPermissionSettingModal({ memberId, role }: Props) {
   const [changeRole, setChangeRole] = useState(role);
   const toast = useToast();
   const { memberRoleMutation } = useMemberRoleMutation();
-  const { memberPasswordResendMutate } = useMemberPasswordResend();
 
   const handleLevelChangeButtonClick = () => {
     if (!changeRole) {
@@ -65,15 +62,11 @@ function MemberSettingModal({ memberId, name, role }: Props) {
     }
   };
 
-  const handlePasswordResendButtonClick = () => {
-    memberPasswordResendMutate(memberId);
-  };
-
   return (
     <div className="space-y-4">
       <div className="relative">
         <Select
-          label="권한 설정"
+          label="멤버 권한 설정"
           options={roleOptions}
           value={changeRole}
           name="studentStatus"
@@ -87,24 +80,6 @@ function MemberSettingModal({ memberId, name, role }: Props) {
         >
           변경하기
         </Button>
-      </div>
-      <div className="flex flex-col">
-        <label className="ml-1 text-left text-xs">비밀번호 재전송</label>
-        <div className="flex justify-between">
-          <p className="p-1.5 text-left text-sm">
-            <span className="font-bold text-red-400">
-              {memberId + '/' + name + ' '}
-            </span>
-            사용자의 비밀번호를 등록된 이메일로 재전송합니다.
-          </p>
-          <Button
-            size="sm"
-            color="red"
-            onClick={handlePasswordResendButtonClick}
-          >
-            초기화
-          </Button>
-        </div>
       </div>
     </div>
   );
