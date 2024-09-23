@@ -1,10 +1,10 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
-import { postAddMember } from '@api/member.ts';
+import { postAddMember } from '@api/member';
 import { MEMBER_QUERY_KEY } from '@constants/key';
 import useToast from '@hooks/common/useToast';
 
-import { AddMemberRequestType } from '@type/manage.ts';
+import { AddMemberRequestType } from '@type/manage';
 
 /**
  * 멤버를 추가합니다.

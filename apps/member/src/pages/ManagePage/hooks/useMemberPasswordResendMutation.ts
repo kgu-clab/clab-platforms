@@ -1,7 +1,7 @@
 import { useMutation } from '@tanstack/react-query';
 
-import { postResendMemberPassword } from '@api/member.ts';
-import useToast from '@hooks/common/useToast.ts';
+import { postResendMemberPassword } from '@api/member';
+import useToast from '@hooks/common/useToast';
 
 /**
  * 멤버의 비밀번호를 등록된 이메일로 재전송합니다.

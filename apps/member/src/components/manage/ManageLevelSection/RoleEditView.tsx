@@ -9,17 +9,17 @@ import {
 } from '@clab-platforms/design-system';
 import { SearchOutline, SettingsColor } from '@clab-platforms/icon';
 
-import Pagination from '@components/common/Pagination/Pagination.tsx';
+import Pagination from '@components/common/Pagination/Pagination';
 
-import { TABLE_HEAD, TABLE_HEAD_ACTION } from '@constants/head.ts';
-import { usePagination } from '@hooks/common/usePagination.ts';
+import { TABLE_HEAD, TABLE_HEAD_ACTION } from '@constants/head';
+import { usePagination } from '@hooks/common/usePagination';
 import { useMemberRole } from '@hooks/queries/member';
-import { useMemberSettingModal } from '@pages/ManagePage/hooks/useMemberSettingModal.tsx';
-import { isNumeric } from '@utils/member.ts';
-import { toKoreaMemberLevel } from '@utils/string.ts';
+import { useMemberSettingModal } from '@pages/ManagePage/hooks/useMemberSettingModal';
+import { isNumeric } from '@utils/member';
+import { toKoreaMemberLevel } from '@utils/string';
 
-import { Role } from '@type/manage.ts';
-import type { RoleLevelKey } from '@type/member.ts';
+import { Role } from '@type/manage';
+import type { RoleLevelKey } from '@type/member';
 
 interface RoleEditViewProps {
   role: Role;

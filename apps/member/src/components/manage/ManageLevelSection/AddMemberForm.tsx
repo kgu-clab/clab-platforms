@@ -2,12 +2,12 @@ import { ChangeEvent, FormEvent, useState } from 'react';
 
 import { Button, Input } from '@clab-platforms/design-system';
 
-import Select from '@components/common/Select/Select.tsx';
+import Select from '@components/common/Select/Select';
 
-import { SELECT_OPTIONS } from '@constants/select.ts';
-import { useMemberAddMutation } from '@hooks/queries/member/useMemberAddMutation.ts';
+import { SELECT_OPTIONS } from '@constants/select';
+import { useMemberAddMutation } from '@hooks/queries/member/useMemberAddMutation';
 
-import { AddMemberRequestType } from '@type/manage.ts';
+import { AddMemberRequestType } from '@type/manage';
 
 const defaultMemberInfo: AddMemberRequestType = {
   id: '',
