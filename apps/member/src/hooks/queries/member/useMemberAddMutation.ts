@@ -9,7 +9,11 @@ import { AddMemberRequestType } from '@type/manage.ts';
 /**
  * 멤버를 추가합니다.
  */
-export const useMemberAddMutation = () => {
+interface Params {
+  reset: () => void;
+}
+
+export function useMemberAddMutation({ reset }: Params) {
   const queryClient = useQueryClient();
   const toast = useToast();
 
@@ -24,6 +28,7 @@ export const useMemberAddMutation = () => {
           state: 'success',
           message: '계정이 생성되었어요.',
         });
+        reset();
       } else {
         toast({
           state: 'error',
@@ -34,4 +39,4 @@ export const useMemberAddMutation = () => {
   });
 
   return { memberAddMutation: mutation.mutate };
-};
+}
