@@ -62,7 +62,8 @@ export function BannerSection() {
   };
 
   const renderView = {
-    VIEW: (
+    VIEW: <ActivityPhotoBanner />,
+    ADD: (
       <form onSubmit={handleOnSubmit} className="space-y-2">
         <Input
           id="title"
@@ -88,7 +89,6 @@ export function BannerSection() {
         <Button className="w-full">활동 사진 변경하기</Button>
       </form>
     ),
-    ADD: <ActivityPhotoBanner />,
   }[view];
 
   return (
