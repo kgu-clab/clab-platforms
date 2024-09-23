@@ -21,7 +21,7 @@ const Modal = ({ children }: PropsWithChildren) => {
 
   return (
     <div
-      className="fixed inset-0 z-40"
+      className="fixed inset-0 z-30"
       aria-labelledby="modalTitle"
       aria-modal="true"
       role="dialog"
