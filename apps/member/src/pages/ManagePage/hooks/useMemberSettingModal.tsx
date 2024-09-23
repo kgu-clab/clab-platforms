@@ -89,7 +89,7 @@ function MemberSettingModal({ memberId, name, role }: Props) {
         </Button>
       </div>
       <div className="flex flex-col">
-        <label className="ml-1 text-left text-xs">사용자 비밀번호 찾기</label>
+        <label className="ml-1 text-left text-xs">비밀번호 재전송</label>
         <div className="flex justify-between">
           <p className="p-1.5 text-left text-sm">
             <span className="font-bold text-red-400">
