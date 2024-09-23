@@ -2,12 +2,12 @@ import { ChangeEvent, FormEvent, useState } from 'react';
 
 import { Button, Input } from '@clab-platforms/design-system';
 
-import Select from '@components/common/Select/Select.tsx';
+import Select from '@components/common/Select/Select';
 
-import { SELECT_OPTIONS } from '@constants/select.ts';
-import { useMemberAddMutation } from '@hooks/queries/member/useMemberAddMutation.ts';
+import { SELECT_OPTIONS } from '@constants/select';
+import { useMemberAddMutation } from '@hooks/queries/member/useMemberAddMutation';
 
-import { AddMemberRequestType } from '@type/manage.ts';
+import { AddMemberRequestType } from '@type/manage';
 
 const defaultMemberInfo: AddMemberRequestType = {
   id: '',
@@ -28,7 +28,9 @@ const defaultMemberInfo: AddMemberRequestType = {
 const AddMemberForm = () => {
   const [userInput, setUserInput] =
     useState<AddMemberRequestType>(defaultMemberInfo);
-  const { memberAddMutation } = useMemberAddMutation();
+  const { memberAddMutation } = useMemberAddMutation({
+    reset: () => setUserInput(defaultMemberInfo),
+  });
 
   const onSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -53,6 +55,7 @@ const AddMemberForm = () => {
         label="학번"
         id="학번"
         name="id"
+        value={userInput.id}
         placeholder="학번을 입력해주세요."
         onChange={handleInputChange}
         required
@@ -61,6 +64,7 @@ const AddMemberForm = () => {
         label="이름"
         id="이름"
         name="name"
+        value={userInput.name}
         placeholder="이름을 입력해주세요."
         onChange={handleInputChange}
         required
@@ -70,6 +74,7 @@ const AddMemberForm = () => {
         id="전화번호"
         name="contact"
         type="tel"
+        value={userInput.contact}
         placeholder="전화번호를 입력해주세요."
         onChange={handleInputChange}
         required
@@ -79,6 +84,7 @@ const AddMemberForm = () => {
         id="이메일"
         name="email"
         type="email"
+        value={userInput.email}
         placeholder="이메일을 입력해주세요."
         onChange={handleInputChange}
         required
@@ -87,14 +93,16 @@ const AddMemberForm = () => {
         label="학과"
         id="학과"
         name="department"
+        value={userInput.department}
         placeholder="학과를 입력해주세요."
         onChange={handleInputChange}
         required
       />
       <Select
-        label="구분"
+        label="학년"
         options={SELECT_OPTIONS.GRADE}
-        name="studentStatus"
+        value={userInput.grade}
+        name="grade"
         onChange={handleInputChange}
       />
       <Input
@@ -102,6 +110,7 @@ const AddMemberForm = () => {
         id="생년월일"
         name="birth"
         type="date"
+        value={userInput.birth}
         placeholder="생년월일을 입력해주세요."
         onChange={handleInputChange}
         required
@@ -110,6 +119,7 @@ const AddMemberForm = () => {
         label="주소"
         id="주소"
         name="address"
+        value={userInput.address}
         placeholder="주소를 입력해주세요."
         onChange={handleInputChange}
         required
@@ -117,6 +127,7 @@ const AddMemberForm = () => {
       <Select
         label="분야"
         options={SELECT_OPTIONS.MY_FIELD}
+        value={userInput.interests}
         name="interests"
         onChange={handleInputChange}
       />
@@ -124,12 +135,14 @@ const AddMemberForm = () => {
         label="깃허브 주소"
         id="깃허브 주소"
         name="githubUrl"
+        value={userInput.githubUrl}
         placeholder="깃허브 주소를 입력해주세요."
         onChange={handleInputChange}
       />
       <Select
         label="구분"
         options={SELECT_OPTIONS.STUDENT_STATUS}
+        value={userInput.studentStatus}
         name="studentStatus"
         onChange={handleInputChange}
       />

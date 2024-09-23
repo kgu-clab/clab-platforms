@@ -24,6 +24,8 @@ export const END_POINT = {
   MEMBER_LEVEL: `/v1/members/roles`,
   MEMBER_LEVEL_EDIT: (memberId: string) => `/v1/members/${memberId}/roles`,
   MEMBER_ADD: `v1/members`,
+  MEMBER_PASSWORD_RESEND: (memberId: string) =>
+    `/v1/members/password/${memberId}/resend`,
   // -- 커뮤니티
   BOARDS: `/v1/boards`,
   BOARDS_LIST: `/v1/boards/category`,

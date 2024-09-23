@@ -4,34 +4,28 @@ import { useNavigate } from 'react-router-dom';
 import {
   Badge,
   BadgeColorVariant,
-  Button,
   Input,
   Table,
 } from '@clab-platforms/design-system';
 import { SearchOutline } from '@clab-platforms/icon';
 
-import Pagination from '@components/common/Pagination/Pagination.tsx';
-import Select from '@components/common/Select/Select.tsx';
+import ActionButton from '@components/common/ActionButton/ActionButton';
+import Pagination from '@components/common/Pagination/Pagination';
 
-import { TABLE_HEAD, TABLE_HEAD_ACTION } from '@constants/head.ts';
-import { ROLE_LEVEL } from '@constants/state.ts';
-import { usePagination } from '@hooks/common/usePagination.ts';
-import useToast from '@hooks/common/useToast.ts';
-import { useMemberRole, useMemberRoleMutation } from '@hooks/queries/member';
-import { isNumeric } from '@utils/member.ts';
-import { toKoreaMemberLevel } from '@utils/string.ts';
+import { TABLE_HEAD, TABLE_HEAD_ACTION } from '@constants/head';
+import { usePagination } from '@hooks/common/usePagination';
+import { useMemberRole } from '@hooks/queries/member';
+import { useMemberPasswordResendModal } from '@pages/ManagePage/hooks/useMemberPasswordResendModal';
+import { useMemberPermissionSettingModal } from '@pages/ManagePage/hooks/useMemberPermissionSettingModal';
+import { isNumeric } from '@utils/member';
+import { toKoreaMemberLevel } from '@utils/string';
 
-import { Role } from '@type/manage.ts';
-import type { RoleLevelKey } from '@type/member.ts';
+import { Role } from '@type/manage';
+import type { RoleLevelKey } from '@type/member';
 
 interface RoleEditViewProps {
   role: Role;
 }
-
-const roleOptions = Object.keys(ROLE_LEVEL).map((key) => ({
-  name: toKoreaMemberLevel(key as RoleLevelKey),
-  value: key as RoleLevelKey,
-}));
 
 const roleColors: Record<RoleLevelKey, BadgeColorVariant> = {
   SUPER: 'red',
@@ -41,13 +35,11 @@ const roleColors: Record<RoleLevelKey, BadgeColorVariant> = {
 
 const RoleEditView = ({ role }: RoleEditViewProps) => {
   const navigation = useNavigate();
-  const toast = useToast();
   const { page, size, handlePageChange } = usePagination({
     defaultSize: 6,
     sectionName: 'level',
   });
   const [searchWords, setSearchWords] = useState<string>('');
-  const [changeRole, setChangeRole] = useState(roleOptions[0].value);
 
   const { data, refetch } = useMemberRole({
     page: page,
@@ -58,23 +50,13 @@ const RoleEditView = ({ role }: RoleEditViewProps) => {
     role: role || undefined,
   });
 
-  const { memberRoleMutation } = useMemberRoleMutation();
+  const { open: permissionSettingModalOpen } =
+    useMemberPermissionSettingModal();
+
+  const { open: passwordResendModalOpen } = useMemberPasswordResendModal();
 
   const handleSearchClick = () => {
     refetch();
-  };
-  const handleLevelChangeButtonClick = (memberId: string) => {
-    if (!changeRole) {
-      return toast({
-        state: 'error',
-        message: '권한을 선택해주세요',
-      });
-    } else {
-      memberRoleMutation({
-        memberId: memberId,
-        body: { role: changeRole },
-      });
-    }
   };
 
   useEffect(() => {
@@ -109,22 +91,22 @@ const RoleEditView = ({ role }: RoleEditViewProps) => {
             <Table.Cell>
               <Badge color={roleColors[role]}>{toKoreaMemberLevel(role)}</Badge>
             </Table.Cell>
-            <Table.Cell>
-              <div className="mx-auto flex items-center justify-center gap-2">
-                <Select
-                  id="changeRole"
-                  options={roleOptions}
-                  onChange={(e) =>
-                    setChangeRole(e.target.value as RoleLevelKey)
-                  }
-                />
-                <Button
-                  size="sm"
-                  onClick={() => handleLevelChangeButtonClick(id)}
-                >
-                  변경하기
-                </Button>
-              </div>
+            <Table.Cell className="flex items-center justify-center gap-x-2">
+              <ActionButton
+                type="button"
+                onClick={() =>
+                  permissionSettingModalOpen({ memberId: id, role })
+                }
+              >
+                권한 변경
+              </ActionButton>
+              <ActionButton
+                type="button"
+                color="red"
+                onClick={() => passwordResendModalOpen({ memberId: id, name })}
+              >
+                비밀번호 재전송
+              </ActionButton>
             </Table.Cell>
           </Table.Row>
         ))}

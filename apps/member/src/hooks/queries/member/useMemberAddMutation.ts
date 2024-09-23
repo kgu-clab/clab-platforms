@@ -1,20 +1,24 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
-import { addMember } from '@api/member';
+import { postAddMember } from '@api/member';
 import { MEMBER_QUERY_KEY } from '@constants/key';
 import useToast from '@hooks/common/useToast';
 
-import { AddMemberRequestType } from '@type/manage.ts';
+import { AddMemberRequestType } from '@type/manage';
 
 /**
  * 멤버를 추가합니다.
  */
-export const useMemberAddMutation = () => {
+interface Params {
+  reset: () => void;
+}
+
+export function useMemberAddMutation({ reset }: Params) {
   const queryClient = useQueryClient();
   const toast = useToast();
 
   const mutation = useMutation({
-    mutationFn: (body: AddMemberRequestType) => addMember(body),
+    mutationFn: (body: AddMemberRequestType) => postAddMember(body),
     onSuccess: (data) => {
       if (data) {
         queryClient.invalidateQueries({
@@ -24,6 +28,7 @@ export const useMemberAddMutation = () => {
           state: 'success',
           message: '계정이 생성되었어요.',
         });
+        reset();
       } else {
         toast({
           state: 'error',
@@ -34,4 +39,4 @@ export const useMemberAddMutation = () => {
   });
 
   return { memberAddMutation: mutation.mutate };
-};
+}
