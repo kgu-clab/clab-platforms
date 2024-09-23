@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
-import { addMember } from '@api/member';
+import { postAddMember } from '@api/member.ts';
 import { MEMBER_QUERY_KEY } from '@constants/key';
 import useToast from '@hooks/common/useToast';
 
@@ -14,7 +14,7 @@ export const useMemberAddMutation = () => {
   const toast = useToast();
 
   const mutation = useMutation({
-    mutationFn: (body: AddMemberRequestType) => addMember(body),
+    mutationFn: (body: AddMemberRequestType) => postAddMember(body),
     onSuccess: (data) => {
       if (data) {
         queryClient.invalidateQueries({

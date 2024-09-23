@@ -1,6 +1,6 @@
 import { useMutation } from '@tanstack/react-query';
 
-import { resendMemberPassword } from '@api/member.ts';
+import { postResendMemberPassword } from '@api/member.ts';
 import useToast from '@hooks/common/useToast.ts';
 
 /**
@@ -10,7 +10,7 @@ export function useMemberPasswordResend() {
   const toast = useToast();
 
   const mutation = useMutation({
-    mutationFn: resendMemberPassword,
+    mutationFn: postResendMemberPassword,
     onSuccess: (data) => {
       if (!data) {
         return toast({

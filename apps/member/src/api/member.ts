@@ -141,7 +141,7 @@ export async function patchMemberRole({
 /**
  * 멤버 추가
  */
-export async function addMember(body: AddMemberRequestType) {
+export async function postAddMember(body: AddMemberRequestType) {
   const { data } = await server.post<
     AddMemberRequestType,
     BaseResponse<string>
@@ -153,7 +153,7 @@ export async function addMember(body: AddMemberRequestType) {
 /**
  * 멤버 비밀번호 재전송
  */
-export async function resendMemberPassword(memberId: string) {
+export async function postResendMemberPassword(memberId: string) {
   const { data } = await server.post<string, BaseResponse<string>>({
     url: END_POINT.MEMBER_PASSWORD_RESEND(memberId),
   });
