@@ -149,3 +149,14 @@ export async function addMember(body: AddMemberRequestType) {
 
   return data;
 }
+
+/**
+ * 멤버 비밀번호 재전송
+ */
+export async function resendMemberPassword(memberId: string) {
+  const { data } = await server.post<string, BaseResponse<string>>({
+    url: END_POINT.MEMBER_PASSWORD_RESEND(memberId),
+  });
+
+  return data;
+}
