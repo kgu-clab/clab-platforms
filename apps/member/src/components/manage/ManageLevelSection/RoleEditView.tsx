@@ -86,7 +86,7 @@ const RoleEditView = ({ role }: RoleEditViewProps) => {
             <Table.Cell>
               <Badge color={roleColors[role]}>{toKoreaMemberLevel(role)}</Badge>
             </Table.Cell>
-            <Table.Cell>
+            <Table.Cell className="flex items-center justify-center">
               <button
                 type="button"
                 onClick={() => open({ memberId: id, name, role })}
