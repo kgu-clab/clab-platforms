@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import { useCallback, useMemo } from 'react';
 
 import { useModal } from '@hooks/common/useModal';
 import { useMemberPasswordResend } from '@pages/ManagePage/hooks/useMemberPasswordResendMutation';
@@ -15,9 +15,12 @@ export function useMemberPasswordResendModal() {
   const { open } = useModal();
   const { memberPasswordResendMutate } = useMemberPasswordResend();
 
-  const handlePasswordResendButtonClick = (memberId: string) => {
-    memberPasswordResendMutate(memberId);
-  };
+  const handlePasswordResendButtonClick = useCallback(
+    (memberId: string) => {
+      memberPasswordResendMutate(memberId);
+    },
+    [memberPasswordResendMutate],
+  );
 
   return useMemo(
     () => ({
@@ -31,7 +34,7 @@ export function useMemberPasswordResendModal() {
           },
         }),
     }),
-    [open],
+    [open, handlePasswordResendButtonClick],
   );
 }
 
