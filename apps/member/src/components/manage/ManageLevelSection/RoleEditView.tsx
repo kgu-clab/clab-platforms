@@ -15,6 +15,7 @@ import Pagination from '@components/common/Pagination/Pagination';
 import { TABLE_HEAD, TABLE_HEAD_ACTION } from '@constants/head';
 import { usePagination } from '@hooks/common/usePagination';
 import { useMemberRole } from '@hooks/queries/member';
+import { useMemberInfoModal } from '@pages/ManagePage/hooks/useMemberInfoModal';
 import { useMemberPasswordResendModal } from '@pages/ManagePage/hooks/useMemberPasswordResendModal';
 import { useMemberPermissionSettingModal } from '@pages/ManagePage/hooks/useMemberPermissionSettingModal';
 import { isNumeric } from '@utils/member';
@@ -40,7 +41,7 @@ const RoleEditView = ({ role }: RoleEditViewProps) => {
     sectionName: 'level',
   });
   const [searchWords, setSearchWords] = useState<string>('');
-
+  const { open: memberInfoModalOpen } = useMemberInfoModal();
   const { data, refetch } = useMemberRole({
     page: page,
     size: size,
@@ -92,6 +93,12 @@ const RoleEditView = ({ role }: RoleEditViewProps) => {
               <Badge color={roleColors[role]}>{toKoreaMemberLevel(role)}</Badge>
             </Table.Cell>
             <Table.Cell className="flex items-center justify-center gap-x-2">
+              <ActionButton
+                type="button"
+                onClick={() => memberInfoModalOpen({ memberId: id })}
+              >
+                정보
+              </ActionButton>
               <ActionButton
                 type="button"
                 onClick={() =>
