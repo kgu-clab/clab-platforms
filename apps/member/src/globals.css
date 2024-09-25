@@ -26,6 +26,8 @@
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
   font-size: 14px;
+  scroll-padding-top: 96px;
+  scroll-behavior: smooth;
 }
 
 @media (min-width: 768px) {

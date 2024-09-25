@@ -1,4 +1,4 @@
-import { type PropsWithChildren } from 'react';
+import { type PropsWithChildren, useId } from 'react';
 
 import { cn } from '@clab-platforms/utils';
 
@@ -26,10 +26,14 @@ const Section = ({ className, children }: SectionProps) => {
 };
 
 const Header = ({ children, title, description }: SectionHeaderProps) => {
+  const id = useId();
+
   return (
     <div className="flex items-center justify-between">
       <div>
-        <h2 className="text-xl font-bold text-black">{title}</h2>
+        <h2 id={id} className="text-xl font-bold text-black">
+          {title}
+        </h2>
         <p className="text-sm font-semibold text-gray-500">{description}</p>
       </div>
       <div className="flex items-center">{children}</div>
