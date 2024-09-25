@@ -29,7 +29,9 @@ const Header = ({ children, title, description }: SectionHeaderProps) => {
   return (
     <div className="flex items-center justify-between">
       <div>
-        <h2 className="text-xl font-bold text-black">{title}</h2>
+        <h2 id={encodeURI(title)} className="text-xl font-bold text-black">
+          {title}
+        </h2>
         <p className="text-sm font-semibold text-gray-500">{description}</p>
       </div>
       <div className="flex items-center">{children}</div>
