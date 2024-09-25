@@ -1,7 +1,7 @@
 import { Suspense } from 'react';
 
 import ProfilePanel from '@components/panels/ProfilePanel/ProfilePanel';
-import ShortcutPanel from '@components/panels/ShortcutPanel/ShortcutPanel.tsx';
+import ShortcutPanel from '@components/panels/ShortcutPanel/ShortcutPanel';
 
 import ActivityPanel from '../ActivityPanel/ActivityPanel';
 import AlarmPanel from '../AlarmPanel/AlarmPanel';
