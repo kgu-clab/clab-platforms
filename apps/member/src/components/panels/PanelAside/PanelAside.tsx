@@ -22,9 +22,7 @@ const PanelAside = () => {
       <Suspense>
         <BookPanel />
       </Suspense>
-      <Suspense>
-        <ShortcutPanel />
-      </Suspense>
+      <ShortcutPanel />
     </aside>
   );
 };
