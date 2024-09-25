@@ -4,13 +4,15 @@ import { ChevronRightOutline, SettingsColor } from '@clab-platforms/icon';
 
 import Panel from '@components/common/Panel/Panel';
 
+import { PATH } from '@constants/path';
+
 export default function ShortcutPanel() {
   const headers = Array.from(document.querySelectorAll('h2'));
   const location = useLocation();
 
   return (
     <>
-      {location.pathname === '/manage' && (
+      {location.pathname === PATH.MANAGE && (
         <Panel className="sticky top-20">
           <Panel.Header
             icon={<SettingsColor />}
@@ -20,9 +22,12 @@ export default function ShortcutPanel() {
           <Panel.Body>
             <ul className="list-disc space-y-2 text-gray-400">
               {headers.map((h2) => (
-                <li key={h2.id} className="group flex justify-between">
+                <li
+                  key={`shortcut-${h2.id}`}
+                  className="group flex justify-between"
+                >
                   <a
-                    href={`#${decodeURI(h2.innerText)}`}
+                    href={`#${h2.id}`}
                     className="transition-all group-hover:translate-x-2 group-hover:font-bold group-hover:text-black"
                   >
                     {h2.innerText}
