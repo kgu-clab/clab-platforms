@@ -1,8 +1,10 @@
 import { useParams } from 'react-router-dom';
 
 import Content from '@components/common/Content/Content';
+import ErrorSection from '@components/common/ErrorSection/ErrorSection';
 import Header from '@components/common/Header/Header';
 import Image from '@components/common/Image/Image';
+import QueryErrorBoundary from '@components/common/QueryErrorBoundary';
 import { Section } from '@components/common/Section';
 import Share from '@components/common/Share/Share';
 
@@ -24,26 +26,30 @@ export default function BlogPage() {
     data;
 
   return (
-    <Content>
-      <Header title={['기술 블로그', title]} />
-      <Section>
-        <Image
-          src={createImageUrl(imageUrl)}
-          alt={title}
-          className="rounded-lg border object-cover"
-        />
-        <div className="my-6 space-y-2 break-keep text-center">
-          <h2 className="text-clab-main text-4xl font-bold">{title}</h2>
-          <div className="text-clab-main-light font-medium">
-            <p>{subTitle}</p>
-            <p>
-              {name} ({memberId}) • {formattedDate(createdAt)}
-            </p>
+    <QueryErrorBoundary
+      fallback={({ reset }) => <ErrorSection reset={reset} />}
+    >
+      <Content>
+        <Header title={['기술 블로그', title]} />
+        <Section>
+          <Image
+            src={createImageUrl(imageUrl)}
+            alt={title}
+            className="rounded-lg border object-cover"
+          />
+          <div className="my-6 space-y-2 break-keep text-center">
+            <h2 className="text-clab-main text-4xl font-bold">{title}</h2>
+            <div className="text-clab-main-light font-medium">
+              <p>{subTitle}</p>
+              <p>
+                {name} ({memberId}) • {formattedDate(createdAt)}
+              </p>
+            </div>
+            <Share className="justify-center" />
           </div>
-          <Share className="justify-center" />
-        </div>
-        <div className="whitespace-pre-wrap break-keep">{content}</div>
-      </Section>
-    </Content>
+          <div className="whitespace-pre-wrap break-keep">{content}</div>
+        </Section>
+      </Content>
+    </QueryErrorBoundary>
   );
 }
