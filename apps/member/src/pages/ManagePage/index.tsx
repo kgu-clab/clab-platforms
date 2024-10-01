@@ -1,15 +1,13 @@
 import { Suspense } from 'react';
 
-import { QueryErrorResetBoundary } from '@tanstack/react-query';
-
 import Content from '@components/common/Content/Content';
 import ErrorSection from '@components/common/ErrorSection/ErrorSection';
 import Header from '@components/common/Header/Header';
+import QueryErrorBoundary from '@components/common/QueryErrorBoundary';
 import { SupportHistorySection } from '@components/support/SupportHistorySection';
 
 import { ROLE_LEVEL } from '@constants/state';
 import { useMyProfile } from '@hooks/queries';
-import { ErrorBoundary } from '@suspensive/react';
 
 import { ActivitySection } from './components/ActivitySection';
 import { AlertSection } from './components/AlertSection';
@@ -26,52 +24,43 @@ export default function ManagePage() {
   }
 
   return (
-    <QueryErrorResetBoundary>
-      {({ reset }) => (
-        <ErrorBoundary
-          onReset={reset}
-          fallback={({ reset }) => <ErrorSection reset={reset} />}
-        >
-          <Content>
-            <Header title="관리" />
-            <Suspense>
-              <SupportHistorySection
-                title="회비"
-                withPagination
-                hasPermission
-              />
-            </Suspense>
+    <QueryErrorBoundary
+      fallback={({ reset }) => <ErrorSection reset={reset} />}
+    >
+      <Content>
+        <Header title="관리" />
+        <Suspense>
+          <SupportHistorySection title="회비" withPagination hasPermission />
+        </Suspense>
 
-            <Suspense>
-              <LibrarySection />
-            </Suspense>
+        <Suspense>
+          <LibrarySection />
+        </Suspense>
 
-            <Suspense>
-              <AlertSection category="notice" />
-            </Suspense>
+        <Suspense>
+          <AlertSection category="notice" />
+        </Suspense>
 
-            <Suspense>
-              <AlertSection category="organization" />
-            </Suspense>
+        <Suspense>
+          <AlertSection category="organization" />
+        </Suspense>
 
-            <Suspense>
-              <CalendarSection />
-            </Suspense>
+        <Suspense>
+          <CalendarSection />
+        </Suspense>
 
-            <Suspense>
-              <MemberRoleSection />
-            </Suspense>
+        <Suspense>
+          <MemberRoleSection />
+        </Suspense>
 
-            <Suspense>
-              <ActivitySection />
-            </Suspense>
+        <Suspense>
+          <ActivitySection />
+        </Suspense>
 
-            <Suspense>
-              <BannerSection />
-            </Suspense>
-          </Content>
-        </ErrorBoundary>
-      )}
-    </QueryErrorResetBoundary>
+        <Suspense>
+          <BannerSection />
+        </Suspense>
+      </Content>
+    </QueryErrorBoundary>
   );
 }
