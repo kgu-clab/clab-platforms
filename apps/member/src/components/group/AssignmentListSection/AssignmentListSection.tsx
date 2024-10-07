@@ -37,11 +37,9 @@ const AssignmentListSection = ({ dueDate }: AssignmentListSectionProps) => {
   }
   const { data: assignmentList } = useActivityGroupBoardByParent({
     parentId: +assignmentId,
-    size: 99,
   });
   const { data: members } = useActivityGroupMemberList({
     activityGroupId: +id,
-    size: 99,
   });
 
   const memberList = members?.items

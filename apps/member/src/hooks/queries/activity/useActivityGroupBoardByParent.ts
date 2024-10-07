@@ -15,7 +15,7 @@ interface useActivityGroupBoardByParentProps extends WithPaginationParams {
 export function useActivityGroupBoardByParent({
   parentId,
   page = 0,
-  size = 20,
+  size = 99,
 }: useActivityGroupBoardByParentProps) {
   return useSuspenseQuery({
     queryKey: [ACTIVITY_QUERY_KEY.BOARD({ id: parentId, parent: true })],
