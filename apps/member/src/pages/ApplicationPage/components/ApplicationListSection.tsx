@@ -26,7 +26,7 @@ export function ApplicationListSection() {
   const { data: recruitmentList } = useRecruitment();
 
   const [selectRecruitment, setSelectRecruitment] = useState(
-    recruitmentList.length,
+    recruitmentList[length].id,
   );
   const { page, size, handlePageChange } = usePagination();
 
