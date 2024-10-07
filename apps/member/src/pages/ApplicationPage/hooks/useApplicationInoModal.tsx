@@ -3,6 +3,7 @@ import { useMemo } from 'react';
 import { DetailsList } from '@clab-platforms/design-system';
 
 import { useModal } from '@hooks/common/useModal';
+import { decode } from 'html-entities';
 
 import { ApplicationMemberType } from '@type/application';
 
@@ -54,7 +55,7 @@ function ApplicationInfoModal({ data }: Props) {
       <DetailsList.Item label="거주지">{address}</DetailsList.Item>
       <DetailsList.Item label="희망분야">{interests}</DetailsList.Item>
       <DetailsList.Item label="Github">{githubUrl ?? '-'}</DetailsList.Item>
-      <p className="mt-8">{otherActivities}</p>
+      <p className="mt-8">{decode(otherActivities)}</p>
     </DetailsList>
   );
 }
