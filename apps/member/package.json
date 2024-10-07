@@ -23,7 +23,6 @@
     "@tanstack/react-query-devtools": "^5.40.1",
     "dayjs": "^1.11.10",
     "framer-motion": "^10.18.0",
-    "html-entities": "^2.5.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-dropzone": "^14.2.3",

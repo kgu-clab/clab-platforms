@@ -1,6 +1,7 @@
 import { useMemo } from 'react';
 
 import { DetailsList } from '@clab-platforms/design-system';
+import { toDecodeHTMLEntities } from '@clab-platforms/utils';
 
 import Image from '@components/common/Image/Image';
 
@@ -8,7 +9,6 @@ import { UseModalResult, useModal } from '@hooks/common/useModal';
 import { useActivityGroup } from '@hooks/queries';
 import { createImageUrl } from '@utils/api';
 import { toKoreaActivityGroupCategory } from '@utils/string';
-import { decode } from 'html-entities';
 
 import type { ActivityGroupCategoryType } from '@type/activity';
 
@@ -59,7 +59,10 @@ function ActivityGroupInfoModal({ groupId }: Props) {
         <DetailsList.Item label="이름">{name}</DetailsList.Item>
         <DetailsList.Item label="대상">{subject}</DetailsList.Item>
         <LongTextItem label="설명" text={content} />
-        <LongTextItem label="커리큘럼" text={decode(curriculum)} />
+        <LongTextItem
+          label="커리큘럼"
+          text={toDecodeHTMLEntities(curriculum)}
+        />
         <DetailsList.Item label="기술스텍">{techStack || '-'}</DetailsList.Item>
       </DetailsList>
     </div>
