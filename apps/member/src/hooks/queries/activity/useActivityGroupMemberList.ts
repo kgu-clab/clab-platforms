@@ -14,7 +14,7 @@ interface useActivityGroupMemberListProps extends WithPaginationParams {
 export function useActivityGroupMemberList({
   activityGroupId,
   page = 0,
-  size = 20,
+  size = 99,
 }: useActivityGroupMemberListProps) {
   return useSuspenseQuery({
     queryKey: ACTIVITY_QUERY_KEY.MEMBER(activityGroupId),

@@ -102,6 +102,14 @@ export const ACTIVITY_QUERY_KEY = {
     pagination: WithPaginationParams,
   ) => [...ACTIVITY_QUERY_KEY.STATUSES_PAGES(status), pagination],
   APPLICATION: (id: number) => [...ACTIVITY_QUERY_KEY.APPLICATIONS(), id],
+  APPLICATIONS_PAGES: (id: number) => [
+    ...ACTIVITY_QUERY_KEY.APPLICATION(id),
+    'pages',
+  ],
+  APPLICATIONS_PAGE: (id: number, pagination: WithPaginationParams) => [
+    ...ACTIVITY_QUERY_KEY.APPLICATIONS_PAGES(id),
+    pagination,
+  ],
   BOARD: ({ id, category, parent = false }: BoardParams) => [
     ...ACTIVITY_QUERY_KEY.BOARDS(),
     id,

@@ -71,8 +71,7 @@ const Uploader = ({
    */
   useEffect(() => {
     if (isSuccess && inputRef.current) {
-      acceptedFiles.length = 0;
-      acceptedFiles.splice(0, acceptedFiles.length);
+      setFiles([]);
       inputRef.current.value = '';
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
