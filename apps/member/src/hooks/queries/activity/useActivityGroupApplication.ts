@@ -18,7 +18,10 @@ export function useActivityGroupApplication({
   size = 20,
 }: Params) {
   return useSuspenseQuery({
-    queryKey: ACTIVITY_QUERY_KEY.APPLICATION(activityGroupId),
+    queryKey: ACTIVITY_QUERY_KEY.APPLICATIONS_PAGE(activityGroupId, {
+      page,
+      size,
+    }),
     queryFn: () => getActivityGroupApplyByStatus(activityGroupId, page, size),
   });
 }
