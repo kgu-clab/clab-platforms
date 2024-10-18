@@ -1,32 +1,33 @@
-name: "\U0001F41E Bug"
+name: '🐞 Bug'
 description: '버그가 발생했나요?'
-labels: "\U0001F41E Bug"
+title: '[Bug]: '
+labels: '🐞 bug'
 body:
   - type: textarea
     attributes:
       label: 버그 설명
-      description: 버그에 대한 설명을 작성해 주세요!
+      description: 버그에 대한 설명을 작성해 주세요
     validations:
       required: true
   - type: textarea
     attributes:
       label: 예상 결과
-      description: 예상한 결과를 작성해 주세요!
+      description: 예상한 결과를 작성해 주세요
     validations:
       required: true
   - type: textarea
     attributes:
       label: 실제 결과
-      description: 실제 결과를 작성해 주세요!
+      description: 실제 결과를 작성해 주세요
     validations:
       required: true
   - type: textarea
     attributes:
       label: 시뮬레이션
-      description: 버그를 발견하게 된 상황을 단계별로 적어주세요!
+      description: 버그를 발견하게 된 상황을 단계별로 적어주세요
     validations:
       required: true
   - type: textarea
     attributes:
       label: ETC
-      description: 더 전달할 내용이 있다면 여기에 작성해주세요!
+      description: 더 전달할 내용이 있다면 여기에 작성해주세요
