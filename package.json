@@ -5,14 +5,14 @@
   "type": "module",
   "scripts": {
     "preinstall": "npx only-allow pnpm",
-    "postinstall": "husky install",
     "dev": "turbo run dev",
     "prebuild": "pnpm -F @clab-platforms/design-system build && pnpm -F @clab-platforms/icon build",
     "build": "turbo run build",
     "type": "turbo run type",
     "test": "turbo run test",
     "coverage": "turbo run coverage",
-    "lint": "turbo run lint"
+    "lint": "turbo run lint",
+    "prepare": "husky"
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": [
