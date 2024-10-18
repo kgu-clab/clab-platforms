@@ -14,7 +14,6 @@ export default {
         'land',
         'member',
         'time',
-        'status',
         'config',
         'design-system',
         'icon',
