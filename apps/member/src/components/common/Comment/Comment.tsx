@@ -1,3 +1,4 @@
+import { ThumbUpOutline } from '@clab-platforms/icon';
 import { cn, toDecodeHTMLEntities } from '@clab-platforms/utils';
 
 import { MODAL_ACCEPT, MODAL_CONTENT, MODAL_TITLE } from '@constants/modal';
@@ -10,6 +11,7 @@ import type { CommentListItem } from '@type/comment';
 
 import ActionButton from '../ActionButton/ActionButton';
 import Avatar from '../Avatar/Avatar';
+import ReactionButton from '../ReactionButton/ReactionButton';
 
 interface Props extends Omit<CommentListItem, 'content' | 'children'> {
   children: string;
@@ -70,9 +72,14 @@ const Comment = ({
     >
       <Avatar src={writerImageUrl} roleLevel={writerRoleLevel} />
       <div className="ml-3 w-full text-sm">
-        <p className="font-semibold">
-          {formatMemberName(writerName, writerId)}
-        </p>
+        <div className="flex justify-between">
+          <p className="font-semibold">
+            {formatMemberName(writerName, writerId)}
+          </p>
+          <ReactionButton className="flex items-center space-x-2">
+            <ThumbUpOutline />
+          </ReactionButton>
+        </div>
         {isDeleted ? (
           <p className="text-red-500">삭제된 댓글입니다.</p>
         ) : (

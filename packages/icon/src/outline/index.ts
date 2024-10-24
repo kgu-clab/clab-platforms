@@ -12,4 +12,5 @@ export { default as MenuOutline } from './react/Menu';
 export { default as RegularFileAltOutline } from './react/RegularFileAlt';
 export { default as SearchOutline } from './react/Search';
 export { default as StudentOutline } from './react/Student';
+export { default as ThumbUpOutline } from './react/ThumbUp';
 export { default as UserOutline } from './react/User';
