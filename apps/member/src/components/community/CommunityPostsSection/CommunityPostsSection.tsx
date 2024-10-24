@@ -2,21 +2,19 @@ import { useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { Table } from '@clab-platforms/design-system';
-import { cn, toDecodeHTMLEntities } from '@clab-platforms/utils';
 
-import CommentCounter from '@components/common/CommentCounter/CommentCounter';
 import Pagination from '@components/common/Pagination/Pagination';
 import { Section } from '@components/common/Section';
 
-import { SERVICE_NAME } from '@constants/environment';
 import { TABLE_HEAD } from '@constants/head';
 import { COMMUNITY_MESSAGE } from '@constants/message';
 import { PATH_FINDER } from '@constants/path';
 import { usePagination } from '@hooks/common/usePagination';
 import { useBoardByCategory } from '@hooks/queries';
-import { toYYMMDD } from '@utils/date';
 
 import type { CommunityCategoryType } from '@type/community';
+
+import CommunityPostsItem from './CommunityPostsItem';
 
 interface Props {
   type: CommunityCategoryType;
@@ -54,31 +52,38 @@ const CommunityPostsSection = ({
               </Table.Cell>
             </Table.Row>
           ) : (
-            data.items.map(
-              ({ id, title, commentCount, writerName, createdAt }, index) => (
-                <Table.Row
-                  key={id}
-                  className={cn('text-nowrap text-center', {
-                    'bg-gray-50 font-semibold': id === currentId,
-                  })}
-                  onClick={() => handleBoardClick(id)}
-                >
-                  <Table.Cell className="w-1/12">
-                    {data.totalItems - (index + page * size)}
-                  </Table.Cell>
-                  <Table.Cell className="w-7/12 truncate text-left">
-                    {toDecodeHTMLEntities(title)}
-                    <CommentCounter>{commentCount}</CommentCounter>
-                  </Table.Cell>
-                  <Table.Cell className="w-3/12">
-                    {writerName || SERVICE_NAME}
-                  </Table.Cell>
-                  <Table.Cell className="w-1/12">
-                    {toYYMMDD(createdAt)}
-                  </Table.Cell>
-                </Table.Row>
-              ),
-            )
+            <>
+              {!currentId &&
+                // 인기 게시물 상위 3개
+                data.items
+                  .slice(0, 3)
+                  .map(({ id, title, commentCount, writerName, createdAt }) => (
+                    <CommunityPostsItem
+                      key={id}
+                      id={id}
+                      title={title}
+                      commentCount={commentCount}
+                      writerName={writerName}
+                      createdAt={createdAt}
+                      onClick={() => handleBoardClick(id)}
+                    />
+                  ))}
+              {data.items.map(
+                ({ id, title, commentCount, writerName, createdAt }, index) => (
+                  <CommunityPostsItem
+                    key={id}
+                    id={id}
+                    title={title}
+                    commentCount={commentCount}
+                    writerName={writerName}
+                    createdAt={createdAt}
+                    onClick={() => handleBoardClick(id)}
+                    index={data.totalItems - (index + page * size)}
+                    currentId={currentId}
+                  />
+                ),
+              )}
+            </>
           )}
         </Table>
         <Pagination
