@@ -1,7 +1,8 @@
-import { useCallback } from 'react';
+import { useCallback, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { Table } from '@clab-platforms/design-system';
+import { Input, Table } from '@clab-platforms/design-system';
+import { SearchOutline } from '@clab-platforms/icon';
 import { cn, toDecodeHTMLEntities } from '@clab-platforms/utils';
 
 import CommentCounter from '@components/common/CommentCounter/CommentCounter';
@@ -34,6 +35,7 @@ const CommunityPostsSection = ({
   const navigate = useNavigate();
   const { page, size, handlePageChange } = usePagination({ defaultSize });
   const { data } = useBoardByCategory({ category: type, page, size });
+  const [hashtag, setHashtag] = useState('');
 
   const handleBoardClick = useCallback(
     (id: number) => {
@@ -41,11 +43,26 @@ const CommunityPostsSection = ({
     },
     [navigate, type],
   );
+  const handleHashtagSearchClick = () => {};
 
   return (
     <Section className="space-y-2">
       {title && <Section.Header title={title} />}
-      <Section.Body className="overflow-auto">
+      <Section.Body className="flex flex-col gap-4 overflow-auto">
+        {type === 'qna' && (
+          <div className="flex">
+            <Input
+              placeholder="검색할 해시태그를 입력해주세요"
+              className="w-full"
+              value={hashtag}
+              onChange={(e) => setHashtag(e.target.value)}
+            />
+            <SearchOutline
+              className="mx-4 my-auto hover:cursor-pointer"
+              onClick={handleHashtagSearchClick}
+            />
+          </div>
+        )}
         <Table head={TABLE_HEAD.COMMUNITY_DETAIL}>
           {data.totalItems === 0 ? (
             <Table.Row>
