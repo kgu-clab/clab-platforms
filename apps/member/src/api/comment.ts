@@ -65,3 +65,12 @@ export const deleteComment = (id: number) => {
     url: END_POINT.COMMENTS(id),
   });
 };
+
+/**
+ * 댓글 좋아요 누르기/취소하기
+ */
+export const postCommentLikes = (commentId: number) => {
+  return server.post<number, BaseResponse<number>>({
+    url: END_POINT.COMMENTS_LIKES(commentId),
+  });
+};

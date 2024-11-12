@@ -4,6 +4,7 @@ import { cn, toDecodeHTMLEntities } from '@clab-platforms/utils';
 import { MODAL_ACCEPT, MODAL_CONTENT, MODAL_TITLE } from '@constants/modal';
 import { useModal } from '@hooks/common/useModal';
 import { useAccusesMutation, useCommentDeleteMutation } from '@hooks/queries';
+import { useCommentLikesMutation } from '@hooks/queries/comment/useCommentLikesMutation';
 import { formattedDate } from '@utils/date';
 import { formatMemberName } from '@utils/string';
 
@@ -31,10 +32,12 @@ const Comment = ({
   isDeleted,
   isReply,
   onClickReply,
+  likes,
 }: Props) => {
   const { open } = useModal();
   const { commentDeleteMutate } = useCommentDeleteMutation();
   const { accusesMutate } = useAccusesMutation();
+  const { commentLikesMutate } = useCommentLikesMutation();
 
   const handleDeleteClick = (id: number) => {
     return open({
@@ -76,7 +79,11 @@ const Comment = ({
           <p className="font-semibold">
             {formatMemberName(writerName, writerId)}
           </p>
-          <ReactionButton className="flex items-center space-x-2">
+          <ReactionButton
+            className="flex items-center space-x-2"
+            countNumber={likes}
+            onClick={() => commentLikesMutate(id)}
+          >
             <ThumbUpOutline />
           </ReactionButton>
         </div>
