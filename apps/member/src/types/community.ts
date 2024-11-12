@@ -3,8 +3,8 @@ import type { RoleLevelType } from './member';
 export type CommunityCategoryType =
   | 'notice'
   | 'free'
-  | 'qna'
-  | 'graduated'
+  | 'development_qna'
+  | 'information_reviews'
   | 'news'
   | 'hire'
   | 'organization';
@@ -12,8 +12,8 @@ export type CommunityCategoryType =
 export type CommunityCategoryKorType =
   | '공지사항'
   | '자유'
-  | 'QnA'
-  | '졸업생'
+  | '개발 질문'
+  | '정보 및 후기'
   | 'IT 뉴스'
   | '채용 정보'
   | '소식';
@@ -74,6 +74,7 @@ export interface CommunityPostDetailItem extends CommunityPostItem {
   hasLikeByMe: boolean;
   files: [];
   imageUrl: string | null;
+  hashtag?: Array<string>;
 }
 
 export interface CommunityHireBoard
