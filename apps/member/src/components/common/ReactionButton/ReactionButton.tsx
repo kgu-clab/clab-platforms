@@ -4,18 +4,26 @@ interface ReactionButtonProps {
   children: React.ReactNode;
   onClick?: () => void;
   className?: string;
-  countNumber?: string;
+  countNumber?: number;
+  isPending?: boolean;
 }
 const ReactionButton = ({
   onClick,
   className,
   countNumber,
   children,
+  isPending,
 }: ReactionButtonProps) => {
   return (
-    <button onClick={onClick} className={cn('p-1', className)}>
+    <button
+      onClick={onClick}
+      className={cn('p-1', className)}
+      disabled={isPending}
+    >
       {children}
-      <p className="text-gray-600">{countNumber ? countNumber : 0}</p>
+      <p className="font-semibold text-gray-600">
+        {countNumber ? countNumber : 0}
+      </p>
     </button>
   );
 };

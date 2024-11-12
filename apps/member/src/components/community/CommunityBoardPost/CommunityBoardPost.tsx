@@ -1,11 +1,13 @@
 import { useState } from 'react';
 
 import { Button, Grid } from '@clab-platforms/design-system';
+import { toDecodeHTMLEntities } from '@clab-platforms/utils/src/string';
 
 import Image from '@components/common/Image/Image';
 import Post from '@components/common/Post/Post';
 import ReactionButton from '@components/common/ReactionButton/ReactionButton';
 
+import { useBoardEmojiMutation } from '@hooks/queries/board/useBoardEmojiMutation';
 import { createImageUrl } from '@utils/api';
 import { formatMemberName } from '@utils/string';
 
@@ -41,6 +43,8 @@ const ReactionEmoji = [
 const CommunityBoardPost = ({ data }: CommunityBoardPostProps) => {
   const [isEdit, setIsEdit] = useState(false);
 
+  const { boardEmojiMutate, isPending } = useBoardEmojiMutation();
+
   const handleIsEditClick = () => setIsEdit((prev) => !prev);
 
   if (isEdit) {
@@ -67,9 +71,20 @@ const CommunityBoardPost = ({ data }: CommunityBoardPostProps) => {
       )}
       <Post.Body className="min-h-60">{data.content}</Post.Body>
       <Post.Footer className="flex flex-col items-end">
-        <Grid gap="lg" col="4" className="item-center mx-auto">
+        <Grid gap="lg" col="4" className="mx-auto">
           {ReactionEmoji.map(({ name, value }) => (
-            <ReactionButton key={value}>
+            <ReactionButton
+              key={value}
+              onClick={() =>
+                boardEmojiMutate({ boardId: data.id, emoji: name })
+              }
+              isPending={isPending}
+              countNumber={
+                data.emojiInfos?.find(
+                  (emoji) => toDecodeHTMLEntities(emoji.emoji) === name,
+                )?.count
+              }
+            >
               <p className="text-3xl">{name}</p>
             </ReactionButton>
           ))}

@@ -66,6 +66,12 @@ export interface CommunityWriteItem {
   imageUrl?: string;
 }
 
+export interface CommunityPostEmojiItem {
+  emoji: string;
+  count: number;
+  isOwner: boolean;
+}
+
 export interface CommunityPostDetailItem extends CommunityPostItem {
   writerRoleLevel: RoleLevelType; // 익명일 경우 null
   writerImageUrl: string | null; // 기본 사진일 경우 null
@@ -74,6 +80,7 @@ export interface CommunityPostDetailItem extends CommunityPostItem {
   hasLikeByMe: boolean;
   files: [];
   imageUrl: string | null;
+  emojiInfos?: Array<CommunityPostEmojiItem>;
 }
 
 export interface CommunityHireBoard
