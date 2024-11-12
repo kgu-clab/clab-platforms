@@ -23,6 +23,11 @@ export interface PatchBoardsParams extends CommunityWriteItem {
   file?: File;
 }
 
+export interface PostBoardEmojiParams {
+  boardId: number;
+  emoji: string;
+}
+
 /**
  * 내가 작성한 커뮤니티 게시글 조회
  */
@@ -109,5 +114,14 @@ export async function patchBoards({ id, file, ...data }: PatchBoardsParams) {
 export function deleteBoards(id: number) {
   return server.del<never, BaseResponse<CommunityCategoryType>>({
     url: END_POINT.BOARDERS_ITEM(id),
+  });
+}
+
+/**
+ * 커뮤니티 게시글 반응
+ */
+export function postBoardsEmoji({ boardId, emoji }: PostBoardEmojiParams) {
+  return server.post<PostBoardEmojiParams, BaseResponse<string>>({
+    url: END_POINT.BOARDERS_EMOJI(boardId, emoji),
   });
 }
