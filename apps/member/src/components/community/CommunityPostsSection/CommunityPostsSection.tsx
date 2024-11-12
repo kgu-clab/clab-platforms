@@ -49,7 +49,7 @@ const CommunityPostsSection = ({
     <Section className="space-y-2">
       {title && <Section.Header title={title} />}
       <Section.Body className="flex flex-col gap-4 overflow-auto">
-        {type === 'qna' && (
+        {type === 'development_qna' && (
           <div className="flex">
             <Input
               placeholder="검색할 해시태그를 입력해주세요"
