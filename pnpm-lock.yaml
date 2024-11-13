@@ -144,6 +144,9 @@ importers:
       '@clab-platforms/utils':
         specifier: workspace:*
         version: link:../../packages/utils
+      '@tanstack/react-query':
+        specifier: ^5.59.20
+        version: 5.59.20(react@19.0.0-rc-ed15d500-20241110)
       next:
         specifier: 15.0.0-rc.1
         version: 15.0.0-rc.1(react-dom@19.0.0-rc-ed15d500-20241110(react@19.0.0-rc-ed15d500-20241110))(react@19.0.0-rc-ed15d500-20241110)
@@ -2699,6 +2702,9 @@ packages:
   '@tanstack/query-core@5.51.9':
     resolution: {integrity: sha512-HsAwaY5J19MD18ykZDS3aVVh+bAt0i7m6uQlFC2b77DLV9djo+xEN7MWQAQQTR8IM+7r/zbozTQ7P0xr0bHuew==}
 
+  '@tanstack/query-core@5.59.20':
+    resolution: {integrity: sha512-e8vw0lf7KwfGe1if4uPFhvZRWULqHjFcz3K8AebtieXvnMOz5FSzlZe3mTLlPuUBcydCnBRqYs2YJ5ys68wwLg==}
+
   '@tanstack/query-devtools@5.37.1':
     resolution: {integrity: sha512-XcG4IIHIv0YQKrexTqo2zogQWR1Sz672tX2KsfE9kzB+9zhx44vRKH5si4WDILE1PIWQpStFs/NnrDQrBAUQpg==}
 
@@ -2722,6 +2728,11 @@ packages:
     resolution: {integrity: sha512-F8j6i42wfKvFrRcxfOyFyYME+bPfNthAGOSkjdv4UwZZXJjnBnBs/yRQGT0bD23LVCTuBzlIfZ0GKSIyclZ9rQ==}
     peerDependencies:
       react: ^18.0.0
+
+  '@tanstack/react-query@5.59.20':
+    resolution: {integrity: sha512-Zly0egsK0tFdfSbh5/mapSa+Zfc3Et0Zkar7Wo5sQkFzWyB3p3uZWOHR2wrlAEEV2L953eLuDBtbgFvMYiLvUw==}
+    peerDependencies:
+      react: ^18 || ^19
 
   '@testing-library/dom@10.1.0':
     resolution: {integrity: sha512-wdsYKy5zupPyLCW2Je5DLHSxSfbIp6h80WoHOQc+RPtmPGA52O9x5MJEkv92Sjonpq+poOAtUKhh1kBGAXBrNA==}
@@ -10155,6 +10166,8 @@ snapshots:
 
   '@tanstack/query-core@5.51.9': {}
 
+  '@tanstack/query-core@5.59.20': {}
+
   '@tanstack/query-devtools@5.37.1': {}
 
   '@tanstack/react-query-devtools@5.45.1(@tanstack/react-query@5.51.23(react@18.2.0))(react@18.2.0)':
@@ -10183,6 +10196,11 @@ snapshots:
     dependencies:
       '@tanstack/query-core': 5.51.9
       react: 18.2.0
+
+  '@tanstack/react-query@5.59.20(react@19.0.0-rc-ed15d500-20241110)':
+    dependencies:
+      '@tanstack/query-core': 5.59.20
+      react: 19.0.0-rc-ed15d500-20241110
 
   '@testing-library/dom@10.1.0':
     dependencies:

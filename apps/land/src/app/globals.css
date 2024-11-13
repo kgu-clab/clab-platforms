@@ -24,4 +24,20 @@ body {
       rgb(var(--background-end-rgb))
     )
     rgb(var(--background-start-rgb));
+  font-family: 'NanumSquare', sans-serif;
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: 'NanumSquare';
+  src: url('/fonts/NanumSquareR.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'NanumSquare';
+  src: url('/fonts/NanumSquareB.ttf') format('truetype');
+  font-weight: bold;
+  font-style: normal;
 }
