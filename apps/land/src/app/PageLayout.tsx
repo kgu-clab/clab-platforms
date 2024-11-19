@@ -1,6 +1,6 @@
 import { cn } from '@clab-platforms/utils';
 
-import { Footer, Nav } from '@/widgets/menu/ui';
+import { Footer, Nav } from '@/components';
 
 interface PageProps {
   nav?: boolean;
@@ -18,7 +18,7 @@ export default function Page({
   return (
     <>
       {nav && <Nav />}
-      <div className={cn('m-auto mt-14 p-4', className)}>{children}</div>
+      <div className={cn('m-auto pt-12', className)}>{children}</div>
       {footer && <Footer />}
     </>
   );

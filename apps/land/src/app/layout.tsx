@@ -1,6 +1,6 @@
 import '@clab-platforms/design-system/dist/index.css';
 
-import { Providers } from '@/shared/utils';
+import { Providers } from '@/utils';
 import type { Metadata } from 'next';
 
 import './globals.css';

@@ -1,6 +1,6 @@
 'use client';
 
-import { GITHUB_URL } from '@/app/lib/constants';
+import { INFORMATION_URL } from '@/constants';
 import Image from 'next/image';
 
 export default function Footer() {
@@ -13,7 +13,7 @@ export default function Footer() {
           <p>© C-Lab. All rights reserved.</p>
         </ul>
       </div>
-      <a href={GITHUB_URL} target="_blank">
+      <a href={INFORMATION_URL.GITHUB} target="_blank">
         <Image
           src="/github-mark-white.svg"
           width={40}
