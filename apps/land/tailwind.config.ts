@@ -16,6 +16,7 @@ const config: Config = {
       },
       fontFamily: {
         'nanum-square': ['NanumSquare', 'sans-serif'],
+        'dung-geun-mo': ['DungGeunMo', 'sans-serif'],
       },
     },
     colors: {

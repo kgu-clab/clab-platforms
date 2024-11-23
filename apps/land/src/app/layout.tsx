@@ -3,6 +3,7 @@ import '@clab-platforms/design-system/dist/index.css';
 import { Providers } from '@/utils';
 import type { Metadata } from 'next';
 
+import './fonts.css';
 import './globals.css';
 
 export const metadata: Metadata = {
