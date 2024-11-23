@@ -8,7 +8,7 @@ import { useRouter } from 'next/navigation';
 
 import { TextSlider } from './components/TextSlider';
 
-export function Home() {
+export default function Home() {
   const router = useRouter();
 
   return (
@@ -33,5 +33,3 @@ export function Home() {
     </PageLayout>
   );
 }
-
-export default Home;
