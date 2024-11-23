@@ -21,7 +21,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko">
-      <body className="flex min-h-screen flex-col">
+      <body className="scrollbar-hide flex min-h-screen flex-col">
         <Providers>{children}</Providers>
       </body>
     </html>
