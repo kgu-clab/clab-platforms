@@ -1,8 +1,7 @@
-'use client';
-
 import { useEffect, useRef, useState } from 'react';
 
 import { Button } from '@clab-platforms/design-system';
+import { MenuOutline } from '@clab-platforms/icon';
 import { cn } from '@clab-platforms/utils';
 
 import { INFORMATION_URL, PATH } from '@/constants';
@@ -10,8 +9,11 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
+import Sidebar from './Sidebar';
+
 export default function Nav() {
   const [scrollingUp, setScrollingUp] = useState(true);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const pathname = usePathname();
   const beforeScrollY = useRef(0);
 
@@ -32,6 +34,10 @@ export default function Nav() {
     };
   }, []);
 
+  const handleSidebarOpen = () => {
+    setIsSidebarOpen((prev) => !prev);
+  };
+
   return (
     <nav
       className={cn(
@@ -41,9 +47,9 @@ export default function Nav() {
         },
       )}
     >
-      <div className="flex place-items-center justify-between px-20 py-2">
+      <div className="flex place-items-center justify-between px-8 py-2 md:px-20">
         <Image src="/favicon.ico" width={48} height={48} alt="C-Lab" />
-        <div className="space-x-8">
+        <div className="hidden space-x-8 md:block">
           <Link
             href="/application"
             className={cn('hover:underline', {
@@ -73,6 +79,13 @@ export default function Nav() {
             VISIT MEMBERS
           </Button>
         </div>
+        <MenuOutline
+          width={20}
+          height={20}
+          className="hover:cursor-pointer md:hidden"
+          onClick={handleSidebarOpen}
+        />
+        <Sidebar isOpen={isSidebarOpen} pathname={pathname} />
       </div>
     </nav>
   );
