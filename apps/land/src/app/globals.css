@@ -3,20 +3,17 @@
 @tailwind utilities;
 
 :root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
-}
+  --foreground-rgb: 255, 255, 255;
+  --background-start-rgb: 0, 0, 0;
+  --background-end-rgb: 0, 0, 0;
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
-}
-
-body {
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+  font-family: 'NanumSquare', sans-serif;
+  font-weight: normal;
+  font-size: 14px;
   color: rgb(var(--foreground-rgb));
   background: linear-gradient(
       to bottom,
@@ -24,20 +21,61 @@ body {
       rgb(var(--background-end-rgb))
     )
     rgb(var(--background-start-rgb));
-  font-family: 'NanumSquare', sans-serif;
-  font-weight: normal;
 }
 
-@font-face {
-  font-family: 'NanumSquare';
-  src: url('/fonts/NanumSquareR.ttf') format('truetype');
-  font-weight: normal;
-  font-style: normal;
+@media (min-width: 768px) {
+  :root {
+    font-size: 18px;
+  }
 }
 
-@font-face {
-  font-family: 'NanumSquare';
-  src: url('/fonts/NanumSquareB.ttf') format('truetype');
-  font-weight: bold;
-  font-style: normal;
+@layer utilities {
+  /* Hide scrollbar for Chrome, Safari, and Opera */
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Hide scrollbar for IE, Edge, and Firefox */
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    /* IE and Edge */
+    scrollbar-width: none;
+    /* Firefox */
+  }
+}
+
+.textLoopWrapper {
+  overflow: hidden;
+  width: 100%;
+  white-space: nowrap;
+}
+
+.textLoop {
+  display: inline-flex;
+}
+
+.textLoop > h1 {
+  margin-right: 4rem;
+  font-size: 20vh;
+}
+
+.textLoopLeft {
+  animation: slide 10s infinite linear;
+  --slide-end-offset: -50%;
+  --slide-start-offset: 0%;
+}
+
+.textLoopRight {
+  animation: slide 10s infinite linear;
+  --slide-end-offset: 0%;
+  --slide-start-offset: -50%;
+}
+
+@keyframes slide {
+  0% {
+    transform: translateX(var(--slide-start-offset, 0%));
+  }
+  100% {
+    transform: translateX(var(--slide-end-offset, 0%));
+  }
 }
