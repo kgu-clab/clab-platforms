@@ -1,5 +1,6 @@
 import { INFORMATION_URL } from '@/constants';
 import Image from 'next/image';
+import Link from 'next/link';
 
 export default function Footer() {
   return (
@@ -11,14 +12,14 @@ export default function Footer() {
           <p>© C-Lab. All rights reserved.</p>
         </ul>
       </div>
-      <a href={INFORMATION_URL.GITHUB} target="_blank">
+      <Link href={INFORMATION_URL.GITHUB} target="_blank">
         <Image
           src="/github-mark-white.svg"
           width={40}
           height={40}
           alt="C-Lab"
         />
-      </a>
+      </Link>
     </footer>
   );
 }
