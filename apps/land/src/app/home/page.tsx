@@ -1,16 +1,10 @@
-'use client';
-
-import { Button } from '@clab-platforms/design-system';
-
 import PageLayout from '@/app/PageLayout';
 import { KEYWORDS, PATH } from '@/constants';
-import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 
-import { TextSlider } from './components/TextSlider';
+import TextSlider from './components/TextSlider';
 
 export default function Home() {
-  const router = useRouter();
-
   return (
     <PageLayout nav footer className="h-screen w-full">
       <div className="flex size-full flex-col items-center justify-between overflow-hidden">
@@ -21,12 +15,12 @@ export default function Home() {
             <br />
             여기 C-Lab에서.
           </h1>
-          <Button
-            onClick={() => router.push(PATH.APPLICATION)}
-            className="bg-clab-yellow hover:text-clab-yellow border-clab-yellow mx-auto w-fit rounded-full px-8 py-2 text-xl"
+          <Link
+            href={PATH.APPLICATION}
+            className="bg-clab-yellow border-clab-yellow hover:text-clab-yellow mx-auto rounded-full border px-10 py-2 text-xl font-bold text-black hover:bg-opacity-0"
           >
             JOIN-US
-          </Button>
+          </Link>
         </div>
         <TextSlider keywords={[...KEYWORDS].reverse()} direction="left" />
       </div>
