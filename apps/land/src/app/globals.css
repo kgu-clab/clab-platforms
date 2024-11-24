@@ -54,7 +54,7 @@
   display: inline-flex;
 }
 
-.textLoop > h1 {
+.textLoop > p {
   margin-right: 4rem;
   font-size: 20vh;
 }

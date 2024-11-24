@@ -5,7 +5,7 @@ interface TextSliderProps {
   direction: string;
 }
 
-export const TextSlider = ({ keywords, direction }: TextSliderProps) => {
+export default function TextSlider({ keywords, direction }: TextSliderProps) {
   return (
     <div className="textLoopWrapper">
       <div
@@ -15,16 +15,14 @@ export const TextSlider = ({ keywords, direction }: TextSliderProps) => {
         )}
       >
         {keywords.map((keyword) => (
-          <h1
+          <p
             key={keyword}
             className="text-clab-yellow-gray font-dung-geun-mo text-9xl font-bold"
           >
             {keyword}
-          </h1>
+          </p>
         ))}
       </div>
     </div>
   );
-};
-
-export default TextSlider;
+}
