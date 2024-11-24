@@ -1,3 +1,5 @@
+'use client';
+
 import { Menubar } from '@clab-platforms/design-system';
 import { cn } from '@clab-platforms/utils';
 

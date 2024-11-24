@@ -1,6 +1,7 @@
+'use client';
+
 import { useEffect, useRef, useState } from 'react';
 
-import { Button } from '@clab-platforms/design-system';
 import { MenuOutline } from '@clab-platforms/icon';
 import { cn } from '@clab-platforms/utils';
 
@@ -52,7 +53,7 @@ export default function Nav() {
         <div className="hidden space-x-8 md:block">
           <Link
             href="/application"
-            className={cn('hover:underline', {
+            className={cn('underline-offset-8 hover:underline', {
               'font-bold': pathname === PATH.APPLICATION,
             })}
           >
@@ -60,24 +61,20 @@ export default function Nav() {
           </Link>
           <Link
             href="/ask"
-            className={cn('hover:underline', {
+            className={cn('underline-offset-8 hover:underline', {
               'font-bold': pathname === PATH.ASK,
             })}
           >
             문의
           </Link>
-          <Button
-            className="bg-clab-yellow border-clab-yellow text-clab-yellow rounded-full bg-opacity-30 px-4"
-            onClick={() =>
-              window.open(
-                INFORMATION_URL.MEMBERS,
-                '_blank',
-                'noopener noreferrer',
-              )
-            }
+          <a
+            className="bg-clab-yellow border-clab-yellow text-clab-yellow rounded-full border bg-opacity-30 px-4 py-2 text-sm hover:bg-opacity-0"
+            href={INFORMATION_URL.MEMBERS}
+            target="_blank"
+            rel="noopener noreferrer"
           >
             VISIT MEMBERS
-          </Button>
+          </a>
         </div>
         <MenuOutline
           width={20}
