@@ -79,3 +79,16 @@
     transform: translateX(var(--slide-end-offset, 0%));
   }
 }
+
+.scroll-fade {
+  opacity: 0;
+  transform: translateY(100px);
+  transition:
+    opacity 1s ease-out,
+    transform 1s ease-out;
+}
+
+.scroll-fade.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
