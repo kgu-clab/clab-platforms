@@ -18,7 +18,7 @@ export default function Page({
   return (
     <>
       {nav && <Nav />}
-      <div className={cn('m-auto pt-12', className)}>{children}</div>
+      <div className={cn('m-auto pt-8', className)}>{children}</div>
       {footer && <Footer />}
     </>
   );

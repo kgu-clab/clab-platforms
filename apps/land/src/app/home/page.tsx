@@ -1,4 +1,5 @@
 import PageLayout from '@/app/PageLayout';
+import { Section } from '@/components';
 import { KEYWORDS, PATH } from '@/constants';
 import Link from 'next/link';
 
@@ -6,8 +7,12 @@ import TextSlider from './components/TextSlider';
 
 export default function Home() {
   return (
-    <PageLayout nav footer className="h-screen w-full">
-      <div className="flex size-full flex-col items-center justify-between overflow-hidden">
+    <PageLayout
+      nav
+      footer
+      className="flex min-h-screen flex-col overflow-hidden"
+    >
+      <Section className="justify-between">
         <TextSlider keywords={KEYWORDS} direction="right" />
         <div className="flex flex-col space-y-4 text-center">
           <h1 className="text-4xl font-bold leading-normal md:text-6xl md:leading-normal">
@@ -23,7 +28,7 @@ export default function Home() {
           </Link>
         </div>
         <TextSlider keywords={[...KEYWORDS].reverse()} direction="left" />
-      </div>
+      </Section>
     </PageLayout>
   );
 }
