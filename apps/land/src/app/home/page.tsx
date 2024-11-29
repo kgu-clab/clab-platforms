@@ -4,9 +4,10 @@ import { cn } from '@clab-platforms/utils';
 
 import PageLayout from '@/app/PageLayout';
 import { Section } from '@/components';
-import { KEYWORDS, PATH } from '@/constants';
+import { KEYWORDS, PATH, VALUES } from '@/constants';
 import Link from 'next/link';
 
+import { ValueCircle } from './components';
 import TextSlider from './components/TextSlider';
 import { useScrollAnimation } from './hooks';
 
@@ -39,7 +40,7 @@ export default function Home() {
       <Section>
         <p
           className={cn(
-            'scroll-fade px-4 text-xl leading-normal md:px-72 md:text-3xl md:leading-normal',
+            'scroll-fade mx-4 whitespace-pre-wrap px-4 text-xl leading-loose md:px-72 md:text-3xl md:leading-normal',
             isVisible ? 'visible' : '',
           )}
         >
@@ -56,6 +57,28 @@ export default function Home() {
           <span className="text-clab-blue font-bold"> 30+</span>의 결과가 이를
           증명해요.
         </p>
+      </Section>
+      <Section className="items-start">
+        <div className="mb-24 flex flex-col space-y-2 pl-12 text-start md:pl-40">
+          <h2 className="text-4xl font-bold md:text-6xl">VALUE</h2>
+          <p className="text-xl md:text-3xl">
+            C-Lab에서 추구하는 <span className="text-clab-yellow">가치</span>를
+            소개해요.
+          </p>
+        </div>
+
+        <div className="flex size-full flex-wrap overflow-scroll px-12 md:px-64">
+          <div className="flex space-x-12">
+            {VALUES.map(({ keyword, description }) => (
+              <ValueCircle
+                key={keyword}
+                keyword={keyword}
+                description={description}
+                flipped={false}
+              />
+            ))}
+          </div>
+        </div>
       </Section>
     </PageLayout>
   );
