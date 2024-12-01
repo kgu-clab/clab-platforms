@@ -80,7 +80,7 @@
   }
 }
 
-.scroll-fade {
+.scroll-fade-info {
   opacity: 0;
   transform: translateY(100px);
   transition:
@@ -88,7 +88,20 @@
     transform 1s ease-out;
 }
 
-.scroll-fade.visible {
+.scroll-fade-info.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.scroll-fade-activity {
+  opacity: 0;
+  transform: translateY(100px);
+  transition:
+    opacity 1s ease-out,
+    transform 1s ease-out;
+}
+
+.scroll-fade-activity.visible {
   opacity: 1;
   transform: translateY(0);
 }
