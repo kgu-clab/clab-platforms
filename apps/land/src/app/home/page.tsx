@@ -7,12 +7,13 @@ import { Section } from '@/components';
 import { KEYWORDS, PATH, VALUES } from '@/constants';
 import Link from 'next/link';
 
-import { ValueCircle } from './components';
+import { ActivityCard, ValueCircle } from './components';
 import TextSlider from './components/TextSlider';
 import { useScrollAnimation } from './hooks';
 
 export default function Home() {
-  const isVisible = useScrollAnimation();
+  const isVisibleInfo = useScrollAnimation('scroll-fade-info');
+  const isVisibleActivity = useScrollAnimation('scroll-fade-activity');
 
   return (
     <PageLayout
@@ -40,8 +41,8 @@ export default function Home() {
       <Section>
         <p
           className={cn(
-            'scroll-fade mx-4 whitespace-pre-wrap px-4 text-xl leading-loose md:px-72 md:text-3xl md:leading-normal',
-            isVisible ? 'visible' : '',
+            'scroll-fade-info mx-4 whitespace-pre-wrap px-4 text-xl leading-loose md:text-3xl md:leading-normal lg:px-72',
+            isVisibleInfo ? 'visible' : '',
           )}
         >
           <span className="text-3xl font-bold md:text-5xl ">C-Lab</span>은
@@ -59,7 +60,7 @@ export default function Home() {
         </p>
       </Section>
       <Section className="items-start">
-        <div className="mb-24 flex flex-col space-y-2 pl-12 text-start md:pl-40">
+        <div className="mb-24 flex flex-col space-y-2 px-12 text-start md:pl-40">
           <h2 className="text-4xl font-bold md:text-6xl">VALUE</h2>
           <p className="text-xl md:text-3xl">
             C-Lab에서 추구하는 <span className="text-clab-yellow">가치</span>를
@@ -67,7 +68,7 @@ export default function Home() {
           </p>
         </div>
 
-        <div className="flex size-full flex-wrap overflow-scroll px-12 md:px-64">
+        <div className="flex size-full flex-wrap overflow-scroll p-12 md:px-64">
           <div className="flex space-x-12">
             {VALUES.map(({ keyword, description }) => (
               <ValueCircle
@@ -78,6 +79,50 @@ export default function Home() {
               />
             ))}
           </div>
+        </div>
+      </Section>
+      <Section>
+        <div className="mb-32 flex flex-col space-y-2 md:text-center lg:px-12">
+          <h2 className="text-4xl font-bold md:text-6xl">ACTIVITY</h2>
+          <p className="text-xl md:text-3xl">
+            다양한 도전과 노력들, 구성원들과
+            <span className="text-clab-yellow"> 교류</span>하며 성장해요.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 gap-16 px-12 md:grid-cols-2 md:gap-0 md:gap-x-20 lg:px-40">
+          <ActivityCard
+            title="스터디"
+            image="/clab_picture.jpeg"
+            className={cn(
+              isVisibleActivity ? 'visible' : '',
+              'scroll-fade-activity',
+            )}
+          />
+          <ActivityCard
+            title="프로젝트"
+            image="/clab_picture.jpeg"
+            className={cn(
+              isVisibleActivity ? 'visible' : '',
+              'scroll-fade-activity text-end md:mt-64',
+            )}
+          />
+          <ActivityCard
+            title="MT"
+            image="/clab_picture.jpeg"
+            className={cn(
+              isVisibleActivity ? 'visible' : '',
+              'scroll-fade-activity',
+            )}
+          />
+          <ActivityCard
+            title="네트워킹 데이"
+            image="/clab_picture.jpeg"
+            className={cn(
+              isVisibleActivity ? 'visible' : '',
+              'scroll-fade-activity text-end md:mt-64',
+            )}
+          />
         </div>
       </Section>
     </PageLayout>
