@@ -1,5 +1,6 @@
 'use client';
 
+import { CheckmarkSolid } from '@clab-platforms/icon';
 import { cn } from '@clab-platforms/utils';
 
 import PageLayout from '@/app/PageLayout';
@@ -123,6 +124,25 @@ export default function Home() {
               'scroll-fade-activity text-end md:mt-64',
             )}
           />
+        </div>
+      </Section>
+      <Section>
+        <div className="mb-24 flex flex-col space-y-2 md:text-center lg:px-12">
+          <h2 className="text-4xl font-bold md:text-6xl">SUPPORT</h2>
+          <p className="text-xl md:text-3xl">
+            구성원의 발전을 C-Lab이
+            <span className="text-clab-yellow"> 지원</span>해요.
+          </p>
+        </div>
+        <div className="space-y-10">
+          {SUPPORT.map((text, index) => (
+            <div key={index} className="flex space-x-4">
+              <CheckmarkSolid width={32} height={32} />
+              <p className="hover:text-clab-yellow text-2xl underline underline-offset-8 transition hover:scale-105">
+                {text}
+              </p>
+            </div>
+          ))}
         </div>
       </Section>
     </PageLayout>
