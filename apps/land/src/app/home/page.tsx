@@ -5,7 +5,7 @@ import { cn } from '@clab-platforms/utils';
 
 import PageLayout from '@/app/PageLayout';
 import { Section } from '@/components';
-import { KEYWORDS, PATH, VALUES } from '@/constants';
+import { KEYWORDS, PATH, SUPPORT, VALUES } from '@/constants';
 import Link from 'next/link';
 
 import { ActivityCard, ValueCircle } from './components';
@@ -69,7 +69,13 @@ export default function Home() {
           </p>
         </div>
 
-        <div className="flex size-full flex-wrap overflow-scroll p-12 md:px-64">
+        <div
+          className="flex size-full flex-wrap overflow-scroll overflow-y-hidden p-12 md:px-64"
+          style={{
+            scrollbarWidth: 'none',
+            msOverflowStyle: 'none',
+          }}
+        >
           <div className="flex space-x-12">
             {VALUES.map(({ keyword, description }) => (
               <ValueCircle
@@ -83,7 +89,7 @@ export default function Home() {
         </div>
       </Section>
       <Section>
-        <div className="mb-32 flex flex-col space-y-2 md:text-center lg:px-12">
+        <div className="mb-32 flex flex-col space-y-2 px-12 md:text-center">
           <h2 className="text-4xl font-bold md:text-6xl">ACTIVITY</h2>
           <p className="text-xl md:text-3xl">
             다양한 도전과 노력들, 구성원들과
@@ -91,7 +97,7 @@ export default function Home() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 gap-16 px-12 md:grid-cols-2 md:gap-0 md:gap-x-20 lg:px-40">
+        <div className="grid grid-cols-1 gap-16 overflow-hidden px-12 md:grid-cols-2 md:gap-0 md:gap-x-20 lg:px-40">
           <ActivityCard
             title="스터디"
             image="/clab_picture.jpeg"
@@ -127,23 +133,44 @@ export default function Home() {
         </div>
       </Section>
       <Section>
-        <div className="mb-24 flex flex-col space-y-2 md:text-center lg:px-12">
+        <div className="mb-24 flex flex-col space-y-2 md:text-center">
           <h2 className="text-4xl font-bold md:text-6xl">SUPPORT</h2>
           <p className="text-xl md:text-3xl">
             구성원의 발전을 C-Lab이
             <span className="text-clab-yellow"> 지원</span>해요.
           </p>
         </div>
-        <div className="space-y-10">
-          {SUPPORT.map((text, index) => (
-            <div key={index} className="flex space-x-4">
-              <CheckmarkSolid width={32} height={32} />
-              <p className="hover:text-clab-yellow text-2xl underline underline-offset-8 transition hover:scale-105">
-                {text}
-              </p>
+        <div className="w-2/3 space-y-8 md:w-1/3">
+          {SUPPORT.map(({ title, detail }, index) => (
+            <div key={index} className="group flex">
+              <CheckmarkSolid width={28} height={28} />
+              <div>
+                <p className="group-hover:text-clab-yellow ml-6 text-2xl transition group-hover:scale-105 group-hover:underline group-hover:underline-offset-8">
+                  {title}
+                </p>
+                <p className="h-0 translate-y-0 break-keep text-xl opacity-0 transition-all duration-500 ease-in-out group-hover:h-fit group-hover:translate-y-4 group-hover:opacity-100">
+                  {detail}
+                </p>
+              </div>
             </div>
           ))}
         </div>
+      </Section>
+      <Section className="text-center">
+        <p className="mb-4 text-4xl font-bold leading-normal md:text-6xl md:leading-normal">
+          C-Lab과 함께라면
+          <span className="text-clab-yellow"> 두려울 게 없는 여정</span>
+        </p>
+        <p className="text-clab-dark-yellow mb-12 text-center text-2xl font-bold leading-normal">
+          지금은 모집기간이 아니에요. <br />
+          3월, 새로운 시작과 함께 만나요!
+        </p>
+        <Link
+          href={PATH.APPLICATION}
+          className="bg-clab-yellow border-clab-yellow hover:text-clab-yellow mx-auto rounded-full border px-10 py-4 text-xl font-bold text-black hover:bg-opacity-0"
+        >
+          이전 모집글 확인하기
+        </Link>
       </Section>
     </PageLayout>
   );

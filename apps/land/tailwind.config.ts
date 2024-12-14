@@ -25,6 +25,7 @@ const config: Config = {
       'clab-gray': '#151515',
       'clab-yellow-gray': '#323024',
       'clab-light-blue': '#CBD4FF',
+      'clab-dark-yellow': '#938D65',
     },
   },
   plugins: [],
