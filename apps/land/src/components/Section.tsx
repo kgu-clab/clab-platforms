@@ -9,7 +9,7 @@ export default function Section({ children, className }: SectionProps) {
   return (
     <div
       className={cn(
-        'flex h-full min-h-screen w-screen flex-col items-center justify-center',
+        'max-w-screen flex h-full min-h-screen w-screen flex-col items-center justify-center overflow-x-hidden',
         className,
       )}
     >

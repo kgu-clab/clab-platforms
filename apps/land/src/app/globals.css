@@ -21,6 +21,7 @@
       rgb(var(--background-end-rgb))
     )
     rgb(var(--background-start-rgb));
+  overflow-x: hidden;
 }
 
 @media (min-width: 768px) {
