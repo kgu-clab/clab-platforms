@@ -25,7 +25,7 @@ export default function Home() {
       <Section className="justify-between">
         <TextSlider keywords={KEYWORDS} direction="right" />
         <div className="flex flex-col space-y-4 text-center">
-          <h1 className="text-4xl font-bold leading-normal md:text-6xl md:leading-normal">
+          <h1 className="px-16 text-4xl font-bold leading-normal md:text-6xl md:leading-normal">
             당신의 가치를 찾기 위한 여정
             <br />
             여기 C-Lab에서.
@@ -148,7 +148,7 @@ export default function Home() {
                 <p className="group-hover:text-clab-yellow ml-6 text-2xl transition group-hover:scale-105 group-hover:underline group-hover:underline-offset-8">
                   {title}
                 </p>
-                <p className="h-0 translate-y-0 break-keep text-xl opacity-0 transition-all duration-500 ease-in-out group-hover:h-fit group-hover:translate-y-4 group-hover:opacity-100">
+                <p className="h-0 translate-y-0 text-xl opacity-0 transition-all duration-500 ease-in-out group-hover:h-fit group-hover:translate-y-4 group-hover:opacity-100">
                   {detail}
                 </p>
               </div>
@@ -157,11 +157,11 @@ export default function Home() {
         </div>
       </Section>
       <Section className="text-center">
-        <p className="mb-4 text-4xl font-bold leading-normal md:text-6xl md:leading-normal">
+        <p className="mb-4 px-16 text-4xl font-bold leading-normal md:text-6xl md:leading-normal">
           C-Lab과 함께라면
           <span className="text-clab-yellow"> 두려울 게 없는 여정</span>
         </p>
-        <p className="text-clab-dark-yellow mb-12 text-center text-2xl font-bold leading-normal">
+        <p className="text-clab-dark-yellow mb-12 text-center text-xl font-bold leading-normal md:text-2xl">
           지금은 모집기간이 아니에요. <br />
           3월, 새로운 시작과 함께 만나요!
         </p>
