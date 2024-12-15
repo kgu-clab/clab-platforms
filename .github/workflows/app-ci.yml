@@ -1,4 +1,4 @@
-name: pnpm CI
+name: App CI
 
 env:
   HUSKY: 0
@@ -14,11 +14,11 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  quality-and-build:
+  Pipelines:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        command: ['lint', 'test', 'build']
+        command: [lint, test, build]
 
     steps:
       - name: Checkout
@@ -27,15 +27,15 @@ jobs:
       - name: Install pnpm
         uses: pnpm/action-setup@v3
         with:
-          version: 8
+          version: 9
           run_install: false
 
       - name: Install Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
-          cache: 'pnpm'
-          cache-dependency-path: 'pnpm-lock.yaml'
+          node-version: 20
+          cache: pnpm
+          cache-dependency-path: pnpm-lock.yaml
 
       - name: Install dependencies
         run: pnpm install
