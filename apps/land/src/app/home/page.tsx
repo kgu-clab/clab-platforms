@@ -1,5 +1,7 @@
 'use client';
 
+import { useCallback, useEffect, useRef, useState } from 'react';
+
 import {
   CheckmarkSolid,
   LeftArrowSolid,
@@ -19,7 +21,60 @@ import { useScrollAnimation } from './hooks';
 export default function Home() {
   const isVisibleInfo = useScrollAnimation('scroll-fade-info');
   const isVisibleActivity = useScrollAnimation('scroll-fade-activity');
+  const valueRef = useRef<HTMLDivElement | null>(null);
+  const [isValueScroll, setIsValueScroll] = useState(false);
   const [value, setValue] = useState(0);
+
+  const handleHorizontalScroll = useCallback(
+    (e: WheelEvent) => {
+      if (!isValueScroll || !valueRef.current || window.innerWidth < 768)
+        return;
+
+      const container = valueRef.current;
+      container.scrollLeft += e.deltaY;
+
+      e.preventDefault();
+
+      if (
+        container.scrollLeft + container.clientWidth >= container.scrollWidth ||
+        container.scrollLeft <= 0
+      ) {
+        setIsValueScroll(false);
+      }
+    },
+    [isValueScroll],
+  );
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsValueScroll(true);
+        } else {
+          setIsValueScroll(false);
+        }
+      },
+      { threshold: 0.7 },
+    );
+
+    if (valueRef.current) {
+      observer.observe(valueRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    if (isValueScroll) {
+      window.addEventListener('wheel', handleHorizontalScroll, {
+        passive: false,
+      });
+    } else {
+      window.removeEventListener('wheel', handleHorizontalScroll);
+    }
+
+    return () => window.removeEventListener('wheel', handleHorizontalScroll);
+  }, [isValueScroll]);
 
   return (
     <PageLayout
@@ -75,10 +130,12 @@ export default function Home() {
         </div>
 
         <div
-          className="flex size-full flex-wrap overflow-scroll overflow-y-hidden p-12 md:px-64"
+          ref={valueRef}
+          className="flex size-full flex-wrap justify-center md:justify-start md:overflow-scroll md:overflow-y-hidden md:p-12 md:px-64"
           style={{
             scrollbarWidth: 'none',
             msOverflowStyle: 'none',
+            whiteSpace: 'nowrap',
           }}
         >
           <div className="hidden space-x-12 md:flex">
