@@ -1,6 +1,10 @@
 'use client';
 
-import { CheckmarkSolid } from '@clab-platforms/icon';
+import {
+  CheckmarkSolid,
+  LeftArrowSolid,
+  RightArrowSolid,
+} from '@clab-platforms/icon';
 import { cn } from '@clab-platforms/utils';
 
 import PageLayout from '@/app/PageLayout';
@@ -15,6 +19,7 @@ import { useScrollAnimation } from './hooks';
 export default function Home() {
   const isVisibleInfo = useScrollAnimation('scroll-fade-info');
   const isVisibleActivity = useScrollAnimation('scroll-fade-activity');
+  const [value, setValue] = useState(0);
 
   return (
     <PageLayout
@@ -60,8 +65,8 @@ export default function Home() {
           증명해요.
         </p>
       </Section>
-      <Section className="items-start">
-        <div className="mb-24 flex flex-col space-y-2 px-12 text-start md:pl-40">
+      <Section className="mb-12 items-start">
+        <div className="mb-12 flex flex-col space-y-2 px-12 text-start md:mb-24 md:pl-40">
           <h2 className="text-4xl font-bold md:text-6xl">VALUE</h2>
           <p className="text-xl md:text-3xl">
             C-Lab에서 추구하는 <span className="text-clab-yellow">가치</span>를
@@ -76,15 +81,35 @@ export default function Home() {
             msOverflowStyle: 'none',
           }}
         >
-          <div className="flex space-x-12">
+          <div className="hidden space-x-12 md:flex">
             {VALUES.map(({ keyword, description }) => (
               <ValueCircle
                 key={keyword}
                 keyword={keyword}
                 description={description}
-                flipped={false}
               />
             ))}
+          </div>
+          <div className="flex items-center gap-8 p-2 pt-12 md:hidden">
+            <LeftArrowSolid
+              width={36}
+              height={36}
+              onClick={() =>
+                setValue(value > 0 ? value - 1 : VALUES.length - 1)
+              }
+            />
+            <ValueCircle
+              key={VALUES[value].keyword}
+              keyword={VALUES[value].keyword}
+              description={VALUES[value].description}
+            />
+            <RightArrowSolid
+              width={36}
+              height={36}
+              onClick={() =>
+                setValue(value < VALUES.length - 1 ? value + 1 : 0)
+              }
+            />
           </div>
         </div>
       </Section>
