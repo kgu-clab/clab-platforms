@@ -80,7 +80,7 @@ export default function Nav() {
               문의
             </Link>
             <Link
-              className="bg-clab-yellow border-clab-yellow text-clab-yellow rounded-full border bg-opacity-30 px-4 py-2 text-sm hover:bg-opacity-0"
+              className="bg-clab-yellow border-clab-yellow text-clab-yellow bg-opacity-/30 hover:bg-opacity-/0 rounded-full border px-4 py-2 text-sm"
               href={INFORMATION_URL.MEMBERS}
               target="_blank"
             >

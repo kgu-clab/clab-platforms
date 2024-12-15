@@ -74,7 +74,7 @@ export default function Home() {
     }
 
     return () => window.removeEventListener('wheel', handleHorizontalScroll);
-  }, [isValueScroll]);
+  }, [isValueScroll, handleHorizontalScroll]);
 
   return (
     <PageLayout
@@ -92,7 +92,7 @@ export default function Home() {
           </h1>
           <Link
             href={PATH.APPLICATION}
-            className="bg-clab-yellow border-clab-yellow hover:text-clab-yellow mx-auto rounded-full border px-10 py-2 text-xl font-bold text-black hover:bg-opacity-0"
+            className="bg-clab-yellow border-clab-yellow hover:text-clab-yellow hover:bg-opacity-/0 mx-auto rounded-full border px-10 py-2 text-xl font-bold text-black"
           >
             JOIN-US
           </Link>
@@ -251,7 +251,7 @@ export default function Home() {
           </p>
           <Link
             href={PATH.APPLICATION}
-            className="bg-clab-yellow border-clab-yellow hover:text-clab-yellow mx-auto rounded-full border px-10 py-4 text-xl font-bold text-black hover:bg-opacity-0"
+            className="bg-clab-yellow border-clab-yellow hover:text-clab-yellow hover:bg-opacity-/0 mx-auto rounded-full border px-10 py-4 text-xl font-bold text-black"
           >
             이전 모집글 확인하기
           </Link>
