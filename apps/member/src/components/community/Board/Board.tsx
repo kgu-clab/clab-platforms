@@ -25,27 +25,31 @@ const FreeBoard = () => {
 };
 FreeBoard.displayName = 'NoticeBoard';
 
-const QnABoard = () => {
-  const { data } = useBoardByCategory({ category: 'qna' });
-
-  return (
-    <BoardSectionItem title="QnA" to={PATH.COMMUNITY_QNA} data={data.items} />
-  );
-};
-QnABoard.displayName = 'QnABoard';
-
-const GraduatedBoard = () => {
-  const { data } = useBoardByCategory({ category: 'graduated' });
+const DevelopmentQnABoard = () => {
+  const { data } = useBoardByCategory({ category: 'development_qna' });
 
   return (
     <BoardSectionItem
-      title="졸업생"
-      to={PATH.COMMUNITY_GRADUATED}
+      title="개발 질문"
+      to={PATH.COMMUNITY_DEVELOPMENT_QNA}
       data={data.items}
     />
   );
 };
-GraduatedBoard.displayName = 'QnABoard';
+DevelopmentQnABoard.displayName = 'DevelopmentQnABoard';
+
+const InformationReviewsBoard = () => {
+  const { data } = useBoardByCategory({ category: 'information_reviews' });
+
+  return (
+    <BoardSectionItem
+      title="정보 및 후기"
+      to={PATH.COMMUNITY_INFORMATION_REVIEWS}
+      data={data.items}
+    />
+  );
+};
+InformationReviewsBoard.displayName = 'InformationReviewsBoard';
 
 const NewsBoard = () => {
   const { data } = useNews();
@@ -76,8 +80,8 @@ HireBoard.displayName = 'HireBoard';
 export {
   NoticeBoard,
   FreeBoard,
-  QnABoard,
-  GraduatedBoard,
+  DevelopmentQnABoard,
+  InformationReviewsBoard,
   NewsBoard,
   HireBoard,
 };

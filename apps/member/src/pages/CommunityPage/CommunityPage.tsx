@@ -4,12 +4,12 @@ import Content from '@components/common/Content/Content';
 import Header from '@components/common/Header/Header';
 import {
   BoardSkeleton,
+  DevelopmentQnABoard,
   FreeBoard,
-  GraduatedBoard,
   HireBoard,
+  InformationReviewsBoard,
   NewsBoard,
   NoticeBoard,
-  QnABoard,
 } from '@components/community/Board';
 import { BoardSection } from '@components/community/BoardSection';
 import {
@@ -34,10 +34,10 @@ const CommunityPage = () => {
           <FreeBoard />
         </Suspense>
         <Suspense fallback={<BoardSkeleton />}>
-          <QnABoard />
+          <DevelopmentQnABoard />
         </Suspense>
         <Suspense fallback={<BoardSkeleton />}>
-          <GraduatedBoard />
+          <InformationReviewsBoard />
         </Suspense>
         <Suspense fallback={<BoardSkeleton />}>
           <NewsBoard />

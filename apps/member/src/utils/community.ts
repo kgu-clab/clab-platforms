@@ -6,8 +6,8 @@ import type {
 const COMMUNITY_CATEGORY: CommunityCategoryType[] = [
   'notice',
   'free',
-  'qna',
-  'graduated',
+  'development_qna',
+  'information_reviews',
   'news',
   'hire',
   'organization',
@@ -19,8 +19,8 @@ const CATEGORY_MAP: Record<
 > = {
   notice: { title: '공지사항', emoji: '📢' },
   free: { title: '자유', emoji: '📝' },
-  qna: { title: 'QnA', emoji: '🤔' },
-  graduated: { title: '졸업생', emoji: '🎓' },
+  development_qna: { title: '개발 질문', emoji: '🤔' },
+  information_reviews: { title: '정보 및 후기', emoji: '🔎' },
   news: { title: 'IT 뉴스', emoji: '📰' },
   hire: { title: '채용 정보', emoji: '👔' },
   organization: { title: '소식', emoji: '🎉' },
