@@ -32,6 +32,7 @@ export const END_POINT = {
   BOARDERS_ITEM: (id: number) => `/v1/boards/${id}`,
   BOARDERS_EMOJI: (id: number, emoji: string) =>
     `/v1/boards/${id}/react/${emoji}`,
+  BOARDS_HOT: `/v1/boards/hot`,
   // -- 도서
   BOOK: `/v1/books`,
   BOOK_DETAIL: (id: number) => `/v1/books/${id}`,

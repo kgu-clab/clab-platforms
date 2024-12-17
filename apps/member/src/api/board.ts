@@ -125,3 +125,12 @@ export function postBoardsEmoji({ boardId, emoji }: PostBoardEmojiParams) {
     url: END_POINT.BOARDERS_EMOJI(boardId, emoji),
   });
 }
+
+/**
+ * 커뮤니티 인기 게시글 조회
+ */
+export function getBoardsHot(strategyName?: string) {
+  return server.get<BaseResponse<Array<CommunityPostItem>>>({
+    url: createPagination(END_POINT.BOARDS_HOT, { strategyName }),
+  });
+}
