@@ -69,38 +69,21 @@ const CommunityPostsSection = ({
               </Table.Cell>
             </Table.Row>
           ) : (
-            <>
-              {!currentId &&
-                // 인기 게시물 상위 3개
-                data.items
-                  .slice(0, 3)
-                  .map(({ id, title, commentCount, writerName, createdAt }) => (
-                    <CommunityPostsItem
-                      key={id}
-                      id={id}
-                      title={title}
-                      commentCount={commentCount}
-                      writerName={writerName}
-                      createdAt={createdAt}
-                      onClick={() => handleBoardClick(id)}
-                    />
-                  ))}
-              {data.items.map(
-                ({ id, title, commentCount, writerName, createdAt }, index) => (
-                  <CommunityPostsItem
-                    key={id}
-                    id={id}
-                    title={title}
-                    commentCount={commentCount}
-                    writerName={writerName}
-                    createdAt={createdAt}
-                    onClick={() => handleBoardClick(id)}
-                    index={data.totalItems - (index + page * size)}
-                    currentId={currentId}
-                  />
-                ),
-              )}
-            </>
+            data.items.map(
+              ({ id, title, commentCount, writerName, createdAt }, index) => (
+                <CommunityPostsItem
+                  key={id}
+                  id={id}
+                  title={title}
+                  commentCount={commentCount}
+                  writerName={writerName}
+                  createdAt={createdAt}
+                  onClick={() => handleBoardClick(id)}
+                  index={data.totalItems - (index + page * size)}
+                  currentId={currentId}
+                />
+              ),
+            )
           )}
         </Table>
         <Pagination

@@ -1,5 +1,6 @@
 import { PATH } from '@constants/path';
 import { useBoardByCategory, useHire, useNews } from '@hooks/queries';
+import { useBoardByHot } from '@hooks/queries/board/useBoardByHot';
 
 import { BoardSectionItem } from '../BoardSection';
 
@@ -77,6 +78,13 @@ const HireBoard = () => {
 };
 HireBoard.displayName = 'HireBoard';
 
+const HotBoard = () => {
+  const { data } = useBoardByHot();
+
+  return <BoardSectionItem title="HOT" data={data.data} />;
+};
+HotBoard.displayName = 'HotBoard';
+
 export {
   NoticeBoard,
   FreeBoard,
@@ -84,4 +92,5 @@ export {
   InformationReviewsBoard,
   NewsBoard,
   HireBoard,
+  HotBoard,
 };
