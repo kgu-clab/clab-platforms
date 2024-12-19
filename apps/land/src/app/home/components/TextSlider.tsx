@@ -7,17 +7,17 @@ interface TextSliderProps {
 
 export default function TextSlider({ keywords, direction }: TextSliderProps) {
   return (
-    <div className="textLoopWrapper">
+    <div className="w-full overflow-hidden whitespace-nowrap">
       <div
         className={cn(
-          'textLoop',
+          'inline-flex',
           direction === 'left' ? 'textLoopLeft' : 'textLoopRight',
         )}
       >
         {keywords.map((keyword) => (
           <p
             key={keyword}
-            className="text-clab-yellow-gray font-dung-geun-mo text-9xl font-bold"
+            className="text-clab-yellow-gray font-dung-geun-mo mr-16 text-[20vh] font-bold"
           >
             {keyword}
           </p>

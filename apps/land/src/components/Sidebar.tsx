@@ -15,40 +15,22 @@ export default function Sidebar({ isOpen, pathname }: SidebarProps) {
   return (
     <aside
       className={cn(
-        'bg-clab-yellow-gray fixed inset-y-0 right-0 top-0 mt-16 h-screen w-1/3 p-6 transition-transform duration-300 ease-in-out md:hidden',
-        isOpen ? 'z-20 translate-x-0' : 'translate-x-full',
+        'bg-clab-gray fixed inset-y-0 top-0 h-fit w-screen p-10 pt-24 transition-transform duration-300 ease-in-out md:hidden',
+        isOpen ? 'z-20 translate-y-0' : '-translate-y-full',
       )}
     >
-      <Menubar className="flex flex-col text-start" gap="lg">
-        <Menubar.Item>
-          <Link
-            href={PATH.HOME}
-            className={cn('hover:underline', {
-              'font-bold': pathname === PATH.HOME,
-            })}
-          >
-            홈
-          </Link>
+      <Menubar className="flex flex-col text-start text-white" gap="lg">
+        <Menubar.Item className="text-white" selected={pathname === PATH.HOME}>
+          <Link href={PATH.HOME}>홈</Link>
         </Menubar.Item>
-        <Menubar.Item>
-          <Link
-            href={PATH.APPLICATION}
-            className={cn('hover:underline', {
-              'font-bold': pathname === PATH.APPLICATION,
-            })}
-          >
-            지원
-          </Link>
+        <Menubar.Item
+          className="text-white"
+          selected={pathname === PATH.APPLICATION}
+        >
+          <Link href={PATH.APPLICATION}>지원</Link>
         </Menubar.Item>
-        <Menubar.Item>
-          <Link
-            href={PATH.ASK}
-            className={cn('hover:underline', {
-              'font-bold': pathname === PATH.ASK,
-            })}
-          >
-            문의
-          </Link>
+        <Menubar.Item className="text-white" selected={pathname === PATH.ASK}>
+          <Link href={PATH.ASK}>문의</Link>
         </Menubar.Item>
       </Menubar>
     </aside>

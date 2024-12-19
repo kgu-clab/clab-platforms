@@ -19,7 +19,8 @@ export const VALUES: Values = [
   },
   {
     keyword: 'HARMONY',
-    description: '',
+    description:
+      '서로 다른 색을 가진 동아리 구성원들이 어울리며, 시너지를 만들어요.',
   },
   {
     keyword: 'CONNECT',
