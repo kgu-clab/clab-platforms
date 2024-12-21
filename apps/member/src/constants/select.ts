@@ -50,8 +50,12 @@ export const SELECT_OPTIONS_COMMUNITY_TYPE: Options<
     value: 'free',
   },
   {
-    name: 'QnA',
-    value: 'qna',
+    name: '개발 질문',
+    value: 'development_qna',
+  },
+  {
+    name: '정보 및 후기',
+    value: 'information_reviews',
   },
 ] as const;
 

@@ -38,8 +38,8 @@ export function useBoardByCategory({
   const queryFn: queryFn = {
     notice: () => getBoardsList('notice', page, size),
     free: () => getBoardsList('free', page, size),
-    qna: () => getBoardsList('qna', page, size),
-    graduated: () => getBoardsList('graduated', page, size),
+    development_qna: () => getBoardsList('development_qna', page, size),
+    information_reviews: () => getBoardsList('information_reviews', page, size),
     organization: () => getBoardsList('organization', page, size),
     news: () => getNews(page, size),
     hire: () => getMyHire(page, size),

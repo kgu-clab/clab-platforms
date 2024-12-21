@@ -11,6 +11,7 @@ interface SectionProps extends StrictPropsWithChildren {
 interface SectionHeaderProps extends PropsWithChildren {
   title: string;
   description?: string;
+  className?: string;
 }
 
 interface SectionBodyProps extends StrictPropsWithChildren {
@@ -25,13 +26,18 @@ const Section = ({ className, children }: SectionProps) => {
   );
 };
 
-const Header = ({ children, title, description }: SectionHeaderProps) => {
+const Header = ({
+  children,
+  title,
+  description,
+  className,
+}: SectionHeaderProps) => {
   const id = useId();
 
   return (
     <div className="flex items-center justify-between">
       <div>
-        <h2 id={id} className="text-xl font-bold text-black">
+        <h2 id={id} className={cn('text-xl font-bold text-black', className)}>
           {title}
         </h2>
         <p className="text-sm font-semibold text-gray-500">{description}</p>

@@ -21,3 +21,9 @@ export interface CommentListItem extends CommentItem {
   isOwner: boolean;
   isDeleted: boolean;
 }
+
+export interface CommentLikeItem {
+  boardId: number;
+  likes: number;
+  isDeleted: boolean;
+}

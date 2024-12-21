@@ -1,10 +1,13 @@
 import { useState } from 'react';
 
-import { Button } from '@clab-platforms/design-system';
+import { Button, Grid } from '@clab-platforms/design-system';
+import { toDecodeHTMLEntities } from '@clab-platforms/utils/src/string';
 
 import Image from '@components/common/Image/Image';
 import Post from '@components/common/Post/Post';
+import ReactionButton from '@components/common/ReactionButton/ReactionButton';
 
+import { useBoardEmojiMutation } from '@hooks/queries/board/useBoardEmojiMutation';
 import { createImageUrl } from '@utils/api';
 import { formatMemberName } from '@utils/string';
 
@@ -18,8 +21,29 @@ interface CommunityBoardPostProps {
   data: CommunityPostDetailItem;
 }
 
+const ReactionEmoji = [
+  {
+    name: '👍',
+    value: 'good',
+  },
+  {
+    name: '👎',
+    value: 'bad',
+  },
+  {
+    name: '🚀',
+    value: 'rocket',
+  },
+  {
+    name: '👀',
+    value: 'eyes',
+  },
+];
+
 const CommunityBoardPost = ({ data }: CommunityBoardPostProps) => {
   const [isEdit, setIsEdit] = useState(false);
+
+  const { boardEmojiMutate, isPending } = useBoardEmojiMutation();
 
   const handleIsEditClick = () => setIsEdit((prev) => !prev);
 
@@ -41,25 +65,45 @@ const CommunityBoardPost = ({ data }: CommunityBoardPostProps) => {
         <Image
           height="min-h-[300px]"
           alt="thumbnail"
-          className=" object-cover"
+          className="object-cover"
           src={createImageUrl(data.imageUrl)}
         />
       )}
       <Post.Body className="min-h-60">{data.content}</Post.Body>
-      <Post.Footer>
-        {data.isOwner ? (
-          // 작성자인 경우 삭제 버튼을 보여준다.
-          <CommunityDeleteButton id={data.id} />
-        ) : (
-          // 작성자가 아닌 경우 신고 버튼을 보여준다.
-          <CommunityReportButton id={data.id} />
-        )}
-        {data.isOwner && (
-          // 작성자인 경우 수정 버튼을 보여준다.
-          <Button size="sm" onClick={handleIsEditClick}>
-            수정
-          </Button>
-        )}
+      <Post.Footer className="flex flex-col items-end">
+        <Grid gap="lg" col="4" className="mx-auto">
+          {ReactionEmoji.map(({ name, value }) => (
+            <ReactionButton
+              key={value}
+              onClick={() =>
+                boardEmojiMutate({ boardId: data.id, emoji: name })
+              }
+              isPending={isPending}
+              countNumber={
+                data.emojiInfos?.find(
+                  (emoji) => toDecodeHTMLEntities(emoji.emoji) === name,
+                )?.count
+              }
+            >
+              <p className="text-3xl">{name}</p>
+            </ReactionButton>
+          ))}
+        </Grid>
+        <div>
+          {data.isOwner ? (
+            // 작성자인 경우 삭제 버튼을 보여준다.
+            <CommunityDeleteButton id={data.id} />
+          ) : (
+            // 작성자가 아닌 경우 신고 버튼을 보여준다.
+            <CommunityReportButton id={data.id} />
+          )}
+          {data.isOwner && (
+            // 작성자인 경우 수정 버튼을 보여준다.
+            <Button size="sm" onClick={handleIsEditClick}>
+              수정
+            </Button>
+          )}
+        </div>
       </Post.Footer>
     </Post>
   );
