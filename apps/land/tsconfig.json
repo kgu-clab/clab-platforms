@@ -8,8 +8,9 @@
       "@hooks/*": ["./app/hooks/*"],
       "@store/*": ["./app/store/*"],
       "@type/*": ["./app/types/*"],
-      "@/*": ["./*"]
-    }
+      "@/*": ["./src/*"]
+    },
+    "target": "ES2017"
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"]
 }
