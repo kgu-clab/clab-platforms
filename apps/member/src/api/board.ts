@@ -8,6 +8,7 @@ import type {
   CommunityCategoryType,
   CommunityPostDetailItem,
   CommunityPostItem,
+  CommunityReactionItem,
   CommunityWriteItem,
 } from '@type/community';
 
@@ -121,9 +122,11 @@ export function deleteBoards(id: number) {
  * 커뮤니티 게시글 반응
  */
 export function postBoardsEmoji({ boardId, emoji }: PostBoardEmojiParams) {
-  return server.post<PostBoardEmojiParams, BaseResponse<string>>({
-    url: END_POINT.BOARDERS_EMOJI(boardId, emoji),
-  });
+  return server.post<PostBoardEmojiParams, BaseResponse<CommunityReactionItem>>(
+    {
+      url: END_POINT.BOARDERS_EMOJI(boardId, emoji),
+    },
+  );
 }
 
 /**

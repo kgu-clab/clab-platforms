@@ -1,7 +1,7 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 import { postBoardsEmoji } from '@api/board';
-import { BOARD_QUERY_KEY } from '@constants/key';
+import { BOARD_QUERY_KEY, ORGANIZATION_QUERY_KEY } from '@constants/key';
 import useToast from '@hooks/common/useToast';
 
 export const useBoardEmojiMutation = () => {
@@ -12,12 +12,16 @@ export const useBoardEmojiMutation = () => {
     mutationFn: postBoardsEmoji,
     onSuccess: ({ success, data }) => {
       if (success) {
-        queryClient.invalidateQueries({
-          queryKey: BOARD_QUERY_KEY.DETAIL(Number(data)),
-        });
+        const queryKey =
+          data.category === 'organization'
+            ? ORGANIZATION_QUERY_KEY.DETAIL(data.boardId)
+            : BOARD_QUERY_KEY.DETAIL(data.boardId);
+        queryClient.invalidateQueries({ queryKey });
+
+        const message = `게시물에 ${data.emoji}를 ${data.isDeleted ? '취소' : '추가'}했어요.`;
         toast({
           state: 'success',
-          message: '게시물에 반응을 추가했어요.',
+          message: message,
         });
       } else {
         toast({

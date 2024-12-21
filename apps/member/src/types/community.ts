@@ -100,3 +100,10 @@ export interface CommunityNewsBoard extends CommunityPostItem {
   content: string;
   files: string[];
 }
+
+export interface CommunityReactionItem {
+  boardId: number;
+  category: CommunityCategoryType;
+  emoji: string;
+  isDeleted: boolean;
+}
