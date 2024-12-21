@@ -1,6 +1,7 @@
 /* eslint-disable no-undef */
+
 /* eslint-disable @typescript-eslint/no-var-requires */
-const path = require('path');
+import path from 'path';
 
 /** @type {import('tailwindcss').Config} */
 export default {
