@@ -10,14 +10,16 @@ export const useCommentLikesMutation = () => {
 
   const mutation = useMutation({
     mutationFn: postCommentLikes,
-    onSuccess: ({ success, data: boardId, errorMessage }) => {
+    onSuccess: ({ success, data, errorMessage }) => {
       if (success) {
         queryClient.invalidateQueries({
-          queryKey: COMMENT_QUERY_KEY.DETAIL(boardId),
+          queryKey: COMMENT_QUERY_KEY.DETAIL(data.boardId),
         });
+
+        const message = `댓글에 좋아요를 ${data.isDeleted ? '취소' : '추가'}했어요.`;
         toast({
           state: 'success',
-          message: '좋아요를 눌렀어요.',
+          message: message,
         });
       } else if (errorMessage) {
         toast({
