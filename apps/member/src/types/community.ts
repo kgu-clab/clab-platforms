@@ -103,7 +103,7 @@ export interface CommunityNewsBoard extends CommunityPostItem {
 
 export interface CommunityReactionItem {
   boardId: number;
-  category: CommunityCategoryType;
+  category?: CommunityCategoryType;
   emoji: string;
   isDeleted: boolean;
 }

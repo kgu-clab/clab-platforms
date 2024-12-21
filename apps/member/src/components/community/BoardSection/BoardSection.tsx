@@ -33,10 +33,18 @@ const BoardSection = ({ children }: StrictPropsWithChildren) => {
 BoardSection.displayName = 'BoardSection';
 
 const BoardSectionItem = ({ title, to, data }: BoardSectionItemProps) => {
+  const isCommunityPostItem = (
+    item: CommunityPostItem | CommunityHireBoard | CommunityNewsBoard,
+  ): item is CommunityPostItem => {
+    return (item as CommunityPostItem).category !== undefined;
+  };
+
   const handleURL = (id: number, index: number, to?: string) => {
+    const item = data[index];
+
     if (to) return createURL(to, id);
-    else if ('category' in data[index])
-      return createURL(PATH_FINDER.COMMUNITY_DETAIL(data[index].category), id);
+    else if (isCommunityPostItem(item))
+      return createURL(PATH_FINDER.COMMUNITY_DETAIL(item.category), id);
   };
 
   return (
