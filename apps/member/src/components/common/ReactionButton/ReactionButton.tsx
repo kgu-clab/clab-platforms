@@ -21,9 +21,7 @@ const ReactionButton = ({
       disabled={isPending}
     >
       {children}
-      <p className="font-semibold text-gray-600">
-        {countNumber ? countNumber : 0}
-      </p>
+      <p className="font-semibold text-gray-600">{countNumber ?? 0}</p>
     </button>
   );
 };

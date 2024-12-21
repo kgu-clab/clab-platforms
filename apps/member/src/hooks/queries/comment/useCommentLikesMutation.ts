@@ -30,5 +30,5 @@ export const useCommentLikesMutation = () => {
     },
   });
 
-  return { commentLikesMutate: mutation.mutate };
+  return { commentLikesMutate: mutation.mutate, isPending: mutation.isPending };
 };

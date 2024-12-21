@@ -37,7 +37,7 @@ const Comment = ({
   const { open } = useModal();
   const { commentDeleteMutate } = useCommentDeleteMutation();
   const { accusesMutate } = useAccusesMutation();
-  const { commentLikesMutate } = useCommentLikesMutation();
+  const { commentLikesMutate, isPending } = useCommentLikesMutation();
 
   const handleDeleteClick = (id: number) => {
     return open({
@@ -83,6 +83,7 @@ const Comment = ({
             className="flex items-center space-x-2"
             countNumber={likes}
             onClick={() => commentLikesMutate(id)}
+            isPending={isPending}
           >
             <ThumbUpOutline />
           </ReactionButton>
