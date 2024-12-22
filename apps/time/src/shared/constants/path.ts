@@ -7,6 +7,7 @@ export const PATH = {
   GRADUATION: '/graduation',
   FESTIVAL: '/festival',
   FOOD: '/food',
+  SUGANG: '/sugang',
   GUIDE: '/guide',
   MY: '/my',
   TERMS: '/terms',
