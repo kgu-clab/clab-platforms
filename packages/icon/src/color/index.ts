@@ -22,3 +22,4 @@ export { default as SurveyColor } from './react/Survey';
 export { default as TemplateColor } from './react/Template';
 export { default as TimelineColor } from './react/Timeline';
 export { default as ViewDetailsColor } from './react/ViewDetails';
+export { default as KguLogo } from './react/KguLogo';
