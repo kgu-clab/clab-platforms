@@ -83,7 +83,7 @@ const Comment = ({
             className="flex items-center space-x-2"
             countNumber={likes}
             onClick={() => commentLikesMutate(id)}
-            isPending={isPending}
+            disabled={isPending}
           >
             <ThumbUpOutline />
           </ReactionButton>

@@ -1,25 +1,19 @@
 import { cn } from '@clab-platforms/utils';
 
-interface ReactionButtonProps {
+interface ReactionButtonProps
+  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children: React.ReactNode;
-  onClick?: () => void;
   className?: string;
   countNumber?: number;
-  isPending?: boolean;
 }
 const ReactionButton = ({
-  onClick,
-  className,
   countNumber,
   children,
-  isPending,
+  className,
+  ...props
 }: ReactionButtonProps) => {
   return (
-    <button
-      onClick={onClick}
-      className={cn('p-1', className)}
-      disabled={isPending}
-    >
+    <button className={cn('p-1', className)} {...props}>
       {children}
       <p className="font-semibold text-gray-600">{countNumber ?? 0}</p>
     </button>
