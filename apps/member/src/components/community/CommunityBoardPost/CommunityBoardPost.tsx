@@ -21,7 +21,7 @@ interface CommunityBoardPostProps {
   data: CommunityPostDetailItem;
 }
 
-const ReactionEmoji = [
+const EMOJI = [
   {
     name: '👍',
     value: 'good',
@@ -38,7 +38,7 @@ const ReactionEmoji = [
     name: '👀',
     value: 'eyes',
   },
-];
+] as const;
 
 const CommunityBoardPost = ({ data }: CommunityBoardPostProps) => {
   const [isEdit, setIsEdit] = useState(false);
@@ -51,6 +51,10 @@ const CommunityBoardPost = ({ data }: CommunityBoardPostProps) => {
     // 수정 모드인 경우
     return <CommunityBoardForm data={data} onClose={handleIsEditClick} />;
   }
+
+  const handleReactionButtonClick = (boardId: number, emoji: string) => {
+    return boardEmojiMutate({ boardId, emoji });
+  };
 
   return (
     <Post>
@@ -72,22 +76,23 @@ const CommunityBoardPost = ({ data }: CommunityBoardPostProps) => {
       <Post.Body className="min-h-60">{data.content}</Post.Body>
       <Post.Footer className="flex flex-col items-end">
         <Grid gap="lg" col="4" className="mx-auto">
-          {ReactionEmoji.map(({ name, value }) => (
-            <ReactionButton
-              key={value}
-              onClick={() =>
-                boardEmojiMutate({ boardId: data.id, emoji: name })
-              }
-              isPending={isPending}
-              countNumber={
-                data.emojiInfos?.find(
-                  (emoji) => toDecodeHTMLEntities(emoji.emoji) === name,
-                )?.count
-              }
-            >
-              <p className="text-3xl">{name}</p>
-            </ReactionButton>
-          ))}
+          {EMOJI.map(({ name, value }) => {
+            const countNumber =
+              data.emojiInfos?.find(
+                (emoji) => toDecodeHTMLEntities(emoji.emoji) === name,
+              )?.count ?? 0;
+
+            return (
+              <ReactionButton
+                key={value}
+                onClick={() => handleReactionButtonClick(data.id, name)}
+                disabled={isPending}
+                countNumber={countNumber}
+              >
+                <p className="text-3xl">{name}</p>
+              </ReactionButton>
+            );
+          })}
         </Grid>
         <div>
           {data.isOwner ? (
