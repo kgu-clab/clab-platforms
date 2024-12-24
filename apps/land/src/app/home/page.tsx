@@ -4,7 +4,9 @@ import {
   ActivitySection,
   DescriptionSection,
   HeroSection,
+  PartSection,
   RecruitmentSection,
+  ReviewSection,
   SupportSection,
   ValueSection,
 } from './sections';
@@ -19,7 +21,9 @@ export default function Home() {
       <HeroSection />
       <DescriptionSection />
       <ValueSection />
+      <PartSection />
       <ActivitySection />
+      <ReviewSection />
       <SupportSection />
       <RecruitmentSection />
     </PageLayout>
