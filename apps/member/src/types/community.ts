@@ -3,8 +3,8 @@ import type { RoleLevelType } from './member';
 export type CommunityCategoryType =
   | 'notice'
   | 'free'
-  | 'qna'
-  | 'graduated'
+  | 'development_qna'
+  | 'information_reviews'
   | 'news'
   | 'hire'
   | 'organization';
@@ -12,8 +12,8 @@ export type CommunityCategoryType =
 export type CommunityCategoryKorType =
   | '공지사항'
   | '자유'
-  | 'QnA'
-  | '졸업생'
+  | '개발 질문'
+  | '정보 및 후기'
   | 'IT 뉴스'
   | '채용 정보'
   | '소식';
@@ -66,6 +66,12 @@ export interface CommunityWriteItem {
   imageUrl?: string;
 }
 
+export interface CommunityPostEmojiItem {
+  emoji: string;
+  count: number;
+  isOwner: boolean;
+}
+
 export interface CommunityPostDetailItem extends CommunityPostItem {
   writerRoleLevel: RoleLevelType; // 익명일 경우 null
   writerImageUrl: string | null; // 기본 사진일 경우 null
@@ -74,6 +80,8 @@ export interface CommunityPostDetailItem extends CommunityPostItem {
   hasLikeByMe: boolean;
   files: [];
   imageUrl: string | null;
+  emojiInfos?: Array<CommunityPostEmojiItem>;
+  hashtag?: Array<string>;
 }
 
 export interface CommunityHireBoard
@@ -91,4 +99,11 @@ export interface CommunityNewsBoard extends CommunityPostItem {
   source: string;
   content: string;
   files: string[];
+}
+
+export interface CommunityReactionItem {
+  boardId: number;
+  category?: CommunityCategoryType;
+  emoji: string;
+  isDeleted: boolean;
 }

@@ -8,6 +8,7 @@ import type {
   CommunityCategoryType,
   CommunityPostDetailItem,
   CommunityPostItem,
+  CommunityReactionItem,
   CommunityWriteItem,
 } from '@type/community';
 
@@ -21,6 +22,11 @@ export interface PostBoardsWriteParams extends CommunityWriteItem {
 export interface PatchBoardsParams extends CommunityWriteItem {
   id: number;
   file?: File;
+}
+
+export interface PostBoardEmojiParams {
+  boardId: number;
+  emoji: string;
 }
 
 /**
@@ -109,5 +115,25 @@ export async function patchBoards({ id, file, ...data }: PatchBoardsParams) {
 export function deleteBoards(id: number) {
   return server.del<never, BaseResponse<CommunityCategoryType>>({
     url: END_POINT.BOARDERS_ITEM(id),
+  });
+}
+
+/**
+ * 커뮤니티 게시글 반응
+ */
+export function postBoardsEmoji({ boardId, emoji }: PostBoardEmojiParams) {
+  return server.post<PostBoardEmojiParams, BaseResponse<CommunityReactionItem>>(
+    {
+      url: END_POINT.BOARDERS_EMOJI(boardId, emoji),
+    },
+  );
+}
+
+/**
+ * 커뮤니티 인기 게시글 조회
+ */
+export function getBoardsHot(strategyName?: string) {
+  return server.get<BaseResponse<Array<CommunityPostItem>>>({
+    url: createPagination(END_POINT.BOARDS_HOT, { strategyName }),
   });
 }

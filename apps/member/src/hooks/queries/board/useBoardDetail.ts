@@ -34,11 +34,11 @@ export const useBoardDetail = (category: CommunityCategoryType, id: number) => {
       queryKey: BOARD_QUERY_KEY.DETAIL(id),
       queryFn: () => getBoardsDetail(id),
     },
-    qna: {
+    development_qna: {
       queryKey: BOARD_QUERY_KEY.DETAIL(id),
       queryFn: () => getBoardsDetail(id),
     },
-    graduated: {
+    information_reviews: {
       queryKey: BOARD_QUERY_KEY.DETAIL(id),
       queryFn: () => getBoardsDetail(id),
     },

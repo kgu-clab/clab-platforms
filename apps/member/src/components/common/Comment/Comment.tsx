@@ -1,8 +1,10 @@
+import { ThumbUpOutline } from '@clab-platforms/icon';
 import { cn, toDecodeHTMLEntities } from '@clab-platforms/utils';
 
 import { MODAL_ACCEPT, MODAL_CONTENT, MODAL_TITLE } from '@constants/modal';
 import { useModal } from '@hooks/common/useModal';
 import { useAccusesMutation, useCommentDeleteMutation } from '@hooks/queries';
+import { useCommentLikesMutation } from '@hooks/queries/comment/useCommentLikesMutation';
 import { formattedDate } from '@utils/date';
 import { formatMemberName } from '@utils/string';
 
@@ -10,6 +12,7 @@ import type { CommentListItem } from '@type/comment';
 
 import ActionButton from '../ActionButton/ActionButton';
 import Avatar from '../Avatar/Avatar';
+import ReactionButton from '../ReactionButton/ReactionButton';
 
 interface Props extends Omit<CommentListItem, 'content' | 'children'> {
   children: string;
@@ -29,10 +32,12 @@ const Comment = ({
   isDeleted,
   isReply,
   onClickReply,
+  likes,
 }: Props) => {
   const { open } = useModal();
   const { commentDeleteMutate } = useCommentDeleteMutation();
   const { accusesMutate } = useAccusesMutation();
+  const { commentLikesMutate, isPending } = useCommentLikesMutation();
 
   const handleDeleteClick = (id: number) => {
     return open({
@@ -70,9 +75,19 @@ const Comment = ({
     >
       <Avatar src={writerImageUrl} roleLevel={writerRoleLevel} />
       <div className="ml-3 w-full text-sm">
-        <p className="font-semibold">
-          {formatMemberName(writerName, writerId)}
-        </p>
+        <div className="flex justify-between">
+          <p className="font-semibold">
+            {formatMemberName(writerName, writerId)}
+          </p>
+          <ReactionButton
+            className="flex items-center space-x-2"
+            countNumber={likes}
+            onClick={() => commentLikesMutate(id)}
+            disabled={isPending}
+          >
+            <ThumbUpOutline />
+          </ReactionButton>
+        </div>
         {isDeleted ? (
           <p className="text-red-500">삭제된 댓글입니다.</p>
         ) : (
