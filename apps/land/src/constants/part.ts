@@ -1,4 +1,4 @@
-import { Part } from '@/types';
+import type { Part } from '@/types';
 
 export const PART: Array<Part> = [
   {
