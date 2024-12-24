@@ -1,1 +1,1 @@
-export * from './useContentByMode';
+export * from './useContentByPage';
