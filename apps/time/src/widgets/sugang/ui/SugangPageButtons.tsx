@@ -1,20 +1,19 @@
-'use client';
+import { SUGANG_PAGE } from '@/widgets/sugang/model';
+import { SugangPageKR } from '@/widgets/sugang/types';
 
-import React, { useState } from 'react';
+interface SugangPageButtonsProps {
+  selected: number;
+  setSelected: (index: number) => void;
+}
 
-export default function SugangPageButtons() {
-  const [selected, setSelected] = useState(0);
-  const sugangPages: string[] = [
-    '소망가방',
-    '교양',
-    '전공',
-    '연계(융합)',
-    '외국어과목',
-    '외국인전용',
-  ];
+export default function SugangPageButtons({
+  selected,
+  setSelected,
+}: SugangPageButtonsProps) {
+  const sugangPages: SugangPageKR[] = Object.values(SUGANG_PAGE);
   return (
     <>
-      <div className="flex text-sm">
+      <div className="flex border-b-2 border-black/40">
         {sugangPages.map((page, index) => (
           <button
             onClick={() => setSelected(index)}
@@ -25,7 +24,6 @@ export default function SugangPageButtons() {
           </button>
         ))}
       </div>
-      <hr className="border-black/20" />
     </>
   );
 }
