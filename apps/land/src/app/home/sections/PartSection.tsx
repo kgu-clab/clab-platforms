@@ -49,7 +49,7 @@ export default function PartSection() {
         <PartCard description={part.description} name={part.name} />
       </div>
 
-      <div className="mx-12 hidden grid-cols-1 gap-8 sm:mx-0 sm:grid sm:grid-cols-2">
+      <div className="mx-12 hidden grid-cols-1 gap-12 sm:mx-0 sm:grid sm:grid-cols-2">
         {PART.map(({ id, name, description }) => (
           <PartCard key={id} description={description} name={name} />
         ))}

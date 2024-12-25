@@ -14,9 +14,7 @@ export default function ValueCircle({
   return (
     <div className={cn('flip-container', className)}>
       <div className="flip">
-        <p className="text-clab-light-blue front text-3xl font-bold">
-          {keyword}
-        </p>
+        <p className="front text-3xl font-bold">{keyword}</p>
         <p className="back flex flex-col p-6 text-xl">
           <span className="mb-4 text-3xl font-extrabold">{keyword}</span>
           {description}
