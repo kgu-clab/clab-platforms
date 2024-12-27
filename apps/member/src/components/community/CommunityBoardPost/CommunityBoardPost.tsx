@@ -41,11 +41,22 @@ const CommunityBoardPost = ({ data }: CommunityBoardPostProps) => {
         <Image
           height="min-h-[300px]"
           alt="thumbnail"
-          className=" object-cover"
+          className="object-cover "
           src={createImageUrl(data.imageUrl)}
         />
       )}
-      <Post.Body className="min-h-60">{data.content}</Post.Body>
+      <Post.Body className="flex min-h-60 flex-col justify-between">
+        {data.content}
+        {data.category === 'development_qna' && data.boardHashtagInfos && (
+          <div className="mt-8 flex space-x-2">
+            {data.boardHashtagInfos?.map(({ id, name }) => (
+              <div key={id} className="rounded-full bg-gray-200 px-4 py-1">
+                {name}
+              </div>
+            ))}
+          </div>
+        )}
+      </Post.Body>
       <Post.Footer>
         {data.isOwner ? (
           // 작성자인 경우 삭제 버튼을 보여준다.

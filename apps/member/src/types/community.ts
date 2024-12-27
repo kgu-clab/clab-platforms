@@ -44,6 +44,7 @@ export interface Board {
   writerName: string;
   imageUrl: string | null;
   createdAt: string;
+  boardHashtagInfos: Array<HashtagBoardItem> | null; // 개발 질문 게시글이 아니라면 null
 }
 
 export interface CommunityPostItem {
@@ -53,8 +54,8 @@ export interface CommunityPostItem {
   writerId: string | null; // 익명일 경우 null
   writerName: string;
   createdAt: string;
-  isOwner: boolean;
   category: CommunityCategoryType;
+  boardHashtagInfos: Array<HashtagBoardItem> | null;
 }
 
 export interface CommunityWriteItem {
@@ -64,6 +65,7 @@ export interface CommunityWriteItem {
   wantAnonymous: boolean;
   fileUrlList?: string[];
   imageUrl?: string;
+  hashtagIdList?: Array<number>;
 }
 
 export interface CommunityPostDetailItem extends CommunityPostItem {
@@ -74,11 +76,11 @@ export interface CommunityPostDetailItem extends CommunityPostItem {
   hasLikeByMe: boolean;
   files: [];
   imageUrl: string | null;
-  hashtag?: Array<string>;
+  isOwner: boolean;
 }
 
 export interface CommunityHireBoard
-  extends Omit<CommunityPostItem, 'isOwner' | 'category'> {
+  extends Omit<CommunityPostItem, 'category' | 'boardHashtagInfos'> {
   careerLevel: CareerLevel;
   recruitmentPeriod: string;
   jobPostingUrl: string;
@@ -86,7 +88,8 @@ export interface CommunityHireBoard
   employmentType: EmploymentType | null;
 }
 
-export interface CommunityNewsBoard extends CommunityPostItem {
+export interface CommunityNewsBoard
+  extends Omit<CommunityPostItem, 'boardHashtagInfos'> {
   articleUrl: string;
   date: string;
   source: string;
