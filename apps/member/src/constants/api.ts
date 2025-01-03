@@ -30,6 +30,7 @@ export const END_POINT = {
   BOARDS: `/v1/boards`,
   BOARDS_LIST: `/v1/boards/category`,
   BOARDERS_ITEM: (id: number) => `/v1/boards/${id}`,
+  BOARDS_HASHTAG: `/v1/boards/hashtag`,
   // -- 도서
   BOOK: `/v1/books`,
   BOOK_DETAIL: (id: number) => `/v1/books/${id}`,
@@ -106,6 +107,8 @@ export const END_POINT = {
     `/v1/applications/${recruitmentId}`,
   // -- 모집 공고 조회
   RECRUITMENT: `/v1/recruitments`,
+  // -- 해시태그
+  HASHTAG: `/v1/hashtags`,
 } as const;
 
 /**

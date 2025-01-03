@@ -1,3 +1,4 @@
+import type { HashtagBoardItem } from './hashtag';
 import type { RoleLevelType } from './member';
 
 export type CommunityCategoryType =
@@ -65,7 +66,7 @@ export interface CommunityWriteItem {
   wantAnonymous: boolean;
   fileUrlList?: string[];
   imageUrl?: string;
-  hashtagIdList?: Array<number>;
+  hashtagNames?: Array<string>;
 }
 
 export interface CommunityPostDetailItem extends CommunityPostItem {

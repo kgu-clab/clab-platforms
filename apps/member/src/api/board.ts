@@ -111,3 +111,17 @@ export function deleteBoards(id: number) {
     url: END_POINT.BOARDERS_ITEM(id),
   });
 }
+/**
+ * 커뮤니티 게시글 해시태그 조회
+ */
+export async function getBoardHashtagsList(
+  hashtags: Array<string>,
+  page: number,
+  size: number,
+) {
+  const { data } = await server.get<ResponsePagination<CommunityPostItem>>({
+    url: createPagination(END_POINT.BOARDS_HASHTAG, { hashtags, page, size }),
+  });
+
+  return data;
+}
