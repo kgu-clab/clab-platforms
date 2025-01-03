@@ -129,6 +129,7 @@ export const BOARD_QUERY_KEY = {
   COLLECTIONS: () => [...BOARD_QUERY_KEY.ALL, 'collections'],
   CATEGORIES: () => [...BOARD_QUERY_KEY.ALL, 'categories'],
   HASHTAGS: () => [...BOARD_QUERY_KEY.ALL, 'hashtags'],
+  HOTS: () => [...BOARD_QUERY_KEY.ALL, 'hots'],
   CATEGORY: (category: CommunityCategoryType) => [
     ...BOARD_QUERY_KEY.CATEGORIES(),
     category,
@@ -158,6 +159,7 @@ export const BOARD_QUERY_KEY = {
     category: CommunityCategoryType,
     pagination: WithPaginationParams,
   ) => [...BOARD_QUERY_KEY.CATEGORY_PAGES(category), pagination],
+  HOT: (strategyName?: string) => [...BOARD_QUERY_KEY.HOTS(), strategyName],
 } as const;
 
 /**

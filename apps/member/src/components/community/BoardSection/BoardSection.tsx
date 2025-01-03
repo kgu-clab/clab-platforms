@@ -8,6 +8,8 @@ import Section from '@components/common/Section/Section';
 
 import { COMMUNITY_MESSAGE } from '@constants/message';
 import { toKoreaISOString, toYYMMDD } from '@utils/date';
+import { PATH_FINDER } from '@constants/path';
+
 
 import type {
   CommunityHireBoard,
@@ -18,7 +20,7 @@ import type { StrictPropsWithChildren } from '@type/component';
 
 interface BoardSectionItemProps {
   title: string;
-  to: string;
+  to?: string;
   data: Array<CommunityPostItem | CommunityHireBoard | CommunityNewsBoard>;
 }
 
@@ -32,10 +34,27 @@ const BoardSection = ({ children }: StrictPropsWithChildren) => {
 BoardSection.displayName = 'BoardSection';
 
 const BoardSectionItem = ({ title, to, data }: BoardSectionItemProps) => {
+  const isCommunityPostItem = (
+    item: CommunityPostItem | CommunityHireBoard | CommunityNewsBoard,
+  ): item is CommunityPostItem => {
+    return (item as CommunityPostItem).category !== undefined;
+  };
+
+  const handleURL = (id: number, index: number, to?: string) => {
+    const item = data[index];
+
+    if (to) return createURL(to, id);
+    else if (isCommunityPostItem(item))
+      return createURL(PATH_FINDER.COMMUNITY_DETAIL(item.category), id);
+  };
+
   return (
     <Section>
-      <Section.Header title={title}>
-        <MoreButton to={to} />
+      <Section.Header
+        className={title === 'HOT' ? 'underline underline-offset-4' : ''}
+        title={title}
+      >
+        {to && <MoreButton to={to} />}
       </Section.Header>
       <Section.Body
         className={cn({
@@ -45,8 +64,8 @@ const BoardSectionItem = ({ title, to, data }: BoardSectionItemProps) => {
         {data.length === 0 ? (
           <p className="text-gray-500">{COMMUNITY_MESSAGE.NO_ARTICLE}</p>
         ) : (
-          data.map(({ id, title, commentCount, createdAt }) => (
-            <ListButton key={id} to={createURL(to, id)}>
+          data.map(({ id, title, commentCount, createdAt }, index) => (
+            <ListButton key={id} to={handleURL(id, index, to)}>
               <p className="line-clamp-1 w-full pr-4">
                 {toDecodeHTMLEntities(title)}
                 <CommentCounter>{commentCount}</CommentCounter>

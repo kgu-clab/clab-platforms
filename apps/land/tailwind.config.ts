@@ -5,6 +5,7 @@ const config: Config = {
     './pages/**/*.{js,ts,jsx,tsx,mdx}',
     './components/**/*.{js,ts,jsx,tsx,mdx}',
     './app/**/*.{js,ts,jsx,tsx,mdx}',
+    './src/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
     extend: {
@@ -13,6 +14,16 @@ const config: Config = {
         'gradient-conic':
           'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
       },
+      fontFamily: {
+        'nanum-square': ['NanumSquare', 'sans-serif'],
+        'dung-geun-mo': ['DungGeunMo', 'sans-serif'],
+      },
+    },
+    colors: {
+      'clab-yellow': '#FFE658',
+      'clab-blue': '#5874FF',
+      'clab-gray': '#151515',
+      'clab-yellow-gray': '#323024',
     },
   },
   plugins: [],

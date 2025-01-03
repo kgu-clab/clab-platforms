@@ -11,6 +11,7 @@ import {
   NewsBoard,
   NoticeBoard,
 } from '@components/community/Board';
+import { HotBoard } from '@components/community/Board/Board';
 import { BoardSection } from '@components/community/BoardSection';
 import {
   CommunityBoardCollectSection,
@@ -26,6 +27,9 @@ const CommunityPage = () => {
       <Header title={PATH_NAME.COMMUNITY}>
         <CommunityWriteButton />
       </Header>
+      <Suspense fallback={<BoardSkeleton />}>
+        <HotBoard />
+      </Suspense>
       <BoardSection>
         <Suspense fallback={<BoardSkeleton />}>
           <NoticeBoard />

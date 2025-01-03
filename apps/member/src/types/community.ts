@@ -69,6 +69,12 @@ export interface CommunityWriteItem {
   hashtagNames?: Array<string>;
 }
 
+export interface CommunityPostEmojiItem {
+  emoji: string;
+  count: number;
+  isOwner: boolean;
+}
+
 export interface CommunityPostDetailItem extends CommunityPostItem {
   writerRoleLevel: RoleLevelType; // 익명일 경우 null
   writerImageUrl: string | null; // 기본 사진일 경우 null
@@ -78,6 +84,7 @@ export interface CommunityPostDetailItem extends CommunityPostItem {
   files: [];
   imageUrl: string | null;
   isOwner: boolean;
+  emojiInfos?: Array<CommunityPostEmojiItem>;
 }
 
 export interface CommunityHireBoard
@@ -96,4 +103,11 @@ export interface CommunityNewsBoard
   source: string;
   content: string;
   files: string[];
+}
+
+export interface CommunityReactionItem {
+  boardId: number;
+  category?: CommunityCategoryType;
+  emoji: string;
+  isDeleted: boolean;
 }

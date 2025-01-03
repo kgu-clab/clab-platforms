@@ -31,6 +31,9 @@ export const END_POINT = {
   BOARDS_LIST: `/v1/boards/category`,
   BOARDERS_ITEM: (id: number) => `/v1/boards/${id}`,
   BOARDS_HASHTAG: `/v1/boards/hashtag`,
+  BOARDERS_EMOJI: (id: number, emoji: string) =>
+    `/v1/boards/${id}/react/${emoji}`,
+  BOARDS_HOT: `/v1/boards/hot`,
   // -- 도서
   BOOK: `/v1/books`,
   BOOK_DETAIL: (id: number) => `/v1/books/${id}`,
@@ -59,6 +62,7 @@ export const END_POINT = {
   SHARED_ACCOUNT_STATUS: (usageId: number) =>
     `/v1/shared-accounts/usage/${usageId}`,
   COMMENTS: (id: number) => `/v1/comments/${id}`,
+  COMMENTS_LIKES: (commentId: number) => `/v1/comments/likes/${commentId}`,
   HIRE: (id: number) => `/v1/job-postings/${id}`,
   NEWS: (id: number) => `/v1/news/${id}`,
   // -- 파일 업로드

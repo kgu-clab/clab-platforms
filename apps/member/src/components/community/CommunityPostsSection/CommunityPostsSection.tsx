@@ -1,14 +1,12 @@
 import { useCallback, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { Table } from '@clab-platforms/design-system';
-import { cn, toDecodeHTMLEntities } from '@clab-platforms/utils';
+import { Input, Table } from '@clab-platforms/design-system';
+import { SearchOutline } from '@clab-platforms/icon';
 
-import CommentCounter from '@components/common/CommentCounter/CommentCounter';
 import Pagination from '@components/common/Pagination/Pagination';
 import { Section } from '@components/common/Section';
 
-import { SERVICE_NAME } from '@constants/environment';
 import { TABLE_HEAD } from '@constants/head';
 import { COMMUNITY_MESSAGE } from '@constants/message';
 import { PATH_FINDER } from '@constants/path';
@@ -58,6 +56,7 @@ const CommunityPostsSection = ({
     },
     [navigate, type],
   );
+  const handleHashtagSearchClick = () => {};
 
   const handleHashtagButtonClick = (value: string) => {
     setHashtagList((prevHashtag) => {
@@ -92,27 +91,17 @@ const CommunityPostsSection = ({
           ) : (
             data.items.map(
               ({ id, title, commentCount, writerName, createdAt }, index) => (
-                <Table.Row
+                <CommunityPostsItem
                   key={id}
-                  className={cn('text-nowrap text-center', {
-                    'bg-gray-50 font-semibold': id === currentId,
-                  })}
+                  id={id}
+                  title={title}
+                  commentCount={commentCount}
+                  writerName={writerName}
+                  createdAt={createdAt}
                   onClick={() => handleBoardClick(id)}
-                >
-                  <Table.Cell className="w-1/12">
-                    {data.totalItems - (index + page * size)}
-                  </Table.Cell>
-                  <Table.Cell className="w-7/12 truncate text-left">
-                    {toDecodeHTMLEntities(title)}
-                    <CommentCounter>{commentCount}</CommentCounter>
-                  </Table.Cell>
-                  <Table.Cell className="w-3/12">
-                    {writerName || SERVICE_NAME}
-                  </Table.Cell>
-                  <Table.Cell className="w-1/12">
-                    {toYYMMDD(createdAt)}
-                  </Table.Cell>
-                </Table.Row>
+                  index={data.totalItems - (index + page * size)}
+                  currentId={currentId}
+                />
               ),
             )
           )}
