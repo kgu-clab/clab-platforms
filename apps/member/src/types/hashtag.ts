@@ -1,4 +1,4 @@
-export type HashtagCategoryType = 'LANGUAGE' | 'FILED' | 'SKILL' | 'ETC';
+export type HashtagCategoryType = 'LANGUAGE' | 'FIELD' | 'SKILL' | 'ETC';
 
 export interface Hashtag {
   id: number;
