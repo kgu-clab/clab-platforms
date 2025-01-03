@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { Button, Checkbox, Input } from '@clab-platforms/design-system';
 import { cn, toDecodeHTMLEntities } from '@clab-platforms/utils';
 
+import HashtagButton from '@components/common/HashtagButton/HashtagButton';
 import Select from '@components/common/Select/Select';
 import Textarea from '@components/common/Textarea/Textarea';
 import Uploader from '@components/common/Uploader/Uploader';
@@ -22,6 +23,7 @@ import { useBoardModifyMutation, useBoardWriteMutation } from '@hooks/queries';
 import type {
   CommunityCategoryType,
   CommunityPostDetailItem,
+  CommunityWriteItem,
 } from '@type/community';
 
 /**
@@ -35,7 +37,7 @@ interface CommunityBoardFormProps {
 }
 
 interface BoardFormState
-  extends Pick<CommunityPostDetailItem, 'title' | 'content'> {
+  extends Pick<CommunityWriteItem, 'title' | 'content' | 'hashtagNames'> {
   category: CommunityCategoryType | typeof SELECT_DEFAULT_OPTION;
   wantAnonymous: boolean;
 }
@@ -57,9 +59,10 @@ const CommunityBoardForm = ({
     title: toDecodeHTMLEntities(data?.title) ?? '',
     content: toDecodeHTMLEntities(data?.content) ?? '',
     wantAnonymous: data?.writerId === null, // 익명일 경우 Null
+    hashtagNames: data?.boardHashtagInfos?.map((hashtag) => hashtag.name) ?? [],
   });
 
-  const { category, title, content, wantAnonymous } = boardForm;
+  const { category, title, content, wantAnonymous, hashtagNames } = boardForm;
 
   const handleBoardFormChange = (
     e: React.ChangeEvent<
@@ -101,6 +104,20 @@ const CommunityBoardForm = ({
       // 게시글 작성
       boardWriteMutate({ ...boardForm, file: uploadFile });
     }
+  };
+
+  const handleHashtagButtonClick = (value: string) => {
+    setBoardForm((prev) => {
+      const updatedHashtags = new Set(prev.hashtagNames);
+
+      if (updatedHashtags.has(value)) {
+        updatedHashtags.delete(value);
+      } else {
+        updatedHashtags.add(value);
+      }
+
+      return { ...prev, hashtagNames: [...updatedHashtags] };
+    });
   };
 
   return (
@@ -146,6 +163,17 @@ const CommunityBoardForm = ({
         value={content}
         onChange={handleBoardFormChange}
       />
+      {category === 'development_qna' && (
+        <div>
+          <label htmlFor="hashtag" className="mb-1 ml-1 text-xs">
+            해시태그
+          </label>
+          <HashtagButton
+            clicked={hashtagNames ?? []}
+            onClick={handleHashtagButtonClick}
+          />
+        </div>
+      )}
       <Checkbox
         id="wantAnonymous"
         name="wantAnonymous"

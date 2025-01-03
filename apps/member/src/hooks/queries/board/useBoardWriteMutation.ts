@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 import { postBoardsWrite } from '@api/board';
-import { BOARD_QUERY_KEY } from '@constants/key';
+import { BOARD_QUERY_KEY, HASHTAG_QUERY_KEY } from '@constants/key';
 import { API_ERROR_MESSAGE } from '@constants/message';
 import { PATH } from '@constants/path';
 import useToast from '@hooks/common/useToast';
@@ -25,6 +25,9 @@ export const useBoardWriteMutation = () => {
         });
         queryClient.invalidateQueries({
           queryKey: BOARD_QUERY_KEY.MY(),
+        });
+        queryClient.invalidateQueries({
+          queryKey: HASHTAG_QUERY_KEY.LIST(),
         });
         toast({
           state: 'success',
