@@ -6,6 +6,7 @@ import Image from '@components/common/Image/Image';
 import Post from '@components/common/Post/Post';
 
 import { createImageUrl } from '@utils/api';
+import { toKoreaISOString } from '@utils/date';
 import { formatMemberName } from '@utils/string';
 
 import type { CommunityPostDetailItem } from '@type/community';
@@ -35,7 +36,7 @@ const CommunityBoardPost = ({ data }: CommunityBoardPostProps) => {
         src={data.writerImageUrl}
         writer={formatMemberName(data.writerName, data.writerId)}
         roleLevel={data.writerRoleLevel}
-        createdAt={data.createdAt}
+        createdAt={toKoreaISOString(data.createdAt)}
       />
       {data.imageUrl && (
         <Image
@@ -50,7 +51,10 @@ const CommunityBoardPost = ({ data }: CommunityBoardPostProps) => {
         {data.category === 'development_qna' && data.boardHashtagInfos && (
           <div className="mt-8 flex space-x-2">
             {data.boardHashtagInfos?.map(({ id, name }) => (
-              <div key={id} className="rounded-full bg-gray-200 px-4 py-1">
+              <div
+                key={id}
+                className="rounded-full bg-gray-100 px-4 py-1 font-semibold text-gray-500"
+              >
                 {name}
               </div>
             ))}
