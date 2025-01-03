@@ -1,8 +1,7 @@
 import { useCallback, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { Input, Table } from '@clab-platforms/design-system';
-import { SearchOutline } from '@clab-platforms/icon';
+import { Table } from '@clab-platforms/design-system';
 
 import Pagination from '@components/common/Pagination/Pagination';
 import { Section } from '@components/common/Section';
@@ -12,11 +11,12 @@ import { COMMUNITY_MESSAGE } from '@constants/message';
 import { PATH_FINDER } from '@constants/path';
 import { usePagination } from '@hooks/common/usePagination';
 import { useBoardByCategory, useBoardByHashtag } from '@hooks/queries';
-import { toYYMMDD } from '@utils/date';
+import { toKoreaISOString } from '@utils/date';
 
 import type { CommunityCategoryType } from '@type/community';
 
 import HashtagButton from '../../common/HashtagButton/HashtagButton';
+import CommunityPostsItem from './CommunityPostsItem';
 
 interface Props {
   type: CommunityCategoryType;
@@ -56,7 +56,6 @@ const CommunityPostsSection = ({
     },
     [navigate, type],
   );
-  const handleHashtagSearchClick = () => {};
 
   const handleHashtagButtonClick = (value: string) => {
     setHashtagList((prevHashtag) => {
@@ -97,7 +96,7 @@ const CommunityPostsSection = ({
                   title={title}
                   commentCount={commentCount}
                   writerName={writerName}
-                  createdAt={createdAt}
+                  createdAt={toKoreaISOString(createdAt)}
                   onClick={() => handleBoardClick(id)}
                   index={data.totalItems - (index + page * size)}
                   currentId={currentId}

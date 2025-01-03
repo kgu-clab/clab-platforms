@@ -132,7 +132,7 @@ export async function getBoardHashtagsList(
 
   return data;
 }
-  
+
 /**
  * 커뮤니티 게시글 반응
  */

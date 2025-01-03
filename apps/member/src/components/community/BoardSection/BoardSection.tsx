@@ -7,9 +7,8 @@ import MoreButton from '@components/common/MoreButton/MoreButton';
 import Section from '@components/common/Section/Section';
 
 import { COMMUNITY_MESSAGE } from '@constants/message';
-import { toKoreaISOString, toYYMMDD } from '@utils/date';
 import { PATH_FINDER } from '@constants/path';
-
+import { toKoreaISOString, toYYMMDD } from '@utils/date';
 
 import type {
   CommunityHireBoard,
