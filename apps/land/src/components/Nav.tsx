@@ -61,21 +61,25 @@ export default function Nav() {
         )}
       >
         <div className="flex place-items-center justify-between px-8 py-2 md:px-20">
-          <Image src="/favicon.ico" width={48} height={48} alt="C-Lab" />
+          <Link href={PATH.HOME} scroll={false}>
+            <Image src="/favicon.ico" width={48} height={48} alt="C-Lab" />
+          </Link>
           <div className="hidden space-x-8 md:block">
             <Link
-              href="/application"
+              href={PATH.APPLY}
               className={cn('underline-offset-8 hover:underline', {
-                'font-bold': pathname === PATH.APPLICATION,
+                'font-bold': pathname === PATH.APPLY,
               })}
+              scroll={false}
             >
               지원
             </Link>
             <Link
-              href="/ask"
+              href={PATH.ASK}
               className={cn('underline-offset-8 hover:underline', {
                 'font-bold': pathname === PATH.ASK,
               })}
+              scroll={false}
             >
               문의
             </Link>
@@ -83,6 +87,7 @@ export default function Nav() {
               className="bg-clab-yellow border-clab-yellow text-clab-yellow rounded-full border bg-opacity-30 px-4 py-2 text-sm hover:bg-opacity-0"
               href={INFORMATION_URL.MEMBERS}
               target="_blank"
+              scroll={false}
             >
               VISIT MEMBERS
             </Link>

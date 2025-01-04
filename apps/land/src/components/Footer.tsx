@@ -18,6 +18,7 @@ export default function Footer() {
           width={40}
           height={40}
           alt="C-Lab"
+          style={{ width: 40, height: 40 }}
         />
       </Link>
     </footer>

@@ -23,7 +23,7 @@ export default function RecruitmentSection() {
           3월, 새로운 시작과 함께 만나요!
         </p>
         <Link
-          href={PATH.APPLICATION}
+          href={PATH.APPLY}
           className="bg-clab-light-blue border-clab-light-blue hover:text-clab-light-blue mx-auto rounded-full border px-10 py-4 text-xl font-bold text-black hover:bg-opacity-0"
         >
           이전 모집글 확인하기

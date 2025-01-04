@@ -21,16 +21,19 @@ export default function Sidebar({ isOpen, pathname }: SidebarProps) {
     >
       <Menubar className="flex flex-col text-start text-white" gap="lg">
         <Menubar.Item className="text-white" selected={pathname === PATH.HOME}>
-          <Link href={PATH.HOME}>홈</Link>
+          <Link href={PATH.HOME} scroll={false}>
+            홈
+          </Link>
         </Menubar.Item>
-        <Menubar.Item
-          className="text-white"
-          selected={pathname === PATH.APPLICATION}
-        >
-          <Link href={PATH.APPLICATION}>지원</Link>
+        <Menubar.Item className="text-white" selected={pathname === PATH.APPLY}>
+          <Link href={PATH.APPLY} scroll={false}>
+            지원
+          </Link>
         </Menubar.Item>
         <Menubar.Item className="text-white" selected={pathname === PATH.ASK}>
-          <Link href={PATH.ASK}>문의</Link>
+          <Link href={PATH.ASK} scroll={false}>
+            문의
+          </Link>
         </Menubar.Item>
       </Menubar>
     </aside>
