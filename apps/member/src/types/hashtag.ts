@@ -1,4 +1,7 @@
-export type HashtagCategoryType = 'LANGUAGE' | 'FIELD' | 'SKILL' | 'ETC';
+import { HASHTAG_CATEGORIES } from '@constants/hashtag';
+
+export type HashtagCategoryType =
+  (typeof HASHTAG_CATEGORIES)[keyof typeof HASHTAG_CATEGORIES];
 
 export interface Hashtag {
   id: number;

@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { Button } from '@clab-platforms/design-system';
 import { cn } from '@clab-platforms/utils';
 
+import { HASHTAG_CATEGORIES } from '@constants/hashtag';
 import { useHashtag } from '@hooks/queries/hashtag';
 
 import type { Hashtag } from '@type/hashtag';
@@ -21,24 +22,10 @@ const HashtagButton = ({ clicked, onClick, className }: HashtagButtonProps) => {
 
   useEffect(() => {
     if (data) {
-      const list = [
-        {
-          title: '언어',
-          items: data.filter((item) => item.hashtagCategory === 'LANGUAGE'),
-        },
-        {
-          title: '분야',
-          items: data.filter((item) => item.hashtagCategory === 'FIELD'),
-        },
-        {
-          title: '기술',
-          items: data.filter((item) => item.hashtagCategory === 'SKILL'),
-        },
-        {
-          title: '기타',
-          items: data.filter((item) => item.hashtagCategory === 'ETC'),
-        },
-      ];
+      const list = Object.entries(HASHTAG_CATEGORIES).map(([key, value]) => ({
+        title: value,
+        items: data.filter((item) => item.hashtagCategory === key),
+      }));
 
       setHashtagCategories(list);
     }
