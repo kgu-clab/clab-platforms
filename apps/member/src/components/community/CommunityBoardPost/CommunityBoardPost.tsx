@@ -70,7 +70,7 @@ const CommunityBoardPost = ({ data }: CommunityBoardPostProps) => {
         <Image
           height="min-h-[300px]"
           alt="thumbnail"
-          className="object-cover "
+          className="object-cover"
           src={createImageUrl(data.imageUrl)}
         />
       )}

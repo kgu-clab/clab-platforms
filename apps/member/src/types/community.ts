@@ -64,7 +64,7 @@ export interface CommunityWriteItem {
   title: string;
   content: string;
   wantAnonymous: boolean;
-  fileUrlList?: string[];
+  fileUrlList?: Array<string>;
   imageUrl?: string;
   hashtagNames?: Array<string>;
 }
@@ -102,7 +102,7 @@ export interface CommunityNewsBoard
   date: string;
   source: string;
   content: string;
-  files: string[];
+  files: Array<string>;
 }
 
 export interface CommunityReactionItem {
