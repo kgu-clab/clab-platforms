@@ -60,8 +60,9 @@ const CommunityPostsSection = ({
   const handleHashtagButtonClick = (value: string) => {
     setHashtagList((prevHashtag) => {
       const updatedHashtags = prevHashtag ? [...prevHashtag] : [];
+      const isHashtagExist = updatedHashtags?.includes(value);
 
-      return updatedHashtags?.includes(value)
+      return isHashtagExist
         ? updatedHashtags.filter((hashtag) => hashtag !== value)
         : [...updatedHashtags, value];
     });
