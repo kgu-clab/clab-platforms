@@ -3,19 +3,23 @@ import type { Values } from '@/types';
 export const VALUES: Values = [
   {
     keyword: 'SHARE',
-    description: '',
+    description:
+      '공부한 내용을 동아리원들과 함께 나누며 다 같이 더 높이 성장해요.',
   },
   {
     keyword: 'IMAGINE',
-    description: '',
+    description:
+      '프로젝트를 진행하며 본인이 상상하던 서비스를 직접 개발해봐요.',
   },
   {
     keyword: 'PASSION',
-    description: '',
+    description:
+      '열정을 가진 동아리원들과 개발자로서의 꿈과 실력을 키워나가요.',
   },
   {
     keyword: 'ENJOY',
-    description: '',
+    description:
+      '총회, MT 등 다양한 이벤트를 함께하며 즐거운 동아리 생활을 해요.',
   },
   {
     keyword: 'HARMONY',
@@ -24,7 +28,8 @@ export const VALUES: Values = [
   },
   {
     keyword: 'CONNECT',
-    description: '',
+    description:
+      '동기들뿐만 아니라 동아리의 선후배들과 연결되어 많은 도움을 받아요.',
   },
 ];
 
