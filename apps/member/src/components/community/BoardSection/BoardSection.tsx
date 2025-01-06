@@ -8,7 +8,7 @@ import Section from '@components/common/Section/Section';
 
 import { COMMUNITY_MESSAGE } from '@constants/message';
 import { PATH_FINDER } from '@constants/path';
-import { toYYMMDD } from '@utils/date';
+import { toKoreaISOString, toYYMMDD } from '@utils/date';
 
 import type {
   CommunityHireBoard,
@@ -69,7 +69,9 @@ const BoardSectionItem = ({ title, to, data }: BoardSectionItemProps) => {
                 {toDecodeHTMLEntities(title)}
                 <CommentCounter>{commentCount}</CommentCounter>
               </p>
-              <p className="text-clab-main-light">{toYYMMDD(createdAt)}</p>
+              <p className="text-clab-main-light">
+                {toYYMMDD(toKoreaISOString(createdAt))}
+              </p>
             </ListButton>
           ))
         )}

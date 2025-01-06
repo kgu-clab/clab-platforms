@@ -1,3 +1,4 @@
+import type { HashtagBoardItem } from './hashtag';
 import type { RoleLevelType } from './member';
 
 export type CommunityCategoryType =
@@ -44,6 +45,7 @@ export interface Board {
   writerName: string;
   imageUrl: string | null;
   createdAt: string;
+  boardHashtagInfos: Array<HashtagBoardItem> | null; // 개발 질문 게시글이 아니라면 null
 }
 
 export interface CommunityPostItem {
@@ -53,8 +55,8 @@ export interface CommunityPostItem {
   writerId: string | null; // 익명일 경우 null
   writerName: string;
   createdAt: string;
-  isOwner: boolean;
   category: CommunityCategoryType;
+  boardHashtagInfos: Array<HashtagBoardItem> | null;
 }
 
 export interface CommunityWriteItem {
@@ -62,8 +64,9 @@ export interface CommunityWriteItem {
   title: string;
   content: string;
   wantAnonymous: boolean;
-  fileUrlList?: string[];
+  fileUrlList?: Array<string>;
   imageUrl?: string;
+  hashtagNames?: Array<string>;
 }
 
 export interface CommunityPostEmojiItem {
@@ -80,12 +83,12 @@ export interface CommunityPostDetailItem extends CommunityPostItem {
   hasLikeByMe: boolean;
   files: [];
   imageUrl: string | null;
+  isOwner: boolean;
   emojiInfos?: Array<CommunityPostEmojiItem>;
-  hashtag?: Array<string>;
 }
 
 export interface CommunityHireBoard
-  extends Omit<CommunityPostItem, 'isOwner' | 'category'> {
+  extends Omit<CommunityPostItem, 'category' | 'boardHashtagInfos'> {
   careerLevel: CareerLevel;
   recruitmentPeriod: string;
   jobPostingUrl: string;
@@ -93,12 +96,13 @@ export interface CommunityHireBoard
   employmentType: EmploymentType | null;
 }
 
-export interface CommunityNewsBoard extends CommunityPostItem {
+export interface CommunityNewsBoard
+  extends Omit<CommunityPostItem, 'boardHashtagInfos'> {
   articleUrl: string;
   date: string;
   source: string;
   content: string;
-  files: string[];
+  files: Array<string>;
 }
 
 export interface CommunityReactionItem {
