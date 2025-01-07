@@ -1,3 +1,4 @@
+export { default as ArrowRightUpSolid } from './react/ArrowRightUp';
 export { default as CheckmarkSolid } from './react/Checkmark';
 export { default as ClipboardDocumentSolid } from './react/ClipboardDocument';
 export { default as ClipboardDocumentCheckSolid } from './react/ClipboardDocumentCheck';
