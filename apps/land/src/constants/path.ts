@@ -1,7 +1,8 @@
 export const PATH = {
   HOME: '/home',
-  APPLICATION: '/application',
+  APPLY: '/apply',
   ASK: '/ask',
+  APPLICATION_FORM: '/applicationForm',
 };
 
 export const INFORMATION_URL = {

@@ -68,7 +68,8 @@ export default function Nav() {
             <Link
               href={PATH.APPLY}
               className={cn('underline-offset-8 hover:underline', {
-                'font-bold': pathname === PATH.APPLY,
+                'font-bold underline underline-offset-8':
+                  pathname === PATH.APPLY,
               })}
               scroll={false}
             >
@@ -77,7 +78,7 @@ export default function Nav() {
             <Link
               href={PATH.ASK}
               className={cn('underline-offset-8 hover:underline', {
-                'font-bold': pathname === PATH.ASK,
+                'font-bold underline underline-offset-8': pathname === PATH.ASK,
               })}
               scroll={false}
             >

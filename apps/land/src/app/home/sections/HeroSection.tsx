@@ -15,7 +15,7 @@ export default function HeroSection() {
           여기 C-Lab에서.
         </h1>
         <Link
-          href={PATH.APPLICATION}
+          href={PATH.APPLY}
           className="bg-clab-yellow border-clab-yellow hover:text-clab-yellow mx-auto rounded-full border px-10 py-2 text-xl font-bold text-black hover:bg-opacity-0"
         >
           JOIN-US
