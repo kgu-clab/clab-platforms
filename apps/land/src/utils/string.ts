@@ -35,3 +35,19 @@ export function isProgressing(startDate: string, endDate: string) {
 
   return now.isAfter(start) && now.isBefore(end);
 }
+
+/**
+ * 전화번호에 -을 생성합니다.
+ */
+export const formattedPhoneInput = (phoneNumber: string): string => {
+  const cleaned = phoneNumber.replace(/\D/g, '');
+  let formatted = cleaned;
+
+  if (cleaned.length > 3 && cleaned.length <= 7) {
+    formatted = `${cleaned.slice(0, 3)}-${cleaned.slice(3)}`;
+  } else if (cleaned.length > 7) {
+    formatted = `${cleaned.slice(0, 3)}-${cleaned.slice(3, 7)}-${cleaned.slice(7, 11)}`;
+  }
+
+  return formatted;
+};
