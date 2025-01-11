@@ -42,17 +42,20 @@ export default function RecruitmentNoticeSection() {
             tableData.map(
               ({
                 id,
+                title,
                 startDate,
                 endDate,
                 applicationType,
                 target,
+                status,
               }: Recruitment) => (
                 <Table.Row
                   key={id}
                   onClick={() => handleRecruitmentNoticeClick(id)}
                   className="hover:bg-clab-yellow-gray text-white hover:cursor-pointer"
                 >
-                  <Table.Cell>C-Lab Core Team 3기 모집</Table.Cell>
+                  <Table.Cell>{status}</Table.Cell>
+                  <Table.Cell>{title}</Table.Cell>
                   <Table.Cell>
                     {formattedDate(toKoreaISOString(startDate))} ~{' '}
                     {formattedDate(toKoreaISOString(endDate))}
