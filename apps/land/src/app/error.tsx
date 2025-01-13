@@ -21,7 +21,7 @@ export default function ErrorPage() {
         href={PATH.HOME}
         className="bg-clab-yellow border-clab-yellow hover:text-clab-yellow mx-auto rounded-full border px-10 py-2 text-xl font-bold text-black hover:bg-opacity-0"
       >
-        JOIN-US
+        HOME
       </Link>
     </PageLayout>
   );
