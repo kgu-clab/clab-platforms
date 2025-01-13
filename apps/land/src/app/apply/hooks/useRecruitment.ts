@@ -13,5 +13,5 @@ export function useRecruitment() {
     queryFn: getRecruitment,
   });
 
-  return { data: data, isError };
+  return { data, isError };
 }

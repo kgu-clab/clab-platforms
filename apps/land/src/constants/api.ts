@@ -5,4 +5,6 @@ export const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL;
  */
 export const END_POINT = {
   RECRUITMENT: `/v1/recruitments`,
+  RECRUITMENT_DETAIL: (recruitmentId: number) =>
+    `/v1/recruitments/${recruitmentId}`,
 } as const;

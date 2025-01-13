@@ -14,3 +14,18 @@ export async function getRecruitment() {
 
   return res.json();
 }
+
+/**
+ * 모집 공고 상세 조회
+ */
+export async function getRecruitmentDetail(id: number) {
+  const apiURL = `${API_BASE_URL}${END_POINT.RECRUITMENT_DETAIL(id)}`;
+
+  const res = await fetch(apiURL);
+
+  if (!res.ok) {
+    throw new Error('모집 공고 상세 조회에 실패했습니다.');
+  }
+
+  return res.json();
+}

@@ -51,3 +51,13 @@ export const formattedPhoneInput = (phoneNumber: string): string => {
 
   return formatted;
 };
+
+/**
+ * 주어진 날짜를 시작 ~ 마감 기간으로 변환합니다.
+ */
+export function formattedPeriod(startDate: string, endDate: string): string {
+  const start = dayjs(startDate).format('YYYY-MM-DD HH:mm');
+  const end = dayjs(endDate).format('YYYY-MM-DD HH:mm');
+
+  return `${start} ~ ${end}`;
+}
