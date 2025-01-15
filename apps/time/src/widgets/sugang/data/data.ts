@@ -1,11 +1,11 @@
 import { TableData } from '@/widgets/sugang/types';
 
 export const dummyData: {
-  wishList: Array<TableData<'wishList'>>;
-  lectureList: string[];
-  registrationList: Array<TableData<'registrationList'>>;
+  WISH_LIST: Array<TableData<'WISH_LIST'>>;
+  LECTURE_LIST: string[];
+  REGISTRATION_LIST: Array<TableData<'REGISTRATION_LIST'>>;
 } = {
-  wishList: [
+  WISH_LIST: [
     {
       No: 1,
       신청: 'O',
@@ -83,8 +83,8 @@ export const dummyData: {
       공학인증: '',
     },
   ],
-  lectureList: [''],
-  registrationList: [
+  LECTURE_LIST: [''],
+  REGISTRATION_LIST: [
     {
       No: 1,
       삭제: 'O',

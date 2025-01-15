@@ -20,9 +20,9 @@ export default function SugangLayout() {
         <Header setOpened={setOpened} />
         <div className="mb-2 flex size-full flex-col gap-y-2 p-2 px-4">
           <NavigatorBtn />
-          <SugangTableView tableName="wishList" />
+          <SugangTableView tableName="WISH_LIST" />
           {/*현재는 tableName이 고정되어 있지만, 나중에는 NavigatorBtn을 통해 누른 탭에 따라 Name을 변하게 할 예정입니다.*/}
-          <SugangTableView tableName="registrationList" />
+          <SugangTableView tableName="REGISTRATION_LIST" />
         </div>
       </div>
     </div>

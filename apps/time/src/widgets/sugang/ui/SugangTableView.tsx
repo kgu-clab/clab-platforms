@@ -4,7 +4,7 @@ import { cn } from '@clab-platforms/utils';
 
 import { dummyData } from '@/widgets/sugang/data';
 import { TABLE_HEADERS } from '@/widgets/sugang/model';
-import { TableData, TableNameKey } from '@/widgets/sugang/types';
+import { TableNameKey } from '@/widgets/sugang/types';
 
 interface TableNameProps {
   tableName: TableNameKey;
@@ -17,7 +17,7 @@ export default function SugangTableView({ tableName }: TableNameProps) {
       <div
         className={cn(
           'w-full border-t-2 border-black/70 bg-gray-100',
-          tableName !== 'registrationList' ? 'h-80' : '',
+          tableName !== 'REGISTRATION_LIST' ? 'h-80' : '',
         )}
       >
         <DynamicTable tableName={tableName} />
@@ -28,9 +28,9 @@ export default function SugangTableView({ tableName }: TableNameProps) {
 
 function SugangTableTitle({ tableName }: TableNameProps) {
   const tableTitle =
-    tableName === 'wishList'
+    tableName === 'WISH_LIST'
       ? '소망가방'
-      : tableName === 'registrationList'
+      : tableName === 'REGISTRATION_LIST'
         ? '수강신청'
         : '';
 
@@ -43,10 +43,7 @@ function SugangTableTitle({ tableName }: TableNameProps) {
 
 function DynamicTable<T extends TableNameKey>({ tableName }: { tableName: T }) {
   const headers = TABLE_HEADERS[tableName];
-  const data =
-    tableName === 'lectureList'
-      ? (dummyData[tableName] as string[])
-      : (dummyData[tableName] as Array<TableData<typeof tableName>>);
+  const data = dummyData[tableName];
 
   return (
     <table className="w-full text-center ">
