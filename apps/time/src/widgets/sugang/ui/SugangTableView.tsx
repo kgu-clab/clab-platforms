@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { cn } from '@clab-platforms/utils';
+
 import { dummyData } from '@/widgets/sugang/data';
 import { TABLE_HEADERS } from '@/widgets/sugang/model';
 import { TableData, TableNameKey } from '@/widgets/sugang/types';
@@ -13,7 +15,10 @@ export default function SugangTableView({
     <div className="size-full text-sm ">
       <SugangTableTitle tableName={tableName} />
       <div
-        className={`w-full border-t-2 border-black/70 bg-gray-100 ${tableName !== 'registrationList' ? 'h-80' : ''}`}
+        className={cn(
+          'w-full border-t-2 border-black/70 bg-gray-100',
+          tableName !== 'registrationList' ? 'h-80' : '',
+        )}
       >
         <DynamicTable tableName={tableName} />
       </div>

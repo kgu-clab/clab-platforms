@@ -4,6 +4,7 @@ import { Dispatch, useState } from 'react';
 
 import { KguLogo } from '@clab-platforms/icon';
 import SvgMenu from '@clab-platforms/icon/src/outline/react/Menu';
+import { cn } from '@clab-platforms/utils';
 
 import { SUGANG_PAGES } from '@/widgets/sugang/model';
 import { SugangTableView } from '@/widgets/sugang/ui';
@@ -31,7 +32,10 @@ export default function SugangLayout() {
 function SideBar({ opened }: { opened: boolean }) {
   return (
     <div
-      className={`h-full w-44 flex-col bg-yellow-500 ${opened ? 'flex' : 'hidden'}`}
+      className={cn(
+        'h-full w-44 flex-col bg-yellow-500',
+        opened ? 'flex' : 'hidden',
+      )}
     >
       <div className="flex w-full items-center p-[18px] text-white">
         수강신청시스템
@@ -69,9 +73,13 @@ function NavigatorBtn() {
             onClick={() => setSelected(index)}
             key={index}
             disabled={index !== 0}
-            className={`w-24 border-l-2 border-t-2 border-black/20 p-2 text-center 
-              ${selected === index ? 'bg-white' : 'border-b-2 bg-gray-200 text-gray-400'}
-              ${index === sugangPages.length - 1 ? 'border-r-2' : ''}`}
+            className={cn(
+              'w-24 border-l-2 border-t-2 border-black/20 p-2 text-center',
+              selected === index
+                ? 'bg-white'
+                : 'border-b-2 bg-gray-200 text-gray-400',
+              index === sugangPages.length - 1 ? 'border-r-2' : '',
+            )}
           >
             {page}
           </button>
