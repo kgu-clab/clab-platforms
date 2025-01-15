@@ -6,11 +6,11 @@ import { dummyData } from '@/widgets/sugang/data';
 import { TABLE_HEADERS } from '@/widgets/sugang/model';
 import { TableData, TableNameKey } from '@/widgets/sugang/types';
 
-export default function SugangTableView({
-  tableName,
-}: {
+interface TableNameProps {
   tableName: TableNameKey;
-}) {
+}
+
+export default function SugangTableView({ tableName }: TableNameProps) {
   return (
     <div className="size-full text-sm ">
       <SugangTableTitle tableName={tableName} />
@@ -26,7 +26,7 @@ export default function SugangTableView({
   );
 }
 
-function SugangTableTitle({ tableName }: { tableName: TableNameKey }) {
+function SugangTableTitle({ tableName }: TableNameProps) {
   const tableTitle =
     tableName === 'wishList'
       ? '소망가방'
