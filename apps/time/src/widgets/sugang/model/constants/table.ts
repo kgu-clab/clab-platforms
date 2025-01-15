@@ -1,5 +1,5 @@
 export const TABLE_HEADERS = {
-  wishList: [
+  WISH_LIST: [
     'No',
     '신청',
     '일괄처리',
@@ -18,8 +18,8 @@ export const TABLE_HEADERS = {
     '비고',
     '공학인증',
   ],
-  lectureList: [''], // 이 부분은 아직 개발하지 않은 교양, 전공, 연계, 외국어과목 탭에서 과목 리스트를 검색할 때 결과 화면에 사용되는 헤더입니다.
-  registrationList: [
+  LECTURE_LIST: [''], // 이 부분은 아직 개발하지 않은 교양, 전공, 연계, 외국어과목 탭에서 과목 리스트를 검색할 때 결과 화면에 사용되는 헤더입니다.
+  REGISTRATION_LIST: [
     'No',
     '삭제',
     '캠퍼스',
