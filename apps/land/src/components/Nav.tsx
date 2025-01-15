@@ -64,7 +64,7 @@ export default function Nav() {
           <Link href={PATH.HOME} scroll={false}>
             <Image src="/favicon.ico" width={48} height={48} alt="C-Lab" />
           </Link>
-          <div className="hidden space-x-8 md:block">
+          <div className="hidden space-x-8 md:flex">
             <Link
               href={PATH.APPLY}
               className={cn('underline-offset-8 hover:underline', {
@@ -84,14 +84,23 @@ export default function Nav() {
             >
               문의
             </Link>
-            <Link
-              className="bg-clab-yellow border-clab-yellow text-clab-yellow rounded-full border bg-opacity-30 px-4 py-2 text-sm hover:bg-opacity-0"
-              href={INFORMATION_URL.MEMBERS}
-              target="_blank"
-              scroll={false}
-            >
-              VISIT MEMBERS
-            </Link>
+            <div className="space-x-2">
+              <Link
+                className="bg-clab-yellow border-clab-yellow text-clab-yellow rounded-full border bg-opacity-30 px-4 py-2 text-sm hover:bg-opacity-0"
+                href={INFORMATION_URL.MEMBERS}
+                target="_blank"
+                scroll={false}
+              >
+                VISIT MEMBERS
+              </Link>
+              <Link
+                className="bg-clab-yellow border-clab-yellow text-clab-yellow rounded-full border bg-opacity-30 px-4 py-2 text-sm hover:bg-opacity-0"
+                href={PATH.RESULT}
+                scroll={false}
+              >
+                합격 확인
+              </Link>
+            </div>
           </div>
           <MenuOutline
             width={20}

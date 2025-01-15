@@ -3,6 +3,7 @@ export const PATH = {
   APPLY: '/apply',
   ASK: '/ask',
   APPLICATION_FORM: '/applicationForm',
+  RESULT: '/apply/result',
 };
 
 export const INFORMATION_URL = {

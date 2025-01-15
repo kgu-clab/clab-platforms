@@ -15,6 +15,11 @@ export interface Recruitment {
 
 export interface RecruitmentDetailItem extends Recruitment {
   teamIntroduction: string;
-  processTimeLine: string;
+  processTimeline: string;
   jobDescription: string;
+}
+
+export interface RecruitmentList {
+  id: number;
+  applicationType: ApplicationType;
 }

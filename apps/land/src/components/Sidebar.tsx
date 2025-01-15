@@ -3,7 +3,7 @@
 import { Menubar } from '@clab-platforms/design-system';
 import { cn } from '@clab-platforms/utils';
 
-import { PATH } from '@/constants';
+import { INFORMATION_URL, PATH } from '@/constants';
 import Link from 'next/link';
 
 interface SidebarProps {
@@ -33,6 +33,16 @@ export default function Sidebar({ isOpen, pathname }: SidebarProps) {
         <Menubar.Item className="text-white" selected={pathname === PATH.ASK}>
           <Link href={PATH.ASK} scroll={false}>
             문의
+          </Link>
+        </Menubar.Item>
+        <Menubar.Item className="text-white">
+          <Link href={INFORMATION_URL.MEMBERS} scroll={false} target="_blank">
+            VISIT MEMBERS
+          </Link>
+        </Menubar.Item>
+        <Menubar.Item className="text-white" selected={pathname === PATH.ASK}>
+          <Link href={PATH.RESULT} scroll={false}>
+            합격 확인
           </Link>
         </Menubar.Item>
       </Menubar>
