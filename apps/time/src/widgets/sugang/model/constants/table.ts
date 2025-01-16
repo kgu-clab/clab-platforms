@@ -1,3 +1,9 @@
+export const TABLE_TITLES = {
+  WISH_LIST: '소망가방',
+  LECTURE_LIST: '개설강좌',
+  REGISTRATION_LIST: '수강신청',
+};
+
 export const TABLE_HEADERS = {
   WISH_LIST: [
     'No',
