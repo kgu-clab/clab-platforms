@@ -3,7 +3,7 @@ import React from 'react';
 import { cn } from '@clab-platforms/utils';
 
 import { dummyData } from '@/widgets/sugang/data';
-import { TABLE_HEADERS } from '@/widgets/sugang/model';
+import { TABLE_HEADERS, TABLE_TITLES } from '@/widgets/sugang/model';
 import { TableNameKey } from '@/widgets/sugang/types';
 
 interface TableNameProps {
@@ -27,12 +27,7 @@ export default function SugangTableView({ tableName }: TableNameProps) {
 }
 
 function SugangTableTitle({ tableName }: TableNameProps) {
-  const tableTitle =
-    tableName === 'WISH_LIST'
-      ? '소망가방'
-      : tableName === 'REGISTRATION_LIST'
-        ? '수강신청'
-        : '';
+  const tableTitle = TABLE_TITLES[tableName];
 
   return (
     <div className="mb-2 w-full justify-between">
