@@ -1,16 +1,25 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { toast } from 'react-toastify';
 
 import { Button, Input } from '@clab-platforms/design-system';
 
 import { Modal, Select, Textarea } from '@/components';
-import { OTHER_ACTIVITY_MAX_LENGTH, SELECT_OPTIONS } from '@/constants';
+import {
+  EMPTY_INPUT,
+  OTHER_ACTIVITY_MAX_LENGTH,
+  SELECT_OPTIONS,
+} from '@/constants';
+import type { ApplyForm } from '@/types';
 import { formattedPhoneInput } from '@/utils';
+
+import { ApplyCheck, ApplyFailed, ApplySuccess } from '../components';
+import { useApplicationMutation, useApplicationNow } from '../hooks';
 
 const initialValue = {
   studentId: '',
-  recruitmentId: SELECT_OPTIONS.RECRUITMENT_TYPE[0].value,
+  recruitmentId: 0,
   name: '',
   contact: '',
   email: '',
@@ -21,30 +30,47 @@ const initialValue = {
   interests: SELECT_OPTIONS.MY_FIELD[0].value,
   otherActivities: '',
   githubUrl: '',
+  applicationType: SELECT_OPTIONS.RECRUITMENT_TYPE[0].value,
 };
 
 export default function Form() {
-  const [formValue, setFormValue] = useState(initialValue);
+  const [formValue, setFormValue] = useState<ApplyForm>(initialValue);
   const [modalContent, setModalContent] = useState<React.ReactNode>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isApplySuccess, setIsApplySuccess] = useState(false);
 
-  const checkInputValue = () => {
-    if (
+  const { applicationMutate } = useApplicationMutation({ setIsApplySuccess });
+  const { data, isError } = useApplicationNow();
+
+  useEffect(() => {
+    if (!isError && data?.data) {
+      setFormValue((prev) => ({
+        ...prev,
+        applicationType: data?.data[0].applicationType,
+      }));
+    }
+  }, [data, isError]);
+
+  const isFormInputValid = () => {
+    if (!formValue.studentId) toast.error(EMPTY_INPUT.STUDENT_ID);
+    if (!formValue.name) toast.error(EMPTY_INPUT.NAME);
+    if (!formValue.contact) toast.error(EMPTY_INPUT.CONTACT);
+    if (!formValue.email) toast.error(EMPTY_INPUT.EMAIL);
+    if (!formValue.department) toast.error(EMPTY_INPUT.DEPARTMENT);
+    if (!formValue.birth) toast.error(EMPTY_INPUT.BIRTH);
+    if (!formValue.address) toast.error(EMPTY_INPUT.ADDRESS);
+    if (!formValue.otherActivities) toast.error(EMPTY_INPUT.OTHER_ACTIVITIES);
+
+    return (
       !formValue.studentId ||
       !formValue.name ||
       !formValue.contact ||
       !formValue.email ||
       !formValue.department ||
-      !formValue.grade ||
       !formValue.birth ||
       !formValue.address ||
-      !formValue.interests ||
       !formValue.otherActivities
-    ) {
-      return false;
-    }
-    return true;
+    );
   };
 
   const handleFormValueChange = (
@@ -62,77 +88,37 @@ export default function Form() {
     setIsModalOpen(false);
   };
 
-  const applySuccess = (
-    <>
-      <h3 className="text-2xl font-bold">지원하기</h3>
-      <p className="text-lg text-gray-500">
-        지원이 완료됐어요!
-        <br />
-        서류 검토 후 연락 드릴 예정이에요.
-      </p>
-      <div className="flex justify-center space-x-2">
-        <Button
-          onClick={handleModalClose}
-          className="bg-clab-light-blue hover:bg-clab-light-blue px-4 hover:bg-opacity-70"
-        >
-          확인
-        </Button>
-      </div>
-    </>
-  );
-
-  const applyFailed = (
-    <>
-      <h3 className="text-2xl font-bold">지원하기</h3>
-      <p className="text-lg text-gray-500">
-        지원에 실패했어요. <br />
-        지원서를 검토하고 다시 시도해주세요.
-      </p>
-      <div className="flex justify-center space-x-2">
-        <Button
-          onClick={handleModalClose}
-          className="bg-clab-light-blue hover:bg-clab-light-blue px-4 hover:bg-opacity-70"
-        >
-          확인
-        </Button>
-      </div>
-    </>
-  );
-
   const handleModalConfirm = () => {
-    const checked = checkInputValue();
-    setIsApplySuccess(true);
-    if (checked) {
-      setModalContent(isApplySuccess ? applySuccess : applyFailed);
-    } else {
-      setModalContent(applyFailed);
-    }
+    applicationMutate(formValue);
+    setModalContent(
+      isApplySuccess ? (
+        <ApplySuccess handleModalClose={handleModalClose} />
+      ) : (
+        <ApplyFailed handleModalClose={handleModalClose} />
+      ),
+    );
+    isApplySuccess && setFormValue(initialValue);
   };
 
-  const applyCheck = (
-    <>
-      <h3 className="text-2xl font-bold">지원하기</h3>
-      <p className="text-lg text-gray-500">작성하신 정보로 지원하시겠습니까?</p>
-      <div className="flex justify-center space-x-2">
-        <Button
-          onClick={handleModalConfirm}
-          className="bg-clab-light-blue hover:bg-clab-light-blue px-4 hover:bg-opacity-70"
-        >
-          확인
-        </Button>
-        <Button
-          onClick={handleModalClose}
-          className="bg-clab-light-blue hover:bg-clab-light-blue px-4 hover:bg-opacity-70"
-        >
-          취소
-        </Button>
-      </div>
-    </>
-  );
-
   const handleApplyButtonClick = () => {
-    setModalContent(applyCheck);
-    setIsModalOpen(true);
+    setFormValue((prev) => ({
+      ...prev,
+      contact: formValue.contact.replace(/-/g, ''),
+      grade: Number(formValue.grade),
+      recruitmentId: data?.data[0].id,
+    }));
+
+    const checked = isFormInputValid();
+
+    if (!checked) {
+      setModalContent(
+        <ApplyCheck
+          handleModalConfirm={handleModalConfirm}
+          handleModalClose={handleModalClose}
+        />,
+      );
+      setIsModalOpen(true);
+    }
   };
 
   return (
@@ -143,14 +129,14 @@ export default function Form() {
             className="col-span-2"
             label="구분"
             options={SELECT_OPTIONS.RECRUITMENT_TYPE}
-            value={formValue.recruitmentId}
-            name="recruitmentId"
+            value={formValue.applicationType}
+            name="applicationType"
             onChange={handleFormValueChange}
           />
           <Input
             id="name"
             name="name"
-            placeholder="김씨랩"
+            placeholder="홍길동"
             className="grow"
             onChange={handleFormValueChange}
             value={formValue.name}
