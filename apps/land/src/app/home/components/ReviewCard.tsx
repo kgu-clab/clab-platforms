@@ -1,12 +1,10 @@
 import { cn } from '@clab-platforms/utils';
 
-interface ReviewCardProps {
-  description: string;
-  writer: string;
-  meta: string;
-  id: number;
+import type { Review } from '@/types';
+import Image from 'next/image';
+
+interface ReviewCardProps extends Review {
   isVisible: boolean;
-  color: string;
 }
 
 export default function ReviewCard({
@@ -16,32 +14,37 @@ export default function ReviewCard({
   id,
   isVisible,
   color,
+  imageSrc,
 }: ReviewCardProps) {
   return (
     <div
       id={`review-card-${id}`}
-      className={`review-card flex flex-col transition-all duration-300 ${
-        isVisible ? 'translate-y-0 scale-110' : 'translate-y-18 scale-100'
-      }`}
+      className={cn(
+        'review-card transition-all duration-300',
+        isVisible ? 'translate-y-0 scale-110' : 'translate-y-18 scale-100',
+      )}
     >
-      <p
+      <div
         className={cn(
-          'mb-4 font-bold',
-          id % 2 === 0 ? 'text-right' : 'text-left',
-        )}
-      >
-        {writer[0]}** | {meta}
-      </p>
-      <p
-        className={cn(
-          'rounded-t-xl bg-white p-6 text-black transition-all duration-300 ',
-          id % 2 === 0 ? 'rounded-l-xl' : 'rounded-r-xl',
+          'rounded-xl bg-white p-6 text-black transition-all duration-300',
           isVisible && color,
-          isVisible && 'font-bold',
         )}
       >
-        {description}
-      </p>
+        <div className="mb-4 flex space-x-2">
+          <Image
+            src={imageSrc}
+            alt="C-Lab"
+            width={40}
+            height={40}
+            className="size-[40px] rounded-full object-cover"
+          />
+          <p className="text-start font-bold">
+            {writer[0]}**
+            <span className="block text-sm text-gray-500">{meta}</span>
+          </p>
+        </div>
+        <p className={cn(isVisible && 'font-bold')}>{description}</p>
+      </div>
     </div>
   );
 }

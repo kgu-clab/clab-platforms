@@ -34,7 +34,7 @@ export default function ReviewSection() {
   }, []);
 
   return (
-    <Section className="items-end bg-gray-200 p-16 text-black lg:px-80 lg:py-32">
+    <Section className="items-end bg-gray-200 p-16 text-black lg:px-44 lg:py-32">
       <div className="mb-24 flex flex-col space-y-2 text-right">
         <h2 className="text-4xl font-bold md:text-6xl">REVIEW</h2>
         <p className="text-xl md:text-3xl">
@@ -45,7 +45,7 @@ export default function ReviewSection() {
       </div>
 
       <div className="grid grid-rows-1 items-center gap-16">
-        {REVIEW.map(({ id, description, writer, meta, color }) => (
+        {REVIEW.map(({ id, description, writer, meta, color, imageSrc }) => (
           <ReviewCard
             key={id}
             id={id}
@@ -54,6 +54,7 @@ export default function ReviewSection() {
             meta={meta}
             isVisible={visibleCard === id}
             color={color}
+            imageSrc={imageSrc}
           />
         ))}
       </div>

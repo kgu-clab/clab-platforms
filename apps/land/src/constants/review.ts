@@ -4,10 +4,11 @@ export const REVIEW: Array<Review> = [
   {
     id: 1,
     description:
-      '1학년때 C-Lab에서 선배님들의 도움으로 C언어를 기초부터 빠르게 학습할수 있어서 좋았습니다. 분위기도 차갑지 않고 선배님들과 친해지기도 좋고 질문에 대한 답변을 잘해주시기 때문에 학습과 선배들과의 인연 둘 다 만들 수 있었습니다',
+      '1학년때 C-Lab에서 선배님들의 도움으로 C언어를 기초부터 빠르게 학습할수 있어서 좋았습니다. 분위기도 차갑지 않고 선배님들과 친해지기도 좋고 질문에 대한 답변을 잘해주시기 때문에 학습과 선배들과의 인연 둘 다 만들 수 있었습니다.',
     writer: '이진명',
     meta: 'C언어, 자료구조 스터디 수강 | 24학번',
     color: 'bg-red-300',
+    imageSrc: '/review/이진명.jpeg',
   },
   {
     id: 2,
@@ -16,6 +17,7 @@ export const REVIEW: Array<Review> = [
     writer: '김태현',
     meta: 'Web분야 스터디 수강 | 23학번',
     color: 'bg-pink-300',
+    imageSrc: '/review/김태현.jpeg',
   },
   {
     id: 3,
@@ -24,6 +26,7 @@ export const REVIEW: Array<Review> = [
     writer: '유승헌',
     meta: 'Server분야 스터디 수강 | 21학번',
     color: 'bg-purple-300',
+    imageSrc: '/review/유승헌.jpeg',
   },
   {
     id: 4,
@@ -32,5 +35,6 @@ export const REVIEW: Array<Review> = [
     writer: '오건우',
     meta: 'Game분야 스터디 수강 | 23학번',
     color: 'bg-blue-300',
+    imageSrc: '/review/오건우.jpeg',
   },
 ];
