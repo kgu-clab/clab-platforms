@@ -1,5 +1,9 @@
-import { APPLICATION_TYPE } from '@/constants';
-import { ApplicationType } from '@/types';
+import {
+  APPLICATION_TYPE,
+  EXECUTIVE_POSITION,
+  SERVER_BASE_URL,
+} from '@/constants';
+import type { ApplicationType, ExecutivePosition } from '@/types';
 import dayjs from 'dayjs';
 
 /**
@@ -60,4 +64,15 @@ export function formattedPeriod(startDate: string, endDate: string): string {
   const end = dayjs(endDate).format('YYYY-MM-DD HH:mm');
 
   return `${start} ~ ${end}`;
+}
+
+export function getImageUrl(imageUrl: string): string {
+  return (imageUrl = `https://${SERVER_BASE_URL}${imageUrl}`);
+}
+
+/**
+ * 운영진 역할을 한국어로 변환합니다.
+ */
+export function toKoreanExecutivePosition(position: ExecutivePosition) {
+  return EXECUTIVE_POSITION[position];
 }

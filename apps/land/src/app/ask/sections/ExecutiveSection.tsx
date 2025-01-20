@@ -33,7 +33,7 @@ export default function ExecutiveSection() {
   return (
     <div>
       <p>C-Lab을 위해 노력하는 운영진을 소개해요.</p>
-      <div className="mt-4 grid grid-cols-1 gap-4 md:!grid-cols-3">
+      <div className="mt-4 grid grid-cols-1 gap-4 lg:!grid-cols-3">
         {executiveList.map(
           ({
             executiveId,

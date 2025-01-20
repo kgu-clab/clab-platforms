@@ -7,7 +7,7 @@ export default function Apply() {
     <PageLayout
       nav
       footer
-      className="flex min-h-screen flex-col space-y-12 p-12 !pt-28 md:p-20"
+      className="flex min-h-screen flex-col space-y-12 p-8 !pt-24 lg:p-20"
     >
       <div className="space-y-2">
         <h1 className="text-left text-6xl font-bold">Any Questions?</h1>

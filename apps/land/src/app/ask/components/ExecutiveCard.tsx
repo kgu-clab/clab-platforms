@@ -1,15 +1,9 @@
-import type { ExecutivePosition } from '@/types';
+import type { Executive } from '@/types';
 import { getImageUrl, toKoreanExecutivePosition } from '@/utils';
 import Image from 'next/image';
 import Link from 'next/link';
 
-interface Props {
-  name: string;
-  email: string;
-  interests: string;
-  position: ExecutivePosition;
-  imageUrl: string;
-}
+interface Props extends Omit<Executive, 'executiveId'> {}
 
 export default function ExecutiveCard({
   name,
@@ -21,7 +15,7 @@ export default function ExecutiveCard({
   return (
     <div className="bg-clab-light-gray flex items-center space-x-4 rounded-lg p-6">
       <Image
-        className="h-[150px] w-[120px] object-cover"
+        className="flex h-[150px] w-[120px] object-cover"
         width={120}
         height={150}
         src={getImageUrl(imageUrl)}
