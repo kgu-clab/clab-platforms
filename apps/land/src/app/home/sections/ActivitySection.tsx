@@ -7,6 +7,25 @@ import { Section } from '@/components';
 import { ActivityCard } from '../components';
 import { useScrollAnimation } from '../hooks';
 
+const ActivityData = [
+  {
+    title: 'MT',
+    image: '/activity/activity_photo1.jpeg',
+  },
+  {
+    title: '네트워킹 데이',
+    image: '/activity/activity_photo2.jpeg',
+  },
+  {
+    title: '회식',
+    image: '/activity/activity_photo3.jpeg',
+  },
+  {
+    title: '1학년 C언어 스터디',
+    image: '/activity/activity_photo4.jpeg',
+  },
+];
+
 export default function ActivitySection() {
   const isVisibleActivity = useScrollAnimation('scroll-fade-activity');
 
@@ -21,38 +40,18 @@ export default function ActivitySection() {
       </div>
 
       <div className="grid grid-cols-1 gap-16 overflow-hidden px-12 md:!grid-cols-2 md:gap-0 md:gap-x-20 lg:px-40">
-        <ActivityCard
-          title="스터디"
-          image="/clab_picture.jpeg"
-          className={cn(
-            isVisibleActivity ? 'visible' : '',
-            'scroll-fade-activity',
-          )}
-        />
-        <ActivityCard
-          title="프로젝트"
-          image="/clab_picture.jpeg"
-          className={cn(
-            isVisibleActivity ? 'visible' : '',
-            'scroll-fade-activity text-end md:mt-64',
-          )}
-        />
-        <ActivityCard
-          title="MT"
-          image="/clab_picture.jpeg"
-          className={cn(
-            isVisibleActivity ? 'visible' : '',
-            'scroll-fade-activity',
-          )}
-        />
-        <ActivityCard
-          title="네트워킹 데이"
-          image="/clab_picture.jpeg"
-          className={cn(
-            isVisibleActivity ? 'visible' : '',
-            'scroll-fade-activity text-end md:mt-64',
-          )}
-        />
+        {ActivityData.map(({ title, image }, index) => (
+          <ActivityCard
+            key={title}
+            title={title}
+            image={image}
+            className={cn(
+              'scroll-fade-activity',
+              isVisibleActivity ? 'visible' : '',
+              index % 2 !== 0 && 'text-end md:mt-64',
+            )}
+          />
+        ))}
       </div>
     </Section>
   );

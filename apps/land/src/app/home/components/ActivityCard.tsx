@@ -17,7 +17,7 @@ export default function ActivityCard({
     <div
       className={cn('lg:max-w-1/3 w-full space-y-2 overflow-hidden', className)}
     >
-      <p className="text-3xl font-bold">{title}</p>
+      <p className="text-2xl font-bold">{title}</p>
       <Image
         className="rounded-md object-cover"
         width={560}
