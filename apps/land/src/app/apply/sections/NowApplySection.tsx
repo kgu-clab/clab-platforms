@@ -2,35 +2,28 @@
 
 import { useEffect, useState } from 'react';
 
-import { PATH } from '@/constants';
-import { isProgressing } from '@/utils';
+import { useApplicationNow } from '@/app/applicationForm/hooks';
+import { APPLY_MESSAGE, PATH } from '@/constants';
 import Link from 'next/link';
 
-import { useRecruitment } from '../hooks';
-
 export default function NowApplySection() {
-  const { data, isError } = useRecruitment();
-  const recentRecruitment = data?.data[0];
+  const { data, isError } = useApplicationNow();
   const [isRecruit, setIsRecruit] = useState(false);
 
   useEffect(() => {
-    if (!isError && recentRecruitment) {
-      const checkRecruit = isProgressing(
-        recentRecruitment.startDate,
-        recentRecruitment.endDate,
-      );
-
-      setIsRecruit(checkRecruit);
+    if (!isError) {
+      const recentRecruitment = data?.data.length > 0;
+      setIsRecruit(recentRecruitment);
     }
   }, [data, isError]);
 
   return (
     <div className="bg-clab-gray flex h-fit flex-col space-y-6 break-keep bg-opacity-70 py-28 text-center">
-      <p className="text-5xl font-bold leading-snug">
-        {isRecruit ? 'C-Lab은 현재 모집중!' : '지금은 모집기간이 아니에요 😢'}
+      <p className="text-3xl font-bold leading-snug md:text-5xl">
+        {isRecruit ? APPLY_MESSAGE.CAN_APPLY : APPLY_MESSAGE.CANNOT_APPLY}
       </p>
-      <p className="text-clab-dark-yellow text-2xl font-bold">
-        {isRecruit ? '망설이지 말고 지금 바로' : '다음 모집 때 만나요!'}
+      <p className="text-clab-dark-yellow text-xl font-bold md:text-2xl">
+        {isRecruit ? APPLY_MESSAGE.NOW : APPLY_MESSAGE.NEXT}
       </p>
       {isRecruit && (
         <Link
