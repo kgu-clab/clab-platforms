@@ -83,7 +83,7 @@
   /* Flip Container */
   .flip-container {
     perspective: 1000px;
-    @apply shadow-clab-blue flex h-[18rem] w-[18rem] flex-col overflow-hidden whitespace-normal rounded-[50%] text-center shadow-[0_0_20px_1px];
+    @apply shadow-clab-light-gray flex h-[18rem] w-[18rem] flex-col overflow-hidden whitespace-normal rounded-[50%] text-center shadow-[0_0_48px_8px];
   }
 
   .flip {
@@ -103,7 +103,7 @@
 
   .back {
     transform: rotateY(180deg);
-    @apply bg-clab-blue;
+    @apply bg-clab-light-gray;
   }
 
   .flip-container:hover .flip {

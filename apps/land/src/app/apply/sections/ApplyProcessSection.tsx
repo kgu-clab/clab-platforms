@@ -19,13 +19,13 @@ const ApplyProcess = [
 
 export default function ApplyProcessSection() {
   return (
-    <div className="flex h-fit w-screen flex-col items-center justify-center overflow-x-hidden break-keep py-32">
+    <div className="flex h-fit w-screen flex-col items-center justify-center overflow-x-hidden break-keep py-24">
       <p className="mb-12 text-3xl font-bold">지원 절차</p>
-      <div className="grid grid-cols-2 gap-4 px-4 md:grid-cols-4 md:gap-8">
+      <div className="grid grid-cols-2 gap-4 px-4 md:!grid-cols-4 md:gap-8">
         {ApplyProcess.map(({ title, content }, index) => (
           <div
             key={index}
-            className="bg-clab-gray flex h-52 w-60 flex-col justify-between rounded-lg p-6 text-left md:h-60 md:py-8"
+            className="bg-clab-gray flex h-52 w-48 flex-col justify-between rounded-lg p-6 text-left md:size-60 md:py-8"
           >
             <p className="mb-4 text-2xl font-bold">{index + 1}</p>
             <div>

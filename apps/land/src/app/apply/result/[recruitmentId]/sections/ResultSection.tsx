@@ -60,7 +60,7 @@ export default function ResultSection() {
           <p className="my-4">감사합니다.</p>
 
           <Link
-            href={result?.isPass ? PATH.HOME : PATH.RESULT} // 필요에 따라 변경
+            href={result?.isPass ? PATH.HOME : PATH.RESULT}
             className="text-bold text-sm text-gray-500 underline after:content-['_↗'] hover:text-gray-600"
           >
             {result?.isPass ? 'HOME' : '다시 확인하러 가기'}

@@ -13,11 +13,11 @@ export default function DescriptionSection() {
     <Section>
       <p
         className={cn(
-          'scroll-fade-info mx-4 whitespace-pre-wrap px-4 text-xl leading-loose md:text-3xl md:leading-normal lg:px-72',
+          'scroll-fade-info mx-4 whitespace-pre-wrap px-4 text-xl leading-loose md:!px-32 md:!text-3xl md:!leading-normal',
           isVisibleInfo ? 'visible' : '',
         )}
       >
-        <span className="text-3xl font-bold md:text-5xl ">C-Lab</span>은
+        <span className="text-3xl font-bold md:text-5xl">C-Lab</span>은
         <br />
         경기대학교 AI컴퓨터공학부 학술동아리로 2014년도부터 지금까지 이어지고
         있어요.

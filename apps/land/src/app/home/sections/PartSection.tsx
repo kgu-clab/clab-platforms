@@ -29,14 +29,14 @@ export default function PartSection() {
       </div>
 
       <div className="px-8 sm:hidden">
-        <div className="mb-8 flex justify-between">
+        <div className="mb-8 flex justify-between space-x-4">
           {PART.map(({ name, id }) => (
             <Button
               key={id}
               onClick={() => handlePartButtonClick(id)}
               color="gray"
               className={cn(
-                'px-6',
+                'w-full',
                 part.id === id
                   ? 'bg-gray-200 font-bold text-black'
                   : 'bg-transparent',
@@ -49,7 +49,7 @@ export default function PartSection() {
         <PartCard description={part.description} name={part.name} />
       </div>
 
-      <div className="mx-12 hidden grid-cols-1 gap-12 sm:mx-0 sm:grid sm:grid-cols-2">
+      <div className="mx-12 hidden gap-12 sm:mx-0 sm:grid-cols-2 md:grid">
         {PART.map(({ id, name, description }) => (
           <PartCard key={id} description={description} name={name} />
         ))}

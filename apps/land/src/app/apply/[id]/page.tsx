@@ -33,7 +33,7 @@ export default function Recruitment() {
     <PageLayout
       nav
       footer
-      className="flex min-h-screen flex-col space-y-16 overflow-hidden p-36"
+      className="flex min-h-screen flex-col overflow-hidden"
     >
       {detailData ? (
         <DetailSection detailData={detailData} />

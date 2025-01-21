@@ -70,8 +70,8 @@ export default function ValueSection() {
       <div className="mb-12 flex flex-col space-y-2 px-12 text-start md:mb-24 md:pl-40">
         <h2 className="text-4xl font-bold md:text-6xl">VALUE</h2>
         <p className="text-xl md:text-3xl">
-          C-Lab에서 추구하는 <span className="text-clab-light-blue">가치</span>
-          를 소개해요.
+          C-Lab에서 추구하는 <span className="text-clab-yellow">가치</span>를
+          소개해요.
         </p>
       </div>
 
@@ -88,7 +88,7 @@ export default function ValueSection() {
             />
           ))}
         </div>
-        <div className="flex items-center gap-8 p-2 pt-12 md:hidden">
+        <div className="flex items-center gap-8 p-2 pt-12 md:!hidden">
           <LeftArrowSolid
             width={36}
             height={36}

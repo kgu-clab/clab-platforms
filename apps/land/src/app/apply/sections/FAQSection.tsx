@@ -23,7 +23,7 @@ export default function FAQSection() {
   };
 
   return (
-    <Section>
+    <Section className="py-16">
       <p className="mb-4 text-5xl font-bold">FAQ</p>
       <p className="text-clab-dark-yellow mb-8 text-2xl font-bold">
         자주 묻는 질문들이에요.
@@ -51,10 +51,10 @@ export default function FAQSection() {
           </div>
         ))}
       </div>
-      <p className="text-clab-dark-yellow my-16 flex text-xl font-bold md:text-2xl">
+      <p className="text-clab-dark-yellow mt-12 flex text-xl font-bold">
         추가적인 질문이 있으시다면
         <Link href={PATH.ASK} scroll={false}>
-          <span className="ml-2 flex text-2xl font-bold text-white underline underline-offset-4">
+          <span className="ml-2 flex text-xl font-bold text-white underline underline-offset-4">
             문의하러 가기
             <ArrowRightUpSolid width={32} height={32} />
           </span>

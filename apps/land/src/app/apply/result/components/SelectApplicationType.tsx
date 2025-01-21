@@ -32,7 +32,7 @@ export default function SelectApplicationType({
       </p>
       <div className="border-clab-light-gray flex h-24 flex-wrap items-center justify-center rounded-md border p-4">
         {!isError && applicationTypeData.length > 0 ? (
-          <div className="gap-2">
+          <div className="space-x-2">
             {applicationTypeData.map(({ id, applicationType }) => {
               return (
                 <Button
@@ -40,7 +40,8 @@ export default function SelectApplicationType({
                   size="sm"
                   className={cn(
                     'border-white bg-white bg-opacity-30 text-xs text-white hover:bg-none',
-                    recruitmentId === id && 'bg-none',
+                    recruitmentId === id &&
+                      'bg-clab-blue border-clab-blue border',
                   )}
                   onClick={() => handleRecruitButtonClick(id)}
                 >

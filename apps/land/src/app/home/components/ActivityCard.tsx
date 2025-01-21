@@ -24,6 +24,7 @@ export default function ActivityCard({
         height={420}
         src={image}
         alt={title}
+        style={{ width: '560', height: '420' }}
       />
     </div>
   );

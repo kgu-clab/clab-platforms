@@ -1,5 +1,6 @@
 import { toDecodeHTMLEntities } from '@clab-platforms/utils';
 
+import { Section } from '@/components';
 import { PATH } from '@/constants';
 import { RECRUITMENT_DETAIL_TYPE } from '@/constants/recruitment';
 import type { RecruitmentDetailItem } from '@/types';
@@ -14,11 +15,11 @@ interface DetailSectionProps {
 
 export default function DetailSection({ detailData }: DetailSectionProps) {
   return (
-    <>
+    <Section className="my-24 justify-center space-y-16 text-left">
       <h1 className="text-clab-light-blue text-6xl font-bold">
         {toDecodeHTMLEntities(detailData.title)}
       </h1>
-      <div className="grid grid-cols-2 gap-12 break-keep">
+      <div className="grid grid-cols-2 gap-12">
         <Content
           title={RECRUITMENT_DETAIL_TYPE[0]}
           detail={toDecodeHTMLEntities(detailData.teamIntroduction)}
@@ -48,7 +49,7 @@ export default function DetailSection({ detailData }: DetailSectionProps) {
         />
       </div>
       {detailData.status !== '종료' && (
-        <div className="flex space-x-2">
+        <div className="flex justify-start space-x-4">
           <Link
             className="bg-clab-yellow border-clab-yellow text-clab-yellow rounded-full border bg-opacity-30 px-8 py-2 text-lg font-bold hover:bg-opacity-0"
             href={PATH.ASK}
@@ -63,6 +64,6 @@ export default function DetailSection({ detailData }: DetailSectionProps) {
           </Link>
         </div>
       )}
-    </>
+    </Section>
   );
 }

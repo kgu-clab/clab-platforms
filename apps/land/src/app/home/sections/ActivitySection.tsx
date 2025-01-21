@@ -20,7 +20,7 @@ export default function ActivitySection() {
         </p>
       </div>
 
-      <div className="grid grid-cols-1 gap-16 overflow-hidden px-12 md:grid-cols-2 md:gap-0 md:gap-x-20 lg:px-40">
+      <div className="grid grid-cols-1 gap-16 overflow-hidden px-12 md:!grid-cols-2 md:gap-0 md:gap-x-20 lg:px-40">
         <ActivityCard
           title="스터디"
           image="/clab_picture.jpeg"
