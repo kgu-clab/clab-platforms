@@ -28,18 +28,17 @@ export default function CheckResultForm({ recruitmentId }: Props) {
       <Input
         id="studentId"
         name="studentId"
-        placeholder="학번"
+        placeholder="학번을 입력해주세요"
         className="grow"
         onChange={(e) => setStudentId(e.target.value)}
         value={studentId}
-        label="학번을 입력해주세요"
         inputClassName="text-black"
       />
       <Button
         className="bg-clab-blue border-clab-blue border text-white hover:bg-none"
         onClick={handleCheckButtonClick}
       >
-        {studentId.length > 8
+        {studentId.length === 9
           ? '정상적으로 입력됐어요. 확인할까요? 🍀'
           : '합격 확인하기 🔖'}
       </Button>

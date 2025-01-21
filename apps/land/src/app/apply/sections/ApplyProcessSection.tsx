@@ -19,9 +19,9 @@ const ApplyProcess = [
 
 export default function ApplyProcessSection() {
   return (
-    <div className="flex h-fit w-screen flex-col items-center justify-center overflow-x-hidden break-keep py-24">
-      <p className="mb-12 text-3xl font-bold">지원 절차</p>
-      <div className="grid grid-cols-2 gap-4 px-4 md:!grid-cols-4 md:gap-8">
+    <div className="flex h-fit w-screen flex-col items-center space-y-8 overflow-x-hidden break-keep py-32 lg:pt-20">
+      <p className="text-2xl font-bold">지원 절차</p>
+      <div className="grid grid-cols-2 gap-4 md:!grid-cols-4 md:gap-8">
         {ApplyProcess.map(({ title, content }, index) => (
           <div
             key={index}

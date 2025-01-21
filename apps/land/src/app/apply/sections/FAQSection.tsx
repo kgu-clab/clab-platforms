@@ -53,7 +53,7 @@ export default function FAQSection() {
       </div>
       <p className="text-clab-dark-yellow mt-12 flex text-xl font-bold">
         추가적인 질문이 있으시다면
-        <Link href={PATH.ASK} scroll={false}>
+        <Link href={PATH.ASK}>
           <span className="ml-2 flex text-xl font-bold text-white underline underline-offset-4">
             문의하러 가기
             <ArrowRightUpSolid width={32} height={32} />

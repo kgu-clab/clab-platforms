@@ -7,7 +7,7 @@ export default function ApplicationForm() {
     <PageLayout
       nav
       footer
-      className="flex min-h-screen flex-col items-center overflow-hidden break-keep px-12 py-28 text-center"
+      className="flex min-h-screen flex-col items-center overflow-hidden break-keep px-12 py-16 text-center"
     >
       <h1 className="mb-4 text-4xl font-bold md:text-5xl">지원서</h1>
       <p className="text-clab-dark-yellow mb-8 text-lg font-bold md:text-xl">

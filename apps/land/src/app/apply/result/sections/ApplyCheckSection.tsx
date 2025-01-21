@@ -30,7 +30,7 @@ export default function ApplyCheckSection() {
   }
 
   return (
-    <Section className="border-clab-light-gray h-3/4 w-fit items-center space-y-4 border p-16">
+    <Section className="w-fit items-center space-y-4">
       <SelectApplicationType
         isError={isError}
         applicationTypeData={data?.data}

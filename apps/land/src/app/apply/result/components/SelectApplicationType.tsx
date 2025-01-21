@@ -18,9 +18,9 @@ export default function SelectApplicationType({
   applicationTypeData,
 }: Props) {
   return (
-    <div className="size-fit space-y-4">
+    <div className="space-y-8">
       <div className="mb-8 flex flex-col items-center space-y-4">
-        <h1 className="text-2xl font-bold">합격 확인하기</h1>
+        <h1 className="text-3xl font-bold">합격 확인하기</h1>
         <Image src="/favicon.ico" alt="C-Lab" width={80} height={80} />
       </div>
       <hr />
@@ -37,7 +37,6 @@ export default function SelectApplicationType({
               return (
                 <Button
                   key={id}
-                  size="sm"
                   className={cn(
                     'border-white bg-white bg-opacity-30 text-xs text-white hover:bg-none',
                     recruitmentId === id &&

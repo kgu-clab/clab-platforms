@@ -19,7 +19,6 @@ export default function ContactInfoSection() {
         오픈 채팅 :{' '}
         <Link
           target="_blank"
-          scroll={false}
           href="https://open.kakao.com/o/gJWcoM6d"
           className="text-clab-yellow underline-offset-4 hover:underline"
         >
@@ -38,7 +37,6 @@ export default function ContactInfoSection() {
       <p>
         서비스문의 :{' '}
         <Link
-          scroll={false}
           href="mailto:clab.coreteam@gmail.com"
           className="text-clab-light-blue underline-offset-4 hover:underline"
         >

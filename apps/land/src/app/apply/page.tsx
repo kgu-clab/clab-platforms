@@ -14,7 +14,7 @@ export default function Apply() {
       footer
       className="flex min-h-screen flex-col overflow-hidden"
     >
-      <h1 className="pt-24 text-center text-6xl font-bold md:pl-32 md:!text-start">
+      <h1 className="pt-20 text-center text-6xl font-bold">
         Join To <span className="text-clab-yellow">C-Lab!</span>
       </h1>
       <ApplyProcessSection />

@@ -15,8 +15,8 @@ interface DetailSectionProps {
 
 export default function DetailSection({ detailData }: DetailSectionProps) {
   return (
-    <Section className="my-24 justify-center space-y-16 text-left">
-      <h1 className="text-clab-light-blue text-6xl font-bold">
+    <Section className="justify-center space-y-16 px-8 py-12 text-left lg:px-60">
+      <h1 className="text-clab-light-blue text-4xl font-bold lg:text-6xl">
         {toDecodeHTMLEntities(detailData.title)}
       </h1>
       <div className="grid grid-cols-2 gap-12">

@@ -29,7 +29,6 @@ export default function ExecutiveCard({
         <p className="text-sm">{interests}</p>
         <p>
           <Link
-            scroll={false}
             href={`mailto:${email}`}
             className="text-clab-light-blue underline-offset-4 hover:underline"
           >

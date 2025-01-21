@@ -54,15 +54,21 @@ export default function Nav() {
 
       <nav
         className={cn(
-          'bg-clab-gray fixed top-0 z-30 w-full transition-transform',
+          'bg-clab-gray sticky top-0 z-30 w-full transition-transform',
           {
             '-translate-y-full': !scrollingUp,
           },
         )}
       >
         <div className="flex place-items-center justify-between px-8 py-2 md:px-20">
-          <Link href={PATH.HOME} scroll={false}>
-            <Image src="/favicon.ico" width={48} height={48} alt="C-Lab" />
+          <Link href={PATH.HOME}>
+            <Image
+              src="/favicon.ico"
+              width={48}
+              height={48}
+              alt="C-Lab"
+              priority
+            />
           </Link>
           <div className="hidden space-x-8 md:flex">
             <Link
@@ -71,7 +77,6 @@ export default function Nav() {
                 'font-bold underline underline-offset-8':
                   pathname === PATH.APPLY,
               })}
-              scroll={false}
             >
               지원
             </Link>
@@ -80,7 +85,6 @@ export default function Nav() {
               className={cn('underline-offset-8 hover:underline', {
                 'font-bold underline underline-offset-8': pathname === PATH.ASK,
               })}
-              scroll={false}
             >
               문의
             </Link>
@@ -89,14 +93,12 @@ export default function Nav() {
                 className="bg-clab-yellow border-clab-yellow text-clab-yellow rounded-full border bg-opacity-30 px-4 py-2 text-sm hover:bg-opacity-0"
                 href={INFORMATION_URL.MEMBERS}
                 target="_blank"
-                scroll={false}
               >
                 VISIT MEMBERS
               </Link>
               <Link
                 className="bg-clab-yellow border-clab-yellow text-clab-yellow rounded-full border bg-opacity-30 px-4 py-2 text-sm hover:bg-opacity-0"
                 href={PATH.RESULT}
-                scroll={false}
               >
                 합격 확인
               </Link>
