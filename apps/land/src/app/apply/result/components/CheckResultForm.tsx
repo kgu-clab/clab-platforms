@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { toast } from 'react-toastify';
 
 import { Button, Input } from '@clab-platforms/design-system';
 
@@ -17,6 +18,8 @@ export default function CheckResultForm({ recruitmentId }: Props) {
   const handleCheckButtonClick = async () => {
     if (studentId.length === 9 && recruitmentId !== 0) {
       router.push(`/apply/result/${recruitmentId}?studentId=${studentId}`);
+    } else if (studentId.length !== 9) {
+      toast.error('학번을 입력해주세요.');
     }
   };
 
@@ -29,7 +32,7 @@ export default function CheckResultForm({ recruitmentId }: Props) {
         className="grow"
         onChange={(e) => setStudentId(e.target.value)}
         value={studentId}
-        label="학번"
+        label="학번을 입력해주세요"
         inputClassName="text-black"
       />
       <Button
@@ -37,7 +40,7 @@ export default function CheckResultForm({ recruitmentId }: Props) {
         onClick={handleCheckButtonClick}
       >
         {studentId.length > 8
-          ? '정상적으로 입력됐어요, 확인할까요? 🍀'
+          ? '정상적으로 입력됐어요. 확인할까요? 🍀'
           : '합격 확인하기 🔖'}
       </Button>
     </div>
