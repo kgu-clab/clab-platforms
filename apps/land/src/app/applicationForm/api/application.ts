@@ -1,5 +1,5 @@
 import { API_BASE_URL, END_POINT } from '@/constants';
-import type { ApplyForm } from '@/types';
+import type { ApplicationForm } from '@/types';
 
 interface GetApplyPassedProps {
   recruitmentId: number;
@@ -9,7 +9,7 @@ interface GetApplyPassedProps {
 /**
  * 동아리 지원
  */
-export async function postApplication(body: ApplyForm) {
+export async function postApplication(body: ApplicationForm) {
   const apiURL = `${API_BASE_URL}${END_POINT.APPLICATIONS}`;
 
   const res = await fetch(apiURL, {

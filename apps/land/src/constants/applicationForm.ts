@@ -26,3 +26,17 @@ export const SELECT_OPTIONS = {
  * 1000자
  */
 export const OTHER_ACTIVITY_MAX_LENGTH = 1000;
+
+export const EMPTY_INPUT = {
+  STUDENT_ID: '학번을 작성해주세요.',
+  NAME: '이름을 작성해주세요.',
+  CONTACT: '연락처를 작성해주세요.',
+  EMAIL: '이메일을 작성해주세요.',
+  DEPARTMENT: '학과를 작성해주세요.',
+  BIRTH: '생일을 작성해주세요.',
+  ADDRESS: '거주지를 작성해주세요.',
+  INTERESTS: '관심분야를 선택해주세요.',
+  GRADE: '학년을 선택해주세요.',
+  APPLICATION_TYPE: '구분을 선택해주세요.',
+  OTHER_ACTIVITIES: '지원 동기 및 활동을 작성해주세요.',
+} as const;

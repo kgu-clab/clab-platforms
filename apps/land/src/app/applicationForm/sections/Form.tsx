@@ -11,8 +11,9 @@ import {
   OTHER_ACTIVITY_MAX_LENGTH,
   SELECT_OPTIONS,
 } from '@/constants';
-import type { ApplyForm } from '@/types';
+import type { ApplicationForm } from '@/types';
 import { formattedPhoneInput } from '@/utils';
+import { notFound } from 'next/navigation';
 
 import { ApplyCheck, ApplyFailed, ApplySuccess } from '../components';
 import { useApplicationMutation, useApplicationNow } from '../hooks';
@@ -34,7 +35,7 @@ const initialValue = {
 };
 
 export default function Form() {
-  const [formValue, setFormValue] = useState<ApplyForm>(initialValue);
+  const [formValue, setFormValue] = useState<ApplicationForm>(initialValue);
   const [modalContent, setModalContent] = useState<React.ReactNode>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isApplySuccess, setIsApplySuccess] = useState(false);
@@ -48,6 +49,8 @@ export default function Form() {
         ...prev,
         applicationType: data?.data[0].applicationType,
       }));
+    } else {
+      notFound(); // 현재 모집 중인 공고가 없는 경우
     }
   }, [data, isError]);
 
@@ -123,8 +126,8 @@ export default function Form() {
 
   return (
     <>
-      <div className="grid w-full grid-cols-1 gap-4 text-start md:grid-cols-2 md:gap-8">
-        <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+      <div className="grid w-full grid-cols-1 gap-4 text-start lg:!grid-cols-2 lg:!gap-8">
+        <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
           <Select
             className="col-span-2"
             label="구분"
