@@ -9,7 +9,7 @@ import Textarea from '@components/common/Textarea/Textarea';
 import { ERROR_MESSAGE } from '@constants/message';
 import { SELECT_OPTIONS } from '@constants/select';
 import {
-  ACTIVITY_JOB_DESCRIPTION_MAX_LENGTH,
+  APPLICATION_JOB_DESCRIPTION_MAX_LENGTH,
   APPLICATION_PROCESS_TIMELINE_MAX_LENGTH,
   APPLICATION_TEAM_INTRODUCTION_MAX_LENGTH,
   APPLICATION_TITLE_MAX_LENGTH,
@@ -139,7 +139,7 @@ export function RecruitmentCreateSection() {
               id="jobDescription"
               name="jobDescription"
               placeholder="모집 공고 대상에 대한 설명을 작성해주세요. ex) 지원자에 대한 요구사항"
-              maxLength={ACTIVITY_JOB_DESCRIPTION_MAX_LENGTH}
+              maxLength={APPLICATION_JOB_DESCRIPTION_MAX_LENGTH}
               value={jobDescription}
               onChange={handleInputsChange}
             />

@@ -132,7 +132,7 @@ export const APPLICATION_PROCESS_TIMELINE_MAX_LENGTH = 1000;
  * 모집 설명 최대 길이
  * 1000자
  */
-export const ACTIVITY_JOB_DESCRIPTION_MAX_LENGTH = 1000;
+export const APPLICATION_JOB_DESCRIPTION_MAX_LENGTH = 1000;
 
 /**
  * 모집 공고 타입을 정의합니다.
