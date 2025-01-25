@@ -7,7 +7,7 @@ import {
   ResponsePagination,
   WithPaginationParams,
 } from '@type/api';
-import { ApplicationMemberType } from '@type/application';
+import type { ApplicationMemberType } from '@type/application';
 
 import { server } from './server';
 

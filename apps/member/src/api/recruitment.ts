@@ -1,11 +1,15 @@
 import { END_POINT } from '@constants/api';
 
 import { BaseResponse } from '@type/api';
-import type { ApplicationType } from '@type/application';
+import type { Recruitment } from '@type/application';
 
 import { server } from './server';
 
-export interface Recruitment {
+export interface RecruitmentList
+  extends Omit<
+    Recruitment,
+    'processTimeline' | 'teamIntroduction' | 'jobDescription'
+  > {
   id: number;
   startDate: string;
   endDate: string;

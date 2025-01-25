@@ -112,3 +112,12 @@ export const ROLE_LEVEL = {
   ADMIN: 2,
   USER: 1,
 } as const;
+
+/**
+ * 모집 공고 타입을 정의합니다.
+ */
+export const APPLICATION_TYPE = {
+  NORMAL: 'NORMAL',
+  OPERATION: 'OPERATION',
+  CORE_TEAM: 'CORE_TEAM',
+} as const;
