@@ -11,10 +11,6 @@ export interface RecruitmentList
     'processTimeline' | 'teamIntroduction' | 'jobDescription'
   > {
   id: number;
-  startDate: string;
-  endDate: string;
-  applicationType: ApplicationType;
-  target: string;
   status: string;
   updatedAt: string;
 }
@@ -23,9 +19,19 @@ export interface RecruitmentList
  * 최신 모집 공고 5개 조회
  */
 export async function getRecruitment() {
-  const { data } = await server.get<BaseResponse<Recruitment[]>>({
+  const { data } = await server.get<BaseResponse<Array<RecruitmentList>>>({
     url: END_POINT.RECRUITMENT,
   });
 
   return data;
+}
+
+/**
+ * 모집 공고 등록
+ */
+export async function postRecruitmentCreate(body: Recruitment) {
+  return server.post<Recruitment, BaseResponse<number>>({
+    url: END_POINT.RECRUITMENT,
+    body,
+  });
 }
