@@ -62,16 +62,7 @@ export function RecruitmentCreateSection() {
   };
 
   const handleCreateButtonClick = () => {
-    if (
-      !title ||
-      !applicationType ||
-      !teamIntroduction ||
-      !processTimeline ||
-      !jobDescription ||
-      !target ||
-      !startDate ||
-      !endDate
-    ) {
+    if (Object.values(inputs).some((value) => !value)) {
       return toast({
         state: 'error',
         message: ERROR_MESSAGE.NO_DATA,
