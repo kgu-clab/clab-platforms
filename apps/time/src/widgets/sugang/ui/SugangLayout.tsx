@@ -66,6 +66,7 @@ function Header({
 function NavigatorBtn() {
   const [selected, setSelected] = useState(0);
   const sugangPages = SUGANG_PAGES;
+  
   return (
     <div className="flex">
       <div className="flex size-fit text-sm">
