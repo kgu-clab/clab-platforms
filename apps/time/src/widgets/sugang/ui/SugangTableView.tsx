@@ -2,8 +2,8 @@ import React from 'react';
 
 import { cn } from '@clab-platforms/utils';
 
-import { dummyData } from '@/widgets/sugang/data';
 import { TABLE_HEADERS, TABLE_TITLES } from '@/widgets/sugang/model';
+import { dummyData } from '@/widgets/sugang/model/data';
 import { TableNameKey } from '@/widgets/sugang/types';
 
 interface TableNameProps {
