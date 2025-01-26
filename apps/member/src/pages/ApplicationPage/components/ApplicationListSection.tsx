@@ -44,11 +44,13 @@ export function ApplicationListSection() {
 
   const options = useMemo(
     () =>
-      recruitmentList.map(({ id, applicationType, startDate, endDate }) => ({
-        id: id,
-        value: id,
-        name: `${id}. ${toKoreanApplicationType(applicationType)} / ${formattedDate(startDate)} ~ ${formattedDate(endDate)}`,
-      })),
+      recruitmentList.map(
+        ({ id, title, applicationType, startDate, endDate }) => ({
+          id: id,
+          value: id,
+          name: `${id}. [${toKoreanApplicationType(applicationType)}] ${title} / ${formattedDate(startDate)} ~ ${formattedDate(endDate)}`,
+        }),
+      ),
     [recruitmentList],
   );
 

@@ -1,4 +1,7 @@
-export type ApplicationType = 'NORMAL' | 'OPERATION' | 'CORE_TEAM';
+import { APPLICATION_TYPE } from '@constants/state';
+
+export type ApplicationType =
+  (typeof APPLICATION_TYPE)[keyof typeof APPLICATION_TYPE];
 
 export interface ApplicationMemberType {
   studentId: string;
@@ -17,4 +20,15 @@ export interface ApplicationMemberType {
   isPass?: boolean;
   updatedAt: string;
   createdAt: string;
+}
+
+export interface Recruitment {
+  title: string;
+  teamIntroduction: string;
+  startDate: string;
+  endDate: string;
+  processTimeline: string;
+  applicationType: ApplicationType;
+  jobDescription: string;
+  target: string;
 }
