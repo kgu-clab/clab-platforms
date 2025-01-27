@@ -17,7 +17,7 @@ interface Params extends WithPaginationParams {
 export function useBirthday({
   month = now().get('M') + 1,
   page = 0,
-  size = 6,
+  size = 99,
 }: Params = {}) {
   return useSuspenseQuery({
     queryKey: BIRTHDAY_QUERY_KEY.MONTH(month),
