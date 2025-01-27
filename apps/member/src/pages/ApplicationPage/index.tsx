@@ -8,7 +8,7 @@ import QueryErrorBoundary from '@components/common/QueryErrorBoundary';
 import { ROLE_LEVEL } from '@constants/state';
 import { useMyProfile } from '@hooks/queries';
 
-import { ApplicationListSection } from './components/ApplicationListSection';
+import { ApplicationListSection, RecruitmentCreateSection } from './components';
 
 export default function ApplicationPage() {
   const { data } = useMyProfile();
@@ -23,7 +23,7 @@ export default function ApplicationPage() {
     >
       <Content>
         <Header title="지원" />
-
+        <RecruitmentCreateSection />
         <Suspense>
           <ApplicationListSection />
         </Suspense>

@@ -112,3 +112,33 @@ export const ROLE_LEVEL = {
   ADMIN: 2,
   USER: 1,
 } as const;
+
+/**
+ * 모집 공고명 최대 길이
+ * 100자
+ */
+export const APPLICATION_TITLE_MAX_LENGTH = 100;
+/**
+ * 모집 설명 최대 길이
+ * 1000자
+ */
+export const APPLICATION_TEAM_INTRODUCTION_MAX_LENGTH = 1000;
+/**
+ * 모집 일정 최대 길이
+ * 1000자
+ */
+export const APPLICATION_PROCESS_TIMELINE_MAX_LENGTH = 1000;
+/**
+ * 모집 설명 최대 길이
+ * 1000자
+ */
+export const APPLICATION_JOB_DESCRIPTION_MAX_LENGTH = 1000;
+
+/**
+ * 모집 공고 타입을 정의합니다.
+ */
+export const APPLICATION_TYPE = {
+  NORMAL: 'NORMAL',
+  OPERATION: 'OPERATION',
+  CORE_TEAM: 'CORE_TEAM',
+} as const;
