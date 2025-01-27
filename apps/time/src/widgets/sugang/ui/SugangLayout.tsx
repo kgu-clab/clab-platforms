@@ -69,18 +69,17 @@ function NavigatorBtn() {
 
   return (
     <div className="flex">
-      <div className="flex size-fit text-sm">
+      <div className="flex size-fit divide-x-2 divide-black/20 border-x-2 border-t-2 border-black/20 text-sm">
         {sugangPages.map((page, index) => (
           <button
             onClick={() => setSelected(index)}
             key={index}
-            disabled={index !== 0}
+            // disabled={index !== 0}
             className={cn(
-              'w-24 border-l-2 border-t-2 border-black/20 p-2 text-center',
+              'w-24 p-2 text-center',
               selected === index
                 ? 'bg-white'
                 : 'border-b-2 bg-gray-200 text-gray-400',
-              index === sugangPages.length - 1 ? 'border-r-2' : '',
             )}
           >
             {page}
