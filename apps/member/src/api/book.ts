@@ -8,6 +8,7 @@ import type {
   WithPaginationParams,
 } from '@type/api';
 import type {
+  Book,
   BookItem,
   BookLoanRecordConditionType,
   BookLoanRecordOverDueResponse,
@@ -134,5 +135,15 @@ export async function getBookLoanRecordOverdue({
 export function patchBookLoanRecordApprove(id: number) {
   return server.patch<null, BaseResponse<number>>({
     url: createURL(END_POINT.BOOK_LOAN_RECORD_APPROVE, id),
+  });
+}
+
+/**
+ * 도서 등록
+ */
+export async function postRegisterBook(body: Book) {
+  return server.post<Book, BaseResponse<number>>({
+    url: END_POINT.BOOK,
+    body,
   });
 }
