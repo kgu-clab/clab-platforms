@@ -147,3 +147,12 @@ export async function postRegisterBook(body: Book) {
     body,
   });
 }
+
+/**
+ * 도서 삭베
+ */
+export async function deleteBook(id: number) {
+  return server.del<never, BaseResponse<number>>({
+    url: END_POINT.BOOK_DETAIL(id),
+  });
+}

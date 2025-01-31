@@ -28,6 +28,7 @@ export const TABLE_HEAD = {
     '연체일수',
     '기능',
   ] as const,
+  BOOK_LIST: ['카테고리', '도서명', '작가', '상태', '기능'] as const,
   CALENDAR_TABLE: ['날짜', '일정'] as const,
   APPLY_TABLE: [
     '번호',

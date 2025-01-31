@@ -7,6 +7,7 @@ import {
   Menubar,
   Table,
 } from '@clab-platforms/design-system';
+import { cn } from '@clab-platforms/utils';
 
 import ActionButton from '@components/common/ActionButton/ActionButton';
 import Pagination from '@components/common/Pagination/Pagination';
@@ -15,19 +16,22 @@ import BookLoanConditionStatusBadge from '@components/library/BookLoanConditionS
 
 import { TABLE_HEAD } from '@constants/head';
 import { ERROR_MESSAGE } from '@constants/message';
+import { BOOK_STATE } from '@constants/state';
 import { usePagination } from '@hooks/common/usePagination';
 import useToast from '@hooks/common/useToast';
 import { useBookLoanRecordConditions } from '@hooks/queries';
+import { useBooks } from '@pages/LibraryPage/hooks/useBooks';
 import { calculateDDay, formattedDate } from '@utils/date';
 
 import type { Book } from '@type/book';
 
+import { useBookDeleteMutation } from '../hooks/useBookDeleteMutation';
 import { useBookLoanRecordApproveMutation } from '../hooks/useBookLoanRecordApproveMutation';
 import { useBookLoanRecordOverdue } from '../hooks/useBookLoanRecordOverdue';
 import { useBookRegisterMutation } from '../hooks/useBookRegisterMutation';
 import { useMemberInfoModal } from '../hooks/useMemberInfoModal';
 
-type Mode = 'condition' | 'overdue' | 'register';
+type Mode = 'condition' | 'overdue' | 'register' | 'view';
 
 export function LibrarySection() {
   const toast = useToast();
@@ -63,6 +67,8 @@ export function LibrarySection() {
     page,
     size,
   });
+  const { data: bookList } = useBooks({ page, size: 10 });
+  const { bookDeleteMutate } = useBookDeleteMutation();
 
   const handleMenubarItemClick = (mode: Mode) => {
     setMode(mode);
@@ -107,6 +113,10 @@ export function LibrarySection() {
     }));
 
     bookRegisterMutate(inputs);
+  };
+
+  const handleBookDeleteButtonClick = (id: number) => {
+    bookDeleteMutate(id);
   };
 
   const renderMode = {
@@ -250,6 +260,35 @@ export function LibrarySection() {
         </Button>
       </div>
     ),
+    view: (
+      <Table head={TABLE_HEAD.BOOK_LIST}>
+        {bookList.items.map(({ id, category, title, author, borrowerId }) => (
+          <Table.Row key={id}>
+            <Table.Cell>{category}</Table.Cell>
+            <Table.Cell>{title}</Table.Cell>
+            <Table.Cell>{author}</Table.Cell>
+            <Table.Cell>
+              <span
+                className={cn(
+                  'text-xs',
+                  borrowerId ? 'text-pink-600' : 'text-green-600',
+                )}
+              >
+                {borrowerId ? BOOK_STATE.BORROWED : BOOK_STATE.AVAILABLE}
+              </span>
+            </Table.Cell>
+            <Table.Cell>
+              <ActionButton
+                color="red"
+                onClick={() => handleBookDeleteButtonClick(id)}
+              >
+                삭제
+              </ActionButton>
+            </Table.Cell>
+          </Table.Row>
+        ))}
+      </Table>
+    ),
   }[mode];
 
   return (
@@ -277,6 +316,12 @@ export function LibrarySection() {
           >
             등록
           </Menubar.Item>
+          <Menubar.Item
+            selected={mode === 'view'}
+            onClick={() => handleMenubarItemClick('view')}
+          >
+            보기
+          </Menubar.Item>
         </Menubar>
       </Section.Header>
       <Section.Body>
@@ -287,9 +332,10 @@ export function LibrarySection() {
             page={page}
             postLimit={size}
             totalItems={
-              mode === 'condition'
-                ? bookLoanRecordCondition.totalItems
-                : bookLoanRecordOverdue.totalItems
+              (mode === 'condition' && bookLoanRecordCondition.totalItems) ||
+              (mode === 'overdue' && bookLoanRecordOverdue.totalItems) ||
+              (mode === 'view' && bookList.totalItems) ||
+              0
             }
             onChange={handlePageChange}
           />
