@@ -7,6 +7,7 @@ import {
   Menubar,
   Table,
 } from '@clab-platforms/design-system';
+import { SearchOutline } from '@clab-platforms/icon';
 import { cn } from '@clab-platforms/utils';
 
 import ActionButton from '@components/common/ActionButton/ActionButton';
@@ -54,6 +55,7 @@ export function LibrarySection() {
   });
 
   const [mode, setMode] = useState<Mode>('condition');
+  const [keyword, setKeyword] = useState('');
 
   const { bookLoanRecordApproveMutate } = useBookLoanRecordApproveMutation();
   const { bookRegisterMutate } = useBookRegisterMutation();
@@ -72,6 +74,7 @@ export function LibrarySection() {
 
   const handleMenubarItemClick = (mode: Mode) => {
     setMode(mode);
+    handlePageChange(1);
   };
 
   const handleApproveButtonClick = (id: number) => {
@@ -118,6 +121,8 @@ export function LibrarySection() {
   const handleBookDeleteButtonClick = (id: number) => {
     bookDeleteMutate(id);
   };
+
+  const handleSearchButtonClick = () => {};
 
   const renderMode = {
     condition: (
@@ -261,33 +266,51 @@ export function LibrarySection() {
       </div>
     ),
     view: (
-      <Table head={TABLE_HEAD.BOOK_LIST}>
-        {bookList.items.map(({ id, category, title, author, borrowerId }) => (
-          <Table.Row key={id}>
-            <Table.Cell>{category}</Table.Cell>
-            <Table.Cell>{title}</Table.Cell>
-            <Table.Cell>{author}</Table.Cell>
-            <Table.Cell>
-              <span
-                className={cn(
-                  'text-xs',
-                  borrowerId ? 'text-pink-600' : 'text-green-600',
-                )}
-              >
-                {borrowerId ? BOOK_STATE.BORROWED : BOOK_STATE.AVAILABLE}
-              </span>
-            </Table.Cell>
-            <Table.Cell>
-              <ActionButton
-                color="red"
-                onClick={() => handleBookDeleteButtonClick(id)}
-              >
-                삭제
-              </ActionButton>
-            </Table.Cell>
-          </Table.Row>
-        ))}
-      </Table>
+      <>
+        <div className="mb-4 flex items-center space-x-2">
+          <Input
+            placeholder="찾으시는 도서를 입력해주세요"
+            id="keyword"
+            name="keyword"
+            value={keyword}
+            onChange={(e) => setKeyword(e.target.value)}
+            className="w-full"
+          />
+          <SearchOutline
+            width={24}
+            height={24}
+            className="hover:cursor-pointer"
+            onClick={handleSearchButtonClick}
+          />
+        </div>
+        <Table head={TABLE_HEAD.BOOK_LIST}>
+          {bookList.items.map(({ id, category, title, author, borrowerId }) => (
+            <Table.Row key={id}>
+              <Table.Cell>{category}</Table.Cell>
+              <Table.Cell>{title}</Table.Cell>
+              <Table.Cell>{author}</Table.Cell>
+              <Table.Cell>
+                <span
+                  className={cn(
+                    'text-xs',
+                    borrowerId ? 'text-pink-600' : 'text-green-600',
+                  )}
+                >
+                  {borrowerId ? BOOK_STATE.BORROWED : BOOK_STATE.AVAILABLE}
+                </span>
+              </Table.Cell>
+              <Table.Cell>
+                <ActionButton
+                  color="red"
+                  onClick={() => handleBookDeleteButtonClick(id)}
+                >
+                  삭제
+                </ActionButton>
+              </Table.Cell>
+            </Table.Row>
+          ))}
+        </Table>
+      </>
     ),
   }[mode];
 
