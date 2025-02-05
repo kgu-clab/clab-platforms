@@ -28,12 +28,18 @@ export interface GetBookLoanRecordConditionsParams
   isReturned?: boolean;
 }
 
+export interface GetBooksParams {
+  page: number;
+  size: number;
+  title?: string;
+}
+
 /**
  * 도서 목록 조회
  */
-export async function getBooks(page: number, size: number) {
+export async function getBooks({ page, size, title }: GetBooksParams) {
   const { data } = await server.get<ResponsePagination<BookItem>>({
-    url: createPagination(END_POINT.BOOK, { page, size }),
+    url: createPagination(END_POINT.BOOK, { page, size, title }),
   });
 
   return data;

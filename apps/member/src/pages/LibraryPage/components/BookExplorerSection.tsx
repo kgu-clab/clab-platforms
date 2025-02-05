@@ -19,11 +19,14 @@ import { useBooks } from '../hooks/useBooks';
 
 export default function BookExplorerSection() {
   const [keyword, setKeyword] = useState('');
+  const [title, setTitle] = useState('');
   const { page, size, handlePageChange } = usePagination({ defaultSize: 16 });
 
-  const { data } = useBooks({ page, size });
+  const { data } = useBooks({ page, size, title });
 
-  const handleSearchButtonClick = () => {};
+  const handleSearchButtonClick = () => {
+    setTitle(keyword);
+  };
 
   return (
     <Section>
@@ -34,7 +37,7 @@ export default function BookExplorerSection() {
       <Section.Body>
         <div className="mb-4 flex items-center space-x-2">
           <Input
-            placeholder="찾으시는 도서를 입력해주세요"
+            placeholder="찾으시는 도서명을 입력해주세요"
             id="keyword"
             name="keyword"
             value={keyword}

@@ -56,6 +56,7 @@ export function LibrarySection() {
 
   const [mode, setMode] = useState<Mode>('condition');
   const [keyword, setKeyword] = useState('');
+  const [title, setTitle] = useState('');
 
   const { bookLoanRecordApproveMutate } = useBookLoanRecordApproveMutation();
   const { bookRegisterMutate } = useBookRegisterMutation();
@@ -69,7 +70,7 @@ export function LibrarySection() {
     page,
     size,
   });
-  const { data: bookList } = useBooks({ page, size: 10 });
+  const { data: bookList } = useBooks({ page, size: 10, title });
   const { bookDeleteMutate } = useBookDeleteMutation();
 
   const handleMenubarItemClick = (mode: Mode) => {
@@ -122,7 +123,9 @@ export function LibrarySection() {
     bookDeleteMutate(id);
   };
 
-  const handleSearchButtonClick = () => {};
+  const handleSearchButtonClick = () => {
+    setTitle(keyword);
+  };
 
   const renderMode = {
     condition: (
@@ -269,7 +272,7 @@ export function LibrarySection() {
       <>
         <div className="mb-4 flex items-center space-x-2">
           <Input
-            placeholder="찾으시는 도서를 입력해주세요"
+            placeholder="찾으시는 도서명을 입력해주세요"
             id="keyword"
             name="keyword"
             value={keyword}
