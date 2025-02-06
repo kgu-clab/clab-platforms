@@ -32,5 +32,8 @@ export function useBookRegisterMutation() {
     },
   });
 
-  return { bookRegisterMutate: mutation.mutate };
+  return {
+    bookRegisterMutate: mutation.mutate,
+    bookRegisterIsPending: mutation.isPending,
+  };
 }

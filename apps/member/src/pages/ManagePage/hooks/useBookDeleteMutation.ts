@@ -30,5 +30,8 @@ export function useBookDeleteMutation() {
     },
   });
 
-  return { bookDeleteMutate: mutation.mutate };
+  return {
+    bookDeleteMutate: mutation.mutate,
+    bookDeleteIsPending: mutation.isPending,
+  };
 }
