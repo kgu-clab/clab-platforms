@@ -250,6 +250,9 @@ importers:
       react-dropzone:
         specifier: ^14.2.3
         version: 14.2.3(react@18.2.0)
+      react-hook-form:
+        specifier: ^7.51.4
+        version: 7.51.4(react@18.2.0)
       react-router-dom:
         specifier: ^6.21.2
         version: 6.22.3(react-dom@18.2.0(react@18.2.0))(react@18.2.0)

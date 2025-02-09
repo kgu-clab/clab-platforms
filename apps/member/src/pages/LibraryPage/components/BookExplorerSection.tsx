@@ -1,5 +1,8 @@
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
+import { Input } from '@clab-platforms/design-system';
+import { SearchOutline } from '@clab-platforms/icon';
 import { cn } from '@clab-platforms/utils';
 
 import Image from '@components/common/Image/Image';
@@ -15,9 +18,15 @@ import type { BookItem } from '@type/book';
 import { useBooks } from '../hooks/useBooks';
 
 export default function BookExplorerSection() {
+  const [keyword, setKeyword] = useState('');
+  const [title, setTitle] = useState('');
   const { page, size, handlePageChange } = usePagination({ defaultSize: 16 });
 
-  const { data } = useBooks({ page, size });
+  const { data } = useBooks({ page, size, title });
+
+  const handleSearchButtonClick = () => {
+    setTitle(keyword);
+  };
 
   return (
     <Section>
@@ -26,6 +35,22 @@ export default function BookExplorerSection() {
         description="소장 도서를 둘러볼 수 있어요"
       />
       <Section.Body>
+        <div className="mb-4 flex items-center space-x-2">
+          <Input
+            placeholder="찾으시는 도서명을 입력해주세요"
+            id="keyword"
+            name="keyword"
+            value={keyword}
+            onChange={(e) => setKeyword(e.target.value)}
+            className="w-full"
+          />
+          <SearchOutline
+            width={24}
+            height={24}
+            className="hover:cursor-pointer"
+            onClick={handleSearchButtonClick}
+          />
+        </div>
         <div className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4">
           {data.items.map(({ id, ...props }) => (
             <BookCard key={id} id={id} {...props} />

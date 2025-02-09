@@ -7,16 +7,19 @@ export type BookConditionStatus =
   | 'REJECTED'
   | 'RETURNED';
 
-export interface BookItem {
-  id: number;
-  borrowerId: string | null;
-  borrowerName: string | null;
+export interface Book {
   category: string;
   title: string;
   author: string;
   publisher: string;
-  imageUrl: string;
-  reviewLinks: Array<string>;
+  imageUrl?: string;
+  reviewLinks?: Array<string>;
+}
+
+export interface BookItem extends Book {
+  id: number;
+  borrowerId: string | null;
+  borrowerName: string | null;
   dueDate: null;
   createdAt: string;
   updatedAt: string | null;
