@@ -491,7 +491,7 @@ importers:
     dependencies:
       react-dom:
         specifier: ^18.3.1
-        version: 18.3.1(react@19.0.0)
+        version: 18.3.1(react@18.3.1)
     devDependencies:
       '@clab-platforms/config':
         specifier: workspace:*
@@ -500,14 +500,14 @@ importers:
         specifier: ^8.1.0
         version: 8.1.0(typescript@5.4.5)
       '@types/react':
-        specifier: ^19.0.8
-        version: 19.0.8
+        specifier: ^18.3.3
+        version: 18.3.18
       '@types/react-dom':
-        specifier: ^19.0.3
-        version: 19.0.3(@types/react@19.0.8)
+        specifier: ^18.3.0
+        version: 18.3.5(@types/react@18.3.18)
       react:
-        specifier: ^19.0.0
-        version: 19.0.0
+        specifier: ^18.3.1
+        version: 18.3.1
       svgo:
         specifier: ^3.3.2
         version: 3.3.2
@@ -10507,6 +10507,10 @@ snapshots:
 
   '@types/range-parser@1.2.7': {}
 
+  '@types/react-dom@18.3.5(@types/react@18.3.18)':
+    dependencies:
+      '@types/react': 18.3.18
+
   '@types/react-dom@18.3.5(@types/react@19.0.8)':
     dependencies:
       '@types/react': 19.0.8
@@ -14081,12 +14085,6 @@ snapshots:
     dependencies:
       loose-envify: 1.4.0
       react: 18.3.1
-      scheduler: 0.23.2
-
-  react-dom@18.3.1(react@19.0.0):
-    dependencies:
-      loose-envify: 1.4.0
-      react: 19.0.0
       scheduler: 0.23.2
 
   react-dom@19.0.0(react@19.0.0):

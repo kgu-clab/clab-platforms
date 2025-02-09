@@ -1,4 +1,4 @@
-# clab-platforms &middot; [![GitHub License](https://img.shields.io/github/license/KGU-C-Lab/clab-platforms)](https://github.com/kgu-clab/clab-platforms/blob/main/LICENSE) [![pnpm CI](https://github.com/kgu-clab/clab-platforms/actions/workflows/pnpm-ci.yml/badge.svg)](https://github.com/kgu-clab/clab-platforms/actions/workflows/pnpm-ci.yml) [![codecov](https://codecov.io/gh/KGU-C-Lab/clab.page/graph/badge.svg?token=Z5PFR6US6Z)](https://codecov.io/gh/KGU-C-Lab/clab.page)
+# clab-platforms &middot; [![GitHub License](https://img.shields.io/github/license/KGU-C-Lab/clab-platforms)](https://github.com/kgu-clab/clab-platforms/blob/main/LICENSE) [![pnpm CI](https://github.com/kgu-clab/clab-platforms/actions/workflows/app-ci.yml/badge.svg)](https://github.com/kgu-clab/clab-platforms/actions/workflows/pnpm-ci.yml) [![codecov](https://codecov.io/gh/kgu-clab/clab-platforms/graph/badge.svg?token=Z5PFR6US6Z)](https://codecov.io/gh/kgu-clab/clab-platforms)
 
 [경기대학교 AI컴퓨터공학부 개발동아리 C-Lab](https://www.clab.page/)의 공식 프론트엔드 시스템이에요.
 
