@@ -1,4 +1,4 @@
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router';
 
 import { Button } from '@clab-platforms/design-system';
 import { HighPriorityColor } from '@clab-platforms/icon';

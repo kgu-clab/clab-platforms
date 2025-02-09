@@ -1,5 +1,5 @@
 import { useLayoutEffect } from 'react';
-import { useNavigate, useSearchParams } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router';
 
 import { server } from '@api/server';
 import { PATH } from '@constants/path';

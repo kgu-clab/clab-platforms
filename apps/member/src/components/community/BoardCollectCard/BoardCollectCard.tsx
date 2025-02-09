@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router';
 
 import { CommentSolidOutline } from '@clab-platforms/icon';
 import { toDecodeHTMLEntities } from '@clab-platforms/utils';
