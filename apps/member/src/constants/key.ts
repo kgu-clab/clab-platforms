@@ -186,9 +186,10 @@ export const BOOK_QUERY_KEY = {
   ALL: ['Book'],
   PAGES: () => [...BOOK_QUERY_KEY.ALL, 'pages'],
   DETAILS: () => [...BOOK_QUERY_KEY.ALL, 'details'],
-  PAGE: (pagination: WithPaginationParams) => [
+  PAGE: (pagination: WithPaginationParams, title: string) => [
     ...BOOK_QUERY_KEY.PAGES(),
     pagination,
+    title,
   ],
   DETAIL: (id: number) => [...BOOK_QUERY_KEY.DETAILS(), id],
 } as const;
