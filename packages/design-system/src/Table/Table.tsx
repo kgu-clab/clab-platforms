@@ -2,17 +2,17 @@ import React, { type HTMLAttributes, type TableHTMLAttributes } from 'react';
 
 import { cn } from '@clab-platforms/utils';
 
-export interface TableProps extends TableHTMLAttributes<HTMLTableElement> {
+interface TableProps extends TableHTMLAttributes<HTMLTableElement> {
   head?: readonly string[];
 }
 
-export interface RowProps extends HTMLAttributes<HTMLTableRowElement> {}
+interface RowProps extends HTMLAttributes<HTMLTableRowElement> {}
 
-export interface CellProps extends HTMLAttributes<HTMLTableCellElement> {
+interface CellProps extends HTMLAttributes<HTMLTableCellElement> {
   colSpan?: number;
 }
 
-const Table = ({ head, className, children, ...rest }: TableProps) => {
+function Table({ head, className, children, ...rest }: TableProps) {
   return (
     <table
       className={cn('w-full table-auto border-collapse', className)}
@@ -35,9 +35,9 @@ const Table = ({ head, className, children, ...rest }: TableProps) => {
       <tbody className="divide-y text-sm">{children}</tbody>
     </table>
   );
-};
+}
 
-const Row = ({ className, onClick, children, ...rest }: RowProps) => {
+export function Row({ className, onClick, children, ...rest }: RowProps) {
   return (
     <tr
       className={cn(
@@ -51,9 +51,9 @@ const Row = ({ className, onClick, children, ...rest }: RowProps) => {
       {children}
     </tr>
   );
-};
+}
 
-const Cell = ({ className, children, colSpan, ...rest }: CellProps) => {
+export function Cell({ className, children, colSpan, ...rest }: CellProps) {
   return (
     <td
       className={cn('p-2 first:rounded-l-lg last:rounded-r-lg', className)}
@@ -63,7 +63,7 @@ const Cell = ({ className, children, colSpan, ...rest }: CellProps) => {
       {children}
     </td>
   );
-};
+}
 
 Table.displayName = 'Table';
 Row.displayName = 'TableRow';
