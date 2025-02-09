@@ -3,7 +3,7 @@ import { useQueryErrorResetBoundary } from '@tanstack/react-query';
 import { ErrorBoundary } from '@suspensive/react';
 
 interface Props {
-  fallback: React.ReactNode;
+  fallback: React.ComponentProps<typeof ErrorBoundary>['fallback'];
   children: React.ReactNode;
 }
 
