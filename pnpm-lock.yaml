@@ -490,8 +490,8 @@ importers:
   packages/icon:
     dependencies:
       react-dom:
-        specifier: ^18.3.1
-        version: 18.3.1(react@18.3.1)
+        specifier: ^19.0.0
+        version: 19.0.0(react@19.0.0)
     devDependencies:
       '@clab-platforms/config':
         specifier: workspace:*
@@ -500,14 +500,14 @@ importers:
         specifier: ^8.1.0
         version: 8.1.0(typescript@5.4.5)
       '@types/react':
-        specifier: ^18.3.3
-        version: 18.3.18
+        specifier: ^19.0.8
+        version: 19.0.8
       '@types/react-dom':
-        specifier: ^18.3.0
-        version: 18.3.5(@types/react@18.3.18)
+        specifier: ^19.0.3
+        version: 19.0.3(@types/react@19.0.8)
       react:
-        specifier: ^18.3.1
-        version: 18.3.1
+        specifier: ^19.0.0
+        version: 19.0.0
       svgo:
         specifier: ^3.3.2
         version: 3.3.2
@@ -10506,10 +10506,6 @@ snapshots:
   '@types/qs@6.9.15': {}
 
   '@types/range-parser@1.2.7': {}
-
-  '@types/react-dom@18.3.5(@types/react@18.3.18)':
-    dependencies:
-      '@types/react': 18.3.18
 
   '@types/react-dom@18.3.5(@types/react@19.0.8)':
     dependencies:

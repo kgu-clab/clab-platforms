@@ -11,6 +11,7 @@ export { default as DownloadColor } from './react/Download';
 export { default as FilingCabinetColor } from './react/FilingCabinet';
 export { default as GraduationCapColor } from './react/GraduationCap';
 export { default as HighPriorityColor } from './react/HighPriority';
+export { default as KguLogoColor } from './react/KguLogo';
 export { default as LandscapeColor } from './react/Landscape';
 export { default as LeaveColor } from './react/Leave';
 export { default as MoneyTransferColor } from './react/MoneyTransfer';
