@@ -5,10 +5,10 @@ import Content from '@components/common/Content/Content';
 import ErrorSection from '@components/common/ErrorSection/ErrorSection';
 import QueryErrorBoundary from '@components/common/QueryErrorBoundary';
 import {
+  DevelopmentQnABoard,
   HireBoard,
   NewsBoard,
   NoticeBoard,
-  QnABoard,
 } from '@components/community/Board';
 import { BoardSection } from '@components/community/BoardSection';
 
@@ -38,7 +38,7 @@ export default function MainPage() {
         <Suspense>
           <BoardSection>
             <NoticeBoard />
-            <QnABoard />
+            <DevelopmentQnABoard />
           </BoardSection>
         </Suspense>
 

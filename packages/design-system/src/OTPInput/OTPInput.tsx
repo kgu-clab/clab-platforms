@@ -2,7 +2,7 @@ import React, { useRef } from 'react';
 
 import { cn } from '@clab-platforms/utils';
 
-interface OTPInputProps {
+interface Props {
   type?: 'text' | 'number' | 'password';
   length?: number;
   value?: string[];
@@ -11,14 +11,14 @@ interface OTPInputProps {
   inputClassName?: string;
 }
 
-const OTPInput = ({
+export default function OTPInput({
   type = 'text',
   length = 6,
   value = Array.from({ length }),
   onChange,
   inputClassName,
   ...rest
-}: OTPInputProps) => {
+}: Props) {
   const inputRefs = useRef<HTMLInputElement[]>([]);
 
   const handleValueChange = (value: string, index: number) => {
@@ -82,7 +82,9 @@ const OTPInput = ({
       {Array.from({ length }).map((_, index) => (
         <input
           key={`otp-input-${index}`}
-          ref={(el) => (inputRefs.current[index] = el!)}
+          ref={(el) => {
+            inputRefs.current[index] = el!;
+          }}
           type={type}
           maxLength={2}
           className={cn(
@@ -97,6 +99,4 @@ const OTPInput = ({
       ))}
     </div>
   );
-};
-
-export default OTPInput;
+}

@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router';
 
 import Image from '@components/common/Image/Image';
 import Section from '@components/common/Section/Section';

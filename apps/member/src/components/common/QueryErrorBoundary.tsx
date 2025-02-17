@@ -1,12 +1,10 @@
-import { type ComponentProps, type ReactNode } from 'react';
-
 import { useQueryErrorResetBoundary } from '@tanstack/react-query';
 
 import { ErrorBoundary } from '@suspensive/react';
 
 interface Props {
-  fallback: ComponentProps<typeof ErrorBoundary>['fallback'];
-  children: ReactNode;
+  fallback: React.ComponentProps<typeof ErrorBoundary>['fallback'];
+  children: React.ReactNode;
 }
 
 export default function QueryErrorBoundary({ fallback, children }: Props) {

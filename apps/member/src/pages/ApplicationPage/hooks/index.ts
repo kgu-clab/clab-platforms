@@ -5,3 +5,4 @@ export * from './useApplicationMemberMutation';
 export * from './useApplicationNonePassMutation';
 export * from './useApplicationPassMutation';
 export * from './useRecruitment';
+export * from './useRecruitmentCreateMutation';

@@ -1,4 +1,4 @@
-import React, { type HTMLAttributes } from 'react';
+import React from 'react';
 
 import { cn } from '@clab-platforms/utils';
 
@@ -9,38 +9,36 @@ import type {
   MenubarVariantProps,
 } from './Menubar.types';
 
-interface MenubarProps
-  extends HTMLAttributes<HTMLUListElement>,
-    MenubarVariantProps {
+interface MenubarProps extends React.ComponentProps<'ul'>, MenubarVariantProps {
   gap?: MenubarGapVariant;
 }
 
 interface MenubarItemProps
-  extends HTMLAttributes<HTMLLIElement>,
+  extends React.ComponentProps<'li'>,
     MenubarItemVariantProps {
   selected?: boolean;
 }
 
-const Menubar = ({ gap, className, children, ...rest }: MenubarProps) => {
+function Menubar({ gap, className, children, ...props }: MenubarProps) {
   return (
-    <ul className={cn(menubarVariants({ gap }), className)} {...rest}>
+    <ul className={cn(menubarVariants({ gap }), className)} {...props}>
       {children}
     </ul>
   );
-};
+}
 
-const MenubarItem = ({
+function MenubarItem({
   selected,
   className,
   children,
-  ...rest
-}: MenubarItemProps) => {
+  ...props
+}: MenubarItemProps) {
   return (
-    <li className={cn(menubarItemVariants({ selected }), className)} {...rest}>
+    <li className={cn(menubarItemVariants({ selected }), className)} {...props}>
       {children}
     </li>
   );
-};
+}
 
 Menubar.displayName = 'Menubar';
 MenubarItem.displayName = 'MenubarItem';

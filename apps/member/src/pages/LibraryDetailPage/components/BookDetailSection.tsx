@@ -73,7 +73,7 @@ export function DetailsSection({ paramsId }: Props) {
    */
   const handleTabsChange = (value: string) => {
     const bookStore = toBookstore(value as BookstoreKorean);
-    const url = bookReviewParser(reviewLinks);
+    const url = bookReviewParser(reviewLinks || []);
     const targetUrl = url[bookStore] ?? `${BOOK_STORE_URL[bookStore]}${title}`;
     window.open(targetUrl, '_blank');
   };

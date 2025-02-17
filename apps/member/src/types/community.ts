@@ -1,10 +1,11 @@
+import type { HashtagBoardItem } from './hashtag';
 import type { RoleLevelType } from './member';
 
 export type CommunityCategoryType =
   | 'notice'
   | 'free'
-  | 'qna'
-  | 'graduated'
+  | 'development_qna'
+  | 'information_reviews'
   | 'news'
   | 'hire'
   | 'organization';
@@ -12,8 +13,8 @@ export type CommunityCategoryType =
 export type CommunityCategoryKorType =
   | '공지사항'
   | '자유'
-  | 'QnA'
-  | '졸업생'
+  | '개발 질문'
+  | '정보 및 후기'
   | 'IT 뉴스'
   | '채용 정보'
   | '소식';
@@ -44,6 +45,7 @@ export interface Board {
   writerName: string;
   imageUrl: string | null;
   createdAt: string;
+  boardHashtagInfos: Array<HashtagBoardItem> | null; // 개발 질문 게시글이 아니라면 null
 }
 
 export interface CommunityPostItem {
@@ -53,8 +55,8 @@ export interface CommunityPostItem {
   writerId: string | null; // 익명일 경우 null
   writerName: string;
   createdAt: string;
-  isOwner: boolean;
   category: CommunityCategoryType;
+  boardHashtagInfos: Array<HashtagBoardItem> | null;
 }
 
 export interface CommunityWriteItem {
@@ -62,8 +64,15 @@ export interface CommunityWriteItem {
   title: string;
   content: string;
   wantAnonymous: boolean;
-  fileUrlList?: string[];
+  fileUrlList?: Array<string>;
   imageUrl?: string;
+  hashtagNames?: Array<string>;
+}
+
+export interface CommunityPostEmojiItem {
+  emoji: string;
+  count: number;
+  isOwner: boolean;
 }
 
 export interface CommunityPostDetailItem extends CommunityPostItem {
@@ -74,10 +83,12 @@ export interface CommunityPostDetailItem extends CommunityPostItem {
   hasLikeByMe: boolean;
   files: [];
   imageUrl: string | null;
+  isOwner: boolean;
+  emojiInfos?: Array<CommunityPostEmojiItem>;
 }
 
 export interface CommunityHireBoard
-  extends Omit<CommunityPostItem, 'isOwner' | 'category'> {
+  extends Omit<CommunityPostItem, 'category' | 'boardHashtagInfos'> {
   careerLevel: CareerLevel;
   recruitmentPeriod: string;
   jobPostingUrl: string;
@@ -85,10 +96,18 @@ export interface CommunityHireBoard
   employmentType: EmploymentType | null;
 }
 
-export interface CommunityNewsBoard extends CommunityPostItem {
+export interface CommunityNewsBoard
+  extends Omit<CommunityPostItem, 'boardHashtagInfos'> {
   articleUrl: string;
   date: string;
   source: string;
   content: string;
-  files: string[];
+  files: Array<string>;
+}
+
+export interface CommunityReactionItem {
+  boardId: number;
+  category?: CommunityCategoryType;
+  emoji: string;
+  isDeleted: boolean;
 }

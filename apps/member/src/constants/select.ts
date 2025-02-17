@@ -3,6 +3,8 @@ import type {
   CommunityCategoryType,
 } from '@type/community';
 
+import { APPLICATION_TYPE } from './state';
+
 type Options<N = string, V = string> = {
   name: N;
   value: V;
@@ -39,6 +41,11 @@ export const SELECT_OPTIONS = {
     { name: '4학년', value: 4 },
     { name: '5학년', value: 5 },
   ],
+  APPLICATION_TYPE: [
+    { name: '회원', value: APPLICATION_TYPE.NORMAL },
+    { name: '운영진', value: APPLICATION_TYPE.OPERATION },
+    { name: '코어팀', value: APPLICATION_TYPE.CORE_TEAM },
+  ],
 } as const;
 
 export const SELECT_OPTIONS_COMMUNITY_TYPE: Options<
@@ -50,8 +57,12 @@ export const SELECT_OPTIONS_COMMUNITY_TYPE: Options<
     value: 'free',
   },
   {
-    name: 'QnA',
-    value: 'qna',
+    name: '개발 질문',
+    value: 'development_qna',
+  },
+  {
+    name: '정보 및 후기',
+    value: 'information_reviews',
   },
 ] as const;
 

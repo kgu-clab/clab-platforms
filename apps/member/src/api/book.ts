@@ -8,6 +8,7 @@ import type {
   WithPaginationParams,
 } from '@type/api';
 import type {
+  Book,
   BookItem,
   BookLoanRecordConditionType,
   BookLoanRecordOverDueResponse,
@@ -27,12 +28,18 @@ export interface GetBookLoanRecordConditionsParams
   isReturned?: boolean;
 }
 
+export interface GetBooksParams {
+  page: number;
+  size: number;
+  title?: string;
+}
+
 /**
  * 도서 목록 조회
  */
-export async function getBooks(page: number, size: number) {
+export async function getBooks({ page, size, title }: GetBooksParams) {
   const { data } = await server.get<ResponsePagination<BookItem>>({
-    url: createPagination(END_POINT.BOOK, { page, size }),
+    url: createPagination(END_POINT.BOOK, { page, size, title }),
   });
 
   return data;
@@ -134,5 +141,24 @@ export async function getBookLoanRecordOverdue({
 export function patchBookLoanRecordApprove(id: number) {
   return server.patch<null, BaseResponse<number>>({
     url: createURL(END_POINT.BOOK_LOAN_RECORD_APPROVE, id),
+  });
+}
+
+/**
+ * 도서 등록
+ */
+export async function postRegisterBook(body: Book) {
+  return server.post<Book, BaseResponse<number>>({
+    url: END_POINT.BOOK,
+    body,
+  });
+}
+
+/**
+ * 도서 삭베
+ */
+export async function deleteBook(id: number) {
+  return server.del<never, BaseResponse<number>>({
+    url: END_POINT.BOOK_DETAIL(id),
   });
 }

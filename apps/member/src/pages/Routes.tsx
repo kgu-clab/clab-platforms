@@ -1,5 +1,5 @@
 import { Suspense, lazy } from 'react';
-import { RouterProvider, createBrowserRouter } from 'react-router-dom';
+import { RouterProvider, createBrowserRouter } from 'react-router';
 
 import { SectionSkeleton } from '@components/common/Section';
 import ProtectAuth from '@components/router/ProtectAuth';

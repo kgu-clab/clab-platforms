@@ -1,5 +1,5 @@
 import { Suspense } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams } from 'react-router';
 
 import Content from '@components/common/Content/Content';
 import ErrorSection from '@components/common/ErrorSection/ErrorSection';

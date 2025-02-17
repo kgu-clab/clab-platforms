@@ -128,9 +128,19 @@ export const BOARD_QUERY_KEY = {
   DETAILS: () => [...BOARD_QUERY_KEY.ALL, 'details'],
   COLLECTIONS: () => [...BOARD_QUERY_KEY.ALL, 'collections'],
   CATEGORIES: () => [...BOARD_QUERY_KEY.ALL, 'categories'],
+  HASHTAGS: () => [...BOARD_QUERY_KEY.ALL, 'hashtags'],
+  HOTS: () => [...BOARD_QUERY_KEY.ALL, 'hots'],
   CATEGORY: (category: CommunityCategoryType) => [
     ...BOARD_QUERY_KEY.CATEGORIES(),
     category,
+  ],
+  HASHTAG: (hashtags: Array<string>) => [
+    ...BOARD_QUERY_KEY.HASHTAGS(),
+    hashtags,
+  ],
+  HASHTAGS_PAGES: (hashtags: Array<string>) => [
+    ...BOARD_QUERY_KEY.HASHTAG(hashtags),
+    'hashtags',
   ],
   CATEGORY_PAGES: (category: CommunityCategoryType) => [
     ...BOARD_QUERY_KEY.CATEGORY(category),
@@ -141,10 +151,15 @@ export const BOARD_QUERY_KEY = {
     ...BOARD_QUERY_KEY.COLLECTIONS(),
     pagination,
   ],
+  HASHTAG_PAGE: (hashtags: Array<string>, pagination: WithPaginationParams) => [
+    ...BOARD_QUERY_KEY.HASHTAGS_PAGES(hashtags),
+    pagination,
+  ],
   CATEGORY_PAGE: (
     category: CommunityCategoryType,
     pagination: WithPaginationParams,
   ) => [...BOARD_QUERY_KEY.CATEGORY_PAGES(category), pagination],
+  HOT: (strategyName?: string) => [...BOARD_QUERY_KEY.HOTS(), strategyName],
 } as const;
 
 /**
@@ -157,15 +172,24 @@ export const COMMENT_QUERY_KEY = {
 } as const;
 
 /**
+ * 해시태그 관련 쿼리 키
+ */
+export const HASHTAG_QUERY_KEY = {
+  ALL: ['Hashtag'],
+  LIST: () => [...HASHTAG_QUERY_KEY.ALL, 'list'],
+} as const;
+
+/**
  * 도서 관련 쿼리 키
  */
 export const BOOK_QUERY_KEY = {
   ALL: ['Book'],
   PAGES: () => [...BOOK_QUERY_KEY.ALL, 'pages'],
   DETAILS: () => [...BOOK_QUERY_KEY.ALL, 'details'],
-  PAGE: (pagination: WithPaginationParams) => [
+  PAGE: (pagination: WithPaginationParams, title: string) => [
     ...BOOK_QUERY_KEY.PAGES(),
     pagination,
+    title,
   ],
   DETAIL: (id: number) => [...BOOK_QUERY_KEY.DETAILS(), id],
 } as const;

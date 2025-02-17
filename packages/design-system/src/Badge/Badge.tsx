@@ -1,30 +1,18 @@
-import React, { type HTMLAttributes, forwardRef } from 'react';
+import React from 'react';
 
 import { cn } from '@clab-platforms/utils';
 
 import { badgeVariants } from './Badge.styles';
 import type { BadgeColorVariant, BadgeVariantProps } from './Badge.types';
 
-interface BadgeProps
-  extends HTMLAttributes<HTMLSpanElement>,
-    BadgeVariantProps {
+interface Props extends React.ComponentProps<'span'>, BadgeVariantProps {
   color?: BadgeColorVariant;
 }
 
-const Badge = forwardRef<HTMLSpanElement, BadgeProps>(
-  ({ color, className, children, ...rest }, ref) => {
-    return (
-      <span
-        ref={ref}
-        className={cn(badgeVariants({ color }), className)}
-        {...rest}
-      >
-        {children}
-      </span>
-    );
-  },
-);
-
-Badge.displayName = 'Badge';
-
-export default Badge;
+export default function Badge({ color, className, children, ...props }: Props) {
+  return (
+    <span className={cn(badgeVariants({ color }), className)} {...props}>
+      {children}
+    </span>
+  );
+}
