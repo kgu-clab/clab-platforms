@@ -8,7 +8,7 @@ export const REVIEW: Array<Review> = [
     writer: '이진명',
     meta: 'C언어, 자료구조 스터디 수강 | 24학번',
     color: 'bg-red-300',
-    imageSrc: '/review/이진명.jpeg',
+    imageSrc: '/review/이진명.webp',
   },
   {
     id: 2,
@@ -17,7 +17,7 @@ export const REVIEW: Array<Review> = [
     writer: '김태현',
     meta: 'Web분야 스터디 수강 | 23학번',
     color: 'bg-pink-300',
-    imageSrc: '/review/김태현.jpeg',
+    imageSrc: '/review/김태현.webp',
   },
   {
     id: 3,
@@ -26,7 +26,7 @@ export const REVIEW: Array<Review> = [
     writer: '유승헌',
     meta: 'Server분야 스터디 수강 | 21학번',
     color: 'bg-purple-300',
-    imageSrc: '/review/유승헌.jpeg',
+    imageSrc: '/review/유승헌.webp',
   },
   {
     id: 4,
@@ -35,6 +35,6 @@ export const REVIEW: Array<Review> = [
     writer: '오건우',
     meta: 'Game분야 스터디 수강 | 23학번',
     color: 'bg-blue-300',
-    imageSrc: '/review/오건우.jpeg',
+    imageSrc: '/review/오건우.webp',
   },
 ];
