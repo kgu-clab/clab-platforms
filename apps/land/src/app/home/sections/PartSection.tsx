@@ -34,7 +34,6 @@ export default function PartSection() {
             <Button
               key={id}
               onClick={() => handlePartButtonClick(id)}
-              color="gray"
               className={cn(
                 'w-full',
                 part.id === id
