@@ -4,16 +4,15 @@ import { cn } from '@clab-platforms/utils';
 
 import type { TabsOptions } from './Tabs.types';
 
-export interface TabsProps {
+interface TabsProps {
   options: readonly TabsOptions[];
   value?: string;
   onChange?: (value: string) => void;
 }
 
-export interface TabsOptionProps
-  extends ButtonHTMLAttributes<HTMLButtonElement> {}
+interface TabsOptionProps extends ButtonHTMLAttributes<HTMLButtonElement> {}
 
-const Tabs = ({ options, value, onChange }: TabsProps) => {
+function Tabs({ options, value, onChange }: TabsProps) {
   const [selected, setSelected] = useState(value ?? options[0].value);
 
   const handleOptionClick = useCallback(
@@ -40,9 +39,9 @@ const Tabs = ({ options, value, onChange }: TabsProps) => {
       ))}
     </div>
   );
-};
+}
 
-const TabsOption = ({ className, children, ...rest }: TabsOptionProps) => {
+function TabsOption({ className, children, ...rest }: TabsOptionProps) {
   return (
     <button
       type="button"
@@ -55,7 +54,7 @@ const TabsOption = ({ className, children, ...rest }: TabsOptionProps) => {
       {children}
     </button>
   );
-};
+}
 
 Tabs.displayName = 'Tabs';
 TabsOption.displayName = 'TabsOption';

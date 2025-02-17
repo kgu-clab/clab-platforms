@@ -1,4 +1,4 @@
-import React, { type HTMLAttributes, forwardRef } from 'react';
+import React from 'react';
 
 import { cn } from '@clab-platforms/utils';
 
@@ -9,25 +9,21 @@ import type {
   GridVariantProps,
 } from './Grid.types';
 
-interface GridProps extends HTMLAttributes<HTMLDivElement>, GridVariantProps {
+interface Props extends React.ComponentProps<'div'>, GridVariantProps {
   col?: GridColVariant;
   gap?: GridGapVariant;
 }
 
-const Grid = forwardRef<HTMLDivElement, GridProps>(
-  ({ col, gap, children, className, ...rest }, ref) => {
-    return (
-      <div
-        ref={ref}
-        className={cn(gridVariants({ col, gap }), className)}
-        {...rest}
-      >
-        {children}
-      </div>
-    );
-  },
-);
-
-Grid.displayName = 'Grid';
-
-export default Grid;
+export default function Grid({
+  col,
+  gap,
+  children,
+  className,
+  ...props
+}: Props) {
+  return (
+    <div className={cn(gridVariants({ col, gap }), className)} {...props}>
+      {children}
+    </div>
+  );
+}

@@ -1,4 +1,4 @@
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router';
 
 import { Menubar } from '@clab-platforms/design-system';
 import { GridOutline, SearchOutline, UserOutline } from '@clab-platforms/icon';

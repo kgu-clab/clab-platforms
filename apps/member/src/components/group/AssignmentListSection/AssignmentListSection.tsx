@@ -1,4 +1,4 @@
-import { useParams } from 'react-router-dom';
+import { useParams } from 'react-router';
 
 import { Button, Table } from '@clab-platforms/design-system';
 import { cn } from '@clab-platforms/utils';

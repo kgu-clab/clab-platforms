@@ -1,5 +1,5 @@
 import { useCallback, useMemo } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router';
 
 import { Menubar, Table } from '@clab-platforms/design-system';
 import { toDecodeHTMLEntities } from '@clab-platforms/utils';

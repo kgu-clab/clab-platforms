@@ -28,7 +28,7 @@ interface Props {
 }
 interface FileUploaderProps {
   uploadedFile: Array<ResponseFile> | null;
-  uploaderRef: React.RefObject<HTMLInputElement>;
+  uploaderRef: React.RefObject<HTMLInputElement | null>;
   handleDeleteFileClick: () => void;
 }
 

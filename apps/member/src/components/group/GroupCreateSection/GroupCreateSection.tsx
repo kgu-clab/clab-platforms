@@ -1,5 +1,5 @@
 import { PropsWithChildren, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router';
 
 import { Button, Grid, Input } from '@clab-platforms/design-system';
 import { SearchOutline } from '@clab-platforms/icon';

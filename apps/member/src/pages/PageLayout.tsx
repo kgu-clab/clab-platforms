@@ -1,5 +1,5 @@
 import { Suspense } from 'react';
-import { Outlet } from 'react-router-dom';
+import { Outlet } from 'react-router';
 
 import Footer from '@components/common/Footer/Footer';
 import Nav from '@components/common/Nav/Nav';
