@@ -17,7 +17,7 @@ export function useActivityGroupMemberMutation() {
     isPending: activityGroupMemberIsPending,
   } = useMutation({
     mutationFn: postActivityGroupMemberApply,
-    onSuccess: ({ success, data: data, errorMessage }) => {
+    onSuccess: ({ success, data, errorMessage }) => {
       if (errorMessage) {
         toast({
           state: 'error',

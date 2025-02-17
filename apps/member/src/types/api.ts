@@ -1,4 +1,4 @@
-import { API_ERROR_MESSAGE } from '@constants/message';
+import { type APIErrorMessage } from '@constants/message';
 
 /**
  * API Call 시 반환되는 기본 응답 타입입니다.
@@ -9,7 +9,7 @@ import { API_ERROR_MESSAGE } from '@constants/message';
 export type BaseResponse<T = unknown> = {
   success: boolean;
   data: T;
-  errorMessage?: keyof typeof API_ERROR_MESSAGE;
+  errorMessage?: APIErrorMessage;
 };
 
 /**
