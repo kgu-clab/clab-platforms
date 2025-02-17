@@ -71,9 +71,9 @@ const buttons = [
   {
     row: false,
     disabled: false,
-    to: PATH.FOOD,
-    title: '학식',
-    description: '감성코어, 기숙사 학식 정보를 제공해 드려요',
+    to: PATH.SUGANG,
+    title: '수강신청',
+    description: '모의 수강신청 사이트를 통해 수강신청을 연습해 보세요',
     icon: <ViewDetailsColor width={48} height={48} />,
   },
 ] as const;
