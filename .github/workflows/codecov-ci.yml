@@ -4,6 +4,8 @@ on:
   push:
     branches:
       - master
+    paths-ignore:
+      - '.changeset/**'
   pull_request:
     types: [opened, synchronize, reopened]
 
