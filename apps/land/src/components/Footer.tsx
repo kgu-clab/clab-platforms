@@ -6,7 +6,7 @@ export default function Footer() {
   return (
     <footer className="bg-clab-gray flex min-h-56 justify-between px-8 py-12 md:px-20 ">
       <div className="flex flex-col justify-between">
-        <Image src="/favicon.ico" width={56} height={56} alt="C-Lab" />
+        <Image src="/favicon.ico" width={56} height={56} alt="C-Lab" priority />
         <ul className="space-y-1 text-sm">
           <p>Developed By C-Lab CoreTeam</p>
           <p>© C-Lab. All rights reserved.</p>

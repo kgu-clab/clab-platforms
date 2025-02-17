@@ -1,6 +1,6 @@
 import '@clab-platforms/design-system/dist/index.css';
 
-import { Providers } from '@/utils';
+import { ChannelTalkProvider, Providers, ToastProvider } from '@/utils';
 import type { Metadata } from 'next';
 
 import './fonts.css';
@@ -22,7 +22,10 @@ export default function RootLayout({
   return (
     <html lang="ko">
       <body className="scrollbar-hide flex min-h-screen flex-col">
-        <Providers>{children}</Providers>
+        <Providers>
+          <ToastProvider />
+          <ChannelTalkProvider>{children}</ChannelTalkProvider>
+        </Providers>
       </body>
     </html>
   );

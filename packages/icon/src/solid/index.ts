@@ -1,6 +1,10 @@
+export { default as ArrowRightUpSolid } from './react/ArrowRightUp';
+export { default as CheckmarkSolid } from './react/Checkmark';
 export { default as ClipboardDocumentSolid } from './react/ClipboardDocument';
 export { default as ClipboardDocumentCheckSolid } from './react/ClipboardDocumentCheck';
 export { default as FacebookSolid } from './react/Facebook';
+export { default as LeftArrowSolid } from './react/LeftArrow';
 export { default as LinkSolid } from './react/Link';
 export { default as MailSolid } from './react/Mail';
+export { default as RightArrowSolid } from './react/RightArrow';
 export { default as XTwitterSolid } from './react/XTwitter';
