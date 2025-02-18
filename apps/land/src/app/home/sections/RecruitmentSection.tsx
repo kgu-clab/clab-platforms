@@ -46,7 +46,7 @@ export default function RecruitmentSection() {
         style={{
           backgroundImage:
             'linear-gradient(to bottom, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0)), ' +
-            "url('/clab_picture.jpeg')",
+            "url('/clab_picture.webp')",
         }}
       />
       <div className="z-5 relative">

@@ -1,98 +1,71 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { toast } from 'react-toastify';
+import { useForm } from 'react-hook-form';
 
-import { Button, Input } from '@clab-platforms/design-system';
+import { Button, Input, Spinner } from '@clab-platforms/design-system';
 
 import { Modal, Select, Textarea } from '@/components';
-import {
-  EMPTY_INPUT,
-  OTHER_ACTIVITY_MAX_LENGTH,
-  SELECT_OPTIONS,
-} from '@/constants';
-import type { ApplicationForm } from '@/types';
-import { formattedPhoneInput } from '@/utils';
+import { OTHER_ACTIVITY_MAX_LENGTH, SELECT_OPTIONS } from '@/constants';
+import { ApplicationForm } from '@/types';
 import { notFound } from 'next/navigation';
 
 import { ApplyCheck, ApplyFailed, ApplySuccess } from '../components';
 import { useApplicationMutation, useApplicationNow } from '../hooks';
 
-const initialValue = {
-  studentId: '',
-  recruitmentId: 0,
-  name: '',
-  contact: '',
-  email: '',
-  department: '',
-  grade: SELECT_OPTIONS.GRADE[0].value,
-  birth: '',
-  address: '',
-  interests: SELECT_OPTIONS.MY_FIELD[0].value,
-  otherActivities: '',
-  githubUrl: '',
-  applicationType: SELECT_OPTIONS.RECRUITMENT_TYPE[0].value,
-};
-
 export default function Form() {
-  const [formValue, setFormValue] = useState<ApplicationForm>(initialValue);
+  const {
+    handleSubmit,
+    register,
+    formState: { errors },
+    setValue,
+    reset,
+  } = useForm({
+    defaultValues: {
+      studentId: '',
+      recruitmentId: 0,
+      name: '',
+      contact: '',
+      email: '',
+      department: '',
+      grade: SELECT_OPTIONS.GRADE[0].value,
+      birth: '',
+      address: '',
+      interests: SELECT_OPTIONS.MY_FIELD[0].value,
+      otherActivities: '',
+      githubUrl: '',
+      applicationType: SELECT_OPTIONS.RECRUITMENT_TYPE[0].value,
+    },
+  });
   const [modalContent, setModalContent] = useState<React.ReactNode>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isApplySuccess, setIsApplySuccess] = useState(false);
 
   const { applicationMutate } = useApplicationMutation({ setIsApplySuccess });
-  const { data, isError } = useApplicationNow();
+  const { data, isError, isLoading } = useApplicationNow();
 
   useEffect(() => {
     if (!isError && data?.data) {
-      setFormValue((prev) => ({
-        ...prev,
-        applicationType: data?.data[0].applicationType,
-      }));
+      setValue('applicationType', data?.data[0].applicationType);
     } else {
       notFound(); // 현재 모집 중인 공고가 없는 경우
     }
-  }, [data, isError]);
+  }, [data, isError, setValue]);
 
-  const isFormInputValid = () => {
-    if (!formValue.studentId) toast.error(EMPTY_INPUT.STUDENT_ID);
-    if (!formValue.name) toast.error(EMPTY_INPUT.NAME);
-    if (!formValue.contact) toast.error(EMPTY_INPUT.CONTACT);
-    if (!formValue.email) toast.error(EMPTY_INPUT.EMAIL);
-    if (!formValue.department) toast.error(EMPTY_INPUT.DEPARTMENT);
-    if (!formValue.birth) toast.error(EMPTY_INPUT.BIRTH);
-    if (!formValue.address) toast.error(EMPTY_INPUT.ADDRESS);
-    if (!formValue.otherActivities) toast.error(EMPTY_INPUT.OTHER_ACTIVITIES);
-
+  if (isLoading) {
     return (
-      !formValue.studentId ||
-      !formValue.name ||
-      !formValue.contact ||
-      !formValue.email ||
-      !formValue.department ||
-      !formValue.birth ||
-      !formValue.address ||
-      !formValue.otherActivities
+      <>
+        <Spinner size="lg" />
+      </>
     );
-  };
-
-  const handleFormValueChange = (
-    e: React.ChangeEvent<
-      HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
-    >,
-  ) => {
-    setFormValue((prev) => ({
-      ...prev,
-      [e.target.name]: e.target.value,
-    }));
-  };
+  }
 
   const handleModalClose = () => {
     setIsModalOpen(false);
   };
 
-  const handleModalConfirm = () => {
-    applicationMutate(formValue);
+  const handleModalConfirm = (formData: ApplicationForm) => {
+    applicationMutate(formData);
     setModalContent(
       isApplySuccess ? (
         <ApplySuccess handleModalClose={handleModalClose} />
@@ -100,23 +73,14 @@ export default function Form() {
         <ApplyFailed handleModalClose={handleModalClose} />
       ),
     );
-    isApplySuccess && setFormValue(initialValue);
+    isApplySuccess && reset();
   };
 
-  const handleApplyButtonClick = () => {
-    setFormValue((prev) => ({
-      ...prev,
-      contact: formValue.contact.replace(/-/g, ''),
-      grade: Number(formValue.grade),
-      recruitmentId: data?.data[0].id,
-    }));
-
-    const checked = isFormInputValid();
-
-    if (!checked) {
+  const onSubmit = (data: ApplicationForm) => {
+    if (Object.keys(errors).length === 0) {
       setModalContent(
         <ApplyCheck
-          handleModalConfirm={handleModalConfirm}
+          handleModalConfirm={() => handleModalConfirm(data)}
           handleModalClose={handleModalClose}
         />,
       );
@@ -126,130 +90,204 @@ export default function Form() {
 
   return (
     <>
-      <div className="grid w-full grid-cols-1 gap-4 text-start lg:!grid-cols-2 lg:!gap-8">
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className="grid w-full grid-cols-1 gap-4 text-start lg:!grid-cols-2 lg:!gap-8"
+      >
         <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
           <Select
             className="col-span-2"
             label="구분"
+            id="applicationType"
             options={SELECT_OPTIONS.RECRUITMENT_TYPE}
-            value={formValue.applicationType}
-            name="applicationType"
-            onChange={handleFormValueChange}
+            {...register('applicationType', {
+              required: {
+                value: true,
+                message: '구분은 필수 항목이에요.',
+              },
+            })}
           />
+          {errors.applicationType && (
+            <span className="ml-1 mt-1 text-xs text-red-500">
+              {errors.applicationType.message}
+            </span>
+          )}
           <Input
             id="name"
-            name="name"
             placeholder="홍길동"
             className="grow"
-            onChange={handleFormValueChange}
-            value={formValue.name}
             label="이름"
             inputClassName="text-black"
+            {...register('applicationType', {
+              required: {
+                value: true,
+                message: '구분은 필수 항목이에요.',
+              },
+            })}
+            message={errors.name?.message}
+            messageClassName="text-red-500"
           />
           <Input
             id="birth"
-            name="birth"
+            label="생일"
             type="date"
             className="grow"
             inputClassName="text-black"
-            onChange={handleFormValueChange}
-            value={formValue.birth}
-            label="생일"
+            {...register('birth', {
+              required: {
+                value: true,
+                message: '생일은 필수 항목이에요.',
+              },
+            })}
+            message={errors.birth?.message}
+            messageClassName="text-red-500"
           />
           <Input
             id="contact"
-            name="contact"
             placeholder="010-1234-5678"
             className="grow"
-            onChange={handleFormValueChange}
-            value={formattedPhoneInput(formValue.contact)}
             label="연락처"
             inputClassName="text-black"
+            {...register('contact', {
+              required: {
+                value: true,
+                message: '연락처는 필수 항목이에요.',
+              },
+            })}
+            message={errors.contact?.message}
+            messageClassName="text-red-500"
           />
           <Input
             id="email"
-            name="email"
             placeholder="clab.coreteam@gmail.com"
             className="grow"
-            onChange={handleFormValueChange}
-            value={formValue.email}
             label="이메일"
             inputClassName="text-black"
+            {...register('email', {
+              required: {
+                value: true,
+                message: '이메일은 필수 항목이에요.',
+              },
+            })}
+            message={errors.email?.message}
+            messageClassName="text-red-500"
           />
           <Input
             id="studentId"
-            name="studentId"
             placeholder="202512345"
             className="grow"
-            onChange={handleFormValueChange}
-            value={formValue.studentId}
             label="학번"
             inputClassName="text-black"
+            {...register('studentId', {
+              required: {
+                value: true,
+                message: '학번은 필수 항목이에요.',
+              },
+            })}
+            message={errors.studentId?.message}
+            messageClassName="text-red-500"
           />
           <Select
             label="학년"
             options={SELECT_OPTIONS.GRADE}
-            value={formValue.grade}
-            name="grade"
-            onChange={handleFormValueChange}
+            id="grade"
+            {...register('grade', {
+              required: {
+                value: true,
+                message: '학년은 필수 항목이에요.',
+              },
+            })}
           />
+          {errors.grade && (
+            <span className="ml-1 mt-1 text-xs text-red-500">
+              {errors.grade.message}
+            </span>
+          )}
           <Input
             id="department"
-            name="department"
             placeholder="컴퓨터공학전공"
             className="col-span-2 grow"
-            onChange={handleFormValueChange}
-            value={formValue.department}
             label="학과"
             inputClassName="text-black"
+            {...register('department', {
+              required: {
+                value: true,
+                message: '학과는 필수 항목이에요.',
+              },
+            })}
+            message={errors.department?.message}
+            messageClassName="text-red-500"
           />
           <Input
             id="address"
-            name="address"
             placeholder="수원시 (통학소요시간)"
             className="col-span-2 grow"
-            onChange={handleFormValueChange}
-            value={formValue.address}
             label="거주지"
             inputClassName="text-black"
+            {...register('address', {
+              required: {
+                value: true,
+                message: '거주지는 필수 항목이에요.',
+              },
+            })}
+            message={errors.address?.message}
+            messageClassName="text-red-500"
           />
         </div>
         <div className="space-y-4">
           <Select
             label="관심 분야"
             options={SELECT_OPTIONS.MY_FIELD}
-            value={formValue.interests}
-            name="interests"
-            onChange={handleFormValueChange}
+            id="interests"
+            {...register('interests', {
+              required: {
+                value: true,
+                message: '관심분야는 필수 항목이에요.',
+              },
+            })}
           />
+          {errors.interests && (
+            <span className="ml-1 mt-1 text-xs text-red-500">
+              {errors.interests.message}
+            </span>
+          )}
           <Input
             id="githubUrl"
-            name="githubUrl"
             placeholder="https://github.com/kgu-clab"
             className="grow"
-            onChange={handleFormValueChange}
-            value={formValue.githubUrl}
             label="Github (선택)"
             inputClassName="text-black"
+            {...register('githubUrl')}
           />
           <Textarea
             id="otherActivities"
-            name="otherActivities"
             placeholder="IT 활동 경험과 지원동기를 자유롭게 기술해주세요."
             className="h-56"
-            onChange={handleFormValueChange}
-            value={formValue.otherActivities}
             label="지원 동기 및 활동"
-            maxLength={OTHER_ACTIVITY_MAX_LENGTH}
+            {...register('otherActivities', {
+              required: {
+                value: true,
+                message: '지원 동기 및 활동은 필수 항목이에요.',
+              },
+              maxLength: {
+                value: OTHER_ACTIVITY_MAX_LENGTH,
+                message: `${OTHER_ACTIVITY_MAX_LENGTH}자 이하로 작성해주세요.`,
+              },
+            })}
           />
+          {errors.otherActivities && (
+            <span className="ml-1 mt-1 text-xs text-red-500">
+              {errors.otherActivities.message}
+            </span>
+          )}
           <Button
-            className="bg-clab-light-gray w-full font-bold text-white"
-            onClick={handleApplyButtonClick}
+            className="bg-clab-gray w-full font-bold text-white"
+            type="submit"
           >
             지원하기
           </Button>
         </div>
-      </div>
+      </form>
 
       {isModalOpen && <Modal body={modalContent} isOpen={isModalOpen} />}
     </>

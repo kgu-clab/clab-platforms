@@ -10,19 +10,19 @@ import { useScrollAnimation } from '../hooks';
 const ActivityData = [
   {
     title: 'MT',
-    image: '/activity/activity_photo1.jpeg',
+    image: '/activity/activity_photo1.webp',
   },
   {
     title: '네트워킹 데이',
-    image: '/activity/activity_photo2.jpeg',
+    image: '/activity/activity_photo2.webp',
   },
   {
     title: '회식',
-    image: '/activity/activity_photo3.jpeg',
+    image: '/activity/activity_photo3.webp',
   },
   {
     title: '1학년 C언어 스터디',
-    image: '/activity/activity_photo4.jpeg',
+    image: '/activity/activity_photo4.webp',
   },
 ];
 
