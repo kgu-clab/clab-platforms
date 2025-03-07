@@ -2,13 +2,14 @@
 
 import { Dispatch, useState } from 'react';
 
+import { SetStateAction } from 'jotai';
+
 import { KguLogoColor } from '@clab-platforms/icon';
 import SvgMenu from '@clab-platforms/icon/src/outline/react/Menu';
 import { cn } from '@clab-platforms/utils';
 
 import { SUGANG_PAGES } from '@/widgets/sugang/model';
 import { SugangTableView } from '@/widgets/sugang/ui';
-import { SetStateAction } from 'jotai';
 
 export default function SugangLayout() {
   const [opened, setOpened] = useState(false);

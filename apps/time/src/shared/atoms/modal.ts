@@ -1,5 +1,6 @@
-import { ModalKey } from '@/shared/types';
 import { atom } from 'jotai';
+
+import { ModalKey } from '@/shared/types';
 
 type ModalAtom = {
   [key in ModalKey]: {
