@@ -1,42 +1,28 @@
 import { useCallback } from 'react';
 
-import { useSetModalStore } from '@store/modal';
-import { now } from '@utils/date';
+import { useAtomValue, useSetAtom } from 'jotai';
 
-interface OpenModalProps {
-  key?: string;
-  title?: string;
-  content?: React.ReactNode;
-  custom?: React.ReactNode;
-  accept?: {
-    text: string;
-    onClick: () => void;
-  };
-  cancel?: {
-    text: string;
-    onClick: () => void;
-  };
-}
+import { modalAtom, setModalAtom } from '@/atom/modal';
+
+import type { Modal } from '@type/modal';
 
 export interface UseModalResult<T> {
   open: (options: T) => void;
 }
 
 export function useModal() {
-  const setModal = useSetModalStore();
+  const setModal = useSetAtom(setModalAtom);
   /**
    * 모달을 엽니다.
    */
   const open = ({
-    key = now().toString(),
     title = 'Members',
     content,
     custom,
     accept,
     cancel,
-  }: OpenModalProps) => {
+  }: Modal) => {
     setModal({
-      key,
       isOpen: true,
       title,
       content,
@@ -53,15 +39,12 @@ export function useModal() {
    * 모달을 닫습니다.
    */
   const close = useCallback(() => {
-    setModal((prev) => ({ ...prev, isOpen: false }));
+    setModal({ isOpen: false });
   }, [setModal]);
 
-  /**
-   * 모달을 강제 업데이트합니다.
-   */
-  const update = useCallback(() => {
-    setModal((prev) => ({ ...prev, key: now().toString() }));
-  }, [setModal]);
+  return { open, close } as const;
+}
 
-  return { open, close, update } as const;
+export function useModalState() {
+  return useAtomValue(modalAtom);
 }
