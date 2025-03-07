@@ -5,7 +5,7 @@ import Modal from '@components/common/Modal/Modal';
 import Textarea from '@components/common/Textarea/Textarea';
 
 import { useModal } from '@hooks/common/useModal';
-import useToast from '@hooks/common/useToast';
+import { useToast } from '@hooks/common/useToast';
 import {
   useActivityGroupBoardMutation,
   useActivityGroupBoardPatchMutation,
@@ -26,7 +26,7 @@ const AssignmentFeedbackModal = ({
   assignmentId,
 }: AssignmentFeedbackModalProps) => {
   const { close } = useModal();
-  const toast = useToast();
+  const { addToast } = useToast();
   const [feedback, setFeedback] = useState('');
   const { data: myProfile } = useMyProfile();
   const { activityGroupBoardMutate, activityGroupBoardIsPending } =
@@ -39,7 +39,7 @@ const AssignmentFeedbackModal = ({
   };
   const handleFeedbackUploadClick = () => {
     if (feedback === '') {
-      return toast({
+      return addToast({
         state: 'error',
         message: '내용을 입력해주세요.',
       });

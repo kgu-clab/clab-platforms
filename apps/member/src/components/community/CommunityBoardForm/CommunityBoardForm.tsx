@@ -17,7 +17,7 @@ import {
   BOARD_CONTENT_MAX_LENGTH,
   BOARD_TITLE_MAX_LENGTH,
 } from '@constants/state';
-import useToast from '@hooks/common/useToast';
+import { useToast } from '@hooks/common/useToast';
 import { useBoardModifyMutation, useBoardWriteMutation } from '@hooks/queries';
 
 import type {
@@ -47,7 +47,7 @@ const CommunityBoardForm = ({
   data,
   onClose,
 }: CommunityBoardFormProps) => {
-  const toast = useToast();
+  const { addToast } = useToast();
   const { boardWriteMutate, isPending: boardWriteIsPending } =
     useBoardWriteMutation();
   const { boardModifyMutate, isPending: boardModifyIsPending } =
@@ -86,7 +86,7 @@ const CommunityBoardForm = ({
 
   const handleSubmitClick = () => {
     if (!title || !content || category === SELECT_DEFAULT_OPTION) {
-      return toast({
+      return addToast({
         state: 'error',
         message: ERROR_MESSAGE.NO_DATA,
       });

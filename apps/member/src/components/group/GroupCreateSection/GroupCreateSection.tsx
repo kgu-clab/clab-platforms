@@ -20,7 +20,7 @@ import {
   ACTIVITY_GROUP_NAME_MAX_LENGTH,
   BOARD_TITLE_MAX_LENGTH,
 } from '@constants/state';
-import useToast from '@hooks/common/useToast';
+import { useToast } from '@hooks/common/useToast';
 import { useActivityGroupMutation } from '@hooks/queries';
 import { toKoreaActivityGroupCategory } from '@utils/string';
 
@@ -80,7 +80,7 @@ const CategoryOptions = Object.entries(SELECT_ACTIVITY_GROUP_CATEGORY_TYPE).map(
 );
 const GroupCreateSection = () => {
   const navigate = useNavigate();
-  const toast = useToast();
+  const { addToast } = useToast();
   const { activityGroupMutate, activityGroupIsPending } =
     useActivityGroupMutation();
   const [photoList, setPhotoList] = useState<PhotoType[]>([]);
@@ -122,23 +122,23 @@ const GroupCreateSection = () => {
 
   const handleApplyButtonClick = () => {
     if (subject.length === 0 || name.length === 0 || content.length === 0) {
-      return toast({
+      return addToast({
         state: 'error',
         message: '필수 입력 사항을 모두 입력해주세요.',
       });
     } else if (name.length > ACTIVITY_GROUP_NAME_MAX_LENGTH) {
-      return toast({
+      return addToast({
         state: 'error',
         message: `활동명은 ${ACTIVITY_GROUP_NAME_MAX_LENGTH}자 이내로 작성해주세요.`,
       });
     } else if (content.length > ACTIVITY_GROUP_CONTENT_MAX_LENGTH) {
-      return toast({
+      return addToast({
         state: 'error',
         message: `내용은 ${ACTIVITY_GROUP_CONTENT_MAX_LENGTH}자 이내로 작성해주세요.`,
       });
     } else if (curriculum) {
       if (curriculum.length > ACTIVITY_GROUP_CONTENT_MAX_LENGTH) {
-        return toast({
+        return addToast({
           state: 'error',
           message: `커리큘럼은 ${ACTIVITY_GROUP_CONTENT_MAX_LENGTH}자 이내로 작성해주세요.`,
         });
@@ -152,7 +152,7 @@ const GroupCreateSection = () => {
 
   const handleSearchClick = async () => {
     if (!photoKeyword)
-      return toast({
+      return addToast({
         state: 'error',
         message: '검색어를 입력해주세요.',
       });

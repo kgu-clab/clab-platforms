@@ -6,7 +6,7 @@ import Select from '@components/common/Select/Select';
 
 import { ROLE_LEVEL } from '@constants/state';
 import { useModal } from '@hooks/common/useModal';
-import useToast from '@hooks/common/useToast';
+import { useToast } from '@hooks/common/useToast';
 import { useMemberRoleMutation } from '@hooks/queries/member';
 import { toKoreaMemberLevel } from '@utils/string';
 
@@ -45,12 +45,12 @@ interface Props extends Options {}
 
 function MemberPermissionSettingModal({ memberId, role }: Props) {
   const [changeRole, setChangeRole] = useState(role);
-  const toast = useToast();
+  const { addToast } = useToast();
   const { memberRoleMutation } = useMemberRoleMutation();
 
   const handleLevelChangeButtonClick = () => {
     if (!changeRole) {
-      return toast({
+      return addToast({
         state: 'error',
         message: '권한을 선택해주세요',
       });

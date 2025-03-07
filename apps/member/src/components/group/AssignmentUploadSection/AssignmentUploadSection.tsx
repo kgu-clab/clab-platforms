@@ -9,7 +9,7 @@ import Textarea from '@components/common/Textarea/Textarea';
 
 import { FORM_DATA_KEY } from '@constants/api';
 import { ACTIVITY_BOARD_CATEGORY_STATE } from '@constants/state';
-import useToast from '@hooks/common/useToast';
+import { useToast } from '@hooks/common/useToast';
 import {
   useActivityGroupBoardMutation,
   useActivityGroupBoardPatchMutation,
@@ -34,7 +34,7 @@ const AssignmentUploadSection = ({
   dueDateTime,
   myAssignment,
 }: Props) => {
-  const toast = useToast();
+  const { addToast } = useToast();
   const isAlreadySubmitted = Boolean(myAssignment);
   const { data: myProfile } = useMyProfile();
   const { activityGroupBoardMutate, activityGroupBoardIsPending } =
@@ -64,7 +64,7 @@ const AssignmentUploadSection = ({
     const files = uploaderRef.current?.files;
 
     if (!description && files?.length === 0) {
-      return toast({
+      return addToast({
         state: 'error',
         message: '첨부파일이나 설명을 입력해주세요.',
       });

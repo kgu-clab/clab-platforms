@@ -14,7 +14,7 @@ import {
   ACTIVITY_GROUP_CONTENT_MAX_LENGTH,
 } from '@constants/state.ts';
 import { useModal } from '@hooks/common/useModal.ts';
-import useToast from '@hooks/common/useToast';
+import { useToast } from '@hooks/common/useToast.ts';
 import {
   useActivityGroupBoardDeleteMutation,
   useActivityGroupBoardMutation,
@@ -43,7 +43,7 @@ const ActivityPostEditor = ({
   activities,
   assignments,
 }: ActivityPostEditorProps) => {
-  const toast = useToast();
+  const { addToast } = useToast();
   const { open } = useModal();
   const [post, setPost] = useState(defaultPost);
   const [editAssignment, setEditAssignment] = useState<boolean[]>(
@@ -73,12 +73,12 @@ const ActivityPostEditor = ({
     const files = uploaderRef.current?.files;
 
     if (!post.title || !post.content) {
-      return toast({
+      return addToast({
         state: 'error',
         message: '제목, 내용은 필수 입력 요소입니다.',
       });
     } else if (post.content.length > ACTIVITY_GROUP_CONTENT_MAX_LENGTH) {
-      return toast({
+      return addToast({
         state: 'error',
         message: `내용은 ${ACTIVITY_GROUP_CONTENT_MAX_LENGTH}자 이내로 작성해주세요.`,
       });

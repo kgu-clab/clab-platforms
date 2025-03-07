@@ -3,14 +3,14 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { postActivityGroupMemberApply } from '@api/activity';
 import { ACTIVITY_QUERY_KEY } from '@constants/key';
 import { API_ERROR_MESSAGE } from '@constants/message';
-import useToast from '@hooks/common/useToast';
+import { useToast } from '@hooks/common/useToast';
 
 /**
  * 활동을 신청합니다.
  */
 export function useActivityGroupMemberMutation() {
   const queryClient = useQueryClient();
-  const toast = useToast();
+  const { addToast } = useToast();
 
   const {
     mutate: activityGroupMemberMutate,
@@ -19,12 +19,12 @@ export function useActivityGroupMemberMutation() {
     mutationFn: postActivityGroupMemberApply,
     onSuccess: ({ success, data, errorMessage }) => {
       if (errorMessage) {
-        toast({
+        addToast({
           state: 'error',
           message: API_ERROR_MESSAGE[errorMessage],
         });
       } else if (success) {
-        toast({
+        addToast({
           state: 'success',
           message: '신청이 완료되었습니다.',
         });

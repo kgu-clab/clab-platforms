@@ -3,14 +3,14 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { postCommentWrite } from '@api/comment';
 import { COMMENT_QUERY_KEY } from '@constants/key';
 import { API_ERROR_MESSAGE } from '@constants/message';
-import useToast from '@hooks/common/useToast';
+import { useToast } from '@hooks/common/useToast';
 
 /**
  * 댓글을 작성합니다.
  */
 export const useCommentCreateMutation = () => {
   const queryClient = useQueryClient();
-  const toast = useToast();
+  const { addToast } = useToast();
 
   const mutation = useMutation({
     mutationFn: postCommentWrite,
@@ -20,7 +20,7 @@ export const useCommentCreateMutation = () => {
           queryKey: COMMENT_QUERY_KEY.DETAIL(boardId),
         });
       } else if (errorMessage) {
-        toast({
+        addToast({
           state: 'error',
           message: API_ERROR_MESSAGE[errorMessage],
         });

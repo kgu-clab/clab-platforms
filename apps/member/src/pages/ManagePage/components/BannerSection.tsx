@@ -8,7 +8,7 @@ import Uploader from '@components/common/Uploader/Uploader';
 
 import { PostActivityPhotoParams } from '@api/activity';
 import { ERROR_MESSAGE } from '@constants/message';
-import useToast from '@hooks/common/useToast';
+import { useToast } from '@hooks/common/useToast';
 import { useView } from '@hooks/common/useView';
 
 import { useActivityPhotoMutation } from '../hooks/useActivityPhotoMutation';
@@ -20,7 +20,7 @@ interface InputsState extends Pick<PostActivityPhotoParams, 'date' | 'title'> {
 type View = 'VIEW' | 'ADD';
 
 export function BannerSection() {
-  const toast = useToast();
+  const { addToast } = useToast();
   const { view, handleViewClick } = useView<View>('VIEW');
   const { activityPhotoMutate } = useActivityPhotoMutation();
 
@@ -49,7 +49,7 @@ export function BannerSection() {
   const handleOnSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!title || !date || !file) {
-      return toast({
+      return addToast({
         state: 'error',
         message: ERROR_MESSAGE.NO_DATA,
       });
