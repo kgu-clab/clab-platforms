@@ -3,12 +3,12 @@ import { useNavigate, useSearchParams } from 'react-router';
 
 import { server } from '@api/server';
 import { PATH } from '@constants/path';
-import { useSetIsLoggedInStore } from '@store/auth';
+import { useIsLoggedIn } from '@hooks/common/useIsLoggedIn';
 import { authorization, removeTokens, setTokens } from '@utils/api';
 
 export default function AuthPage() {
   const [searchParams] = useSearchParams();
-  const setIsLoggedIn = useSetIsLoggedInStore();
+  const { updateLogged } = useIsLoggedIn();
   const navigate = useNavigate();
 
   useLayoutEffect(() => {
@@ -21,15 +21,15 @@ export default function AuthPage() {
       // 토큰이 있으면 토큰을 저장하고 메인 페이지로 이동합니다.
       setTokens(accessToken, refreshToken);
       server.setHeaders(authorization(accessToken));
-      setIsLoggedIn(true);
+      updateLogged(true);
       navigate(PATH.MAIN);
     } else {
       // 토큰이 없으면 로그인 페이지로 이동합니다.
       removeTokens();
-      setIsLoggedIn(false);
+      updateLogged(false);
       navigate(PATH.LOGIN);
     }
-  }, [navigate, searchParams, setIsLoggedIn]);
+  }, [navigate, searchParams, updateLogged]);
 
   return <h1>로그인 중...</h1>;
 }

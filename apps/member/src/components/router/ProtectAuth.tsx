@@ -1,7 +1,7 @@
 import { Navigate, Outlet } from 'react-router';
 
 import { PATH } from '@constants/path';
-import { useGetIsLoggedInStore } from '@store/auth';
+import { useIsLoggedInState } from '@hooks/common/useIsLoggedIn';
 
 interface ProtectAuthProps {
   protect?: boolean;
@@ -13,7 +13,7 @@ interface ProtectAuthProps {
  * false일 경우 로그인 상태일 경우 접근 불가능한 페이지
  */
 const ProtectAuth = ({ protect = false, children }: ProtectAuthProps) => {
-  const isLoggedIn = useGetIsLoggedInStore();
+  const isLoggedIn = useIsLoggedInState();
 
   if (protect && !isLoggedIn) {
     // 로그인이 필요한 페이지에 로그인이 되어있지 않은 경우
