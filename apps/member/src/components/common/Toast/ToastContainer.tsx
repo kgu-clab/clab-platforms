@@ -1,9 +1,9 @@
-import { useGetToastStore } from '@store/toast';
+import { useToastState } from '@hooks/common/useToast';
 
 import Toast from './Toast';
 
 const ToastContainer = () => {
-  const toasts = useGetToastStore();
+  const toasts = useToastState();
 
   return (
     <div id="toast-container">

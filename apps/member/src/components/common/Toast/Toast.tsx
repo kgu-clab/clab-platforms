@@ -7,7 +7,8 @@ import {
 } from '@clab-platforms/icon';
 import { cn } from '@clab-platforms/utils';
 
-import { type TToastState, useSetToastStore } from '@store/toast';
+import { TToastState } from '@atom/toast';
+import { useToast } from '@hooks/common/useToast';
 
 interface ToastProps {
   id: number;
@@ -22,13 +23,13 @@ const STATE_ICON = {
 } as const;
 
 const Toast = ({ id, state, message }: ToastProps) => {
-  const setToast = useSetToastStore();
+  const { updateToast } = useToast();
   const [animation, setAnimation] = useState(false);
 
   const handleClick = () => {
     setAnimation(false);
     setTimeout(() => {
-      setToast((prev) => prev.filter((toast) => toast.id !== id));
+      updateToast((prev) => prev.filter((toast) => toast.id !== id));
     }, 300);
   };
 
@@ -36,7 +37,7 @@ const Toast = ({ id, state, message }: ToastProps) => {
     const showTimeout = setTimeout(() => setAnimation(true), 100);
     const hideTimeout = setTimeout(() => setAnimation(false), 3700);
     const removeTimeout = setTimeout(() => {
-      setToast((prev) => prev.filter((toast) => toast.id !== id));
+      updateToast((prev) => prev.filter((toast) => toast.id !== id));
     }, 4000);
 
     return () => {
@@ -44,7 +45,7 @@ const Toast = ({ id, state, message }: ToastProps) => {
       clearTimeout(hideTimeout);
       clearTimeout(removeTimeout);
     };
-  }, [id, setToast]);
+  }, [id, updateToast]);
 
   return (
     <div
