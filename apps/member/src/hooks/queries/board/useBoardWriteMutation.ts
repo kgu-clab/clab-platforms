@@ -6,14 +6,14 @@ import { postBoardsWrite } from '@api/board';
 import { BOARD_QUERY_KEY, HASHTAG_QUERY_KEY } from '@constants/key';
 import { API_ERROR_MESSAGE } from '@constants/message';
 import { PATH } from '@constants/path';
-import useToast from '@hooks/common/useToast';
+import { useToast } from '@hooks/common/useToast';
 
 /**
  * 게시글을 작성합니다.
  */
 export const useBoardWriteMutation = () => {
   const queryClient = useQueryClient();
-  const toast = useToast();
+  const { addToast } = useToast();
   const navigate = useNavigate();
 
   const mutation = useMutation({
@@ -29,12 +29,12 @@ export const useBoardWriteMutation = () => {
         queryClient.invalidateQueries({
           queryKey: HASHTAG_QUERY_KEY.LIST(),
         });
-        toast({
+        addToast({
           state: 'success',
           message: '게시글이 작성되었어요.',
         });
       } else if (errorMessage) {
-        toast({
+        addToast({
           state: 'error',
           message: API_ERROR_MESSAGE[errorMessage],
         });

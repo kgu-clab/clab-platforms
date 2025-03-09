@@ -15,14 +15,14 @@ import {
   APPLICATION_TITLE_MAX_LENGTH,
   APPLICATION_TYPE,
 } from '@constants/state';
-import useToast from '@hooks/common/useToast';
+import { useToast } from '@hooks/common/useToast';
 
 import { Recruitment } from '@type/application';
 
 import { useRecruitmentCreateMutation } from '../hooks';
 
 export function RecruitmentCreateSection() {
-  const toast = useToast();
+  const { addToast } = useToast();
   const [isOpen, setIsOpen] = useState(false);
   const [inputs, setInputs] = useState<Recruitment>({
     title: '',
@@ -63,7 +63,7 @@ export function RecruitmentCreateSection() {
 
   const handleCreateButtonClick = () => {
     if (Object.values(inputs).some((value) => !value)) {
-      return toast({
+      return addToast({
         state: 'error',
         message: ERROR_MESSAGE.NO_DATA,
       });

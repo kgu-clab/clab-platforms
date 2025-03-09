@@ -2,11 +2,11 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 import { postCommentLikes } from '@api/comment';
 import { COMMENT_QUERY_KEY } from '@constants/key';
-import useToast from '@hooks/common/useToast';
+import { useToast } from '@hooks/common/useToast';
 
 export const useCommentLikesMutation = () => {
   const queryClient = useQueryClient();
-  const toast = useToast();
+  const { addToast } = useToast();
 
   const mutation = useMutation({
     mutationFn: postCommentLikes,
@@ -17,12 +17,12 @@ export const useCommentLikesMutation = () => {
         });
 
         const message = `댓글에 좋아요를 ${data.isDeleted ? '취소' : '추가'}했어요.`;
-        toast({
+        addToast({
           state: 'success',
           message: message,
         });
       } else if (errorMessage) {
-        toast({
+        addToast({
           state: 'error',
           message: '문제가 발생했어요. 다시 시도해주세요.',
         });

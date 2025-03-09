@@ -14,7 +14,7 @@ import {
   ACTIVITY_GROUP_CONTENT_MAX_LENGTH,
 } from '@constants/state';
 import { useModal } from '@hooks/common/useModal';
-import useToast from '@hooks/common/useToast';
+import { useToast } from '@hooks/common/useToast';
 import { useActivityGroupBoardPatchMutation } from '@hooks/queries';
 import { isDateValid } from '@utils/date';
 import dayjs from 'dayjs';
@@ -34,7 +34,7 @@ interface FileUploaderProps {
 
 export const ActivityBoardEditModal = ({ prevData, groupId }: Props) => {
   const { close } = useModal();
-  const toast = useToast();
+  const { addToast } = useToast();
   const [board, setBoard] = useState<ActivityBoardType>(prevData);
 
   const uploaderRef = useRef<HTMLInputElement>(null);
@@ -62,12 +62,12 @@ export const ActivityBoardEditModal = ({ prevData, groupId }: Props) => {
     const files = uploaderRef.current?.files;
 
     if (!board.title || !board.content) {
-      return toast({
+      return addToast({
         state: 'error',
         message: '제목과 내용을 입력해주세요.',
       });
     } else if (board.content.length > ACTIVITY_GROUP_CONTENT_MAX_LENGTH) {
-      return toast({
+      return addToast({
         state: 'error',
         message: `내용은 ${ACTIVITY_GROUP_CONTENT_MAX_LENGTH}자 이내로 작성해주세요.`,
       });
@@ -77,7 +77,7 @@ export const ActivityBoardEditModal = ({ prevData, groupId }: Props) => {
       prevData.category === ACTIVITY_BOARD_CATEGORY_STATE.ASSIGNMENT &&
       isDateValid(board.dueDateTime, String(dayjs()))
     ) {
-      return toast({
+      return addToast({
         state: 'error',
         message: '종료 일시는 현재 일시 이후로 선택해주세요.',
       });

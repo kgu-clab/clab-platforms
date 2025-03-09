@@ -6,7 +6,7 @@ import { cn } from '@clab-platforms/utils';
 import Modal from '@components/common/Modal/Modal';
 
 import { UseModalResult, useModal } from '@hooks/common/useModal';
-import useToast from '@hooks/common/useToast';
+import { useToast } from '@hooks/common/useToast';
 import { useUserInfoMutation } from '@hooks/queries';
 
 interface Options {
@@ -36,7 +36,7 @@ interface Props extends Options {
 }
 
 function ChangePasswordModal({ close, memberId }: Props) {
-  const toast = useToast();
+  const { addToast } = useToast();
   const { userInfoMutate } = useUserInfoMutation();
 
   const [newPassword, setNewPassword] = useState({
@@ -52,14 +52,14 @@ function ChangePasswordModal({ close, memberId }: Props) {
   const handledAcceptClick = () => {
     const { password, passwordCheck } = newPassword;
     if (password === '' || passwordCheck === '') {
-      return toast({
+      return addToast({
         state: 'error',
         message: '새로운 비밀번호를 입력해주세요.',
       });
     }
 
     if (password !== passwordCheck) {
-      return toast({
+      return addToast({
         state: 'error',
         message: '비밀번호가 일치하지 않습니다.',
       });

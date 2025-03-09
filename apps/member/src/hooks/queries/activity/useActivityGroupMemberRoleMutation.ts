@@ -2,25 +2,25 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 import { patchActivityGroupMemberRole } from '@api/activity';
 import { ACTIVITY_QUERY_KEY } from '@constants/key';
-import useToast from '@hooks/common/useToast';
+import { useToast } from '@hooks/common/useToast';
 
 /**
  * 활동 멤버 역할을 변경합니다.
  */
 export function useActivityGroupMemberRoleMutation() {
   const queryClient = useQueryClient();
-  const toast = useToast();
+  const { addToast } = useToast();
 
   const mutation = useMutation({
     mutationFn: patchActivityGroupMemberRole,
     onSuccess: (data) => {
       if (!data) {
-        return toast({
+        return addToast({
           state: 'error',
           message: '멤버 권한 변경에 실패했어요.',
         });
       }
-      toast({
+      addToast({
         state: 'success',
         message: '멤버 권한이 변경됐어요.',
       });

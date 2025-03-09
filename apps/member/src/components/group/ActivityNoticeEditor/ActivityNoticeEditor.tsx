@@ -7,7 +7,7 @@ import Section from '@components/common/Section/Section';
 import Textarea from '@components/common/Textarea/Textarea';
 
 import { FORM_DATA_KEY } from '@constants/api';
-import useToast from '@hooks/common/useToast';
+import { useToast } from '@hooks/common/useToast';
 import { useActivityGroupBoardMutation } from '@hooks/queries';
 
 import type { ActivityBoardType } from '@type/activity';
@@ -31,7 +31,7 @@ const defaultNotice: ActivityBoardType = {
 };
 
 const ActivityNoticeEditor = ({ groupId, data }: ActivityNoticeEditorProps) => {
-  const toast = useToast();
+  const { addToast } = useToast();
   const [notice, setNotice] = useState<ActivityBoardType>(defaultNotice);
   const uploaderRef = useRef<HTMLInputElement>(null);
   const { activityGroupBoardMutate, activityGroupBoardIsPending } =
@@ -49,7 +49,7 @@ const ActivityNoticeEditor = ({ groupId, data }: ActivityNoticeEditorProps) => {
     const files = uploaderRef.current?.files;
 
     if (!notice.title || !notice.content)
-      return toast({
+      return addToast({
         state: 'error',
         message: '제목, 내용은 필수 입력 요소입니다.',
       });

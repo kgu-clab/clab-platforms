@@ -1,12 +1,11 @@
 import { Suspense, useCallback, useLayoutEffect } from 'react';
 
-import { useModal } from '@hooks/common/useModal';
-import { useGetModalStore } from '@store/modal';
+import { useModal, useModalState } from '@hooks/common/useModal';
 
 import Modal from './Modal';
 
 const ModalContainer = () => {
-  const { isOpen, title, content, custom, accept, cancel } = useGetModalStore();
+  const { isOpen, title, content, custom, accept, cancel } = useModalState();
   const { close } = useModal();
 
   const handleKeyDown = useCallback(

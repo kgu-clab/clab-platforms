@@ -15,7 +15,7 @@ import Uploader from '@components/common/Uploader/Uploader';
 
 import { PATH } from '@constants/path';
 import { SELECT_DEFAULT_OPTION } from '@constants/select';
-import useToast from '@hooks/common/useToast';
+import { useToast } from '@hooks/common/useToast';
 import { useMembershipFeeMutation } from '@hooks/queries/useMembershipFeeMutation';
 import { createFormData } from '@utils/api';
 
@@ -79,7 +79,7 @@ export function RequestForm({
   isSuccess,
   onSubmit,
 }: RequestFormProps) {
-  const toast = useToast();
+  const { addToast } = useToast();
   const {
     formData,
     checkList,
@@ -103,7 +103,7 @@ export function RequestForm({
     e.preventDefault();
     if (isPending) return;
     if (!validation) {
-      return toast({
+      return addToast({
         state: 'error',
         message: '모든 항목을 입력해주세요',
       });

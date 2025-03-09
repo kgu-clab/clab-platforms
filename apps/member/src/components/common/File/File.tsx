@@ -1,7 +1,7 @@
 import { createURL } from '@clab-platforms/utils';
 
 import { SERVER_BASE_URL } from '@constants/api';
-import useToast from '@hooks/common/useToast';
+import { useToast } from '@hooks/common/useToast';
 
 interface FileProps extends React.PropsWithChildren {
   href: string;
@@ -9,7 +9,7 @@ interface FileProps extends React.PropsWithChildren {
 }
 
 const File = ({ href, name }: FileProps) => {
-  const toast = useToast();
+  const { addToast } = useToast();
 
   if (!href.startsWith(SERVER_BASE_URL)) {
     href = createURL(SERVER_BASE_URL, href);
@@ -30,7 +30,7 @@ const File = ({ href, name }: FileProps) => {
         a.remove();
       })
       .catch(() => {
-        toast({ state: 'error', message: '파일 다운로드에 실패했습니다' });
+        addToast({ state: 'error', message: '파일 다운로드에 실패했습니다' });
       });
   };
 

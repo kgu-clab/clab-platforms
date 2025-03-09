@@ -19,7 +19,7 @@ import { GROUP_MESSAGE } from '@constants/message';
 import { ACTIVITY_MEMBER_ROLE, ACTIVITY_MEMBER_STATE } from '@constants/state';
 import { useModal } from '@hooks/common/useModal';
 import { usePagination } from '@hooks/common/usePagination';
-import useToast from '@hooks/common/useToast';
+import { useToast } from '@hooks/common/useToast';
 import {
   useActivityGroupApplication,
   useActivityGroupApplicationMutation,
@@ -63,7 +63,7 @@ function getRoleColor(state: ActivityMemberRoleType): BadgeColorVariant {
 const ActivityParticipantEditor = ({
   groupId,
 }: ActivityParticipantEditorProps) => {
-  const toast = useToast();
+  const { addToast } = useToast();
   const [mode, setMode] = useState(false);
   const { page, size, handlePageChange } = usePagination({ defaultSize: 10 });
   const { open, close } = useModal();
@@ -135,7 +135,7 @@ const ActivityParticipantEditor = ({
       .filter((member) => member.status === true)
       .map((member) => member.memberId);
     if (!changeList.length) {
-      return toast({
+      return addToast({
         state: 'error',
         message: '선택된 멤버가 없어요',
       });

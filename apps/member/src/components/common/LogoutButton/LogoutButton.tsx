@@ -2,8 +2,8 @@ import { type ComponentPropsWithoutRef } from 'react';
 
 import { Button } from '@clab-platforms/design-system';
 
+import { useIsLoggedIn } from '@hooks/common/useIsLoggedIn';
 import { useModal } from '@hooks/common/useModal';
-import { useSetIsLoggedInStore } from '@store/auth';
 import { removeTokens } from '@utils/api';
 
 interface Props
@@ -13,7 +13,7 @@ interface Props
   > {}
 
 const LogoutButton = ({ children, ...props }: Props) => {
-  const setIsLoggedIn = useSetIsLoggedInStore();
+  const { updateLogged } = useIsLoggedIn();
   const { open } = useModal();
 
   const handleLogoutClick = () => {
@@ -24,7 +24,7 @@ const LogoutButton = ({ children, ...props }: Props) => {
         text: '로그아웃',
         onClick: () => {
           removeTokens();
-          setIsLoggedIn(false);
+          updateLogged(false);
         },
       },
     });

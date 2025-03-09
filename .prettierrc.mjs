@@ -7,7 +7,7 @@ export default {
   printWidth: 80,
   importOrder: [
     '^react(.*)',
-    '^recoil(.*)',
+    '^jotai(.*)',
     '^@tanstack/(.*)$',
     '^@clab-platforms/(.*)$',
     '^@components/(.*)$',

@@ -2,7 +2,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 import { postAddMember } from '@api/member';
 import { MEMBER_QUERY_KEY } from '@constants/key';
-import useToast from '@hooks/common/useToast';
+import { useToast } from '@hooks/common/useToast';
 
 import { AddMemberRequestType } from '@type/manage';
 
@@ -15,7 +15,7 @@ interface Params {
 
 export function useMemberAddMutation({ reset }: Params) {
   const queryClient = useQueryClient();
-  const toast = useToast();
+  const { addToast } = useToast();
 
   const mutation = useMutation({
     mutationFn: (body: AddMemberRequestType) => postAddMember(body),
@@ -24,13 +24,13 @@ export function useMemberAddMutation({ reset }: Params) {
         queryClient.invalidateQueries({
           queryKey: MEMBER_QUERY_KEY.PAGES(),
         });
-        toast({
+        addToast({
           state: 'success',
           message: '계정이 생성되었어요.',
         });
         reset();
       } else {
-        toast({
+        addToast({
           state: 'error',
           message: '계정 생성에 실패했어요.',
         });

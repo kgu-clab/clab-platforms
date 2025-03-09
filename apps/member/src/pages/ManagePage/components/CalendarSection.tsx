@@ -17,7 +17,7 @@ import Textarea from '@components/common/Textarea/Textarea';
 
 import { PATH } from '@constants/path';
 import { usePagination } from '@hooks/common/usePagination';
-import useToast from '@hooks/common/useToast';
+import { useToast } from '@hooks/common/useToast';
 import { useView } from '@hooks/common/useView';
 import { useDeleteModal } from '@hooks/modal/useDeleteModal';
 import { useSchedule } from '@hooks/queries';
@@ -126,7 +126,7 @@ interface ScheduleFormProps {
 }
 
 export function ScheduleForm({ onSubmit }: ScheduleFormProps) {
-  const toast = useToast();
+  const { addToast } = useToast();
   const [inputs, setInputs] = useState({
     title: '',
     detail: '',
@@ -149,7 +149,7 @@ export function ScheduleForm({ onSubmit }: ScheduleFormProps) {
 
   const handleSubmitClick = () => {
     if (!title || !detail || !startDateTime || !endDateTime) {
-      return toast({
+      return addToast({
         state: 'error',
         message: '모든 항목을 입력해주세요.',
       });

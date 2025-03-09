@@ -2,14 +2,14 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 import { postRegisterBook } from '@api/book';
 import { BOOK_QUERY_KEY } from '@constants/key';
-import useToast from '@hooks/common/useToast';
+import { useToast } from '@hooks/common/useToast';
 
 /**
  * 도서를 추가합니다.
  */
 export function useBookRegisterMutation() {
   const queryClient = useQueryClient();
-  const toast = useToast();
+  const { addToast } = useToast();
 
   const mutation = useMutation({
     mutationFn: postRegisterBook,
@@ -22,12 +22,12 @@ export function useBookRegisterMutation() {
           queryKey: BOOK_QUERY_KEY.PAGES(),
         });
 
-        toast({
+        addToast({
           state: 'success',
           message: '도서를 추가했어요.',
         });
       } else if (errorMessage) {
-        toast({ state: 'error', message: '도서 등록에 실패했어요.' });
+        addToast({ state: 'error', message: '도서 등록에 실패했어요.' });
       }
     },
   });

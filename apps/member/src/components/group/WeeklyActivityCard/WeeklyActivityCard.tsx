@@ -6,7 +6,7 @@ import File from '@components/common/File/File';
 import Image from '@components/common/Image/Image';
 
 import { PATH_FINDER } from '@constants/path';
-import useToast from '@hooks/common/useToast';
+import { useToast } from '@hooks/common/useToast';
 import { isImageFile } from '@utils/api';
 import { formattedDate } from '@utils/date';
 
@@ -33,7 +33,7 @@ const WeeklyActivityCard = ({
   files,
 }: WeeklyActivityCardProps) => {
   const navigate = useNavigate();
-  const toast = useToast();
+  const { addToast } = useToast();
 
   const onClick = (assignmentId: number, state: Array<string | undefined>) => {
     if (isParticipant) {
@@ -41,7 +41,7 @@ const WeeklyActivityCard = ({
         state: { name: state },
       });
     } else {
-      toast({
+      addToast({
         state: 'error',
         message: '참여자만 열람이 가능해요.',
       });

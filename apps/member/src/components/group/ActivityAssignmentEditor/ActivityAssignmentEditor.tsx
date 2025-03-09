@@ -11,7 +11,7 @@ import {
   ACTIVITY_BOARD_CATEGORY_STATE,
   ACTIVITY_GROUP_CONTENT_MAX_LENGTH,
 } from '@constants/state';
-import useToast from '@hooks/common/useToast';
+import { useToast } from '@hooks/common/useToast';
 import { useActivityGroupBoardMutation, useMyProfile } from '@hooks/queries';
 import { isDateValid, toKoreaISOString } from '@utils/date';
 import dayjs from 'dayjs';
@@ -29,7 +29,7 @@ const defaultBoard = {
 };
 
 const ActivityAssignmentEditor = ({ parentId, activityGroupId }: Props) => {
-  const toast = useToast();
+  const { addToast } = useToast();
   const [board, setBoard] = useState(defaultBoard);
 
   const { data: myProfile } = useMyProfile();
@@ -49,19 +49,19 @@ const ActivityAssignmentEditor = ({ parentId, activityGroupId }: Props) => {
     const files = uploaderRef.current?.files;
 
     if (!board.title || !board.content || !board.dueDateTime) {
-      return toast({
+      return addToast({
         state: 'error',
         message: '제목, 내용, 종료 일시는 필수 입력 요소입니다.',
       });
     } else if (board.content.length > ACTIVITY_GROUP_CONTENT_MAX_LENGTH) {
-      return toast({
+      return addToast({
         state: 'error',
         message: `내용은 ${ACTIVITY_GROUP_CONTENT_MAX_LENGTH}자 이내로 작성해주세요.`,
       });
     }
 
     if (isDateValid(board.dueDateTime, toKoreaISOString(String(dayjs())))) {
-      return toast({
+      return addToast({
         state: 'error',
         message: '종료 일시는 현재 일시 이후로 선택해주세요.',
       });
