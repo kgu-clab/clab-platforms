@@ -20,7 +20,14 @@
 
 ## Apps
 
-![monorepo diagram](https://github.com/user-attachments/assets/fae92084-3945-47ee-b1a9-fffad4a09cd9)
+```mermaid
+flowchart LR
+    clab-platforms --> apps
+    apps -->|Internal Community| member
+    apps -->|University Community| time
+    apps -->|Landing Website| land
+    apps -->|OAuth Website| auth
+```
 
 > @clab-platforms의 프로젝트 구성도예요. 더 자세히 알고 싶다면 해당 프로젝트의 `README.md`를 살펴봐주세요.
 
