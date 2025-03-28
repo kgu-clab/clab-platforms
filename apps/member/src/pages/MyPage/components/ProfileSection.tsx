@@ -57,7 +57,7 @@ export function ProfileSection() {
         <div className="flex gap-2">
           {isEdit && (
             <Button size="sm" onClick={() => open({ memberId: data.id })}>
-              비빌번호 변경
+              비밀번호 변경
             </Button>
           )}
           <Button

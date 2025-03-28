@@ -65,7 +65,7 @@ const LoginForm = ({ data, onLogin, onTwoFactor }: LoginFormProps) => {
         {...register('password')}
         type="password"
         label="비밀번호"
-        placeholder="비빌번호를 입력해주세요."
+        placeholder="비밀번호를 입력해주세요."
         aria-invalid={errors.password ? 'true' : 'false'}
         message={errors.password?.message}
         inputClassName={errors.password && ' border-red-500'}
