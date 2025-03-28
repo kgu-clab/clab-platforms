@@ -26,6 +26,7 @@ export const END_POINT = {
   MEMBER_ADD: `v1/members`,
   MEMBER_PASSWORD_RESEND: (memberId: string) =>
     `/v1/members/password/${memberId}/resend`,
+  MEMBER_DELETE: (memberId: string) => `/v1/members/${memberId}`,
   // -- 커뮤니티
   BOARDS: `/v1/boards`,
   BOARDS_LIST: `/v1/boards/category`,

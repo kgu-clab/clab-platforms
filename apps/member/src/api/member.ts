@@ -160,3 +160,12 @@ export async function postResendMemberPassword(memberId: string) {
 
   return data;
 }
+
+/**
+ * 멤버 계정 삭제
+ */
+export function deleteMember(id: string) {
+  return server.del<never, BaseResponse<string>>({
+    url: END_POINT.MEMBER_DELETE(id),
+  });
+}
