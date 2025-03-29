@@ -15,6 +15,7 @@ import Pagination from '@components/common/Pagination/Pagination';
 import { TABLE_HEAD, TABLE_HEAD_ACTION } from '@constants/head';
 import { usePagination } from '@hooks/common/usePagination';
 import { useMemberRole } from '@hooks/queries/member';
+import { useMemberDeleteModal } from '@pages/ManagePage/hooks/useMemberDeleteModal';
 import { useMemberInfoModal } from '@pages/ManagePage/hooks/useMemberInfoModal';
 import { useMemberPasswordResendModal } from '@pages/ManagePage/hooks/useMemberPasswordResendModal';
 import { useMemberPermissionSettingModal } from '@pages/ManagePage/hooks/useMemberPermissionSettingModal';
@@ -55,6 +56,8 @@ const RoleEditView = ({ role }: RoleEditViewProps) => {
     useMemberPermissionSettingModal();
 
   const { open: passwordResendModalOpen } = useMemberPasswordResendModal();
+
+  const { open: memberDeleteModalOpen } = useMemberDeleteModal();
 
   const handleSearchClick = () => {
     refetch();
@@ -113,6 +116,13 @@ const RoleEditView = ({ role }: RoleEditViewProps) => {
                 onClick={() => passwordResendModalOpen({ memberId: id, name })}
               >
                 비밀번호 재전송
+              </ActionButton>
+              <ActionButton
+                type="button"
+                color="red"
+                onClick={() => memberDeleteModalOpen({ memberId: id, name })}
+              >
+                계정 삭제
               </ActionButton>
             </Table.Cell>
           </Table.Row>
