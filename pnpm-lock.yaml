@@ -259,6 +259,9 @@ importers:
       framer-motion:
         specifier: ^10.18.0
         version: 10.18.0(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
+      frimousse:
+        specifier: ^0.1.0
+        version: 0.1.0(react@19.0.0)
       jotai:
         specifier: ^2.11.3
         version: 2.12.1(@types/react@19.0.10)(react@19.0.0)
@@ -3242,6 +3245,11 @@ packages:
         optional: true
       react-dom:
         optional: true
+
+  frimousse@0.1.0:
+    resolution: {integrity: sha512-0K6cSb8BVmzn2brlhuw5nlFZuYUO+eWwgVwfFsHaYnKffJYO/WItnfFWfFQ6Zo1NKLq/9EdSVna+eZ07OVffLg==}
+    peerDependencies:
+      react: ^18 || ^19
 
   fs-extra@7.0.1:
     resolution: {integrity: sha512-YJDaCJZEnBmcbw13fvdAM9AwNOJwOzrE4pqMqBq5nFiEqXUqHwlK4B+3pUw6JNvfSPtX05xFHtYy/1ni01eGCw==}
@@ -8338,6 +8346,10 @@ snapshots:
       '@emotion/is-prop-valid': 0.8.8
       react: 19.0.0
       react-dom: 19.0.0(react@19.0.0)
+
+  frimousse@0.1.0(react@19.0.0):
+    dependencies:
+      react: 19.0.0
 
   fs-extra@7.0.1:
     dependencies:
