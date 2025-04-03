@@ -4,6 +4,7 @@ export { default as ChevronRightOutline } from './react/ChevronRight';
 export { default as CloseOutline } from './react/Close';
 export { default as CommentSolidOutline } from './react/CommentSolid';
 export { default as DateRangeOutline } from './react/DateRange';
+export { default as EmojiAddOutline } from './react/EmojiAdd';
 export { default as FileEarmarkArrowUpOutline } from './react/FileEarmarkArrowUp';
 export { default as FileEarmarkDiffOutline } from './react/FileEarmarkDiff';
 export { default as GridOutline } from './react/Grid';

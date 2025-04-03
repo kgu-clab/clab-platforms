@@ -13,9 +13,15 @@ const ReactionButton = ({
   ...props
 }: ReactionButtonProps) => {
   return (
-    <button className={cn('p-1', className)} {...props}>
+    <button
+      className={cn(
+        'flex items-center gap-2 rounded-full border px-3 hover:bg-blue-200 hover:bg-opacity-20',
+        className,
+      )}
+      {...props}
+    >
       {children}
-      <p className="font-semibold text-gray-600">{countNumber ?? 0}</p>
+      <p className="font-medium">{countNumber ?? 0}</p>
     </button>
   );
 };

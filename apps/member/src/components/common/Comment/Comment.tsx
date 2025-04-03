@@ -5,7 +5,7 @@ import { MODAL_ACCEPT, MODAL_CONTENT, MODAL_TITLE } from '@constants/modal';
 import { useModal } from '@hooks/common/useModal';
 import { useAccusesMutation, useCommentDeleteMutation } from '@hooks/queries';
 import { useCommentLikesMutation } from '@hooks/queries/comment/useCommentLikesMutation';
-import { formattedDate } from '@utils/date';
+import { formattedDate, toKoreaISOString } from '@utils/date';
 import { formatMemberName } from '@utils/string';
 
 import type { CommentListItem } from '@type/comment';
@@ -96,7 +96,9 @@ const Comment = ({
           </p>
         )}
         <div className="flex justify-end gap-4">
-          <p className="text-gray-500">{formattedDate(createdAt)}</p>
+          <p className="text-gray-500">
+            {formattedDate(toKoreaISOString(createdAt))}
+          </p>
 
           {isOwner ? (
             <ActionButton onClick={() => handleDeleteClick(id)}>

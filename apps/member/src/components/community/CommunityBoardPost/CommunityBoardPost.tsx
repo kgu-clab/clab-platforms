@@ -1,6 +1,7 @@
 import { useState } from 'react';
 
 import { Button, Grid } from '@clab-platforms/design-system';
+import EmojiAdd from '@clab-platforms/icon/src/outline/react/EmojiAdd';
 import { toDecodeHTMLEntities } from '@clab-platforms/utils/src/string';
 
 import Image from '@components/common/Image/Image';
@@ -43,6 +44,7 @@ const EMOJI = [
 
 const CommunityBoardPost = ({ data }: CommunityBoardPostProps) => {
   const [isEdit, setIsEdit] = useState(false);
+  const [isShowReactionModal, setIsShowReactionModal] = useState(false);
 
   const { boardEmojiMutate, isPending } = useBoardEmojiMutation();
 
@@ -77,11 +79,11 @@ const CommunityBoardPost = ({ data }: CommunityBoardPostProps) => {
       <Post.Body className="flex min-h-60 flex-col justify-between">
         {data.content}
         {data.category === 'development_qna' && data.boardHashtagInfos && (
-          <div className="mt-8 flex space-x-2">
+          <div className="mt-8 flex justify-start space-x-2">
             {data.boardHashtagInfos?.map(({ id, name }) => (
               <div
                 key={id}
-                className="rounded-full bg-gray-100 px-4 py-1 font-semibold text-gray-500"
+                className="rounded-full border border-blue-400 bg-blue-50 px-3 font-semibold text-blue-400"
               >
                 {name}
               </div>
@@ -89,27 +91,51 @@ const CommunityBoardPost = ({ data }: CommunityBoardPostProps) => {
           </div>
         )}
       </Post.Body>
-      <Post.Footer className="flex flex-col items-end">
-        <Grid gap="lg" col="4" className="mx-auto">
-          {EMOJI.map(({ name, value }) => {
-            const countNumber =
-              data.emojiInfos?.find(
-                (emoji) => toDecodeHTMLEntities(emoji.emoji) === name,
-              )?.count ?? 0;
+      <Post.Footer className="flex justify-between">
+        <div className="flex gap-2">
+          <button
+            type="button"
+            className="flex size-fit justify-center rounded-full border p-1 hover:bg-gray-100"
+            onClick={() => setIsShowReactionModal(!isShowReactionModal)}
+          >
+            <EmojiAdd />
+          </button>
+          {isShowReactionModal && (
+            <div className="absolute mt-11 flex gap-6 rounded-full border bg-white px-4 py-1 shadow-lg transition">
+              {EMOJI.map(({ name }) => (
+                <button
+                  onClick={() => handleReactionButtonClick(data.id, name)}
+                  className="text-xl hover:cursor-pointer"
+                  key={name}
+                >
+                  {name}
+                </button>
+              ))}
+            </div>
+          )}
+          <Grid gap="sm" col="4">
+            {EMOJI.map(({ name, value }) => {
+              const countNumber =
+                data.emojiInfos?.find(
+                  (emoji) => toDecodeHTMLEntities(emoji.emoji) === name,
+                )?.count ?? 0;
 
-            return (
-              <ReactionButton
-                key={value}
-                onClick={() => handleReactionButtonClick(data.id, name)}
-                disabled={isPending}
-                countNumber={countNumber}
-              >
-                <p className="text-3xl">{name}</p>
-              </ReactionButton>
-            );
-          })}
-        </Grid>
-        <div>
+              if (countNumber)
+                return (
+                  <ReactionButton
+                    key={value}
+                    onClick={() => handleReactionButtonClick(data.id, name)}
+                    disabled={isPending}
+                    countNumber={countNumber}
+                    className="transition"
+                  >
+                    <p className="text-xl">{name}</p>
+                  </ReactionButton>
+                );
+            })}
+          </Grid>
+        </div>
+        <div className="flex gap-2">
           {data.isOwner ? (
             // 작성자인 경우 삭제 버튼을 보여준다.
             <CommunityDeleteButton id={data.id} />
