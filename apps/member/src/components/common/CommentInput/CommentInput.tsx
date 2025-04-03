@@ -71,7 +71,7 @@ const CommentInput = ({
           </button>
           {isShowEmoji && (
             <EmojiPicker.Root
-              className="absolute right-0 isolate mt-6 flex h-[368px] w-fit flex-col rounded-md bg-white"
+              className="absolute right-0 isolate mt-12 flex h-[368px] w-fit flex-col rounded-md bg-white"
               onEmojiSelect={(emoji) => handleEmojiButtonClick(emoji.emoji)}
             >
               <EmojiPicker.Search className="z-10 mx-2 mt-2 appearance-none rounded-md bg-neutral-100 px-2.5 py-2 text-sm" />
@@ -83,7 +83,7 @@ const CommentInput = ({
                   이모티콘이 없어요.
                 </EmojiPicker.Empty>
                 <EmojiPicker.List
-                  className="absolute select-none pb-1.5"
+                  className="select-none pb-1.5"
                   components={{
                     CategoryHeader: ({ category, ...props }) => (
                       <div
