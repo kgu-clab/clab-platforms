@@ -55,7 +55,7 @@ const Sidebar = () => {
           isOpen ? 'translate-y-0 border-b' : '-translate-y-full',
         )}
       >
-        <Menubar className="container flex flex-col gap-6 pt-4 pb-6">
+        <Menubar className="container flex flex-col gap-6 pb-6 pt-4">
           <Menubar.Item
             selected={pathName === PATH.MAIN}
             onClick={() => handleMenubarItemClick(PATH.MAIN)}
