@@ -1,0 +1,37 @@
+import { Suspense } from 'react';
+
+import Content from '@components/common/Content/Content';
+import ErrorSection from '@components/common/ErrorSection/ErrorSection';
+import Header from '@components/common/Header/Header';
+import QueryErrorBoundary from '@components/common/QueryErrorBoundary';
+
+import InquiryListSection from '../InquiryListPage/components/InquiryListSection';
+import InquiryFaqSection from './components/InquiryFaqSection';
+import InquiryIntroduceSection from './components/InquiryIntroduceSection';
+import InquiryNav from './components/InquiryNav';
+
+export default function InquiryPage() {
+  return (
+    <QueryErrorBoundary
+      fallback={({ reset }) => <ErrorSection reset={reset} />}
+    >
+      <Content>
+        <Header title="문의">
+          <InquiryNav></InquiryNav>
+        </Header>
+
+        <Suspense>
+          <InquiryIntroduceSection></InquiryIntroduceSection>
+        </Suspense>
+
+        <Suspense>
+          <InquiryFaqSection></InquiryFaqSection>
+        </Suspense>
+
+        <Suspense>
+          <InquiryListSection></InquiryListSection>
+        </Suspense>
+      </Content>
+    </QueryErrorBoundary>
+  );
+}
