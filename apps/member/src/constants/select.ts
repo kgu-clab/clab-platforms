@@ -2,6 +2,10 @@ import type {
   CommunityCategoryKorType,
   CommunityCategoryType,
 } from '@type/community';
+import type {
+  InquiryCategoryKorType,
+  InquiryCategoryType,
+} from '@type/inquiry';
 
 import { APPLICATION_TYPE } from './state';
 
@@ -70,3 +74,17 @@ export const SELECT_ACTIVITY_GROUP_CATEGORY_TYPE = {
   STUDY: 'STUDY',
   PROJECT: 'PROJECT',
 } as const;
+
+export const SELECT_OPTIONS_INQURIY_TYPE: Options<
+  InquiryCategoryKorType,
+  InquiryCategoryType
+>[] = [
+  {
+    name: '버그',
+    value: 'bug',
+  },
+  {
+    name: '문의',
+    value: 'inquiry',
+  },
+] as const;

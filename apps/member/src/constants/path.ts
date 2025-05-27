@@ -38,6 +38,9 @@ export const PATH = {
   LOGIN: '/login',
   AUTH: '/auth',
   APPLICATION: '/application',
+  INQUIRY: '/inquiry',
+  INQUIRY_WRITE: '/inquiry/write',
+  INQUIRY_LIST: '/inquiry/list',
 } as const;
 /**
  * 페이지의 URL을 생성하는 함수입니다.

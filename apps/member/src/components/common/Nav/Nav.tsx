@@ -35,7 +35,7 @@ const Nav = () => {
         'border-b-orange-300': IS_DEVELOPMENT,
       })}
     >
-      <div className="container flex h-14 items-center justify-between bg-white">
+      <div className="container flex items-center justify-between bg-white h-14">
         <div className="flex items-center gap-10 lg:gap-20">
           <Link className="flex items-center gap-2 text-xl" to={PATH.MAIN}>
             <img src="/favicon.ico" alt="c-lab" className="size-7" />
@@ -82,6 +82,12 @@ const Nav = () => {
               onClick={() => handleMenubarItemClick(PATH.SUPPORT)}
             >
               회비
+            </Menubar.Item>
+            <Menubar.Item
+              selected={pathName.startsWith(PATH.INQUIRY)}
+              onClick={() => handleMenubarItemClick(PATH.INQUIRY)}
+            >
+              문의
             </Menubar.Item>
             {data.roleLevel! >= ROLE_LEVEL.ADMIN && (
               <>

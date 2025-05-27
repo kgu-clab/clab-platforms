@@ -55,7 +55,7 @@ const Sidebar = () => {
           isOpen ? 'translate-y-0 border-b' : '-translate-y-full',
         )}
       >
-        <Menubar className="container flex flex-col gap-6 pb-6 pt-4">
+        <Menubar className="container flex flex-col gap-6 pt-4 pb-6">
           <Menubar.Item
             selected={pathName === PATH.MAIN}
             onClick={() => handleMenubarItemClick(PATH.MAIN)}
@@ -91,6 +91,12 @@ const Sidebar = () => {
             onClick={() => handleMenubarItemClick(PATH.SUPPORT)}
           >
             회비
+          </Menubar.Item>
+          <Menubar.Item
+            selected={pathName.startsWith(PATH.INQUIRY)}
+            onClick={() => handleMenubarItemClick(PATH.INQUIRY)}
+          >
+            문의
           </Menubar.Item>
           {data.roleLevel! >= ROLE_LEVEL.ADMIN && (
             <>

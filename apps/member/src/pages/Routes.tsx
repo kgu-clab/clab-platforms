@@ -46,6 +46,9 @@ const LoginPage = lazy(() => import('@pages/LoginPage'));
 const AuthPage = lazy(() => import('@pages/AuthPage'));
 const BlogPage = lazy(() => import('@pages/BlogPage'));
 const ManagePage = lazy(() => import('@pages/ManagePage'));
+const InquiryPage = lazy(() => import('@pages/InquiryPage'));
+const InquiryWritePage = lazy(() => import('@pages/InquiryWritePage'));
+const InquiryListPage = lazy(() => import('@pages/InquiryListPage'));
 
 const router = createBrowserRouter([
   {
@@ -202,6 +205,30 @@ const router = createBrowserRouter([
         element: (
           <Suspense>
             <ApplicationPage />
+          </Suspense>
+        ),
+      },
+      {
+        path: PATH.INQUIRY,
+        element: (
+          <Suspense>
+            <InquiryPage />
+          </Suspense>
+        ),
+      },
+      {
+        path: PATH.INQUIRY_WRITE,
+        element: (
+          <Suspense>
+            <InquiryWritePage />
+          </Suspense>
+        ),
+      },
+      {
+        path: PATH.INQUIRY_LIST,
+        element: (
+          <Suspense>
+            <InquiryListPage />
           </Suspense>
         ),
       },
