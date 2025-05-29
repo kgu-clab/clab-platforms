@@ -142,14 +142,12 @@ const InquiryTableRow = ({
       <div className="space-y-2">
         <div>아직 답변이 되지 않았어요</div>
         {isAdmin && (
-          <div>
-            <button
-              onClick={handleAnswerEditToggle}
-              className="cursor-pointer border-none bg-none text-blue-600 underline"
-            >
-              답변하기
-            </button>
-          </div>
+          <button
+            onClick={handleAnswerEditToggle}
+            className="cursor-pointer border-none bg-none text-blue-600 underline"
+          >
+            답변하기
+          </button>
         )}
       </div>
     );
