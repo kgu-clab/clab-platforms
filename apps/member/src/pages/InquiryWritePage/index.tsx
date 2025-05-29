@@ -22,11 +22,11 @@ export default function InquiryWritePage() {
         />
 
         <Suspense>
-          <InquiryWriteIntroduceSection></InquiryWriteIntroduceSection>
+          <InquiryWriteIntroduceSection />
         </Suspense>
 
         <Suspense>
-          <InquiryForm></InquiryForm>
+          <InquiryForm />
         </Suspense>
       </Content>
     </QueryErrorBoundary>

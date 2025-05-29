@@ -17,19 +17,19 @@ export default function InquiryPage() {
     >
       <Content>
         <Header title="문의">
-          <InquiryNav></InquiryNav>
+          <InquiryNav />
         </Header>
 
         <Suspense>
-          <InquiryIntroduceSection></InquiryIntroduceSection>
+          <InquiryIntroduceSection />
         </Suspense>
 
         <Suspense>
-          <InquiryFaqSection></InquiryFaqSection>
+          <InquiryFaqSection />
         </Suspense>
 
         <Suspense>
-          <InquiryListSection></InquiryListSection>
+          <InquiryListSection />
         </Suspense>
       </Content>
     </QueryErrorBoundary>

@@ -55,7 +55,7 @@ const InquiryFqaSetion = () => {
       </Section.Header>
       <Section.Body>
         <div className="flex flex-col gap-4">
-          <Accodion items={currentItems} resetKey={menu.value}></Accodion>
+          <Accodion items={currentItems} resetKey={menu.value} />
         </div>
       </Section.Body>
     </Section>

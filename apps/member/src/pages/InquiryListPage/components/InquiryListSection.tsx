@@ -44,7 +44,7 @@ const InquiryListSection = ({ showAll = false }: InquiryListSectionProps) => {
               showAll={showAll}
               currentOpenItemIndex={currentOpenItemIndex}
               onClick={handleTableItemClick}
-            ></InquiryTableRow>
+            />
           ))}
         </Table>
       </Section.Body>

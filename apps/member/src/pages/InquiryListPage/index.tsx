@@ -21,13 +21,15 @@ export default function InquiryIndexPage() {
           title={['문의', '전체 문의']}
           path={[PATH.INQUIRY, PATH.INQUIRY_LIST]}
         >
-          <InquiryNav></InquiryNav>
+          <InquiryNav />
         </Header>
+
         <Suspense>
-          <InquiryMySection></InquiryMySection>
+          <InquiryMySection />
         </Suspense>
+
         <Suspense>
-          <InquiryListSection showAll={true}></InquiryListSection>
+          <InquiryListSection showAll={true} />
         </Suspense>
       </Content>
     </QueryErrorBoundary>
