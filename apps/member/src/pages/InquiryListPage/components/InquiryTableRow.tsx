@@ -13,7 +13,7 @@ import { useBoardDeleteMutation, useMyProfile } from '@hooks/queries';
 import InquiryForm from '@pages/InquiryWritePage/components/InquiryForm';
 import { createImageUrl } from '@utils/api';
 import { formattedDate } from '@utils/date';
-import { formatMemberName } from '@utils/string';
+import { formatMemberName, toKoreaInquiryCategory } from '@utils/string';
 
 import { InquiryItem } from '@type/inquiry';
 
@@ -74,17 +74,6 @@ const InquiryTableRow = ({
       ),
     });
   };
-
-  const renderCategoryBadge = () => (
-    <Badge color="primary" className="mr-2">
-      {isBugType ? '오류' : '문의'}
-    </Badge>
-  );
-  const renderAnswerStatusBadge = () => (
-    <Badge color={data.isAnswered ? 'green' : 'red'}>
-      {data.isAnswered ? '답변완료' : '답변예정'}
-    </Badge>
-  );
 
   const renderOwnerActions = () => {
     if (!data.isOwner) return null;
@@ -200,8 +189,17 @@ const InquiryTableRow = ({
         </Table.Cell>
         <Table.Cell>{formattedDate(data.createdAt)}</Table.Cell>
         <Table.Cell>
-          {renderCategoryBadge()}
-          {renderAnswerStatusBadge()}
+          {
+            <>
+              <Badge color="primary" className="mr-2">
+                {toKoreaInquiryCategory(data.category)}
+              </Badge>
+
+              <Badge color={data.isAnswered ? 'green' : 'red'}>
+                {data.isAnswered ? '답변완료' : '답변예정'}
+              </Badge>
+            </>
+          }
         </Table.Cell>
       </Table.Row>
 

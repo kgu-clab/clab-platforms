@@ -142,3 +142,11 @@ export const APPLICATION_TYPE = {
   OPERATION: 'OPERATION',
   CORE_TEAM: 'CORE_TEAM',
 } as const;
+
+/**
+ * 문의 카테고리를 정의합니다.
+ */
+export const INQUIRY_CATEGORY_STATE = {
+  BUG: 'BUG',
+  INQUIRY: 'INQUIRY',
+} as const;

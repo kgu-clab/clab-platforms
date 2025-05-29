@@ -1,6 +1,10 @@
 import { SERVICE_NAME } from '@constants/environment';
 import { SELECT_ACTIVITY_GROUP_CATEGORY_TYPE } from '@constants/select';
-import { ACTIVITY_MEMBER_ROLE, ACTIVITY_MEMBER_STATE } from '@constants/state';
+import {
+  ACTIVITY_MEMBER_ROLE,
+  ACTIVITY_MEMBER_STATE,
+  INQUIRY_CATEGORY_STATE,
+} from '@constants/state';
 
 import {
   ActivityGroupCategoryType,
@@ -10,6 +14,7 @@ import {
 import type { ApplicationType } from '@type/application';
 import type { Bookstore, BookstoreKorean } from '@type/book';
 import type { CareerLevel, EmploymentType } from '@type/community';
+import { InquiryCategoryType } from '@type/inquiry';
 import type { RoleLevelKey, RoleLevelType } from '@type/member';
 import type { MembershipStatusType } from '@type/membershipFee';
 import type { SchedulePriority } from '@type/schedule';
@@ -212,6 +217,17 @@ export function toKoreaActivityGroupMemberStatus(
       return '거절';
     case ACTIVITY_MEMBER_STATE.WAITING:
       return '대기';
+    default:
+      return '-';
+  }
+}
+
+export function toKoreaInquiryCategory(status: InquiryCategoryType): string {
+  switch (status) {
+    case INQUIRY_CATEGORY_STATE.BUG:
+      return '버그';
+    case INQUIRY_CATEGORY_STATE.INQUIRY:
+      return '문의';
     default:
       return '-';
   }

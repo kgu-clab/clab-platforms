@@ -13,6 +13,7 @@ import { SELECT_OPTIONS_INQURIY_TYPE } from '@constants/select';
 import {
   BOARD_CONTENT_MAX_LENGTH,
   BOARD_TITLE_MAX_LENGTH,
+  INQUIRY_CATEGORY_STATE,
 } from '@constants/state';
 import { useToast } from '@hooks/common/useToast';
 import { useBoardModifyMutation, useBoardWriteMutation } from '@hooks/queries';
@@ -137,7 +138,7 @@ const InquiryForm = ({
             onChange={handleInquiryFormChange}
           />
         </div>
-        {category === 'bug' && (
+        {category === INQUIRY_CATEGORY_STATE.BUG && (
           <Uploader
             label="오류 이미지"
             accept="image/*"
@@ -150,9 +151,9 @@ const InquiryForm = ({
           className="min-h-96 w-full"
           value={
             content ||
-            (category === 'bug'
+            (category === INQUIRY_CATEGORY_STATE.BUG
               ? bugDefaultValue
-              : category === 'inquiry'
+              : category === INQUIRY_CATEGORY_STATE.INQUIRY
                 ? inquiryDefaultValue
                 : '')
           }

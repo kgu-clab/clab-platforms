@@ -7,7 +7,7 @@ import type {
   InquiryCategoryType,
 } from '@type/inquiry';
 
-import { APPLICATION_TYPE } from './state';
+import { APPLICATION_TYPE, INQUIRY_CATEGORY_STATE } from './state';
 
 type Options<N = string, V = string> = {
   name: N;
@@ -81,10 +81,10 @@ export const SELECT_OPTIONS_INQURIY_TYPE: Options<
 >[] = [
   {
     name: '버그',
-    value: 'bug',
+    value: INQUIRY_CATEGORY_STATE.BUG,
   },
   {
     name: '문의',
-    value: 'inquiry',
+    value: INQUIRY_CATEGORY_STATE.INQUIRY,
   },
 ] as const;
