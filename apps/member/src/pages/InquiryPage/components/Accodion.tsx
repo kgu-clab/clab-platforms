@@ -4,14 +4,12 @@ import { cn } from '@clab-platforms/utils';
 
 import DropdownButton from '@components/common/DropdownButton/DropdownButton';
 
-// 아코디언 아이템 타입
 interface AccordionItem {
   id: string | number;
   question: string;
   answer: string;
 }
 
-// 아코디언 Props
 interface AccordionProps {
   items: AccordionItem[];
   className?: string;

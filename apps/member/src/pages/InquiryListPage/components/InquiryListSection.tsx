@@ -3,9 +3,9 @@ import { useState } from 'react';
 import { Table } from '@clab-platforms/design-system';
 
 import MoreButton from '@components/common/MoreButton/MoreButton';
-// import Pagination from '@components/common/Pagination/Pagination';
 import { Section } from '@components/common/Section';
 
+import { TABLE_HEAD } from '@constants/head';
 import { inquiryData } from '@pages/InquiryPage/staticData';
 
 import InquiryTableRow from './InquiryTableRow';
@@ -20,7 +20,6 @@ const InquiryListSection = ({ showAll = false }: InquiryListSectionProps) => {
   const handleTableItemClick = (id: number) => {
     setCurrentOpenItemIndex(id);
   };
-  // showAll 이 false면 최근 5개만 slice
   inquiryData.sort((a, b) => b.id - a.id);
   const displayData = showAll ? inquiryData : inquiryData.slice(0, 5);
 
@@ -30,7 +29,7 @@ const InquiryListSection = ({ showAll = false }: InquiryListSectionProps) => {
         {!showAll && <MoreButton to="./list">더보기</MoreButton>}
       </Section.Header>
       <Section.Body>
-        <Table head={['번호', '제목', '문의자', '문의일', '카테고리 / 상태']}>
+        <Table head={TABLE_HEAD.INQUIRY_TABLE}>
           <colgroup>
             <col className="w-2/12" /> {/* 번호 */}
             <col className="w-3/12" /> {/* 제목 */}
@@ -48,14 +47,6 @@ const InquiryListSection = ({ showAll = false }: InquiryListSectionProps) => {
             ></InquiryTableRow>
           ))}
         </Table>
-        {/* TODO : 페이지네이션 만들기 */}
-        {/* <Pagination
-          className="justify-center mt-4"
-          totalItems={totalItems}
-          postLimit={size}
-          onChange={handlePageChange}
-          page={page}
-        /> */}
       </Section.Body>
     </Section>
   );

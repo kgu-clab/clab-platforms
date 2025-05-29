@@ -39,18 +39,13 @@ const InquiryTableRow = ({
   const { open } = useModal();
   const { boardDeleteMutate } = useBoardDeleteMutation();
 
-  // isCurrentItemOpen 열려있는 문의 항목 체크
-  // isBugType 카테고리가 버그인지
-  // isAdmin 관리자 권한이 있는지
   const isCurrentItemOpen = currentOpenItemIndex === data.id;
   const isBugType = data.category === SELECT_OPTIONS_INQURIY_TYPE[0].value;
   const isAdmin = myProfile.roleLevel >= ROLE_LEVEL.ADMIN;
 
-  // 편집 모드 토글 핸들러
   const handleEditToggle = () => setIsEdit((prev) => !prev);
   const handleAnswerEditToggle = () => setIsAnswerEdit((prev) => !prev);
 
-  // 문의 삭제 핸들러
   const handleDeleteClick = (id: number) => {
     open({
       title: MODAL_TITLE.DELETE,
@@ -62,7 +57,6 @@ const InquiryTableRow = ({
     });
   };
 
-  // 오류 이미지 핸들러
   const handleImageClick = (imageUrl: string) => {
     window.open(imageUrl, '_blank');
   };
@@ -112,7 +106,6 @@ const InquiryTableRow = ({
       </>
     );
   };
-  // 답변 세션 렌더링 함수
   const renderAnswerSection = () => {
     // 답변 편집 모드인 경우
     if (isAnswerEdit) {
@@ -161,7 +154,6 @@ const InquiryTableRow = ({
       </div>
     );
   };
-  // 클릭으로 확장된 부분 렌더링 함수
   const renderExpandedContent = () => {
     // 문의 편집 모드인 경우 폼 표시
     if (isEdit) {
@@ -182,7 +174,6 @@ const InquiryTableRow = ({
           <div className="text-gray-500">{data.title}</div>
           <div className="">{data.content}</div>
           <div className="flex gap-3">
-            {/* 오류 이미지 버튼 (오류 타입인 경우만) */}
             {isBugType && (
               <Button onClick={() => handleErrorImageModalOpen(data.imageUrl!)}>
                 오류 이미지
@@ -196,7 +187,6 @@ const InquiryTableRow = ({
       </Table.Row>
     );
   };
-  // 전체 렌더링
   return (
     <>
       <Table.Row

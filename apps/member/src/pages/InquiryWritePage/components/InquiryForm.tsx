@@ -44,7 +44,6 @@ const InquiryForm = ({
   onClose,
 }: InquiryFormProps) => {
   const { addToast } = useToast();
-  // TODO : 문의용 작성, 수정 뮤테이트 만들기
   const { boardWriteMutate, isPending: boardWriteIsPending } =
     useBoardWriteMutation();
   const { boardModifyMutate, isPending: boardModifyIsPending } =
