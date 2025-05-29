@@ -4,7 +4,19 @@ import { Section } from '@components/common/Section';
 
 import { PATH } from '@constants/path';
 import Accodion from '@pages/InquiryPage/components/Accodion';
-import { WriteIntroduceData } from '@pages/InquiryPage/staticData';
+
+const WriteIntroduceData = [
+  {
+    id: 1,
+    question: '문의사항이 있어요!',
+    answer: '문의사항이 있다면 어떻게 해야하는지 모르겠는데뭐라곤 적어놔야하',
+  },
+  {
+    id: 2,
+    question: '버그를 발견했어요!',
+    answer: '버그가 있다면 어떻게 해야하는지 모르겠는데뭐라곤 적어놔야ㅕㅎ',
+  },
+];
 
 const InquiryWriteIntroduceSection = () => {
   return (

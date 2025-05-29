@@ -6,9 +6,13 @@ import MoreButton from '@components/common/MoreButton/MoreButton';
 import { Section } from '@components/common/Section';
 
 import { TABLE_HEAD } from '@constants/head';
-import { inquiryData } from '@pages/InquiryPage/staticData';
+import inquiryList from '@mocks/data/inquiryList.json';
+
+import { InquiryItem } from '@type/inquiry';
 
 import InquiryTableRow from './InquiryTableRow';
+
+const inquiryData = inquiryList as InquiryItem[];
 
 interface InquiryListSectionProps {
   showAll?: boolean;

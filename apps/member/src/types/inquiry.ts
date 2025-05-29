@@ -2,14 +2,8 @@ export type InquiryCategoryType = 'BUG' | 'INQUIRY';
 
 export type InquiryCategoryKorType = '버그' | '문의';
 
-export interface InquiryPostPayload {
-  title: string;
-  content: string;
-  category: InquiryCategoryType;
-  imageUrl?: string | null;
-}
 export interface InquiryWriteItem {
-  category: string;
+  category: InquiryCategoryType;
   title: string;
   content: string;
   wantAnonymous: boolean;

@@ -17,16 +17,38 @@ import {
 } from '@constants/state';
 import { useToast } from '@hooks/common/useToast';
 import { useBoardModifyMutation, useBoardWriteMutation } from '@hooks/queries';
-import {
-  bugDefaultValue,
-  inquiryDefaultValue,
-} from '@pages/InquiryPage/staticData';
 
 import {
   InquiryCategoryType,
   InquiryItem,
   InquiryWriteItem,
 } from '@type/inquiry';
+
+const bugDefaultValue = `
+🐞 버그 요약
+- 어떤 문제가 있었나요? [여기에 버그를 간단히 설명해주세요]
+
+🧪 재현 방법
+1. 어떤 상황에서 발생했나요? [예: 로그인 후 게시글 작성 시]
+2. 어떤 환경에서 발생했나요? [예: Chrome, iPhone]
+
+✅ 기대한 동작
+- 원래 어떻게 작동해야 하나요? [예: 작성 후 저장되어야 함]
+
+📎 참고자료 (선택)
+- 스크린샷이나 파일을 첨부해주셔도 좋아요!
+`.trim();
+
+const inquiryDefaultValue = `
+💬 문의 또는 건의 내용
+- 어떤 점이 궁금하거나, 개선하고 싶은 부분이 있으신가요? [예: 메뉴 위치 변경 건의, 동아리 활동 관련 문의]
+
+🧠 배경 또는 이유
+- 왜 이런 문의/건의를 하게 되었는지 알려주세요. [예: 찾기 어려워서 불편함, 올해 활동이 무엇이 있는지 궁금함]
+
+📎 참고자료 또는 아이디어 (선택)
+- 디자인, 예시 링크 등 추가 자료가 있다면 공유해주세요!
+`.trim();
 
 interface InquiryFormProps {
   category?: InquiryCategoryType;
@@ -35,7 +57,7 @@ interface InquiryFormProps {
 }
 
 interface InquiryFormState extends Pick<InquiryWriteItem, 'title' | 'content'> {
-  category: InquiryCategoryType;
+  category: string;
   wantAnonymous: boolean;
 }
 

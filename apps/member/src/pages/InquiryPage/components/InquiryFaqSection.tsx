@@ -4,7 +4,8 @@ import { Menubar } from '@clab-platforms/design-system';
 
 import { Section } from '@components/common/Section';
 
-import { faqData } from '../staticData';
+import faqData from '@mocks/data/inquiryFaq.json';
+
 import Accodion from './Accodion';
 
 const ABOUT = {
