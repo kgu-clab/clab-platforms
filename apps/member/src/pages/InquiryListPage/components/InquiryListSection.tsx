@@ -51,5 +51,4 @@ const InquiryListSection = ({ showAll = false }: InquiryListSectionProps) => {
     </Section>
   );
 };
-
 export default InquiryListSection;
