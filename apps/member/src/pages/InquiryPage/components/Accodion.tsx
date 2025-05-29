@@ -31,16 +31,13 @@ const Accordion = ({ items, className, resetKey }: AccordionProps) => {
     <div className={cn('flex flex-col gap-4', className)}>
       {items.map((item) => {
         const isOpen = openId === item.id;
-        const headerOpenStyle = isOpen ? '' : 'rounded-b-lg';
-        const bodyOpenStyle = isOpen ? 'opacity-100 p-4' : 'max-h-0 opacity-0';
-
         return (
           <div key={item.id} className="w-full rounded-lg border bg-white">
             {/* 아코디언 헤더 */}
             <div
               className={cn(
                 'text-clab-main flex items-center justify-between rounded-t-lg bg-gray-100 p-4 ease-in-out',
-                headerOpenStyle,
+                isOpen && 'rounded-b-lg',
               )}
             >
               <div className="flex items-center gap-2 font-semibold">
@@ -57,7 +54,7 @@ const Accordion = ({ items, className, resetKey }: AccordionProps) => {
             <div
               className={cn(
                 'overflow-hidden rounded-b-lg transition duration-500 ease-in-out',
-                bodyOpenStyle,
+                isOpen ? 'p-4 opacity-100' : 'max-h-0 opacity-0',
               )}
             >
               {item.answer}
