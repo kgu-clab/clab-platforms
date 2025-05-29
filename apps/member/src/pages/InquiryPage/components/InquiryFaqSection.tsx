@@ -7,12 +7,12 @@ import { Section } from '@components/common/Section';
 import { faqData } from '../staticData';
 import Accodion from './Accodion';
 
-export const ABOUT = {
+const ABOUT = {
   CLUB: 'ABOUT_CLUB',
   UNIVERCITY: 'ABOUT_UNIVERCITY',
 };
 
-export const MenubarItems = [
+const MenubarItems = [
   { name: '동아리 활동', value: ABOUT.CLUB },
   { name: '학교 생활', value: ABOUT.UNIVERCITY },
 ];
