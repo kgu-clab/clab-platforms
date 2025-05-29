@@ -6,8 +6,7 @@ import { cn } from '@clab-platforms/utils';
 import Image from '@components/common/Image/Image';
 
 import { MODAL_ACCEPT, MODAL_CONTENT, MODAL_TITLE } from '@constants/modal';
-import { SELECT_OPTIONS_INQURIY_TYPE } from '@constants/select';
-import { ROLE_LEVEL } from '@constants/state';
+import { INQUIRY_CATEGORY_STATE, ROLE_LEVEL } from '@constants/state';
 import { useModal } from '@hooks/common/useModal';
 import { useBoardDeleteMutation, useMyProfile } from '@hooks/queries';
 import InquiryForm from '@pages/InquiryWritePage/components/InquiryForm';
@@ -39,8 +38,24 @@ const InquiryTableRow = ({
   const { open } = useModal();
   const { boardDeleteMutate } = useBoardDeleteMutation();
 
-  const isCurrentItemOpen = currentOpenItemIndex === data.id;
-  const isBugType = data.category === SELECT_OPTIONS_INQURIY_TYPE[0].value;
+  const {
+    id,
+    category,
+    isOwner,
+    answer,
+    isAnswered,
+    answeredAt,
+    responder,
+    title,
+    content,
+    imageUrl,
+    memberName,
+    memberId,
+    createdAt,
+  } = data;
+
+  const isCurrentItemOpen = currentOpenItemIndex === id;
+
   const isAdmin = myProfile.roleLevel >= ROLE_LEVEL.ADMIN;
 
   const handleEditToggle = () => setIsEdit((prev) => !prev);
@@ -76,7 +91,7 @@ const InquiryTableRow = ({
   };
 
   const renderOwnerActions = () => {
-    if (!data.isOwner) return null;
+    if (!isOwner) return null;
 
     return (
       <>
@@ -87,7 +102,7 @@ const InquiryTableRow = ({
           수정
         </button>
         <button
-          onClick={() => handleDeleteClick(data.id)}
+          onClick={() => handleDeleteClick(id)}
           className="cursor-pointer border-none bg-transparent text-blue-600 underline"
         >
           삭제
@@ -99,20 +114,17 @@ const InquiryTableRow = ({
     // 답변 편집 모드인 경우
     if (isAnswerEdit) {
       return (
-        <InquiryAnswerInput
-          onCancel={handleAnswerEditToggle}
-          data={data.answer!}
-        />
+        <InquiryAnswerInput onCancel={handleAnswerEditToggle} data={answer!} />
       );
     }
 
     // 답변 편집 모드가 아니고, 답변이 있는 경우
-    if (data.isAnswered) {
+    if (isAnswered) {
       return (
         <div className="space-y-2">
-          <div>{data.answer}</div>
+          <div>{answer}</div>
           <div className="flex items-center gap-2 text-sm text-gray-600">
-            {formattedDate(data.answeredAt)} {data.responder}
+            {formattedDate(answeredAt)} {responder}
             {isAdmin && (
               <button
                 onClick={handleAnswerEditToggle}
@@ -158,11 +170,11 @@ const InquiryTableRow = ({
     return (
       <Table.Row className="bg-gray-50">
         <Table.Cell colSpan={5} className="space-y-4 px-6 py-8 text-left">
-          <div className="text-gray-500">{data.title}</div>
-          <div className="">{data.content}</div>
+          <div className="text-gray-500">{title}</div>
+          <div className="">{content}</div>
           <div className="flex gap-3">
-            {isBugType && (
-              <Button onClick={() => handleErrorImageModalOpen(data.imageUrl!)}>
+            {category === INQUIRY_CATEGORY_STATE.BUG && (
+              <Button onClick={() => handleErrorImageModalOpen(imageUrl!)}>
                 오류 이미지
               </Button>
             )}
@@ -177,26 +189,24 @@ const InquiryTableRow = ({
   return (
     <>
       <Table.Row
-        onClick={() => showAll && onClick(data.id)}
+        onClick={() => showAll && onClick(id)}
         className={cn('border-none', isCurrentItemOpen && 'bg-gray-50')}
       >
-        <Table.Cell>{data.id}</Table.Cell>
+        <Table.Cell>{id}</Table.Cell>
         <Table.Cell className="max-w-[180px] overflow-hidden truncate whitespace-nowrap">
-          <span title={data.title}>{data.title}</span>
+          <span title={title}>{title}</span>
         </Table.Cell>
-        <Table.Cell>
-          {formatMemberName(data.memberName, data.memberId)}
-        </Table.Cell>
-        <Table.Cell>{formattedDate(data.createdAt)}</Table.Cell>
+        <Table.Cell>{formatMemberName(memberName, memberId)}</Table.Cell>
+        <Table.Cell>{formattedDate(createdAt)}</Table.Cell>
         <Table.Cell>
           {
             <>
               <Badge color="primary" className="mr-2">
-                {toKoreaInquiryCategory(data.category)}
+                {toKoreaInquiryCategory(category)}
               </Badge>
 
-              <Badge color={data.isAnswered ? 'green' : 'red'}>
-                {data.isAnswered ? '답변완료' : '답변예정'}
+              <Badge color={isAnswered ? 'green' : 'red'}>
+                {isAnswered ? '답변완료' : '답변예정'}
               </Badge>
             </>
           }

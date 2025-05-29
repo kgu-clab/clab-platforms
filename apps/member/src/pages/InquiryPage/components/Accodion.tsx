@@ -30,9 +30,10 @@ const Accordion = ({ items, className, resetKey }: AccordionProps) => {
   return (
     <div className={cn('flex flex-col gap-4', className)}>
       {items.map((item) => {
-        const isOpen = openId === item.id;
+        const { id, question, answer } = item;
+        const isOpen = openId === id;
         return (
-          <div key={item.id} className="w-full rounded-lg border bg-white">
+          <div key={id} className="w-full rounded-lg border bg-white">
             {/* 아코디언 헤더 */}
             <div
               className={cn(
@@ -41,12 +42,12 @@ const Accordion = ({ items, className, resetKey }: AccordionProps) => {
               )}
             >
               <div className="flex items-center gap-2 font-semibold">
-                <span className="text-md text-nowrap">{item.question}</span>
+                <span className="text-md text-nowrap">{question}</span>
               </div>
               <DropdownButton
                 key={isOpen ? 'open' : 'closed'}
                 isOpen={isOpen}
-                onClick={() => handleToggle(item.id)}
+                onClick={() => handleToggle(id)}
               />
             </div>
 
@@ -57,7 +58,7 @@ const Accordion = ({ items, className, resetKey }: AccordionProps) => {
                 isOpen ? 'p-4 opacity-100' : 'max-h-0 opacity-0',
               )}
             >
-              {item.answer}
+              {answer}
             </div>
           </div>
         );
