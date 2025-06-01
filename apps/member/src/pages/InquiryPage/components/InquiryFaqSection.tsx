@@ -19,33 +19,33 @@ const MenubarItems = [
 ];
 
 const InquiryFqaSetion = () => {
-  const [menu, setMenu] = useState(MenubarItems[0]);
+  const [selectedMenu, setMenu] = useState(ABOUT.CLUB);
 
-  const handleMenuClick = (item: { name: string; value: string }) => () => {
-    setMenu(item);
+  const handleSelectedMenuClick = (value: string) => () => {
+    setMenu(value);
   };
 
-  const currentData = faqData.find((item) => item.value === menu.value);
+  const currentData = faqData.find((item) => item.value === selectedMenu);
   const currentItems = currentData ? currentData.item : [];
 
   return (
     <Section>
       <Section.Header title="FAQ">
         <Menubar className="flex">
-          {MenubarItems.map((item) => (
+          {MenubarItems.map(({ name, value }) => (
             <Menubar.Item
-              selected={menu.value === item.value}
-              key={item.value}
-              onClick={handleMenuClick(item)}
+              selected={selectedMenu === value}
+              key={value}
+              onClick={handleSelectedMenuClick(value)}
             >
-              {item.name}
+              {name}
             </Menubar.Item>
           ))}
         </Menubar>
       </Section.Header>
       <Section.Body>
         <div className="flex flex-col gap-4">
-          <Accodion items={currentItems} resetKey={menu.value} />
+          <Accodion items={currentItems} resetKey={selectedMenu} />
         </div>
       </Section.Body>
     </Section>

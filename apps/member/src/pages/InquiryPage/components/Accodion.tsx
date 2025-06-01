@@ -29,8 +29,7 @@ const Accordion = ({ items, className, resetKey }: AccordionProps) => {
 
   return (
     <div className={cn('flex flex-col gap-4', className)}>
-      {items.map((item) => {
-        const { id, question, answer } = item;
+      {items.map(({ id, question, answer }) => {
         const isOpen = openId === id;
         return (
           <div key={id} className="w-full rounded-lg border bg-white">
