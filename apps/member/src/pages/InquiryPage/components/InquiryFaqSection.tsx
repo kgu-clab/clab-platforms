@@ -4,11 +4,16 @@ import { Menubar } from '@clab-platforms/design-system';
 
 import { Section } from '@components/common/Section';
 
-import Accodion from './Accodion';
+import Accordion from './Accordion';
+
+const CATEGORY = {
+  MEMBERS: 'MEMBERS',
+  CLUB: 'CLUB',
+};
 
 const faqData = [
   {
-    value: 'MEMBERS_USAGE',
+    value: CATEGORY.MEMBERS,
     item: [
       {
         id: 1,
@@ -38,7 +43,7 @@ const faqData = [
     ],
   },
   {
-    value: 'CLUB_ACTIVITY',
+    value: CATEGORY.CLUB,
     item: [
       {
         id: 1,
@@ -69,18 +74,13 @@ const faqData = [
   },
 ];
 
-const CATEGORY = {
-  MEMBERSE: 'MEMBERS',
-  CLUB: 'CLUB',
-};
-
 const MenubarItems = [
-  { name: '멤버스 이용', value: CATEGORY.MEMBERSE },
+  { name: '멤버스 이용', value: CATEGORY.MEMBERS },
   { name: '동아리 활동', value: CATEGORY.CLUB },
 ];
 
-const InquiryFqaSetion = () => {
-  const [selectedMenu, setMenu] = useState(CATEGORY.MEMBERSE);
+const InquiryFqaSection = () => {
+  const [selectedMenu, setMenu] = useState(CATEGORY.MEMBERS);
 
   const handleSelectedMenuClick = (value: string) => () => {
     setMenu(value);
@@ -106,11 +106,11 @@ const InquiryFqaSetion = () => {
       </Section.Header>
       <Section.Body>
         <div className="flex flex-col gap-4">
-          <Accodion items={currentItems} resetKey={selectedMenu} />
+          <Accordion items={currentItems} resetKey={selectedMenu} />
         </div>
       </Section.Body>
     </Section>
   );
 };
 
-export default InquiryFqaSetion;
+export default InquiryFqaSection;
