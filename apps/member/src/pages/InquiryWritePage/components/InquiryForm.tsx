@@ -74,8 +74,7 @@ const InquiryForm = ({
 
   const [uploadFile, setUploadFile] = useState<File | undefined>();
   const [inquiryForm, setInquiryForm] = useState<InquiryFormState>({
-    category:
-      strictCategory ?? data?.category ?? SELECT_OPTIONS_INQURIY_TYPE[0].value,
+    category: strictCategory ?? data?.category ?? INQUIRY_CATEGORY_STATE.BUG,
     title: toDecodeHTMLEntities(data?.title) ?? '',
     content: toDecodeHTMLEntities(data?.content) ?? '',
     wantAnonymous: data?.id === null, // 익명일 경우 Null
