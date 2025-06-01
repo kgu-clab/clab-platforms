@@ -3,7 +3,7 @@ import { Link } from 'react-router';
 import { Section } from '@components/common/Section';
 
 import { PATH } from '@constants/path';
-import Accodion from '@pages/InquiryPage/components/Accodion';
+import Accordion from '@pages/InquiryPage/components/Accordion';
 
 const WriteIntroduceData = [
   {
@@ -51,7 +51,7 @@ const InquiryWriteIntroduceSection = () => {
           </Link>{' '}
           에 원하는 답변 없다면 아래 안내사항을 읽고 문의 해주세요.
         </div>
-        <Accodion items={WriteIntroduceData} />
+        <Accordion items={WriteIntroduceData} />
       </Section.Body>
     </Section>
   );

@@ -5,7 +5,8 @@ import ErrorSection from '@components/common/ErrorSection/ErrorSection';
 import Header from '@components/common/Header/Header';
 import QueryErrorBoundary from '@components/common/QueryErrorBoundary';
 
-import InquiryListSection from '../InquiryListPage/components/InquiryListSection';
+import InquiryListSection from '@pages/InquiryListPage/components/InquiryListSection';
+
 import InquiryFaqSection from './components/InquiryFaqSection';
 import InquiryIntroduceSection from './components/InquiryIntroduceSection';
 import InquiryNav from './components/InquiryNav';
