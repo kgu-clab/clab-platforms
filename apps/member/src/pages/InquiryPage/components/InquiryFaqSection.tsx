@@ -31,18 +31,7 @@ const InquiryFqaSetion = () => {
   return (
     <Section>
       <Section.Header title="FAQ">
-        <Menubar className="hidden sm:flex">
-          {MenubarItems.map((item) => (
-            <Menubar.Item
-              selected={menu.value === item.value}
-              key={item.value}
-              onClick={handleMenuClick(item)}
-            >
-              {item.name}
-            </Menubar.Item>
-          ))}
-        </Menubar>
-        <Menubar className="flex sm:hidden">
+        <Menubar className="flex">
           {MenubarItems.map((item) => (
             <Menubar.Item
               selected={menu.value === item.value}
