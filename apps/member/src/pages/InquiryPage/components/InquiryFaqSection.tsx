@@ -4,9 +4,70 @@ import { Menubar } from '@clab-platforms/design-system';
 
 import { Section } from '@components/common/Section';
 
-import faqData from '@mocks/data/inquiryFaq.json';
-
 import Accodion from './Accodion';
+
+const faqData = [
+  {
+    value: 'ABOUT_CLUB',
+    item: [
+      {
+        id: 1,
+        question: '스터디는 누구나 만들 수 있나요?',
+        answer: '그럴껄요?????????',
+      },
+      {
+        id: 2,
+        question: '스터디는 누구나 만들 수 있나요?',
+        answer: '그럴껄요?????????',
+      },
+      {
+        id: 3,
+        question: '스터디는 누구나 만들 수 있나요?',
+        answer: '그럴껄요?????????',
+      },
+      {
+        id: 4,
+        question: '스터디는 누구나 만들 수 있나요?',
+        answer: '그럴껄요?????????',
+      },
+      {
+        id: 5,
+        question: '스터디는 누구나 만들 수 있나요?',
+        answer: '그럴껄요?????????',
+      },
+    ],
+  },
+  {
+    value: 'ABOUT_UNIVERCITY',
+    item: [
+      {
+        id: 1,
+        question: '학교가야 되나요',
+        answer: '그럴껄요?????????',
+      },
+      {
+        id: 2,
+        question: '학교가야 되나요',
+        answer: '그럴껄요?????????',
+      },
+      {
+        id: 3,
+        question: '학교가야 되나요',
+        answer: '그럴껄요?????????',
+      },
+      {
+        id: 4,
+        question: '학교가야 되나요',
+        answer: '그럴껄요?????????',
+      },
+      {
+        id: 5,
+        question: '학교가야 되나요',
+        answer: '그럴껄요?????????',
+      },
+    ],
+  },
+];
 
 const ABOUT = {
   CLUB: 'ABOUT_CLUB',

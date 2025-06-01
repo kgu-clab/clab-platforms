@@ -4,12 +4,12 @@ import blogList from '@mocks/data/blogList.json';
 import freeBoardList from '@mocks/data/freeBoardList.json';
 import graduatedBoardList from '@mocks/data/graduatedBoardList.json';
 import hireBoardList from '@mocks/data/hireBoardList.json';
+import inquiryList from '@mocks/data/inquiryList.json';
 import itNewsBoardList from '@mocks/data/itNewsBoardList.json';
 import mainAlertList from '@mocks/data/mainAlertList.json';
 import mainBannerList from '@mocks/data/mainBannerList.json';
 import newsList from '@mocks/data/newsList.json';
 import noticeBoardList from '@mocks/data/noticeBoardList.json';
-import qnaBoardList from '@mocks/data/qnaBoardList.json';
 
 const getPokemonImage = (): string => {
   const random = Math.floor(Math.random() * 1008) + 1;
@@ -28,9 +28,9 @@ export {
   birthdayList,
   blogList,
   noticeBoardList,
-  qnaBoardList,
   itNewsBoardList,
   hireBoardList,
   freeBoardList,
   graduatedBoardList,
+  inquiryList,
 };

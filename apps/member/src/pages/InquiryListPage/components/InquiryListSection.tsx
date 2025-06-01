@@ -6,7 +6,7 @@ import MoreButton from '@components/common/MoreButton/MoreButton';
 import { Section } from '@components/common/Section';
 
 import { TABLE_HEAD } from '@constants/head';
-import inquiryList from '@mocks/data/inquiryList.json';
+import { inquiryList } from '@mocks/mocks';
 
 import { InquiryItem } from '@type/inquiry';
 
