@@ -129,6 +129,12 @@ const InquiryForm = ({
       }));
     }
   }, [category, data]);
+  const getDefaultContent = () => {
+    if (content) return content;
+    if (category === INQUIRY_CATEGORY_STATE.BUG) return bugDefaultValue;
+    if (category === INQUIRY_CATEGORY_STATE.INQUIRY) return inquiryDefaultValue;
+    return '';
+  };
   return (
     <Section>
       <div className="space-y-2">
@@ -170,14 +176,7 @@ const InquiryForm = ({
           label="내용"
           name="content"
           className="min-h-96 w-full"
-          value={
-            content ||
-            (category === INQUIRY_CATEGORY_STATE.BUG
-              ? bugDefaultValue
-              : category === INQUIRY_CATEGORY_STATE.INQUIRY
-                ? inquiryDefaultValue
-                : '')
-          }
+          value={getDefaultContent()}
           placeholder="카테고리를 선택해주세요."
           maxLength={BOARD_CONTENT_MAX_LENGTH}
           onChange={handleInquiryFormChange}
