@@ -34,13 +34,6 @@ const InquiryListSection = ({ showAll = false }: InquiryListSectionProps) => {
       </Section.Header>
       <Section.Body>
         <Table head={TABLE_HEAD.INQUIRY_TABLE}>
-          <colgroup>
-            <col className="w-2/12" /> {/* 번호 */}
-            <col className="w-3/12" /> {/* 제목 */}
-            <col className="w-2/12" /> {/* 문의자 */}
-            <col className="w-3/12" /> {/* 문의일 */}
-            <col className="w-2/12" /> {/* 카테고리 / 상태 */}
-          </colgroup>
           {displayData.map((data) => (
             <InquiryTableRow
               data={data}
