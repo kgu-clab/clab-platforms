@@ -10,20 +10,18 @@ const WriteIntroduceData = [
     id: 1,
     question: '문의사항이 있어요!',
     answer: `문의하신 내용은 내부 검토를 거쳐 순차적으로 확인됩니다.
-
 내용이 구체적일수록 더 빠르게 도움을 드릴 수 있어요.
 
-단, 내용에 따라 답변이 지연되거나 반영이 어려울 수 있는 점 양해 부탁드립니다.`,
+단, 내용에 따라 답변이 지연되거나 반영이 어려울 수 있는 점 양해 부탁드립니다.`.trim(),
   },
   {
     id: 2,
     question: '버그를 발견했어요!',
     answer: `제보해주신 버그는 확인 후 우선순위에 따라 처리됩니다.
-
 문제 상황을 가능한 한 구체적으로 작성해주시면 빠른 해결에 큰 도움이 됩니다.
 
 다만, 모든 버그가 즉시 수정되지는 않으며,
-재현이 어려운 경우 반려되거나 시간이 소요될 수 있습니다.`,
+재현이 어려운 경우 반려되거나 시간이 소요될 수 있습니다.`.trim(),
   },
 ];
 
@@ -37,18 +35,17 @@ const InquiryWriteIntroduceSection = () => {
           <br />
           <Link
             to={PATH.INQUIRY_LIST}
-            className={'text-blue-500 hover:rounded-sm hover:bg-gray-200'}
+            className="text-blue-500 hover:rounded-sm hover:bg-gray-200"
           >
-            최근 문의{' '}
-          </Link>
+            최근 문의
+          </Link>{' '}
           혹은{' '}
           <Link
             to={PATH.INQUIRY}
-            className={'text-blue-500 hover:rounded-sm hover:bg-gray-200'}
+            className="text-blue-500 hover:rounded-sm hover:bg-gray-200"
           >
-            {' '}
             FAQ
-          </Link>{' '}
+          </Link>
           에 원하는 답변 없다면 아래 안내사항을 읽고 문의 해주세요.
         </div>
         <Accordion items={WriteIntroduceData} />

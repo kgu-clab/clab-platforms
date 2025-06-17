@@ -57,7 +57,9 @@ const Accordion = ({ items, className, resetKey }: AccordionProps) => {
                 isOpen ? 'p-4 opacity-100' : 'max-h-0 opacity-0',
               )}
             >
-              {answer}
+              <div className="whitespace-pre-line leading-relaxed">
+                {answer}
+              </div>
             </div>
           </div>
         );

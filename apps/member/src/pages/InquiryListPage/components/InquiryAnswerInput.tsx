@@ -60,7 +60,7 @@ const InquiryAnswerInput = ({
         <Button size="sm" onClick={onCancel}>
           취소
         </Button>
-        <Button size="sm" onClick={handleSubmit} disabled={!answer.trim()}>
+        <Button size="sm" onClick={handleSubmit} disabled={!answer}>
           답변 등록
         </Button>
       </div>
