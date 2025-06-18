@@ -4,8 +4,8 @@ import { DetailsList } from '@clab-platforms/design-system';
 import { formatWon } from '@clab-platforms/utils';
 
 import Image from '@components/common/Image/Image';
-import MembershipCategoryBadge from '@components/membership/MembershipCategoryBadge/MembershipCategoryBadge';
-import MembershipStatusBadge from '@components/membership/MembershipStatusBadge/MembershipStatusBadge';
+import MembershipCategoryBadge from '@components/membership/membershipCategoryBadge/MembershipCategoryBadge';
+import MembershipStatusBadge from '@components/membership/membershipStatusBadge/MembershipStatusBadge';
 
 import { MODAL_TITLE } from '@constants/modal';
 import { UseModalResult, useModal } from '@hooks/common/useModal';
