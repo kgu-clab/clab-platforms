@@ -1,7 +1,7 @@
 import EmptyBox from '@components/common/EmptyBox/EmptyBox';
 import ListButton from '@components/common/ListButton/ListButton';
 import Section from '@components/common/Section/Section';
-import MembershipStatusBadge from '@components/membership/MembershipStatusBadge/MembershipStatusBadge';
+import MembershipStatusBadge from '@components/membership/membershipStatusBadge/MembershipStatusBadge';
 
 import { MY_MESSAGE } from '@constants/message';
 import { useMembershipInfoModal } from '@hooks/modal/useMembershipInfoModal';

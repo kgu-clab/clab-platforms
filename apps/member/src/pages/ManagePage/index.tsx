@@ -4,7 +4,7 @@ import Content from '@components/common/Content/Content';
 import ErrorSection from '@components/common/ErrorSection/ErrorSection';
 import Header from '@components/common/Header/Header';
 import QueryErrorBoundary from '@components/common/QueryErrorBoundary';
-import { SupportHistorySection } from '@components/support/SupportHistorySection';
+import { MembershipFeeHistorySection } from '@components/membership/membershipFee/MembershipFeeHistorySection';
 
 import { ROLE_LEVEL } from '@constants/state';
 import { useMyProfile } from '@hooks/queries';
@@ -30,7 +30,11 @@ export default function ManagePage() {
       <Content>
         <Header title="관리" />
         <Suspense>
-          <SupportHistorySection title="회비" withPagination hasPermission />
+          <MembershipFeeHistorySection
+            title="회비"
+            withPagination
+            hasPermission
+          />
         </Suspense>
 
         <Suspense>
