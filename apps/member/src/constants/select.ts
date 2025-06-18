@@ -3,11 +3,11 @@ import type {
   CommunityCategoryType,
 } from '@type/community';
 import type {
-  InquiryCategoryKorType,
-  InquiryCategoryType,
-} from '@type/inquiry';
+  SupportCategoryKorType,
+  SupportCategoryType,
+} from '@type/support';
 
-import { APPLICATION_TYPE, INQUIRY_CATEGORY_STATE } from './state';
+import { APPLICATION_TYPE, SUPPORT_CATEGORY_STATE } from './state';
 
 type Options<N = string, V = string> = {
   name: N;
@@ -76,15 +76,15 @@ export const SELECT_ACTIVITY_GROUP_CATEGORY_TYPE = {
 } as const;
 
 export const SELECT_OPTIONS_INQURIY_TYPE: Options<
-  InquiryCategoryKorType,
-  InquiryCategoryType
+  SupportCategoryKorType,
+  SupportCategoryType
 >[] = [
   {
     name: '버그',
-    value: INQUIRY_CATEGORY_STATE.BUG,
+    value: SUPPORT_CATEGORY_STATE.BUG,
   },
   {
     name: '문의',
-    value: INQUIRY_CATEGORY_STATE.INQUIRY,
+    value: SUPPORT_CATEGORY_STATE.INQUIRY,
   },
 ] as const;

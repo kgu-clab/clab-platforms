@@ -87,14 +87,14 @@ const Sidebar = () => {
             도서관
           </Menubar.Item>
           <Menubar.Item
-            selected={pathName.startsWith(PATH.SUPPORT)}
-            onClick={() => handleMenubarItemClick(PATH.SUPPORT)}
+            selected={pathName.startsWith(PATH.MEMBERSHIP_FEE)}
+            onClick={() => handleMenubarItemClick(PATH.MEMBERSHIP_FEE)}
           >
             회비
           </Menubar.Item>
           <Menubar.Item
-            selected={pathName.startsWith(PATH.INQUIRY)}
-            onClick={() => handleMenubarItemClick(PATH.INQUIRY)}
+            selected={pathName.startsWith(PATH.SUPPORT)}
+            onClick={() => handleMenubarItemClick(PATH.SUPPORT)}
           >
             문의
           </Menubar.Item>

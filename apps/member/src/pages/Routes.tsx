@@ -40,15 +40,15 @@ const GroupCreatePage = lazy(
 const LibraryPage = lazy(() => import('@pages/LibraryPage'));
 const LibraryDetailPage = lazy(() => import('@pages/LibraryDetailPage'));
 const MyPage = lazy(() => import('@pages/MyPage'));
-const SupportPage = lazy(() => import('@pages/SupportPage'));
+const MembershipFeePage = lazy(() => import('@pages/MembershipFeePage'));
 const CalendarPage = lazy(() => import('@pages/CalendarPage'));
 const LoginPage = lazy(() => import('@pages/LoginPage'));
 const AuthPage = lazy(() => import('@pages/AuthPage'));
 const BlogPage = lazy(() => import('@pages/BlogPage'));
 const ManagePage = lazy(() => import('@pages/ManagePage'));
-const InquiryPage = lazy(() => import('@pages/InquiryPage'));
-const InquiryWritePage = lazy(() => import('@pages/InquiryWritePage'));
-const InquiryListPage = lazy(() => import('@pages/InquiryListPage'));
+const SupportPage = lazy(() => import('@pages/SupportPage'));
+const SupportWritePage = lazy(() => import('@pages/SupportWritePage'));
+const SupportListPage = lazy(() => import('@pages/SupportListPage'));
 
 const router = createBrowserRouter([
   {
@@ -185,10 +185,10 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: PATH.SUPPORT,
+        path: PATH.MEMBERSHIP_FEE,
         element: (
           <Suspense>
-            <SupportPage />
+            <MembershipFeePage />
           </Suspense>
         ),
       },
@@ -209,26 +209,26 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: PATH.INQUIRY,
+        path: PATH.SUPPORT,
         element: (
           <Suspense>
-            <InquiryPage />
+            <SupportPage />
           </Suspense>
         ),
       },
       {
-        path: PATH.INQUIRY_WRITE,
+        path: PATH.SUPPORT_WRITE,
         element: (
           <Suspense>
-            <InquiryWritePage />
+            <SupportWritePage />
           </Suspense>
         ),
       },
       {
-        path: PATH.INQUIRY_LIST,
+        path: PATH.SUPPORT_LIST,
         element: (
           <Suspense>
-            <InquiryListPage />
+            <SupportListPage />
           </Suspense>
         ),
       },

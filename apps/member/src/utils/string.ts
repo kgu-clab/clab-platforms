@@ -3,7 +3,7 @@ import { SELECT_ACTIVITY_GROUP_CATEGORY_TYPE } from '@constants/select';
 import {
   ACTIVITY_MEMBER_ROLE,
   ACTIVITY_MEMBER_STATE,
-  INQUIRY_CATEGORY_STATE,
+  SUPPORT_CATEGORY_STATE,
 } from '@constants/state';
 
 import {
@@ -14,10 +14,10 @@ import {
 import type { ApplicationType } from '@type/application';
 import type { Bookstore, BookstoreKorean } from '@type/book';
 import type { CareerLevel, EmploymentType } from '@type/community';
-import { InquiryCategoryType } from '@type/inquiry';
 import type { RoleLevelKey, RoleLevelType } from '@type/member';
 import type { MembershipStatusType } from '@type/membershipFee';
 import type { SchedulePriority } from '@type/schedule';
+import { SupportCategoryType } from '@type/support';
 
 /**
  * 멤버십 상태를 텍스트로 변환하는 함수입니다.
@@ -222,11 +222,11 @@ export function toKoreaActivityGroupMemberStatus(
   }
 }
 
-export function toKoreaInquiryCategory(status: InquiryCategoryType): string {
+export function toKoreaSupportCategory(status: SupportCategoryType): string {
   switch (status) {
-    case INQUIRY_CATEGORY_STATE.BUG:
+    case SUPPORT_CATEGORY_STATE.BUG:
       return '버그';
-    case INQUIRY_CATEGORY_STATE.INQUIRY:
+    case SUPPORT_CATEGORY_STATE.INQUIRY:
       return '문의';
     default:
       return '-';

@@ -146,7 +146,7 @@ export const APPLICATION_TYPE = {
 /**
  * 문의 카테고리를 정의합니다.
  */
-export const INQUIRY_CATEGORY_STATE = {
+export const SUPPORT_CATEGORY_STATE = {
   BUG: 'BUG',
   INQUIRY: 'INQUIRY',
 } as const;
