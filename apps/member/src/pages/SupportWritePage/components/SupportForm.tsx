@@ -165,13 +165,11 @@ const SupportForm = ({
             onChange={handleSupportFormChange}
           />
         </div>
-        {category === SUPPORT_CATEGORY_STATE.BUG && (
-          <Uploader
-            label="오류 이미지"
-            accept="image/*"
-            onFileAccepted={setUploadFile}
-          />
-        )}
+        <Uploader
+          label="오류 이미지"
+          accept="image/*"
+          onFileAccepted={setUploadFile}
+        />
         <Textarea
           label="내용"
           name="content"
