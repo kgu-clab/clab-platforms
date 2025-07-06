@@ -22,7 +22,7 @@ export default function LibraryPage() {
     >
       <Content>
         <Header title="도서관">
-          <Button size="sm" onClick={() => navigate(PATH.SUPPORT)}>
+          <Button size="sm" onClick={() => navigate(PATH.MEMBERSHIP_FEE)}>
             희망도서 신청하기
           </Button>
         </Header>
