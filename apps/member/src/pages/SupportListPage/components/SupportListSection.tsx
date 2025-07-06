@@ -48,17 +48,19 @@ const SupportListSection = ({ showAll = false }: SupportListSectionProps) => {
         {!showAll && <MoreButton to="./list">더보기</MoreButton>}
       </Section.Header>
       <Section.Body>
-        <Table head={TABLE_HEAD.SUPPORT_TABLE}>
-          {displayData.map((data) => (
-            <SupportTableRow
-              data={data}
-              key={data.id}
-              showAll={showAll}
-              currentOpenItemIndex={currentOpenItemIndex}
-              onClick={handleTableItemClick}
-            />
-          ))}
-        </Table>
+        <div className="w-full overflow-x-auto">
+          <Table head={TABLE_HEAD.SUPPORT_TABLE}>
+            {displayData.map((data) => (
+              <SupportTableRow
+                data={data}
+                key={data.id}
+                showAll={showAll}
+                currentOpenItemIndex={currentOpenItemIndex}
+                onClick={handleTableItemClick}
+              />
+            ))}
+          </Table>
+        </div>
       </Section.Body>
     </Section>
   );
