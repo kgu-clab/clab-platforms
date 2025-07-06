@@ -15,7 +15,7 @@ const SupportNav = () => {
       >
         문의하기
       </Button>
-      <Button size="sm" onClick={() => navigate(PATH.SUPPORT_LIST)}>
+      <Button size="sm" onClick={() => navigate(PATH.MY)}>
         내 문의 확인하기
       </Button>
     </>

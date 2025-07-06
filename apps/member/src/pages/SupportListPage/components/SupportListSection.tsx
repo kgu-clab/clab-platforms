@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useSearchParams } from 'react-router';
 
 import { Table } from '@clab-platforms/design-system';
 
@@ -12,7 +13,7 @@ import { SupportItem } from '@type/support';
 
 import SupportTableRow from './SupportTableRow';
 
-const SupportData = supportList as SupportItem[];
+const supportData = supportList as SupportItem[];
 
 interface SupportListSectionProps {
   showAll?: boolean;
@@ -20,12 +21,26 @@ interface SupportListSectionProps {
 
 const SupportListSection = ({ showAll = false }: SupportListSectionProps) => {
   const [currentOpenItemIndex, setCurrentOpenItemIndex] = useState<number>(-1);
+  const [searchParams] = useSearchParams();
+  const selectedId = searchParams.get('selected');
 
   const handleTableItemClick = (id: number) => {
     setCurrentOpenItemIndex(id);
   };
-  SupportData.sort((a, b) => b.id - a.id);
-  const displayData = showAll ? SupportData : SupportData.slice(0, 5);
+
+  supportData.sort((a, b) => b.id - a.id);
+  const displayData = showAll ? supportData : supportData.slice(0, 5);
+
+  useEffect(() => {
+    if (selectedId && showAll) {
+      const targetId = parseInt(selectedId);
+      const targetSupport = supportData.find((item) => item.id === targetId);
+
+      if (targetSupport) {
+        setCurrentOpenItemIndex(targetId);
+      }
+    }
+  }, [selectedId, supportData, showAll]);
 
   return (
     <Section>

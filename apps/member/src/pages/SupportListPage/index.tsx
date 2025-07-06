@@ -9,7 +9,6 @@ import { PATH } from '@constants/path';
 import SupportNav from '@pages/SupportPage/components/SupportNav';
 
 import SupportListSection from './components/SupportListSection';
-import SupportMySection from './components/SupportMySection';
 
 export default function SupportIndexPage() {
   return (
@@ -23,10 +22,6 @@ export default function SupportIndexPage() {
         >
           <SupportNav />
         </Header>
-
-        <Suspense>
-          <SupportMySection />
-        </Suspense>
 
         <Suspense>
           <SupportListSection showAll={true} />

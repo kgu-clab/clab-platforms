@@ -42,6 +42,10 @@ export default function MyPage() {
               <HistorySection category="나의 댓글" />
             </Grid>
           </Suspense>
+
+          <Suspense>
+            <HistorySection category="나의 문의" />
+          </Suspense>
         </Content>
       </Suspense>
     </QueryErrorBoundary>
@@ -62,6 +66,9 @@ const Skeleton = () => {
       </Section>
       <Section className="h-32 animate-pulse">
         <Section.Header title="나의 댓글" />
+      </Section>
+      <Section className="h-32 animate-pulse">
+        <Section.Header title="나의 문의" />
       </Section>
     </Content>
   );

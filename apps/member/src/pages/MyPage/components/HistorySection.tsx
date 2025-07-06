@@ -1,5 +1,7 @@
 import { useMemo } from 'react';
 
+import { Badge } from '@clab-platforms/design-system';
+
 import EmptyBox from '@components/common/EmptyBox/EmptyBox';
 import ListButton from '@components/common/ListButton/ListButton';
 import Section from '@components/common/Section/Section';
@@ -14,13 +16,19 @@ import {
   useMyNotifications,
   useMyProfile,
 } from '@hooks/queries';
+import supportList from '@mocks/data/supportList.json';
 import { toYYMMDD } from '@utils/date';
 
 import { useMyBoards } from '../hooks/useMyBoards';
 import { useMyComments } from '../hooks/useMyComments';
 
 interface Props {
-  category: '지난 알림' | '도서 대출 내역' | '나의 게시글' | '나의 댓글';
+  category:
+    | '지난 알림'
+    | '도서 대출 내역'
+    | '나의 게시글'
+    | '나의 댓글'
+    | '나의 문의';
 }
 
 export function HistorySection({ category }: Props) {
@@ -34,6 +42,7 @@ export function HistorySection({ category }: Props) {
     borrowerId: myProfile.id,
     size: 10,
   });
+  const mySupports = supportList.filter((support) => support.isOwner);
 
   const contents = useMemo(() => {
     switch (category) {
@@ -94,9 +103,25 @@ export function HistorySection({ category }: Props) {
             <p className="text-clab-main-light">{toYYMMDD(createdAt)}</p>
           </ListButton>
         ));
+      case '나의 문의':
+        return mySupports.map(({ id, title, createdAt, isAnswered }) => (
+          <ListButton
+            key={`my-support-${id}`}
+            to={`/support/list?selected=${id}`}
+          >
+            <p className="grow space-x-2 truncate pr-4">
+              <Badge color={isAnswered ? 'green' : 'red'}>
+                {isAnswered ? '답변완료' : '답변예정'}
+              </Badge>
+              <span>{title}</span>
+            </p>
+            <p className="text-clab-main-light">{toYYMMDD(createdAt)}</p>
+          </ListButton>
+        ));
     }
   }, [
     category,
+    mySupports,
     myBoardsData.items,
     myBookLoanRecord.items,
     myCommentsData.items,
