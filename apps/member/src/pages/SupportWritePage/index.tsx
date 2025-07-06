@@ -6,6 +6,7 @@ import Header from '@components/common/Header/Header';
 import QueryErrorBoundary from '@components/common/QueryErrorBoundary';
 
 import { PATH } from '@constants/path';
+import SupportNav from '@pages/SupportPage/components/SupportNav';
 
 import SupportForm from './components/SupportForm';
 import SupportWriteIntroduceSection from './components/SupportWriteIntroduceSection';
@@ -19,7 +20,9 @@ export default function SupportWritePage() {
         <Header
           title={['문의', '문의하기']}
           path={[PATH.SUPPORT, PATH.SUPPORT_WRITE]}
-        />
+        >
+          <SupportNav />
+        </Header>
 
         <Suspense>
           <SupportWriteIntroduceSection />
