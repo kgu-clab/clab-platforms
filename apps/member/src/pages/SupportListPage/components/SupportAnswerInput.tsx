@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useCallback } from 'react';
 
 import { Button } from '@clab-platforms/design-system';
 import { cn } from '@clab-platforms/utils';
@@ -6,28 +6,46 @@ import { cn } from '@clab-platforms/utils';
 import Textarea from '@components/common/Textarea/Textarea';
 
 import { useToast } from '@hooks/common/useToast';
+import {
+  useAnswerModifyMutation,
+  useAnswerWriteMutation,
+} from '@hooks/queries';
+
+import { SupportAnswerItem } from '@type/support';
 
 interface SupportAnswerInputProps {
-  data: string;
   onCancel?: () => void;
   className?: string;
+  setAnswer: (answer: SupportAnswerItem) => void;
+  answer: SupportAnswerItem;
+  isAnswered?: boolean;
 }
 
 const SupportAnswerInput = ({
-  data,
   className,
   onCancel,
+  setAnswer,
+  answer,
+  isAnswered = false,
 }: SupportAnswerInputProps) => {
   const { addToast } = useToast();
+  const { content, id } = answer;
 
-  const [answer, setAnswer] = useState(data);
-
-  const handleAnswerChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    setAnswer(e.target.value);
-  };
-
-  const handleSubmit = () => {
-    if (!answer.trim()) {
+  const { answerWriteMutate, isPending: isWritePending } =
+    useAnswerWriteMutation();
+  const { answerModifyMutate, isPending: isModifyPending } =
+    useAnswerModifyMutation();
+  const handleAnswerChange = useCallback(
+    (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+      setAnswer({
+        ...answer,
+        content: e.target.value,
+      });
+    },
+    [answer, setAnswer],
+  );
+  const handleSubmit = useCallback(() => {
+    if (!content || content.trim() === '') {
       addToast({
         state: 'error',
         message: '답변 내용을 입력해주세요.',
@@ -35,13 +53,58 @@ const SupportAnswerInput = ({
       return;
     }
 
-    addToast({
-      state: 'success',
-      message: '답변이 등록되었습니다.',
-    });
+    if (!id) {
+      addToast({
+        state: 'error',
+        message: '문의 ID가 없어요.',
+      });
+      return;
+    }
 
-    setAnswer('');
-  };
+    const mutationOptions = {
+      onSuccess: () => {
+        onCancel?.();
+        addToast({
+          state: 'success',
+          message: isAnswered ? '답변이 수정되었어요' : '답변이 등록되었어요',
+        });
+      },
+      onError: () => {
+        addToast({
+          state: 'error',
+          message: '답변 처리 중 오류가 발생했어요.',
+        });
+      },
+    };
+
+    if (isAnswered) {
+      answerModifyMutate(
+        {
+          id: id,
+          content: content.trim(),
+        },
+        mutationOptions,
+      );
+    } else {
+      answerWriteMutate(
+        {
+          id: id,
+          content: content.trim(),
+        },
+        mutationOptions,
+      );
+    }
+  }, [
+    content,
+    id,
+    isAnswered,
+    answerModifyMutate,
+    answerWriteMutate,
+    onCancel,
+    addToast,
+  ]);
+
+  const isPending = isWritePending || isModifyPending;
 
   return (
     <div className={cn('space-y-3', className)}>
@@ -50,7 +113,7 @@ const SupportAnswerInput = ({
           className="size-full resize-none border p-3"
           placeholder="답변을 입력해주세요."
           maxLength={1000}
-          value={answer}
+          value={content}
           onChange={handleAnswerChange}
           rows={4}
         />
@@ -60,12 +123,15 @@ const SupportAnswerInput = ({
         <Button size="sm" onClick={onCancel}>
           취소
         </Button>
-        <Button size="sm" onClick={handleSubmit} disabled={!answer}>
-          답변 등록
+        <Button
+          size="sm"
+          onClick={handleSubmit}
+          disabled={!content || isPending}
+        >
+          {isPending ? '처리 중...' : isAnswered ? '답변 수정' : '답변 등록'}
         </Button>
       </div>
     </div>
   );
 };
-
 export default SupportAnswerInput;

@@ -3,6 +3,7 @@ export * from './blog';
 export * from './board';
 export * from './book-loan';
 export * from './comment';
+export * from './support';
 export * from './my';
 export * from './schedule';
 export * from './queryClient';

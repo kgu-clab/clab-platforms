@@ -10,13 +10,14 @@ import BookLoanConditionStatusBadge from '@components/library/BookLoanConditionS
 import { MY_MESSAGE } from '@constants/message';
 import { MODAL_TITLE } from '@constants/modal';
 import { PATH_FINDER } from '@constants/path';
+import { SUPPORT_ANSWER_STATE } from '@constants/state';
 import { useModal } from '@hooks/common/useModal';
 import {
   useBookLoanRecordConditions,
   useMyNotifications,
   useMyProfile,
 } from '@hooks/queries';
-import supportList from '@mocks/data/supportList.json';
+import { useMySupports } from '@hooks/queries/support/useMySupports';
 import { toYYMMDD } from '@utils/date';
 
 import { useMyBoards } from '../hooks/useMyBoards';
@@ -42,7 +43,7 @@ export function HistorySection({ category }: Props) {
     borrowerId: myProfile.id,
     size: 10,
   });
-  const mySupports = supportList.filter((support) => support.isOwner);
+  const { data: mySupports } = useMySupports({ page: 0, size: 999 });
 
   const contents = useMemo(() => {
     switch (category) {
@@ -104,20 +105,23 @@ export function HistorySection({ category }: Props) {
           </ListButton>
         ));
       case '나의 문의':
-        return mySupports.map(({ id, title, createdAt, isAnswered }) => (
-          <ListButton
-            key={`my-support-${id}`}
-            to={`/support/list?selected=${id}`}
-          >
-            <p className="grow space-x-2 truncate pr-4">
-              <Badge color={isAnswered ? 'green' : 'red'}>
-                {isAnswered ? '답변완료' : '답변예정'}
-              </Badge>
-              <span>{title}</span>
-            </p>
-            <p className="text-clab-main-light">{toYYMMDD(createdAt)}</p>
-          </ListButton>
-        ));
+        return mySupports.items.map(({ id, title, createdAt, status }) => {
+          const isAnswered = status === SUPPORT_ANSWER_STATE.COMPLETED;
+          return (
+            <ListButton
+              key={`my-support-${id}`}
+              to={`/support/list?selected=${id}`}
+            >
+              <p className="grow space-x-2 truncate pr-4">
+                <Badge color={isAnswered ? 'green' : 'red'}>
+                  {isAnswered ? '답변완료' : '답변예정'}
+                </Badge>
+                <span>{title}</span>
+              </p>
+              <p className="text-clab-main-light">{toYYMMDD(createdAt)}</p>
+            </ListButton>
+          );
+        });
     }
   }, [
     category,

@@ -9,20 +9,19 @@ import Textarea from '@components/common/Textarea/Textarea';
 import Uploader from '@components/common/Uploader/Uploader';
 
 import { ERROR_MESSAGE } from '@constants/message';
-import { SELECT_OPTIONS_INQURIY_TYPE } from '@constants/select';
+import { SELECT_OPTIONS_INQUIRY_TYPE } from '@constants/select';
 import {
-  BOARD_CONTENT_MAX_LENGTH,
-  BOARD_TITLE_MAX_LENGTH,
   SUPPORT_CATEGORY_STATE,
+  SUPPORT_CONTENT_MAX_LENGTH,
+  SUPPORT_TITLE_MAX_LENGTH,
 } from '@constants/state';
 import { useToast } from '@hooks/common/useToast';
-import { useBoardModifyMutation, useBoardWriteMutation } from '@hooks/queries';
-
 import {
-  SupportCategoryType,
-  SupportItem,
-  SupportWriteItem,
-} from '@type/support';
+  useSupportModifyMutation,
+  useSupportWriteMutation,
+} from '@hooks/queries';
+
+import { SupportCategoryType, SupportWriteItem } from '@type/support';
 
 const bugDefaultValue = `
 🐞 버그 요약
@@ -39,7 +38,7 @@ const bugDefaultValue = `
 - 스크린샷이나 파일을 첨부해주셔도 좋아요!
 `.trim();
 
-const SupportDefaultValue = `
+const inquiryDefaultValue = `
 💬 문의 또는 건의 내용
 - 어떤 점이 궁금하거나, 개선하고 싶은 부분이 있으신가요? [예: 메뉴 위치 변경 건의, 동아리 활동 관련 문의]
 
@@ -52,12 +51,12 @@ const SupportDefaultValue = `
 
 interface SupportFormProps {
   category?: SupportCategoryType;
-  data?: SupportItem;
+  data?: SupportWriteItem;
   onClose?: () => void;
 }
 
 interface SupportFormState extends Pick<SupportWriteItem, 'title' | 'content'> {
-  category: string;
+  category: SupportCategoryType;
   wantAnonymous: boolean;
 }
 
@@ -67,20 +66,21 @@ const SupportForm = ({
   onClose,
 }: SupportFormProps) => {
   const { addToast } = useToast();
-  const { boardWriteMutate, isPending: boardWriteIsPending } =
-    useBoardWriteMutation();
-  const { boardModifyMutate, isPending: boardModifyIsPending } =
-    useBoardModifyMutation();
+
+  const { supportWriteMutate, isPending: supportWriteIsPending } =
+    useSupportWriteMutation();
+  const { supportModifyMutate, isPending: supportModifyIsPending } =
+    useSupportModifyMutation();
 
   const [uploadFile, setUploadFile] = useState<File | undefined>();
-  const [SupportForm, setSupportForm] = useState<SupportFormState>({
+  const [supportForm, setSupportForm] = useState<SupportFormState>({
     category: strictCategory ?? data?.category ?? SUPPORT_CATEGORY_STATE.BUG,
     title: toDecodeHTMLEntities(data?.title) ?? '',
     content: toDecodeHTMLEntities(data?.content) ?? '',
     wantAnonymous: data?.id === null, // 익명일 경우 Null
   });
 
-  const { category, title, content, wantAnonymous } = SupportForm;
+  const { category, title, content, wantAnonymous } = supportForm;
 
   const handleSupportFormChange = (
     e: React.ChangeEvent<
@@ -109,16 +109,18 @@ const SupportForm = ({
     }
 
     if (data) {
-      // 게시글 수정
-      boardModifyMutate({
-        ...SupportForm,
-        id: data.id,
-        file: uploadFile,
-      });
+      // 문의 수정
+      if (data.id) {
+        supportModifyMutate({
+          id: data.id,
+          file: uploadFile,
+          ...supportForm,
+        });
+      }
       onClose?.();
     } else {
-      // 게시글 작성
-      boardWriteMutate({ ...SupportForm, file: uploadFile });
+      // 문의 작성
+      supportWriteMutate({ ...supportForm, file: uploadFile });
     }
   };
   useEffect(() => {
@@ -132,7 +134,7 @@ const SupportForm = ({
   const getDefaultContent = () => {
     if (content) return content;
     if (category === SUPPORT_CATEGORY_STATE.BUG) return bugDefaultValue;
-    if (category === SUPPORT_CATEGORY_STATE.INQUIRY) return SupportDefaultValue;
+    if (category === SUPPORT_CATEGORY_STATE.INQUIRY) return inquiryDefaultValue;
     return '';
   };
   return (
@@ -147,7 +149,7 @@ const SupportForm = ({
               <Select
                 id="category"
                 name="category"
-                options={SELECT_OPTIONS_INQURIY_TYPE}
+                options={SELECT_OPTIONS_INQUIRY_TYPE}
                 disabled={!!strictCategory || !!data?.category}
                 value={category}
                 onChange={handleSupportFormChange}
@@ -160,7 +162,7 @@ const SupportForm = ({
             label="제목"
             placeholder="제목을 입력해주세요"
             className="grow"
-            maxLength={BOARD_TITLE_MAX_LENGTH}
+            maxLength={SUPPORT_TITLE_MAX_LENGTH}
             value={title}
             onChange={handleSupportFormChange}
           />
@@ -176,7 +178,7 @@ const SupportForm = ({
           className="min-h-96 w-full"
           value={getDefaultContent()}
           placeholder="카테고리를 선택해주세요."
-          maxLength={BOARD_CONTENT_MAX_LENGTH}
+          maxLength={SUPPORT_CONTENT_MAX_LENGTH}
           onChange={handleSupportFormChange}
         />
         <Checkbox
@@ -197,7 +199,7 @@ const SupportForm = ({
             size={data ? 'sm' : 'md'}
             className={cn({ 'w-full': !data })}
             onClick={handleSubmitClick}
-            loading={boardWriteIsPending || boardModifyIsPending}
+            loading={supportWriteIsPending || supportModifyIsPending}
           >
             {data ? '수정' : '등록하기'}
           </Button>
