@@ -75,7 +75,7 @@ export const SELECT_ACTIVITY_GROUP_CATEGORY_TYPE = {
   PROJECT: 'PROJECT',
 } as const;
 
-export const SELECT_OPTIONS_INQURIY_TYPE: Options<
+export const SELECT_OPTIONS_INQUIRY_TYPE: Options<
   SupportCategoryKorType,
   SupportCategoryType
 >[] = [
