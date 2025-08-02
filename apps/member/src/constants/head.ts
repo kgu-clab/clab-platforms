@@ -40,7 +40,7 @@ export const TABLE_HEAD = {
     '생성',
   ] as const,
   MEMBER_MANAGE_TABLE: ['번호', '학번', '이름', '상태'],
-  SUPPORT_TABLE: ['번호', '제목', '문의자', '문의일', '카테고리 / 상태'],
+  SUPPORT_TABLE: ['번호', '제목', '문의자', '문의일', '상태'],
 } as const;
 /**
  * 관리자 페이지에서 기능을 나타내는 상수
