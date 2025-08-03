@@ -1,35 +1,29 @@
 'use client';
 
-import { PropsWithChildren, memo, useState } from 'react';
+import { PropsWithChildren, memo } from 'react';
 
 import { cn } from '@clab-platforms/utils';
 
-import { DAY_VALUE_ARRAY, MODAL_KEY } from '@/shared/constants';
-import { useModalAction } from '@/shared/hooks';
-import type { DayKor } from '@/shared/types';
+import { DAY_VALUE_ARRAY } from '@/shared/constants';
 import type { GetLectureByParamsValue } from '@/widgets/time-table/api';
 import {
   DAY_PERIOD_ARRAY,
   LECTURE_COLOR,
   NIGHT_PERIOD_ARRAY,
-  PERIOD_STATUS,
-  getFormattedTime,
-  getLectureFillRange,
   useLectureByParams,
   useTimeTableParams,
 } from '@/widgets/time-table/model';
-import type { DayPeriod, NightPeriod } from '@/widgets/time-table/types';
-import {
-  TimeTableLectureRemoveModal,
-  TimeTableModal,
-} from '@/widgets/time-table/ui';
+
+import TimeTableUtilButtons from './TimeTableUtilButtons';
 
 interface TimeTableHeaderProps extends PropsWithChildren {
   type: 'ROW' | 'COLUMN';
+  className?: string;
 }
 
 interface TimeTableItemProps extends PropsWithChildren {
   bgColor?: string | null;
+  rowSpan?: number;
 }
 
 interface TimeTableSpecialLectureTableProps {
@@ -50,22 +44,21 @@ const SPECIAL_LECTURE_TABLE_HEADER = [
   '수업구분',
 ] as const;
 
-function TimeTableHeader({ type, children }: TimeTableHeaderProps) {
+function TimeTableHeader({ type, children, className }: TimeTableHeaderProps) {
   return type === 'ROW' ? (
-    <th className="h-16 border border-gray-400 bg-gray-50">{children}</th>
-  ) : (
-    <td className="h-24 w-12 border border-gray-400 bg-gray-50 p-0 text-sm sm:w-fit sm:p-4">
+    <th
+      className={cn(
+        'bg-time-table-header border-time-table-border h-9 border font-normal',
+        className,
+      )}
+    >
       {children}
-    </td>
-  );
-}
-
-function TimeTableItem({ bgColor, children }: TimeTableItemProps) {
-  return (
+    </th>
+  ) : (
     <td
       className={cn(
-        'h-24 cursor-pointer border border-gray-400 text-sm transition-colors',
-        bgColor ?? 'hover:bg-gray-100',
+        'border-time-table-border h-9 w-12 border bg-white p-0 text-sm sm:w-fit sm:p-4',
+        className,
       )}
     >
       {children}
@@ -73,24 +66,41 @@ function TimeTableItem({ bgColor, children }: TimeTableItemProps) {
   );
 }
 
-function TimeTableSpecialLectureTable({
+function TimeTableItem({ bgColor, rowSpan, children }: TimeTableItemProps) {
+  return (
+    <td
+      className={cn(
+        'border-time-table-border h-10 cursor-pointer border text-sm transition-colors',
+        bgColor ?? 'hover:bg-gray-100',
+      )}
+      rowSpan={rowSpan}
+    >
+      {children}
+    </td>
+  );
+}
+
+export function TimeTableSpecialLectureTable({
   handleSpecialLecture,
   specialLectureGroup,
 }: TimeTableSpecialLectureTableProps) {
   return (
-    <div className="w-full space-y-8">
-      <h2 className="text-xl font-bold">이러닝 / 사회봉사 / 교외수업</h2>
-      <table className="border- w-full border border-gray-400 bg-white">
+    <div className="w-full space-y-2">
+      <h2 className="text-lg font-normal">이러닝 / 사회봉사 / 교외수업</h2>
+      <table className="border-time-table-border w-full border">
         <thead>
-          <tr className="divide-x divide-gray-400 border border-gray-400 bg-gray-50">
+          <tr className="border-time-table-border divide-time-table-border divide-x border bg-gray-50">
             {SPECIAL_LECTURE_TABLE_HEADER.map((header) => (
-              <th key={header} className="px-4 py-2">
+              <th
+                key={header}
+                className="bg-time-table-header px-4 py-2 font-normal"
+              >
                 {header}
               </th>
             ))}
           </tr>
         </thead>
-        <tbody className="w-full divide-y divide-gray-300">
+        <tbody className="divide-time-table-border w-full divide-y">
           {specialLectureGroup.length ? (
             <>
               {...specialLectureGroup.map((lecture) => (
@@ -102,9 +112,9 @@ function TimeTableSpecialLectureTable({
               ))}
             </>
           ) : (
-            <tr className="w-full text-center">
+            <tr className="bg-time-table-header w-full text-center">
               <td
-                className="px-10 py-24"
+                className="bg-white px-10 py-24"
                 colSpan={SPECIAL_LECTURE_TABLE_HEADER.length}
               >
                 선택된 이러닝 / 사회봉사 / 교외수업이 없습니다.
@@ -121,16 +131,18 @@ function TimeTableSpecialLectureItem({
   lecture,
   handleSpecialLecture,
 }: TimeTableSpecialLectureTableItemProps) {
+  const { campus, category, name, professor, time } = lecture;
+
   return (
     <tr
-      className="h-12 cursor-pointer divide-x divide-gray-300 text-[12px] transition-colors hover:bg-gray-50"
+      className="divide-time-table-border h-9 cursor-pointer divide-x bg-white text-[12px] transition-colors hover:bg-gray-50"
       onClick={() => handleSpecialLecture(lecture.id)}
     >
-      <td className="shrink-0 whitespace-nowrap p-2">{lecture.campus}</td>
-      <td className="shrink-0 whitespace-nowrap p-2">{lecture.category}</td>
-      <td className="shrink-0 whitespace-nowrap p-2">{lecture.name}</td>
-      <td className="shrink-0 whitespace-nowrap p-2">{lecture.professor}</td>
-      <td className="shrink-0 whitespace-nowrap p-2">{lecture.time}</td>
+      <td className="shrink-0 whitespace-nowrap p-2">{campus}</td>
+      <td className="shrink-0 whitespace-nowrap p-2">{category}</td>
+      <td className="shrink-0 whitespace-nowrap p-2">{name}</td>
+      <td className="shrink-0 whitespace-nowrap p-2">{professor}</td>
+      <td className="shrink-0 whitespace-nowrap p-2">{time}</td>
     </tr>
   );
 }
@@ -139,145 +151,120 @@ function TimeTable() {
   const { dayStatus, searchParamsAction } = useTimeTableParams();
   const selectedSchedule =
     dayStatus === 'day' ? DAY_PERIOD_ARRAY : NIGHT_PERIOD_ARRAY;
-  const { open: openLectureSearchModal } = useModalAction({
-    key: MODAL_KEY.timeTable,
-  });
-  const { open: openLectureRemoveModal } = useModalAction({
-    key: MODAL_KEY.lectureRemove,
-  });
   const selectedIdList = searchParamsAction.getAll('id').map(Number);
   const { basicLectureGroup, specialLectureGroup } =
     useLectureByParams(selectedIdList);
-  const [selectedLectureId, setSelectedLectureId] = useState<number>();
-  const [selectedDay, setSelectedDay] = useState<DayKor>();
-  const [selectedPeriod, setSelectedPeriod] = useState<
-    DayPeriod | NightPeriod
-  >();
-
-  const handleTimeTableEmptyButton = ({
-    period,
-    idx,
-  }: {
-    period: string;
-    idx: number;
-  }) => {
-    setSelectedDay(DAY_VALUE_ARRAY[idx]);
-    setSelectedPeriod(period as DayPeriod | NightPeriod);
-    openLectureSearchModal();
-  };
 
   const handleTimeTableFillButton = (id: number | undefined) => {
-    setSelectedLectureId(id);
-    openLectureRemoveModal();
-  };
+    if (id) {
+      const currentIds = searchParamsAction.getAll('id').map(Number);
+      const updatedIds = currentIds.filter((currentId) => currentId !== id);
 
-  const isAddableLecture = (time: string) => {
-    const commaSplitTime = time.split(',');
-    let flag = true;
-
-    commaSplitTime.forEach((parsedTime) => {
-      const spaceSplitTime = parsedTime.split(' ');
-      const day = spaceSplitTime.shift() as DayKor;
-      const dayOrder = DAY_VALUE_ARRAY.indexOf(day);
-      const range = getLectureFillRange({
-        dayStatus,
-        start: spaceSplitTime[0],
-        end: spaceSplitTime[spaceSplitTime.length - 1],
+      searchParamsAction.remove('id');
+      updatedIds.forEach((id) => {
+        searchParamsAction.append('id', id.toString());
       });
-
-      range.forEach((period) => {
-        if (basicLectureGroup[period][dayOrder].type === PERIOD_STATUS.fill) {
-          flag = false;
-          return;
-        }
-      });
-    });
-
-    return flag;
+    }
   };
 
   return (
     <>
-      <div className="size-full space-y-16">
-        <table className="w-full table-fixed border-collapse bg-white">
-          <thead className="w-full">
-            <tr>
-              <TimeTableHeader type="COLUMN" />
-              {DAY_VALUE_ARRAY.map((day) => (
-                <TimeTableHeader key={day} type="ROW">
-                  {day}
+      <table className="w-full table-fixed border-collapse bg-white">
+        <thead className="w-full">
+          <tr>
+            <TimeTableHeader type="COLUMN" className="bg-time-table-header" />
+            {DAY_VALUE_ARRAY.map((day) => (
+              <TimeTableHeader key={day} type="ROW">
+                {day}
+              </TimeTableHeader>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          {selectedSchedule.map(([period, time], periodIndex) => {
+            return (
+              <tr key={period} className="text-center">
+                <TimeTableHeader type="COLUMN">
+                  <p className="text-md flex justify-center">
+                    {period}
+                    <span className="hidden sm:block">교시</span>
+                  </p>
+                  <p className="hidden text-nowrap text-xs md:block">
+                    {time.string}
+                  </p>
                 </TimeTableHeader>
-              ))}
-            </tr>
-          </thead>
-          <tbody>
-            {selectedSchedule.map(([period, time]) => {
-              return (
-                <tr key={period} className="text-center">
-                  <TimeTableHeader type="COLUMN">
-                    <p className="flex justify-center">
-                      {period}
-                      <span className="hidden sm:block">교시</span>
-                    </p>
-                    <p className="hidden md:block">
-                      {getFormattedTime({
-                        hour: time.start.hour,
-                        minute: time.start.minute,
-                      })}
-                      ~
-                      {getFormattedTime({
-                        hour: time.end.hour,
-                        minute: time.end.minute,
-                      })}
-                    </p>
-                  </TimeTableHeader>
-                  {basicLectureGroup[period].map(
-                    ({ type, value, head }, idx) => (
-                      <TimeTableItem
-                        key={`${period}-${idx + 1}`}
-                        bgColor={value ? LECTURE_COLOR[value.type] : null}
+                {basicLectureGroup[period].map(({ value, head }, idx) => {
+                  let rowSpan = 1;
+                  if (value && head) {
+                    for (
+                      let i = 1;
+                      i < selectedSchedule.length - periodIndex;
+                      i++
+                    ) {
+                      const nextPeriod = selectedSchedule[periodIndex + i]?.[0];
+                      if (
+                        nextPeriod &&
+                        basicLectureGroup[nextPeriod]?.[idx]?.value?.id ===
+                          value.id
+                      ) {
+                        rowSpan++;
+                      } else {
+                        break;
+                      }
+                    }
+                  }
+
+                  if (value && !head) {
+                    return null;
+                  }
+
+                  return (
+                    <TimeTableItem
+                      key={`${period}-${idx + 1}`}
+                      bgColor={value ? LECTURE_COLOR[value.type] : null}
+                      rowSpan={rowSpan > 1 ? rowSpan : undefined}
+                    >
+                      <button
+                        type="button"
+                        className="size-full p-2 focus:outline-0"
+                        onClick={() => handleTimeTableFillButton(value?.id)}
                       >
-                        <button
-                          type="button"
-                          className="size-full p-2 focus:outline-0"
-                          onClick={() =>
-                            type === PERIOD_STATUS.empty
-                              ? handleTimeTableEmptyButton({ period, idx })
-                              : handleTimeTableFillButton(value?.id)
-                          }
-                        >
-                          {value && head && (
-                            <div className="flex size-full flex-col justify-between gap-y-2 break-all text-start">
-                              <p className="text-base font-bold">
-                                {value.name}
-                              </p>
-                              <div className="text-[12px] text-gray-500">
-                                <p>{value.professor}</p>
-                                <p>{value.room}</p>
-                              </div>
+                        {value && head && (
+                          <div className="flex size-full flex-col gap-y-2 break-all text-start">
+                            <p className="text-base font-bold">{value.name}</p>
+                            <div className="text-xs text-gray-500">
+                              <p>{value.professor}</p>
+                              <p>{value.room}</p>
                             </div>
-                          )}
-                        </button>
-                      </TimeTableItem>
-                    ),
-                  )}
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
-        <TimeTableSpecialLectureTable
-          specialLectureGroup={specialLectureGroup}
-          handleSpecialLecture={handleTimeTableFillButton}
-        />
-      </div>
-      <TimeTableModal
-        dayStatus={dayStatus}
-        day={selectedDay!}
-        period={selectedPeriod!}
-        isAddableLecture={isAddableLecture}
+                          </div>
+                        )}
+                      </button>
+                    </TimeTableItem>
+                  );
+                })}
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
+      <TimeTableUtilButtons />
+      <TimeTableSpecialLectureTable
+        specialLectureGroup={specialLectureGroup}
+        handleSpecialLecture={(id: number | undefined) => {
+          if (id) {
+            // 특별 강의도 삭제 가능하도록 동일한 로직 적용
+            const currentIds = searchParamsAction.getAll('id').map(Number);
+            const updatedIds = currentIds.filter(
+              (currentId) => currentId !== id,
+            );
+
+            searchParamsAction.remove('id');
+            updatedIds.forEach((id) => {
+              searchParamsAction.append('id', id.toString());
+            });
+          }
+        }}
       />
-      <TimeTableLectureRemoveModal selectedLectureId={selectedLectureId!} />
     </>
   );
 }
