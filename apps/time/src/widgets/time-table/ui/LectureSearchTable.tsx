@@ -1,9 +1,8 @@
 'use client';
 
-import { memo } from 'react';
+import { memo, useState } from 'react';
 
-import { MODAL_KEY } from '@/shared/constants';
-import { useInfiniteScroll, useModalAction } from '@/shared/hooks';
+import { useInfiniteScroll } from '@/shared/hooks';
 import type {
   GetLectureListParams,
   GetLectureListResponseValue,
@@ -27,17 +26,15 @@ interface TimeTableLectureTableItemProps {
 }
 
 const LECTURE_TABLE_ROW_HEADER = [
-  { title: '캠퍼스', size: 2 },
-  { title: '카테고리', size: 2 },
+  { title: '구분', size: 2 },
   { title: '과목코드', size: 2 },
-  { title: '학점', size: 2 },
-  { title: '학년', size: 2 },
+  { title: '수업명', size: 3 },
+  { title: '담당교수', size: 2 },
+  { title: '교시', size: 2 },
   { title: '전공', size: 3 },
-  { title: '수업명', size: 4 },
-  { title: '담당교수', size: 3 },
-  { title: '학기', size: 2 },
-  { title: '시간', size: 3 },
-  { title: '수업구분', size: 7 },
+  { title: '학점', size: 1 },
+  { title: '학년', size: 1 },
+  { title: '추가', size: 1 },
 ] as const;
 
 function TimeTableLectureNotification({ text }: { text: string }) {
@@ -58,9 +55,9 @@ function TimeTableLectureItem({
   lecture,
 }: TimeTableLectureTableItemProps) {
   const { searchParamsAction } = useTimeTableParams();
-  const { close } = useModalAction({ key: MODAL_KEY.timeTable });
   const router = useRouter();
   const specialPeriodSet = new Set<string>(SPECIAL_PERIOD);
+  const [isExpanded, setIsExpanded] = useState(false);
 
   const handleTimeTableLectureItem = () => {
     if (specialPeriodSet.has(lecture.time) || isAddableLecture(lecture.time)) {
@@ -74,25 +71,55 @@ function TimeTableLectureItem({
     }
   };
 
+  const handleRowClick = () => {
+    setIsExpanded(!isExpanded);
+  };
+
+  const handleAddClick = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    handleTimeTableLectureItem();
+  };
+
   return (
-    <tr
-      className="h-12 shrink-0 cursor-pointer divide-x divide-gray-300 text-[12px] transition-colors hover:bg-gray-50"
-      onClick={() => handleTimeTableLectureItem()}
-    >
-      <td className="whitespace-nowrap p-2">{lecture.campus}</td>
-      <td className="whitespace-nowrap p-2">{lecture.category}</td>
-      <td className="whitespace-nowrap p-2">{lecture.code}</td>
-      <td className="whitespace-nowrap p-2">{lecture.credit}</td>
-      <td className="whitespace-nowrap p-2">{lecture.grade ?? '-'}</td>
-      <td className="whitespace-nowrap p-2">
-        {lecture.major !== 'None' ? lecture.major : '-'}
-      </td>
-      <td className="whitespace-nowrap p-2">{lecture.name}</td>
-      <td className="whitespace-nowrap p-2">{lecture.professor}</td>
-      <td className="whitespace-nowrap p-2">{lecture.semester}</td>
-      <td className="whitespace-nowrap p-2">{lecture.time}</td>
-      <td className="whitespace-nowrap p-2">{lecture.groupName}</td>
-    </tr>
+    <>
+      <tr
+        className="place-items h-9 shrink-0 cursor-pointer divide-x divide-gray-300 text-center text-sm transition-colors hover:bg-gray-50"
+        onClick={handleRowClick}
+      >
+        <td className="truncate p-2">{lecture.category}</td>
+        <td className="truncate p-2">{lecture.code}</td>
+        <td className="truncate p-2">{lecture.name}</td>
+        <td className="truncate p-2">{lecture.professor}</td>
+        <td className="truncate p-2">{lecture.time}</td>
+        <td className="truncate p-2">
+          {lecture.major !== 'None' ? lecture.major : '-'}
+        </td>
+        <td className="truncate p-2">{lecture.credit}</td>
+        <td className="truncate p-2">{lecture.grade ?? '-'}</td>
+        <td className="flex items-center justify-center p-2">
+          <button
+            onClick={handleAddClick}
+            className="flex size-6 items-center justify-center rounded-full border border-gray-300 bg-white text-gray-600 hover:bg-gray-50"
+          >
+            <span className="text-xs">+</span>
+          </button>
+        </td>
+      </tr>
+      {isExpanded && (
+        <tr className="bg-gray-50">
+          <td
+            colSpan={LECTURE_TABLE_ROW_HEADER.length}
+            className="p-3 text-sm text-gray-600"
+          >
+            <div className="flex flex-wrap gap-4">
+              <span>수업 구분 : {lecture.groupName}</span>
+              <span>학기 : {lecture.semester}</span>
+              <span>캠퍼스 : {lecture.campus}</span>
+            </div>
+          </td>
+        </tr>
+      )}
+    </>
   );
 }
 
@@ -158,14 +185,14 @@ function TimeTableLectureTable({
 }: TimeTableLectureTableProps) {
   return (
     <div className="mt-3 flex grow overflow-auto text-sm">
-      <table className="h-full w-auto grow table-fixed border-separate border-spacing-0 break-keep border-x border-b border-gray-400">
-        <thead className="sticky top-0 z-20 size-full h-12 text-center">
-          <tr className="divide-x divide-gray-400 bg-gray-100">
+      <table className="border-time-table-border size-full table-fixed border-separate border-spacing-0 break-keep border-x border-b">
+        <thead className="sticky top-0 z-20 size-full h-9 text-center">
+          <tr className="divide-time-table-border bg-time-table-header divide-x">
             {LECTURE_TABLE_ROW_HEADER.map(({ title, size }) => (
               <th
-                className="shrink-0 whitespace-nowrap border-y border-gray-400 px-1 py-2"
+                className="border-time-table-border shrink-0 whitespace-nowrap border-y px-1 py-2 font-normal"
                 key={title}
-                style={{ minWidth: `${size * 2}rem` }}
+                style={{ width: `${size * 2}rem` }}
               >
                 {title}
               </th>

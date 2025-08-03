@@ -10,7 +10,7 @@ import { useDebounce, useOutsideClick } from '@/shared/hooks';
 import type { DayKor } from '@/shared/types';
 import * as model from '@/widgets/time-table/model';
 import type * as types from '@/widgets/time-table/types';
-import { TimeTableLectureTable } from '@/widgets/time-table/ui';
+import { LectureSearchTable } from '@/widgets/time-table/ui';
 
 interface LectureSearchFilterProps<T> {
   title: string;
@@ -101,7 +101,7 @@ const LectureSearchPeriodDropdown = memo(function LectureSearchPeriodDropdown<
           ))}
         </div>
       ) : (
-        <p className="select-none px-1 py-0.5 text-gray-700">
+        <p className="select-none p-0 text-sm text-gray-500">
           시간을 선택하세요
         </p>
       )}
@@ -445,7 +445,7 @@ export default function TimeTableLectureFinder() {
   );
 
   return (
-    <div className="space-y-4">
+    <div className="w-full space-y-4">
       <div className="w-7/8 flex flex-wrap gap-4">
         <LectureSearchFilter
           title="캠퍼스"
@@ -493,7 +493,7 @@ export default function TimeTableLectureFinder() {
       <LectureSearchLectureSearchInput
         handleLectureSearchInputChange={(keyword) => setSearchKeyword(keyword)}
       />
-      <TimeTableLectureTable
+      <LectureSearchTable
         isAddableLecture={defaultIsAddableLecture}
         selectedValues={{
           campus: selectedRegion.map(
