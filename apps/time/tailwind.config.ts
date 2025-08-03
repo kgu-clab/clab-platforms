@@ -4,6 +4,10 @@ import defaultTheme from 'tailwindcss/defaultTheme';
 const config: Config = {
   content: ['./src/**/*.{js,ts,jsx,tsx,mdx}'],
   theme: {
+    colors: {
+      'time-table-header': '#B9D3F3',
+      'time-table-border': '#ADADAD',
+    },
     extend: {
       container: {
         center: true,
