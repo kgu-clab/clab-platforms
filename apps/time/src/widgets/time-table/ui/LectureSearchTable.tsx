@@ -184,9 +184,9 @@ function TimeTableLectureTable({
   isAddableLecture,
 }: TimeTableLectureTableProps) {
   return (
-    <div className="mt-3 flex grow overflow-auto text-sm">
-      <table className="border-time-table-border size-full table-fixed border-separate border-spacing-0 break-keep border-x border-b">
-        <thead className="sticky top-0 z-20 size-full h-9 text-center">
+    <div className="mt-4 flex h-[560px] grow overflow-y-auto text-sm">
+      <table className="border-time-table-border w-full table-fixed border-separate border-spacing-0 break-keep border-x border-b">
+        <thead className="bg-time-table-header sticky top-0 z-20 text-center">
           <tr className="divide-time-table-border bg-time-table-header divide-x">
             {LECTURE_TABLE_ROW_HEADER.map(({ title, size }) => (
               <th

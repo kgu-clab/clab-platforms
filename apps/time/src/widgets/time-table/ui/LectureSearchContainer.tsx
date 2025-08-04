@@ -4,7 +4,7 @@ import { LectureSearch } from '.';
 
 export default function LectureSearchContainer() {
   return (
-    <div className="h-[1013px] w-full overflow-y-auto p-10">
+    <div className="max-h-[1013px] w-full overflow-hidden p-10">
       <LectureSearch />
     </div>
   );

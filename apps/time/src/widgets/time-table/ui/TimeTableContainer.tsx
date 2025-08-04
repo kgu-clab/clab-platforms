@@ -10,7 +10,7 @@ import TimeTableHeader from './TimeTableHeader';
 export default function TimeTableContainer() {
   return (
     <Suspense>
-      <div className="relative h-fit w-full shrink-0 overflow-hidden lg:h-fit">
+      <div className="relative h-fit w-full shrink-0 overflow-hidden lg:h-full lg:min-h-[calc(100vh-201px)]">
         <Image
           className="absolute inset-0 -z-10 object-center"
           src="/images/time-table/time-table-bg.png"

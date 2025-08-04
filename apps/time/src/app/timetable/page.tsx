@@ -11,7 +11,7 @@ export default function TimeTablePage() {
       <PageLayout
         nav
         footer
-        className="grid w-screen grid-rows-[auto_1fr] p-0 lg:grid-cols-[598px_1fr]"
+        className="m-0 grid min-h-[calc(100vh-201px)] w-screen grid-rows-[auto_auto] p-0 lg:grid-cols-[598px_1fr]"
       >
         <TimeTableContainer />
         <LectureSearchContainer />
