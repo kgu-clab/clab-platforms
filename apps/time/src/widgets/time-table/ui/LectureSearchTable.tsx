@@ -98,40 +98,42 @@ function TimeTableLectureItem({ lecture }: TimeTableLectureTableItemProps) {
   );
 
   const cellData = [
-    { value: category, className: 'truncate p-2' },
-    { value: code, className: 'truncate p-2' },
-    { value: name, className: 'truncate p-2' },
-    { value: professor, className: 'truncate p-2' },
-    { value: time, className: 'truncate p-2' },
+    { value: category },
+    { value: code },
+    { value: name },
+    { value: professor },
+    { value: time },
     {
       value: major !== 'None' ? major : '-',
-      className: 'truncate p-2',
     },
-    { value: credit, className: 'truncate p-2' },
-    { value: grade ?? '-', className: 'truncate p-2' },
+    { value: credit },
+    { value: grade ?? '-' },
     {
       value: <Button />,
-      className: 'flex items-center justify-center p-2',
     },
   ];
 
   return (
     <>
       <tr
-        className="place-items h-9 shrink-0 cursor-pointer divide-x divide-gray-300 text-center text-sm transition-colors hover:bg-gray-50"
+        key="main"
+        className="h-9 max-h-9 shrink-0 cursor-pointer divide-x divide-gray-300 text-center text-sm transition-colors hover:bg-gray-50"
         onClick={handleRowClick}
       >
-        {cellData.map(({ value, className }, index) => (
-          <td key={index} className={className}>
-            {value}
+        {cellData.map(({ value }, index) => (
+          <td key={index} className="h-9 max-h-9 overflow-hidden">
+            <div className="flex h-9 max-h-9 items-center justify-center truncate whitespace-nowrap">
+              {value}
+            </div>
           </td>
         ))}
       </tr>
+
       {isExpanded && (
-        <tr className="bg-gray-50">
+        <tr key="expanded" className="h-9 max-h-9 bg-gray-50">
           <td
             colSpan={LECTURE_TABLE_ROW_HEADER.length}
-            className="p-3 text-sm text-gray-600"
+            className="max-h-9 p-2 text-sm text-gray-600"
           >
             <div className="flex flex-wrap gap-4">
               <span>수업 구분 : {groupName}</span>
@@ -198,7 +200,7 @@ function TimeTableLectureContent({
   }, [hasNextPage, scrollRef]);
 
   return (
-    <tbody className="size-full divide-y divide-gray-300">
+    <tbody className="divide-y divide-gray-300">
       {renderTableBody()}
       {renderTableFooter()}
     </tbody>
@@ -207,7 +209,7 @@ function TimeTableLectureContent({
 
 function TimeTableLectureTable({ selectedValues }: TimeTableLectureTableProps) {
   return (
-    <div className="mt-4 flex h-[560px] grow overflow-y-auto text-sm">
+    <div className="mt-4 flex max-h-[560px] grow overflow-y-auto text-sm">
       <table className="border-time-table-border w-full table-fixed border-separate border-spacing-0 break-keep border-x border-b">
         <thead className="bg-time-table-header sticky top-0 z-20 text-center">
           <tr className="divide-time-table-border bg-time-table-header divide-x">
