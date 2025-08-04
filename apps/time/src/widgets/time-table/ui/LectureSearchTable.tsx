@@ -1,6 +1,6 @@
 'use client';
 
-import { memo, useState } from 'react';
+import { memo, useCallback, useState } from 'react';
 
 import { useInfiniteScroll } from '@/shared/hooks';
 import type {
@@ -47,6 +47,19 @@ function TimeTableLectureItem({ lecture }: TimeTableLectureTableItemProps) {
   const [isExpanded, setIsExpanded] = useState(false);
   const { addLecture, deleteLecture, isLectureAdded, isLectureValid } =
     useLecture();
+  const {
+    professor,
+    time,
+    major,
+    credit,
+    grade,
+    category,
+    code,
+    name,
+    groupName,
+    semester,
+    campus,
+  } = lecture;
 
   const isAddedLecture = isLectureAdded(lecture.id);
   const isTimeConflict = !isLectureValid(lecture);
@@ -55,19 +68,52 @@ function TimeTableLectureItem({ lecture }: TimeTableLectureTableItemProps) {
     setIsExpanded(!isExpanded);
   };
 
-  const handleAddClick = (e: React.MouseEvent) => {
+  const handleButtonClick = (e: React.MouseEvent) => {
     e.stopPropagation();
+
+    if (isAddedLecture) {
+      deleteLecture(lecture.id);
+      return;
+    }
+
     if (isTimeConflict) {
       alert('이미 추가된 강의와 시간이 충돌합니다.');
       return;
     }
+
     addLecture(lecture);
   };
 
-  const handleDeleteClick = (e: React.MouseEvent) => {
-    e.stopPropagation();
-    deleteLecture(lecture.id);
-  };
+  const Button = () => (
+    <button
+      onClick={handleButtonClick}
+      className={`flex size-6 shrink-0 items-center justify-center rounded-full border bg-white text-xs hover:bg-gray-50 ${
+        isAddedLecture
+          ? 'border-red-300 text-red-600 hover:bg-red-50'
+          : 'border-gray-300 text-gray-600'
+      }`}
+    >
+      {isAddedLecture ? '-' : '+'}
+    </button>
+  );
+
+  const cellData = [
+    { value: category, className: 'truncate p-2' },
+    { value: code, className: 'truncate p-2' },
+    { value: name, className: 'truncate p-2' },
+    { value: professor, className: 'truncate p-2' },
+    { value: time, className: 'truncate p-2' },
+    {
+      value: major !== 'None' ? major : '-',
+      className: 'truncate p-2',
+    },
+    { value: credit, className: 'truncate p-2' },
+    { value: grade ?? '-', className: 'truncate p-2' },
+    {
+      value: <Button />,
+      className: 'flex items-center justify-center p-2',
+    },
+  ];
 
   return (
     <>
@@ -75,33 +121,11 @@ function TimeTableLectureItem({ lecture }: TimeTableLectureTableItemProps) {
         className="place-items h-9 shrink-0 cursor-pointer divide-x divide-gray-300 text-center text-sm transition-colors hover:bg-gray-50"
         onClick={handleRowClick}
       >
-        <td className="truncate p-2">{lecture.category}</td>
-        <td className="truncate p-2">{lecture.code}</td>
-        <td className="truncate p-2">{lecture.name}</td>
-        <td className="truncate p-2">{lecture.professor}</td>
-        <td className="truncate p-2">{lecture.time}</td>
-        <td className="truncate p-2">
-          {lecture.major !== 'None' ? lecture.major : '-'}
-        </td>
-        <td className="truncate p-2">{lecture.credit}</td>
-        <td className="truncate p-2">{lecture.grade ?? '-'}</td>
-        <td className="flex items-center justify-center p-2">
-          {isAddedLecture ? (
-            <button
-              onClick={handleDeleteClick}
-              className="flex size-6 shrink-0 items-center justify-center rounded-full border border-red-300 bg-white text-red-600 hover:bg-red-50"
-            >
-              <span className="text-xs">-</span>
-            </button>
-          ) : (
-            <button
-              onClick={handleAddClick}
-              className="flex size-6 shrink-0 items-center justify-center rounded-full border border-gray-300 bg-white text-gray-600 hover:bg-gray-50"
-            >
-              <span className="text-xs">+</span>
-            </button>
-          )}
-        </td>
+        {cellData.map(({ value, className }, index) => (
+          <td key={index} className={className}>
+            {value}
+          </td>
+        ))}
       </tr>
       {isExpanded && (
         <tr className="bg-gray-50">
@@ -110,9 +134,9 @@ function TimeTableLectureItem({ lecture }: TimeTableLectureTableItemProps) {
             className="p-3 text-sm text-gray-600"
           >
             <div className="flex flex-wrap gap-4">
-              <span>수업 구분 : {lecture.groupName}</span>
-              <span>학기 : {lecture.semester}</span>
-              <span>캠퍼스 : {lecture.campus}</span>
+              <span>수업 구분 : {groupName}</span>
+              <span>학기 : {semester}</span>
+              <span>캠퍼스 : {campus}</span>
             </div>
           </td>
         </tr>
@@ -140,37 +164,43 @@ function TimeTableLectureContent({
     }
   });
 
+  const renderTableBody = useCallback(() => {
+    if (!data) {
+      return (
+        <TimeTableLectureNotification text="강의 정보를 불러오고 있습니다" />
+      );
+    }
+
+    if (data.length === 0) {
+      return <TimeTableLectureNotification text="검색 결과가 없습니다" />;
+    }
+
+    return data.map((lecture) => (
+      <TimeTableLectureItem key={`lecture-${lecture.id}`} lecture={lecture} />
+    ));
+  }, [data]);
+
+  const renderTableFooter = useCallback(() => {
+    if (!hasNextPage) return null;
+
+    return (
+      <tr className="block">
+        <td
+          ref={(node) => {
+            scrollRef.current = node;
+          }}
+          colSpan={LECTURE_TABLE_ROW_HEADER.length}
+          className="h-1"
+          aria-label="무한 스크롤 트리거"
+        />
+      </tr>
+    );
+  }, [hasNextPage, scrollRef]);
+
   return (
     <tbody className="size-full divide-y divide-gray-300">
-      {data ? (
-        <>
-          {data.length ? (
-            <>
-              {...data.map((lecture) => (
-                <TimeTableLectureItem
-                  key={`lecture-${lecture.id}`}
-                  lecture={lecture}
-                />
-              ))}
-            </>
-          ) : (
-            <TimeTableLectureNotification text="검색 결과가 없습니다" />
-          )}
-        </>
-      ) : (
-        <TimeTableLectureNotification text="강의 정보를 불러오고 있습니다" />
-      )}
-      {hasNextPage && (
-        <tr className="block">
-          <td
-            ref={(node) => {
-              scrollRef.current = node;
-            }}
-            colSpan={LECTURE_TABLE_ROW_HEADER.length}
-            className="h-1"
-          />
-        </tr>
-      )}
+      {renderTableBody()}
+      {renderTableFooter()}
     </tbody>
   );
 }
