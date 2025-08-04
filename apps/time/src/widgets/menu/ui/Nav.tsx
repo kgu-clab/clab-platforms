@@ -35,7 +35,7 @@ const actions = [
 
 export default function Nav() {
   return (
-    <nav className="sticky top-0 w-full border-b bg-white">
+    <nav className="sticky top-0 z-[99] w-full border-b bg-white">
       <div className="container flex h-14 items-center justify-between text-nowrap">
         <div className="flex items-center gap-2 sm:w-1/5">
           <Image
