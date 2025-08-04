@@ -200,10 +200,10 @@ function TimeTableLectureContent({
   }, [hasNextPage, scrollRef]);
 
   return (
-    <tbody className="divide-y divide-gray-300">
+    <>
       {renderTableBody()}
       {renderTableFooter()}
-    </tbody>
+    </>
   );
 }
 
@@ -224,19 +224,21 @@ function TimeTableLectureTable({ selectedValues }: TimeTableLectureTableProps) {
             ))}
           </tr>
         </thead>
-        <ErrorBoundary
-          fallback={
-            <TimeTableLectureNotification text="강의 정보 불러오기에 실패했습니다" />
-          }
-        >
-          <Suspense
+        <tbody className="divide-y divide-gray-300">
+          <ErrorBoundary
             fallback={
-              <TimeTableLectureNotification text="강의 정보를 불러오고 있습니다" />
+              <TimeTableLectureNotification text="강의 정보 불러오기에 실패했습니다" />
             }
           >
-            <TimeTableLectureContent selectedValues={selectedValues} />
-          </Suspense>
-        </ErrorBoundary>
+            <Suspense
+              fallback={
+                <TimeTableLectureNotification text="강의 정보를 불러오고 있습니다" />
+              }
+            >
+              <TimeTableLectureContent selectedValues={selectedValues} />
+            </Suspense>
+          </ErrorBoundary>
+        </tbody>
       </table>
     </div>
   );
