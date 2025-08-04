@@ -6,3 +6,4 @@ export { default as TimeTableUtilButtons } from './TimeTableUtilButtons';
 export { default as LectureSearchContainer } from './LectureSearchContainer';
 export { default as LectureSearch } from './LectureSearch';
 export { default as LectureSearchTable } from './LectureSearchTable';
+export { LectureSearchItem } from './LectureSearchItem';
