@@ -7,21 +7,14 @@ import type {
   GetLectureListParams,
   GetLectureListResponseValue,
 } from '@/widgets/time-table/api';
-import {
-  SPECIAL_PERIOD,
-  useLectureList,
-  useTimeTableParams,
-} from '@/widgets/time-table/model';
+import { useLecture, useLectureList } from '@/widgets/time-table/model';
 import { ErrorBoundary, Suspense } from '@suspensive/react';
-import { useRouter } from 'next/navigation';
 
 interface TimeTableLectureTableProps {
-  isAddableLecture: (time: string) => boolean;
   selectedValues: GetLectureListParams;
 }
 
 interface TimeTableLectureTableItemProps {
-  isAddableLecture: (time: string) => boolean;
   lecture: GetLectureListResponseValue;
 }
 
@@ -50,26 +43,13 @@ function TimeTableLectureNotification({ text }: { text: string }) {
   );
 }
 
-function TimeTableLectureItem({
-  isAddableLecture,
-  lecture,
-}: TimeTableLectureTableItemProps) {
-  const { searchParamsAction } = useTimeTableParams();
-  const router = useRouter();
-  const specialPeriodSet = new Set<string>(SPECIAL_PERIOD);
+function TimeTableLectureItem({ lecture }: TimeTableLectureTableItemProps) {
   const [isExpanded, setIsExpanded] = useState(false);
+  const { addLecture, deleteLecture, isLectureAdded, isLectureValid } =
+    useLecture();
 
-  const handleTimeTableLectureItem = () => {
-    if (specialPeriodSet.has(lecture.time) || isAddableLecture(lecture.time)) {
-      searchParamsAction.append('id', lecture.id.toString());
-      router.push(`/timetable?${searchParamsAction.getParams()}`, {
-        scroll: false,
-      });
-      close();
-    } else {
-      alert('선택된 시간에 이미 수강하는 강의가 존재합니다.');
-    }
-  };
+  const isAddedLecture = isLectureAdded(lecture.id);
+  const isTimeConflict = !isLectureValid(lecture);
 
   const handleRowClick = () => {
     setIsExpanded(!isExpanded);
@@ -77,7 +57,16 @@ function TimeTableLectureItem({
 
   const handleAddClick = (e: React.MouseEvent) => {
     e.stopPropagation();
-    handleTimeTableLectureItem();
+    if (isTimeConflict) {
+      alert('이미 추가된 강의와 시간이 충돌합니다.');
+      return;
+    }
+    addLecture(lecture);
+  };
+
+  const handleDeleteClick = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    deleteLecture(lecture.id);
   };
 
   return (
@@ -97,12 +86,21 @@ function TimeTableLectureItem({
         <td className="truncate p-2">{lecture.credit}</td>
         <td className="truncate p-2">{lecture.grade ?? '-'}</td>
         <td className="flex items-center justify-center p-2">
-          <button
-            onClick={handleAddClick}
-            className="flex size-6 items-center justify-center rounded-full border border-gray-300 bg-white text-gray-600 hover:bg-gray-50"
-          >
-            <span className="text-xs">+</span>
-          </button>
+          {isAddedLecture ? (
+            <button
+              onClick={handleDeleteClick}
+              className="flex size-6 shrink-0 items-center justify-center rounded-full border border-red-300 bg-white text-red-600 hover:bg-red-50"
+            >
+              <span className="text-xs">-</span>
+            </button>
+          ) : (
+            <button
+              onClick={handleAddClick}
+              className="flex size-6 shrink-0 items-center justify-center rounded-full border border-gray-300 bg-white text-gray-600 hover:bg-gray-50"
+            >
+              <span className="text-xs">+</span>
+            </button>
+          )}
         </td>
       </tr>
       {isExpanded && (
@@ -124,7 +122,6 @@ function TimeTableLectureItem({
 }
 
 function TimeTableLectureContent({
-  isAddableLecture,
   selectedValues,
 }: TimeTableLectureTableProps) {
   const { data, hasNextPage, fetchNextPage } = useLectureList({
@@ -151,7 +148,6 @@ function TimeTableLectureContent({
             <>
               {...data.map((lecture) => (
                 <TimeTableLectureItem
-                  isAddableLecture={isAddableLecture}
                   key={`lecture-${lecture.id}`}
                   lecture={lecture}
                 />
@@ -179,10 +175,7 @@ function TimeTableLectureContent({
   );
 }
 
-function TimeTableLectureTable({
-  selectedValues,
-  isAddableLecture,
-}: TimeTableLectureTableProps) {
+function TimeTableLectureTable({ selectedValues }: TimeTableLectureTableProps) {
   return (
     <div className="mt-4 flex h-[560px] grow overflow-y-auto text-sm">
       <table className="border-time-table-border w-full table-fixed border-separate border-spacing-0 break-keep border-x border-b">
@@ -209,10 +202,7 @@ function TimeTableLectureTable({
               <TimeTableLectureNotification text="강의 정보를 불러오고 있습니다" />
             }
           >
-            <TimeTableLectureContent
-              isAddableLecture={isAddableLecture}
-              selectedValues={selectedValues}
-            />
+            <TimeTableLectureContent selectedValues={selectedValues} />
           </Suspense>
         </ErrorBoundary>
       </table>

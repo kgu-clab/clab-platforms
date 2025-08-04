@@ -310,7 +310,6 @@ export default function LectureSearch() {
 
   const searchTableProps = useMemo(
     () => ({
-      isAddableLecture: () => true,
       selectedValues: {
         campus: selectedRegion.map(
           (region) =>
