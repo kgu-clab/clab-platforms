@@ -26,11 +26,11 @@ interface TimeTableLectureTableItemProps {
 }
 
 const LECTURE_TABLE_ROW_HEADER = [
-  { title: '구분', size: 2 },
+  { title: '구분', size: 1.5 },
   { title: '과목코드', size: 2 },
   { title: '수업명', size: 3 },
   { title: '담당교수', size: 2 },
-  { title: '교시', size: 2 },
+  { title: '교시', size: 3 },
   { title: '전공', size: 3 },
   { title: '학점', size: 1 },
   { title: '학년', size: 1 },

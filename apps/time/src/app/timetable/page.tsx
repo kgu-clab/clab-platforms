@@ -6,7 +6,11 @@ import {
 
 export default function TimeTablePage() {
   return (
-    <PageLayout nav footer className="flex w-screen p-0">
+    <PageLayout
+      nav
+      footer
+      className="grid w-screen grid-rows-[auto_1fr] p-0 lg:grid-cols-2"
+    >
       <TimeTableContainer />
       <LectureSearchContainer />
     </PageLayout>

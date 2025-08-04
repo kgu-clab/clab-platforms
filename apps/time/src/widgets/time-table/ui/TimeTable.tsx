@@ -57,7 +57,7 @@ function TimeTableHeader({ type, children, className }: TimeTableHeaderProps) {
   ) : (
     <td
       className={cn(
-        'border-time-table-border h-9 w-12 border bg-white p-0 text-sm sm:w-fit sm:p-4',
+        'border-time-table-border w-10 border bg-white p-0 text-sm sm:w-fit sm:p-2',
         className,
       )}
     >
@@ -169,7 +169,7 @@ function TimeTable() {
 
   return (
     <>
-      <table className="w-full table-fixed border-collapse bg-white">
+      <table className="w-full table-fixed border-collapse bg-white shadow-sm">
         <thead className="w-full">
           <tr>
             <TimeTableHeader type="COLUMN" className="bg-time-table-header" />
