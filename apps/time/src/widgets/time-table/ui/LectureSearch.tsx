@@ -14,6 +14,21 @@ interface LectureSearchPeriodDropdownProps {
   onPeriodToggle: (period: types.DayPeriod | types.NightPeriod) => void;
 }
 
+interface LectureSearchLectureTypeDropdownProps {
+  selectedLectureType: types.LectureKey[];
+  onLectureTypeToggle: (lectureType: types.LectureKey) => void;
+}
+
+interface LectureMajorInputProps {
+  selectedMajor: string[];
+  onMajorToggle: (major: string) => void;
+}
+
+interface LectureSearchInputProps {
+  searchKeyword: string;
+  onSearchKeywordChange: (keyword: string) => void;
+}
+
 const LectureSearchPeriodDropdown = memo<LectureSearchPeriodDropdownProps>(
   ({ dayStatus, selectedPeriod, onPeriodToggle }) => {
     const [isOpen, setIsOpen] = useState(false);
@@ -99,170 +114,173 @@ const LectureSearchPeriodDropdown = memo<LectureSearchPeriodDropdownProps>(
 
 LectureSearchPeriodDropdown.displayName = 'LectureSearchPeriodDropdown';
 
-const LectureSearchLectureTypeDropdown = memo(() => {
-  const { selectedLectureType, toggleLectureType } = model.useLectureFilters();
-  const [isOpen, setIsOpen] = useState(false);
+const LectureSearchLectureTypeDropdown =
+  memo<LectureSearchLectureTypeDropdownProps>(
+    ({ selectedLectureType, onLectureTypeToggle }) => {
+      const [isOpen, setIsOpen] = useState(false);
 
-  const selectedItems = useMemo(
-    () =>
-      selectedLectureType.length ? (
-        <div className="flex max-w-full flex-wrap gap-1">
-          {selectedLectureType.map((lectureType) => (
-            <LectureSearchItem.RemovableTag
-              key={`lecture-${lectureType}`}
-              value={model.LECTURE[lectureType]}
-              onRemove={() => {
-                toggleLectureType(lectureType);
-              }}
-            />
-          ))}
-        </div>
-      ) : (
-        <p className="select-none text-sm font-normal text-gray-500">
-          강의 구분을 선택하세요
-        </p>
-      ),
-    [selectedLectureType, toggleLectureType],
-  );
+      const selectedItems = useMemo(
+        () =>
+          selectedLectureType.length ? (
+            <div className="flex max-w-full flex-wrap gap-1">
+              {selectedLectureType.map((lectureType) => (
+                <LectureSearchItem.RemovableTag
+                  key={`lecture-${lectureType}`}
+                  value={model.LECTURE[lectureType]}
+                  onRemove={() => {
+                    onLectureTypeToggle(lectureType);
+                  }}
+                />
+              ))}
+            </div>
+          ) : (
+            <p className="select-none text-sm font-normal text-gray-500">
+              강의 구분을 선택하세요
+            </p>
+          ),
+        [selectedLectureType, onLectureTypeToggle],
+      );
 
-  const dropdownContent = useMemo(
-    () => (
-      <>
-        {model.LECTURE_ARRAY.map(([lectureKey, lectureValue]) => (
-          <LectureSearchItem.DropdownButton
-            key={`lecture-dropdown-${lectureKey}`}
-            isSelected={selectedLectureType.includes(lectureKey)}
-            onClick={() => {
-              toggleLectureType(lectureKey);
-              setIsOpen(false);
-            }}
-          >
-            {lectureValue}
-          </LectureSearchItem.DropdownButton>
-        ))}
-      </>
-    ),
-    [selectedLectureType, toggleLectureType],
-  );
+      const dropdownContent = useMemo(
+        () => (
+          <>
+            {model.LECTURE_ARRAY.map(([lectureKey, lectureValue]) => (
+              <LectureSearchItem.DropdownButton
+                key={`lecture-dropdown-${lectureKey}`}
+                isSelected={selectedLectureType.includes(lectureKey)}
+                onClick={() => {
+                  onLectureTypeToggle(lectureKey);
+                  setIsOpen(false);
+                }}
+              >
+                {lectureValue}
+              </LectureSearchItem.DropdownButton>
+            ))}
+          </>
+        ),
+        [selectedLectureType, onLectureTypeToggle],
+      );
 
-  return (
-    <LectureSearchItem.Dropdown
-      title="강의 구분"
-      isOpen={isOpen}
-      onToggle={() => setIsOpen(!isOpen)}
-      selectedItems={selectedItems}
-    >
-      {dropdownContent}
-    </LectureSearchItem.Dropdown>
+      return (
+        <LectureSearchItem.Dropdown
+          title="강의 구분"
+          isOpen={isOpen}
+          onToggle={() => setIsOpen(!isOpen)}
+          selectedItems={selectedItems}
+        >
+          {dropdownContent}
+        </LectureSearchItem.Dropdown>
+      );
+    },
   );
-});
 
 LectureSearchLectureTypeDropdown.displayName =
   'LectureSearchLectureTypeDropdown';
 
-const LectureMajorInput = memo(() => {
-  const { selectedMajor, toggleMajor } = model.useLectureFilters();
+const LectureMajorInput = memo<LectureMajorInputProps>(
+  ({ selectedMajor, onMajorToggle }) => {
+    const [inputValue, setInputValue] = useState('');
+    const [isOpen, setIsOpen] = useState(false);
 
-  const [inputValue, setInputValue] = useState('');
-  const [isOpen, setIsOpen] = useState(false);
+    const debouncedValue = useDebounce({ value: inputValue, delay: 500 });
+    const findMajorList = model.useMajorList({ major: debouncedValue });
+    const ref = useOutsideClick({ callback: () => setIsOpen(false) });
 
-  const debouncedValue = useDebounce({ value: inputValue, delay: 500 });
-  const findMajorList = model.useMajorList({ major: debouncedValue });
-  const ref = useOutsideClick({ callback: () => setIsOpen(false) });
+    const handleInputChange = useCallback(
+      (event: React.ChangeEvent<HTMLInputElement>) => {
+        setInputValue(event.target.value);
+        setIsOpen(true);
+      },
+      [],
+    );
 
-  const handleInputChange = useCallback(
-    (event: React.ChangeEvent<HTMLInputElement>) => {
-      setInputValue(event.target.value);
-      setIsOpen(true);
-    },
-    [],
-  );
+    const handleMajorSelect = useCallback(
+      (major: string) => {
+        onMajorToggle(major);
+        setInputValue('');
+        setIsOpen(false);
+      },
+      [onMajorToggle],
+    );
 
-  const handleMajorSelect = useCallback(
-    (major: string) => {
-      toggleMajor(major);
-      setInputValue('');
-      setIsOpen(false);
-    },
-    [toggleMajor],
-  );
-
-  const selectedTags = useMemo(
-    () => (
-      <div className="flex max-w-full flex-wrap gap-1">
-        {selectedMajor.map((major) => (
-          <LectureSearchItem.RemovableTag
-            key={major}
-            value={major}
-            onRemove={() => toggleMajor(major)}
-          />
-        ))}
-      </div>
-    ),
-    [selectedMajor, toggleMajor],
-  );
-
-  return (
-    <div className="mb-4">
-      <h3 className="mb-2 text-sm font-medium text-gray-700">전공 선택</h3>
-      <div className="relative" ref={ref}>
-        <div
-          className="flex w-full flex-wrap gap-1 text-sm"
-          onClick={() => setIsOpen(true)}
-        >
-          {selectedMajor.length > 0 && selectedTags}
-          <div className="flex grow items-center">
-            <LectureSearchItem.Input
-              placeholder="전공을 입력해주세요"
-              inputValue={inputValue}
-              handleInputChange={handleInputChange}
+    const selectedTags = useMemo(
+      () => (
+        <div className="flex max-w-full flex-wrap gap-1">
+          {selectedMajor.map((major) => (
+            <LectureSearchItem.RemovableTag
+              key={major}
+              value={major}
+              onRemove={() => onMajorToggle(major)}
             />
-          </div>
+          ))}
         </div>
-        {findMajorList.length > 0 && isOpen && (
-          <div className="absolute z-40 mt-1 max-h-60 w-full overflow-y-auto rounded-md border border-gray-400 bg-white drop-shadow-md">
-            {findMajorList.map((major) => (
-              <LectureSearchItem.DropdownButton
-                key={major}
-                isSelected={selectedMajor.includes(major)}
-                onClick={() => handleMajorSelect(major)}
-              >
-                {major}
-              </LectureSearchItem.DropdownButton>
-            ))}
+      ),
+      [selectedMajor, onMajorToggle],
+    );
+
+    return (
+      <div className="mb-4">
+        <h3 className="mb-2 text-sm font-medium text-gray-700">전공 선택</h3>
+        <div className="relative" ref={ref}>
+          <div
+            className="flex w-full flex-wrap gap-1 text-sm"
+            onClick={() => setIsOpen(true)}
+          >
+            {selectedMajor.length > 0 && selectedTags}
+            <div className="flex grow items-center">
+              <LectureSearchItem.Input
+                placeholder="전공을 입력해주세요"
+                inputValue={inputValue}
+                handleInputChange={handleInputChange}
+              />
+            </div>
           </div>
-        )}
+          {findMajorList.length > 0 && isOpen && (
+            <div className="absolute z-40 mt-1 max-h-60 w-full overflow-y-auto rounded-md border border-gray-400 bg-white drop-shadow-md">
+              {findMajorList.map((major) => (
+                <LectureSearchItem.DropdownButton
+                  key={major}
+                  isSelected={selectedMajor.includes(major)}
+                  onClick={() => handleMajorSelect(major)}
+                >
+                  {major}
+                </LectureSearchItem.DropdownButton>
+              ))}
+            </div>
+          )}
+        </div>
       </div>
-    </div>
-  );
-});
+    );
+  },
+);
 
 LectureMajorInput.displayName = 'LectureMajorInput';
 
-const LectureSearchInput = memo(() => {
-  const { setSearchKeyword } = model.useLectureFilters();
-  const [inputValue, setInputValue] = useState('');
+const LectureSearchInput = memo<LectureSearchInputProps>(
+  ({ searchKeyword, onSearchKeywordChange }) => {
+    const [inputValue, setInputValue] = useState(searchKeyword);
 
-  const handleInputChange = useCallback(
-    (event: React.ChangeEvent<HTMLInputElement>) => {
-      const value = event.target.value;
-      setInputValue(value);
-      setSearchKeyword(value);
-    },
-    [setSearchKeyword],
-  );
+    const handleInputChange = useCallback(
+      (event: React.ChangeEvent<HTMLInputElement>) => {
+        const value = event.target.value;
+        setInputValue(value);
+        onSearchKeywordChange(value);
+      },
+      [onSearchKeywordChange],
+    );
 
-  return (
-    <div className="mb-4">
-      <h3 className="mb-2 text-sm font-medium text-gray-700">강의 검색</h3>
-      <LectureSearchItem.Input
-        inputValue={inputValue}
-        handleInputChange={handleInputChange}
-        placeholder="강의명을 입력해주세요"
-      />
-    </div>
-  );
-});
+    return (
+      <div className="mb-4">
+        <h3 className="mb-2 text-sm font-medium text-gray-700">강의 검색</h3>
+        <LectureSearchItem.Input
+          inputValue={inputValue}
+          handleInputChange={handleInputChange}
+          placeholder="강의명을 입력해주세요"
+        />
+      </div>
+    );
+  },
+);
 
 LectureSearchInput.displayName = 'LectureSearchInput';
 
@@ -279,7 +297,10 @@ export default function LectureSearch() {
     toggleGrade,
     toggleDay,
     togglePeriod,
+    toggleLectureType,
+    toggleMajor,
     defaultValues,
+    setSearchKeyword,
   } = model.useLectureFilters();
 
   const debouncedSearchKeyword = useDebounce({
@@ -346,9 +367,18 @@ export default function LectureSearch() {
         dayStatus={defaultValues.dayStatus}
         onPeriodToggle={togglePeriod}
       />
-      <LectureSearchLectureTypeDropdown />
-      <LectureMajorInput />
-      <LectureSearchInput />
+      <LectureSearchLectureTypeDropdown
+        selectedLectureType={selectedLectureType}
+        onLectureTypeToggle={toggleLectureType}
+      />
+      <LectureMajorInput
+        selectedMajor={selectedMajor}
+        onMajorToggle={toggleMajor}
+      />
+      <LectureSearchInput
+        searchKeyword={searchKeyword}
+        onSearchKeywordChange={setSearchKeyword}
+      />
       <LectureSearchTable {...searchTableProps} />
     </div>
   );

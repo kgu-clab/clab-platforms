@@ -14,7 +14,7 @@ export function useLectureFilters() {
     () => ({
       dayStatus: 'day' as types.DayStatus,
       day: DAY.mon,
-      period: model.DAY_PERIOD['1'],
+      period: '1' as types.DayPeriod,
     }),
     [],
   );
@@ -26,10 +26,10 @@ export function useLectureFilters() {
     ] as types.Region[],
     selectedGrade: [] as types.Grade[],
     selectedDay: [selectedTimeInfo?.day || defaultValues.day] as DayKor[],
-    selectedPeriod: [selectedTimeInfo?.period || defaultValues.period] as (
-      | types.DayPeriod
-      | types.NightPeriod
-    )[],
+    selectedPeriod: [
+      (selectedTimeInfo?.period as types.DayPeriod | types.NightPeriod) ||
+        defaultValues.period,
+    ] as (types.DayPeriod | types.NightPeriod)[],
     selectedLectureType: [] as types.LectureKey[],
     selectedMajor: [] as string[],
     searchKeyword: '',
