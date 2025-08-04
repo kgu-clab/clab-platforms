@@ -1,4 +1,5 @@
 import PageLayout from '@/app/PageLayout';
+import { TimeTableProvider } from '@/widgets/time-table/context/TimeTableContext';
 import {
   LectureSearchContainer,
   TimeTableContainer,
@@ -6,13 +7,15 @@ import {
 
 export default function TimeTablePage() {
   return (
-    <PageLayout
-      nav
-      footer
-      className="grid w-screen grid-rows-[auto_1fr] p-0 lg:grid-cols-2"
-    >
-      <TimeTableContainer />
-      <LectureSearchContainer />
-    </PageLayout>
+    <TimeTableProvider>
+      <PageLayout
+        nav
+        footer
+        className="grid w-screen grid-rows-[auto_1fr] p-0 lg:grid-cols-[598px_1fr]"
+      >
+        <TimeTableContainer />
+        <LectureSearchContainer />
+      </PageLayout>
+    </TimeTableProvider>
   );
 }

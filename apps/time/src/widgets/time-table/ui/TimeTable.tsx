@@ -6,6 +6,7 @@ import { cn } from '@clab-platforms/utils';
 
 import { DAY_VALUE_ARRAY } from '@/shared/constants';
 import type { GetLectureByParamsValue } from '@/widgets/time-table/api';
+import { useTimeTableContext } from '@/widgets/time-table/context/TimeTableContext';
 import {
   DAY_PERIOD_ARRAY,
   LECTURE_COLOR,
@@ -149,6 +150,7 @@ function TimeTableSpecialLectureItem({
 
 function TimeTable() {
   const { dayStatus, searchParamsAction } = useTimeTableParams();
+  const { setSelectedTimeInfo } = useTimeTableContext();
   const selectedSchedule =
     dayStatus === 'day' ? DAY_PERIOD_ARRAY : NIGHT_PERIOD_ARRAY;
   const selectedIdList = searchParamsAction.getAll('id').map(Number);
@@ -165,6 +167,24 @@ function TimeTable() {
         searchParamsAction.append('id', id.toString());
       });
     }
+  };
+
+  const handleTimeTableEmptyButton = ({
+    period,
+    idx,
+  }: {
+    period: string;
+    idx: number;
+  }) => {
+    // 선택된 시간 정보를 컨텍스트에 저장
+    const day = DAY_VALUE_ARRAY[idx];
+    const timeInfo = {
+      day,
+      period,
+      dayStatus,
+    };
+
+    setSelectedTimeInfo(timeInfo);
   };
 
   return (
@@ -227,7 +247,17 @@ function TimeTable() {
                       <button
                         type="button"
                         className="size-full p-2 focus:outline-0"
-                        onClick={() => handleTimeTableFillButton(value?.id)}
+                        onClick={() => {
+                          if (value) {
+                            handleTimeTableFillButton(value?.id);
+                          } else {
+                            // 빈 셀 클릭 시 시간 정보를 LectureSearch에 전달
+                            handleTimeTableEmptyButton({
+                              period,
+                              idx,
+                            });
+                          }
+                        }}
                       >
                         {value && head && (
                           <div className="flex size-full flex-col gap-y-2 break-all text-start">

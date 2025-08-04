@@ -8,6 +8,7 @@ import { CloseOutline } from '@clab-platforms/icon';
 import { DAY_VALUE_ARRAY } from '@/shared/constants';
 import { useDebounce, useOutsideClick } from '@/shared/hooks';
 import type { DayKor } from '@/shared/types';
+import { useTimeTableContext } from '@/widgets/time-table/context/TimeTableContext';
 import * as model from '@/widgets/time-table/model';
 import type * as types from '@/widgets/time-table/types';
 import { LectureSearchTable } from '@/widgets/time-table/ui';
@@ -380,15 +381,23 @@ export default function TimeTableLectureFinder() {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const defaultIsAddableLecture = (time: string) => true;
 
+  // 컨텍스트에서 시간 정보 가져오기
+  const { selectedTimeInfo, clearSelectedTimeInfo } = useTimeTableContext();
+
   const [selectedRegion, setSelectedRegion] = useState<types.Region[]>([
     model.REGION.campus1,
     model.REGION.campus2,
   ]);
   const [selectedGrade, setSelectedGrade] = useState<types.Grade[]>([]);
-  const [selectedDay, setSelectedDay] = useState<DayKor[]>([defaultDay]);
+  const [selectedDay, setSelectedDay] = useState<DayKor[]>([
+    selectedTimeInfo?.day || defaultDay,
+  ]);
   const [selectedPeriod, setSelectedPeriod] = useState<
     types.DayPeriod[] | types.NightPeriod[]
-  >([defaultPeriod]);
+  >([
+    (selectedTimeInfo?.period as types.DayPeriod | types.NightPeriod) ||
+      defaultPeriod,
+  ]);
   const [selectedLectureType, setSelectedLectureType] = useState<
     types.LectureKey[]
   >([]);
@@ -398,6 +407,16 @@ export default function TimeTableLectureFinder() {
     value: searchKeyword,
     delay: 1000,
   });
+
+  useEffect(() => {
+    if (selectedTimeInfo) {
+      setSelectedDay([selectedTimeInfo.day]);
+      setSelectedPeriod([
+        selectedTimeInfo.period as types.DayPeriod | types.NightPeriod,
+      ]);
+      clearSelectedTimeInfo();
+    }
+  }, [selectedTimeInfo, clearSelectedTimeInfo]);
 
   useEffect(() => {
     setSelectedGrade([]);
@@ -475,7 +494,7 @@ export default function TimeTableLectureFinder() {
 
       <LectureSearchPeriodDropdown
         selectedPeriod={selectedPeriod}
-        dayStatus={defaultDayStatus}
+        dayStatus={selectedTimeInfo?.dayStatus || defaultDayStatus}
         handlePeriodDropdownItem={handlePeriodDropdownItem}
       />
       <LectureSearchLectureTypeDropdown
