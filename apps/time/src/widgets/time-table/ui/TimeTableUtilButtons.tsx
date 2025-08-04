@@ -21,7 +21,7 @@ function TimeTableCopyButton() {
       timeoutRef.current = window.setTimeout(() => {
         setIsCopy(false);
         timeoutRef.current = null;
-      }, 2000);
+      }, 6000);
     } catch (error) {
       alert(`Failed to copy: ${error}`);
     }
@@ -36,25 +36,35 @@ function TimeTableCopyButton() {
   }, []);
 
   return (
-    <button
-      className="rounded-md border border-gray-400 bg-gray-50 p-3 transition-colors hover:bg-gray-100"
-      type="button"
-      onClick={handleCopyButton}
-    >
-      {!isCopy ? (
-        <ClipboardDocumentSolid
-          className="fill-gray-800"
-          width={24}
-          height={24}
-        />
-      ) : (
-        <ClipboardDocumentCheckSolid
-          className="fill-green-600"
-          width={24}
-          height={24}
-        />
-      )}
-    </button>
+    <div className="flex w-full justify-end">
+      <button
+        className="rounded-full border border-gray-400 bg-gray-50 px-4 py-2 font-light transition-colors hover:bg-gray-100"
+        type="button"
+        onClick={handleCopyButton}
+      >
+        {!isCopy ? (
+          <div className="flex items-center gap-2">
+            <ClipboardDocumentSolid
+              className="fill-gray-800"
+              width={16}
+              height={16}
+            />
+            <p>시간표 링크 복사</p>
+          </div>
+        ) : (
+          <div className="flex items-center gap-2">
+            <ClipboardDocumentCheckSolid
+              className="fill-green-600"
+              width={16}
+              height={16}
+            />
+            <p className="text-green-600">
+              복사 완료! 링크를 전송해 친구와 공유해보세요
+            </p>
+          </div>
+        )}
+      </button>
+    </div>
   );
 }
 
