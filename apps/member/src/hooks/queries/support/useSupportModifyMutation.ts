@@ -36,7 +36,7 @@ export const useSupportModifyMutation = () => {
     onError: () => {
       addToast({
         state: 'error',
-        message: ERROR_MESSAGE.NETWORK,
+        message: ERROR_MESSAGE.DEFAULT,
       });
     },
   });
