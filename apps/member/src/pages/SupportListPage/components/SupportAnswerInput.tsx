@@ -56,7 +56,7 @@ const SupportAnswerInput = ({
     if (!id) {
       addToast({
         state: 'error',
-        message: '문의 ID가 없어요.',
+        message: '해당하는 문의글을 찾을 수 없어요',
       });
       return;
     }
@@ -72,7 +72,7 @@ const SupportAnswerInput = ({
       onError: () => {
         addToast({
           state: 'error',
-          message: '답변 처리 중 오류가 발생했어요.',
+          message: '답변 등록 중 오류가 발생했어요.',
         });
       },
     };
@@ -128,7 +128,7 @@ const SupportAnswerInput = ({
           onClick={handleSubmit}
           disabled={!content || isPending}
         >
-          {isPending ? '처리 중...' : isAnswered ? '답변 수정' : '답변 등록'}
+          {isAnswered ? '수정하기' : '등록하기'}
         </Button>
       </div>
     </div>

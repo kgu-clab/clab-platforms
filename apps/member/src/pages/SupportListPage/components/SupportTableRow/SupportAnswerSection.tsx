@@ -79,7 +79,7 @@ const SupportAnswerSection = ({
   // 답변이 없는 경우
   return (
     <div className="space-y-2">
-      <div>아직 답변이 되지 않았어요.</div>
+      <p>아직 답변이 등록되지 않았어요.</p>
       {isAdmin && (
         <div className="flex justify-end">
           <button
