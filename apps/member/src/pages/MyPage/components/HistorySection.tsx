@@ -1,6 +1,7 @@
 import { useMemo } from 'react';
 
 import { Badge } from '@clab-platforms/design-system';
+import { createURLWithQueryString } from '@clab-platforms/utils';
 
 import EmptyBox from '@components/common/EmptyBox/EmptyBox';
 import ListButton from '@components/common/ListButton/ListButton';
@@ -9,7 +10,7 @@ import BookLoanConditionStatusBadge from '@components/library/BookLoanConditionS
 
 import { MY_MESSAGE } from '@constants/message';
 import { MODAL_TITLE } from '@constants/modal';
-import { PATH_FINDER } from '@constants/path';
+import { PATH, PATH_FINDER } from '@constants/path';
 import { SUPPORT_ANSWER_STATE } from '@constants/state';
 import { useModal } from '@hooks/common/useModal';
 import {
@@ -110,7 +111,9 @@ export function HistorySection({ category }: Props) {
           return (
             <ListButton
               key={`my-support-${id}`}
-              to={`/support/list?selected=${id}`}
+              to={createURLWithQueryString([PATH.SUPPORT_LIST], {
+                selected: id,
+              })}
             >
               <p className="grow space-x-2 truncate pr-4">
                 <Badge color={isAnswered ? 'green' : 'red'}>
