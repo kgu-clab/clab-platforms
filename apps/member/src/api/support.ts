@@ -49,7 +49,7 @@ export async function getMySupports({ page, size }: WithPaginationParams) {
 /**
  * 문의 목록 조회
  */
-export async function getSupports({ page, size }: WithPaginationParams) {
+export async function getSupportList({ page, size }: WithPaginationParams) {
   const { data } = await server.get<ResponsePagination<Support>>({
     url: createPagination(END_POINT.SUPPORTS, { page, size }),
   });
