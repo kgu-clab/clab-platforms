@@ -2,6 +2,7 @@ import { useState } from 'react';
 
 import { Table } from '@clab-platforms/design-system';
 
+import { SUPPORT_ANSWER_STATE } from '@constants/state';
 import SupportForm from '@pages/SupportWritePage/components/SupportForm';
 
 import type { MemberProfileType } from '@type/member';
@@ -26,7 +27,7 @@ const SupportRowContent = ({
   const { title, content, imageUrl, isOwner, id, answer } = data;
 
   const handleEditToggle = () => setIsEdit((prev) => !prev);
-  const isAnswered = data.status === 'COMPLETED';
+  const isAnswered = data.status === SUPPORT_ANSWER_STATE.COMPLETED;
 
   if (!data) {
     return (

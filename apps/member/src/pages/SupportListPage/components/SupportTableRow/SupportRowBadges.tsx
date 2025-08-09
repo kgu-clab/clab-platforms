@@ -1,16 +1,17 @@
 import { Badge } from '@clab-platforms/design-system';
 
+import { SUPPORT_ANSWER_STATE } from '@constants/state';
 import { toKoreaSupportCategory } from '@utils/string';
 
-import type { Support } from '@type/support';
+import type { SupportCategoryType, SupportStatusType } from '@type/support';
 
 interface SupportRowBadgesProps {
-  category: Support['category'];
-  status: Support['status'];
+  category: SupportCategoryType;
+  status: SupportStatusType;
 }
 
 const SupportRowBadges = ({ category, status }: SupportRowBadgesProps) => {
-  const isAnswered = status === 'COMPLETED';
+  const isAnswered = status === SUPPORT_ANSWER_STATE.COMPLETED;
 
   return (
     <>
