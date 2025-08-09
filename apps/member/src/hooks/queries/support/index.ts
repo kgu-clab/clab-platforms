@@ -6,5 +6,3 @@ export * from './useSupportDeleteMutation';
 export * from './useSupportDetail';
 export * from './useSupportModifyMutation';
 export * from './useSupportWriteMutation';
-export * from './useSupportListQuery';
-export * from './useSupportListUi';

@@ -44,7 +44,7 @@ const SupportAnswerSection = ({
     });
   }, [isAnswerEdit, answerData, supportId, myProfile.name]);
 
-  if (answer) {
+  if (!isAnswerEdit && answer) {
     return (
       <SupportAnswerInput
         onCancel={handleAnswerEditToggle}
