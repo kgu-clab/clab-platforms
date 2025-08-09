@@ -21,7 +21,7 @@ const SupportAnswerSection = ({
   isAnswered,
 }: SupportAnswerSectionProps) => {
   const [isAnswerEdit, setIsAnswerEdit] = useState(false);
-  const [answer, setAnswer] = useState<SupportAnswerItem>({});
+  const [answer, setAnswer] = useState<SupportAnswerItem>();
 
   const isAdmin = myProfile.roleLevel >= ROLE_LEVEL.ADMIN;
 
@@ -30,20 +30,21 @@ const SupportAnswerSection = ({
     setAnswer(newAnswer);
 
   useEffect(() => {
-    if (isAnswerEdit && answerData) {
+    if (!isAnswerEdit) return;
+
+    if (answerData) {
       setAnswer({ ...answerData, id: supportId });
-    } else if (isAnswerEdit && !answerData) {
-      setAnswer({
-        id: supportId,
-        content: '',
-        responder: myProfile.name,
-        createdAt: new Date().toISOString(),
-      });
+      return;
     }
+    setAnswer({
+      id: supportId,
+      content: '',
+      responder: myProfile.name,
+      createdAt: new Date().toISOString(),
+    });
   }, [isAnswerEdit, answerData, supportId, myProfile.name]);
 
-  // 답변 편집 모드
-  if (isAnswerEdit) {
+  if (answer) {
     return (
       <SupportAnswerInput
         onCancel={handleAnswerEditToggle}
@@ -54,15 +55,13 @@ const SupportAnswerSection = ({
     );
   }
 
-  // 답변이 있는 경우
-  if (isAnswered && answerData) {
+  if (answerData) {
+    const { content, createdAt, responder } = answerData;
     return (
       <div className="space-y-2">
-        <div>{answerData.content}</div>
+        <div>{content}</div>
         <div className="flex items-center justify-between text-sm text-gray-600">
-          <div>
-            {`${formattedDate(answerData.createdAt!)} ${answerData.responder}`}
-          </div>
+          <div>{`${formattedDate(createdAt!)} ${responder}`}</div>
           {isAdmin && (
             <button
               onClick={handleAnswerEditToggle}
@@ -76,7 +75,6 @@ const SupportAnswerSection = ({
     );
   }
 
-  // 답변이 없는 경우
   return (
     <div className="space-y-2">
       <p>아직 답변이 등록되지 않았어요.</p>
