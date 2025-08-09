@@ -54,7 +54,7 @@ const SupportListSection = ({ showAll = false }: SupportListSectionProps) => {
         <Section.Header title={showAll ? ' ' : '최근 문의'} />
         <Section.Body>
           <div className="py-8 text-center">
-            <div className="mx-auto size-8 animate-spin rounded-full border-b-2 border-blue-600"></div>
+            <div className="mx-auto size-8 animate-spin rounded-full border-b-2 border-blue-600" />
             <p className="mt-2 text-gray-500">로딩 중...</p>
           </div>
         </Section.Body>

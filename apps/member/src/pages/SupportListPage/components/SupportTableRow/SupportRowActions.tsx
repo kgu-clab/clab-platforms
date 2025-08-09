@@ -23,9 +23,9 @@ const SupportRowActions = ({
   if (!isOwner) return null;
   else if (isAnswered) {
     return (
-      <div className="text-sm text-gray-500">
+      <p className="text-sm text-gray-500">
         답변 완료된 문의는 수정/삭제할 수 없어요.
-      </div>
+      </p>
     );
   }
 
