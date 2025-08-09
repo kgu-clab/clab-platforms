@@ -1,7 +1,7 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router';
 
-import { Support } from '@type/support';
+import type { Support } from '@type/support';
 
 interface UseSupportListUIProps {
   sortedData: Support[];
@@ -25,29 +25,30 @@ export const useSupportListUI = ({
 
   const [currentOpenItemIndex, setCurrentOpenItemIndex] = useState(-1);
 
-  const handleTableItemClick = useCallback((id: number) => {
+  const handleTableItemClick = (id: number) => {
     setCurrentOpenItemIndex(id);
-  }, []);
+  };
 
   useEffect(() => {
     setCurrentOpenItemIndex(-1);
 
-    if (selectedId && showAll) {
-      const targetId = parseInt(selectedId);
-      const targetSupport = supportData.find((item) => item.id === targetId);
+    if (!selectedId || !showAll) return;
+    const targetId = Number(selectedId);
 
-      if (targetSupport) {
-        const targetIndex = sortedData.findIndex(
-          (item) => item.id === targetId,
-        );
-        const targetPage = Math.floor(targetIndex / size) + 1;
+    const existsInSupportData = supportData.some(
+      (item) => item.id === targetId,
+    );
 
-        if (targetPage !== page) {
-          handlePageChange(targetPage);
-        } else {
-          setCurrentOpenItemIndex(targetId);
-        }
-      }
+    if (!existsInSupportData) return;
+    const targetIndex = sortedData.findIndex((item) => item.id === targetId);
+
+    if (targetIndex === -1) return;
+    const targetPage = Math.floor(targetIndex / size) + 1;
+
+    if (targetPage !== page) {
+      handlePageChange(targetPage);
+    } else {
+      setCurrentOpenItemIndex(targetId);
     }
   }, [
     selectedId,
