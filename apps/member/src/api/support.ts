@@ -2,16 +2,16 @@ import { createPagination } from '@clab-platforms/utils';
 
 import { END_POINT } from '@constants/api';
 
-import {
+import type {
   BaseResponse,
   ResponsePagination,
   WithPaginationParams,
 } from '@type/api';
-import {
+import type {
   Support,
-  SupportAnswerItem,
+  SupportAnswerFormItem,
   SupportDetail,
-  SupportWriteItem,
+  SupportWriteFormItem,
 } from '@type/support';
 
 import { server } from './server';
@@ -21,17 +21,17 @@ import {
   uploadFiles,
 } from './uploadedFile';
 
-export interface PostSupportsWriteParams extends SupportWriteItem {
+export interface PostSupportsWriteParams extends SupportWriteFormItem {
   file?: File;
 }
-export interface PostAnswersParams extends SupportAnswerItem {
-  id: number;
-}
-export interface PatchSupportsParams extends SupportWriteItem {
+export interface PatchSupportsParams extends SupportWriteFormItem {
   id: number;
   file?: File;
 }
-export interface PatchAnswersParams extends SupportAnswerItem {
+export interface PostAnswersParams extends SupportAnswerFormItem {
+  id: number;
+}
+export interface PatchAnswersParams extends SupportAnswerFormItem {
   id: number;
 }
 
@@ -68,7 +68,7 @@ export async function postSupportsWrite(data: PostSupportsWriteParams) {
     data.imageUrl = files[0].fileUrl;
   }
 
-  return server.post<SupportWriteItem, BaseResponse<number>>({
+  return server.post<SupportWriteFormItem, BaseResponse<number>>({
     url: END_POINT.SUPPORTS,
     body: data,
   });
@@ -99,7 +99,7 @@ export async function patchSupports({
     data.imageUrl = uploadedFile[0].fileUrl;
   }
 
-  return server.patch<SupportWriteItem, BaseResponse<number>>({
+  return server.patch<SupportWriteFormItem, BaseResponse<number>>({
     url: END_POINT.SUPPORTS_ITEM(id),
     body: data,
   });
@@ -118,7 +118,7 @@ export function deleteSupports(id: number) {
  * 답변 작성
  */
 export async function postAnswersWrite({ id, ...data }: PostAnswersParams) {
-  return server.post<SupportAnswerItem, BaseResponse<number>>({
+  return server.post<SupportAnswerFormItem, BaseResponse<number>>({
     url: END_POINT.ANSWERS_ITEM(id),
     body: data,
   });
@@ -128,7 +128,7 @@ export async function postAnswersWrite({ id, ...data }: PostAnswersParams) {
  * 답변 수정
  */
 export async function patchAnswers({ id, ...data }: PatchAnswersParams) {
-  return server.patch<SupportAnswerItem, BaseResponse<number>>({
+  return server.patch<SupportAnswerFormItem, BaseResponse<number>>({
     url: END_POINT.ANSWERS_ITEM(id),
     body: data,
   });
