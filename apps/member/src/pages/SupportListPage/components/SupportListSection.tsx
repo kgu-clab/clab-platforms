@@ -89,7 +89,6 @@ const SupportListSection = ({ showAll = false }: SupportListSectionProps) => {
             )}
           </Table>
 
-          {/* showAll일 때만 페이지네이션 표시 */}
           {showAll && data?.totalItems && data.totalItems > size && (
             <Pagination
               className="mt-4 justify-center"

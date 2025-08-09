@@ -109,7 +109,6 @@ const SupportForm = ({
     }
 
     if (data) {
-      // 문의 수정
       if (data.id) {
         supportModifyMutate({
           id: data.id,
@@ -119,7 +118,6 @@ const SupportForm = ({
       }
       onClose?.();
     } else {
-      // 문의 작성
       supportWriteMutate({ ...supportForm, file: uploadFile });
     }
   };
@@ -190,7 +188,6 @@ const SupportForm = ({
         />
         <div className="flex justify-end gap-2">
           {data && (
-            // 수정 모드일 경우만 취소 버튼을 보여준다.
             <Button size="sm" color="red" onClick={onClose}>
               취소
             </Button>
