@@ -18,13 +18,10 @@ export const useSupportWriteMutation = () => {
 
   const mutation = useMutation({
     mutationFn: postSupportsWrite,
-    onSuccess: ({ success, data: id, errorMessage }) => {
+    onSuccess: ({ success, errorMessage }) => {
       if (success) {
         queryClient.invalidateQueries({
           queryKey: SUPPORT_QUERY_KEY.COLLECTIONS(),
-        });
-        queryClient.invalidateQueries({
-          queryKey: SUPPORT_QUERY_KEY.DETAIL(id),
         });
         addToast({
           state: 'success',
