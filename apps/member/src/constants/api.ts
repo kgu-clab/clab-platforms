@@ -79,7 +79,7 @@ export const END_POINT = {
     `/v1/files/notices/${groupId}`,
   UPLOADEDFILE_ACTIVITY_ASSIGNMENT: (groupId: number) =>
     `/v1/files/assignments/${groupId}`,
-  UPLOADEDFILE_SUPPORT: '/v1/files/supports/',
+  UPLOADEDFILE_SUPPORT: '/v1/files/supports',
   // -- 활동그룹 멤버
   ACTIVITY_GROUP_MEMBER: (id: number) => `/v1/activity-group/member/${id}`,
   ACTIVITY_GROUP_MEMBER_MY: `/v1/activity-group/member/my`,
