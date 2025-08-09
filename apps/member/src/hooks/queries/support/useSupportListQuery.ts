@@ -1,8 +1,5 @@
-import { useMemo } from 'react';
-
 import { usePagination } from '@hooks/common/usePagination';
-
-import { useSupports } from './useSupports';
+import { useSupportList } from '@hooks/queries';
 
 export const useSupportListQuery = (showAll: boolean) => {
   const { page, size, handlePageChange } = usePagination({
@@ -10,20 +7,16 @@ export const useSupportListQuery = (showAll: boolean) => {
     sectionName: 'support',
   });
 
-  const { data, isLoading, error } = useSupports({
+  const { data, isLoading, error } = useSupportList({
     page: showAll ? page : 0,
     size: showAll ? size : 10,
   });
 
-  const supportData = useMemo(() => data?.items ?? [], [data]);
+  const supportData = data.items;
 
-  const sortedData = useMemo(() => {
-    return [...supportData].sort((a, b) => b.id - a.id);
-  }, [supportData]);
+  const sortedData = [...supportData].sort((a, b) => b.id - a.id);
 
-  const displayData = useMemo(() => {
-    return showAll ? sortedData : sortedData.slice(0, 5);
-  }, [sortedData, showAll]);
+  const displayData = showAll ? sortedData : sortedData.slice(0, 5);
 
   return {
     data,

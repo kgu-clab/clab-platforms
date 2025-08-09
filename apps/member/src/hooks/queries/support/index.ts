@@ -1,4 +1,4 @@
-export * from './useSupports';
+export * from './useSupportList';
 export * from './useAnswerModifyMutation';
 export * from './useAnswerWriteMutation';
 export * from './useMySupports';
