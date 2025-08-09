@@ -4,8 +4,8 @@ import { Table } from '@clab-platforms/design-system';
 
 import SupportForm from '@pages/SupportWritePage/components/SupportForm';
 
-import { MemberProfileType } from '@type/member';
-import { SupportDetail } from '@type/support';
+import type { MemberProfileType } from '@type/member';
+import type { SupportDetail } from '@type/support';
 
 import SupportAnswerSection from './SupportAnswerSection';
 import SupportErrorImage from './SupportErrorImage';

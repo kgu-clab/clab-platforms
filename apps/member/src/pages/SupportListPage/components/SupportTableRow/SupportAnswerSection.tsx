@@ -4,8 +4,8 @@ import { ROLE_LEVEL } from '@constants/state';
 import SupportAnswerInput from '@pages/SupportListPage/components/SupportAnswerInput';
 import { formattedDate } from '@utils/date';
 
-import { MemberProfileType } from '@type/member';
-import { SupportAnswerItem } from '@type/support';
+import type { MemberProfileType } from '@type/member';
+import type { SupportAnswerItem } from '@type/support';
 
 interface SupportAnswerSectionProps {
   supportId: number;

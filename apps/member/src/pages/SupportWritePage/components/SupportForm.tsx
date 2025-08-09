@@ -21,7 +21,7 @@ import {
   useSupportWriteMutation,
 } from '@hooks/queries';
 
-import { SupportCategoryType, SupportWriteItem } from '@type/support';
+import type { SupportCategoryType, SupportWriteItem } from '@type/support';
 
 const bugDefaultValue = `
 🐞 버그 요약

@@ -5,7 +5,7 @@ import { useMyProfile, useSupportDetail } from '@hooks/queries';
 import { formattedDate, toKoreaISOString } from '@utils/date';
 import { formatMemberName } from '@utils/string';
 
-import { Support } from '@type/support';
+import type { Support } from '@type/support';
 
 import SupportRowBadges from './SupportRowBadges';
 import SupportRowContent from './SupportRowContent';

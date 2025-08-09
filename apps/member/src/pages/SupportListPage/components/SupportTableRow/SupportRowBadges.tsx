@@ -2,7 +2,7 @@ import { Badge } from '@clab-platforms/design-system';
 
 import { toKoreaSupportCategory } from '@utils/string';
 
-import { Support } from '@type/support';
+import type { Support } from '@type/support';
 
 interface SupportRowBadgesProps {
   category: Support['category'];

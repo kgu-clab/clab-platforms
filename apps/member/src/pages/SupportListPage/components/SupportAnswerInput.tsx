@@ -11,7 +11,7 @@ import {
   useAnswerWriteMutation,
 } from '@hooks/queries';
 
-import { SupportAnswerItem } from '@type/support';
+import type { SupportAnswerItem } from '@type/support';
 
 interface SupportAnswerInputProps {
   onCancel?: () => void;
