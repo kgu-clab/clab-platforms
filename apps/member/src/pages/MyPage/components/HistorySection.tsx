@@ -1,7 +1,7 @@
 import { useMemo } from 'react';
 
 import { Badge } from '@clab-platforms/design-system';
-import { createURLWithQueryString } from '@clab-platforms/utils';
+import { createPagination } from '@clab-platforms/utils';
 
 import EmptyBox from '@components/common/EmptyBox/EmptyBox';
 import ListButton from '@components/common/ListButton/ListButton';
@@ -111,9 +111,7 @@ export function HistorySection({ category }: Props) {
           return (
             <ListButton
               key={`my-support-${id}`}
-              to={createURLWithQueryString([PATH.SUPPORT_LIST], {
-                selected: id,
-              })}
+              to={createPagination(PATH.SUPPORT_LIST, { selected: id })}
             >
               <p className="grow space-x-2 truncate pr-4">
                 <Badge color={isAnswered ? 'green' : 'red'}>

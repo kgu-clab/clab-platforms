@@ -24,19 +24,6 @@ export function createURL(...path: Array<string | number | undefined>): string {
 }
 
 /**
- * 여러 개의 경로와 쿼리스트링을 연결하여 전체 경로을 생성합니다.
- * @param {...Array<string | number>} path - 연결할 경로들입니다.
- * @param params 쿼리스트링에 넣을 객체
- * @returns 쿼리스트링이 붙은 경로
- */
-export function createURLWithQueryString(
-  path: Array<string | number | undefined>,
-  params: Record<string, string | number>,
-): string {
-  return `${createURL(...path)}${toQueryString(params)}`;
-}
-
-/**
  * API 엔드포인트에 공통적인 페이징을 적용한 URL을 생성합니다.
  * @param {string} endpoint - 기본이 되는 API 엔드포인트 주소입니다.
  * @param {Record<string, T>} params - URL에 포함될 쿼리 파라미터들입니다.
@@ -89,16 +76,4 @@ export const formatComma = (value: number | string): string => {
 export function toDecodeHTMLEntities(string?: string) {
   if (!string) return '';
   return entities.decodeHTML(string);
-}
-
-/**
- * 객체를 쿼리스트링으로 바꿔줍니다.
- */
-function toQueryString(params: Record<string, string | number>): string {
-  const searchParams = new URLSearchParams();
-  Object.entries(params).forEach(([key, value]) => {
-    searchParams.append(key, String(value));
-  });
-  const queryString = searchParams.toString();
-  return queryString ? `?${queryString}` : '';
 }
