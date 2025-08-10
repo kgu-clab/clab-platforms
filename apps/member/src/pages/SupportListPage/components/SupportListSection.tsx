@@ -33,12 +33,11 @@ const SupportListSection = ({ showAll = false }: SupportListSectionProps) => {
   });
 
   const { data: allSupportData } = useSupportList({ page: 0, size: 999 });
-  const allSupportItems = allSupportData?.items ?? [];
 
-  const supportItems = pagedSupportData.items;
+  const supportItems = pagedSupportData?.items ?? [];
   const [searchParams] = useSearchParams();
   const selectedSupportId = searchParams.get('selected');
-  const [openedSupportId, setOpenedSupportId] = useState(-1);
+  const [openedSupportId, setOpenedSupportId] = useState<number | null>(null);
 
   const handleTableRowClick = (id: number) => {
     setOpenedSupportId(id);
@@ -48,9 +47,11 @@ const SupportListSection = ({ showAll = false }: SupportListSectionProps) => {
     if (!selectedSupportId || !showAll) return;
 
     const targetId = Number(selectedSupportId);
-    const targetIndex = allSupportItems.findIndex(
+    const targetIndex = allSupportData?.items?.findIndex(
       (item) => item.id === targetId,
     );
+    if (targetIndex === -1 || targetIndex === undefined) return;
+
     const targetPage = Math.floor(targetIndex / size) + 1;
 
     if (targetPage !== page) {
@@ -61,7 +62,7 @@ const SupportListSection = ({ showAll = false }: SupportListSectionProps) => {
   }, [
     selectedSupportId,
     showAll,
-    allSupportItems,
+    allSupportData?.items,
     size,
     page,
     handlePageChange,

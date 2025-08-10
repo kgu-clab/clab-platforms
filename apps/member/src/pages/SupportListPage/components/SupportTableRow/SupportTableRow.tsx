@@ -13,7 +13,7 @@ import SupportRowContent from './SupportRowContent';
 interface SupportTableRowProps {
   data: Support;
   showAll?: boolean;
-  currentOpenItemIndex: number;
+  currentOpenItemIndex: number | null;
   onClick(id: number): void;
 }
 
