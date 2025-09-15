@@ -179,13 +179,15 @@ const SupportForm = ({
           maxLength={SUPPORT_CONTENT_MAX_LENGTH}
           onChange={handleSupportFormChange}
         />
-        <Checkbox
-          id="wantAnonymous"
-          name="wantAnonymous"
-          label="익명"
-          checked={wantAnonymous}
-          onChange={handleWantAnonymousChange}
-        />
+        {!data && (
+          <Checkbox
+            id="wantAnonymous"
+            name="wantAnonymous"
+            label="익명"
+            checked={wantAnonymous}
+            onChange={handleWantAnonymousChange}
+          />
+        )}
         <div className="flex justify-end gap-2">
           {data && (
             <Button size="sm" color="red" onClick={onClose}>
