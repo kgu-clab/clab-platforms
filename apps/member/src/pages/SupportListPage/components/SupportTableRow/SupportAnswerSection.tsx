@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 
 import { ROLE_LEVEL } from '@constants/state';
 import SupportAnswerInput from '@pages/SupportListPage/components/SupportAnswerInput';
-import { formattedDate } from '@utils/date';
+import { formattedDate, toKoreaISOString } from '@utils/date';
 
 import type { MemberProfileType } from '@type/member';
 import type { SupportAnswerItem } from '@type/support';
@@ -61,7 +61,7 @@ const SupportAnswerSection = ({
       <div className="space-y-2">
         <div>{content}</div>
         <div className="flex items-center justify-between text-sm text-gray-600">
-          <div>{`${formattedDate(createdAt!)} ${responder}`}</div>
+          <div>{`${formattedDate(toKoreaISOString(createdAt))} ${responder}`}</div>
           {isAdmin && (
             <button
               onClick={handleAnswerEditToggle}
