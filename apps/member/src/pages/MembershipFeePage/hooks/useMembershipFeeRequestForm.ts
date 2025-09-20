@@ -12,7 +12,7 @@ const INIT_FORM_DATA = {
   file: null,
 };
 
-export interface SupportRequestData {
+export interface MembershipFeeRequestData {
   category: string;
   amount: number;
   content: string;
@@ -20,8 +20,9 @@ export interface SupportRequestData {
   file?: File | null;
 }
 
-export const useSupportRequestForm = () => {
-  const [formData, setFormData] = useState<SupportRequestData>(INIT_FORM_DATA);
+export const useMembershipFeeRequestForm = () => {
+  const [formData, setFormData] =
+    useState<MembershipFeeRequestData>(INIT_FORM_DATA);
   const [checkList, setCheckList] = useState<boolean[]>(INIT_CHECK_LIST);
 
   const handleInputChange = useCallback(

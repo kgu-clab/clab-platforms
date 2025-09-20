@@ -20,15 +20,15 @@ import { useMembershipFeeMutation } from '@hooks/queries/useMembershipFeeMutatio
 import { createFormData } from '@utils/api';
 
 import {
-  type SupportRequestData,
-  useSupportRequestForm,
-} from '../hooks/useSupportRequestForm';
+  type MembershipFeeRequestData,
+  useMembershipFeeRequestForm,
+} from '../hooks/useMembershipFeeRequestForm';
 
 export function RequestSection() {
   const { membershipFeeMutate, isPending, isSuccess } =
     useMembershipFeeMutation();
 
-  const handleRequestSubmit = async (data: SupportRequestData) => {
+  const handleRequestSubmit = async (data: MembershipFeeRequestData) => {
     membershipFeeMutate({
       ...data,
       multipartFile: createFormData(data.file),
@@ -71,7 +71,7 @@ const TABS_OPTIONS = [
 interface RequestFormProps {
   isPending: boolean;
   isSuccess: boolean;
-  onSubmit: (data: SupportRequestData) => void;
+  onSubmit: (data: MembershipFeeRequestData) => void;
 }
 
 export function RequestForm({
@@ -88,7 +88,7 @@ export function RequestForm({
     handleInputChange,
     handleTabsChange,
     resetFormData,
-  } = useSupportRequestForm();
+  } = useMembershipFeeRequestForm();
 
   const { category, amount, account, content } = formData;
   const validation =

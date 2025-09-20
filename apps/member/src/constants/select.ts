@@ -2,8 +2,12 @@ import type {
   CommunityCategoryKorType,
   CommunityCategoryType,
 } from '@type/community';
+import type {
+  SupportCategoryKorType,
+  SupportCategoryType,
+} from '@type/support';
 
-import { APPLICATION_TYPE } from './state';
+import { APPLICATION_TYPE, SUPPORT_CATEGORY_STATE } from './state';
 
 type Options<N = string, V = string> = {
   name: N;
@@ -70,3 +74,17 @@ export const SELECT_ACTIVITY_GROUP_CATEGORY_TYPE = {
   STUDY: 'STUDY',
   PROJECT: 'PROJECT',
 } as const;
+
+export const SELECT_OPTIONS_INQUIRY_TYPE: Options<
+  SupportCategoryKorType,
+  SupportCategoryType
+>[] = [
+  {
+    name: '버그',
+    value: SUPPORT_CATEGORY_STATE.BUG,
+  },
+  {
+    name: '문의',
+    value: SUPPORT_CATEGORY_STATE.INQUIRY,
+  },
+] as const;

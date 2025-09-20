@@ -302,3 +302,18 @@ export const RECRUITMENT_QUERY_KEY = {
   ALL: ['Application'],
   LIST: () => [...APPLICATION_QUERY_KEY.ALL, 'list'],
 } as const;
+
+/**
+ * 문의 관련 쿼리 키
+ */
+export const SUPPORT_QUERY_KEY = {
+  ALL: ['Support'],
+  MY: () => [...SUPPORT_QUERY_KEY.ALL, 'my'],
+  DETAILS: () => [...SUPPORT_QUERY_KEY.ALL, 'details'],
+  COLLECTIONS: () => [...SUPPORT_QUERY_KEY.ALL, 'collections'],
+  DETAIL: (id: number) => [...SUPPORT_QUERY_KEY.DETAILS(), id],
+  COLLECTION: (pagination: WithPaginationParams) => [
+    ...SUPPORT_QUERY_KEY.COLLECTIONS(),
+    pagination,
+  ],
+} as const;

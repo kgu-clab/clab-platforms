@@ -40,12 +40,15 @@ const GroupCreatePage = lazy(
 const LibraryPage = lazy(() => import('@pages/LibraryPage'));
 const LibraryDetailPage = lazy(() => import('@pages/LibraryDetailPage'));
 const MyPage = lazy(() => import('@pages/MyPage'));
-const SupportPage = lazy(() => import('@pages/SupportPage'));
+const MembershipFeePage = lazy(() => import('@pages/MembershipFeePage'));
 const CalendarPage = lazy(() => import('@pages/CalendarPage'));
 const LoginPage = lazy(() => import('@pages/LoginPage'));
 const AuthPage = lazy(() => import('@pages/AuthPage'));
 const BlogPage = lazy(() => import('@pages/BlogPage'));
 const ManagePage = lazy(() => import('@pages/ManagePage'));
+const SupportPage = lazy(() => import('@pages/SupportPage'));
+const SupportWritePage = lazy(() => import('@pages/SupportWritePage'));
+const SupportListPage = lazy(() => import('@pages/SupportListPage'));
 
 const router = createBrowserRouter([
   {
@@ -182,10 +185,10 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: PATH.SUPPORT,
+        path: PATH.MEMBERSHIP_FEE,
         element: (
           <Suspense>
-            <SupportPage />
+            <MembershipFeePage />
           </Suspense>
         ),
       },
@@ -202,6 +205,30 @@ const router = createBrowserRouter([
         element: (
           <Suspense>
             <ApplicationPage />
+          </Suspense>
+        ),
+      },
+      {
+        path: PATH.SUPPORT,
+        element: (
+          <Suspense>
+            <SupportPage />
+          </Suspense>
+        ),
+      },
+      {
+        path: PATH.SUPPORT_WRITE,
+        element: (
+          <Suspense>
+            <SupportWritePage />
+          </Suspense>
+        ),
+      },
+      {
+        path: PATH.SUPPORT_LIST,
+        element: (
+          <Suspense>
+            <SupportListPage />
           </Suspense>
         ),
       },

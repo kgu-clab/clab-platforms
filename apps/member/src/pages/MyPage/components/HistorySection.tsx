@@ -1,5 +1,8 @@
 import { useMemo } from 'react';
 
+import { Badge } from '@clab-platforms/design-system';
+import { createPagination } from '@clab-platforms/utils';
+
 import EmptyBox from '@components/common/EmptyBox/EmptyBox';
 import ListButton from '@components/common/ListButton/ListButton';
 import Section from '@components/common/Section/Section';
@@ -7,20 +10,27 @@ import BookLoanConditionStatusBadge from '@components/library/BookLoanConditionS
 
 import { MY_MESSAGE } from '@constants/message';
 import { MODAL_TITLE } from '@constants/modal';
-import { PATH_FINDER } from '@constants/path';
+import { PATH, PATH_FINDER } from '@constants/path';
+import { SUPPORT_ANSWER_STATE } from '@constants/state';
 import { useModal } from '@hooks/common/useModal';
 import {
   useBookLoanRecordConditions,
   useMyNotifications,
   useMyProfile,
 } from '@hooks/queries';
+import { useMySupports } from '@hooks/queries/support/useMySupports';
 import { toYYMMDD } from '@utils/date';
 
 import { useMyBoards } from '../hooks/useMyBoards';
 import { useMyComments } from '../hooks/useMyComments';
 
 interface Props {
-  category: '지난 알림' | '도서 대출 내역' | '나의 게시글' | '나의 댓글';
+  category:
+    | '지난 알림'
+    | '도서 대출 내역'
+    | '나의 게시글'
+    | '나의 댓글'
+    | '나의 문의';
 }
 
 export function HistorySection({ category }: Props) {
@@ -34,6 +44,7 @@ export function HistorySection({ category }: Props) {
     borrowerId: myProfile.id,
     size: 10,
   });
+  const { data: mySupports } = useMySupports({ page: 0, size: 999 });
 
   const contents = useMemo(() => {
     switch (category) {
@@ -94,9 +105,28 @@ export function HistorySection({ category }: Props) {
             <p className="text-clab-main-light">{toYYMMDD(createdAt)}</p>
           </ListButton>
         ));
+      case '나의 문의':
+        return mySupports.items.map(({ id, title, createdAt, status }) => {
+          const isAnswered = status === SUPPORT_ANSWER_STATE.COMPLETED;
+          return (
+            <ListButton
+              key={`my-support-${id}`}
+              to={createPagination(PATH.SUPPORT_LIST, { selected: id })}
+            >
+              <p className="grow space-x-2 truncate pr-4">
+                <Badge color={isAnswered ? 'green' : 'red'}>
+                  {isAnswered ? '답변완료' : '답변예정'}
+                </Badge>
+                <span>{title}</span>
+              </p>
+              <p className="text-clab-main-light">{toYYMMDD(createdAt)}</p>
+            </ListButton>
+          );
+        });
     }
   }, [
     category,
+    mySupports,
     myBoardsData.items,
     myBookLoanRecord.items,
     myCommentsData.items,

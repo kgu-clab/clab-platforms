@@ -5,32 +5,26 @@ import ErrorSection from '@components/common/ErrorSection/ErrorSection';
 import Header from '@components/common/Header/Header';
 import QueryErrorBoundary from '@components/common/QueryErrorBoundary';
 
-import SupportListSection from '@pages/SupportListPage/components/SupportListSection';
+import { PATH } from '@constants/path';
+import SupportNav from '@pages/SupportPage/components/SupportNav';
 
-import SupportFaqSection from './components/SupportFaqSection';
-import SupportIntroduceSection from './components/SupportIntroduceSection';
-import SupportNav from './components/SupportNav';
+import SupportListSection from './components/SupportListSection';
 
-export default function SupportPage() {
+export default function SupportIndexPage() {
   return (
     <QueryErrorBoundary
       fallback={({ reset }) => <ErrorSection reset={reset} />}
     >
       <Content>
-        <Header title="문의">
+        <Header
+          title={['문의', '전체 문의']}
+          path={[PATH.SUPPORT, PATH.SUPPORT_LIST]}
+        >
           <SupportNav />
         </Header>
 
         <Suspense>
-          <SupportIntroduceSection />
-        </Suspense>
-
-        <Suspense>
-          <SupportFaqSection />
-        </Suspense>
-
-        <Suspense>
-          <SupportListSection />
+          <SupportListSection showAll={true} />
         </Suspense>
       </Content>
     </QueryErrorBoundary>

@@ -3,7 +3,7 @@ import { Table } from '@clab-platforms/design-system';
 import ActionButton from '@components/common/ActionButton/ActionButton';
 import Pagination from '@components/common/Pagination/Pagination';
 import Section from '@components/common/Section/Section';
-import MembershipStatusBadge from '@components/membership/MembershipStatusBadge/MembershipStatusBadge';
+import MembershipStatusBadge from '@components/membership/membershipStatusBadge/MembershipStatusBadge';
 
 import { ROLE_LEVEL } from '@constants/state';
 import { usePagination } from '@hooks/common/usePagination';
@@ -23,7 +23,7 @@ interface Props {
   hasPermission?: boolean;
 }
 
-export function SupportHistorySection({
+export function MembershipFeeHistorySection({
   title,
   size: defaultSize,
   withPagination,
@@ -98,7 +98,7 @@ export function SupportHistorySection({
   );
 }
 
-export function SupportHistorySectionSkeleton() {
+export function MembershipFeeHistorySectionSkeleton() {
   return (
     <Section className="h-96 animate-pulse">
       <Section.Header title={TITLE} />

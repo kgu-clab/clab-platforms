@@ -87,10 +87,16 @@ const Sidebar = () => {
             도서관
           </Menubar.Item>
           <Menubar.Item
+            selected={pathName.startsWith(PATH.MEMBERSHIP_FEE)}
+            onClick={() => handleMenubarItemClick(PATH.MEMBERSHIP_FEE)}
+          >
+            회비
+          </Menubar.Item>
+          <Menubar.Item
             selected={pathName.startsWith(PATH.SUPPORT)}
             onClick={() => handleMenubarItemClick(PATH.SUPPORT)}
           >
-            회비
+            문의
           </Menubar.Item>
           {data.roleLevel! >= ROLE_LEVEL.ADMIN && (
             <>

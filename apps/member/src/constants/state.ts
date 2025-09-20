@@ -142,3 +142,33 @@ export const APPLICATION_TYPE = {
   OPERATION: 'OPERATION',
   CORE_TEAM: 'CORE_TEAM',
 } as const;
+
+/**
+ * 문의 카테고리를 정의합니다.
+ */
+export const SUPPORT_CATEGORY_STATE = {
+  BUG: 'BUG',
+  INQUIRY: 'INQUIRY',
+} as const;
+/**
+ * 문의 답변 상태를 정의합니다.
+ */
+export const SUPPORT_ANSWER_STATE = {
+  PENDING: 'PENDING',
+  COMPLETED: 'COMPLETED',
+} as const;
+/**
+ * 문의 제목의 최대 길이
+ * 100자
+ */
+export const SUPPORT_TITLE_MAX_LENGTH = 100;
+/**
+ * 문의 내용의 최대 길이
+ * 5000자
+ */
+export const SUPPORT_CONTENT_MAX_LENGTH = 5000;
+/**
+ * 문의 답변의 최대 길이
+ * 5000자
+ */
+export const SUPPORT_ANSWER_MAX_LENGTH = 5000;

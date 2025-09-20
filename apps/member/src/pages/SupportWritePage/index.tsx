@@ -1,7 +1,4 @@
 import { Suspense } from 'react';
-import { useNavigate } from 'react-router';
-
-import { Button } from '@clab-platforms/design-system';
 
 import Content from '@components/common/Content/Content';
 import ErrorSection from '@components/common/ErrorSection/ErrorSection';
@@ -9,30 +6,30 @@ import Header from '@components/common/Header/Header';
 import QueryErrorBoundary from '@components/common/QueryErrorBoundary';
 
 import { PATH } from '@constants/path';
+import SupportNav from '@pages/SupportPage/components/SupportNav';
 
-import BookExplorerSection from './components/BookExplorerSection';
-import NewBooksSection from './components/NewBooksSection';
+import SupportForm from './components/SupportForm';
+import SupportWriteIntroduceSection from './components/SupportWriteIntroduceSection';
 
-export default function LibraryPage() {
-  const navigate = useNavigate();
-
+export default function SupportWritePage() {
   return (
     <QueryErrorBoundary
       fallback={({ reset }) => <ErrorSection reset={reset} />}
     >
       <Content>
-        <Header title="도서관">
-          <Button size="sm" onClick={() => navigate(PATH.MEMBERSHIP_FEE)}>
-            희망도서 신청하기
-          </Button>
+        <Header
+          title={['문의', '문의하기']}
+          path={[PATH.SUPPORT, PATH.SUPPORT_WRITE]}
+        >
+          <SupportNav />
         </Header>
 
         <Suspense>
-          <NewBooksSection />
+          <SupportWriteIntroduceSection />
         </Suspense>
 
         <Suspense>
-          <BookExplorerSection />
+          <SupportForm />
         </Suspense>
       </Content>
     </QueryErrorBoundary>

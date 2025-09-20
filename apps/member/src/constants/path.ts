@@ -32,12 +32,15 @@ export const PATH = {
   BLOG_DETAIL: '/blog/:id',
   LIBRARY: '/library',
   LIBRARY_DETAIL: '/library/:id',
-  SUPPORT: '/support',
+  MEMBERSHIP_FEE: '/membershipFee',
   SITEMAP: '/sitemap',
   MANAGE: '/manage',
   LOGIN: '/login',
   AUTH: '/auth',
   APPLICATION: '/application',
+  SUPPORT: '/support',
+  SUPPORT_WRITE: '/support/write',
+  SUPPORT_LIST: '/support/list',
 } as const;
 /**
  * 페이지의 URL을 생성하는 함수입니다.

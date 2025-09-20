@@ -9,7 +9,7 @@ import mainAlertList from '@mocks/data/mainAlertList.json';
 import mainBannerList from '@mocks/data/mainBannerList.json';
 import newsList from '@mocks/data/newsList.json';
 import noticeBoardList from '@mocks/data/noticeBoardList.json';
-import qnaBoardList from '@mocks/data/qnaBoardList.json';
+import supportList from '@mocks/data/supportList.json';
 
 const getPokemonImage = (): string => {
   const random = Math.floor(Math.random() * 1008) + 1;
@@ -28,9 +28,9 @@ export {
   birthdayList,
   blogList,
   noticeBoardList,
-  qnaBoardList,
   itNewsBoardList,
   hireBoardList,
   freeBoardList,
   graduatedBoardList,
+  supportList,
 };

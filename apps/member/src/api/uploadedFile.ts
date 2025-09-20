@@ -154,3 +154,15 @@ export async function postUploadedFileSubmit({
 
   return data;
 }
+
+/**
+ * 문의 이미지 업로드
+ */
+export async function postFilesSupportImages(multipartFile: FormData) {
+  const { data } = await server.post<FormData, BaseResponse<ResponseFile[]>>({
+    url: createURL(END_POINT.UPLOADEDFILE_SUPPORT, STORAGE_PERIOD(5)), // 문의 이미지는 5년간 보관
+    body: multipartFile,
+  });
+
+  return data;
+}
