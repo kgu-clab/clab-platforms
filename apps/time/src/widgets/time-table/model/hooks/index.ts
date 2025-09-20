@@ -3,3 +3,5 @@ export * from './useTimeTableParams';
 export * from './useMajorList';
 export * from './useLectureList';
 export * from './useLectureByParams';
+export * from './useLectureFilters';
+export * from './useLecture';
