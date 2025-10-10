@@ -113,7 +113,10 @@ export function LibrarySection() {
 
   const renderMode = {
     condition: (
-      <Table head={['도서명', ...TABLE_HEAD.BOOK_LOAN_RECORD, '기능']}>
+      <Table
+        head={['도서명', ...TABLE_HEAD.BOOK_LOAN_RECORD, '기능']}
+        className="w-full overflow-x-scroll"
+      >
         {bookLoanRecordCondition.items.map(
           ({
             bookLoanRecordId,
@@ -326,26 +329,30 @@ export function LibrarySection() {
         title="도서관"
         description="대여자와 연체자를 확인하거나 신규 도서를 등록할 수 있어요"
       >
-        <Menubar>
+        <Menubar className="grid grid-cols-2 gap-2 sm:flex sm:flex-row">
           <Menubar.Item
+            className="min-w-[30px] whitespace-nowrap sm:min-w-0"
             selected={mode === 'condition'}
             onClick={() => handleMenubarItemClick('condition')}
           >
             대여
           </Menubar.Item>
           <Menubar.Item
+            className="min-w-[30px] whitespace-nowrap sm:min-w-0"
             selected={mode === 'overdue'}
             onClick={() => handleMenubarItemClick('overdue')}
           >
             연체
           </Menubar.Item>
           <Menubar.Item
+            className="min-w-[30px] whitespace-nowrap sm:min-w-0"
             selected={mode === 'register'}
             onClick={() => handleMenubarItemClick('register')}
           >
             등록
           </Menubar.Item>
           <Menubar.Item
+            className="min-w-[30px] whitespace-nowrap sm:min-w-0"
             selected={mode === 'view'}
             onClick={() => handleMenubarItemClick('view')}
           >
@@ -354,7 +361,9 @@ export function LibrarySection() {
         </Menubar>
       </Section.Header>
       <Section.Body>
-        {renderMode}
+        <div className="w-full overflow-x-auto">
+          <div className="min-w-[800px]">{renderMode}</div>
+        </div>
         {mode !== 'register' && (
           <Pagination
             className="mt-4 justify-center"

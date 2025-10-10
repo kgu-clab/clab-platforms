@@ -121,7 +121,9 @@ export function AlertSection({ category }: Props) {
         </Menubar>
       </Section.Header>
       <Section.Body>
-        {renderView}
+        <div className="w-full overflow-x-auto">
+          <div className="min-w-[800px]">{renderView}</div>
+        </div>
         {view === 'view' && (
           <Pagination
             className="mt-4 justify-center"
