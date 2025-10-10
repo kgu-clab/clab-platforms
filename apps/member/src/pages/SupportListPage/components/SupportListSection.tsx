@@ -109,7 +109,10 @@ const SupportListSection = ({ showAll = false }: SupportListSectionProps) => {
       </Section.Header>
       <Section.Body>
         <div className="w-full overflow-x-auto">
-          <Table head={TABLE_HEAD.SUPPORT_TABLE} className="w-full table-fixed">
+          <Table
+            head={TABLE_HEAD.SUPPORT_TABLE}
+            className="min-w-[700px] table-fixed"
+          >
             {supportItems.length > 0 ? (
               supportItems.map((item) => (
                 <SupportTableRow
@@ -128,19 +131,18 @@ const SupportListSection = ({ showAll = false }: SupportListSectionProps) => {
               </Table.Row>
             )}
           </Table>
-
-          {showAll &&
-            pagedSupportData?.totalItems &&
-            pagedSupportData.totalItems > size && (
-              <Pagination
-                className="mt-4 justify-center"
-                totalItems={pagedSupportData.totalItems}
-                postLimit={size}
-                onChange={handlePageChange}
-                page={page}
-              />
-            )}
         </div>
+        {showAll &&
+          pagedSupportData?.totalItems &&
+          pagedSupportData.totalItems > size && (
+            <Pagination
+              className="mt-4 justify-center"
+              totalItems={pagedSupportData.totalItems}
+              postLimit={size}
+              onChange={handlePageChange}
+              page={page}
+            />
+          )}
       </Section.Body>
     </Section>
   );
