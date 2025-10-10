@@ -9,6 +9,8 @@ import { useBookDetails } from '@pages/LibraryPage/hooks/useBookDetails';
 import { formattedDate } from '@utils/date';
 import { formatMemberName } from '@utils/string';
 
+import MobileActionButtons from './MobileActionButtons';
+
 interface Props {
   paramsId: string;
 }
@@ -44,6 +46,7 @@ export function LoanHistorySection({ paramsId }: Props) {
             ),
           )}
         </Table>
+        <MobileActionButtons bookDetailId={bookDetails.id} />
       </Section.Body>
     </Section>
   );
