@@ -78,15 +78,15 @@ const GroupCard = ({
 
   return (
     <Grid
-      col="3"
+      col="1"
       gap="sm"
-      className="h-[227px] cursor-pointer overflow-hidden rounded-lg border transition-colors hover:bg-gray-50"
+      className="h-[227px] cursor-pointer overflow-hidden rounded-lg border transition-colors hover:bg-gray-50 sm:grid-cols-3"
       onClick={() => navigate(PATH_FINDER.ACTIVITY_DETAIL(id))}
     >
       <Image
         src={createImageUrl(imageUrl)}
         alt={name}
-        className="overflow-hidden rounded-l-lg border-r object-cover"
+        className="hidden overflow-hidden rounded-l-lg border-r object-cover sm:block"
       />
       <div className="col-span-2 flex flex-col gap-2 divide-y p-4 ">
         <div className="h-full overflow-hidden text-ellipsis sm:h-24 ">
