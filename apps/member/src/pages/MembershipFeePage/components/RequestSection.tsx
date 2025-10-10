@@ -160,6 +160,8 @@ export function RequestForm({
           <li>
             <Checkbox
               id="checkbox-1"
+              className="items-start sm:items-center"
+              checkboxClassName="mt-[6px] sm:mt-0"
               checked={checkList[0]}
               onChange={() => handleCheckboxChange(0)}
               label="해당 요청은 동아리 활동에 필요한 것이며, 동아리 활동과 관련이 없는
@@ -169,6 +171,8 @@ export function RequestForm({
           <li>
             <Checkbox
               id="checkbox-2"
+              className="items-start sm:items-center"
+              checkboxClassName="mt-[6px] sm:mt-0"
               checked={checkList[1]}
               onChange={() => handleCheckboxChange(1)}
               label="회비 요청은 동아리 활동에 필요한지 여부에 대하여 운영진 회의후에
@@ -178,6 +182,8 @@ export function RequestForm({
           <li>
             <Checkbox
               id="checkbox-3"
+              className="items-start sm:items-center"
+              checkboxClassName="mt-[6px] sm:mt-0"
               checked={checkList[2]}
               onChange={() => handleCheckboxChange(2)}
               label="회비를 통해 구매한 물품은 동아리의 소유가 되며, 모든 부원에게 공유
