@@ -69,12 +69,12 @@ const Comment = ({
 
   return (
     <div
-      className={cn('flex', {
+      className={cn('my-5 flex sm:my-2', {
         'border-l pl-5 last:border-l-white': isReply,
       })}
     >
       <Avatar src={writerImageUrl} roleLevel={writerRoleLevel} />
-      <div className="ml-3 w-full text-sm">
+      <div className="ml-3 flex w-full flex-col gap-2 text-sm">
         <div className="flex justify-between">
           <p className="font-semibold">
             {formatMemberName(writerName, writerId)}

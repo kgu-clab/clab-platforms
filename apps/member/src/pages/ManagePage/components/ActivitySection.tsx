@@ -217,7 +217,9 @@ export function ActivitySection() {
         </Menubar>
       </Section.Header>
       <Section.Body>
-        {renderMode}
+        <div className="w-full overflow-x-auto">
+          <div className="min-w-[700px]">{renderMode}</div>
+        </div>
         <Pagination
           className="mt-4 justify-center"
           totalItems={groupData.totalItems}

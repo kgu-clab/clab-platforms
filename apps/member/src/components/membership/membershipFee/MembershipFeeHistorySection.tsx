@@ -56,43 +56,50 @@ export function MembershipFeeHistorySection({
         description="최근에 신청된 회비 신청 내역이에요"
       />
       <Section.Body>
-        <Table head={['번호', '요청자', '구분', '상태', '신청일', '기능']}>
-          {membershipFee.items.map((membership) => (
-            <Table.Row
-              key={membership.id}
-              onClick={() => handleInfoClick(membership)}
-            >
-              <Table.Cell>{membership.id}</Table.Cell>
-              <Table.Cell>
-                {formatMemberName(membership.memberName, membership.memberId)}
-              </Table.Cell>
-              <Table.Cell> {membership.category}</Table.Cell>
-              <Table.Cell>
-                <MembershipStatusBadge status={membership.status} />
-              </Table.Cell>
-              <Table.Cell>{formattedDate(membership.createdAt)}</Table.Cell>
-              <Table.Cell>
-                <ActionButton
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    handleInfoClick(membership);
-                  }}
+        <div className="w-full overflow-x-auto">
+          <div className="min-w-[800px]">
+            <Table head={['번호', '요청자', '구분', '상태', '신청일', '기능']}>
+              {membershipFee.items.map((membership) => (
+                <Table.Row
+                  key={membership.id}
+                  onClick={() => handleInfoClick(membership)}
                 >
-                  정보
-                </ActionButton>
-              </Table.Cell>
-            </Table.Row>
-          ))}
-        </Table>
-        {withPagination && (
-          <Pagination
-            className="mt-4 justify-center"
-            totalItems={membershipFee.totalItems}
-            postLimit={size}
-            onChange={handlePageChange}
-            page={page}
-          />
-        )}
+                  <Table.Cell>{membership.id}</Table.Cell>
+                  <Table.Cell>
+                    {formatMemberName(
+                      membership.memberName,
+                      membership.memberId,
+                    )}
+                  </Table.Cell>
+                  <Table.Cell> {membership.category}</Table.Cell>
+                  <Table.Cell>
+                    <MembershipStatusBadge status={membership.status} />
+                  </Table.Cell>
+                  <Table.Cell>{formattedDate(membership.createdAt)}</Table.Cell>
+                  <Table.Cell>
+                    <ActionButton
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleInfoClick(membership);
+                      }}
+                    >
+                      정보
+                    </ActionButton>
+                  </Table.Cell>
+                </Table.Row>
+              ))}
+            </Table>
+            {withPagination && (
+              <Pagination
+                className="mt-4 justify-center"
+                totalItems={membershipFee.totalItems}
+                postLimit={size}
+                onChange={handlePageChange}
+                page={page}
+              />
+            )}
+          </div>
+        </div>
       </Section.Body>
     </Section>
   );

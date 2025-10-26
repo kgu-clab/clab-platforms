@@ -9,6 +9,8 @@ import { useBookDetails } from '@pages/LibraryPage/hooks/useBookDetails';
 import { formattedDate } from '@utils/date';
 import { formatMemberName } from '@utils/string';
 
+import MobileActionButtons from './MobileActionButtons';
+
 interface Props {
   paramsId: string;
 }
@@ -19,7 +21,9 @@ export function LoanHistorySection({ paramsId }: Props) {
 
   return (
     <Section>
-      <Section.Header title="대여 내역" description="최근 대여 내역이에요" />
+      <Section.Header title="대여 내역" description="최근 대여 내역이에요">
+        <MobileActionButtons bookDetailId={bookDetails.id} />
+      </Section.Header>
       <Section.Body>
         <Table head={TABLE_HEAD.BOOK_LOAN_RECORD}>
           {data.items.map(

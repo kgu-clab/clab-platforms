@@ -14,8 +14,11 @@ export function useBookLoanExtendMutation() {
 
   const mutation = useMutation({
     mutationFn: postExtendBook,
-    onSuccess: ({ success, errorMessage }, { borrowerId }) => {
+    onSuccess: ({ success, errorMessage }, { bookId, borrowerId }) => {
       if (success) {
+        queryClient.invalidateQueries({
+          queryKey: BOOK_LOAN_RECORD_QUERY_KEY.BOOK(bookId),
+        });
         queryClient.invalidateQueries({
           queryKey: BOOK_LOAN_RECORD_QUERY_KEY.BORROWER(borrowerId),
         });

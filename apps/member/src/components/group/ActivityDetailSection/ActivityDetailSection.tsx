@@ -28,13 +28,14 @@ const ActivityDetailSection = ({ data }: ActivityDetailSectionProps) => {
       <Section className="flex min-h-[120px] flex-col justify-between">
         <h1 className="text-xl font-bold">{data.name}</h1>
         <p className="my-1 whitespace-pre-line text-sm ">{data.content}</p>
-        <div className="flex items-center gap-1 text-sm text-gray-500">
+        <div className="flex flex-wrap items-center gap-1 text-sm text-gray-500">
           <CertificateSolidOutline />
           <span>{data.category}</span>
           <span>•</span>
           <DateRangeOutline />
           <span>{getDateSemester(data.createdAt)}</span>
-          <span>•</span>
+          <span className="block w-full sm:hidden" />
+          <span className="hidden sm:inline">•</span>
           <StudentOutline />
           <span>{data.subject}</span>
         </div>

@@ -129,7 +129,7 @@ const CommunityBoardPost = ({ data }: CommunityBoardPostProps) => {
                     countNumber={countNumber}
                     className="transition"
                   >
-                    <p className="text-xl">{name}</p>
+                    <p className="text-md sm:text-xl">{name}</p>
                   </ReactionButton>
                 );
             })}

@@ -33,32 +33,37 @@ export function MemberRoleSection() {
         title="멤버 관리"
         description="멤버 목록과 권한을 관리할 수 있어요"
       >
-        <Menubar>
+        <Menubar className="grid grid-cols-2 gap-2 sm:flex sm:flex-row">
           <Menubar.Item
+            className="min-w-[40px] whitespace-nowrap sm:min-w-0"
             selected={role === '' && view === 'view'}
             onClick={() => handleMenubarItemClick('')}
           >
             전체
           </Menubar.Item>
           <Menubar.Item
+            className="min-w-[30px] whitespace-nowrap sm:min-w-0"
             selected={role === 'SUPER' && view === 'view'}
             onClick={() => handleMenubarItemClick('SUPER')}
           >
             관리자
           </Menubar.Item>
           <Menubar.Item
+            className="min-w-[30px] whitespace-nowrap sm:min-w-0"
             selected={role === 'ADMIN' && view === 'view'}
             onClick={() => handleMenubarItemClick('ADMIN')}
           >
             운영진
           </Menubar.Item>
           <Menubar.Item
+            className="min-w-[30px] whitespace-nowrap sm:min-w-0"
             selected={role === 'USER' && view === 'view'}
             onClick={() => handleMenubarItemClick('USER')}
           >
             일반
           </Menubar.Item>
           <Menubar.Item
+            className="min-w-[30px] whitespace-nowrap sm:min-w-0"
             selected={view === 'add'}
             onClick={() => handleViewClick('add')}
           >
@@ -74,7 +79,9 @@ export function MemberRoleSection() {
             </div>
           }
         >
-          {renderView}
+          <div className="w-full overflow-x-auto">
+            <div className="min-w-[700px]">{renderView}</div>
+          </div>
         </Suspense>
       </Section.Body>
     </Section>
