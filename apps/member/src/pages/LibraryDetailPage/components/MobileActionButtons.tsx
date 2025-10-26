@@ -39,7 +39,7 @@ const MobileActionButtons = ({ bookDetailId }: MobileActionButtonsProps) => {
 
   return (
     isLoan && (
-      <div className="mt-4 flex w-full justify-center gap-2 lg:hidden">
+      <div className="flex gap-2 lg:hidden">
         <Button
           className="py-1.5 hover:bg-gray-100 hover:text-black"
           onClick={handleBookExtendClick}

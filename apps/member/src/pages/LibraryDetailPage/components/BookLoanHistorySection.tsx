@@ -21,7 +21,9 @@ export function LoanHistorySection({ paramsId }: Props) {
 
   return (
     <Section>
-      <Section.Header title="대여 내역" description="최근 대여 내역이에요" />
+      <Section.Header title="대여 내역" description="최근 대여 내역이에요">
+        <MobileActionButtons bookDetailId={bookDetails.id} />
+      </Section.Header>
       <Section.Body>
         <Table head={TABLE_HEAD.BOOK_LOAN_RECORD}>
           {data.items.map(
@@ -46,7 +48,6 @@ export function LoanHistorySection({ paramsId }: Props) {
             ),
           )}
         </Table>
-        <MobileActionButtons bookDetailId={bookDetails.id} />
       </Section.Body>
     </Section>
   );
