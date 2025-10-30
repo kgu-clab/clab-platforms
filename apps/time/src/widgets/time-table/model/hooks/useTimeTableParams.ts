@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 
+import { PATH } from '@/shared/constants';
 import { useEditableSearchParams } from '@/shared/hooks';
 import type { DayStatus } from '@/widgets/time-table/types';
 import { useRouter } from 'next/navigation';
@@ -36,12 +37,15 @@ export function useTimeTableParams(): {
     },
     set: (key: string, value: string) => {
       searchParams.set(key, value);
+      router.push(`${PATH.TIMETABLE}?${searchParams.toString()}`);
     },
     append: (key: string, value: string) => {
       searchParams.append(key, value);
+      router.push(`${PATH.TIMETABLE}?${searchParams.toString()}`);
     },
     remove: (key: string) => {
       searchParams.delete(key);
+      router.push(`${PATH.TIMETABLE}?${searchParams.toString()}`);
     },
   };
 

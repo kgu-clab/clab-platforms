@@ -22,6 +22,10 @@ const config: Config = {
       fontFamily: {
         sans: ['"Pretendard"', ...defaultTheme.fontFamily.sans],
       },
+      colors: {
+        'time-table-header': '#B9D3F3',
+        'time-table-border': '#ADADAD',
+      },
     },
   },
   plugins: [],
