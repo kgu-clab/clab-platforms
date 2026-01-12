@@ -19,6 +19,11 @@
   --color-gray-5: #444444;
   --color-black: #1a1a1a;
 
+  --color-chip-red: #ff715b;
+  --color-chip-yellow: #f9cb40;
+  --color-chip-green: #1fc16b;
+  --color-chip-purple: #8855ff;
+
   --font-family-primary:
     "WantedSans", "Pretendard Variable", Pretendard, system-ui, Avenir,
     Helvetica, Arial, sans-serif;
@@ -50,8 +55,8 @@
   --font-size-22: 22px;
   --font-size-24: 24px;
 
-  --spacing-xs: 2px;
-  --spacing-sm: 4px;
+  --spacing-xs: 4px;
+  --spacing-sm: 6px;
   --spacing-md: 8px;
   --spacing-lg: 12px;
   --spacing-xl: 16px;
