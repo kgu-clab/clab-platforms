@@ -1,6 +1,6 @@
 import type { ButtonHTMLAttributes, ReactNode } from "react";
 import { buttonVariant, type ButtonSize, type ButtonColor } from "./button.css";
-import { cn } from "../../../shared/utils/cn";
+import { cn } from "@/shared/utils/cn";
 
 export interface ButtonProps
   extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, "color" | "size"> {

@@ -1,5 +1,5 @@
 import type { HTMLAttributes, ReactNode } from "react";
-import { cn } from "../../../shared/utils/cn";
+import { cn } from "@/shared/utils/cn";
 import { chipVariant, type ChipColor } from "./chip.css";
 
 export interface ChipProps extends HTMLAttributes<HTMLDivElement> {

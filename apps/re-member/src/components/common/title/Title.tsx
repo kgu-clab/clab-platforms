@@ -1,5 +1,5 @@
 import type { HTMLAttributes, ReactNode } from "react";
-import { cn } from "../../../shared/utils/cn";
+import { cn } from "@/shared/utils/cn";
 
 export interface TitleProps extends HTMLAttributes<HTMLElement> {
   children: ReactNode;
