@@ -62,13 +62,19 @@
   --spacing-xl: 16px;
   --spacing-2xl: 20px;
   --spacing-3xl: 24px;
+
   --spacing-gutter: 16px;
+  --spacing-max-width: 500px;
+  --spacing-bottom-navbar-height: 80px;
+  --spacing-bottom-padding: 200px;
+  --spacing-header-height: 60px;
 
   --radius-sm: 4px;
   --radius-md: 8px;
   --radius-lg: 12px;
   --radius-xl: 16px;
   --radius-2xl: 20px;
+  --radius-bottom-navbar: 30px;
   --radius-full: 9999px;
 
   --duration-fast: 150ms;
@@ -144,6 +150,15 @@
   }
   .text-22-bold {
     @apply text-[22px] font-bold leading-[1.2];
+  }
+
+  /* Scrollbar utilities */
+  .scrollbar-hide {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+  }
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera */
   }
 }
 
