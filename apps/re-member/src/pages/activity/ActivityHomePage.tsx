@@ -5,6 +5,7 @@ import ActivityStudyPage from "./ActivityStudyPage";
 import {
   ActivityCalendar,
   ActivityCalendarHeader,
+  ActivityScheduleList,
 } from "@/components/activity";
 
 export default function ActivityHomePage() {
@@ -37,14 +38,7 @@ export default function ActivityHomePage() {
         />
       </Section>
       <Section title="일정" className="px-gutter">
-        <Section.List>
-          <div className="h-20 w-full rounded-xl bg-gray-200" />
-          <div className="h-20 w-full rounded-xl bg-gray-200" />
-          <div className="h-20 w-full rounded-xl bg-gray-200" />
-          <div className="h-20 w-full rounded-xl bg-gray-200" />
-          <div className="h-20 w-full rounded-xl bg-gray-200" />
-          <div className="h-20 w-full rounded-xl bg-gray-200" />
-        </Section.List>
+        <ActivityScheduleList />
       </Section>
     </>
   );
