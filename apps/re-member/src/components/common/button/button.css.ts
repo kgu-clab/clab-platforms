@@ -6,7 +6,8 @@ export const buttonVariant = cva(
     variants: {
       size: {
         large: "h-[52px] rounded-lg font-16 font-semibold",
-        small: "h-[33px] rounded-full font-14 font-medium px-lg py-md",
+        small:
+          "h-[33px] rounded-full text-[14px] w-fit font-medium px-lg py-md",
       },
       color: {
         dark: "bg-black text-white",
@@ -15,6 +16,7 @@ export const buttonVariant = cva(
         outlineActive: "border border-primary bg-primary/10 text-primary",
         outlineDisabled:
           "border border-gray-3 text-gray-3 bg-gray-1 active:brightness-100",
+        ghost: "bg-transparent text-gray-3 ",
       },
     },
     defaultVariants: {
