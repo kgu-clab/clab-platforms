@@ -1,4 +1,5 @@
-import { Header, Section } from "@/components/common";
+import { Button, Header, Section } from "@/components/common";
+import { HomeRankingList } from "@/components/home";
 import { BottomNavbar } from "@/components/menu";
 
 export default function HomePage() {
@@ -16,14 +17,18 @@ export default function HomePage() {
           </div>
         </Section>
         <Section title="커뮤니티 인기 게시글" className="px-gutter">
-          <Section.List>
-            <div className="h-20 w-full rounded-xl bg-gray-200" />
-            <div className="h-20 w-full rounded-xl bg-gray-200" />
-            <div className="h-20 w-full rounded-xl bg-gray-200" />
-            <div className="h-20 w-full rounded-xl bg-gray-200" />
-            <div className="h-20 w-full rounded-xl bg-gray-200" />
-            <div className="h-20 w-full rounded-xl bg-gray-200" />
-          </Section.List>
+          <div className="gap-sm flex items-center">
+            <Button size="small" color="dark">
+              전체
+            </Button>
+            <Button size="small" color="ghost">
+              자유
+            </Button>
+            <Button size="small" color="ghost">
+              질문
+            </Button>
+          </div>
+          <HomeRankingList />
         </Section>
       </div>
       <BottomNavbar />
