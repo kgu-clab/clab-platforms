@@ -39,7 +39,7 @@ function TabsItem({ className, icon, label, href, ...props }: TabsItemProps) {
   return (
     <button
       className={cn(
-        "gap-md pb-sm flex cursor-pointer items-center justify-center border-b-2 border-transparent focus:outline-none",
+        "gap-md pb-sm px-xs flex cursor-pointer items-center justify-center border-b-2 border-transparent focus:outline-none",
         className,
         isActive && "border-primary",
       )}
