@@ -1,10 +1,21 @@
 import PageLayout from '@/app/PageLayout';
-import { TimeTableContainer } from '@/widgets/time-table/ui';
+import { TimeTableProvider } from '@/widgets/time-table/context/TimeTableContext';
+import {
+  LectureSearchContainer,
+  TimeTableContainer,
+} from '@/widgets/time-table/ui';
 
 export default function TimeTablePage() {
   return (
-    <PageLayout nav footer className="container w-full space-y-4">
-      <TimeTableContainer />
-    </PageLayout>
+    <TimeTableProvider>
+      <PageLayout
+        nav
+        footer
+        className="m-0 grid min-h-[calc(100vh-201px)] w-screen grid-rows-[auto_auto] p-0 lg:grid-cols-[598px_1fr]"
+      >
+        <TimeTableContainer />
+        <LectureSearchContainer />
+      </PageLayout>
+    </TimeTableProvider>
   );
 }
