@@ -11,7 +11,7 @@ export default function ActivityLayout() {
     <>
       <Header
         left={<Title>활동</Title>}
-        className="absolute left-0 right-0 top-0 bg-white"
+        className="z-999 absolute left-0 right-0 top-0 bg-white"
       />
 
       <div className="pt-header-height scrollbar-hide gap-3xl pb-bottom-padding flex h-full w-full flex-col overflow-y-auto">
