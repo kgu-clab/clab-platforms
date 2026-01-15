@@ -1,4 +1,4 @@
-import { Button, Header, Section } from "@/components/common";
+import { Button, Header, Scrollable, Section } from "@/components/common";
 import { HomeRankingList } from "@/components/home";
 import { BottomNavbar } from "@/components/menu";
 
@@ -9,7 +9,7 @@ export default function HomePage() {
         left={<img src="/logo/logo.svg" alt="clab" className="w-15" />}
         className="absolute left-0 right-0 top-0 bg-white"
       />
-      <div className="pt-header-height scrollbar-hide gap-3xl pb-bottom-padding flex h-full w-full flex-col overflow-y-auto">
+      <Scrollable className="pt-header-height gap-3xl">
         <Section title="안녕하세요, 유진님!" className="px-gutter">
           <div className="gap-lg flex w-full">
             <div className="h-50 flex-1 rounded-xl bg-gray-200" />
@@ -30,7 +30,7 @@ export default function HomePage() {
           </div>
           <HomeRankingList />
         </Section>
-      </div>
+      </Scrollable>
       <BottomNavbar />
     </>
   );

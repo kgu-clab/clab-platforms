@@ -1,5 +1,12 @@
 import { StudyMemberGrid } from "@/components/activity";
-import { Button, Chip, Field, Header, Section } from "@/components/common";
+import {
+  Button,
+  Chip,
+  Field,
+  Header,
+  Scrollable,
+  Section,
+} from "@/components/common";
 import { GoChevronLeft } from "react-icons/go";
 import { useNavigate } from "react-router";
 
@@ -11,7 +18,7 @@ export default function StudyDetailPage() {
   };
 
   return (
-    <div className="scrollbar-hide flex h-full w-full flex-col overflow-y-auto">
+    <Scrollable>
       <Header
         left={
           <button className="focus:outline-none" onClick={handleBack}>
@@ -56,6 +63,6 @@ export default function StudyDetailPage() {
           <Button>참여 신청</Button>
         </footer>
       </div>
-    </div>
+    </Scrollable>
   );
 }
