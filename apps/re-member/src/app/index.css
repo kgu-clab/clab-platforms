@@ -92,13 +92,13 @@
 
 @layer utilities {
   .text-12-regular {
-    @apply text-[12px] font-normal leading-[1.5];
+    @apply font-regular text-[12px] leading-[1.5];
   }
   .text-12-medium {
     @apply text-[12px] font-medium leading-[1.5];
   }
   .text-13-regular {
-    @apply text-[13px] font-normal leading-[1.5];
+    @apply font-regular text-[13px] leading-[1.5];
   }
   .text-13-medium {
     @apply text-[13px] font-medium leading-[1.5];
@@ -107,7 +107,7 @@
     @apply text-[13px] font-semibold leading-[1.5];
   }
   .text-14-regular {
-    @apply text-[14px] font-normal leading-[1.5];
+    @apply font-regular text-[14px] leading-[1.5];
   }
   .text-14-medium {
     @apply text-[14px] font-medium leading-[1.5];
@@ -116,7 +116,7 @@
     @apply text-[14px] font-semibold leading-[1.5];
   }
   .text-15-regular {
-    @apply text-[15px] font-normal leading-[1.5];
+    @apply font-regular text-[15px] leading-[1.5];
   }
   .text-15-medium {
     @apply text-[15px] font-medium leading-[1.5];
@@ -125,7 +125,7 @@
     @apply text-[15px] font-semibold leading-[1.5];
   }
   .text-16-regular {
-    @apply text-[16px] font-normal leading-[1.5];
+    @apply font-regular text-[16px] leading-[1.5];
   }
   .text-16-medium {
     @apply text-[16px] font-medium leading-[1.5];
@@ -134,7 +134,7 @@
     @apply text-[16px] font-semibold leading-[1.5];
   }
   .text-18-regular {
-    @apply text-[18px] font-normal leading-[1.4];
+    @apply font-regular text-[18px] leading-[1.4];
   }
   .text-18-medium {
     @apply text-[18px] font-medium leading-[1.4];

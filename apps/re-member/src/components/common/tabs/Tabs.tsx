@@ -5,7 +5,7 @@ import {
   type ReactNode,
 } from "react";
 import { cn } from "@/shared/utils/cn";
-import { useMatch, useNavigate } from "react-router";
+import { useLocation, useNavigate } from "react-router";
 import type { IconBaseProps } from "react-icons";
 
 export interface TabsProps extends HTMLAttributes<HTMLElement> {
@@ -33,8 +33,16 @@ export default function Tabs({ className, children, ...props }: TabsProps) {
 }
 
 function TabsItem({ className, icon, label, href, ...props }: TabsItemProps) {
-  const isActive = useMatch(href);
+  const location = useLocation();
   const navigate = useNavigate();
+
+  const [targetPath, targetSearch] = href.split("?");
+  const currentPath = location.pathname;
+  const currentSearch = location.search;
+
+  const isActive =
+    targetPath === currentPath &&
+    (targetSearch ? `?${targetSearch}` === currentSearch : !currentSearch);
 
   return (
     <button

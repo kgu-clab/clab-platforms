@@ -1,7 +1,7 @@
 import { cva, type VariantProps } from "class-variance-authority";
 
 export const chipVariant = cva(
-  "focus:outline-none flex items-center justify-center px-md py-sm font-12 font-medium rounded-full",
+  "focus:outline-none flex items-center justify-center px-md py-sm text-[12px] font-medium leading-[1.5] shrink-0 w-fit rounded-full",
   {
     variants: {
       color: {

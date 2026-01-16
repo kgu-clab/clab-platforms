@@ -2,9 +2,10 @@ import type { HTMLAttributes, ReactNode } from "react";
 import { cn } from "@/shared/utils/cn";
 import Title from "../title/Title";
 
-export interface SectionProps extends HTMLAttributes<HTMLElement> {
+export interface SectionProps
+  extends Omit<HTMLAttributes<HTMLElement>, "title"> {
   children: ReactNode;
-  title?: string;
+  title?: ReactNode;
 }
 
 export default function Section({
