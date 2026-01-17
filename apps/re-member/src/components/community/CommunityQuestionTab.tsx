@@ -47,12 +47,13 @@ export default function CommunityQuestionTab() {
   };
 
   return (
-    <div className="gap-md flex">
+    <div className="gap-md scrollbar-hide flex overflow-y-hidden overflow-x-scroll">
       <Dropdown
         trigger={
           <Button
             color={language === "all" ? "outlineDisabled" : "outlineActive"}
             size="small"
+            className="shrink-0 whitespace-nowrap"
           >
             {getSelectedLabel(LANGUAGE_OPTIONS, language)}
             <IoChevronDown className="ml-xs" />
@@ -75,6 +76,7 @@ export default function CommunityQuestionTab() {
           <Button
             color={field === "all" ? "outlineDisabled" : "outlineActive"}
             size="small"
+            className="shrink-0 whitespace-nowrap"
           >
             {getSelectedLabel(FIELD_OPTIONS, field)}
             <IoChevronDown className="ml-xs" />
@@ -97,6 +99,7 @@ export default function CommunityQuestionTab() {
           <Button
             color={tech === "all" ? "outlineDisabled" : "outlineActive"}
             size="small"
+            className="shrink-0 whitespace-nowrap"
           >
             {getSelectedLabel(TECH_OPTIONS, tech)}
             <IoChevronDown className="ml-xs" />

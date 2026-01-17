@@ -7,7 +7,7 @@ export default function CommunityInformationTab() {
   const [activeFilter, setActiveFilter] = useState(FILTERS[0]);
 
   return (
-    <div className="gap-lg flex">
+    <div className="gap-lg flex overflow-auto">
       {FILTERS.map((filter) => (
         <Button
           key={filter}
