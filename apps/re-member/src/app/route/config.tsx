@@ -1,8 +1,15 @@
 import { createBrowserRouter } from "react-router";
 import RootLayout from "../layout/RootLayout";
-import { ActivityHomePage, HomePage, StudyDetailPage } from "@/pages";
+import {
+  ActivityHomePage,
+  HomePage,
+  StudyDetailPage,
+  CommunityDetailPage,
+  CommunityPage,
+} from "@/pages";
 import { ROUTE } from "@/shared/config/route";
 import ActivityLayout from "../layout/ActivityLayout";
+import CommunityLayout from "../layout/CommunityLayout";
 
 export const router = createBrowserRouter([
   {
@@ -19,6 +26,12 @@ export const router = createBrowserRouter([
         path: `${ROUTE.ACTIVITY}/:id`,
         children: [{ index: true, element: <StudyDetailPage /> }],
       },
+      {
+        path: ROUTE.COMMUNITY,
+        element: <CommunityLayout />,
+        children: [{ index: true, element: <CommunityPage /> }],
+      },
+      { path: `${ROUTE.COMMUNITY}/:id`, element: <CommunityDetailPage /> },
     ],
   },
 ]);
