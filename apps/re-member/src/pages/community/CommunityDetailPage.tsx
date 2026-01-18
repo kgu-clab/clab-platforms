@@ -5,7 +5,7 @@ import {
   PostDetailCommentList,
 } from "@/components/community";
 import { BottomNavbar } from "@/components/menu";
-import type { PostDetailCommentData } from "@/app/types/community";
+import type { PostDetailCommentData } from "@/types/community";
 import { useNavigate } from "react-router";
 import { GoChevronLeft } from "react-icons/go";
 

@@ -1,5 +1,5 @@
 import { IoChatbubbleOutline, IoHeart, IoHeartOutline } from "react-icons/io5";
-import type { PostDetailCommentData } from "@/app/types/community";
+import type { PostDetailCommentData } from "@/types/community";
 import { useState } from "react";
 
 interface PostDetailCommentItemProps {

@@ -1,4 +1,4 @@
-import type { BookData } from "@/app/types/library";
+import type { BookData } from "@/types/library";
 import LibraryBookItem from "./LibraryBookItem";
 
 const MOCK_BOOKS: BookData[] = [

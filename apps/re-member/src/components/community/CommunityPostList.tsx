@@ -1,4 +1,4 @@
-import type { PostData } from "@/app/types/community";
+import type { PostData } from "@/types/community";
 import CommunityPostItem from "./CommunityPostItem";
 
 interface PostItem {

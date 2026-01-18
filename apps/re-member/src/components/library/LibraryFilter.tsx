@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Button } from "../common";
-import { BOOK_STATUS, type BookStatus } from "@/app/types/library";
+import { BOOK_STATUS, type BookStatus } from "@/types/library";
 
 const FILTER_OPTIONS: { label: string; value: BookStatus }[] = [
   { label: "전체", value: BOOK_STATUS.ALL },

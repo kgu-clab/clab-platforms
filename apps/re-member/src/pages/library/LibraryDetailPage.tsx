@@ -6,7 +6,7 @@ import {
   Scrollable,
   Title,
 } from "@/components/common";
-import type { BookDetailData } from "@/app/types/library";
+import type { BookDetailData } from "@/types/library";
 import { useNavigate } from "react-router";
 import { GoChevronLeft } from "react-icons/go";
 

@@ -2,7 +2,7 @@ import { IoHeartOutline, IoChatbubbleOutline } from "react-icons/io5";
 import { useNavigate } from "react-router";
 import { Chip } from "../common";
 import { ROUTE } from "@/shared/config/route";
-import type { PostData } from "@/app/types/community";
+import type { PostData } from "@/types/community";
 
 interface CommunityPostItemProps {
   postData: PostData;
