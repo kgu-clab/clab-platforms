@@ -6,6 +6,8 @@ import {
   StudyDetailPage,
   CommunityDetailPage,
   CommunityPage,
+  LibraryPage,
+  LibraryDetailPage,
 } from "@/pages";
 import { ROUTE } from "@/shared/config/route";
 import ActivityLayout from "../layout/ActivityLayout";
@@ -32,6 +34,8 @@ export const router = createBrowserRouter([
         children: [{ index: true, element: <CommunityPage /> }],
       },
       { path: `${ROUTE.COMMUNITY}/:id`, element: <CommunityDetailPage /> },
+      { path: ROUTE.LIBRARY, element: <LibraryPage /> },
+      { path: `${ROUTE.LIBRARY}/:id`, element: <LibraryDetailPage /> },
     ],
   },
 ]);
