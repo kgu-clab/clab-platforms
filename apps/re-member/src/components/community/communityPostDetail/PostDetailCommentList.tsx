@@ -2,13 +2,13 @@ import { Chip } from "@/components/common";
 import type { PostDetailCommentData } from "@/app/types/community";
 import PostDetailCommentItem from "./PostDetailCommentItem";
 
-interface PostDetailCommentSectionProps {
+interface PostDetailCommentListProps {
   comments: PostDetailCommentData[];
 }
 
-export default function PostDetailCommentSection({
+export default function PostDetailCommentList({
   comments,
-}: PostDetailCommentSectionProps) {
+}: PostDetailCommentListProps) {
   return (
     <div className="gap-lg flex flex-col">
       <div className="gap-sm px-gutter mb-2xl flex  items-center ">

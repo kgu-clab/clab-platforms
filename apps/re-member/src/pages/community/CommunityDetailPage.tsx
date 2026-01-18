@@ -2,7 +2,7 @@ import { Header } from "@/components/common";
 import {
   PostDetailContent,
   PostDetailCommentInput,
-  PostDetailCommentSection,
+  PostDetailCommentList,
 } from "@/components/community";
 import { BottomNavbar } from "@/components/menu";
 import type { PostDetailCommentData } from "@/app/types/community";
@@ -65,7 +65,7 @@ export default function CommunityDetailPage() {
 
         <hr className="border-gray-1 border-t" />
 
-        <PostDetailCommentSection comments={MOCK_COMMENTS} />
+        <PostDetailCommentList comments={MOCK_COMMENTS} />
       </div>
 
       <BottomNavbar />
