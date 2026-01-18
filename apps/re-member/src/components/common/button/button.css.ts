@@ -17,6 +17,7 @@ export const buttonVariant = cva(
         outlineDisabled:
           "border border-gray-3 text-gray-3 bg-gray-1 active:brightness-100",
         ghost: "bg-transparent text-gray-3 ",
+        text: "bg-transparent text-black ",
       },
     },
     defaultVariants: {

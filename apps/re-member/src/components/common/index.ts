@@ -7,3 +7,4 @@ export { default as Scrollable } from "./scrollable/Scrollable";
 export { default as Section } from "./section/Section";
 export { default as Tabs } from "./tabs/Tabs";
 export { default as Title } from "./title/Title";
+export { default as PlusButton } from "./plus-button/PlusButton";
