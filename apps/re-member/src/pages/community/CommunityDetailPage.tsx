@@ -1,4 +1,4 @@
-import { Header } from "@/components/common";
+import { Header, Scrollable } from "@/components/common";
 import {
   PostDetailContent,
   PostDetailCommentInput,
@@ -56,7 +56,7 @@ export default function CommunityDetailPage() {
         className="absolute left-0 right-0 top-0 bg-transparent"
       />
 
-      <div className="scrollbar-hide gap-xl pt-header-height pb-bottom-padding flex h-full w-full flex-col overflow-y-auto">
+      <Scrollable className="gap-xl pt-header-height">
         <PostDetailContent postDetailData={MOCK_POST} />
 
         <hr className="border-gray-1 border-t" />
@@ -66,7 +66,7 @@ export default function CommunityDetailPage() {
         <hr className="border-gray-1 border-t" />
 
         <PostDetailCommentList comments={MOCK_COMMENTS} />
-      </div>
+      </Scrollable>
 
       <BottomNavbar />
     </>
