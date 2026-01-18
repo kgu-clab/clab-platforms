@@ -1,6 +1,6 @@
 import { PlusButton, Section } from "@/components/common";
 import { CommunityPostList, CommunityFilter } from "@/components/community";
-import { CATEGORY } from "@/app/types/community";
+import { CATEGORY } from "@/types/community";
 import { useSearchParams } from "react-router";
 
 export default function CommunityPage() {

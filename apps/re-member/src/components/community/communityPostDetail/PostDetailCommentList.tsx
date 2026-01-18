@@ -1,5 +1,5 @@
 import { Chip } from "@/components/common";
-import type { PostDetailCommentData } from "@/app/types/community";
+import type { PostDetailCommentData } from "@/types/community";
 import PostDetailCommentItem from "./PostDetailCommentItem";
 
 interface PostDetailCommentListProps {
