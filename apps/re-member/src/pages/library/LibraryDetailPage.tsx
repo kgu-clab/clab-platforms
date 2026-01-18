@@ -4,27 +4,12 @@ import {
   Field,
   Header,
   Scrollable,
+  Section,
   Title,
 } from "@/components/common";
-import type { BookDetailData } from "@/types/library";
 import { useNavigate } from "react-router";
 import { GoChevronLeft } from "react-icons/go";
-
-const MOCK_BOOK: BookDetailData = {
-  id: 7,
-  borrowerId: null,
-  borrowerName: null,
-  category: "교양",
-  title: "서양음악의 이해 CLASSICS A to Z",
-  author: "민은기, 신혜승",
-  publisher: "음악세계",
-  imageUrl:
-    "https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9788966851287.jpg",
-  dueDate: null,
-  createdAt: "2024-05-13T10:41:09.176582",
-  updatedAt: "2024-05-13T10:41:09.176582",
-  reviewLinks: [],
-};
+import { MOCK_BOOK } from "@/shared/mock/library";
 
 export default function LibraryDetailPage() {
   const navigate = useNavigate();
@@ -115,8 +100,7 @@ export default function LibraryDetailPage() {
             </Chip>
           </div>
 
-          <div className="mt-xl">
-            <Title>대여 내역</Title>
+          <Section title="대여 내역">
             {MOCK_BOOK.borrowerName ? (
               <p className="text-14-regular text-gray-5">
                 {MOCK_BOOK.borrowerName}님이 대여 중 (반납 예정일:{" "}
@@ -142,22 +126,9 @@ export default function LibraryDetailPage() {
                 내역이 없습니다대여 내역이 없습니다대여 내역이 없습니다대여
                 내역이 없습니다대여 내역이 없습니다대여 내역이 없습니다대여
                 내역이 없습니다대여 내역이 없습니다대여 내역이 없습니다대여
-                내역이 없습니다대여 내역이 없습니다대여 내역이 없습니다대여
-                내역이 없습니다대여 내역이 없습니다대여 내역이 없습니다대여
-                내역이 없습니다대여 내역이 없습니다대여 내역이 없습니다대여
-                내역이 없습니다대여 내역이 없습니다대여 내역이 없습니다대여
-                내역이 없습니다대여 내역이 없습니다대여 내역이 없습니다대여
-                내역이 없습니다대여 내역이 없습니다대여 내역이 없습니다대여
-                내역이 없습니다대여 내역이 없습니다대여 내역이 없습니다대여
-                내역이 없습니다대여 내역이 없습니다대여 내역이 없습니다대여
-                내역이 없습니다대여 내역이 없습니다대여 내역이 없습니다대여
-                내역이 없습니다대여 내역이 없습니다대여 내역이 없습니다대여
-                내역이 없습니다대여 내역이 없습니다대여 내역이 없습니다대여
-                내역이 없습니다대여 내역이 없습니다대여 내역이 없습니다대여
-                내역이 없습니다대여 내역이 없습니다
               </p>
             )}
-          </div>
+          </Section>
 
           <footer className="z-999 h-bottom-navbar-height px-gutter border-gray-2 fixed bottom-0 left-0 right-0 box-border flex items-center justify-center border-t bg-white">
             <Button>대여 신청</Button>

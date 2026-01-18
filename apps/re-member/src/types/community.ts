@@ -5,6 +5,11 @@ export const CATEGORY = {
   INFORMATION: "information",
 };
 
+export interface PostItem {
+  postData: PostData;
+  chipLabel?: string;
+}
+
 export interface PostData {
   id: number;
   title: string;
