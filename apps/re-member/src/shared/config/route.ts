@@ -10,5 +10,6 @@ export const ROUTE = {
   ACTIVITY_STUDY: "/activity?tab=study",
   ACTIVITY_CREATE: "/activity/create",
   LIBRARY: "/library",
+  LIBRARY_CREATE: "/library/create",
   MY: "/my",
 };

@@ -5,11 +5,16 @@ import {
   LibraryFilter,
   LibraryBookList,
 } from "@/components/library";
+import { useNavigate } from "react-router";
+import { ROUTE } from "@/shared/config/route";
 
 export default function LibraryPage() {
+  const navigate = useNavigate();
+
   const handleAddBook = () => {
-    // 도서 추가 페이지 이동
+    navigate(ROUTE.LIBRARY_CREATE);
   };
+
   return (
     <>
       <Header

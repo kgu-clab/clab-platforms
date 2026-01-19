@@ -8,6 +8,7 @@ import {
   CommunityPage,
   LibraryPage,
   LibraryDetailPage,
+  LibraryCreatePage,
   CommunityWritePage,
   ActivityCreatePage,
 } from "@/pages";
@@ -41,6 +42,7 @@ const communityRoutes = [
 const libraryRoutes = [
   { path: ROUTE.LIBRARY, element: <LibraryPage /> },
   { path: `${ROUTE.LIBRARY}/:id`, element: <LibraryDetailPage /> },
+  { path: ROUTE.LIBRARY_CREATE, element: <LibraryCreatePage /> },
 ];
 
 export const router = createBrowserRouter([

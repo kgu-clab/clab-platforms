@@ -8,3 +8,4 @@ export { default as CommunityDetailPage } from "./community/CommunityDetailPage"
 export { default as CommunityWritePage } from "./community/CommunityWritePage";
 export { default as LibraryPage } from "./library/LibraryPage";
 export { default as LibraryDetailPage } from "./library/LibraryDetailPage";
+export { default as LibraryCreatePage } from "./library/LibraryCreatePage";
