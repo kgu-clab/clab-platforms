@@ -10,3 +10,4 @@ export { default as Title } from "./title/Title";
 export { default as PlusButton } from "./plus-button/PlusButton";
 export { default as Textarea } from "./textarea/Textarea";
 export { default as Input } from "./input/Input";
+export { default as StepProgressBar } from "./stepProgressBar/StepProgressBar";

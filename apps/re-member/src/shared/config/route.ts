@@ -8,6 +8,7 @@ export const ROUTE = {
   COMMUNITY_WRITE: "/community/write",
   ACTIVITY: "/activity",
   ACTIVITY_STUDY: "/activity?tab=study",
+  ACTIVITY_CREATE: "/activity/create",
   LIBRARY: "/library",
   MY: "/my",
 };
