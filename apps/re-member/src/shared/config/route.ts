@@ -5,6 +5,7 @@ export const ROUTE = {
   COMMUNITY_FREE: "/community?tab=free",
   COMMUNITY_QUESTION: "/community?tab=question",
   COMMUNITY_INFORMATION: "/community?tab=information",
+  COMMUNITY_WRITE: "/community/write",
   ACTIVITY: "/activity",
   ACTIVITY_STUDY: "/activity?tab=study",
   LIBRARY: "/library",
