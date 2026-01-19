@@ -1,6 +1,6 @@
 import { useState } from "react";
 import {
-  CategoryChipList,
+  CommunityWriteSelector,
   CommunityWriteBottomBar,
 } from "@/components/community";
 import {
@@ -77,7 +77,7 @@ export default function CommunityWritePage() {
           }
         >
           <div className="px-gutter">
-            <CategoryChipList
+            <CommunityWriteSelector
               selectedCategory={selectedCategory}
               onSelectCategory={setSelectedCategory}
             />
