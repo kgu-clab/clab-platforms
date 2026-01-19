@@ -17,7 +17,7 @@ export const textareaWrapperVariant = cva(
 );
 
 export const textareaInputVariant = cva(
-  "text-15-regular placeholder:text-gray-3 bg-transparent w-full resize-none focus:outline-none focus:text-black",
+  "text-[15px] font-regular leading-[1.5] placeholder:text-gray-3 bg-transparent w-full resize-none focus:outline-none focus:text-black",
   {
     variants: {
       size: {

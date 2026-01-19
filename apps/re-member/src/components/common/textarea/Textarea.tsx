@@ -33,7 +33,7 @@ export default function Textarea({
         {...props}
       />
       {showCounter && maxLength && (
-        <p className="text-15-regular text-gray-3 bottom-xl left-xl absolute">
+        <p className="font-regular text-gray-3 bottom-xl left-xl absolute text-[15px] leading-[1.5]">
           {currentLength} / {maxLength}
         </p>
       )}

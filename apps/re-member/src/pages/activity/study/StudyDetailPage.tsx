@@ -4,17 +4,36 @@ import {
   Chip,
   Field,
   Header,
+  Modal,
   Scrollable,
   Section,
+  Textarea,
 } from "@/components/common";
 import { GoChevronLeft } from "react-icons/go";
 import { useNavigate } from "react-router";
+import { useState } from "react";
 
 export default function StudyDetailPage() {
   const navigate = useNavigate();
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [motivation, setMotivation] = useState("");
 
   const handleBack = () => {
     navigate(-1);
+  };
+
+  const handleOpenModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+    setMotivation("");
+  };
+
+  const handleSubmit = () => {
+    console.log("참여 신청:", motivation);
+    handleCloseModal();
   };
 
   return (
@@ -60,9 +79,25 @@ export default function StudyDetailPage() {
         </Section>
 
         <footer className="z-999 h-bottom-navbar-height px-gutter border-gray-2 fixed bottom-0 left-0 right-0 box-border flex items-center justify-center border-t bg-white">
-          <Button>참여 신청</Button>
+          <Button onClick={handleOpenModal}>참여 신청</Button>
         </footer>
       </div>
+
+      <Modal
+        isOpen={isModalOpen}
+        onClose={handleCloseModal}
+        title="활동 참여하기"
+        subtitle="코어팀 플로우 작성 프로젝트 활동에 참여 신청을 보내요"
+      >
+        <Textarea
+          placeholder="지원 동기를 간단하게 작성해주세요."
+          value={motivation}
+          onChange={(e) => setMotivation(e.target.value)}
+          maxLength={400}
+          showCounter
+        />
+        <Button onClick={handleSubmit}>신청하기</Button>
+      </Modal>
     </Scrollable>
   );
 }
