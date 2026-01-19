@@ -14,7 +14,7 @@ export const inputWrapperVariant = cva("flex flex-col w-full", {
 });
 
 export const inputVariant = cva(
-  "text-15-medium text-gray-3 bg-transparent border-0 focus:outline-none focus:text-black w-full",
+  "text-15-medium placeholder:text-gray-3 bg-transparent border-0 focus:outline-none focus:text-black w-full",
   {
     variants: {
       variant: {
@@ -32,7 +32,7 @@ export const inputVariant = cva(
 export const dividerVariant = cva("", {
   variants: {
     variant: {
-      underline: "h-px w-full bg-gray-3",
+      underline: "h-px w-full bg-gray-2",
       outlined: "hidden",
       filled: "hidden",
     },
