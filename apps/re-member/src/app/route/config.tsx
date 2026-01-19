@@ -9,10 +9,39 @@ import {
   LibraryPage,
   LibraryDetailPage,
   CommunityWritePage,
+  ActivityCreatePage,
 } from "@/pages";
 import { ROUTE } from "@/shared/config/route";
 import ActivityLayout from "../layout/ActivityLayout";
 import CommunityLayout from "../layout/CommunityLayout";
+
+const activityRoutes = [
+  {
+    path: ROUTE.ACTIVITY,
+    element: <ActivityLayout />,
+    children: [{ index: true, element: <ActivityHomePage /> }],
+  },
+  {
+    path: `${ROUTE.ACTIVITY}/:id`,
+    element: <StudyDetailPage />,
+  },
+  { path: ROUTE.ACTIVITY_CREATE, element: <ActivityCreatePage /> },
+];
+
+const communityRoutes = [
+  {
+    path: ROUTE.COMMUNITY,
+    element: <CommunityLayout />,
+    children: [{ index: true, element: <CommunityPage /> }],
+  },
+  { path: `${ROUTE.COMMUNITY}/:id`, element: <CommunityDetailPage /> },
+  { path: ROUTE.COMMUNITY_WRITE, element: <CommunityWritePage /> },
+];
+
+const libraryRoutes = [
+  { path: ROUTE.LIBRARY, element: <LibraryPage /> },
+  { path: `${ROUTE.LIBRARY}/:id`, element: <LibraryDetailPage /> },
+];
 
 export const router = createBrowserRouter([
   {
@@ -20,24 +49,9 @@ export const router = createBrowserRouter([
     element: <RootLayout />,
     children: [
       { index: true, element: <HomePage /> },
-      {
-        path: ROUTE.ACTIVITY,
-        element: <ActivityLayout />,
-        children: [{ index: true, element: <ActivityHomePage /> }],
-      },
-      {
-        path: `${ROUTE.ACTIVITY}/:id`,
-        children: [{ index: true, element: <StudyDetailPage /> }],
-      },
-      {
-        path: ROUTE.COMMUNITY,
-        element: <CommunityLayout />,
-        children: [{ index: true, element: <CommunityPage /> }],
-      },
-      { path: `${ROUTE.COMMUNITY}/:id`, element: <CommunityDetailPage /> },
-      { path: ROUTE.COMMUNITY_WRITE, element: <CommunityWritePage /> },
-      { path: ROUTE.LIBRARY, element: <LibraryPage /> },
-      { path: `${ROUTE.LIBRARY}/:id`, element: <LibraryDetailPage /> },
+      ...activityRoutes,
+      ...communityRoutes,
+      ...libraryRoutes,
     ],
   },
 ]);
