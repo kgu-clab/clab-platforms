@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { IoChevronDown } from "react-icons/io5";
-import { CATEGORY } from "@/app/types/community";
+import { CATEGORY } from "@/types/community";
 import { Button, Dropdown } from "../common";
 
 interface CommunityFilterProps {

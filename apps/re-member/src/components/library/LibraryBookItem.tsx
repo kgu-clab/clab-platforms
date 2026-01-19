@@ -1,7 +1,7 @@
 import { Chip } from "../common";
 import { ROUTE } from "@/shared/config/route";
 import { useNavigate } from "react-router";
-import type { BookData } from "@/app/types/library";
+import type { BookData } from "@/types/library";
 
 interface LibraryBookItemProps {
   book: BookData;
