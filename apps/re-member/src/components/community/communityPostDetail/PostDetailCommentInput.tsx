@@ -33,7 +33,7 @@ export default function PostDetailCommentInput({
         <button
           type="button"
           onClick={handleSubmit}
-          className="bg-primary absolute bottom-6 right-6 flex size-8 shrink-0 items-center justify-center rounded-full"
+          className="bg-primary absolute bottom-3 right-6 flex size-8 shrink-0 items-center justify-center rounded-full"
         >
           <IoSend className="size-4 text-white" />
         </button>
