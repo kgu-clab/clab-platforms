@@ -1,7 +1,7 @@
 import { Header, PlusButton, Section, Title } from "@/components/common";
 import { BottomNavbar } from "@/components/menu";
 import {
-  LibrarySearchBar,
+  LibrarySearchInput,
   LibraryFilter,
   LibraryBookList,
 } from "@/components/library";
@@ -23,7 +23,7 @@ export default function LibraryPage() {
       />
 
       <Section className="pt-header-height scrollbar-hide pb-bottom-padding overflow-y-auto">
-        <LibrarySearchBar />
+        <LibrarySearchInput />
         <LibraryFilter />
         <LibraryBookList />
       </Section>
