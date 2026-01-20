@@ -53,3 +53,6 @@ RELEASE.md
 .verdaccio-cache
 .turbo
 src_checksums.txt
+
+# cursor settings
+.cursor/rules/*.md

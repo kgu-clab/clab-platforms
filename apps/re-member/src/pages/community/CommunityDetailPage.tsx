@@ -4,7 +4,6 @@ import {
   PostDetailCommentInput,
   PostDetailCommentList,
 } from "@/components/community";
-import { BottomNavbar } from "@/components/menu";
 import { useNavigate } from "react-router";
 import { GoChevronLeft } from "react-icons/go";
 import { MOCK_POST, MOCK_COMMENTS } from "@/shared/mock/community";
@@ -34,8 +33,6 @@ export default function CommunityDetailPage() {
 
         <PostDetailCommentList comments={MOCK_COMMENTS} />
       </Scrollable>
-
-      <BottomNavbar />
     </>
   );
 }

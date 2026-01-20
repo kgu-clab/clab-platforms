@@ -1,5 +1,12 @@
 import type { PostDetailCommentData, PostItem } from "@/types/community";
 
+export const MOCK_CATEGORIES = [
+  { id: "free", label: "자유" },
+  { id: "field1", label: "분야" },
+  { id: "field2", label: "분야" },
+  { id: "field3", label: "분야" },
+];
+
 export const MOCK_POSTS: PostItem[] = [
   {
     postData: {

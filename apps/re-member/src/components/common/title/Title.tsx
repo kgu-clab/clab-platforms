@@ -7,8 +7,8 @@ export interface TitleProps extends HTMLAttributes<HTMLElement> {
 
 export default function Title({ className, children, ...props }: TitleProps) {
   return (
-    <h1 className={cn("text-20-semibold", className)} {...props}>
+    <div className={cn("text-20-semibold", className)} {...props}>
       {children}
-    </h1>
+    </div>
   );
 }

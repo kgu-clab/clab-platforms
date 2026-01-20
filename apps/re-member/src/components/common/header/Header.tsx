@@ -18,7 +18,7 @@ export default function Header({
   return (
     <header
       className={cn(
-        "px-gutter box-border grid h-[60px] w-full grid-cols-[auto_1fr_auto]",
+        "px-gutter h-header-height box-border grid w-full shrink-0 grid-cols-[auto_1fr_auto]",
         className,
       )}
       {...props}
