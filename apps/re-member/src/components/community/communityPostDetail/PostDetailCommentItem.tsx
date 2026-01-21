@@ -1,41 +1,63 @@
 import { IoChatbubbleOutline, IoHeart, IoHeartOutline } from "react-icons/io5";
 import type { PostDetailCommentData } from "@/types/community";
 import { useState } from "react";
+import { useNavigate } from "react-router";
 
 interface PostDetailCommentItemProps {
   commentData: PostDetailCommentData;
+  to?: string;
 }
 
 export default function PostDetailCommentItem({
   commentData,
+  to,
 }: PostDetailCommentItemProps) {
   const {
-    author,
-    generation,
+    writerName,
+    writerImageUrl,
     createdAt,
     content,
-    likeCount,
-    isAuthor = false,
+    likes,
+    hasLikeByMe,
+    isOwner,
   } = commentData;
 
-  const [isLiked, setIsLiked] = useState(false);
+  const [isLiked, setIsLiked] = useState(hasLikeByMe);
+  const navigate = useNavigate();
 
-  const onClickLike = () => {
+  const onClickLike = (e: React.MouseEvent) => {
+    e.stopPropagation();
     setIsLiked((prev) => !prev);
   };
 
+  const handleClick = () => {
+    if (to) {
+      navigate(to);
+    }
+  };
+
   return (
-    <div className="gap-md px-gutter flex">
-      <div className="bg-gray-2 size-8 shrink-0 rounded-full" />
+    <div
+      className={`gap-md px-gutter py-xl border-b-gray-2 flex border-b${to ? " cursor-pointer" : ""}`}
+      onClick={handleClick}
+      role={to ? "button" : undefined}
+    >
+      <div className="bg-gray-2 size-8 shrink-0 overflow-hidden rounded-full">
+        {writerImageUrl && (
+          <img
+            src={writerImageUrl}
+            alt={writerName}
+            className="h-full w-full object-cover"
+          />
+        )}
+      </div>
       <div className="gap-sm flex flex-1 flex-col">
         <div className="flex items-center justify-between">
           <div className="gap-sm flex items-center">
-            <span className="text-14-semibold text-black">
-              {author}({generation})
-            </span>
+            <span className="text-14-semibold text-black">{writerName}</span>
             <span className="text-12-regular text-gray-4">{createdAt}</span>
           </div>
-          {isAuthor && (
+          {isOwner && (
             <button className="text-12-regular text-gray-4">삭제</button>
           )}
         </div>
@@ -55,7 +77,7 @@ export default function PostDetailCommentItem({
             ) : (
               <IoHeartOutline className="size-4" />
             )}
-            <span>{isLiked ? likeCount + 1 : likeCount}</span>
+            <span>{isLiked ? likes + 1 : likes}</span>
           </button>
           <div className="gap-xs flex items-center">
             <IoChatbubbleOutline className="size-4" />
