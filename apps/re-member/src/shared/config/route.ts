@@ -12,4 +12,8 @@ export const ROUTE = {
   LIBRARY: "/library",
   LIBRARY_CREATE: "/library/create",
   MY: "/my",
+  MY_POSTS: "/my/posts",
+  MY_COMMENTS: "/my/comments",
+  MY_LIBRARY: "/my/library",
+  MY_ACTIVITY: "/my/activity",
 };
