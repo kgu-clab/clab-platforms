@@ -31,10 +31,19 @@ export interface PostDetailData {
 
 export interface PostDetailCommentData {
   id: number;
-  author: string;
-  generation: number;
-  createdAt: string;
+  isDeleted: boolean;
+  writerId: string;
+  writerName: string;
+  writerImageUrl: string;
+  writerRoleLevel: number;
   content: string;
-  likeCount: number;
-  isAuthor?: boolean;
+  likes: number;
+  hasLikeByMe: boolean;
+  createdAt: string;
+  isOwner: boolean;
+}
+
+export interface MyCommentData extends PostDetailCommentData {
+  boardId: number;
+  boardCategory: string;
 }

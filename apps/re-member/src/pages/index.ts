@@ -9,3 +9,8 @@ export { default as CommunityWritePage } from "./community/CommunityWritePage";
 export { default as LibraryPage } from "./library/LibraryPage";
 export { default as LibraryDetailPage } from "./library/LibraryDetailPage";
 export { default as LibraryCreatePage } from "./library/LibraryCreatePage";
+export { default as MyPage } from "./my/MyPage";
+export { default as MyPostsPage } from "./my/MyPostsPage";
+export { default as MyCommentsPage } from "./my/MyCommentsPage";
+export { default as MyLibraryPage } from "./my/MyLibraryPage";
+export { default as MyActivityPage } from "./my/MyActivityPage";

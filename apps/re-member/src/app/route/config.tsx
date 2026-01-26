@@ -11,6 +11,11 @@ import {
   LibraryCreatePage,
   CommunityWritePage,
   ActivityCreatePage,
+  MyPage,
+  MyPostsPage,
+  MyCommentsPage,
+  MyLibraryPage,
+  MyActivityPage,
 } from "@/pages";
 import { ROUTE } from "@/shared/config/route";
 import ActivityLayout from "../layout/ActivityLayout";
@@ -45,6 +50,14 @@ const libraryRoutes = [
   { path: ROUTE.LIBRARY_CREATE, element: <LibraryCreatePage /> },
 ];
 
+const myRoutes = [
+  { path: ROUTE.MY, element: <MyPage /> },
+  { path: ROUTE.MY_POSTS, element: <MyPostsPage /> },
+  { path: ROUTE.MY_COMMENTS, element: <MyCommentsPage /> },
+  { path: ROUTE.MY_LIBRARY, element: <MyLibraryPage /> },
+  { path: ROUTE.MY_ACTIVITY, element: <MyActivityPage /> },
+];
+
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -54,6 +67,7 @@ export const router = createBrowserRouter([
       ...activityRoutes,
       ...communityRoutes,
       ...libraryRoutes,
+      ...myRoutes,
     ],
   },
 ]);
